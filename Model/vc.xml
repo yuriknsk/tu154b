@@ -10,7 +10,7 @@
 	<type>select</type>
 	<object-name>MESH199</object-name>
         <condition>
-        <not>	<property>/sim/current-view/internal</property> </not>
+	<not>	<property>/sim/rendering/rembrandt/enabled</property>	</not>
       	</condition>
 </animation>
 
