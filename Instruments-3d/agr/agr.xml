@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff			 	  	#
+    #    	yurik@megasignal.com					   	#
+    #    	Jul 2007						   	#
+    #############################################################################	  
+    -->
+
+<!-- AGR attitude indicator
+     3D instrument for Tu-154 -->
+<PropertyList>
+ <path>agr.ac</path>
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+  <object-name>sphere</object-name>
+  <object-name>needle</object-name>
+  <object-name>vizir</object-name>
+  <object-name>blanker</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+<!--Attitude-->
+<animation>
+  <type>rotate</type>
+  <object-name>sphere</object-name>
+  <object-name>needle</object-name>
+  <property>instrumentation/attitude-indicator[3]/indicated-roll-deg</property>
+  <center>
+    <x-m>-0.08047</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.0</z-m>
+  </center>
+  <axis>
+    <x>1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>sphere</object-name>
+  <property>instrumentation/attitude-indicator[3]/indicated-pitch-deg</property>  
+  <center>
+    <x-m>-0.08047</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.0</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!--Arretir-->
+
+<animation>
+  <type>select</type>
+  <object-name>blanker</object-name>
+  <condition>
+    <property>instrumentation/attitude-indicator[3]/caged-flag</property>  
+  </condition>
+</animation>
+<!--Control-->
+<animation>
+  <type>pick</type>
+  <object-name>hs</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-toggle</command>
+      <property>instrumentation/attitude-indicator[3]/caged-flag</property>  
+    </binding>
+  </action>
+</animation>
+
+
+</PropertyList>

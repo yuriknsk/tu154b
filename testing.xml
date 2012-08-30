@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="http://jsbsim.sourceforge.net/JSBSimScript.xsl"?>
+<runscript xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://jsbsim.sourceforge.net/JSBSimScript.xsd"
+    name="Tu-154">
+  <description>Landing Tu-154b</description>
+  <use aircraft="tu154b" initialize="reset00"/>
+  <run start="0.0" end="250" dt="0.0083333">
+
+    <event name="On-ground trim">
+      <description>The aircraft is trimmed on-ground.</description>
+      <condition>simulation/sim-time-sec ge 0.25</condition>
+      <set name="simulation/do_simple_trim" value="2"/> <!-- on-ground trim -->
+<!--      <set name="simulation/do_trim" value="2"/>-->
+
+      <set name="ap/roll-hold" value="1"/>
+      <set name="ap/pitch-hold" value="0"/>
+      
+  <set name="ap/input-heading-zk" value="180"/>
+  <set name="ap/input-heading-pnp" value="90"/>
+
+      <set name="ap/pitch-selector" value="0"/>
+      <set name="ap/roll-selector" value="1"/>
+      <set name="ap/stab-input-pitch-rad" value="0.0"/>
+      <set name="ap/stab-input-roll-rad" value="0.0"/>
+<set name="instrumentation/zpu-deg-1" value="1.0"/>
+
+      <notify/>
+    </event>
+
+    <event name="Systems up">
+      <description>System to work state</description>
+      <condition>simulation/sim-time-sec ge 1</condition>
+      <set name="fcs/stab-auto-cmd" value="1.0"/>
+      
+      <set name="systems/electrical-ok" value="1"/>
+      <set name="hs/max-pressure" value="210.0"/>
+      
+      <set name="hs/buster-1-switch" value="1"/>
+      <set name="hs/buster-2-switch" value="1"/>
+      <set name="hs/buster-3-switch" value="1"/>
+      
+      <set name="hs/ra56-pitch-1" value="1"/>
+      <set name="hs/ra56-pitch-2" value="1"/>
+      <set name="hs/ra56-pitch-3" value="1"/>
+      
+      <set name="hs/ra56-roll-1" value="1"/>
+      <set name="hs/ra56-roll-2" value="1"/>
+      <set name="hs/ra56-roll-3" value="1"/>
+      
+      <set name="hs/ra56-yaw-1" value="1"/>
+      <set name="hs/ra56-yaw-2" value="1"/>
+      <set name="hs/ra56-yaw-3" value="1"/>
+
+      <notify/>
+    </event>
+
+
+
+    <event name="Both brakes applied">
+      <description>Brake testing</description>
+      <condition>simulation/sim-time-sec ge 2</condition>
+      <set name="fcs/right-brake-cmd-norm" value="1"/>
+      <set name="fcs/left-brake-cmd-norm" value="1"/>
+      <notify/>
+    </event>
+
+    <event name="Flaps extend">
+      <description>Flaps extend</description>
+      <condition>simulation/sim-time-sec ge 5</condition>      
+      <set name="fcs/flap-cmd-norm" value="0.6"/>
+     
+      <notify/>
+    </event>
+
+   <event name="Start engine: Starter">
+      <description>The starter for both engines is turned on.</description>
+      <condition>simulation/sim-time-sec ge 5</condition>
+      <set name="propulsion/starter_cmd" value="1"/>
+      <notify/>
+    </event>
+
+    <event name="Start engine: Cutoff">
+      <description>Cutoff is turned off, allowing fuel to flow.</description>
+      <!--<condition>propulsion/engine[0]/n2 ge 4.0</condition>-->
+      <condition>simulation/sim-time-sec ge 10</condition>
+
+      <set name="propulsion/cutoff_cmd" value="0"/>
+      <set name="fcs/throttle-cmd-norm[0]" value="0.4"/>
+      <set name="fcs/throttle-cmd-norm[1]" value="0.4"/>
+      <set name="fcs/throttle-cmd-norm[2]" value="0.4"/>
+      
+      <notify>
+        <property>propulsion/engine[0]/n2</property>
+<!--        <property>propulsion/engine[1]/n2</property>
+        <property>propulsion/starter_cmd</property>
+        <property>propulsion/engine[0]/	</property>
+        <property>propulsion/engine[1]/thrust</property>-->
+      </notify>
+    </event>
+
+<event name="Throttle-up">
+      <description>Move throttle to full for take-off.</description>
+      <condition>
+      propulsion/engine[0]/n2 ge 70.0
+      </condition>
+      <set name="fcs/throttle-cmd-norm[0]" value="1.0"/>
+      <set name="fcs/throttle-cmd-norm[1]" value="1.0"/>
+      <set name="fcs/throttle-cmd-norm[2]" value="1.0"/>
+      <notify>
+      
+        <property>propulsion/engine[0]/n2</property>
+        <property>propulsion/engine[1]/n2</property>
+	
+      </notify>
+    </event>
+
+
+    <event name="Brakes released">
+      <description>Go</description>
+      <condition>propulsion/engine[0]/n2 ge 90.0</condition>
+      <set name="fcs/right-brake-cmd-norm" value="0"/>
+      <set name="fcs/left-brake-cmd-norm" value="0"/>
+      <notify/>
+    </event>
+
+
+    <event name="Rotation">
+      <description>Rotation</description>
+      <notify>
+        <property>velocities/vc-kts</property>
+</notify>
+      <condition>
+        velocities/vc-kts >= 135
+      </condition>
+
+      <set name="fcs/elevator-cmd-norm" value="-0.5"/>
+
+    </event>
+
+
+
+    <event name="stop rotation">
+      <description>stop rotation </description>
+      <notify/>
+      <condition>
+                aero/alpha-deg ge 5.0
+		simulation/sim-time-sec ge 1
+      </condition>      
+   <set name="fcs/elevator-cmd-norm" value="-0.2"/>
+
+    </event>
+
+    <event name="retract gear">
+      <description>retract gear</description>
+      <notify>
+        <property>velocities/vc-kts</property>
+      </notify>
+      <condition>
+        position/h-agl-ft >= 100
+      </condition>
+      <set name="gear/gear-cmd-norm" value="0"/>
+    </event>
+
+    <event name="Retract flaps">
+      <description>retract flaps</description>
+      <notify>
+        <property>position/h-agl-ft</property>
+	<property>velocities/vc-kts</property>
+      </notify>
+      <condition>position/h-agl-ft >= 1000  </condition>
+      
+      <set name="fcs/flap-cmd-norm" value="0.0"/>
+      <set name="fcs/stabilizer-cmd-norm" value="0.0"/>
+    </event>
+
+
+    <event name="down engine">
+      <description>down engines</description>
+      <notify>
+        <property>position/h-agl-ft</property>
+	<property>velocities/vc-kts</property>
+      </notify>
+      <condition>position/h-agl-ft >= 2000  </condition>
+      <!--<condition>simulation/sim-time-sec ge 110  </condition>-->
+
+      <set name="fcs/elevator-cmd-norm" value="-0.1"/>
+      
+      <set name="fcs/throttle-cmd-norm[0]" value="1.0"/>
+      <set name="fcs/throttle-cmd-norm[1]" value="1.0"/>
+      <set name="fcs/throttle-cmd-norm[2]" value="1.0"/>
+      
+<!--      
+      <set name="gear/gear-cmd-norm" value="1.0"/>
+      <set name="fcs/flap-cmd-norm" value="1.0"/>
+      <set name="fcs/stabilizer-cmd-norm" value="1.0"/>-->
+
+    </event>
+
+    
+    <event name="AP stab h">
+      <description>go to gorizont</description>
+      <notify>
+        <property>position/h-agl-ft</property>
+	<property>velocities/vc-kts</property>
+      </notify>  
+      <condition>simulation/sim-time-sec ge 140  </condition>
+
+ <!--<set name="ap/stab-input-pitch-rad" value="0.0"/>-->
+  <set name="ap/input-altitude" value="3900"/>
+  <set name="ap/input-speed" value="400"/>
+  
+  <set name="ap/pitch-selector" value="3"/>
+  
+
+  <!--<set name="ap/pitch-selector" value="1"/>-->
+  <set name="ap/pitch-hold" value="1"/>
+  
+    </event>
+
+    
+<!--   <event name="AP GS test">
+      <description>hold vert speed on</description>
+      <notify>
+        <property>position/h-agl-ft</property>
+	<property>velocities/vc-kts</property>
+      </notify>
+      <condition>simulation/sim-time-sec ge 150  </condition>
+      <set name="ap/pitch-selector" value="5"/>
+      <set name="ap/input-glideslope-speed" value="-11.5"/>
+    </event>-->
+
+    
+<!--  
+    <event name="gorizont">
+      <description>go to gorizont</description>
+      <notify>
+        <property>position/h-agl-ft</property>
+	<property>velocities/vc-kts</property>
+      </notify>
+      
+      <condition>simulation/sim-time-sec ge 150  </condition>
+
+  <set name="ap/input-altitude" value="2400"/>
+  <set name="ap/pitch-selector" value="2"/>
+  <set name="ap/pitch-hold" value="1"/>
+  
+    </event>
+-->
+<!--
+   <event name="Turn to left">
+<description>ILS heading test</description>
+      <notify>
+        <property>position/h-agl-ft</property>
+	<property>velocities/vc-kts</property>
+      </notify>
+      
+      <condition>simulation/sim-time-sec ge 250  </condition>
+      <set name="ap/input-heading-pnp" value="90"/>
+      <set name="ap/roll-selector" value="5"/>
+
+    </event>
+
+-->
+
+
+
+
+<!--   <event name="AP gs test">
+    
+      <notify>
+        <property>position/h-agl-ft</property>
+      </notify>
+      <condition>simulation/sim-time-sec ge 220  </condition>
+      <set name="ap/input-glideslope-speed" value="0"/>
+
+    </event>-->
+
+
+<!--
+    <event name="Beta">
+      <condition>simulation/sim-time-sec ge 220  </condition>
+      <notify> 
+      <property>attitude/heading-true-rad</property> 
+      </notify>
+      
+      <set name="fcs/rudder-cmd-norm" value="-0.5"/>
+
+    </event>
+-->
+
+<!--
+    <event name="Hold Vref speed">
+      <description>hold Vref speed</description>
+      <notify>
+        <property>velocities/vc-kts</property>
+      </notify>
+      <condition>simulation/sim-time-sec ge 200  </condition>
+      <set name="ap/input-speed" value="260"/>
+    </event>
+-->
+
+<!--
+    <event name="Glissada">
+      <description>glissada</description>
+      <notify>
+        <property>velocities/vc-kts</property>
+      </notify>
+      <condition>simulation/sim-time-sec ge 350  </condition>
+      <set name="fcs/flap-cmd-norm" value="1.0"/>
+  <set name="fcs/stabilizer-cmd-norm" value="1.0"/>
+      
+    </event>
+-->
+
+  </run>
+
+</runscript>

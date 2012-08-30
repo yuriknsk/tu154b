@@ -1,0 +1,646 @@
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff			 	  	#
+    #    	yurik@megasignal.com					   	#
+    #    	Jul 2007						   	#
+    #############################################################################	  
+    -->
+<!-- Heading indicator PNP
+     3D instrument for Tu-154 -->
+<PropertyList>
+  <path>pnp.ac</path>
+  <!--External panel lighting-->
+  <animation>
+    <type>material</type>
+    <object-name>cover</object-name>
+    <emission>
+      <red-prop>tu154/light/panel/ext-red</red-prop>
+      <green-prop>tu154/light/panel/ext-green</green-prop>
+      <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+    </emission>
+  </animation>
+
+  <!-- Internal instrument lighting -->  
+  <animation>
+    <type>material</type>
+    <object-name>compass</object-name>
+    <object-name>needle</object-name>
+    <object-name>kurs_plan</object-name>
+    <object-name>center</object-name>
+    <object-name>kurs_planka</object-name>
+    <object-name>limb</object-name>
+    <object-name>dkm</object-name>
+    <object-name>drift</object-name>
+    <object-name>plane_sym</object-name>
+    <object-name>plane_sym_handle</object-name>
+    <object-name>heading_sym_handle</object-name>
+    <object-name>dig_plane_ones</object-name>
+    <object-name>dig_plane_dec</object-name>
+    <object-name>dig_plane_hund</object-name>
+    <object-name>dig_heading_ones</object-name>
+    <object-name>dig_heading_dec</object-name>
+    <object-name>dig_heading_hund</object-name>
+    <object-name>blanker_k</object-name>
+    <object-name>blanker_g</object-name>
+    <object-name>blanker_ks</object-name>
+    <emission>
+      <red-prop>tu154/light/instruments/int-red</red-prop>
+      <green-prop>tu154/light/instruments/int-green</green-prop>
+      <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+    </emission>
+  </animation>
+  <!--Yellow color-->
+  <animation>
+    <type>material</type>
+    <object-name>gliss_planka</object-name>
+    <object-name>heading_marker_main</object-name>
+    <object-name>heading_marker_90</object-name>
+    <object-name>heading_marker_180</object-name>
+    <object-name>heading_marker_270</object-name>
+    <emission>
+      <red-prop>tu154/light/instruments/int-red</red-prop>
+      <green-prop>tu154/light/instruments/int-green</green-prop>
+    </emission>
+  </animation>
+  <!--Red color-->
+  <animation>
+    <type>material</type>
+    <object-name>blanker_dkm</object-name>
+    <object-name>blanker_heading</object-name>
+    <emission>
+      <red-prop>tu154/light/instruments/int-red</red-prop>
+    </emission>
+  </animation>
+  <animation>
+	  <type>material</type>
+	  <object-name>sp_on</object-name>
+	  <object-name>vor_on</object-name>
+	  <object-name>nv_on</object-name>
+	  <object-name>rsbn_on</object-name>
+	  <emission>
+		  <red>1.0</red>
+		  <green>1.0</green>
+		  <blue>1.0</blue>
+	  </emission>
+  </animation>
+
+<!--mode selector-->
+<animation>
+	<type>material</type>
+	<object-name>sp_on</object-name>
+	<object-name>vor_on</object-name>
+	<object-name>nv_on</object-name>
+	<object-name>rsbn_on</object-name>
+	<emission>
+		<red>1.0</red>
+		<green>1.0</green>
+		<blue>1.0</blue>
+	</emission>
+</animation>
+
+<animation>
+  <type>select</type>
+  <object-name>sp_on</object-name>
+  <condition>
+  <property>tu154/systems/electrical/indicators/heading</property>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>vor_on</object-name>
+  <condition>
+  <property>tu154/systems/electrical/indicators/vor</property>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>nv_on</object-name>
+  <condition>
+  <property>tu154/systems/electrical/indicators/nvu</property>
+  </condition>
+</animation>
+<!--Not in use-->
+<animation>
+  <type>select</type>
+  <object-name>rsbn_on</object-name>
+<!--  <condition>
+    <property>tu154/rsbn_on</property>
+  </condition>-->
+</animation>
+
+<!--Blankers-->
+<animation>
+  <type>select</type>
+  <object-name>blanker_dkm</object-name>
+  <condition>
+    <value>1</value>
+  </condition>  
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>blanker_heading</object-name>
+<!--  <condition>
+    <property>tu154/blankers</property>
+  </condition>-->
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>blanker_k</object-name>
+  <condition>
+    <property>tu154/instrumentation/pnp[0]/kurs-blanker</property>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>blanker_g</object-name>
+  <condition>
+    <property>tu154/instrumentation/pnp[0]/gliss-blanker</property>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>blanker_ks</object-name>
+  <condition>
+    <not><property>instrumentation/heading-indicator[0]/serviceable</property></not>
+  </condition>
+</animation>
+
+<!--Needles-->  
+<animation>
+  <type>rotate</type>
+  <object-name>needle</object-name>
+  <object-name>kurs_plan</object-name>
+  <object-name>kurs_planka</object-name>
+  <property>tu154/instrumentation/pnp[0]/plane-deg</property>  
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<!--Marker-->
+<animation>
+  <type>rotate</type>
+  <object-name>heading_marker_main</object-name>
+  <object-name>heading_marker_90</object-name>
+  <object-name>heading_marker_180</object-name>
+  <object-name>heading_marker_270</object-name>
+  <property>tu154/instrumentation/pnp[0]/heading-deg</property>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+
+<!--Compass-->
+  <animation>
+    <type>rotate</type>
+    <object-name>compass</object-name>
+    <object-name>needle</object-name>
+    <object-name>kurs_plan</object-name>
+    <object-name>kurs_planka</object-name>
+    <object-name>heading_marker_main</object-name>
+    <object-name>heading_marker_90</object-name>
+    <object-name>heading_marker_180</object-name>
+    <object-name>heading_marker_270</object-name>
+    <property>fdm/jsbsim/instrumentation/pnp-heading-left</property> 
+    <axis>
+      <x>1.0</x>
+      <y>0.0</y>
+      <z>0.0</z>
+    </axis>
+  </animation>
+  
+  <!--Drift indicator-->
+  <animation>
+    <type>rotate</type>
+    <object-name>drift</object-name>
+    <property>tu154/instrumentation/diss/drift-deg</property>
+    <max-deg>20.0</max-deg>
+    <min-deg>-20.0</min-deg>
+    <axis>
+      <x>-1.0</x>
+      <y>0.0</y>
+      <z>0.0</z>
+    </axis>
+  </animation>
+
+  <!--ILS-->
+  <animation>
+    <type>translate</type>
+    <object-name>kurs_planka</object-name>
+    <property>fdm/jsbsim/ap/heading-needle-deflection</property>
+    <interpolation>
+      <entry><ind>	1.0</ind>	<dep>	0.021</dep></entry>
+      <entry><ind>	-1.0</ind>	<dep>	-0.021</dep></entry>
+    </interpolation>
+    <axis>
+      <x>0.0</x>
+      <y>1.0</y>
+      <z>0.0</z>
+    </axis>
+  </animation>
+  <animation>
+    <type>translate</type>
+    <object-name>gliss_planka</object-name>
+    <property>fdm/jsbsim/ap/gs-needle-deflection</property>
+    <interpolation>
+      <entry><ind>	1.0</ind>	<dep>	0.025</dep></entry>
+      <entry><ind>	-1.0</ind>	<dep>	-0.025</dep></entry>
+    </interpolation>
+    <axis>
+      <x>0.0</x>
+      <y>0.0</y>
+      <z>1.0</z>
+    </axis>
+  </animation>
+
+
+
+<!--Digits-->
+<!--Heading deg-->  
+<animation>
+    <type>rotate</type>
+    <object-name>dig_heading_ones</object-name>
+    <property>tu154/instrumentation/pnp[0]/heading/ones</property>  
+    <factor>36</factor>
+    <center>
+      <x-m>-0.01393</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.0534</z-m>
+    </center>
+    <axis>
+      <x>0.0</x>
+      <y>-1.0</y>
+      <z>0.0</z>
+    </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>dig_heading_dec</object-name>
+  <property>tu154/instrumentation/pnp[0]/heading/dec</property>  
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	0.9</ind>	<dep>	0.1</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
+    <entry><ind>	1.9</ind>	<dep>	36.1</dep></entry>
+    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
+    <entry><ind>	2.9</ind>	<dep>	72.1</dep></entry>
+    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
+    <entry><ind>	3.9</ind>	<dep>	108.1</dep></entry>
+    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
+    <entry><ind>	4.9</ind>	<dep>	144.1</dep></entry>
+    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
+    <entry><ind>	5.9</ind>	<dep>	180.1</dep></entry>
+    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
+    <entry><ind>	6.9</ind>	<dep>	216.1</dep></entry>
+    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
+    <entry><ind>	7.9</ind>	<dep>	252.1</dep></entry>
+    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
+    <entry><ind>	8.9</ind>	<dep>	288.1</dep></entry>
+    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
+    <entry><ind>	9.9</ind>	<dep>	324.1</dep></entry>
+    <entry><ind>	9.99</ind>	<dep>	359.9</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>-0.01393</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.0534</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>dig_heading_hund</object-name>
+  <property>tu154/instrumentation/pnp[0]/heading/hund</property>  
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	0.99</ind>	<dep>	0.1</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
+    <entry><ind>	1.99</ind>	<dep>	36.1</dep></entry>
+    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
+    <entry><ind>	2.99</ind>	<dep>	72.1</dep></entry>
+    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
+    <entry><ind>	3.99</ind>	<dep>	108.1</dep></entry>
+    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
+    <entry><ind>	4.99</ind>	<dep>	144.1</dep></entry>
+    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
+    <entry><ind>	5.99</ind>	<dep>	180.1</dep></entry>
+    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
+    <entry><ind>	6.99</ind>	<dep>	216.1</dep></entry>
+    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
+    <entry><ind>	7.99</ind>	<dep>	252.1</dep></entry>
+    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
+    <entry><ind>	8.99</ind>	<dep>	288.1</dep></entry>
+    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
+    <entry><ind>	9.99</ind>	<dep>	324.1</dep></entry>
+    <entry><ind>	9.999</ind>	<dep>	359.9</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>-0.01393</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.0534</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!--Plane deg-->  
+<animation>
+  <type>rotate</type>
+  <object-name>dig_plane_ones</object-name>
+  <property>tu154/instrumentation/pnp[0]/plane/ones</property>  
+  <factor>36</factor>
+  <center>
+    <x-m>-0.01393</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.0534</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>dig_plane_dec</object-name>
+  <property>tu154/instrumentation/pnp[0]/plane/dec</property>  
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	0.9</ind>	<dep>	0.1</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
+    <entry><ind>	1.9</ind>	<dep>	36.1</dep></entry>
+    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
+    <entry><ind>	2.9</ind>	<dep>	72.1</dep></entry>
+    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
+    <entry><ind>	3.9</ind>	<dep>	108.1</dep></entry>
+    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
+    <entry><ind>	4.9</ind>	<dep>	144.1</dep></entry>
+    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
+    <entry><ind>	5.9</ind>	<dep>	180.1</dep></entry>
+    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
+    <entry><ind>	6.9</ind>	<dep>	216.1</dep></entry>
+    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
+    <entry><ind>	7.9</ind>	<dep>	252.1</dep></entry>
+    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
+    <entry><ind>	8.9</ind>	<dep>	288.1</dep></entry>
+    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
+    <entry><ind>	9.9</ind>	<dep>	324.1</dep></entry>
+    <entry><ind>	9.99</ind>	<dep>	359.9</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>-0.01393</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.0534</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>dig_plane_hund</object-name>
+  <property>tu154/instrumentation/pnp[0]/plane/hund</property>  
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	0.99</ind>	<dep>	0.1</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
+    <entry><ind>	1.99</ind>	<dep>	36.1</dep></entry>
+    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
+    <entry><ind>	2.99</ind>	<dep>	72.1</dep></entry>
+    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
+    <entry><ind>	3.99</ind>	<dep>	108.1</dep></entry>
+    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
+    <entry><ind>	4.99</ind>	<dep>	144.1</dep></entry>
+    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
+    <entry><ind>	5.99</ind>	<dep>	180.1</dep></entry>
+    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
+    <entry><ind>	6.99</ind>	<dep>	216.1</dep></entry>
+    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
+    <entry><ind>	7.99</ind>	<dep>	252.1</dep></entry>
+    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
+    <entry><ind>	8.99</ind>	<dep>	288.1</dep></entry>
+    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
+    <entry><ind>	9.99</ind>	<dep>	324.1</dep></entry>
+    <entry><ind>	9.999</ind>	<dep>	359.9</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>-0.01393</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.0534</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+
+
+<!--Handles-->
+
+<animation>
+  <type>rotate</type>
+  <object-name>plane_sym_handle</object-name>
+  <property>tu154/instrumentation/pnp[0]/plane-deg</property>
+  <factor>5.0</factor>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>0.05358</y-m>
+    <z-m>-0.05518</z-m>
+  </center>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>heading_sym_handle</object-name>
+  <property>tu154/instrumentation/pnp[0]/heading-deg</property>
+  <factor>5.0</factor>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>-0.05386</y-m>
+    <z-m>-0.05461</z-m>
+  </center>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+ <!--+++++++++++++++++ Controls ++++++++++++++++++++++-->
+<animation>
+  <type>pick</type>
+  <object-name>plane_sym_handle</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
+<!--    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/pnp[0]/plane-deg</property>
+      <step>1.0</step>
+    </binding>-->
+    <binding>
+      <command>nasal</command>
+<script>instruments.compass_adjust_plane(0,1)</script>
+    </binding>
+    
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>plane_sym_handle</object-name>
+  <visible>true</visible>
+  <action>
+    <button>1</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
+<!--    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/pnp[0]/plane-deg</property>
+      <step>-1.0</step>
+    </binding>-->
+    <binding>
+      <command>nasal</command>
+      <script>instruments.compass_adjust_plane(0,-1)</script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>heading_sym_handle</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
+<!--    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/pnp[0]/heading-deg</property>
+      <step>1.0</step>
+    </binding>-->
+    <binding>
+      <command>nasal</command>
+	<script>instruments.compass_adjust_hdg(0,1)</script>
+    </binding>
+
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>heading_sym_handle</object-name>
+  <visible>true</visible>
+  <action>
+    <button>1</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
+<!--    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/pnp[0]/heading-deg</property>
+      <step>-1.0</step>
+    </binding>-->
+    <binding>
+      <command>nasal</command>
+<script>instruments.compass_adjust_hdg(0,-1)</script>
+    </binding>
+  </action>
+</animation>
+
+<!--+++++++++++++++++ Mouse wheel ++++++++++++++++++++++-->
+<animation>
+  <type>pick</type>
+  <object-name>plane_sym_handle</object-name>
+  <visible>true</visible>
+  <action>
+    <button>3</button>
+    <repeatable>false</repeatable>
+<!--    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/pnp[0]/plane-deg</property>
+      <step>1.0</step>
+    </binding>-->
+    <binding>
+      <command>nasal</command>
+      <script>instruments.compass_adjust_plane(0,1)</script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>plane_sym_handle</object-name>
+  <visible>true</visible>
+  <action>
+    <button>4</button>
+    <repeatable>false</repeatable>
+<!--    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/pnp[0]/plane-deg</property>
+      <step>-1.0</step>
+    </binding>-->
+    <binding>
+      <command>nasal</command>
+ <script>instruments.compass_adjust_plane(0,-1)</script>
+    </binding>
+    
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>heading_sym_handle</object-name>
+  <visible>true</visible>
+  <action>
+    <button>3</button>
+    <repeatable>false</repeatable>
+<!--    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/pnp[0]/heading-deg</property>
+      <step>1.0</step>
+    </binding>-->
+    <binding>
+      <command>nasal</command>
+ <script>instruments.compass_adjust_hdg(0,1)</script>
+    </binding>
+
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>heading_sym_handle</object-name>
+  <visible>true</visible>
+  <action>
+    <button>4</button>
+    <repeatable>false</repeatable>
+<!--    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/pnp[0]/heading-deg</property>
+      <step>-1.0</step>
+    </binding>-->
+    <binding>
+      <command>nasal</command>
+<script>instruments.compass_adjust_hdg(0,-1)</script>
+    </binding>
+  </action>
+</animation>
+
+
+
+</PropertyList>

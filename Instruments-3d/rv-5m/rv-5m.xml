@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff			 	  	#
+    #    	yurik@megasignal.com					   	#
+    #    	Jul 2007						   	#
+    #############################################################################	  
+    -->
+
+<!-- Radio altimeter
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>rv-5m.ac</path>
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>text</object-name>
+  <object-name>needle</object-name>
+  <object-name>index</object-name>
+  <object-name>flag</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+<!-- External instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+  <emission>
+    <red-prop>tu154/light/panel/ext-red</red-prop>
+    <green-prop>tu154/light/panel/ext-green</green-prop>
+    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+  </emission>
+</animation>
+
+
+<!--Cage-->
+<animation>
+  <type>select</type>
+  <object-name>flag</object-name>
+  <condition>
+  	<property>tu154/instrumentation/rv-5m/caged-flag</property>
+  </condition>
+</animation>
+
+<!--Warning lamp-->
+<animation>
+  <type>material</type>
+  <object-name>lamp</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/systems/electrical/checking-lamps/lamps-power</factor-prop>
+  </emission>
+</animation>
+
+<animation>
+  <type>select</type>
+  <object-name>lamp</object-name>
+  <condition>
+    <or>
+  	<property>tu154/instrumentation/rv-5m/warn</property>
+        <property>tu154/systems/electrical/checking-lamps/main-panel</property>
+    </or>
+  </condition>
+</animation>
+
+
+<!--Needles-->
+<animation>
+    <type>rotate</type>
+    <object-name>needle</object-name>
+    <property>tu154/instrumentation/rv-5m/indicated-altitude-m</property>
+    <interpolation>
+      <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+      <entry><ind>	10.0</ind>	<dep>	15.0</dep></entry>
+      <entry><ind>	20.0</ind>	<dep>	30.0</dep></entry>
+      <entry><ind>	30.0</ind>	<dep>	45.0</dep></entry>
+      <entry><ind>	40.0</ind>	<dep>	60.0</dep></entry>
+      <entry><ind>	50.0</ind>	<dep>	75.0</dep></entry>
+      <entry><ind>	60.0</ind>	<dep>	91.5</dep></entry>
+      <entry><ind>	80.0</ind>	<dep>	123.0</dep></entry>
+      <entry><ind>	100.0</ind>	<dep>	155.0</dep></entry>
+      <entry><ind>	200.0</ind>	<dep>	179.0</dep></entry>
+      <entry><ind>	300.0</ind>	<dep>	203.0</dep></entry>
+      <entry><ind>	400.0</ind>	<dep>	226.0</dep></entry>
+      <entry><ind>	500.0</ind>	<dep>	251.0</dep></entry>
+      <entry><ind>	700.0</ind>	<dep>	300.0</dep></entry>
+      <entry><ind>	800.0</ind>	<dep>	325.0</dep></entry>
+    </interpolation>
+    <axis>
+      <x>-1.0</x>
+      <y>0.0</y>
+      <z>0.0</z>
+    </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>index</object-name>
+  <property>tu154/instrumentation/rv-5m/index-m</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	10.0</ind>	<dep>	15.0</dep></entry>
+    <entry><ind>	20.0</ind>	<dep>	30.0</dep></entry>
+    <entry><ind>	30.0</ind>	<dep>	45.0</dep></entry>
+    <entry><ind>	40.0</ind>	<dep>	60.0</dep></entry>
+    <entry><ind>	50.0</ind>	<dep>	75.0</dep></entry>
+    <entry><ind>	60.0</ind>	<dep>	91.5</dep></entry>
+    <entry><ind>	80.0</ind>	<dep>	123.0</dep></entry>
+    <entry><ind>	100.0</ind>	<dep>	155.0</dep></entry>
+    <entry><ind>	200.0</ind>	<dep>	179.0</dep></entry>
+    <entry><ind>	300.0</ind>	<dep>	203.0</dep></entry>
+    <entry><ind>	400.0</ind>	<dep>	226.0</dep></entry>
+    <entry><ind>	500.0</ind>	<dep>	251.0</dep></entry>
+    <entry><ind>	700.0</ind>	<dep>	300.0</dep></entry>
+    <entry><ind>	800.0</ind>	<dep>	325.0</dep></entry>
+  </interpolation>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!--Controls-->
+
+<animation>
+  <type>pick</type>
+  <object-name>hs</object-name>
+  <visible>false</visible>
+  <action>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/rv-5m/index-m</property>
+      <step>-5.0</step>
+      <min>0.0</min>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs</object-name>
+  <visible>false</visible>
+  <action>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/rv-5m/index-m</property>
+      <step>5.0</step>
+      <max>700.0</max>
+    </binding>
+    
+  </action>
+</animation>
+
+
+
+</PropertyList>

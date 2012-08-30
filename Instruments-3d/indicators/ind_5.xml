@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2006 by Yurik V. Nikiforoff - port for FGFS,  FDM,   	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+
+<!-- indicators on central panel
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>ind_5.ac</path>
+<!--External panel lighting-->
+<animation>
+  <type>material</type>
+  <object-name>cover_1</object-name>
+  <object-name>cover_2</object-name>
+  <object-name>cover_3</object-name>
+  <emission>
+    <red-prop>tu154/light/panel/ext-red</red-prop>
+    <green-prop>tu154/light/panel/ext-green</green-prop>
+    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+  </emission>
+</animation>
+<!--Indicators-->
+<animation>
+  <type>material</type>
+  <object-name>text_1</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/systems/electrical/indicators/engine-failure-1</factor-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>text_2</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/systems/electrical/indicators/engine-failure-2</factor-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>text_3</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/systems/electrical/indicators/engine-failure-3</factor-prop>
+  </emission>
+</animation>
+
+<!--Check lamps procedure-->
+<animation>
+  <type>material</type>
+  <object-name>text_1</object-name>
+  <object-name>text_2</object-name>
+  <object-name>text_3</object-name>
+  <condition>
+    <property>tu154/systems/electrical/checking-lamps/main-panel</property>
+  </condition>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/systems/electrical/checking-lamps/main-panel</factor-prop>
+  </emission>
+</animation>
+
+
+
+</PropertyList>

@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+
+<!-- Comm radio control
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>com.ac</path>
+<!--External panel lighting-->
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+    <emission>
+    <red-prop>tu154/light/panel/ext-red</red-prop>
+    <green-prop>tu154/light/panel/ext-green</green-prop>
+    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+  </emission>
+</animation>
+
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>d1</object-name>
+  <object-name>d2</object-name>
+  <object-name>digits</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+<!--    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>-->
+  </emission>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>dig_f_hi</object-name>
+  <property>tu154/instrumentation/com-2/digit-f-hi</property>
+  <interpolation>
+    <entry><ind>	108.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	136.0</ind>	<dep>	349.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>-0.0480</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.0059</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>dig_f_low</object-name>
+  <property>tu154/instrumentation/com-2/digit-f-low</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	95.0</ind>	<dep>	338.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>-0.03176</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.0061</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!--Frequency-->
+<animation>
+  <type>pick</type>
+  <object-name>hs_1</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/com-2/digit-f-hi</property>
+      <step>1.0</step>
+      <min>108.0</min>
+      <max>136.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_2</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/com-2/digit-f-hi</property>
+      <step>-1.0</step>
+      <min>108.0</min>
+      <max>136.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_3</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/com-2/digit-f-low</property>
+      <step>5.0</step>
+      <min>0.0</min>
+      <max>95.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_4</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/com-2/digit-f-low</property>
+      <step>-5.0</step>
+      <min>0.0</min>
+      <max>95.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+
+
+</PropertyList>

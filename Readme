@@ -1,0 +1,56 @@
+
+********************** Tu-154b v.2.0 *******************************************
+
+Welcome to world of Russian Aviation!
+
+Before use of model, you MUST read documentation: Docs/tu154eng.html - in English, Docs/tu154rus.html - in Russian. 
+There are Project Tupolev docs in Docs/PT_Docs. If you want get more information about plane and PT model for MSFS sim,
+you should read it.
+
+This is a very complexy model, and it's not intended for beginners.
+
+******************************** Installation ***********************************
+
+Unpack archive into $FGROOT/Aircraft/tu154b folder; under UNIX, you can place model into your home dir and create
+symlink.
+
+Prepare AI model; for it, copy (or create symlink) AI/Aircraft/tu154b into $FGROOT/AI/Aircraft/tu154b. 
+If you skip this step, model will work yet, but when you go to multiplay mode, and another player will use Tu-154 
+model, your comp will stale for long time and drop fps. For avoid it, light model was created for AI/MP mode. There is
+livereas support for AI models, so you will see planes of another players with right livereas (if you install theys 
+livereas before).
+
+This model intend for FlightGear version 2.1.0 only. It not support old FlightGear version (1.9.1, 2.0 or late), and 
+you would not replace FDM file.
+
+********************************** !!! *******************************************
+Under UNIX, be carefull with register of directory name. After changing main SVN server at Feb 16 2011, name of model 
+directory (TU154B) has changed to (tu154b).
+********************************** !!! *******************************************
+
+********************************** LICENSE ***************************************
+
+Owner forbid un-authorize changing and re-distribution visual model. All 3D files and textures (*.ac and *.png) in 
+Model directory, all textures (*.png) in Instruments-3D directory, and all wav-files in Sound directory are under 
+freeware Project Tupolev license, not GPL! For detail, see http://www.fs-proteam.com.
+
+All *.xml or *.nas files are under GPL license.
+
+
+********************************** Authors ***************************************
+
+Yurik V. Nikiforoff aka Yurik_nsk - FDM, 2d & 3d instruments, animations, systems and over.
+
+Ruslan Gnatovsky aka Gnat - nasal electrical system.
+
+Russian FlightGear community: BOG, Magic, VaLeo, AlexTochka, RealMike, AirAlex, Schneider, vlad32768,
+CAXAP, DimkaS - beta-testing.
+
+Stalker198033 - picture for splash-screen.
+
+English pack - Don Lavelle aka Karla (www.flightgear.org)
+
+Welcome to http://flightgear.ru/forum!
+
+Yurik_NSK, your humble author.
+yurik@megasignal.com

@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2006 by Yurik V. Nikiforoff - port for FGFS,  FDM,   	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+
+<!-- Check lamps button on Flight Engineer panel - Engine section
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>knob_1.ac</path>
+<!--External panel lighting-->
+<animation>
+  <type>material</type>
+  <object-name>button</object-name>
+  <emission>
+    <red-prop>tu154/light/panel/ext-red</red-prop>
+    <green-prop>tu154/light/panel/ext-green</green-prop>
+    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+  </emission>
+</animation>
+
+  
+<animation>
+  <type>translate</type>
+  <object-name>button</object-name>
+  <property>tu154/switches/check-lamps-4</property>  
+  <factor>0.002</factor>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!--Control-->
+<animation>
+  <type>pick</type>
+  <object-name>button</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-assign</command>
+      <property>tu154/switches/check-lamps-4</property>
+      <value>1.0</value>
+    </binding>
+    <binding>
+      <command>property-assign</command>
+      <property>fdm/jsbsim/systems/engine-control-lamps</property>  
+      <value>1.0</value>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>
+	setprop("tu154/systems/electrical/checking-lamps/engine-panel", 1.0 );
+        engines.check_lamps_eng();
+      </script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>property-assign</command>
+        <property>tu154/switches/check-lamps-4</property>
+        <value>0.0</value>
+      </binding>
+      <binding>
+        <command>property-assign</command>
+        <property>fdm/jsbsim/systems/engine-control-lamps</property>
+        <value>0.0</value>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>
+          setprop("tu154/systems/electrical/checking-lamps/engine-panel", 0.0 );
+          engines.check_lamps_eng();
+        </script>
+      </binding>
+    </mod-up>
+  </action>
+</animation>
+
+
+
+</PropertyList>

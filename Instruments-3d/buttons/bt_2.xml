@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2006 by Yurik V. Nikiforoff - port for FGFS,  FDM,   	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+
+<!-- UT-7A control for engine 1
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>knob_1.ac</path>
+<!--External panel lighting-->
+<animation>
+  <type>material</type>
+  <object-name>button</object-name>
+  <emission>
+    <red-prop>tu154/light/panel/ext-red</red-prop>
+    <green-prop>tu154/light/panel/ext-green</green-prop>
+    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+  </emission>
+</animation>
+
+  
+<animation>
+  <type>translate</type>
+  <object-name>button</object-name>
+  <property>tu154/switches/ut7-control-2</property>  
+  <factor>0.002</factor>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!--Control-->
+<animation>
+  <type>pick</type>
+  <object-name>button</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-assign</command>
+      <property>tu154/switches/ut7-control-2</property>  
+      <value>1.0</value>
+    </binding>
+    <binding>
+      <command>property-assign</command>
+      <property>fdm/jsbsim/propulsion/engine[1]/egt-check</property>  
+      <value>1.0</value>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>property-assign</command>
+        <property>tu154/switches/ut7-control-2</property>  
+        <value>0.0</value>
+      </binding>
+      <binding>
+        <command>property-assign</command>
+        <property>fdm/jsbsim/propulsion/engine[1]/egt-check</property>  
+        <value>0.0</value>
+      </binding>
+    </mod-up>
+  </action>
+</animation>
+
+
+
+</PropertyList>

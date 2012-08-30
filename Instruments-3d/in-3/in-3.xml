@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2008 by Yurik V. Nikiforoff			 	  	#
+    #    	yurik@megasignal.com					   	#
+    #    	mar 2008						   	#
+    #############################################################################	  
+    -->
+
+<!-- IN-3 ABSU indicator
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>in-3.ac</path>
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>text</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+<!-- External instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+  <emission>
+    <red-prop>tu154/light/panel/ext-red</red-prop>
+    <green-prop>tu154/light/panel/ext-green</green-prop>
+    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+  </emission>
+</animation>
+
+
+<!--Needles-->
+<!--Pitch channel-->
+<animation>
+    <type>translate</type>
+    <object-name>text7</object-name>
+    <property>fdm/jsbsim/fcs/pitch-ra-56-hydropower</property>
+    <interpolation>
+      <entry><ind>	1.0</ind>	<dep>	0.014</dep></entry>
+      <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+      <entry><ind>	-1.0</ind>	<dep>	-0.01</dep></entry>
+    </interpolation>
+    <axis>
+      <x>0.0</x>
+      <y>0.0</y>
+      <z>1.0</z>
+    </axis>
+</animation>
+<!--Roll channel-->
+<animation>
+  <type>translate</type>
+  <object-name>text8</object-name>
+  <property>fdm/jsbsim/fcs/roll-ra-56-hydropower</property>
+  <interpolation>
+    <entry><ind>	1.0</ind>	<dep>	0.011</dep></entry>
+    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	-1.0</ind>	<dep>	-0.012</dep></entry>
+  </interpolation>
+  <axis>
+    <x>0.0</x>
+    <y>0.0</y>
+    <z>1.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>translate</type>
+  <object-name>text9</object-name>
+  <property>fdm/jsbsim/fcs/roll-ra-56-hydropower</property>
+  <interpolation>
+    <entry><ind>	1.0</ind>	<dep>	0.011</dep></entry>
+    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	-1.0</ind>	<dep>	-0.012</dep></entry>
+  </interpolation>
+  <axis>
+    <x>0.0</x>
+    <y>0.0</y>
+    <z>-1.0</z>
+  </axis>
+</animation>
+
+<!--Yaw channel-->
+<animation>
+  <type>translate</type>
+  <object-name>text10</object-name>
+  <property>fdm/jsbsim/fcs/yaw-ra-56-hydropower</property>
+  <interpolation>
+    <entry><ind>	1.0</ind>	<dep>	0.017</dep></entry>
+    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	-1.0</ind>	<dep>	-0.016</dep></entry>
+  </interpolation>
+  <axis>
+    <x>0.0</x>
+    <y>1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+
+</PropertyList>

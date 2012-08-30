@@ -1,0 +1,500 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+
+<!-- V-51 NVU (navigation system) control
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>v-51.ac</path>
+<!--External panel lighting-->
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+  <object-name>selector_1</object-name>
+  <object-name>selector_2</object-name>
+  <object-name>power</object-name>
+  <object-name>count</object-name>
+  <object-name>corr</object-name>
+    <emission>
+    <red-prop>tu154/light/panel/ext-red</red-prop>
+    <green-prop>tu154/light/panel/ext-green</green-prop>
+    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+  </emission>
+</animation>
+
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>text</object-name>
+  <object-name>_handle_marker</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+<animation>
+  <type>material</type>
+  <object-name>lamp_1_on</object-name>
+  <object-name>lamp_2_on</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/systems/nvu/powered</factor-prop>
+  </emission>
+</animation>
+
+
+<!--selectors-->
+<animation>
+  <type>rotate</type>
+  <object-name>selector_1</object-name>
+  <property>tu154/switches/v-51-selector-1</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	-130.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	-95.0</dep></entry>
+    <entry><ind>	2.0</ind>	<dep>	-62.0</dep></entry>
+    <entry><ind>	3.0</ind>	<dep>	-31.0</dep></entry>
+    <entry><ind>	4.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	5.0</ind>	<dep>	31.0</dep></entry>
+    <entry><ind>	6.0</ind>	<dep>	62.0</dep></entry>
+    <entry><ind>	7.0</ind>	<dep>	98.0</dep></entry>
+    <entry><ind>	8.0</ind>	<dep>	130.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>-0.03017</y-m>
+    <z-m>0.00849</z-m>
+  </center>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>selector_2</object-name>
+  <property>tu154/switches/v-51-selector-2</property>
+    <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	-90.0</dep></entry>
+    <entry><ind>	6.0</ind>	<dep>	90.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>0.02607</y-m>
+    <z-m>0.0133</z-m>
+  </center>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<!--Switches-->
+<animation>
+  <type>rotate</type>
+  <object-name>power</object-name>
+  <property>tu154/switches/v-51-power</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	-60.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	60.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.0202</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>count</object-name>
+  <property>tu154/switches/v-51-count</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	-60.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	60.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.0202</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>corr</object-name>
+  <property>tu154/switches/v-51-corr</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	-60.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	60.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.0202</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<!--Lamps-->
+<animation>
+  <type>select</type>
+  <object-name>lamp_1_on</object-name>
+  <condition>
+    <property>tu154/systems/nvu/powered</property>
+    <property>tu154/systems/nvu/serviceable</property>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>lamp_2_on</object-name>
+  <condition>
+    <property>tu154/systems/nvu/rsbn-corr</property>
+  </condition>
+</animation>
+
+<!--Controls-->
+<animation>
+  <type>pick</type>
+  <object-name>hs_1</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/v-51-power", 1.0, 0.1 );
+      </script>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.nvu_power_on()</script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_2</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/v-51-power", 0.0, 0.1 );
+      </script>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.nvu_power_off()</script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_3</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/v-51-count", 1.0, 0.1 );
+      </script>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.nvu_start_count()</script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_4</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/v-51-count", 0.0, 0.1 );
+      </script>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.nvu_stop_count()</script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_5</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/v-51-corr", 1.0, 0.1 );
+      </script>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.nvu_start_corr()</script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_6</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/v-51-corr", 0.0, 0.1 );
+      </script>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.nvu_stop_corr()</script>
+    </binding>
+  </action>
+</animation>
+
+<!--Knobs-->
+
+<animation>
+  <type>pick</type>
+  <object-name>hs_7</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.nvu_set_d(-1)</script>
+    </binding>
+   <mod-up>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.nvu_set_d(0)</script>
+    </binding>
+   </mod-up>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_8</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.nvu_toggle_multiplier(1)</script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_9</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.nvu_set_d(1)</script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>nasal</command>
+        <script>instruments.nvu_set_d(0)</script>
+      </binding>
+    </mod-up>
+  </action>
+</animation>
+
+<!--Selectors-->
+<animation>
+  <type>pick</type>
+  <object-name>selector_1</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/v-51-selector-1</property>
+      <step>1.0</step>
+      <min>0.0</min>
+      <max>8.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>selector_1</object-name>
+  <visible>true</visible>
+  <action>
+    <button>1</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/v-51-selector-1</property>
+      <step>-1.0</step>
+      <min>0.0</min>
+      <max>8.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+<!--Mouse wheel-->
+<animation>
+  <type>pick</type>
+  <object-name>selector_1</object-name>
+  <visible>true</visible>
+  <action>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/v-51-selector-1</property>
+      <step>1.0</step>
+      <min>0.0</min>
+      <max>8.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>selector_1</object-name>
+  <visible>true</visible>
+  <action>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/v-51-selector-1</property>
+      <step>-1.0</step>
+      <min>0.0</min>
+      <max>8.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>selector_2</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/v-51-selector-2</property>
+      <step>1.0</step>
+      <min>0.0</min>
+      <max>6.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>selector_2</object-name>
+  <visible>true</visible>
+  <action>
+    <button>1</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/v-51-selector-2</property>
+      <step>-1.0</step>
+      <min>0.0</min>
+      <max>8.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+<!--Mouse wheel-->
+<animation>
+  <type>pick</type>
+  <object-name>selector_2</object-name>
+  <visible>true</visible>
+  <action>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/v-51-selector-2</property>
+      <step>1.0</step>
+      <min>0.0</min>
+      <max>6.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>selector_2</object-name>
+  <visible>true</visible>
+  <action>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/v-51-selector-2</property>
+      <step>-1.0</step>
+      <min>0.0</min>
+      <max>6.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+<!--Mode selector-->
+<animation>
+  <type>pick</type>
+  <object-name>hs_10</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-toggle</command>
+      <property>tu154/systems/nvu/mode</property>
+    </binding>
+  </action>
+</animation>
+
+</PropertyList>

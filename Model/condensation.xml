@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PropertyList>
+
+  <particlesystem>
+    <name>condensation</name>
+    <type>trail</type>
+    <texture>smoke3.png</texture>
+    <emissive>false</emissive>
+    <lighting>true</lighting>
+    <pass>true</pass>
+
+    <condition>
+      <and>
+        <greater-than>
+          <property>/environment/relative-humidity</property>
+          <value>95</value>
+        </greater-than>
+        <greater-than>
+          <property>/environment/temperature-degc</property>
+          <value>0</value>
+        </greater-than>
+        <greater-than>
+          <property>velocities/airspeed-kt</property>
+          <value>180</value>
+        </greater-than>
+      </and>
+    </condition>
+
+    <attach>world</attach> <!-- world / local-->
+
+    <placer>
+      <type>point</type>  <!-- sector / segments / point -->
+    </placer>
+
+    <shooter>
+      <speed-mps>
+        <value>0</value>
+        <spread>0</spread>
+      </speed-mps>
+    </shooter>
+
+    <counter>
+      <particles-per-sec>
+        <property>/velocities/airspeed-kt</property>
+        <factor>1</factor>
+        <offset>5</offset>
+      </particles-per-sec>
+    </counter>
+
+    <align>fixed</align> <!-- billboard / fixed -->
+
+    <particle>
+      <start>
+        <color>
+          <red><value>   1.0 </value></red>
+          <green><value> 1.0 </value></green>
+          <blue><value>  1.0 </value></blue>
+          <alpha><value> 0.1 </value></alpha>
+        </color>
+        <size>
+          <value>0.10</value>
+        </size>
+      </start>
+
+      <end>
+       <color>
+         <red><value>   1.00 </value></red>
+         <green><value> 1.00 </value></green>
+         <blue><value>  1.00 </value></blue>
+         <alpha><value> 0.01 </value></alpha>
+       </color>
+       <size>
+         <value>0.30</value>
+       </size>
+      </end>
+
+      <life-sec>
+        <value>0.03</value>
+      </life-sec>
+
+      <mass-kg>0.005</mass-kg>
+      <radius-m>0.1</radius-m>
+    </particle>
+
+    <program>
+      <fluid>   air  </fluid>
+      <gravity> true </gravity>
+      <wind>    true </wind>
+    </program>
+
+  </particlesystem>
+
+</PropertyList>

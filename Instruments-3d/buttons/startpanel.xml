@@ -1,0 +1,474 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2008 by Yurik V. Nikiforoff - port for FGFS,  FDM,   	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+
+<!-- Engines start panel
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>startpanel.ac</path>
+<!-- Internal instruments lighting -->
+
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+  <object-name>c_1</object-name>
+  <object-name>_c_1</object-name>
+  <object-name>_c_2</object-name>
+  <object-name>button_1</object-name>
+  <object-name>button_2</object-name>
+  <object-name>handle_1</object-name>
+  <object-name>handle_2</object-name>
+  <object-name>handle_3</object-name>
+  <object-name>handle_4</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+<!-- "PDA working" green lamp -->
+<!--Brightness-->
+<animation>
+  <type>material</type>
+  <object-name>_d_2</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/systems/electrical/checking-lamps/lamps-power</factor-prop>
+  </emission>
+</animation>
+
+<!--Set-->
+<animation>
+  <type>select</type>
+  <object-name>_d_2</object-name>
+  <condition>
+    <or>
+      <property>controls/engines/engine[0]/starter</property>
+      <property>controls/engines/engine[1]/starter</property>
+      <property>controls/engines/engine[2]/starter</property>
+      <property>tu154/systems/electrical/checking-lamps/engine-panel</property>
+    </or>
+  </condition>
+</animation>
+
+  
+<!--Cover-->
+
+<animation>
+    <type>rotate</type>
+    <object-name>cover</object-name>
+    <property>tu154/switches/startpanel-cover</property>
+    <factor>90.0</factor>
+    <center>
+      <x-m>0.0</x-m>
+      <y-m>0.05</y-m>
+      <z-m>0.0</z-m>
+    </center>
+    <axis>
+      <x>0.0</x>
+      <y>0.0</y>
+      <z>1.0</z>
+    </axis>
+</animation>
+
+<!--Start switch-->
+<animation>
+  <type>rotate</type>
+  <object-name>handle_1</object-name>
+  <property>tu154/switches/startpanel-start</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	-60.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	60.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.0633</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<!--Cold  switch-->
+<animation>
+  <type>rotate</type>
+  <object-name>handle_2</object-name>
+  <property>tu154/switches/startpanel-cold</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	-60.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	60.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.0294</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!--Heating  switch-->
+<animation>
+  <type>rotate</type>
+  <object-name>handle_3</object-name>
+  <property>tu154/switches/startpanel-heating</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	-60.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	60.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.0294</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!--Engine selector switch-->
+<animation>
+  <type>rotate</type>
+  <object-name>handle_4</object-name>
+  <property>tu154/switches/startpanel-selector-2</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	60.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.0128</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>handle_4</object-name>
+  <property>tu154/switches/startpanel-selector-3</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	60.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>0.001</y-m>
+    <z-m>-0.0128</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>0.866</y>
+    <z>0.5</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>handle_4</object-name>
+  <property>tu154/switches/startpanel-selector-1</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	60.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>0.001</y-m>
+    <z-m>-0.0128</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>0.866</y>
+    <z>-0.5</z>
+  </axis>
+</animation>
+
+<!--buttons-->
+<animation>
+  <type>translate</type>
+  <object-name>b_3_1</object-name>
+  <property>tu154/switches/startpanel-button-1</property>  
+  <factor>0.002</factor>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>translate</type>
+  <object-name>b_3_2</object-name>
+  <property>tu154/switches/startpanel-button-2</property>  
+  <factor>0.002</factor>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+
+<!--Controls-->
+<!--Buttons-->
+<animation>
+  <type>pick</type>
+  <object-name>b_3_1</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        engines.start_engine();
+      </script>
+    </binding>
+    <binding>
+      <command>property-assign</command>
+      <property>tu154/switches/startpanel-button-1</property>  
+      <value>1.0</value>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>property-assign</command>
+        <property>tu154/switches/startpanel-button-1</property>  
+        <value>0.0</value>
+      </binding>
+    </mod-up>
+  </action>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>b_3_2</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        engines.break_start();
+      </script>
+    </binding>
+    <binding>
+      <command>property-assign</command>
+      <property>tu154/switches/startpanel-button-2</property>  
+      <value>1.0</value>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>property-assign</command>
+        <property>tu154/switches/startpanel-button-2</property>  
+        <value>0.0</value>
+      </binding>
+    </mod-up>
+  </action>
+</animation>
+
+<!--Cover-->
+<animation>
+  <type>pick</type>
+  <object-name>cover</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        if( getprop("tu154/switches/startpanel-cover" ) == 0.0 )
+        	interpolate("tu154/switches/startpanel-cover", 1.0, 0.1 );
+        else 	interpolate("tu154/switches/startpanel-cover", 0.0, 0.1 );
+      </script>
+    </binding>
+  </action>
+</animation>
+
+<!--Start switch-->
+<animation>
+  <type>pick</type>
+  <object-name>hotspot_1</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/startpanel-start", 1.0, 0.1 );
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hotspot_2</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/startpanel-start", 0.0, 0.1 );
+      </script>
+    </binding>
+  </action>
+</animation>
+
+<!--Cold switch-->
+<animation>
+  <type>pick</type>
+  <object-name>hotspot_3</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/startpanel-cold", 1.0, 0.1 );
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hotspot_4</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/startpanel-cold", 0.0, 0.1 );
+      </script>
+    </binding>
+  </action>
+</animation>
+
+<!--Heating switch-->
+<animation>
+  <type>pick</type>
+  <object-name>hotspot_5</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/startpanel-heating", 1.0, 0.1 );
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hotspot_6</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/startpanel-heating", 0.0, 0.1 );
+      </script>
+    </binding>
+  </action>
+</animation>
+
+<!--Engine selector-->
+<animation>
+  <type>pick</type>
+  <object-name>hotspot_7</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/startpanel-selector-2", 1.0, 0.1 );
+        setprop("tu154/switches/startpanel-selector-3", 0.0 );
+        setprop("tu154/switches/startpanel-selector-1", 0.0 );
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hotspot_8</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        setprop("tu154/switches/startpanel-selector-2", 0.0 );
+        interpolate("tu154/switches/startpanel-selector-3", 1.0, 0.1 );
+        setprop("tu154/switches/startpanel-selector-1", 0.0 );
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hotspot_9</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        setprop("tu154/switches/startpanel-selector-2", 0.0 );
+        setprop("tu154/switches/startpanel-selector-3", 0.0 );
+        interpolate("tu154/switches/startpanel-selector-1", 1.0, 0.1 );
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>base_hs_10</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/startpanel-selector-1", 0.0, 0.1 );
+        interpolate("tu154/switches/startpanel-selector-2", 0.0, 0.1 );
+        interpolate("tu154/switches/startpanel-selector-3", 0.0, 0.1 );
+      </script>
+    </binding>
+  </action>
+</animation>
+
+
+
+
+</PropertyList>

@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+
+<!-- Throttle lever indicator IP21-08
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>ip21.ac</path>
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+  <object-name>needle</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+<!--External panel lighting-->
+<animation>
+  <type>material</type>
+  <object-name>cover</object-name>
+  <emission>
+    <red-prop>tu154/light/panel/ext-red</red-prop>
+    <green-prop>tu154/light/panel/ext-green</green-prop>
+    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+  </emission>
+</animation>
+
+  
+<!--Needles-->
+<animation>
+  <type>rotate</type>
+  <object-name>needle</object-name>
+  <property>fdm/jsbsim/fcs/at-throttle-cmd-norm[2]</property>
+  <interpolation>
+    <!--<entry><ind>	0.0</ind>	<dep>	-120.0</dep></entry>--><!--full revers-->
+    <entry><ind>	0.22</ind>	<dep>	-70.0</dep></entry><!--idle-->
+    <entry><ind>	0.57</ind>	<dep>	12.0</dep></entry><!--0.4-->
+    <entry><ind>	0.7</ind>	<dep>	40.0</dep></entry><!--0.6-->
+    <entry><ind>	0.75</ind>	<dep>	53.0</dep></entry><!--0.7-->
+    <entry><ind>	0.84</ind>	<dep>	73.0</dep></entry><!--0.85-->
+    <entry><ind>	0.93</ind>	<dep>	92.0</dep></entry><!--nominal-->
+    <entry><ind>	1.0</ind>	<dep>	108.0</dep></entry><!--miltrust-->
+  </interpolation>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+
+</PropertyList>
