@@ -1,5 +1,5 @@
 
-********************** Tu-154b v.2.0 *******************************************
+********************** Tu-154b v.2.1 *******************************************
 
 Welcome to world of Russian Aviation!
 
@@ -15,13 +15,14 @@ Unpack archive into $FGROOT/Aircraft/tu154b folder; under UNIX, you can place mo
 symlink.
 
 Prepare AI model; for it, copy (or create symlink) AI/Aircraft/tu154b into $FGROOT/AI/Aircraft/tu154b. 
-If you skip this step, model will work yet, but when you go to multiplay mode, and another player will use Tu-154 
+If you skip this step, model will work yet, but when you go to multiplay mode, and another player will use Tu-154b
 model, your comp will stale for long time and drop fps. For avoid it, light model was created for AI/MP mode. There is
 livereas support for AI models, so you will see planes of another players with right livereas (if you install theys 
 livereas before).
 
-This model intend for FlightGear version 2.1.0 only. It not support old FlightGear version (1.9.1, 2.0 or late), and 
-you would not replace FDM file.
+This model intend for FlightGear version 2.8.0 and devel 2.9. It not support old FlightGear version (1.9.1, 2.0 or late), and 
+you would not replace FDM file. If you want use older FG version, you may download appropriate version from 
+http://yurik.flightgear.ru/tu154b-release/.
 
 ********************************** !!! *******************************************
 Under UNIX, be carefull with register of directory name. After changing main SVN server at Feb 16 2011, name of model 
@@ -53,4 +54,4 @@ English pack - Don Lavelle aka Karla (www.flightgear.org)
 Welcome to http://flightgear.ru/forum!
 
 Yurik_NSK, your humble author.
-yurik@megasignal.com
+yurik.nsk@gmail.com
