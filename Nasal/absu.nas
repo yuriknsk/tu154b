@@ -507,8 +507,8 @@ if( getprop("tu154/switches/pu-46-kren" ) == 1.0 )
 # VOR 1
 var absu_az1 = func{
 if( absu_powered() == 0 ) return;
-if( getprop("tu154/switches/pn-5-navigac" ) != 1.0 ) return; #"podgotovka navigacii" not engaged
-if( getprop("tu154/switches/pn-5-posadk" ) != 0.0 ) return; # wrong control!
+#if( getprop("tu154/switches/pn-5-navigac" ) != 1.0 ) return; #"podgotovka navigacii" not engaged
+#if( getprop("tu154/switches/pn-5-posadk" ) != 0.0 ) return; # wrong control!
 #if( getprop("instrumentation/nav[0]/data-is-valid" ) != 1 ) return; # Silence in air!
 #if( getprop("instrumentation/nav[0]/nav-loc" ) != 0 ) return; # Is it ILS?
 
@@ -533,8 +533,8 @@ if( getprop("tu154/switches/pu-46-kren" ) == 1.0 )
 # VOR 2
 var absu_az2 = func{
 if( absu_powered() == 0 ) return;
-if( getprop("tu154/switches/pn-5-navigac" ) != 1.0 ) return; #"podgotovka navigacii" not engaged
-if( getprop("tu154/switches/pn-5-posadk" ) != 0.0 ) return; # wrong control!
+#if( getprop("tu154/switches/pn-5-navigac" ) != 1.0 ) return; #"podgotovka navigacii" not engaged
+#if( getprop("tu154/switches/pn-5-posadk" ) != 0.0 ) return; # wrong control!
 #if( getprop("instrumentation/nav[1]/data-is-valid" ) != 1 ) return; # Silence in air!
 #if( getprop("instrumentation/nav[1]/nav-loc" ) != 0 ) return; # Is it ILS?
 
@@ -558,8 +558,8 @@ if( getprop("tu154/switches/pu-46-kren" ) == 1.0 )
 # NVU
 var absu_nvu = func{
 if( absu_powered() == 0 ) return;
-if( getprop("tu154/switches/pn-5-navigac" ) != 1.0 ) return; #"podgotovka navigacii" not engaged
-if( getprop("tu154/switches/pn-5-posadk" ) != 0.0 ) return; # wrong control!
+#if( getprop("tu154/switches/pn-5-navigac" ) != 1.0 ) return; #"podgotovka navigacii" not engaged
+#if( getprop("tu154/switches/pn-5-posadk" ) != 0.0 ) return; # wrong control!
 clr_heading_lamp();
 # PNP NVU procedure
 if( getprop( "fdm/jsbsim/instrumentation/nvu-selector") )
