@@ -249,10 +249,19 @@ if( getprop( "controls/engines/engine/throttle" ) > 0.85 )
 		if( getprop( "gear/gear[1]/wow" ) == 1 )
 			horn_const_src = horn_const_src + 1.0;
 
-if( getprop( "tu154/systems/warning/deploy-flaps" ) > 0.1 )
-	if( getprop( "fdm/jsbsim/gear/gear-pos-norm" ) < 1.0 )
-		horn_const_src = horn_const_src + 1.0;
+#if( getprop( "tu154/systems/warning/deploy-flaps" ) > 0.1 )
+#	if( getprop( "fdm/jsbsim/gear/gear-pos-norm" ) < 1.0 )
+#		horn_const_src = horn_const_src + 1.0;
 
+
+#  Fix by soitanen.michael[sobaka]gmail.com:
+# ---
+if( getprop( "tu154/systems/warning/deploy-flaps" ) > 0.1 )
+      if( getprop( "fdm/jsbsim/gear/gear-pos-norm" ) < 1.0 )
+	      if( getprop( "fdm/jsbsim/fcs/flap-pos-deg" ) < 14.0 )
+		    horn_const_src = horn_const_src + 1.0;
+
+# ---
 if( getprop( "fdm/jsbsim/gear/gear-pos-norm" ) != 1.0 )
 	if( getprop( "controls/engines/engine/throttle" ) < 0.97 )
 		if( getprop( "fdm/jsbsim/velocities/vc-kts" ) < 175.5 )

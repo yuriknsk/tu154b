@@ -433,4 +433,228 @@
   </action>
 </animation>
 
+
+<!--Mouse wheel-->
+<!--Left-->
+<animation>
+  <type>pick</type>
+  <object-name>hs_1_1</object-name>
+  <object-name>hs_1_2</object-name>
+  <visible>false</visible>
+  <action>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/ark-15[1]/digit-1-3</property>
+      <step>-1.0</step>
+      <min>0.0</min>
+      <max>16.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>hs_1_1</object-name>
+  <object-name>hs_1_2</object-name>
+  <visible>false</visible>
+  <action>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/ark-15[1]/digit-1-3</property>
+      <step>1.0</step>
+      <min>0.0</min>
+      <max>16.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_1_3</object-name>
+  <object-name>hs_1_4</object-name>
+  <visible>false</visible>
+  <action>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/ark-15[1]/digit-1-2</property>
+      <step>-1.0</step>
+      <min>0.0</min>
+      <max>9.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_1_3</object-name>
+  <object-name>hs_1_4</object-name>
+  <visible>false</visible>
+  <action>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/ark-15[1]/digit-1-2</property>
+      <step>1.0</step>
+      <min>0.0</min>
+      <max>9.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_1_5</object-name>
+  <object-name>hs_1_6</object-name>
+  <visible>false</visible>
+  <action>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/ark-15[1]/digit-1-1</property>
+      <step>-1.0</step>
+      <min>0.0</min>
+      <max>9.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_1_5</object-name>
+  <object-name>hs_1_6</object-name>
+  <visible>false</visible>
+  <action>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/ark-15[1]/digit-1-1</property>
+      <step>1.0</step>
+      <min>0.0</min>
+      <max>9.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+<!--Right half-->
+<animation>
+  <type>pick</type>
+  <object-name>hs_2_1</object-name>
+  <object-name>hs_2_2</object-name>
+  <visible>false</visible>
+  <action>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/ark-15[1]/digit-2-3</property>
+      <step>-1.0</step>
+      <min>0.0</min>
+      <max>16.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_2_1</object-name>
+  <object-name>hs_2_2</object-name>
+  <visible>false</visible>
+  <action>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/ark-15[1]/digit-2-3</property>
+      <step>1.0</step>
+      <min>0.0</min>
+      <max>16.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_2_3</object-name>
+  <object-name>hs_2_4</object-name>
+  <visible>false</visible>
+  <action>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/ark-15[1]/digit-2-2</property>
+      <step>-1.0</step>
+      <min>0.0</min>
+      <max>9.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_2_4</object-name>
+  <object-name>hs_2_3</object-name>
+  <visible>false</visible>
+  <action>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/ark-15[1]/digit-2-2</property>
+      <step>1.0</step>
+      <min>0.0</min>
+      <max>9.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_2_5</object-name>
+  <object-name>hs_2_6</object-name>
+  <visible>false</visible>
+  <action>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/ark-15[1]/digit-2-1</property>
+      <step>-1.0</step>
+      <min>0.0</min>
+      <max>9.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_2_5</object-name>
+  <object-name>hs_2_6</object-name>
+  <visible>false</visible>
+  <action>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/ark-15[1]/digit-2-1</property>
+      <step>1.0</step>
+      <min>0.0</min>
+      <max>9.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+
+
+
 </PropertyList>
