@@ -242,30 +242,32 @@ if(  pwr < 13.0 )
 var horn_pulse_src = 0.0;
 var horn_const_src = 0.0;
 
-# checking
+# On-ground
 
 if( getprop( "controls/engines/engine/throttle" ) > 0.85 )
 	if( getprop( "fdm/jsbsim/fcs/flap-pos-deg" ) < 14.0 )
 		if( getprop( "gear/gear[1]/wow" ) == 1 )
 			horn_const_src = horn_const_src + 1.0;
 
-#if( getprop( "tu154/systems/warning/deploy-flaps" ) > 0.1 )
-#	if( getprop( "fdm/jsbsim/gear/gear-pos-norm" ) < 1.0 )
-#		horn_const_src = horn_const_src + 1.0;
 
+# added by Yurik sep 2012
+#
+# Modified horn warning system
+#
+if( getprop( "gear/gear[1]/wow" ) == 0 )			# in air
+  if( getprop( "controls/engines/engine/throttle" ) < 0.15 )	# Idle engines
+  {
+								# Forbidden pair:
 
-#  Fix by soitanen.michael[sobaka]gmail.com:
-# ---
-if( getprop( "tu154/systems/warning/deploy-flaps" ) > 0.1 )
-      if( getprop( "fdm/jsbsim/gear/gear-pos-norm" ) < 1.0 )
-	      if( getprop( "fdm/jsbsim/fcs/flap-pos-deg" ) < 14.0 )
-		    horn_const_src = horn_const_src + 1.0;
-
-# ---
-if( getprop( "fdm/jsbsim/gear/gear-pos-norm" ) != 1.0 )
-	if( getprop( "controls/engines/engine/throttle" ) < 0.97 )
-		if( getprop( "fdm/jsbsim/velocities/vc-kts" ) < 175.5 )
+  if( getprop( "fdm/jsbsim/gear/gear-pos-norm" ) != 1.0 )	# Gear retracted
+      if( getprop( "fdm/jsbsim/fcs/flap-pos-deg" ) > 3.0 )	# Flaps extended
 		horn_const_src = horn_const_src + 1.0;
+
+  if( getprop( "fdm/jsbsim/gear/gear-pos-norm" ) == 1.0 )	# Gear extended
+      if( getprop( "fdm/jsbsim/fcs/flap-pos-deg" ) < 3.0 )	# Flaps retracted
+		horn_const_src = horn_const_src + 1.0;
+
+  }
 
 # set output
 if( horn_const_src > 0.0 ) 
@@ -367,12 +369,18 @@ if( alt < (30.0 + RV_OFFSET) )
 if( alt < (40.0 + RV_OFFSET) )
 	if( alt > (38.0 + RV_OFFSET) )
 		setprop( "tu154/systems/warning/voice/altitude", 40.0 );
+if( alt < (55.0 + RV_OFFSET) )
+	if( alt > (53.0 + RV_OFFSET) )
+		setprop( "tu154/systems/warning/voice/altitude", 55.0 );		
 if( alt < (60.0 + RV_OFFSET) )
 	if( alt > (58.0 + RV_OFFSET) )
 		setprop( "tu154/systems/warning/voice/altitude", 60.0 );
 if( alt < (80.0 + RV_OFFSET) )
 	if( alt > (78.0 + RV_OFFSET) )
 		setprop( "tu154/systems/warning/voice/altitude", 80.0 );
+if( alt < (90.0 + RV_OFFSET) )
+	if( alt > (88.0 + RV_OFFSET) )
+		setprop( "tu154/systems/warning/voice/altitude", 90.0 );		
 if( alt < (100.0 + RV_OFFSET) )
 	if( alt > (98.0 + RV_OFFSET) )
 		setprop( "tu154/systems/warning/voice/altitude", 100.0 );

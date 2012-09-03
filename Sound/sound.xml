@@ -499,6 +499,25 @@
     </position>
 </voice> 
 
+  <voice>
+    <name>s_h_oz</name>
+    <path>Aircraft/tu154b/Sound/voice/St_H_oz.wav</path>
+    <condition>
+      <equals>
+	<property>tu154/systems/warning/voice/altitude</property>
+        <value>90.0</value>
+      </equals>
+    </condition>
+    <mode>once</mode>
+    <position>
+      <x>-22.0</x>
+      <y>0.0</y>
+      <z>2.5</z>
+    </position>
+</voice>
+
+
+
 <voice>
     <name>s_h_80</name>
     <path>Aircraft/tu154b/Sound/voice/St_H_80.wav</path>
@@ -523,6 +542,23 @@
       <equals>
         <property>tu154/systems/warning/voice/altitude</property>
         <value>60.0</value>
+      </equals>
+    </condition>
+    <mode>once</mode>
+    <position>
+      <x>-22.0</x>
+      <y>0.0</y>
+      <z>2.5</z>
+    </position>
+</voice> 
+
+<voice>
+    <name>s_h_ch</name>
+    <path>Aircraft/tu154b/Sound/voice/St_H_vpr.wav</path>
+    <condition>
+      <equals>
+        <property>tu154/systems/warning/voice/altitude</property>
+        <value>55.0</value>
       </equals>
     </condition>
     <mode>once</mode>
@@ -2070,6 +2106,7 @@
       <offset type="double">0.5</offset>
     </volume>
   </marker>
+ 
 
 </fx> 
 
