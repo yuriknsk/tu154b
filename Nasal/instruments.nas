@@ -1646,12 +1646,15 @@ var gradient = 0.0;
 
 var selector = getprop("tu154/systems/nvu/selector" );
 if( selector == nil ) selector = 0;
-var fork_flag = getprop( "/tu154/systems/nvu-calc/fork_flag" );
+var fork_flag = getprop( "/tu154/systems/nvu-calc/fork-flag" );
 if( fork_flag == nil ) fork_flag = 0;
 # We use departure OZPU obviosly.
 # If fork applied, operate with destination OZPU instead
 if( fork_flag ) var zpu_selected = zpu_dest_selected;
 else var zpu_selected = zpu_dep_selected;
+
+
+
 if( have_next ){
 	if( fork_flag ) var zpu_selected_next = zpu_dest_selected_next;
 	else var zpu_selected_next = zpu_dep_selected_next;

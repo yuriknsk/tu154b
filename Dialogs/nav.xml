@@ -13,7 +13,7 @@
 			var beacon_node = props.globals.getNode("/tu154/systems/nvu-calc/beacons", 1);
 			result = cmdarg().getNode("list");
 			# convertor from deg.decimal to deg.minutes 
-			var dec2min = func{
+		var dec2min = func{
 			var arg_copy = arg[0];
 
 			if( arg_copy > 360.0  ) arg_copy -= 360.0;
@@ -22,12 +22,12 @@
 			var dec = arg_copy - integer;
 			return integer + dec * 0.6;
 			}
-			var min2dec = func{
+		var min2dec = func{
 			var integer = int( arg[0] );
 			var min = arg[0] - integer;
 			return integer + min/0.6;
 			}
-			var nvu_calc = func{
+		var nvu_calc = func{
 			# empty coord object - for departure, destination and beacon waypoints
 			var begin_wpt = geo.Coord.new();
 			var end_wpt = geo.Coord.new();
@@ -141,10 +141,10 @@
 			}}
 			
 			fgcommand("dialog-update", props.Node.new({"object-name":"result", "dialog-name":"nav"}));	
-			}
+			} # nvu_calc
 			
 			# Beacon staff
-			var insert_beacon = func{
+		var insert_beacon = func{
 			point.lat = num( getprop("/tu154/systems/nvu-calc/lat") );
 			if( point.lat == nil ) return; # drop point if empty
 			point.lon = num( getprop("/tu154/systems/nvu-calc/lon") );
@@ -165,7 +165,7 @@
 			beacon.setValues( point );
 			}
 			
-			var remove_beacon = func{
+		var remove_beacon = func{
 			route_num = num( getprop("/tu154/systems/nvu-calc/num") );
 			if( route_num == nil ) return;
 			var bc = beacon_node.getChildren("beacon");
