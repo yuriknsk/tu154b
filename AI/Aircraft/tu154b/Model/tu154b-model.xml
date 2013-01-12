@@ -23,7 +23,7 @@ This file is under GPL licensy.
  
  <nasal>
     <load>
-    var livery_update = aircraft.livery_update.new("Aircraft/TU154B/Model/Liveries");
+    var livery_update = aircraft.livery_update.new("Aircraft/tu154b/Model/Liveries");
     </load>
 
     <unload>
