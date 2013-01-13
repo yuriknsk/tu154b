@@ -6592,228 +6592,6 @@
   </emission>
   <texture-prop>tu154/textures/fe-panel</texture-prop>
 </animation>
-<!--Added by Andrey BOG mar 2009-->
-<!--<animation>
-	<type>material</type>
-	<object-name>tablo_1</object-name>
-	<emission>
-		<red-prop>tu154/light/panel/ext-red</red-prop>
-		<green-prop>tu154/light/panel/ext-green</green-prop>
-		<blue-prop>tu154/light/panel/ext-blue</blue-prop>
-	</emission>
-	<texture-prop>tu154/textures/tablo</texture-prop>
-</animation>
-<animation>
-	<type>material</type>
-	<object-name>tablo_2</object-name>
-	<emission>
-		<red-prop>tu154/light/panel/ext-red</red-prop>
-		<green-prop>tu154/light/panel/ext-green</green-prop>
-		<blue-prop>tu154/light/panel/ext-blue</blue-prop>
-	</emission>
-	<texture-prop>tu154/textures/tablo_1</texture-prop>
-</animation>
-<animation>
-	<type>material</type>
-	<object-name>tablo_3</object-name>
-	<emission>
-		<red-prop>tu154/light/panel/ext-red</red-prop>
-		<green-prop>tu154/light/panel/ext-green</green-prop>
-		<blue-prop>tu154/light/panel/ext-blue</blue-prop>
-	</emission>
-	<texture-prop>tu154/textures/tablo_2</texture-prop>
-</animation>
-<animation>
-	<type>material</type>
-	<object-name>tablo_4</object-name>
-	<emission>
-		<red-prop>tu154/light/panel/ext-red</red-prop>
-		<green-prop>tu154/light/panel/ext-green</green-prop>
-		<blue-prop>tu154/light/panel/ext-blue</blue-prop>
-	</emission>
-	<texture-prop>tu154/textures/tablo_3</texture-prop>
-</animation>
-<animation>
-	<type>material</type>
-	<object-name>tablo_5</object-name>
-	<emission>
-		<red-prop>tu154/light/panel/ext-red</red-prop>
-		<green-prop>tu154/light/panel/ext-green</green-prop>
-		<blue-prop>tu154/light/panel/ext-blue</blue-prop>
-	</emission>
-	<texture-prop>tu154/textures/tablo_4</texture-prop>
-</animation>
-<animation>
-	<type>material</type>
-	<object-name>tablo_6</object-name>
-	<emission>
-		<red-prop>tu154/light/panel/ext-red</red-prop>
-		<green-prop>tu154/light/panel/ext-green</green-prop>
-		<blue-prop>tu154/light/panel/ext-blue</blue-prop>
-	</emission>
-	<texture-prop>tu154/textures/tablo_5</texture-prop>
-</animation>
-<animation>
-	<type>material</type>
-	<object-name>tablo_7</object-name>
-	<emission>
-		<red-prop>tu154/light/panel/ext-red</red-prop>
-		<green-prop>tu154/light/panel/ext-green</green-prop>
-		<blue-prop>tu154/light/panel/ext-blue</blue-prop>
-	</emission>
-	<texture-prop>tu154/textures/tablo_6</texture-prop>
-</animation>
-<animation>
-	<type>material</type>
-	<object-name>tablo_8</object-name>
-	<emission>
-		<red-prop>tu154/light/panel/ext-red</red-prop>
-		<green-prop>tu154/light/panel/ext-green</green-prop>
-		<blue-prop>tu154/light/panel/ext-blue</blue-prop>
-	</emission>
-	<texture-prop>tu154/textures/tablo_7</texture-prop>
-</animation>
-<animation>
-	<type>material</type>
-	<object-name>tablo_9</object-name>
-	<emission>
-		<red-prop>tu154/light/panel/ext-red</red-prop>
-		<green-prop>tu154/light/panel/ext-green</green-prop>
-		<blue-prop>tu154/light/panel/ext-blue</blue-prop>
-	</emission>
-	<texture-prop>tu154/textures/tablo_8</texture-prop>
-</animation>
-<animation>
-	<type>material</type>
-	<object-name>tablo_10</object-name>
-	<emission>
-		<red-prop>tu154/light/panel/ext-red</red-prop>
-		<green-prop>tu154/light/panel/ext-green</green-prop>
-		<blue-prop>tu154/light/panel/ext-blue</blue-prop>
-	</emission>
-	<texture-prop>tu154/textures/tablo_9</texture-prop>
-</animation>
-<animation>
-	<type>material</type>
-	<object-name>tablo_11</object-name>
-	<emission>
-		<red-prop>tu154/light/panel/ext-red</red-prop>
-		<green-prop>tu154/light/panel/ext-green</green-prop>
-		<blue-prop>tu154/light/panel/ext-blue</blue-prop>
-	</emission>
-	<texture-prop>tu154/textures/tablo_10</texture-prop>
-</animation>
-<animation>
-	<type>material</type>
-	<object-name>tablo_12</object-name>
-	<emission>
-		<red-prop>tu154/light/panel/ext-red</red-prop>
-		<green-prop>tu154/light/panel/ext-green</green-prop>
-		<blue-prop>tu154/light/panel/ext-blue</blue-prop>
-	</emission>
-	<texture-prop>tu154/textures/tablo_11</texture-prop>
-</animation>
-<animation>
-	<type>material</type>
-	<object-name>tablo_13</object-name>
-	<emission>
-		<red-prop>tu154/light/panel/ext-red</red-prop>
-		<green-prop>tu154/light/panel/ext-green</green-prop>
-		<blue-prop>tu154/light/panel/ext-blue</blue-prop>
-	</emission>
-	<texture-prop>tu154/textures/tablo_12</texture-prop>
-</animation>
-<animation>
-	<type>material</type>
-	<object-name>tablo_14</object-name>
-	<emission>
-		<red-prop>tu154/light/panel/ext-red</red-prop>
-		<green-prop>tu154/light/panel/ext-green</green-prop>
-		<blue-prop>tu154/light/panel/ext-blue</blue-prop>
-	</emission>
-	<texture-prop>tu154/textures/tablo_13</texture-prop>
-</animation>
-<animation>
-	<type>material</type>
-	<object-name>tablo_15</object-name>
-	<emission>
-		<red-prop>tu154/light/panel/ext-red</red-prop>
-		<green-prop>tu154/light/panel/ext-green</green-prop>
-		<blue-prop>tu154/light/panel/ext-blue</blue-prop>
-	</emission>
-	<texture-prop>tu154/textures/tablo_14</texture-prop>
-</animation>
-<animation>
-	<type>material</type>
-	<object-name>tablo_16</object-name>
-	<emission>
-		<red-prop>tu154/light/panel/ext-red</red-prop>
-		<green-prop>tu154/light/panel/ext-green</green-prop>
-		<blue-prop>tu154/light/panel/ext-blue</blue-prop>
-	</emission>
-	<texture-prop>tu154/textures/tablo_15</texture-prop>
-</animation>
-<animation>
-	<type>material</type>
-	<object-name>tablo_17</object-name>
-	<emission>
-		<red-prop>tu154/light/panel/ext-red</red-prop>
-		<green-prop>tu154/light/panel/ext-green</green-prop>
-		<blue-prop>tu154/light/panel/ext-blue</blue-prop>
-	</emission>
-	<texture-prop>tu154/textures/tablo_16</texture-prop>
-</animation>
-<animation>
-	<type>material</type>
-	<object-name>tablo_18</object-name>
-	<emission>
-		<red-prop>tu154/light/panel/ext-red</red-prop>
-		<green-prop>tu154/light/panel/ext-green</green-prop>
-		<blue-prop>tu154/light/panel/ext-blue</blue-prop>
-	</emission>
-	<texture-prop>tu154/textures/tablo_17</texture-prop>
-</animation>
-<animation>
-	<type>material</type>
-	<object-name>tablo_19</object-name>
-	<emission>
-		<red-prop>tu154/light/panel/ext-red</red-prop>
-		<green-prop>tu154/light/panel/ext-green</green-prop>
-		<blue-prop>tu154/light/panel/ext-blue</blue-prop>
-	</emission>
-	<texture-prop>tu154/textures/tablo_18</texture-prop>
-</animation>
-<animation>
-	<type>material</type>
-	<object-name>tablo_20</object-name>
-	<emission>
-		<red-prop>tu154/light/panel/ext-red</red-prop>
-		<green-prop>tu154/light/panel/ext-green</green-prop>
-		<blue-prop>tu154/light/panel/ext-blue</blue-prop>
-	</emission>
-	<texture-prop>tu154/textures/tablo_19</texture-prop>
-</animation>
-<animation>
-	<type>material</type>
-	<object-name>tablo_21</object-name>
-	<emission>
-		<red-prop>tu154/light/panel/ext-red</red-prop>
-		<green-prop>tu154/light/panel/ext-green</green-prop>
-		<blue-prop>tu154/light/panel/ext-blue</blue-prop>
-	</emission>
-	<texture-prop>tu154/textures/tablo_20</texture-prop>
-</animation>
-<animation>
-	<type>material</type>
-	<object-name>tablo_22</object-name>
-	<emission>
-		<red-prop>tu154/light/panel/ext-red</red-prop>
-		<green-prop>tu154/light/panel/ext-green</green-prop>
-		<blue-prop>tu154/light/panel/ext-blue</blue-prop>
-	</emission>
-	<texture-prop>tu154/textures/tablo_21</texture-prop>
-</animation>-->
-
 
 <!--Ambient light-->
 <animation>
@@ -7552,7 +7330,7 @@
 
 <animation>
 	<type>pick</type>
-	<object-name>fan1</object-name>
+	<object-name>fan1.001</object-name>
 	<visible>true</visible>
 	<action>
 		<button>0</button>
@@ -7587,7 +7365,7 @@
 
 <animation>
 	<type>pick</type>
-	<object-name>fan2</object-name>
+	<object-name>fan2.001</object-name>
 	<visible>true</visible>
 	<action>
 		<button>0</button>
@@ -7622,7 +7400,7 @@
 
 <animation>
 	<type>pick</type>
-	<object-name>fan3</object-name>
+	<object-name>fan3.001</object-name>
 	<visible>true</visible>
 	<action>
 		<button>0</button>
