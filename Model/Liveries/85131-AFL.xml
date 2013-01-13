@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+<tu154>
+   <livery>
+      <maina>
+	<name type="string">85131-Aeroflot</name>
+	<texture>Liveries/85131-AFL/maina_t.png</texture>
+      </maina>
+      <mainb>
+	<texture>Liveries/85131-AFL/mainb_t.png</texture>
+      </mainb>
+      <var>
+	<texture>Liveries/85131-AFL/var_t.png</texture>
+      </var>
+      <wingl>
+	<texture>Liveries/85131-AFL/wingl_t.png</texture>
+      </wingl>
+      <wingr>
+	<texture>Liveries/85131-AFL/wingr_t.png</texture>
+      </wingr>
+   </livery>
+ </tu154>
+ 
+</PropertyList>
