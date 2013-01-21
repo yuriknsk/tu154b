@@ -3,7 +3,7 @@
 #
 # Project Tupolev for FlightGear
 #
-# Yurik V. Nikiforoff, yurik@megasignal.com
+# Yurik V. Nikiforoff, yurik.nsk@gmail.com
 # Novosibirsk, Russia
 # mar 2008
 #

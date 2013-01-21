@@ -1,6 +1,6 @@
 #
 # debug & control
-# Yurik V. Nikiforoff, yurik@megasignal.com
+# Yurik V. Nikiforoff, yurik.nsk@gmail.com
 # Novosibirsk, Russia
 # oct 2007
 #

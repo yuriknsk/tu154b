@@ -1,6 +1,6 @@
 #
 # ABSU-154 support
-# Yurik V. Nikiforoff, yurik@megasignal.com
+# Yurik V. Nikiforoff, yurik.nsk@gmail.com
 # Novosibirsk, Russia
 # 2007 - 2008,2010
 #

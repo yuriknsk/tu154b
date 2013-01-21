@@ -1,6 +1,6 @@
 #
 # Help & advise subsystem for TU-154B
-# Yurik V. Nikiforoff, yurik@megasignal.com
+# Yurik V. Nikiforoff, yurik.nsk@gmail.com
 # Novosibirsk, Russia
 # dec 2007
 #
