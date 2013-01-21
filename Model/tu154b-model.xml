@@ -7092,7 +7092,7 @@
 </animation>-->
 
 
-<!--Let's external model visible then landing light on-->
+<!--Let's external model visible then landing light on
  <animation>
    <type>material</type>
    <object-name>Exterior</object-name>
@@ -7105,6 +7105,7 @@
      <min>0.0</min>
    </emission>
  </animation>
+ -->
 
 <!-- ********************* Liveries support *************************** -->
 <nasal>
