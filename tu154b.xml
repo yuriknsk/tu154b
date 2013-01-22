@@ -56,7 +56,7 @@
         <pointmass name="Crew">
             <weight unit="KG">320</weight>
             <location unit="M">
-                <x>3,847</x>
+                <x>3.847</x>
                 <y>0</y>
                 <z>0</z>
             </location>
@@ -1445,6 +1445,7 @@
             </function>
         </axis>
     </aerodynamics>
+<!--    
     <output name="tu-fldata.csv" type="CSV" rate="1">
         <simulation> OFF </simulation>
         <atmosphere> OFF </atmosphere>
@@ -1470,5 +1471,5 @@
 	<property>ap/gs-error-switched</property>
 	<property>ap/gs-error</property>
     </output>
-
+    -->
   </fdm_config>
