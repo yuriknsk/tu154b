@@ -218,6 +218,36 @@
     </config>
   </view>
   
+  <view n="105">
+    <name>Passenger View</name>
+    <!--<enabled type="bool" >true</enabled>-->
+    <type>lookfrom</type>
+    <internal type="bool">true</internal>
+    <config>
+      <from-model type="bool">true</from-model>
+      <x-offset-m type="double" archive="y">-0.1</x-offset-m>
+      <y-offset-m type="double" archive="y">2.25</y-offset-m>
+      <z-offset-m type="double" archive="y">-20.5</z-offset-m>
+      <heading-offset-deg type="double">90.0</heading-offset-deg>
+      <pitch-offset-deg type="double">-10.0</pitch-offset-deg>
+      <from-model-idx type="int">0</from-model-idx>
+      <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
+      <default-field-of-view-deg type="double">55.0</default-field-of-view-deg>
+      <default-pitch-deg type="double">0</default-pitch-deg>
+      <default-heading-deg type="double">0</default-heading-deg>
+      <front-direction-deg type="double">0</front-direction-deg>
+      <front-left-direction-deg type="double">45</front-left-direction-deg>
+      <left-direction-deg type="double">90</left-direction-deg>
+      <back-left-direction-deg type="double">235</back-left-direction-deg>
+      <back-direction-deg type="double">180</back-direction-deg>
+      <back-right-direction-deg type="double">225</back-right-direction-deg>
+      <right-direction-deg type="double">270</right-direction-deg>
+      <front-right-direction-deg type="double">315</front-right-direction-deg>
+      <dynamic-view type="bool">true</dynamic-view>
+    </config>
+  </view>
+  
+  
   <instrumentation>
     <path>Aircraft/tu154b/Systems/instrumentation-config.xml</path>
   </instrumentation>
