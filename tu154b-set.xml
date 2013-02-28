@@ -580,6 +580,28 @@
         <value>0.87</value>
       </binding>
     </key>
+    
+    
+        <key n="42">
+      <name>*</name>
+      <desc>small thrust</desc>
+      <binding>
+        <command>property-assign</command>
+        <property>/controls/engines/engine[0]/throttle</property>
+        <value>0.05</value>
+      </binding>
+      <binding>
+        <command>property-assign</command>
+        <property>/controls/engines/engine[1]/throttle</property>
+        <value>0.05</value>
+      </binding>
+      <binding>
+        <command>property-assign</command>
+        <property>/controls/engines/engine[2]/throttle</property>
+        <value>0.05</value>
+      </binding>
+    </key>
+
 
 
 <!--View shortcuts-->
