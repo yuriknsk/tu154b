@@ -104,7 +104,7 @@
      <x-offset-m archive="y">-0.55</x-offset-m>
      <y-offset-m archive="y">2.16</y-offset-m>
      <z-offset-m archive="y">-21.75</z-offset-m>
-     <pitch-offset-deg type="double">-8.0</pitch-offset-deg>
+     <pitch-offset-deg type="double">-10.0</pitch-offset-deg>
    </config>
   </view>
   <!--Custom views-->
