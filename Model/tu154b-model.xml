@@ -5677,7 +5677,7 @@
   <condition>
       <property>gear/gear[0]/compression-norm</property>
   </condition>
-  <property>velocities/airspeed-kt</property>
+  <property>velocities/groundspeed-kt</property>
   <factor>12.28</factor>
   <center>
     <x-m>-16.0096</x-m>
@@ -5700,7 +5700,7 @@
       <value>0.15</value>
     </greater-than>
   </condition>
-  <property>velocities/airspeed-kt</property>
+  <property>velocities/groundspeed-kt</property>
   <factor>10.56</factor>
   <center>
     <x-m>3.5377</x-m>
@@ -5722,7 +5722,7 @@
       <value>0.2</value>
     </greater-than>
   </condition>
-  <property>velocities/airspeed-kt</property>
+  <property>velocities/groundspeed-kt</property>
   <factor>10.56</factor>
   <center>
     <x-m>2.5151</x-m>
@@ -5744,7 +5744,7 @@
       <value>0.21</value>
     </greater-than>
   </condition>
-  <property>velocities/airspeed-kt</property>
+  <property>velocities/groundspeed-kt</property>
   <factor>10.56</factor>
   <center>
     <x-m>1.5421</x-m>
@@ -5767,7 +5767,7 @@
       <value>0.15</value>
     </greater-than>
   </condition>
-  <property>velocities/airspeed-kt</property>
+  <property>velocities/groundspeed-kt</property>
   <factor>10.56</factor>
   <center>
     <x-m>3.5377</x-m>
@@ -5789,7 +5789,7 @@
       <value>0.2</value>
     </greater-than>
   </condition>
-  <property>velocities/airspeed-kt</property>
+  <property>velocities/groundspeed-kt</property>
   <factor>10.56</factor>
   <center>
     <x-m>2.5151</x-m>
@@ -5811,7 +5811,7 @@
       <value>0.21</value>
     </greater-than>
   </condition>
-  <property>velocities/airspeed-kt</property>
+  <property>velocities/groundspeed-kt</property>
   <factor>10.56</factor>
   <center>
     <x-m>1.5421</x-m>
