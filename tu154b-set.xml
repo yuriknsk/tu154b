@@ -723,12 +723,14 @@
     </panel>
     <!--<window-alpha type="double" archive="y">0.3</window-alpha>      -->
   </light>
+  
   <textures>
     <capt-panel>vc01_t.png</capt-panel>
     <copilot-panel>vc02_t.png</copilot-panel>
     <overhead-panel>vc06_t.png</overhead-panel>
     <fe-panel>vc08_t.png</fe-panel>
   </textures>
+  
   <instrumentation>
     <ark-15 n="0">
       <powered type="bool" archive="y">false</powered>

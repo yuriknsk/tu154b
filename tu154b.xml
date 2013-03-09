@@ -700,7 +700,6 @@
             <default value="0.0"/>
             <test value="1.0">
               fcs/flap-pos-deg gt 10
-              fcs/flap-pos-deg lt 30
               fcs/revers-on-ground gt 0
             </test>
           </switch>

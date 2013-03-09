@@ -1077,10 +1077,8 @@ setprop("tu154/instrumentation/kurs-mp-2/digit-f-low", (freq - int(freq) ) * 100
 hdg = getprop("instrumentation/nav[1]/radials/selected-deg");
 if( hdg == nil ) { settimer( kursmp_init, 1.0 ); return; }
 setprop("tu154/instrumentation/kurs-mp-2/digit-h-hund", int( hdg/100) );
-setprop("tu154/instrumentation/kurs-mp-2/digit-h-dec",
-int( ( hdg / 10.0 )-int( hdg / 100.0 ) * 10.0 ) );
-setprop("tu154/instrumentation/kurs-mp-2/digit-h-ones", 
-int( hdg-int( hdg/10.0 )* 10.0 ) );
+setprop("tu154/instrumentation/kurs-mp-2/digit-h-dec",int( ( hdg / 10.0 )-int( hdg / 100.0 ) * 10.0 ) );
+setprop("tu154/instrumentation/kurs-mp-2/digit-h-ones", int( hdg-int( hdg/10.0 )* 10.0 ) );
 
 }
 

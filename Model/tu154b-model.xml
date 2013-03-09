@@ -6566,12 +6566,13 @@
 <animation>
   <type>material</type>
   <object-name>capt_panel</object-name>
+  <texture-prop>tu154/textures/capt-panel</texture-prop>
   <emission>
     <red-prop>tu154/light/panel/ext-red</red-prop>
     <green-prop>tu154/light/panel/ext-green</green-prop>
     <blue-prop>tu154/light/panel/ext-blue</blue-prop>
   </emission>
-  <texture-prop>tu154/textures/capt-panel</texture-prop>
+  
 </animation>
 
 <animation>

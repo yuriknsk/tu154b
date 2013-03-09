@@ -179,7 +179,7 @@
     </binding>
     <binding>
       <command>nasal</command>
-      <script>instruments.kursmp_sync(0)</script>
+      <script>instruments.kursmp_sync(1)</script>
     </binding>    
   </action>
 </animation>
@@ -201,7 +201,7 @@
     </binding>
     <binding>
       <command>nasal</command>
-      <script>instruments.kursmp_sync(0)</script>
+      <script>instruments.kursmp_sync(1)</script>
     </binding>    
   </action>
 </animation>
@@ -223,7 +223,7 @@
     </binding>
     <binding>
       <command>nasal</command>
-      <script>instruments.kursmp_sync(0)</script>
+      <script>instruments.kursmp_sync(1)</script>
     </binding>    
   </action>
 </animation>
@@ -245,7 +245,7 @@
     </binding>
     <binding>
       <command>nasal</command>
-      <script>instruments.kursmp_sync(0)</script>
+      <script>instruments.kursmp_sync(1)</script>
     </binding>    
   </action>
 </animation>
@@ -267,7 +267,7 @@
     </binding>
     <binding>
       <command>nasal</command>
-      <script>instruments.kursmp_sync(0)</script>
+      <script>instruments.kursmp_sync(1)</script>
     </binding>    
   </action>
 </animation>
@@ -289,7 +289,7 @@
     </binding>
     <binding>
       <command>nasal</command>
-      <script>instruments.kursmp_sync(0)</script>
+      <script>instruments.kursmp_sync(1)</script>
     </binding>    
   </action>
 </animation>
@@ -314,7 +314,7 @@
     </binding>
     <binding>
       <command>nasal</command>
-      <script>instruments.kursmp_sync(0)</script>
+      <script>instruments.kursmp_sync(1)</script>
     </binding>    
   </action>
 </animation>
@@ -336,7 +336,7 @@
     </binding>
     <binding>
       <command>nasal</command>
-      <script>instruments.kursmp_sync(0)</script>
+      <script>instruments.kursmp_sync(1)</script>
     </binding>    
   </action>
 </animation>
@@ -358,7 +358,7 @@
     </binding>
     <binding>
       <command>nasal</command>
-      <script>instruments.kursmp_sync(0)</script>
+      <script>instruments.kursmp_sync(1)</script>
     </binding>    
   </action>
 </animation>
@@ -381,7 +381,7 @@
     </binding>
     <binding>
       <command>nasal</command>
-      <script>instruments.kursmp_sync(0)</script>
+      <script>instruments.kursmp_sync(1)</script>
     </binding>    
   </action>
 </animation>
@@ -404,7 +404,7 @@
     </binding>
     <binding>
       <command>nasal</command>
-      <script>instruments.kursmp_sync(0)</script>
+      <script>instruments.kursmp_sync(1)</script>
     </binding>    
   </action>
 </animation>
@@ -427,7 +427,7 @@
     </binding>
     <binding>
       <command>nasal</command>
-      <script>instruments.kursmp_sync(0)</script>
+      <script>instruments.kursmp_sync(1)</script>
     </binding>    
   </action>
 </animation>
@@ -451,7 +451,7 @@
     </binding>
     <binding>
       <command>nasal</command>
-      <script>instruments.kursmp_sync(0)</script>
+      <script>instruments.kursmp_sync(1)</script>
     </binding>    
   </action>
 </animation>
@@ -472,7 +472,7 @@
     </binding>
     <binding>
       <command>nasal</command>
-      <script>instruments.kursmp_sync(0)</script>
+      <script>instruments.kursmp_sync(1)</script>
     </binding>    
   </action>
 </animation>
@@ -493,7 +493,7 @@
     </binding>
     <binding>
       <command>nasal</command>
-      <script>instruments.kursmp_sync(0)</script>
+      <script>instruments.kursmp_sync(1)</script>
     </binding>    
   </action>
 </animation>
@@ -514,7 +514,7 @@
     </binding>
     <binding>
       <command>nasal</command>
-      <script>instruments.kursmp_sync(0)</script>
+      <script>instruments.kursmp_sync(1)</script>
     </binding>    
   </action>
 </animation>
@@ -539,7 +539,7 @@
     </binding>
     <binding>
       <command>nasal</command>
-      <script>instruments.kursmp_sync(0)</script>
+      <script>instruments.kursmp_sync(1)</script>
     </binding>    
   </action>
 </animation>
@@ -561,7 +561,7 @@
     </binding>
     <binding>
       <command>nasal</command>
-      <script>instruments.kursmp_sync(0)</script>
+      <script>instruments.kursmp_sync(1)</script>
     </binding>    
   </action>
 </animation>
@@ -583,7 +583,7 @@
     </binding>
     <binding>
       <command>nasal</command>
-      <script>instruments.kursmp_sync(0)</script>
+      <script>instruments.kursmp_sync(1)</script>
     </binding>    
   </action>
 </animation>
@@ -605,7 +605,7 @@
     </binding>
     <binding>
       <command>nasal</command>
-      <script>instruments.kursmp_sync(0)</script>
+      <script>instruments.kursmp_sync(1)</script>
     </binding>    
   </action>
 </animation>
