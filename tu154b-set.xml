@@ -83,7 +83,7 @@
   <path>Aircraft/tu154b/Sound/sound.xml</path>
 </sound>
 
-
+  <checklists include="tu154b-checklists.xml"/>
   
   <flaps>
 	  <setting>0.0</setting>
