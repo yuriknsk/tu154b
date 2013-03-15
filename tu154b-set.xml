@@ -660,6 +660,14 @@
         <script>view.forceView(4);</script>
       </binding>
     </key>
+     <key n="54">
+      <name>6</name>
+      <desc>Passenger View</desc>
+      <binding>
+        <command>nasal</command>
+        <script>view.forceView(5);</script>
+      </binding>
+    </key>
     
 <!-- Reverser -->
  <key n="258">
