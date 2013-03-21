@@ -79,12 +79,12 @@
          <alpha><value>0.001</value></alpha>
        </color>
        <size>
-         <value>18</value>
+         <value>100</value>
        </size>
      </end>
 
      <life-sec>
-       <value>70</value>
+       <value>60</value>
      </life-sec>
         
      <mass-kg>0.5</mass-kg>
