@@ -254,7 +254,35 @@
   <realism>
 	  <false-radio-courses-enabled type="bool">false</false-radio-courses-enabled>
   </realism>
+  
+  <multiplay>
+            <generic>
+		<int n="0" alias="/tu154/switches/bano"/>
+                <int n="1" alias="/tu154/switches/omi"/>
+		<int n="3" alias="/gear/gear[0]/tyre-smoke"/>
+		<int n="4" alias="/gear/gear[1]/tyre-smoke"/>
+		<int n="5" alias="/gear/gear[2]/tyre-smoke"/>
+            </generic>
+        </multiplay>
 </sim>
+
+ <gear>
+    <gear n="0">
+      <tyre-smoke type="int">0</tyre-smoke>
+      <sprayspeed-ms type="double">0</sprayspeed-ms>
+      <spray-density type="double">0</spray-density>
+    </gear>
+    <gear n="1">
+      <tyre-smoke type="int">0</tyre-smoke>
+      <sprayspeed-ms type="double">0</sprayspeed-ms>
+      <spray-density type="double">0</spray-density>
+    </gear>
+    <gear n="2">
+      <tyre-smoke type="int">0</tyre-smoke>
+      <sprayspeed-ms type="double">0</sprayspeed-ms>
+      <spray-density type="double">0</spray-density>
+    </gear>
+ </gear>
 
 <instrumentation>
   <adf n="0">
@@ -347,6 +375,9 @@
         <liveries>
           <file>Aircraft/tu154b/Nasal/liveries.nas</file>
         </liveries>
+	<tyresmoke>
+	  <file>Aircraft/tu154b/Nasal/tyresmoke.nas</file>
+	 </tyresmoke>
 <!--
       <debug>
   <file>Aircraft/tu154b/Nasal/debug.nas</file>
