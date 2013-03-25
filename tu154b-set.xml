@@ -280,6 +280,7 @@
 		<int n="3" alias="/gear/gear[0]/tyre-smoke"/>
 		<int n="4" alias="/gear/gear[1]/tyre-smoke"/>
 		<int n="5" alias="/gear/gear[2]/tyre-smoke"/>
+		
             </generic>
         </multiplay>
 </sim>
@@ -396,7 +397,7 @@
 	<tyresmoke>
 	  <file>Aircraft/tu154b/Nasal/tyresmoke.nas</file>
 	 </tyresmoke>
-<!--
+	<!--
       <debug>
   <file>Aircraft/tu154b/Nasal/debug.nas</file>
         </debug>-->
