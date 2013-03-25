@@ -7595,7 +7595,7 @@
   <path>Aircraft/tu154b/Model/Effects/tyre-smoke-nose.xml</path>
   <name>tyre-smoke-n</name>
   <offsets>
-   <x-m>-4.669</x-m>
+   <x-m>-15.669</x-m>
    <y-m>0</y-m>
    <z-m>-2.584</z-m>
   </offsets>
@@ -7606,7 +7606,7 @@
   <name>tyre-smoke-l</name>
   <offsets>
    <x-m>7.962</x-m>
-   <y-m>-2.634</y-m>
+   <y-m>-3.634</y-m>
    <z-m>-2.584</z-m>
   </offsets>
  </model>
@@ -7616,7 +7616,7 @@
   <name>tyre-smoke-r</name>
   <offsets>
    <x-m>7.962</x-m>
-   <y-m>2.634</y-m>
+   <y-m>3.634</y-m>
    <z-m>-2.584</z-m>
   </offsets>
  </model>

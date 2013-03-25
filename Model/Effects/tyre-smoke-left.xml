@@ -15,17 +15,17 @@
         </offsets>
 
         <condition>
-	  <and>
-	    <or>
-                <property>gear/gear[1]/tyre-smoke</property>
-                <property>gear/brake-smoke</property>
-	    </or>
-		<equals>
-			<property>sim/multiplay/generic/int[4]</property>
-			<value>1</value>
+		<and> 
+		<greater-than>
+				<property>orientation/pitch-deg</property>
+				<value>-0.5</value>
+		            </greater-than>
+                               <equals>
+				 <property>sim/multiplay/generic/int[4]</property>
+				<value>1</value>
 		</equals>
-	</and>
-        </condition>
+		</and>
+		</condition>
 
         <attach>world</attach>
 
@@ -39,8 +39,8 @@
             <phi-min-deg>-60</phi-min-deg>
             <phi-max-deg>60</phi-max-deg>
             <speed-mps>
-                <value>50</value>
-                <spread>5</spread>
+                <value>25</value>
+                <spread>50</spread>
             </speed-mps>
             <rotation-speed>
                 <x-max-deg-sec>15</x-max-deg-sec>
@@ -55,7 +55,7 @@
         <counter>
             <particles-per-sec>
                 <value>25</value>
-                <spread>50</spread>
+                <spread>20</spread>
             </particles-per-sec>
         </counter>
 
@@ -101,7 +101,7 @@
                 </size>
             </end>
             <life-sec>
-                <value>1</value>
+                <value>2</value>
             </life-sec>
             <mass-kg>0.025</mass-kg>
             <radius-m>0.175</radius-m>
