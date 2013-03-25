@@ -4,7 +4,7 @@
 
     <particlesystem>
         <name>tyre-smoke-n</name>
-        <texture>tire_smoke.png</texture>
+        <texture>tyresmoke.png</texture>
         <emissive>false</emissive>
         <lighting>false</lighting>
 
@@ -55,7 +55,7 @@
         <counter>
             <particles-per-sec>
                 <value>25</value>
-                <spread>20</spread>
+                <spread>50</spread>
             </particles-per-sec>
         </counter>
 
@@ -101,7 +101,7 @@
                 </size>
             </end>
             <life-sec>
-                <value>2</value>
+                <value>1</value>
             </life-sec>
             <mass-kg>0.025</mass-kg>
             <radius-m>0.175</radius-m>

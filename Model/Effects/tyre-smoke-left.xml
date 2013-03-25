@@ -4,7 +4,7 @@
 
     <particlesystem>
         <name>tyre-smoke-l</name>
-        <texture>tire_smoke.png</texture>
+        <texture>tyresmoke.png</texture>
         <emissive>false</emissive>
         <lighting>false</lighting>
 
@@ -39,8 +39,8 @@
             <phi-min-deg>-60</phi-min-deg>
             <phi-max-deg>60</phi-max-deg>
             <speed-mps>
-                <value>25</value>
-                <spread>50</spread>
+                <value>50</value>
+                <spread>5</spread>
             </speed-mps>
             <rotation-speed>
                 <x-max-deg-sec>15</x-max-deg-sec>
@@ -55,7 +55,7 @@
         <counter>
             <particles-per-sec>
                 <value>25</value>
-                <spread>20</spread>
+                <spread>50</spread>
             </particles-per-sec>
         </counter>
 
