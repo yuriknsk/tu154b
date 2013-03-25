@@ -66,6 +66,24 @@
   </default>
 </menubar>
 
+
+<gui>
+  <style>
+    <colors>
+      <splash-font>
+	<red>0.25</red>
+	<green>0.28</green>
+	<blue>0.31</blue>
+      </splash-font>
+      <splash-screen>
+	<red>1.0</red>
+	<green>1.0</green>
+	<blue>1.0</blue>
+      </splash-screen>
+    </colors>
+  </style>
+</gui>
+
 <model>
 <path>Aircraft/tu154b/Model/tu154b-model.xml</path>
 <livery>
