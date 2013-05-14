@@ -10,7 +10,42 @@
 # Custom views 
 #
 
+var modview_active = 0;
+
+
+#	Modified by Yurik may 2013
+#	Take from system FGDATA/Nasal/view.nas 
+#	Add flag check for sub-view error fix.
+#	
+
+##
+# Handler.  Step to the next (force=1) or next enabled view.
+#
+var stepView = func(step, force = 0) {
+    if( modview_active ) return;	# Deny view modification if ~ pressed (sub view active)
+    step = step > 0 ? 1 : -1;
+    var n = index;
+    for (var i = 0; i < size(views); i += 1) {
+        n += step;
+        if (n < 0)
+            n = size(views) - 1;
+        elsif (n >= size(views))
+            n = 0;
+        var e = views[n].getNode("enabled");
+        if (force or (e == nil or e.getBoolValue()) and
+            (views[n].getNode("name")!=nil))
+            break;
+    }
+    setprop("/sim/current-view/view-number", n);
+
+    # And pop up a nice reminder
+    var popup=getprop("/sim/view-name-popup");
+    if(popup == 1 or popup==nil) gui.popupTip(views[n].getNode("name").getValue());
+}
+
+
 var forceView = func{
+	if( modview_active ) return;	# Deny view modification if ~ pressed (sub view active)
 	var n = arg[0];
 	# Hide levers on navigator view
 	if( n == 2 ) setprop("tu154/mod-views/nav-view", 1);
@@ -33,6 +68,7 @@ var modView  = func{
 	if( n < 0 ) return;
 	var mode = arg[0];
 	if( mode == nil ) mode = 0;
+	modview_active = mode;		# Set global ModView flag
 	# get mod view coordinates	
 	var mv = props.globals.getNode("tu154/mod-views").getChildren("mod-view");
 	if( mode == 1 )
