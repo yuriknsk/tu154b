@@ -1,5 +1,5 @@
 
-********************** Tu-154b v.2.2 *******************************************
+********************** Tu-154b v.3.0 *******************************************
 
 Welcome to world of Russian Aviation!
 
@@ -20,7 +20,7 @@ model, your comp will stale for long time and drop fps. For avoid it, light mode
 livereas support for AI models, so you will see planes of another players with right livereas (if you install theys 
 livereas before).
 
-This model intend for FlightGear version 2.8.0 and devel 2.9. It not support old FlightGear version (1.9.1, 2.0 or late), and 
+This model intend for FlightGear version 2.10.0 and devel. It not support old FlightGear version (1.9.1, 2.0 or late), and 
 you would not replace FDM file. If you want use older FG version, you may download appropriate version from 
 http://yurik.flightgear.ru/tu154b-release/.
 
@@ -31,12 +31,8 @@ directory (TU154B) has changed to (tu154b).
 
 ********************************** LICENSE ***************************************
 
-Owner forbid un-authorize changing and re-distribution visual model. All 3D files and textures (*.ac and *.png) in 
-Model directory, all textures (*.png) in Instruments-3D directory, and all wav-files in Sound directory are under 
-freeware Project Tupolev license, not GPL! For detail, see http://www.fs-proteam.com.
-
-All *.xml or *.nas files are under GPL license.
-
+Roman Skoryh, author of original visual model of Tu-154B for Project Tupolev, give permission for distribute this model under GPL license. Since version 3.0,
+released at june 2013, Tu-154b for FlightGear has distributed under GPL.
 
 ********************************** Authors ***************************************
 
@@ -47,11 +43,20 @@ Ruslan Gnatovsky aka Gnat - nasal electrical system.
 Russian FlightGear community: BOG, Magic, VaLeo, AlexTochka, RealMike, AirAlex, Schneider, vlad32768,
 CAXAP, DimkaS - beta-testing.
 
-Stalker198033 - picture for splash-screen.
+Stalker198033 - picture for old splash-screen.
 
 English pack - Don Lavelle aka Karla (www.flightgear.org)
+
+Vitaliy.May and Co - new splash-screen.
+
+Project Tupolev staff:
+
+Roman Skoryh - visual model, permission for GPL.
+Big thanks to Dmitry Kolesnil aka TenderCat - for consulting and support.
 
 Welcome to http://flightgear.ru/forum!
 
 Yurik_NSK, your humble author.
 yurik.nsk@gmail.com
+
+June 2013

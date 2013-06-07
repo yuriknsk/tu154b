@@ -660,22 +660,13 @@ else	{
 	interpolate("tu154/instrumentation/electrical/hz200", 0.0, UPDATE_PERIOD );
 	}
 
-# Blank landing light if altitude above 100 m
-var sun = getprop("sim/time/sun-angle-rad");
-if( sun < 1.3 ) sun = 0.0;
 var hd_input = getprop("tu154/light/headlight-selector");
 if( hd_input == nil ) hd_input = 0.0;
 if(  hd_input > 0.0 )
 	{
-	var alt_blanker = getprop("position/altitude-agl-ft");
-	alt_blanker = ( 300.0 - alt_blanker ) * 0.0033;
-	if( alt_blanker < 0.0 ) alt_blanker = 0.0;
-	if( alt_blanker > 1.0 ) alt_blanker = 1.0;
-	interpolate("tu154/light/alpha", alt_blanker, UPDATE_PERIOD);
-	setprop("tu154/light/headlight", sun*hd_input*0.6 );
+	setprop("tu154/light/headlight", 1.0 );
 	}
 	else { 
-	setprop("tu154/light/alpha", 0.0 );
 	setprop("tu154/light/headlight", 0.0 );
 	}
 

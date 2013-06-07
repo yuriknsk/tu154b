@@ -22,8 +22,8 @@ var gear = aircraft.light.new("tu154/systems/warning/gear", [0.5, 0.5] );
 var voice_h = aircraft.light.new("tu154/systems/warning/voice", [3.5, 1.0] );
 
 # Strobe
-var strobe_1 = aircraft.light.new("tu154/light/strobe-1", [0.1, 1.5] );
-var strobe_2 = aircraft.light.new("tu154/light/strobe-2", [0.1, 1.4] );
+var strobe = aircraft.light.new("tu154/light/strobe", [0.1, 1.5] );
+#var strobe_2 = aircraft.light.new("tu154/light/strobe-2", [0.1, 1.4] );
 # blank all if we lose 27 V power
 var blank_all = func{
 setprop("tu154/systems/electrical/indicators/wrong-trim", 0 );
@@ -127,8 +127,8 @@ rvrn.switch(0);
 slats.switch(0);
 gear.switch(0);
 not_ready.switch(0);
-strobe_1.switch(0);
-strobe_2.switch(0);
+strobe.switch(0);
+#strobe_2.switch(0);
 
 # PKP blankers
 setprop("tu154/instrumentation/pkp/kurs-blanker", 1 );
@@ -148,6 +148,22 @@ else {
 	}
 
 }
+
+var strobe_selector = func{
+
+  var state = getprop("tu154/light/strobe/state" );
+  var selector = getprop("tu154/light/strobe/strobe_selector" );
+  if( selector ) setprop( "tu154/light/strobe/strobe_1", state );
+  else setprop( "tu154/light/strobe/strobe_2", state );
+  if( state ) return;	# listener invoked by ether variation of flag, so we divide events by 2
+#print("Strobe!");
+  if( selector )
+	setprop("tu154/light/strobe/strobe_selector", 0.0 );
+  else
+	setprop("tu154/light/strobe/strobe_selector", 1.0 )
+}
+
+setlistener( "tu154/light/strobe/state", strobe_selector, 1, 0 );
 
 var panel_lighting = func{
 if( arg[0] ) {
@@ -1009,12 +1025,10 @@ if( getprop( "controls/flight/flaps" ) > 0.1 )
 
 var strobe_control = func{
 if( arg[0] ){
-	strobe_1.switch(1);
-	strobe_2.switch(1);
+	strobe.switch(1);
 	}
 else	{
-	strobe_1.switch(0);
-	strobe_2.switch(0);
+	strobe.switch(0);
 	}
 
 }

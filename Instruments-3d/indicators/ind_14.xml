@@ -12,7 +12,7 @@
 <PropertyList>
  <path>ind_14.ac</path>
 <!--External panel lighting-->
-<animation>
+<!--<animation>
   <type>material</type>
   <object-name>base</object-name>
   <emission>
@@ -20,7 +20,13 @@
     <green-prop>tu154/light/panel/ext-green</green-prop>
     <blue-prop>tu154/light/panel/ext-blue</blue-prop>
   </emission>
-</animation>
+</animation>-->
+
+<effect>
+ <inherits-from>Effects/model-transparent</inherits-from>
+  <object-name>base</object-name>
+</effect>
+
 <!--Indicators-->
 <animation>
   <type>material</type>

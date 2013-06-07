@@ -11,33 +11,54 @@
 3D instrument for Tu-154 -->
 <PropertyList>
  <path>com.ac</path>
-<!--External panel lighting-->
+
+ 
+ <effect>
+    <inherits-from>Effects/model-transparent</inherits-from>
+    <object-name>base</object-name>
+ </effect>
+
 <animation>
-  <type>material</type>
-  <object-name>base</object-name>
-    <emission>
-    <red-prop>tu154/light/panel/ext-red</red-prop>
-    <green-prop>tu154/light/panel/ext-green</green-prop>
-    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
-  </emission>
+  <type>select</type>
+  <object-name>d1_night</object-name>
+  <object-name>d2_night</object-name>
+  <object-name>digits_night</object-name>
+  <condition>
+    <greater-than>
+      <property>tu154/light/instruments/int-red</property>
+      <value>0.1</value>
+    </greater-than>
+  </condition>
+</animation>
+
+<animation>
+  <type>select</type>
+  <object-name>d1</object-name>
+  <object-name>d2</object-name>
+  <object-name>digits</object-name>
+  <condition>
+    <less-than>
+      <property>tu154/light/instruments/int-red</property>
+      <value>0.1</value>
+    </less-than>
+  </condition>
 </animation>
 
 <!-- Internal instruments lighting -->
 <animation>
   <type>material</type>
-  <object-name>d1</object-name>
-  <object-name>d2</object-name>
-  <object-name>digits</object-name>
+  <object-name>d1_night</object-name>
+  <object-name>d2_night</object-name>
+  <object-name>digits_night</object-name>
   <emission>
-    <red-prop>tu154/light/instruments/int-red</red-prop>
-<!--    <green-prop>tu154/light/instruments/int-green</green-prop>
-    <blue-prop>tu154/light/instruments/int-blue</blue-prop>-->
+    <red>0.6</red>
   </emission>
 </animation>
 
 <animation>
   <type>rotate</type>
   <object-name>dig_f_hi</object-name>
+  <object-name>dig_f_hi_night</object-name>
   <property>tu154/instrumentation/com-1/digit-f-hi</property>
   <interpolation>
     <entry><ind>	108.0</ind>	<dep>	0.0</dep></entry>
@@ -57,6 +78,7 @@
 <animation>
   <type>rotate</type>
   <object-name>dig_f_low</object-name>
+  <object-name>dig_f_low_night</object-name>
   <property>tu154/instrumentation/com-1/digit-f-low</property>
   <interpolation>
     <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>

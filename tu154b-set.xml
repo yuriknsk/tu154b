@@ -469,7 +469,7 @@
 
 <input>
   <keyboard>
-<!--    <key n="357">
+<key n="357">
       <name>up</name>
       <binding n="0">
         <command>property-adjust</command>
@@ -518,7 +518,12 @@
         <property>/tu154/x</property>
         <step>0.001</step>
       </binding>
-    </key>-->
+    </key>
+    
+    
+    
+    
+    
     <key n="115">
 	    <name>s</name>
 	    <desc>Auto Startup</desc>
@@ -767,17 +772,22 @@
   </gear>
   <light>
     <instruments>
-      <int-red-def type="double" archive="y">0.8</int-red-def>
-      <int-green-def type="double" archive="y">0.8</int-green-def>
-      <int-blue-def type="double" archive="y">0.7</int-blue-def>
+      <int-red-def type="double" archive="y">0.2</int-red-def>
+      <int-green-def type="double" archive="y">0.2</int-green-def>
+      <int-blue-def type="double" archive="y">0.1</int-blue-def>
     </instruments>
+    <cabin>
+      <red type="double" archive="y">0.3</red>
+      <green type="double" archive="y">0.3</green>
+      <blue type="double" archive="y">0.3</blue>
+    </cabin>
     <panel>
-      <ext-red-def type="double" archive="y">0.6</ext-red-def>
-      <ext-green-def type="double" archive="y">0.6</ext-green-def>
-      <ext-blue-def type="double" archive="y">0.6</ext-blue-def>
-      <amb-red-def type="double" archive="y">0.3</amb-red-def>
-      <amb-green-def type="double" archive="y">0.3</amb-green-def>
-      <amb-blue-def type="double" archive="y">0.3</amb-blue-def>      
+      <ext-red-def type="double" archive="y">0.0</ext-red-def>
+      <ext-green-def type="double" archive="y">0.0</ext-green-def>
+      <ext-blue-def type="double" archive="y">0.0</ext-blue-def>
+      <amb-red-def type="double" archive="y">0.0</amb-red-def>
+      <amb-green-def type="double" archive="y">0.0</amb-green-def>
+      <amb-blue-def type="double" archive="y">0.0</amb-blue-def>      
     </panel>
     <!--<window-alpha type="double" archive="y">0.3</window-alpha>      -->
   </light>
@@ -887,7 +897,7 @@
     </APU>
     <electrical>
       <checking-lamps>
-        <lamps-power type="double" archive="y">1.0</lamps-power>
+        <lamps-power type="double" archive="y">0.3</lamps-power>
         <main-panel type="double" archive="y">0.0</main-panel>
       </checking-lamps>
       <indicators>
