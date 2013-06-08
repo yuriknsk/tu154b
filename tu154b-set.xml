@@ -469,6 +469,9 @@
 
 <input>
   <keyboard>
+    
+<!--It developer code. It should be commented for release-->
+<!--    
 <key n="357">
       <name>up</name>
       <binding n="0">
@@ -518,11 +521,9 @@
         <property>/tu154/x</property>
         <step>0.001</step>
       </binding>
-    </key>
-    
-    
-    
-    
+    </key>-->    
+
+<!--End developer keys biding-->
     
     <key n="115">
 	    <name>s</name>
