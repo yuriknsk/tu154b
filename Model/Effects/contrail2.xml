@@ -10,7 +10,7 @@
    <condition>
      <and>
         <greater-than>
-	  <property>/engines/engine[2]/rpm</property>
+	  <property>/engines/engine[1]/rpm</property>
 		<value>6200</value>
 	</greater-than>
        <greater-than>
