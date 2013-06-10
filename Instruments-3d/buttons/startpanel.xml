@@ -12,7 +12,7 @@
 <PropertyList>
  <path>startpanel.ac</path>
 <!-- Internal instruments lighting -->
-
+<!--
 <animation>
   <type>material</type>
   <object-name>base</object-name>
@@ -30,7 +30,7 @@
     <green-prop>tu154/light/instruments/int-green</green-prop>
     <blue-prop>tu154/light/instruments/int-blue</blue-prop>
   </emission>
-</animation>
+</animation>-->
 
 <!-- "PDA working" green lamp -->
 <!--Brightness-->
