@@ -3144,7 +3144,7 @@
  <name>Pushback</name>
  <path>Models/Airport/Pushback/Goldhofert.xml</path>
  <offsets>
-  <x-m>-18.0</x-m>
+  <x-m>-22.0</x-m>
   <y-m>0</y-m>
   <z-m>-2.67</z-m>
  </offsets>
