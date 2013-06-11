@@ -61,10 +61,20 @@
 		      <dialog-name>nav</dialog-name>
 	      </binding>
       </item>
-    </menu>
-    
+      
+      <item>
+	      <label>Pushback</label>
+	      <name>pushback</name>
+	      <binding>
+	      <command>dialog-show</command>
+	      <dialog-name>pushback</dialog-name>
+	      </binding>
+      </item>
+      
+    </menu>    
   </default>
 </menubar>
+
 
 
 <gui>
@@ -85,10 +95,16 @@
 </gui>
 
 <model>
-<path>Aircraft/tu154b/Model/tu154b-model.xml</path>
-<livery>
+ <path>Aircraft/tu154b/Model/tu154b-model.xml</path>
+ <livery>
   <file type="string">85131-AFL.xml</file>
  </livery>
+ <pushback>
+  <kp type="double">100</kp>
+  <ki type="double">25</ki>
+  <kd type="double">0</kd>
+  <position-norm type="double">0</position-norm>
+ </pushback>
 </model>
 
 <flight-model>jsb</flight-model>

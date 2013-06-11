@@ -910,6 +910,7 @@
     <system file="hydrosystems"/>
     <system file="instrumentation"/>
     <system file="nvu"/>
+    <system file="pushback"/>
     <autopilot file="Systems/absu154"/>
 <!--    <autopilot file="absu154"/>-->
     
@@ -1444,6 +1445,21 @@
             </function>
         </axis>
     </aerodynamics>
+    
+    <external_reactions>
+      <force name="pushback" frame="BODY">
+	<location unit="IN">
+	<x>  -139 </x>
+	<y>    0.0 </y>
+	<z>  -71.0 </z>
+	</location>
+	<direction>
+	<x>1</x>
+	<y>0</y>
+	<z>0</z>
+	</direction>
+      </force>
+   </external_reactions>
 <!--    
     <output name="tu-fldata.csv" type="CSV" rate="1">
         <simulation> OFF </simulation>
