@@ -5644,10 +5644,18 @@
 <animation>
   <type>material</type>
   <object-name>left_nav</object-name>
-  <object-name>right_nav</object-name>
   <object-name>rear_light</object-name>
   <emission>
     <red-prop>tu154/light/nav/red</red-prop>
+  </emission>
+</animation>
+
+<animation>
+  <type>material</type>
+  <object-name>right_nav</object-name>
+  <object-name>rear_light</object-name>
+  <emission>
+    <green-prop>tu154/light/nav/green</green-prop>
   </emission>
 </animation>
 
