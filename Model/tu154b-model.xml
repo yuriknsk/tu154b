@@ -5700,6 +5700,23 @@
   </emission>
 </animation>
 
+<model>
+  <path>Aircraft/tu154b/Model/Lights/strobe.xml</path>
+     <offsets>
+      <x-m>9.8856</x-m> 
+      <y-m>0</y-m> 
+      <z-m>0.1689</z-m>       
+     </offsets>
+</model>
+
+<model>
+  <path>Aircraft/tu154b/Model/Lights/strobe.xml</path>
+     <offsets>
+      <x-m>15.2915</x-m> 
+      <y-m>0</y-m> 
+      <z-m>9.0603</z-m>       
+     </offsets>
+</model>
 <!--
 <animation>
   <type>material</type>
