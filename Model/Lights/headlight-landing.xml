@@ -60,9 +60,9 @@
 	  <type>select</type>
 	  <condition>
 		  <property>tu154/light/headlight-selector</property>
-		  <property>tu154/systems/electrical/buses/DC27-bus-L/volts</property> 
+		  <property>tu154/systems/electrical/buses/DC27-bus-L/volts</property>
 	  </condition>
-  </animation> 
+  </animation>
 
 
  
