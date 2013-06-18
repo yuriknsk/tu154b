@@ -5710,7 +5710,7 @@
 </model>
 
 <model>
-  <path>Aircraft/tu154b/Model/Lights/strobe.xml</path>
+  <path>Aircraft/tu154b/Model/Lights/strobe2.xml</path>
      <offsets>
       <x-m>15.2915</x-m> 
       <y-m>0</y-m> 

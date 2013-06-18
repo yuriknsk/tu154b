@@ -297,7 +297,8 @@
 		<int n="3" alias="/gear/gear[0]/tyre-smoke"/>
 		<int n="4" alias="/gear/gear[1]/tyre-smoke"/>
 		<int n="5" alias="/gear/gear[2]/tyre-smoke"/>
-		<int n="6" alias="/tu154/switches/omi"/>
+		<int n="6" alias="/tu154/light/strobe/strobe_1"/>
+		<int n="7" alias="/tu154/light/strobe/strobe_2"/>
             </generic>
   </multiplay>
 </sim>
