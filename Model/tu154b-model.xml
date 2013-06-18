@@ -5644,12 +5644,45 @@
 <animation>
   <type>material</type>
   <object-name>left_nav</object-name>
-  <object-name>right_nav</object-name>
-  <!--<object-name>rear_light</object-name>-->
   <emission>
     <red-prop>tu154/light/nav/red</red-prop>
   </emission>
 </animation>
+
+<animation>
+  <type>material</type>
+  <object-name>right_nav</object-name>
+  <emission>
+    <green-prop>tu154/light/nav/green</green-prop>
+  </emission>
+</animation>
+
+<model>
+  <path>Aircraft/tu154b/Model/Lights/red.xml</path>
+    <offsets>
+      <x-m>6.8417</x-m> 
+      <y-m>-18.772</y-m> 
+      <z-m>0.1192</z-m>       
+    </offsets>
+</model>
+
+<model>
+  <path>Aircraft/tu154b/Model/Lights/green.xml</path>
+     <offsets>
+      <x-m>6.8417</x-m> 
+      <y-m>18.772</y-m> 
+      <z-m>0.1192</z-m>       
+     </offsets>
+</model>
+ 
+<model>
+  <path>Aircraft/tu154b/Model/Lights/white.xml</path>
+     <offsets>
+      <x-m>16.4956</x-m> 
+      <y-m>0</y-m> 
+      <z-m>1.57</z-m>       
+     </offsets>
+</model>
 
 <animation>
   <type>material</type>
@@ -5667,6 +5700,23 @@
   </emission>
 </animation>
 
+<model>
+  <path>Aircraft/tu154b/Model/Lights/strobe.xml</path>
+     <offsets>
+      <x-m>9.8856</x-m> 
+      <y-m>0</y-m> 
+      <z-m>0.1689</z-m>       
+     </offsets>
+</model>
+
+<model>
+  <path>Aircraft/tu154b/Model/Lights/strobe.xml</path>
+     <offsets>
+      <x-m>15.2915</x-m> 
+      <y-m>0</y-m> 
+      <z-m>9.0603</z-m>       
+     </offsets>
+</model>
 <!--
 <animation>
   <type>material</type>
@@ -6614,6 +6664,71 @@
 </animation>
  -->
 
+ <!-- REFLECTION 
+   <effect>
+       <inherits-from>Aircraft/tu154b/Model/Effects/reflect</inherits-from>
+	  <object-name>visor_MES0</object-name>
+	  <object-name>visor_MES2</object-name>
+	  <object-name>visor_MES1</object-name>
+	  <object-name>visor_MESH</object-name>
+	  <object-name>c_gear_M10</object-name>
+	  <object-name>MESH17external</object-name>
+	  <object-name>MESH178</object-name>
+	  <object-name>lever_sti3</object-name>
+	  <object-name>lever_sti4</object-name>
+	  <object-name>MESH23external</object-name>
+	  <object-name>Door_Cargo</object-name>
+	  <object-name>Door_Passe</object-name>
+	  <object-name>MESH134</object-name>
+	  <object-name>MESH90</object-name>
+	  <object-name>c_gear_ME6</object-name>
+	  <object-name>c_gear_ME7</object-name>
+	  <object-name>c_gear_ME8</object-name>
+	  <object-name>c_gear_ME9</object-name>
+	  <object-name>l_pct_tr16</object-name>
+	  <object-name>lever_cow0</object-name>
+	  <object-name>lever_cowl</object-name>
+	  <object-name>MESH18</object-name>
+	  <object-name>MESH24</object-name>
+	  <object-name>rudder</object-name>
+	  <object-name>Door_Carg0</object-name>
+	  <object-name>Door_Carg1</object-name>
+	  <object-name>MESH135</object-name>
+	  <object-name>MESH91</object-name>
+	  <object-name>MESH25external</object-name>
+	  <object-name>lever_pr11</object-name>
+	  <object-name>Door_Passe</object-name>
+	  <object-name>l_pct_lea3</object-name>
+	  <object-name>l_pct_lea0</object-name>
+	  <object-name>interceptor_left</object-name>
+	  <object-name>l_pct_tra4</object-name>
+	  <object-name>l_pct_tra3</object-name>
+	  <object-name>l_pct_tr12</object-name>
+	  <object-name>l_pct_lea2</object-name>
+	  <object-name>l_pct_tra9</object-name>
+	  <object-name>l_spoiler0</object-name>
+	  <object-name>l_pct_tra6</object-name>
+	  	  
+	  <object-name>ailer_interc_left</object-name>
+	  <object-name>aileron_left</object-name>
+	  <object-name>l_spoiler0</object-name>
+	  <object-name>l_spoiler_</object-name>
+	  <object-name>stabilizer</object-name>
+	  <object-name>elevator_left</object-name>
+	  <object-name>elevator_right</object-name>
+	  <object-name>interceptor_right</object-name>
+	  <object-name>exterior.ac</object-name>
+	  <object-name>interceptor_left</object-name>
+	  <object-name>l_pct_tra4</object-name>
+	  <object-name>l_pct_tra3</object-name>
+	  <object-name>l_pct_tr12</object-name>
+	  <object-name>l_pct_lea2</object-name>
+	  <object-name>l_pct_tra9</object-name>
+	  <object-name>l_spoiler0</object-name>
+	  <object-name>l_pct_tra6</object-name>
+	  </effect>
  
+ -->
+   
 </PropertyList>
 
