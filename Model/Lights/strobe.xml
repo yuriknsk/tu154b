@@ -34,7 +34,7 @@
     <condition>
       <or>
       <property>tu154/light/strobe/strobe_1</property>
-      <property>sim/generic/multiplay/int[6]</property>
+      <property>sim/multiplay/generic/int[6]</property>
       </or>
     </condition>
   </animation>
