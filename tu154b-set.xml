@@ -296,9 +296,10 @@
 		<int n="2" alias="/tu154/light/nav/red"/>
 		<int n="3" alias="/gear/gear[0]/tyre-smoke"/>
 		<int n="4" alias="/gear/gear[1]/tyre-smoke"/>
-		<int n="5" alias="/gear/gear[2]/tyre-smoke"/>		
+		<int n="5" alias="/gear/gear[2]/tyre-smoke"/>
+		<int n="6" alias="/tu154/switches/omi"/>
             </generic>
-        </multiplay>
+  </multiplay>
 </sim>
 
  <gear>
