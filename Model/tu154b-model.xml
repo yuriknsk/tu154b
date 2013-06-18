@@ -5678,9 +5678,9 @@
 <model>
   <path>Aircraft/tu154b/Model/Lights/white.xml</path>
      <offsets>
-      <x-m>16.5956</x-m> 
+      <x-m>16.4956</x-m> 
       <y-m>0</y-m> 
-      <z-m>1.5229</z-m>       
+      <z-m>1.57</z-m>       
      </offsets>
 </model>
 
