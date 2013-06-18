@@ -639,11 +639,23 @@ if( voltage > 15.0 )
 		( getprop( "tu154/switches/generator-3") == 1 ) )
 			setprop("tu154/lamps/gen-3-failure", 0.0);
 	else	setprop("tu154/lamps/gen-3-failure", 1.0);
+
+
 	# Main battery lamp
-	if( (getprop( "tu154/lamps/gen-1-failure" ) == 0.0 ) and
-	( getprop( "tu154/switches/vypr-1") == 1 ) )
+	if( 
+	      ( (getprop( "tu154/systems/electrical/suppliers/VU6B-1/volts" ) > 18.0 ) and
+	      ( getprop( "tu154/switches/vypr-1") == 1 ) ) or
+	      ( (getprop( "tu154/systems/electrical/suppliers/VU6B-2/volts" ) > 18.0 ) and
+	      ( getprop( "tu154/switches/vypr-2") == 1 ) )
+	  )	
+		{
 		setprop("tu154/lamps/battery", 0.0);
-	else	setprop("tu154/lamps/battery", 1.0);
+		setprop( "tu154/systems/electrical/suppliers/battery_charge", 1.0 );
+		}
+	else	{
+		setprop("tu154/lamps/battery", 1.0);
+		setprop( "tu154/systems/electrical/suppliers/battery_charge", 0.0 );
+		}
 	
 	}
 else	{
@@ -653,6 +665,7 @@ else	{
 	setprop("tu154/lamps/gen-2-failure", 0.0);
 	setprop("tu154/lamps/gen-3-failure", 0.0);
 	setprop("tu154/lamps/battery", 0.0);
+	setprop( "tu154/systems/electrical/suppliers/battery_charge", 0.0 );
 	interpolate("tu154/instrumentation/electrical/v27", 0.0, UPDATE_PERIOD );
 	interpolate("tu154/instrumentation/electrical/a27", 0.0, UPDATE_PERIOD );
 	interpolate("tu154/instrumentation/electrical/a200", 0.0, UPDATE_PERIOD );

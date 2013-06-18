@@ -812,10 +812,7 @@
   <name>electrical</name>
   <path>Aircraft/tu154b/Sound/misc/el_loop.wav</path>
   <condition>
-    <greater-than>
-      <property>tu154/systems/electrical/buses/DC27-bus-L/volts</property>
-      <value>13.0</value>
-    </greater-than>
+    <property>tu154/systems/electrical/suppliers/battery_charge</property>
   </condition>
   <mode>looped</mode>
   <position>
