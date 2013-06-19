@@ -5657,6 +5657,17 @@
   </emission>
 </animation>
 
+<animation>
+  <type>material</type>
+  <object-name>rear_nav</object-name>
+  <emission>
+    <red-prop>tu154/light/nav/red</red-prop>
+    <green-prop>tu154/light/nav/green</green-prop>
+    <blue-prop>tu154/light/nav/red</blue-prop>
+  </emission>
+</animation>
+
+
 <model>
   <path>Aircraft/tu154b/Model/Lights/red.xml</path>
     <offsets>
@@ -5703,20 +5714,21 @@
 <model>
   <path>Aircraft/tu154b/Model/Lights/strobe.xml</path>
      <offsets>
-      <x-m>9.8856</x-m> 
+      <x-m>15.2915</x-m> 
       <y-m>0</y-m> 
-      <z-m>0.1689</z-m>       
+      <z-m>9.0603</z-m>       
      </offsets>
 </model>
 
 <model>
   <path>Aircraft/tu154b/Model/Lights/strobe2.xml</path>
      <offsets>
-      <x-m>15.2915</x-m> 
+      <x-m>9.8856</x-m> 
       <y-m>0</y-m> 
-      <z-m>9.0603</z-m>       
+      <z-m>0.1689</z-m>       
      </offsets>
 </model>
+
 <!--
 <animation>
   <type>material</type>
