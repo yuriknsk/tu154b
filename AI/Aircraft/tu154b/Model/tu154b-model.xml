@@ -2008,7 +2008,7 @@ This file is under GPL licensy.
   <type>spin</type>
   <object-name>EngineFan.1</object-name>
   <factor>67</factor>
-  <property>engines/engine/N1</property>
+  <property>engines/engine/n1</property>
   <center>
    <x-m>11.1364</x-m>
    <y-m>-3.3775</y-m>
@@ -2025,7 +2025,7 @@ This file is under GPL licensy.
   <type>spin</type>
   <object-name>EngineFan.2</object-name>
   <factor>67</factor>
-  <property>engines/engine/N1</property>
+  <property>engines/engine/n1</property>
   <center>
    <x-m>11.1364</x-m>
    <y-m>3.3775</y-m>
@@ -2039,116 +2039,54 @@ This file is under GPL licensy.
  </animation>
 <!-- end: rotation of the engine fans-->
 
+ <!--beginning: lights-->
+ 
+ <model>
+  <path>Aircraft/tu154b/Model/Lights/red.xml</path>
+    <offsets>
+      <x-m>6.8417</x-m> 
+      <y-m>-18.772</y-m> 
+      <z-m>0.1192</z-m>       
+    </offsets>
+</model>
 
-<!--beginning: lighs-->
-<!--
- <animation>
-  <name>BeaconFlasher</name>
-  <type>timed</type>
-  <object-name>BeaconFuselageOff</object-name>
-  <object-name>BeaconFuselageOn</object-name>
-  <object-name>BeaconTailOff</object-name>
-  <object-name>BeaconTailOn</object-name>
-  <duration-sec>1.0</duration-sec>
- </animation>-->
-<!--
- <animation>
-  <type>select</type>
-  <object-name>BeaconFlasher</object-name>
-  <condition>
-   <property>tu154/light/strobe-2/state</property>
-  </condition>
- </animation>-->
+<model>
+  <path>Aircraft/tu154b/Model/Lights/green.xml</path>
+     <offsets>
+      <x-m>6.8417</x-m> 
+      <y-m>18.772</y-m> 
+      <z-m>0.1192</z-m>       
+     </offsets>
+</model>
+ 
+<model>
+  <path>Aircraft/tu154b/Model/Lights/white.xml</path>
+     <offsets>
+      <x-m>16.4956</x-m> 
+      <y-m>0</y-m> 
+      <z-m>1.57</z-m>       
+     </offsets>
+</model>
 
-<animation>
-  <type>select</type>
-  <object-name>LeftNavLightOff</object-name>
-  <object-name>RightNavLightOff</object-name>
-  <condition>
-   <not>
-    <greater-than>
-      <property>tu154/light/nav/red</property>
-      <value>0.1</value>
-    </greater-than>
-   </not>
-  </condition>
- </animation>
+<model>
+  <path>Aircraft/tu154b/Model/Lights/strobe.xml</path>
+     <offsets>
+      <x-m>9.8856</x-m> 
+      <y-m>0</y-m> 
+      <z-m>0.1689</z-m>       
+     </offsets>
+</model>
 
- <animation>
-  <type>select</type>
-  <object-name>LeftNavLightOn</object-name>
-  <object-name>RightNavLightOn</object-name>
-  <condition>
-    <greater-than>
-      <property>tu154/light/nav/red</property>
-      <value>0.1</value>
-    </greater-than>
-  </condition>
- </animation>
+<model>
+  <path>Aircraft/tu154b/Model/Lights/strobe2.xml</path>
+     <offsets>
+      <x-m>15.2915</x-m> 
+      <y-m>0</y-m> 
+      <z-m>9.0603</z-m>       
+     </offsets>
+</model>
 
 <!--end: lights-->
-
-
-
-
-<!--beginning: shadow map-->
-<!-- pitch -->
-<!--
- <animation>
-  <type>rotate</type>
-  <object-name>ShadowMap</object-name>
-  <property>orientation/pitch-deg</property>
-  <factor>-1.0</factor>
-  <center>
-   <x-m>0</x-m>
-   <y-m>0</y-m>
-   <z-m>0</z-m>
-  </center>
-  <axis>
-   <x>0</x>
-   <y>1</y>
-   <z>0</z>
-  </axis>
- </animation>-->
-
-<!-- roll -->
-<!--
- <animation>
-  <type>rotate</type>
-  <object-name>ShadowMap</object-name>
-  <property>orientation/roll-deg</property>
-  <factor>1.0</factor>
-  <center>
-   <x-m>0</x-m>
-   <y-m>0</y-m>
-   <z-m>0</z-m>
-  </center>
-  <axis>
-   <x>1</x>
-   <y>0</y>
-   <z>0</z>
-  </axis>
- </animation>-->
-
-<!-- Translate to ground level -->
-<!-- <animation>
-  <type>translate</type>
-  <object-name>ShadowMap</object-name>
-  <property>position/altitude-agl-ft</property>
-  <factor>-0.3</factor>
-  <center>
-   <x-m>0</x-m>
-   <y-m>0</y-m>
-   <z-m>0</z-m>
-  </center>
-  <axis>
-   <x>0</x>
-   <y>0</y>
-   <z>1</z>
-  </axis>
- </animation>-->
-<!--end: shadow map-->
-
 
 <!-- CONTRAIL -->
  
