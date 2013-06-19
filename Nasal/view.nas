@@ -149,4 +149,21 @@ setlistener("/sim/signals/fdm-initialized", func {
 view.manager.register("Flight Engineer View", fe_view );});
 
 
+# Added by Yurik jun 2013
+# Load exterior at startup to avoid stale sim at first external view selection.
+var load_exterior = func{
+print("Load exterior, wait...");
+# return to cabin to next cycle
+settimer( load_interior, 0 );
+setprop("/sim/current-view/view-number", 1);
+}
+
+var load_interior = func{
+setprop("/sim/current-view/view-number", 0);
+print("Done!");
+}
+# Start it late as we can
+setlistener("/sim/signals/fdm-initialized", load_exterior, 0, 0 );
+
 print("View registered");
+

@@ -2,6 +2,7 @@
 
 print(getprop("/sim/gui/dialogs"));
 
+
 var UPDATE_PERIOD = 0.3;
 
 var enode="tu154/systems/electrical/";

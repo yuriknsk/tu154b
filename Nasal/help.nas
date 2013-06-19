@@ -71,4 +71,7 @@ help_win.write(sprintf("mass: %.0f kg CG: %.1f%% MAC Vrotate: %.0f kmh Vref: %.0
 var messenger = func{
 help_win.write(arg[0]);
 }
+
+
 print("Help subsystem started");
+
