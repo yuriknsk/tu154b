@@ -2970,5 +2970,9 @@ gear_handler();
 setprop("instrumentation/heading-indicator[0]/offset-deg", 359.0 * rand() );
 setprop("instrumentation/heading-indicator[1]/offset-deg", 359.0 * rand() );
 
+#save sound volume and deny sound for startup
 
+var vol = getprop("/sim/sound/volume");
+	  setprop("tu154/volume", vol);  
+	  setprop("/sim/sound/volume", 0.0);
 print("PNK started");

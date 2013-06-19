@@ -161,6 +161,8 @@ setprop("/sim/current-view/view-number", 1);
 var load_interior = func{
 setprop("/sim/current-view/view-number", 0);
 print("Done!");
+# Enable sim sound - it was disabled in instruments.nas while startup for avoid stupid effects sound.
+setprop("/sim/sound/volume", getprop("tu154/volume") );
 }
 # Start it late as we can
 setlistener("/sim/signals/fdm-initialized", load_exterior, 0, 0 );
