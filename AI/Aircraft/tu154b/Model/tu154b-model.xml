@@ -17,9 +17,18 @@ This file is under GPL licensy.
 <PropertyList>
  <path>tu154B.ac</path>
  <offsets>
-   <z-m>1.5</z-m>
+   <x-m>-3.7</x-m>
+   <z-m>1.2</z-m>
    <pitch-deg>0</pitch-deg>
  </offsets>
+
+<animation>
+  <type>scale</type>
+   <x-offset>0.94</x-offset>
+   <y-offset>0.95</y-offset>
+   <z-offset>0.95</z-offset>
+</animation>
+ 
  
  <nasal>
     <load>
@@ -138,47 +147,6 @@ This file is under GPL licensy.
 </animation>
 
 
-
-  
-<!--
- <model>
-  <path>Aircraft/tu154/Models/tu154-cockpit.ac</path>
-  <offsets>
-   <x-m>-19.0738</x-m>
-   <y-m>0.0</y-m>
-   <z-m>0.39</z-m>
-  </offsets>
- </model>
-
- <model>
-  <path>Aircraft/tu154/Models/3d-instruments.xml</path>
- </model>
-
-
- <animation>
-  <type>select</type>
-  <object-name>Fuselage</object-name>
-  <condition>
-   <not>
-    <equals>
-     <property>sim/current-view/view-number</property>
-     <value>0</value>
-    </equals>
-   </not>
-  </condition>
- </animation>
-
- <animation>
-  <type>select</type>
-  <object-name>Panel</object-name>
-  <object-name>Cockpit</object-name>
-  <condition>
-   <not>
-    <property>controls/lighting/nav-lights</property>
-   </not>
-  </condition>
- </animation>
--->
 <animation>
   <type>rotate</type>
   <object-name>AileronLeftOuter</object-name>
@@ -2025,7 +1993,7 @@ This file is under GPL licensy.
   <type>spin</type>
   <object-name>EngineFan.2</object-name>
   <factor>67</factor>
-  <property>engines/engine[2]/n1</property>
+  <property>engines/engine/n1</property>
   <center>
    <x-m>11.1364</x-m>
    <y-m>3.3775</y-m>

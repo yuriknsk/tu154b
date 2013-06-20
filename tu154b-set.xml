@@ -97,8 +97,9 @@
 <model>
  <path>Aircraft/tu154b/Model/tu154b-model.xml</path>
  <livery>
-  <file type="string">85131-AFL.xml</file>
+  <file type="string">85529-KRS</file>
  </livery>
+ 
  <pushback>
   <kp type="double">100</kp>
   <ki type="double">25</ki>
