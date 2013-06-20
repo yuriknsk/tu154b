@@ -2044,45 +2044,45 @@ This file is under GPL licensy.
  <model>
   <path>Aircraft/tu154b/Model/Lights/red.xml</path>
     <offsets>
-      <x-m>6.8417</x-m> 
-      <y-m>-18.772</y-m> 
-      <z-m>0.1192</z-m>       
+      <x-m>11.1894</x-m> 
+      <y-m>-19.6731</y-m> 
+      <z-m>-1.3556</z-m>       
     </offsets>
 </model>
 
 <model>
   <path>Aircraft/tu154b/Model/Lights/green.xml</path>
      <offsets>
-      <x-m>6.8417</x-m> 
-      <y-m>18.772</y-m> 
-      <z-m>0.1192</z-m>       
+      <x-m>11.1894</x-m> 
+      <y-m>19.6731</y-m> 
+      <z-m>-1.3556</z-m>       
      </offsets>
 </model>
  
 <model>
   <path>Aircraft/tu154b/Model/Lights/white.xml</path>
      <offsets>
-      <x-m>16.4956</x-m> 
+      <x-m>21.3544</x-m> 
       <y-m>0</y-m> 
-      <z-m>1.57</z-m>       
+      <z-m>0.3574</z-m>       
      </offsets>
 </model>
 
 <model>
   <path>Aircraft/tu154b/Model/Lights/strobe.xml</path>
      <offsets>
-      <x-m>9.8856</x-m> 
+      <x-m>14.5971</x-m> 
       <y-m>0</y-m> 
-      <z-m>0.1689</z-m>       
+      <z-m>-1.3462</z-m>       
      </offsets>
 </model>
 
 <model>
   <path>Aircraft/tu154b/Model/Lights/strobe2.xml</path>
      <offsets>
-      <x-m>15.2915</x-m> 
+      <x-m>20.2578</x-m> 
       <y-m>0</y-m> 
-      <z-m>9.0603</z-m>       
+      <z-m>8.16</z-m>       
      </offsets>
 </model>
 
