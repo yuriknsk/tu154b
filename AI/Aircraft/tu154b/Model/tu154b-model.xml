@@ -1975,8 +1975,8 @@ This file is under GPL licensy.
  <animation>
   <type>spin</type>
   <object-name>EngineFan.1</object-name>
-  <factor>67</factor>
   <property>engines/engine/n1</property>
+  <factor>5</factor>
   <center>
    <x-m>11.1364</x-m>
    <y-m>-3.3775</y-m>
@@ -1992,8 +1992,8 @@ This file is under GPL licensy.
  <animation>
   <type>spin</type>
   <object-name>EngineFan.2</object-name>
-  <factor>67</factor>
-  <property>engines/engine/n1</property>
+  <property>engines/engine[2]/n1</property>
+  <factor>5</factor>
   <center>
    <x-m>11.1364</x-m>
    <y-m>3.3775</y-m>
@@ -2013,7 +2013,7 @@ This file is under GPL licensy.
   <path>Aircraft/tu154b/Model/Lights/red.xml</path>
     <offsets>
       <x-m>11.1894</x-m> 
-      <y-m>-19.6731</y-m> 
+      <y-m>-19.73</y-m> 
       <z-m>-1.3556</z-m>       
     </offsets>
 </model>
@@ -2022,7 +2022,7 @@ This file is under GPL licensy.
   <path>Aircraft/tu154b/Model/Lights/green.xml</path>
      <offsets>
       <x-m>11.1894</x-m> 
-      <y-m>19.6731</y-m> 
+      <y-m>19.73</y-m> 
       <z-m>-1.3556</z-m>       
      </offsets>
 </model>
@@ -2032,7 +2032,7 @@ This file is under GPL licensy.
      <offsets>
       <x-m>21.3544</x-m> 
       <y-m>0</y-m> 
-      <z-m>0.3574</z-m>       
+      <z-m>0.1574</z-m>       
      </offsets>
 </model>
 
