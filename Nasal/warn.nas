@@ -118,6 +118,11 @@ setprop("tu154/light/nav/red", 0.0 );
 setprop("tu154/light/nav/green", 0.0 );
 setprop("tu154/light/nav/blue", 0.0 );
 
+setprop("tu154/systems/warning/voice/eng-ready", 0.0);
+setprop("tu154/systems/warning/voice/nav-ready", 0.0 );
+setprop("tu154/systems/warning/voice/sp-ready", 0.0 );
+
+
 # flashes
 iso.switch(0);
 horn.switch(0);
@@ -545,7 +550,7 @@ else { if( getprop( "tu154/systems/warning/not-ready/enabled" ) != 0 )
 { # time for speech - only if we stay. If we run - keep silence.
 	interpolate("tu154/systems/warning/voice/eng-ready", 1.0, 2.0 );
 	interpolate("tu154/systems/warning/voice/nav-ready", 1.0, 3.0 );
-	interpolate("tu154/systems/warning/voice/sp-ready", 1.0, 3.1 );
+	interpolate("tu154/systems/warning/voice/sp-ready", 1.0, 4.0 );
 	}}
      }
 
