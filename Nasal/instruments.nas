@@ -158,9 +158,11 @@ setprop("tu154/instrumentation/pnp[1]/plane/hund",
 }
 
 # Tu-154 not use hdg digit, yellow bug only!
-#setlistener("tu154/instrumentation/pnp[0]/heading-deg-delayed", pnp0_hdg_handler,0,0 );
+setlistener("tu154/instrumentation/pnp[0]/heading-deg-delayed", pnp0_hdg_handler,0,0 );
+setlistener("tu154/instrumentation/pnp[1]/heading-deg-delayed", pnp1_hdg_handler,0,0 );
+
+
 setlistener("tu154/instrumentation/pnp[0]/plane-deg-delayed", pnp0_plane_handler,0,0 );
-#setlistener("tu154/instrumentation/pnp[1]/heading-deg-delayed", pnp1_hdg_handler,0,0 );
 setlistener("tu154/instrumentation/pnp[1]/plane-deg-delayed", pnp1_plane_handler,0,0 );
 
 
@@ -168,6 +170,46 @@ pnp0_hdg_handler();
 pnp0_plane_handler();
 pnp1_hdg_handler();
 pnp1_plane_handler();
+
+# SKAWK support
+
+var skawk_handler = func{
+  var digit_1 = getprop( "tu154/instrumentation/skawk/handle-1" );
+  var digit_2 = getprop( "tu154/instrumentation/skawk/handle-2" );
+  var digit_3 = getprop( "tu154/instrumentation/skawk/handle-3" );
+  var digit_4 = getprop( "tu154/instrumentation/skawk/handle-4" );
+  var mode_handle = getprop("tu154/instrumentation/skawk/handle-5" );
+  var mode = 1;
+
+  if( mode_handle == 0 ) mode = 4;	# A mode
+  if( mode_handle == 2 ) mode = 5;	# C mode
+  if( mode_handle == 1 ) mode = 1;	# Standby mode (B)
+  if( mode_handle == 3 ) mode = 3;	# Ground mode (D)
+
+  setprop("instrumentation/transponder/inputs/knob-mode", mode );
+  setprop("instrumentation/transponder/inputs/digit[3]", digit_1 );
+  setprop("instrumentation/transponder/inputs/digit[2]", digit_2 );
+  setprop("instrumentation/transponder/inputs/digit[1]", digit_3 );
+  setprop("instrumentation/transponder/inputs/digit", digit_4 );
+}
+
+
+# Load defaults at startup
+setprop( "tu154/instrumentation/skawk/handle-1", getprop( "instrumentation/transponder/inputs/digit[3]" ) );
+setprop( "tu154/instrumentation/skawk/handle-2", getprop( "instrumentation/transponder/inputs/digit[2]" ) );
+setprop( "tu154/instrumentation/skawk/handle-3", getprop( "instrumentation/transponder/inputs/digit[1]" ) );
+setprop( "tu154/instrumentation/skawk/handle-4", getprop( "instrumentation/transponder/inputs/digit" ) );
+setprop( "tu154/instrumentation/skawk/handle-5", 1 );
+setprop( "instrumentation/transponder/inputs/knob-mode", 1 );
+
+
+setlistener("tu154/instrumentation/skawk/handle-1", skawk_handler,0,0 );
+setlistener("tu154/instrumentation/skawk/handle-2", skawk_handler,0,0 );
+setlistener("tu154/instrumentation/skawk/handle-3", skawk_handler,0,0 );
+setlistener("tu154/instrumentation/skawk/handle-4", skawk_handler,0,0 );
+setlistener("tu154/instrumentation/skawk/handle-5", skawk_handler,0,0 );
+
+
 
 # IKU support
 iku_handler = func {
