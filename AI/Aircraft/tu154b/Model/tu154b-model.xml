@@ -2025,7 +2025,7 @@ This file is under GPL licensy.
   <type>spin</type>
   <object-name>EngineFan.2</object-name>
   <factor>67</factor>
-  <property>engines/engine/n1</property>
+  <property>engines/engine[2]/n1</property>
   <center>
    <x-m>11.1364</x-m>
    <y-m>3.3775</y-m>

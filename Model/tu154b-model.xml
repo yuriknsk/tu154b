@@ -4809,6 +4809,115 @@
 </animation>
 <!--*********************** END GEAR ANIMATION ********************************-->
 
+<!-- beginning: rotation of the engine fans-->
+ <animation>
+  <type>spin</type>
+  <object-name>engine0_M0</object-name>
+  <object-name>engine0_ME</object-name>
+  <property>engines/engine/n1</property>
+  <factor>10</factor>
+  <center>
+   <x-m>7.08996</x-m>
+   <y-m>-3.20567</y-m>
+   <z-m>1.89313</z-m>
+  </center>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+ 
+  <animation>
+  <type>spin</type>
+  <object-name>engine0_M1</object-name>
+  <object-name>engine0_M2</object-name>
+  <property>engines/engine/n1</property>
+  <factor>10</factor>
+  <center>
+   <x-m>10.44998</x-m>
+   <y-m>-3.02705</y-m>
+   <z-m>1.72309</z-m>
+  </center>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+ 
+ <animation>
+  <type>spin</type>
+  <object-name>engine2_M0</object-name>
+  <object-name>engine2_ME</object-name>
+  <property>engines/engine[2]/n1</property>
+  <factor>10</factor>
+  <center>
+   <x-m>7.08996</x-m>
+   <y-m>3.20587</y-m>
+   <z-m>1.89313</z-m>
+  </center>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+ 
+ <animation>
+  <type>spin</type>
+  <object-name>engine2_M1</object-name>
+  <object-name>engine2_M2</object-name>
+  <property>engines/engine[2]/n1</property>
+  <factor>10</factor>
+  <center>
+   <x-m>10.44998</x-m>
+   <y-m>3.02723</y-m>
+   <z-m>1.72309</z-m>
+  </center>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+ 
+ <animation>
+  <type>spin</type>
+  <object-name>engine1_M1</object-name>
+  <object-name>engine1_M2</object-name>
+  <property>engines/engine[1]/n1</property>
+  <factor>10</factor>
+  <center>
+   <x-m>13.70820</x-m>
+   <y-m>0.000085</y-m>
+   <z-m>2.36410</z-m>
+  </center>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+ 
+ <animation>
+  <type>spin</type>
+  <object-name>engine1_M0</object-name>
+  <object-name>engine1_ME</object-name>
+  <property>engines/engine[1]/n1</property>
+  <factor>10</factor>
+  <center>
+   <x-m>10.12460</x-m>
+   <y-m>0.000089</y-m>
+   <z-m>2.36410</z-m>
+  </center>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+
 <!--+++++++++++++++++++++++ SURFACE ANIMATION ++++++++++++++++++++++++++++++++-->
 
 <!--Ailerons-->
