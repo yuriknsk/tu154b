@@ -49,12 +49,8 @@
         <dep>1</dep>
       </entry>
       <entry>
-        <ind>500</ind>
+        <ind>1000</ind>
         <dep>2</dep>
-      </entry>
-      <entry>
-        <ind>2500</ind>
-        <dep>3</dep>
       </entry>
     </interpolation>
   </animation>
