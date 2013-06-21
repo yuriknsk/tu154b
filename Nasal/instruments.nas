@@ -193,8 +193,8 @@ var skawk_handler = func{
   setprop("instrumentation/transponder/inputs/digit", digit_4 );
 }
 
-
 # Load defaults at startup
+var skawk_init = func{
 setprop( "tu154/instrumentation/skawk/handle-1", getprop( "instrumentation/transponder/inputs/digit[3]" ) );
 setprop( "tu154/instrumentation/skawk/handle-2", getprop( "instrumentation/transponder/inputs/digit[2]" ) );
 setprop( "tu154/instrumentation/skawk/handle-3", getprop( "instrumentation/transponder/inputs/digit[1]" ) );
@@ -202,13 +202,16 @@ setprop( "tu154/instrumentation/skawk/handle-4", getprop( "instrumentation/trans
 setprop( "tu154/instrumentation/skawk/handle-5", 1 );
 setprop( "instrumentation/transponder/inputs/knob-mode", 1 );
 
-
 setlistener("tu154/instrumentation/skawk/handle-1", skawk_handler,0,0 );
 setlistener("tu154/instrumentation/skawk/handle-2", skawk_handler,0,0 );
 setlistener("tu154/instrumentation/skawk/handle-3", skawk_handler,0,0 );
 setlistener("tu154/instrumentation/skawk/handle-4", skawk_handler,0,0 );
 setlistener("tu154/instrumentation/skawk/handle-5", skawk_handler,0,0 );
+}
 
+# We use transponder for FG 2.10 and late
+
+if( getprop( "instrumentation/transponder/inputs/digit" ) != nil ) skawk_init();
 
 
 # IKU support
