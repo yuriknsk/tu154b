@@ -5,6 +5,8 @@
 <emissive type="bool">false</emissive>
 <lighting type="bool">false</lighting>
 <condition>
+  <or>
+    <property>sim/multiplay/generic/int[10]</property>
 <and>
 <greater-than>
 <property>/engines/engine[2]/rpm</property>
@@ -19,6 +21,7 @@
 <value>1678</value>
 </less-than>
 </and>
+</or>
 </condition>
 <attach>world</attach>
 <placer>

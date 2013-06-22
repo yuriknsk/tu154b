@@ -300,6 +300,9 @@
 		<int n="5" alias="/gear/gear[2]/tyre-smoke"/>
 		<int n="6" alias="/tu154/light/strobe/strobe_1"/>
 		<int n="7" alias="/tu154/light/strobe/strobe_2"/>
+		<int n="8" alias="/tu154/contrail/smoke1"/>
+		<int n="9" alias="/tu154/contrail/smoke2"/>
+		<int n="10" alias="/tu154/contrail/smoke3"/>
             </generic>
   </multiplay>
 </sim>
@@ -424,7 +427,9 @@
         <help>
           <file>Aircraft/tu154b/Nasal/help.nas</file>
         </help>
-
+	<contrail>
+          <file>Aircraft/tu154b/Nasal/contrail.nas</file>
+        </contrail>
 </nasal>
 
 <fdm>
