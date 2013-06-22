@@ -11,6 +11,8 @@
     <pass>true</pass>
 
     <condition>
+      <or>
+      <property>sim/multiplay/generic/int[14]</property>
       <and>
         <greater-than>
           <property>/environment/relative-humidity</property>
@@ -25,6 +27,7 @@
           <value>180</value>
         </greater-than>
       </and>
+    </or>
     </condition>
 
     <attach>world</attach> <!-- world / local-->

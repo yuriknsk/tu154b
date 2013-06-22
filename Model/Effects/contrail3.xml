@@ -8,6 +8,8 @@
    <lighting type="bool">false</lighting>
 
    <condition>
+     <or>
+      <property>sim/multiplay/generic/int[13]</property>
      <and>
         <greater-than>
 	  <property>/engines/engine[2]/rpm</property>
@@ -22,6 +24,7 @@
          <value>-29</value>
        </less-than>
      </and>
+   </or>
    </condition>
 
    <attach>world</attach>

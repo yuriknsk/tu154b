@@ -303,6 +303,11 @@
 		<int n="8" alias="/tu154/contrail/smoke1"/>
 		<int n="9" alias="/tu154/contrail/smoke2"/>
 		<int n="10" alias="/tu154/contrail/smoke3"/>
+		<int n="11" alias="/tu154/contrail/contrail1"/>
+		<int n="12" alias="/tu154/contrail/contrail2"/>
+		<int n="13" alias="/tu154/contrail/contrail3"/>
+		<int n="14" alias="/tu154/contrail/condensation"/>
+		
             </generic>
   </multiplay>
 </sim>
