@@ -12,17 +12,13 @@
        <property>sim/multiplay/generic/int[11]</property>
      <and>
         <greater-than>
-	  <property>/engines/engine/rpm</property>
+	  <property>engines/engine/rpm</property>
 		<value>6200</value>
 	</greater-than>
        <greater-than>
-         <property>/position/altitude-ft</property>
+         <property>position/altitude-ft</property>
          <value>21450</value>
        </greater-than>
-       <less-than>
-	 <property>/environment/temperature-degc</property>
-         <value>-29</value>
-       </less-than>
      </and>
    </or>
    </condition>

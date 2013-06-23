@@ -37,7 +37,7 @@ _setlistener("/sim/signals/fdm-initialized", func { smoke3() });
 setprop("tu154/contrail/contrail1", 0 );
 setprop("engines/engine/rpm", 0);
 var contrail1 = func() {
-      if((getprop("engines/engine/rpm") > 6200) and (getprop("position/altitude-ft") > 21450) and (getprop("environment/temperature-degc") < -29)) {
+      if((getprop("engines/engine/rpm") > 6200) and (getprop("position/altitude-ft") > 21450)) {
                 setprop("tu154/contrail/contrail1", 1 );
         } else {
                 setprop("tu154/contrail/contrail1", 0 );
@@ -49,7 +49,7 @@ _setlistener("/sim/signals/fdm-initialized", func { contrail1() });
 setprop("tu154/contrail/contrail2", 0 );
 setprop("engines/engine[1]/rpm", 0);
 var contrail2 = func() {
-      if((getprop("engines/engine[1]/rpm") > 6200) and (getprop("position/altitude-ft") > 21450) and (getprop("environment/temperature-degc") < -29)) {
+       if((getprop("engines/engine/rpm") > 6200) and (getprop("position/altitude-ft") > 21450)) {
                 setprop("tu154/contrail/contrail2", 1 );
         } else {
                 setprop("tu154/contrail/contrail2", 0 );
@@ -61,7 +61,7 @@ _setlistener("/sim/signals/fdm-initialized", func { contrail2() });
 setprop("tu154/contrail/contrail3", 0 );
 setprop("engines/engine[2]/rpm", 0);
 var contrail3 = func() {
-      if((getprop("engines/engine[2]/rpm") > 6200) and (getprop("position/altitude-ft") > 21450) and (getprop("environment/temperature-degc") < -29)) {
+       if((getprop("engines/engine/rpm") > 6200) and (getprop("position/altitude-ft") > 21450)) {
                 setprop("tu154/contrail/contrail3", 1 );
         } else {
                 setprop("tu154/contrail/contrail3", 0 );

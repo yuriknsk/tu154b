@@ -9,53 +9,53 @@
     <property>sim/multiplay/generic/int[8]</property>
     <and>
       <greater-than>
-	<property>/engines/engine/rpm</property>
+	<property>engines/engine/rpm</property>
 	<value>6200</value>
       </greater-than>
       <greater-than>
-	<property>/position/altitude-agl-ft</property>
+	<property>position/altitude-agl-ft</property>
 	<value>50</value>
       </greater-than>
       <less-than>
-	<property>/position/altitude-agl-ft</property>
+	<property>position/altitude-agl-ft</property>
 	<value>1678</value>
       </less-than>
     </and>
   </or>
 </condition>
 <attach>world</attach>
-<placer>
-<type>point</type>
-</placer>
+  <placer>
+    <type>point</type>
+  </placer>
 <shooter>
-<theta-min-deg>-1.5</theta-min-deg>
-<theta-max-deg>1.5</theta-max-deg>
-<phi-min-deg>-1.5</phi-min-deg>
-<phi-max-deg>1.5</phi-max-deg>
-<speed-mps>
-<value>0</value>
-<spread>0</spread>
-</speed-mps>
-<rotation-speed>
-<x-min-deg-sec>0</x-min-deg-sec>
-<y-min-deg-sec>0</y-min-deg-sec>
-<z-min-deg-sec>0</z-min-deg-sec>
-<x-max-deg-sec>0</x-max-deg-sec>
-<y-max-deg-sec>0</y-max-deg-sec>
-<z-max-deg-sec>0</z-max-deg-sec>
-</rotation-speed>
+    <theta-min-deg>-1.5</theta-min-deg>
+    <theta-max-deg>1.5</theta-max-deg>
+    <phi-min-deg>-1.5</phi-min-deg>
+    <phi-max-deg>1.5</phi-max-deg>
+  <speed-mps>
+      <value>0</value>
+    <spread>0</spread>
+  </speed-mps>
+  <rotation-speed>
+    <x-min-deg-sec>0</x-min-deg-sec>
+    <y-min-deg-sec>0</y-min-deg-sec>
+    <z-min-deg-sec>0</z-min-deg-sec>
+    <x-max-deg-sec>0</x-max-deg-sec>
+    <y-max-deg-sec>0</y-max-deg-sec>
+    <z-max-deg-sec>0</z-max-deg-sec>
+  </rotation-speed>
 </shooter>
-<counter>
-<particles-per-sec>
-<value>35</value>
-<spread>0</spread>
-</particles-per-sec>
-</counter>
-<align>billboard</align>
-<particle>
-<start>
-<color>
-<red>
+  <counter>	
+    <particles-per-sec>
+	<value>35</value>
+	<spread>0</spread>
+    </particles-per-sec>
+   </counter>
+  <align>billboard</align>
+  <particle>
+  <start>
+    <color>
+      <red>
 <value>0.69</value>
 </red>
 <green>
