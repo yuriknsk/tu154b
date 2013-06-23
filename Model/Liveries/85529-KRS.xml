@@ -15,10 +15,10 @@
 	<texture>Liveries/85529-KRS/var_t.png</texture>
       </var>
       <wingl>
-	<texture>Livereis/85529-KRS/wingl_t.png</texture>
+	<texture>Liveries/85529-KRS/wingl_t.png</texture>
       </wingl>
       <wingr>
-	<texture>Livereis/85529-KRS/wingr_t.png</texture>
+	<texture>Liveries/85529-KRS/wingr_t.png</texture>
       </wingr>
    </livery>
  </tu154>
