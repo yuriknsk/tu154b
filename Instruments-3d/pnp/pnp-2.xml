@@ -121,7 +121,7 @@
   <type>select</type>
   <object-name>blanker_dkm</object-name>
   <condition>
-    <value>1</value>  
+    <property>tu154/instrumentation/pnp[1]/blanker-dkm</property>
   </condition>
 </animation>
 <animation>

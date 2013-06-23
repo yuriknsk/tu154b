@@ -34,8 +34,8 @@
       <property>tu154/instrumentation/eup/powered</property>
     </condition>
     <interpolation>
-      <entry><ind>	-0.7853</ind>	<dep>	-45.0</dep></entry>
-      <entry><ind>	0.7853</ind>	<dep>	45.0</dep></entry>
+      <entry><ind>	-1.13</ind>	<dep>	-35.5</dep></entry>
+      <entry><ind>	1.13</ind>	<dep>	35.5</dep></entry>
     </interpolation>
     <center>
       <x-m>0.0</x-m>

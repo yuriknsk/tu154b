@@ -2,7 +2,7 @@
 # NASAL instruments for TU-154B
 # Yurik V. Nikiforoff, yurik.nsk@gmail.com
 # Novosibirsk, Russia
-# jun 2007
+# jun 2007, 2013
 #
 
 
@@ -117,7 +117,7 @@ altimeter2_pressure_handler();
 
 pnp0_hdg_handler = func{
 #settimer( pnp0_hdg_handler, 0 );
-var hdg = getprop("tu154/instrumentation/pnp[0]/heading-deg-delayed");
+var hdg = getprop("tu154/instrumentation/pnp[0]/distance-km");
 if( hdg == nil )return; 
 setprop("tu154/instrumentation/pnp[0]/heading/ones", hdg );
 setprop("tu154/instrumentation/pnp[0]/heading/dec", 
@@ -127,7 +127,7 @@ setprop("tu154/instrumentation/pnp[0]/heading/hund",
 }
 pnp1_hdg_handler = func{
 #settimer( pnp0_hdg_handler, 0 );
-var hdg = getprop("tu154/instrumentation/pnp[1]/heading-deg-delayed");
+var hdg = getprop("tu154/instrumentation/pnp[1]/distance-km");
 if( hdg == nil )return; 
 setprop("tu154/instrumentation/pnp[1]/heading/ones", hdg );
 setprop("tu154/instrumentation/pnp[1]/heading/dec", 
@@ -158,8 +158,8 @@ setprop("tu154/instrumentation/pnp[1]/plane/hund",
 }
 
 # Tu-154 not use hdg digit, yellow bug only!
-setlistener("tu154/instrumentation/pnp[0]/heading-deg-delayed", pnp0_hdg_handler,0,0 );
-setlistener("tu154/instrumentation/pnp[1]/heading-deg-delayed", pnp1_hdg_handler,0,0 );
+setlistener("tu154/instrumentation/pnp[0]/distance-km", pnp0_hdg_handler,0,0 );
+setlistener("tu154/instrumentation/pnp[1]/distance-km", pnp1_hdg_handler,0,0 );
 
 
 setlistener("tu154/instrumentation/pnp[0]/plane-deg-delayed", pnp0_plane_handler,0,0 );
@@ -209,7 +209,7 @@ setlistener("tu154/instrumentation/skawk/handle-4", skawk_handler,0,0 );
 setlistener("tu154/instrumentation/skawk/handle-5", skawk_handler,0,0 );
 }
 
-# We use transponder for FG 2.10 and late
+# We use transponder for FG 2.10 and newest
 
 if( getprop( "instrumentation/transponder/inputs/digit" ) != nil ) skawk_init();
 
@@ -277,15 +277,12 @@ if( arg[0] == 1 ) prop = "tu154/instrumentation/pnp[1]/heading-deg";
 
 var delta = arg[1];
 var heading = getprop( prop );
-if( heading == nil ) return;
+if( heading == nil ) heading = 0.0;
 
 heading = heading + delta;
 if( heading >= 360.0 ) heading = heading - 360.0;
 if( 0 > heading ) heading = heading + 360.0; 
 setprop( prop, heading );
-# proceed delayed property for smooth digit wheel animation
-prop = sprintf("%s-delayed", prop);
-interpolate( prop, heading, 0.2 );
 
 }
 
@@ -301,7 +298,7 @@ var delayed_prop = sprintf("%s-delayed", prop);
 var local_prop = sprintf("%s-local", prop);
 
 var heading = getprop( local_prop );
-if( heading == nil ) return;
+if( heading == nil ) heading = 0.0;
 heading = heading + delta;
 if( heading >= 360.0 ) heading = heading - 360.0;
 if( 0 > heading ) heading = heading + 360.0; 
@@ -715,7 +712,46 @@ if( getprop("tu154/switches/capt-idr-selector") == 2 )
 		}}
 	else  distance = 0.0;
 	}
-setprop("tu154/instrumentation/idr-1[0]/caged-flag", caged ); 
+setprop("tu154/instrumentation/idr-1[0]/caged-flag", caged );
+
+# Translate distance to pkp.
+# Added by Yurik jun 2013
+  if( getprop( "tu154/instrumentation/distance-to-pnp" ) ) # Absent in real life
+  {
+    if( getprop("tu154/instrumentation/idr-1[0]/caged-flag" ) == 0.0 ) {	# Set distance from IDR
+	  setprop( "tu154/instrumentation/pnp[0]/distance-km", distance/1000.0 );
+	  setprop( "tu154/instrumentation/pnp[1]/distance-km", distance/1000.0 );
+	  setprop( "tu154/instrumentation/pnp[0]/blanker-dkm", 0 );
+	  setprop( "tu154/instrumentation/pnp[1]/blanker-dkm", 0 );
+    }
+    else {	# Check if NVU ready and set distance from there.
+	if( getprop("tu154/systems/nvu/selector" ) == 1 ) { # selected NVU block 1
+	      setprop( "tu154/instrumentation/pnp[0]/distance-km",
+		abs( getprop("fdm/jsbsim/instrumentation/aircraft-integrator-s-1")/1000.0 ) );
+	      setprop( "tu154/instrumentation/pnp[1]/distance-km",
+		abs( getprop("fdm/jsbsim/instrumentation/aircraft-integrator-s-1")/1000.0 ) );
+	      }
+	else  {  # selected NVU block 0
+	      setprop( "tu154/instrumentation/pnp[0]/distance-km",
+		abs( getprop("fdm/jsbsim/instrumentation/aircraft-integrator-s-2")/1000.0 ) );
+	      setprop( "tu154/instrumentation/pnp[1]/distance-km",
+		abs( getprop("fdm/jsbsim/instrumentation/aircraft-integrator-s-2")/1000.0 ) );
+
+	      }
+	if( ( getprop("tu154/systems/nvu/powered" ) == 1 ) and ( getprop("tu154/systems/nvu/serviceable" ) == 1 ) ) {
+        setprop( "tu154/instrumentation/pnp[0]/blanker-dkm", 0 );
+	setprop( "tu154/instrumentation/pnp[1]/blanker-dkm", 0 );
+	}
+	else {
+	      setprop( "tu154/instrumentation/pnp[0]/blanker-dkm", 1 );
+	      setprop( "tu154/instrumentation/pnp[1]/blanker-dkm", 1 );
+	}
+    }
+  }
+  else {
+  setprop( "tu154/instrumentation/pnp[0]/blanker-dkm", 1 );
+  setprop( "tu154/instrumentation/pnp[1]/blanker-dkm", 1 );
+  }
 if( distance == nil ){ setprop("tu154/instrumentation/idr-1[0]/caged-flag",1 ); return; } 
   distance = distance/10.0; # to dec meters, it need for correct work of digit wheels
   setprop("tu154/instrumentation/idr-1[0]/indicated-wheels_dec_m", 

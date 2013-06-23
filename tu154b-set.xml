@@ -128,17 +128,17 @@
   </flaps>
   
   
-  <virtual-cockpit archive="y">true</virtual-cockpit>
-  <allow-toggle-cockpit archive="y">true</allow-toggle-cockpit>
-  <chase-distance-m type="double" archive="y">-110.0</chase-distance-m>
+  <virtual-cockpit >true</virtual-cockpit>
+  <allow-toggle-cockpit >true</allow-toggle-cockpit>
+  <chase-distance-m type="double" >-110.0</chase-distance-m>
   
   <view>
     <name>Captain View</name>
-   <internal archive="y">true</internal>
+   <internal >true</internal>
    <config>
-     <x-offset-m archive="y">-0.55</x-offset-m>
-     <y-offset-m archive="y">2.16</y-offset-m>
-     <z-offset-m archive="y">-21.75</z-offset-m>
+     <x-offset-m >-0.55</x-offset-m>
+     <y-offset-m >2.16</y-offset-m>
+     <z-offset-m >-21.75</z-offset-m>
      <pitch-offset-deg type="double">-10.0</pitch-offset-deg>
    </config>
   </view>
@@ -150,9 +150,9 @@
     <internal type="bool">true</internal>
     <config>
       <from-model type="bool">true</from-model>
-      <x-offset-m type="double" archive="y">0.55</x-offset-m>
-      <y-offset-m type="double" archive="y">2.18</y-offset-m>
-      <z-offset-m type="double" archive="y">-21.75</z-offset-m>
+      <x-offset-m type="double" >0.55</x-offset-m>
+      <y-offset-m type="double" >2.18</y-offset-m>
+      <z-offset-m type="double" >-21.75</z-offset-m>
       <pitch-offset-deg type="double">-12.0</pitch-offset-deg>
       <from-model-idx type="int">0</from-model-idx>
       <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
@@ -177,9 +177,9 @@
     <internal type="bool">true</internal>
     <config>
       <from-model type="bool">true</from-model>
-      <x-offset-m type="double" archive="y">0.0</x-offset-m>
-      <y-offset-m type="double" archive="y">2.25</y-offset-m>
-      <z-offset-m type="double" archive="y">-21.75</z-offset-m>
+      <x-offset-m type="double" >0.0</x-offset-m>
+      <y-offset-m type="double" >2.25</y-offset-m>
+      <z-offset-m type="double" >-21.75</z-offset-m>
       <pitch-offset-deg type="double">-60.0</pitch-offset-deg>
       <from-model-idx type="int">0</from-model-idx>
       <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
@@ -204,9 +204,9 @@
     <internal type="bool">true</internal>
     <config>
       <from-model type="bool">true</from-model>
-      <x-offset-m type="double" archive="y">0.0</x-offset-m>
-      <y-offset-m type="double" archive="y">1.5</y-offset-m>
-      <z-offset-m type="double" archive="y">-21.75</z-offset-m>
+      <x-offset-m type="double" >0.0</x-offset-m>
+      <y-offset-m type="double" >1.5</y-offset-m>
+      <z-offset-m type="double" >-21.75</z-offset-m>
       <pitch-offset-deg type="double">70.0</pitch-offset-deg>
       <from-model-idx type="int">0</from-model-idx>
       <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
@@ -231,9 +231,9 @@
     <internal type="bool">true</internal>
     <config>
       <from-model type="bool">true</from-model>
-      <x-offset-m type="double" archive="y">-0.1</x-offset-m>
-      <y-offset-m type="double" archive="y">2.25</y-offset-m>
-      <z-offset-m type="double" archive="y">-20.5</z-offset-m>
+      <x-offset-m type="double" >-0.1</x-offset-m>
+      <y-offset-m type="double" >2.25</y-offset-m>
+      <z-offset-m type="double" >-20.5</z-offset-m>
       <heading-offset-deg type="double">-90.0</heading-offset-deg>
       <pitch-offset-deg type="double">-10.0</pitch-offset-deg>
       <from-model-idx type="int">0</from-model-idx>
@@ -260,9 +260,9 @@
     <internal type="bool">false</internal>
     <config>
       <from-model type="bool">true</from-model>
-      <x-offset-m type="double" archive="y">2.01</x-offset-m>
-      <y-offset-m type="double" archive="y">2.01</y-offset-m>
-      <z-offset-m type="double" archive="y">4.51</z-offset-m>
+      <x-offset-m type="double" >2.01</x-offset-m>
+      <y-offset-m type="double" >2.01</y-offset-m>
+      <z-offset-m type="double" >4.51</z-offset-m>
       <heading-offset-deg type="double">307.0</heading-offset-deg>
       <pitch-offset-deg type="double">-18.2</pitch-offset-deg>
       <from-model-idx type="int">0</from-model-idx>
@@ -300,14 +300,6 @@
 		<int n="5" alias="/gear/gear[2]/tyre-smoke"/>
 		<int n="6" alias="/tu154/light/strobe/strobe_1"/>
 		<int n="7" alias="/tu154/light/strobe/strobe_2"/>
-		<int n="8" alias="/tu154/contrail/smoke1"/>
-		<int n="9" alias="/tu154/contrail/smoke2"/>
-		<int n="10" alias="/tu154/contrail/smoke3"/>
-		<int n="11" alias="/tu154/contrail/contrail1"/>
-		<int n="12" alias="/tu154/contrail/contrail2"/>
-		<int n="13" alias="/tu154/contrail/contrail3"/>
-		<int n="14" alias="/tu154/contrail/condensation"/>
-		
             </generic>
   </multiplay>
 </sim>
@@ -333,23 +325,23 @@
 <instrumentation>
   <adf n="0">
     <!--Set instrumental error in deg here if you want-->
-    <error-deg type="double" archive="y">0.0</error-deg>
-    <mode type="string" archive="y">adf</mode>
-    <volume-norm type="double" archive="y">0.2</volume-norm>
+    <error-deg type="double" >0.0</error-deg>
+    <mode type="string" >adf</mode>
+    <volume-norm type="double" >0.2</volume-norm>
   </adf>
   <adf n="1">
-    <error-deg type="double" archive="y">0.0</error-deg>
-    <mode type="string" archive="y">adf</mode>
-    <volume-norm type="double" archive="y">0.2</volume-norm>
+    <error-deg type="double" >0.0</error-deg>
+    <mode type="string" >adf</mode>
+    <volume-norm type="double" >0.2</volume-norm>
   </adf>
   <altimeter n="1">
-    <serviceable type="bool" archive="y">true</serviceable>
+    <serviceable type="bool" >true</serviceable>
   </altimeter>
   <nav n="0">
-    <volume type="double" archive="y">0.2</volume>
+    <volume type="double" >0.2</volume>
   </nav>
   <nav n="1">
-	  <volume type="double" archive="y">0.2</volume>
+	  <volume type="double" >0.2</volume>
   </nav>  
   <nav n="2">
    <frequencies>
@@ -370,15 +362,15 @@
     <serviceable>true</serviceable>
    </to-from>
    <slaved-to-gps type="bool">false</slaved-to-gps>
-   <powered type="bool" archive="y">false</powered>
-   <volume type="double" archive="y">0.2</volume>
+   <powered type="bool" >false</powered>
+   <volume type="double" >0.2</volume>
   </nav>
   
   <marker-beacon>
-    <serviceable type="bool" archive="y">false</serviceable>
-    <power-btn type="bool" archive="y">false</power-btn>
-    <audio-btn type="bool" archive="y">false</audio-btn>
-    <volume type="double" archive="y">0.0</volume>
+    <serviceable type="bool" >false</serviceable>
+    <power-btn type="bool" >false</power-btn>
+    <audio-btn type="bool" >false</audio-btn>
+    <volume type="double" >0.0</volume>
   </marker-beacon>
 </instrumentation>
 
@@ -432,9 +424,7 @@
         <help>
           <file>Aircraft/tu154b/Nasal/help.nas</file>
         </help>
-	<contrail>
-          <file>Aircraft/tu154b/Nasal/contrail.nas</file>
-        </contrail>
+
 </nasal>
 
 <fdm>
@@ -797,29 +787,29 @@
   <cp-gauge-scale-10>1.1</cp-gauge-scale-10><!--10%increase size-->
   <cp-gauge-scale-20>1.2</cp-gauge-scale-20><!--20%increase size-->
   <gear>
-    <offset type="double" archive="y">0.15</offset>
-    <gain type="double" archive="y">0.3048</gain>
+    <offset type="double" >0.15</offset>
+    <gain type="double" >0.3048</gain>
   </gear>
   <light>
     <instruments>
-      <int-red-def type="double" archive="y">0.2</int-red-def>
-      <int-green-def type="double" archive="y">0.2</int-green-def>
-      <int-blue-def type="double" archive="y">0.1</int-blue-def>
+      <int-red-def type="double" >0.2</int-red-def>
+      <int-green-def type="double" >0.2</int-green-def>
+      <int-blue-def type="double" >0.1</int-blue-def>
     </instruments>
     <cabin>
-      <red type="double" archive="y">0.3</red>
-      <green type="double" archive="y">0.3</green>
-      <blue type="double" archive="y">0.3</blue>
+      <red type="double" >0.3</red>
+      <green type="double" >0.3</green>
+      <blue type="double" >0.3</blue>
     </cabin>
     <panel>
-      <ext-red-def type="double" archive="y">0.0</ext-red-def>
-      <ext-green-def type="double" archive="y">0.0</ext-green-def>
-      <ext-blue-def type="double" archive="y">0.0</ext-blue-def>
-      <amb-red-def type="double" archive="y">0.0</amb-red-def>
-      <amb-green-def type="double" archive="y">0.0</amb-green-def>
-      <amb-blue-def type="double" archive="y">0.0</amb-blue-def>      
+      <ext-red-def type="double" >0.0</ext-red-def>
+      <ext-green-def type="double" >0.0</ext-green-def>
+      <ext-blue-def type="double" >0.0</ext-blue-def>
+      <amb-red-def type="double" >0.0</amb-red-def>
+      <amb-green-def type="double" >0.0</amb-green-def>
+      <amb-blue-def type="double" >0.0</amb-blue-def>      
     </panel>
-    <!--<window-alpha type="double" archive="y">0.3</window-alpha>      -->
+    <!--<window-alpha type="double" >0.3</window-alpha>      -->
   </light>
   
   <textures>
@@ -830,89 +820,90 @@
   </textures>
   
   <instrumentation>
+    <distance-to-pnp type="bool">true</distance-to-pnp>
     <ark-15 n="0">
-      <powered type="bool" archive="y">false</powered>
+      <powered type="bool">false</powered>
     </ark-15>
     <ark-15 n="1">
-      <powered type="bool" archive="y">false</powered>
+      <powered type="bool" >false</powered>
     </ark-15>
     <pn-5>
-      <heading-state type="double" archive="y">0.0</heading-state>
-      <pitch-state type="double" archive="y">0.0</pitch-state>
+      <heading-state type="double" >0.0</heading-state>
+      <pitch-state type="double" >0.0</pitch-state>
     </pn-5>
     <pn-6>
-      <serviceable type="bool" archive="y">true</serviceable>
-      <at-kt type="double" archive="y">0.0</at-kt>
-      <stab type="double" archive="y">false</stab>
-      <mode type="double" archive="y">0.0</mode>
+      <serviceable type="bool" >true</serviceable>
+      <at-kt type="double" >0.0</at-kt>
+      <stab type="double" >false</stab>
+      <mode type="double" >0.0</mode>
     </pn-6>
     <rv-5m>
-      <warn type="bool" archive="y">false</warn>
-      <caged-flag type="bool" archive="y">false</caged-flag>
-      <serviceable type="bool" archive="y">true</serviceable>
-      <index-m type="double" archive="y">200.0</index-m>
+      <warn type="bool" >false</warn>
+      <caged-flag type="bool" >false</caged-flag>
+      <serviceable type="bool" >true</serviceable>
+      <index-m type="double" >200.0</index-m>
     </rv-5m>
     <idr-1>
-      <caged-flag type="bool" archive="y">true</caged-flag>
+      <caged-flag type="bool" >true</caged-flag>
     </idr-1>
     <uap-12>
-      <warn type="bool" archive="y">false</warn>
-      <accelerate-max type="double" archive="y">-2.0</accelerate-max>
-      <accelerate-min type="double" archive="y">0.8</accelerate-min>
-      <alpha-limit-deg type="double" archive="y">11.5</alpha-limit-deg>
+      <warn type="bool" >false</warn>
+      <accelerate-max type="double" >-2.0</accelerate-max>
+      <accelerate-min type="double" >0.8</accelerate-min>
+      <alpha-limit-deg type="double" >11.5</alpha-limit-deg>
     </uap-12>   
     <pnp>
       <plane-deg>252.0</plane-deg>
       <plane-deg-local>252.0</plane-deg-local>
       <plane-deg-delayed>252.0</plane-deg-delayed>
-      <heading-deg>161.0</heading-deg>
-      <heading-deg-delayed>161.0</heading-deg-delayed>
+<!--      <heading-deg>161.0</heading-deg>
+      <heading-deg-delayed>161.0</heading-deg-delayed>-->
     </pnp>
     <pnp>
       <plane-deg>252.0</plane-deg>
       <plane-deg-local>252.0</plane-deg-local>
       <plane-deg-delayed>252.0</plane-deg-delayed>
-      <heading-deg>161.0</heading-deg>
-      <heading-deg-delayed>161.0</heading-deg-delayed>
+<!--      <heading-deg>161.0</heading-deg>
+      <heading-deg-delayed>161.0</heading-deg-delayed>-->
     </pnp>
     <pu-46>
-      <stab type="double" archive="y">0.0</stab>
+      <stab type="double" >0.0</stab>
     </pu-46>
     <iku-1>
-      <l-mode type="double" archive="y">0.0</l-mode>
-      <r-mode type="double" archive="y">0.0</r-mode>
+      <l-mode type="double" >0.0</l-mode>
+      <r-mode type="double" >0.0</r-mode>
     </iku-1>
     <iku-1>
-      <l-mode type="double" archive="y">0.0</l-mode>
-      <r-mode type="double" archive="y">0.0</r-mode>
+      <l-mode type="double" >0.0</l-mode>
+      <r-mode type="double" >0.0</r-mode>
     </iku-1>
   <diss>
-    <powered type="bool" archive="y">false</powered>
-    <drift-angle-deg type="double" archive="y">0.0</drift-angle-deg>
+    <powered type="bool" >false</powered>
+    <drift-angle-deg type="double" >0.0</drift-angle-deg>
   </diss>
   <bkk>
-    <serviceable type="bool" archive="y">true</serviceable>
-    <mgv-1-failure type="bool" archive="y">true</mgv-1-failure>
-    <mgv-2-failure type="bool" archive="y">true</mgv-2-failure>
-    <mgv-contr-failure type="bool" archive="y">true</mgv-contr-failure>
-    <delta-deg type="double" archive="y">1.0</delta-deg>
-    <!--<roll-limit type="double" archive="y">15.0</roll-limit>-->
+    <serviceable type="bool" >true</serviceable>
+    <mgv-1-failure type="bool" >true</mgv-1-failure>
+    <mgv-2-failure type="bool" >true</mgv-2-failure>
+    <mgv-contr-failure type="bool" >true</mgv-contr-failure>
+    <delta-deg type="double" >1.0</delta-deg>
+    <!--<roll-limit type="double" >15.0</roll-limit>-->
   </bkk>   
   <v-57>
-    <fork-deg type="double" archive="y">0.0</fork-deg>
+    <fork-deg type="double" >0.0</fork-deg>
   </v-57>
   <rsbn>
-    <handle-1 type="double" archive="y">0.0</handle-1>
-    <handle-2 type="double" archive="y">0.0</handle-2>
-    <mode type="bool" archive="y">false</mode>
-    <serviceable type="bool" archive="y">false</serviceable>
-    <distance-m type="double" archive="y">0.0</distance-m>
-    <heading-deg type="double" archive="y">0.0</heading-deg>
+    <handle-1 type="double" >0.0</handle-1>
+    <handle-2 type="double" >0.0</handle-2>
+    <mode type="bool" >false</mode>
+    <serviceable type="bool" >false</serviceable>
+    <distance-m type="double" >0.0</distance-m>
+    <heading-deg type="double" >0.0</heading-deg>
   </rsbn>
   
   <uap-12>
-    <accelerate-max type="double" archive="y">-1.0</accelerate-max>
-    <accelerate-min type="double" archive="y">-1.0</accelerate-min>
+    <accelerate-max type="double" >-1.0</accelerate-max>
+    <accelerate-min type="double" >-1.0</accelerate-min>
   </uap-12>
   
   </instrumentation>
@@ -920,15 +911,15 @@
   
   <systems>
     <APU>
-      <!--<rpm type="double" archive="y">0.0</rpm>-->
-      <APU-damper type="double" archive="y">0.0</APU-damper>
-      <APU-bleed type="double" archive="y">0.0</APU-bleed>
-      <APU-ready type="double" archive="y">0.0</APU-ready>
+      <!--<rpm type="double" >0.0</rpm>-->
+      <APU-damper type="double" >0.0</APU-damper>
+      <APU-bleed type="double" >0.0</APU-bleed>
+      <APU-ready type="double" >0.0</APU-ready>
     </APU>
     <electrical>
       <checking-lamps>
-        <lamps-power type="double" archive="y">0.3</lamps-power>
-        <main-panel type="double" archive="y">0.0</main-panel>
+        <lamps-power type="double" >0.3</lamps-power>
+        <main-panel type="double" >0.0</main-panel>
       </checking-lamps>
       <indicators>
         <fuel-2500>0.0</fuel-2500>
@@ -945,111 +936,111 @@
       </indicators>
     </electrical>
     <absu>
-      <serviceable type="bool" archive="y">1</serviceable>
+      <serviceable type="bool" >1</serviceable>
       <!--Hydro system state-->
-      <pitch_ok type="bool" archive="y">1</pitch_ok>
-      <roll_ok type="bool" archive="y">1</roll_ok>
-      <yaw_ok type="bool" archive="y">1</yaw_ok>
+      <pitch_ok type="bool" >1</pitch_ok>
+      <roll_ok type="bool" >1</roll_ok>
+      <yaw_ok type="bool" >1</yaw_ok>
     </absu>
     <mgv>
-      <one type="double" archive="y">0.0</one>
-      <two type="double" archive="y">0.0</two>
-      <contr type="double" archive="y">0.0</contr>
-      <agr type="double" archive="y">6.0</agr>
+      <one type="double" >0.0</one>
+      <two type="double" >0.0</two>
+      <contr type="double" >0.0</contr>
+      <agr type="double" >6.0</agr>
     </mgv>
     <tks>
-      <ga3-1 type="double" archive="y">6.0</ga3-1>
-      <ga3-2 type="double" archive="y">6.0</ga3-2>
+      <ga3-1 type="double" >6.0</ga3-1>
+      <ga3-2 type="double" >6.0</ga3-2>
     </tks>
     <nvu>
-      <!--<powered type="bool" archive="y">false</powered>-->
-      <selector type="bool" archive="y">false</selector>
-      <serviceable type="bool" archive="y">false</serviceable>
-      <powered type="double" archive="y">0.0</powered>
-      <trigger type="bool" archive="y">false</trigger>
-      <mult-1 type="double" archive="y">1.0</mult-1>
-      <mult-2 type="double" archive="y">1.0</mult-2>
-      <mult-3 type="double" archive="y">1.0</mult-3>
-      <rsbn-corr type="bool" archive="y">false</rsbn-corr>
-      <mode type="bool" archive="y">true</mode>
+      <!--<powered type="bool" >false</powered>-->
+      <selector type="bool" >false</selector>
+      <serviceable type="bool" >false</serviceable>
+      <powered type="double" >0.0</powered>
+      <trigger type="bool" >false</trigger>
+      <mult-1 type="double" >1.0</mult-1>
+      <mult-2 type="double" >1.0</mult-2>
+      <mult-3 type="double" >1.0</mult-3>
+      <rsbn-corr type="bool" >false</rsbn-corr>
+      <mode type="bool" >true</mode>
     </nvu>
     <warning>
-      <deploy-flaps type="double" archive="y">0.0</deploy-flaps>
+      <deploy-flaps type="double" >0.0</deploy-flaps>
       <alarm>
-        <absu_warn type="double" archive="y">0.0</absu_warn>
+        <absu_warn type="double" >0.0</absu_warn>
       </alarm>
     </warning>
   </systems>
   <switches>
-    <adf-1-selector type="double" archive="y">0.0</adf-1-selector>
-    <adf-2-selector type="double" archive="y">0.0</adf-2-selector>
-    <pu-46-kren type="double" archive="y">0.0</pu-46-kren>
-    <pu-46-tang type="double" archive="y">0.0</pu-46-tang> 
-    <pn-5-strelki type="double" archive="y">0.0</pn-5-strelki>
-    <pn-5-navigac type="double" archive="y">0.0</pn-5-navigac>
-    <pn-5-posadk type="double" archive="y">0.0</pn-5-posadk>
-    <pn-5-pnp-selector type="double" archive="y">0.0</pn-5-pnp-selector>
-    <pu-11-consumers type="double" archive="y">1.0</pu-11-consumers>
-    <pu-11-gpk type="double" archive="y">0.0</pu-11-gpk>
-    <pu-11-corr type="double" archive="y">0.0</pu-11-corr>
-    <pn-6-cover-1 type="double" archive="y">0.0</pn-6-cover-1>
-    <pn-6-cover-2 type="double" archive="y">0.0</pn-6-cover-2>
-    <pu-46-cover-1 type="double" archive="y">0.0</pu-46-cover-1>
-    <pu-46-cover-2 type="double" archive="y">0.0</pu-46-cover-2>
-    <usvp-selector type="double" archive="y">0.0</usvp-selector>
-    <v-51-selector-1 type="double" archive="y">1.0</v-51-selector-1>
-    <v-51-selector-2 type="double" archive="y">1.0</v-51-selector-2>
-    <stab-manu-selector type="double" archive="y">1.0</stab-manu-selector>
-    <stab-auto-handle type="double" archive="y">1.0</stab-auto-handle>
-    <busters-cover type="double" archive="y">1.0</busters-cover>
-    <startpanel-cover type="double" archive="y">0.0</startpanel-cover>
-    <startpanel-cold type="double" archive="y">0.0</startpanel-cold>
-    <RSBN-power type="double" archive="y">0.0</RSBN-power>
-    <RSBN-opozn type="double" archive="y">0.0</RSBN-opozn>
-    <APU-bleed type="double" archive="y">1.0</APU-bleed>
+    <adf-1-selector type="double" >0.0</adf-1-selector>
+    <adf-2-selector type="double" >0.0</adf-2-selector>
+    <pu-46-kren type="double" >0.0</pu-46-kren>
+    <pu-46-tang type="double" >0.0</pu-46-tang> 
+    <pn-5-strelki type="double" >0.0</pn-5-strelki>
+    <pn-5-navigac type="double" >0.0</pn-5-navigac>
+    <pn-5-posadk type="double" >0.0</pn-5-posadk>
+    <pn-5-pnp-selector type="double" >0.0</pn-5-pnp-selector>
+    <pu-11-consumers type="double" >1.0</pu-11-consumers>
+    <pu-11-gpk type="double" >0.0</pu-11-gpk>
+    <pu-11-corr type="double" >0.0</pu-11-corr>
+    <pn-6-cover-1 type="double" >0.0</pn-6-cover-1>
+    <pn-6-cover-2 type="double" >0.0</pn-6-cover-2>
+    <pu-46-cover-1 type="double" >0.0</pu-46-cover-1>
+    <pu-46-cover-2 type="double" >0.0</pu-46-cover-2>
+    <usvp-selector type="double" >0.0</usvp-selector>
+    <v-51-selector-1 type="double" >1.0</v-51-selector-1>
+    <v-51-selector-2 type="double" >1.0</v-51-selector-2>
+    <stab-manu-selector type="double" >1.0</stab-manu-selector>
+    <stab-auto-handle type="double" >1.0</stab-auto-handle>
+    <busters-cover type="double" >1.0</busters-cover>
+    <startpanel-cover type="double" >0.0</startpanel-cover>
+    <startpanel-cold type="double" >0.0</startpanel-cold>
+    <RSBN-power type="double" >0.0</RSBN-power>
+    <RSBN-opozn type="double" >0.0</RSBN-opozn>
+    <APU-bleed type="double" >1.0</APU-bleed>
   </switches>
   <mod-views>
     <mod-view>
-      <x-offset-m archive="y">-0.55</x-offset-m>
-      <y-offset-m archive="y">2.3</y-offset-m>
-      <z-offset-m archive="y">-21.75</z-offset-m>
-      <field-of-view archive="y">27.0</field-of-view>
+      <x-offset-m >-0.55</x-offset-m>
+      <y-offset-m >2.3</y-offset-m>
+      <z-offset-m >-21.75</z-offset-m>
+      <field-of-view >27.0</field-of-view>
       <heading-offset-deg type="double">0.0</heading-offset-deg>
       <pitch-offset-deg type="double">-32.5</pitch-offset-deg>
       <roll-offset-deg type="double">0.0</roll-offset-deg>
     </mod-view>
     <mod-view>
-      <x-offset-m archive="y">0.47</x-offset-m>
-      <y-offset-m archive="y">2.25</y-offset-m>
-      <z-offset-m archive="y">-21.75</z-offset-m>
-      <field-of-view archive="y">31.0</field-of-view>
+      <x-offset-m >0.47</x-offset-m>
+      <y-offset-m >2.25</y-offset-m>
+      <z-offset-m >-21.75</z-offset-m>
+      <field-of-view >31.0</field-of-view>
       <heading-offset-deg type="double">0.0</heading-offset-deg>
       <pitch-offset-deg type="double">-30.0</pitch-offset-deg>
       <roll-offset-deg type="double">0.0</roll-offset-deg>
     </mod-view>
     <mod-view>
-      <x-offset-m archive="y">0.0</x-offset-m>
-      <y-offset-m archive="y">2.1</y-offset-m>
-      <z-offset-m archive="y">-21.75</z-offset-m>
-      <field-of-view archive="y">40.0</field-of-view>
+      <x-offset-m >0.0</x-offset-m>
+      <y-offset-m >2.1</y-offset-m>
+      <z-offset-m >-21.75</z-offset-m>
+      <field-of-view >40.0</field-of-view>
       <heading-offset-deg type="double">0.0</heading-offset-deg>
       <pitch-offset-deg type="double">-21.0</pitch-offset-deg>
       <roll-offset-deg type="double">0.0</roll-offset-deg>
     </mod-view>
     <mod-view>
-      <x-offset-m archive="y">0.1</x-offset-m>
-      <y-offset-m archive="y">2.0</y-offset-m>
-      <z-offset-m archive="y">-21.75</z-offset-m>
-      <field-of-view archive="y">50.0</field-of-view>
+      <x-offset-m >0.1</x-offset-m>
+      <y-offset-m >2.0</y-offset-m>
+      <z-offset-m >-21.75</z-offset-m>
+      <field-of-view >50.0</field-of-view>
       <heading-offset-deg type="double">350.0</heading-offset-deg>
       <pitch-offset-deg type="double">55.0</pitch-offset-deg>
       <roll-offset-deg type="double">10.0</roll-offset-deg>
     </mod-view>
     <mod-view>
-      <x-offset-m archive="y">-0.1</x-offset-m>
-      <y-offset-m archive="y">2.25</y-offset-m>
-      <z-offset-m archive="y">-20.9</z-offset-m>
-      <field-of-view archive="y">47.0</field-of-view>
+      <x-offset-m >-0.1</x-offset-m>
+      <y-offset-m >2.25</y-offset-m>
+      <z-offset-m >-20.9</z-offset-m>
+      <field-of-view >47.0</field-of-view>
       <heading-offset-deg type="double">270.0</heading-offset-deg>
       <pitch-offset-deg type="double">-16.0</pitch-offset-deg>
       <roll-offset-deg type="double">0.0</roll-offset-deg>
