@@ -2061,7 +2061,7 @@ This file is under GPL licensy.
 <model>
     <path>Aircraft/tu154b/Model/Effects/contrail1.xml</path>
     <offsets>
-      <x-m> 48.290</x-m>
+      <x-m> 50.290</x-m>
       <y-m>-2.550</y-m>
       <z-m> 0.0</z-m> 
       <roll-deg>    0 </roll-deg>
@@ -2073,7 +2073,7 @@ This file is under GPL licensy.
   <model>
     <path>Aircraft/tu154b/Model/Effects/contrail3.xml</path>
     <offsets>
-      <x-m> 48.290</x-m>
+      <x-m> 50.290</x-m>
       <y-m> 2.550</y-m>
       <z-m> 0.0</z-m> 
       <roll-deg>    0 </roll-deg>
@@ -2085,7 +2085,7 @@ This file is under GPL licensy.
   <model>
     <path>Aircraft/tu154b/Model/Effects/contrail2.xml</path>
     <offsets>
-      <x-m> 56.290</x-m>
+      <x-m> 58.290</x-m>
       <y-m> 0.0</y-m>
       <z-m> 0.8</z-m> 
       <roll-deg>    0 </roll-deg>

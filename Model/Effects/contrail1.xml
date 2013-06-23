@@ -78,16 +78,16 @@
          <alpha><value>0.001</value></alpha>
        </color>
        <size>
-         <value>100</value>
+         <value>120</value>
        </size>
      </end>
 
      <life-sec>
-       <value>60</value>
+       <value>70</value>
      </life-sec>
         
-     <mass-kg>0.5</mass-kg>
-     <radius-m>0.5</radius-m>
+     <mass-kg>0.3</mass-kg>
+     <radius-m>0.8</radius-m>
    </particle>
 
    <program>
