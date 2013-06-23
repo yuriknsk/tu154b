@@ -2057,14 +2057,13 @@ This file is under GPL licensy.
 <!--end: lights-->
 
 <!-- CONTRAIL -->
- 
-  <!-- Particules OSG -->
-  <model>
+
+<model>
     <path>Aircraft/tu154b/Model/Effects/contrail1.xml</path>
     <offsets>
       <x-m> 48.290</x-m>
       <y-m>-2.550</y-m>
-      <z-m> 1.7</z-m> 
+      <z-m> 0.0</z-m> 
       <roll-deg>    0 </roll-deg>
       <pitch-deg>   0 </pitch-deg>
       <heading-deg> 0 </heading-deg>
@@ -2076,7 +2075,7 @@ This file is under GPL licensy.
     <offsets>
       <x-m> 48.290</x-m>
       <y-m> 2.550</y-m>
-      <z-m> 1.7</z-m> 
+      <z-m> 0.0</z-m> 
       <roll-deg>    0 </roll-deg>
       <pitch-deg>   0 </pitch-deg>
       <heading-deg> 0 </heading-deg>
@@ -2088,14 +2087,12 @@ This file is under GPL licensy.
     <offsets>
       <x-m> 56.290</x-m>
       <y-m> 0.0</y-m>
-      <z-m> 3.6</z-m> 
+      <z-m> 0.8</z-m> 
       <roll-deg>    0 </roll-deg>
       <pitch-deg>   0 </pitch-deg>
       <heading-deg> 0 </heading-deg>
     </offsets>
   </model>
- 
-<!-- SMOKE -->
  
   <!-- Particules OSG -->
   <model>
@@ -2103,7 +2100,7 @@ This file is under GPL licensy.
     <offsets>
       <x-m> 28.290</x-m>
       <y-m>-2.550</y-m>
-      <z-m> 1.5</z-m> 
+      <z-m> 0.0</z-m> 
       <roll-deg>    0 </roll-deg>
       <pitch-deg>   0 </pitch-deg>
       <heading-deg> 0 </heading-deg>
@@ -2115,7 +2112,7 @@ This file is under GPL licensy.
     <offsets>
       <x-m> 28.290</x-m>
       <y-m> 2.550</y-m>
-      <z-m> 1.5</z-m> 
+      <z-m> 0.0</z-m> 
       <roll-deg>    0 </roll-deg>
       <pitch-deg>   0 </pitch-deg>
       <heading-deg> 0 </heading-deg>
@@ -2127,7 +2124,7 @@ This file is under GPL licensy.
     <offsets>
       <x-m> 36.290</x-m>
       <y-m> 0.0</y-m>
-      <z-m> 2.5</z-m> 
+      <z-m> 0.8</z-m> 
       <roll-deg>    0 </roll-deg>
       <pitch-deg>   0 </pitch-deg>
       <heading-deg> 0 </heading-deg>
@@ -2139,18 +2136,18 @@ This file is under GPL licensy.
   <model>
     <path>Aircraft/tu154b/Model/Effects/condensation.xml</path>
     <offsets>
-      <x-m>   8.716 </x-m>
-      <y-m> -18.742 </y-m>
-      <z-m>  0.14 </z-m>
+      <x-m>12.56</x-m>
+      <y-m>-19.4</y-m>
+      <z-m>-1.4</z-m>
     </offsets>
   </model>11
   
   <model>
     <path>Aircraft/tu154b/Model/Effects/condensation.xml</path>
     <offsets>
-      <x-m>  8.716 </x-m>
-      <y-m> 18.782 </y-m>
-      <z-m> 0.14 </z-m>
+      <x-m>12.56</x-m>
+      <y-m>19.4</y-m>
+      <z-m>-1.4</z-m>
     </offsets>
   </model>
 
@@ -2158,21 +2155,20 @@ This file is under GPL licensy.
 <model>
     <path>Aircraft/tu154b/Model/Effects/stream failure.xml</path>
     <offsets>
-      <x-m>   6.916 </x-m>
-      <y-m> -18.742 </y-m>
-      <z-m>  0.25 </z-m>
+      <x-m>11.18</x-m>
+      <y-m>-19.73</y-m>
+      <z-m>-1.2</z-m>
     </offsets>
   </model>11
   
   <model>
     <path>Aircraft/tu154b/Model/Effects/stream failure.xml</path>
     <offsets>
-      <x-m>  6.916 </x-m>
-      <y-m> 18.782 </y-m>
-      <z-m> 0.25 </z-m>
+       <x-m>11.18</x-m>
+      <y-m>19.73</y-m>
+      <z-m>-1.2</z-m>
     </offsets>
   </model>
-  
   
   <!--generic tyre smoke-->
   
