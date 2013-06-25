@@ -188,6 +188,45 @@
   </action>
 </animation>
 
+<!--Sound-->
+
+<animation>
+  <type>pick</type>
+  <object-name>base</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>instrumentation/nav[2]/volume</property>
+      <step>0.2</step>
+      <min>0.0</min>
+      <max>1.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>base</object-name>
+  <visible>true</visible>
+  <action>
+    <button>1</button>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>instrumentation/nav[2]/volume</property>
+      <step>-0.2</step>
+      <min>0.0</min>
+      <max>1.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+
 
 
 </PropertyList>

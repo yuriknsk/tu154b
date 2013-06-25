@@ -72,6 +72,45 @@ var messenger = func{
 help_win.write(arg[0]);
 }
 
+# Sound volume helpers
+
+var nav_0_vol = func{
+  help_win.write( sprintf( "NAV radio Kurs-MP #1 sound: %d%%", getprop("instrumentation/nav[0]/volume")*100 ) );
+}
+
+var nav_1_vol = func{
+  help_win.write( sprintf( "NAV radio Kurs-MP #2 sound: %d%%", getprop("instrumentation/nav[1]/volume")*100 ) );
+}
+
+var rsbn_vol = func{
+  help_win.write( sprintf( "RSBN sound: %d%%", getprop("instrumentation/nav[2]/volume")*100 ) );
+}
+
+var adf_0_vol = func{
+  help_win.write( sprintf( "ADF ARK-15 #1 sound: %d%%", getprop("instrumentation/adf[0]/volume")*100 ) );
+}
+
+var adf_1_vol = func{
+  help_win.write( sprintf( "ADF ARK-15 #2 sound: %d%%", getprop("instrumentation/adf[1]/volume")*100 ) );
+}
+
+var comm_0_vol = func{
+  help_win.write( sprintf( "Comm radio #1 sound: %d%%", getprop("instrumentation/comm[0]/volume")*100 ) );
+}
+
+var comm_1_vol = func{
+  help_win.write( sprintf( "Comm radio #2 sound: %d%%", getprop("instrumentation/comm[1]/volume")*100 ) );
+}
+
+
+setlistener( "instrumentation/nav[0]/volume", nav_0_vol, 0, 0 );
+setlistener( "instrumentation/nav[1]/volume", nav_1_vol, 0, 0 );
+setlistener( "instrumentation/nav[2]/volume", rsbn_vol, 0, 0 );
+setlistener( "instrumentation/adf[0]/volume", adf_0_vol, 0, 0 );
+setlistener( "instrumentation/adf[1]/volume", adf_1_vol, 0, 0 );
+setlistener( "instrumentation/comm[0]/volume", comm_0_vol, 0, 0 );
+setlistener( "instrumentation/comm[1]/volume", comm_1_vol, 0, 0 );
+
 
 print("Help subsystem started");
 
