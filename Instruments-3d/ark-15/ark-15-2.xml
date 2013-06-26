@@ -659,8 +659,8 @@
 
 <animation>
   <type>pick</type>
-  <object-name>base</object-name>
-  <visible>true</visible>
+  <object-name>hs_3</object-name>
+  <visible>false</visible>
   <action>
     <button>0</button>
     <button>3</button>
@@ -677,8 +677,8 @@
 </animation>
 <animation>
   <type>pick</type>
-  <object-name>base</object-name>
-  <visible>true</visible>
+  <object-name>hs_3</object-name>
+  <visible>false</visible>
   <action>
     <button>1</button>
     <button>4</button>
