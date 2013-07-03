@@ -469,6 +469,7 @@ adjust speed-pid to right state all time. -->
 	    <default value="0.0"/>
             <test value="ap/gs-error-corr">
               ap/pitch-selector == 5
+	      ap/posadk == 1
             </test>
           </switch>
 
@@ -798,8 +799,8 @@ There is a system for enchance pitch control. It read pitch trimmer position and
         </switch>
         
         <switch name="ap/ils-beam-ki">
-          <default value="0.003"/>
-          <test value="0.007">
+          <default value="0.003"/><!--0.003-->
+          <test value="0.007"><!--0.007-->
             instrumentation/indicated-altitude-m lt 250.0
           </test>
         </switch>
@@ -838,7 +839,6 @@ There is a system for enchance pitch control. It read pitch trimmer position and
 		<test value="0.0">
 			ap/roll-selector == 5
 			ap/ils-hdg-windup == 0
-			ap/navigac == 1
 		</test>
 	</switch>
 
