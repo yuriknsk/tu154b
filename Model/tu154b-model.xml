@@ -4582,8 +4582,8 @@
   <condition>
       <property>gear/gear[0]/compression-norm</property>
   </condition>
-  <property>velocities/groundspeed-kt</property>
-  <factor>12.28</factor>
+  <property>gear/gear[0]/rollspeed-ms</property>
+  <factor>25.4</factor>
   <center>
     <x-m>-16.0096</x-m>
     <y-m>0.0</y-m>
@@ -4605,8 +4605,8 @@
       <value>0.15</value>
     </greater-than>
   </condition>
-  <property>velocities/groundspeed-kt</property>
-  <factor>10.56</factor>
+  <property>gear/gear[1]/rollspeed-ms</property>
+  <factor>21.23</factor>
   <center>
     <x-m>3.5377</x-m>
     <y-m>0.0</y-m>
@@ -4627,8 +4627,8 @@
       <value>0.2</value>
     </greater-than>
   </condition>
-  <property>velocities/groundspeed-kt</property>
-  <factor>10.56</factor>
+  <property>gear/gear[1]/rollspeed-ms</property>
+  <factor>21.23</factor>
   <center>
     <x-m>2.5151</x-m>
     <y-m>0.0</y-m>
@@ -4649,8 +4649,8 @@
       <value>0.21</value>
     </greater-than>
   </condition>
-  <property>velocities/groundspeed-kt</property>
-  <factor>10.56</factor>
+  <property>gear/gear[1]/rollspeed-ms</property>
+  <factor>21.23</factor>
   <center>
     <x-m>1.5421</x-m>
     <y-m>0.0</y-m>
@@ -4672,8 +4672,8 @@
       <value>0.15</value>
     </greater-than>
   </condition>
-  <property>velocities/groundspeed-kt</property>
-  <factor>10.56</factor>
+  <property>gear/gear[2]/rollspeed-ms</property>
+  <factor>21.23</factor>
   <center>
     <x-m>3.5377</x-m>
     <y-m>0.0</y-m>
@@ -4694,8 +4694,8 @@
       <value>0.2</value>
     </greater-than>
   </condition>
-  <property>velocities/groundspeed-kt</property>
-  <factor>10.56</factor>
+  <property>gear/gear[2]/rollspeed-ms</property>
+  <factor>21.23</factor>
   <center>
     <x-m>2.5151</x-m>
     <y-m>0.0</y-m>
@@ -4716,8 +4716,8 @@
       <value>0.21</value>
     </greater-than>
   </condition>
-  <property>velocities/groundspeed-kt</property>
-  <factor>10.56</factor>
+  <property>gear/gear[2]/rollspeed-ms</property>
+  <factor>21.23</factor>
   <center>
     <x-m>1.5421</x-m>
     <y-m>0.0</y-m>

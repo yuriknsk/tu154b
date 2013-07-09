@@ -4,7 +4,7 @@
 Welcome to world of Russian Aviation!
 
 Before use of model, you MUST read documentation: Docs/tu154eng.pdf - in English, Docs/tu154rus.pdf - in Russian. 
-There are Project Tupolev docs in Docs/PT_Docs. If you want to get more information about plane and PT model for MSFS sim,
+There are Project Tupolev docs in Docs/PT_Docs for SVN version of model. If you want to get more information about plane and PT model for MSFS sim,
 you should read it.
 
 This is a very complex model, and it's not intended for beginners.
@@ -20,7 +20,7 @@ model, your computer will stall for long time (from 20 s to 2 min) and drop fps.
 There are liveries support for AI models, so you will see planes of another players with right liveries (if you install theese 
 liveries before).
 
-This model intend for FlightGear version 2.10.0 and devel. It does not support old FlightGear version (1.9.1, 2.0 or late), and 
+This model intend for FlightGear version 2.12 and devel. It does not support old FlightGear version (1.9.1, 2.0 or late), and 
 you would not replace FDM file. If you want use older FG version, you may download appropriate version from 
 http://yurik.flightgear.ru/tu154b-release/.
 
