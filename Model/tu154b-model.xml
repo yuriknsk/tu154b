@@ -5558,6 +5558,7 @@
   </axis>
 </animation>
 
+
 <animation>
   <type>material</type>
   <object-name>visor_MES0</object-name>
@@ -5575,11 +5576,16 @@
   </emission>
 </animation>
 
-<!--Panels light-->
-<!--
+<!--Old Panels light-->
+
 <animation>
   <type>material</type>
   <object-name>capt_panel</object-name>
+  <condition>
+    <not>
+      <property>sim/rendering/rembrandt/enabled</property>
+    </not>
+  </condition>  
   <texture-prop>tu154/textures/capt-panel</texture-prop>
   <emission>
     <red-prop>tu154/light/panel/ext-red</red-prop>
@@ -5587,43 +5593,58 @@
     <blue-prop>tu154/light/panel/ext-blue</blue-prop>
   </emission>
   
-</animation>-->
-<!--
+</animation>
+
 <animation>
   <type>material</type>
   <object-name>MESH22</object-name>
+  <condition>
+    <not>
+      <property>sim/rendering/rembrandt/enabled</property>
+    </not>
+  </condition>
   <emission>
     <red-prop>tu154/light/panel/ext-red</red-prop>
     <green-prop>tu154/light/panel/ext-green</green-prop>
     <blue-prop>tu154/light/panel/ext-blue</blue-prop>
   </emission>
   <texture-prop>tu154/textures/copilot-panel</texture-prop>
-</animation>-->
-<!--
+</animation>
+
 <animation>
   <type>material</type>
   <object-name>MESH26</object-name>
+  <condition>
+    <not>
+      <property>sim/rendering/rembrandt/enabled</property>
+    </not>
+  </condition>
   <emission>
     <red-prop>tu154/light/panel/ext-red</red-prop>
     <green-prop>tu154/light/panel/ext-green</green-prop>
     <blue-prop>tu154/light/panel/ext-blue</blue-prop>
   </emission>
   <texture-prop>tu154/textures/overhead-panel</texture-prop>
-</animation>-->
-<!--
+</animation>
+
 <animation>
   <type>material</type>
   <object-name>MESH28</object-name>
+  <condition>
+    <not>
+      <property>sim/rendering/rembrandt/enabled</property>
+    </not>
+  </condition>
   <emission>
     <red-prop>tu154/light/panel/ext-red</red-prop>
     <green-prop>tu154/light/panel/ext-green</green-prop>
     <blue-prop>tu154/light/panel/ext-blue</blue-prop>
   </emission>
   <texture-prop>tu154/textures/fe-panel</texture-prop>
-</animation>-->
+</animation>
 
 <!--Ambient light-->
-<!--
+
 <animation>
   <type>material</type>
   <object-name>MESH17</object-name>
@@ -5641,12 +5662,17 @@
   <object-name>lever_mix8</object-name>
   <object-name>lever_mix9</object-name>
   <object-name>lever_mi10</object-name>
+  <condition>
+    <not>
+      <property>sim/rendering/rembrandt/enabled</property>
+    </not>
+  </condition>
   <emission>
     <red-prop>tu154/light/panel/amb-red</red-prop>
     <green-prop>tu154/light/panel/amb-green</green-prop>
     <blue-prop>tu154/light/panel/amb-blue</blue-prop>
   </emission>
-</animation>-->
+</animation>
 
 <!--Pax cabin windows-->
 <animation>

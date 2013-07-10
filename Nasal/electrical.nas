@@ -1,6 +1,6 @@
 #Tu-154B-2 electrical system.
 
-print(getprop("/sim/gui/dialogs"));
+#print(getprop("/sim/gui/dialogs"));
 
 
 var UPDATE_PERIOD = 0.3;
@@ -516,6 +516,17 @@ init_electrical = func {
   setprop("tu154/switches/dc-src-selector", 0);  
   setprop("tu154/switches/POS", 0);  
 
+# Added by Yurik jul 2013
+#   Set external light parameters if Rembrandt deselected
+    if( !getprop("sim/rendering/rembrandt/enabled") ) {
+    setprop("tu154/light/panel/ext-red-def", 0.4 );
+    setprop("tu154/light/panel/ext-green-def", 0.4 );
+    setprop("tu154/light/panel/ext-blue-def", 0.4 );
+    setprop("tu154/light/panel/amb-red-def", 0.3 );
+    setprop("tu154/light/panel/amb-green-def", 0.3 );
+    setprop("tu154/light/panel/amb-blue-def", 0.3 );
+
+    }
 
     setlistener("engines/engine[0]/n2", RPPO30_KP_1_handler,0,0 );
     setlistener("engines/engine[1]/n2", RPPO30_KP_2_handler,0,0 );
@@ -530,7 +541,8 @@ init_electrical = func {
 
 
     settimer(update_buses_thandler, UPDATE_PERIOD );
-settimer(update_electrical, 0);
+    settimer(update_electrical, 0);
+
 }
 
 
