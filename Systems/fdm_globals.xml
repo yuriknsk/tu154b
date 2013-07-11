@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!--
+    
+    Author:   Yurik V. Nikiforoff, yurik@megasignal.com
+    Date:     15 apr 2009
+    Function: JSBSim global properties
+    
+    -->
+
+
+<system name="Globals">
+          <!-- Declare some interface properties -->
+        <!--<property>inertia/cg-x-in</property>-->
+        <property>fcs/absu-pitch</property>
+        <property>fcs/absu-roll</property>
+        <property>fcs/absu-yaw</property>
+<!--        <property>fcs/stabilizer-cmd-norm</property>
+        <property>fcs/stabilizer-pos-rad</property>-->
+<!--        <property>fcs/stab-manu-cmd</property>-->
+        <property>fcs/stab-manu-switch</property>
+        <!--<property value="2.0">fcs/stab-auto-cmd</property>--> <!--0-1-2-->
+        <!--Hydro power support-->
+        <property>fcs/elevator-pos-static</property>
+        <property>fcs/aileron-pos-static</property>
+        <property>fcs/rudder-pos-static</property>
+        <property>fcs/flap-cmd-static</property>
+        <property>fcs/speedbrake-cmd-static</property>
+        <!--<property>gear/gear-cmd-static</property>-->
+        <!--Brake support-->
+        <property>gear/brake-left</property>
+        <property>gear/brake-right</property>
+        <property>gear/brake-parking</property>
+        <!--<property>gear/static-friction</property>-->
+        <!--Steering support-->
+        <property>gear/steering</property>
+        <property>gear/nose-wheel-steering</property>
+
+        <!--Electrical support-->
+        <property>systems/electrical-ok</property>
+	
+	<!--Refuel systems-->
+      <property>tu154/systems/flight/fl</property>
+      <property>tu154/systems/flight/dist</property>
+
+
+  
+</system>

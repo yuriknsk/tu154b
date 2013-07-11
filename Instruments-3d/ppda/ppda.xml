@@ -1,0 +1,192 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff - port for FGFS,  FDM,		   	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+
+<!-- PPDA radial/dme indicator from RSBN
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>ppda.ac</path>
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>text</object-name>
+  <object-name>needle_1</object-name>
+  <object-name>needle_2</object-name>
+  <object-name>dig_hund</object-name>
+  <object-name>dig_dec</object-name>
+  <object-name>dig_ones</object-name>
+  <object-name>dig_hm</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+<!--Needles-->
+<animation>
+  <type>rotate</type>
+  <object-name>needle_1</object-name>
+  <property>tu154/instrumentation/rsbn/heading-deg</property>
+  <factor>36.0</factor>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>needle_2</object-name>
+  <property>tu154/instrumentation/rsbn/heading-deg</property>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+
+<!--Digit wheels-->
+<animation>
+  <type>rotate</type>
+  <object-name>dig_hm</object-name>
+  <property>tu154/instrumentation/rsbn/indicated-wheels_ones</property>
+  <factor>36.0</factor>
+  <center>
+    <x-m>-0.01403</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.01547</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>dig_ones</object-name>
+  <property>tu154/instrumentation/rsbn/indicated-wheels_dec</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	0.9</ind>	<dep>	0.1</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
+    <entry><ind>	1.9</ind>	<dep>	36.1</dep></entry>
+    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
+    <entry><ind>	2.9</ind>	<dep>	72.1</dep></entry>
+    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
+    <entry><ind>	3.9</ind>	<dep>	108.1</dep></entry>
+    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
+    <entry><ind>	4.9</ind>	<dep>	144.1</dep></entry>
+    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
+    <entry><ind>	5.9</ind>	<dep>	180.1</dep></entry>
+    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
+    <entry><ind>	6.9</ind>	<dep>	216.1</dep></entry>
+    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
+    <entry><ind>	7.9</ind>	<dep>	252.1</dep></entry>
+    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
+    <entry><ind>	8.9</ind>	<dep>	288.1</dep></entry>
+    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
+    <entry><ind>	9.9</ind>	<dep>	324.1</dep></entry>
+    <entry><ind>	9.99</ind>	<dep>	359.9</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>-0.01403</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.01547</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>dig_dec</object-name>
+  <property>tu154/instrumentation/rsbn/indicated-wheels_hund</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	0.99</ind>	<dep>	0.1</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
+    <entry><ind>	1.99</ind>	<dep>	36.1</dep></entry>
+    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
+    <entry><ind>	2.99</ind>	<dep>	72.1</dep></entry>
+    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
+    <entry><ind>	3.99</ind>	<dep>	108.1</dep></entry>
+    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
+    <entry><ind>	4.99</ind>	<dep>	144.1</dep></entry>
+    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
+    <entry><ind>	5.99</ind>	<dep>	180.1</dep></entry>
+    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
+    <entry><ind>	6.99</ind>	<dep>	216.1</dep></entry>
+    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
+    <entry><ind>	7.99</ind>	<dep>	252.1</dep></entry>
+    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
+    <entry><ind>	8.99</ind>	<dep>	288.1</dep></entry>
+    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
+    <entry><ind>	9.99</ind>	<dep>	324.1</dep></entry>
+    <entry><ind>	9.999</ind>	<dep>	359.9</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>-0.01403</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.01547</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>dig_hund</object-name>
+  <property>tu154/instrumentation/rsbn/indicated-wheels_ths</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	0.999</ind>	<dep>	0.1</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
+    <entry><ind>	1.999</ind>	<dep>	36.1</dep></entry>
+    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
+    <entry><ind>	2.999</ind>	<dep>	72.1</dep></entry>
+    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
+    <entry><ind>	3.999</ind>	<dep>	108.1</dep></entry>
+    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
+    <entry><ind>	4.999</ind>	<dep>	144.1</dep></entry>
+    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
+    <entry><ind>	5.999</ind>	<dep>	180.1</dep></entry>
+    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
+    <entry><ind>	6.999</ind>	<dep>	216.1</dep></entry>
+    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
+    <entry><ind>	7.999</ind>	<dep>	252.1</dep></entry>
+    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
+    <entry><ind>	8.999</ind>	<dep>	288.1</dep></entry>
+    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
+    <entry><ind>	9.999</ind>	<dep>	324.1</dep></entry>
+    <entry><ind>	9.9999</ind>	<dep>	359.9</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>-0.01403</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.01547</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+
+</PropertyList>

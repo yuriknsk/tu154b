@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2006 by Yurik V. Nikiforoff - port for FGFS,  FDM,   	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+
+<!-- Air speed indicator
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>kus730_1100-cp.ac</path>
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>text</object-name>
+  <object-name>long_needle</object-name>
+  <object-name>short_needle</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+  
+<!--Needles-->
+<animation>
+    <type>rotate</type>
+    <object-name>short_needle</object-name>
+    <property>fdm/jsbsim/velocities/vt-fps</property>
+<!--fps-->
+    <interpolation>
+      <entry><ind>	0.0</ind>	<dep>	180.0</dep></entry>
+      <entry><ind>	363.64</ind>	<dep>	196.0</dep></entry>
+      <entry><ind>	454.55</ind>	<dep>	244.0</dep></entry>
+      <entry><ind>	727.27</ind>	<dep>	383.0</dep></entry>
+      <entry><ind>	909.09</ind>	<dep>	476.0</dep></entry>
+      <entry><ind>	1000.0</ind>	<dep>	527.0</dep></entry>
+    </interpolation>
+<!--kmh-->
+<!--    <interpolation>
+      <entry><ind>	0.0</ind>	<dep>	180.0</dep></entry>
+      <entry><ind>	400.0</ind>	<dep>	196.0</dep></entry>
+      <entry><ind>	500.0</ind>	<dep>	244.0</dep></entry>
+      <entry><ind>	800.0</ind>	<dep>	383.0</dep></entry>
+      <entry><ind>	1000.0</ind>	<dep>	476.0</dep></entry>
+      <entry><ind>	1100.0</ind>	<dep>	527.0</dep></entry>
+    </interpolation>-->
+    <axis>
+      <x>-1.0</x>
+      <y>0.0</y>
+      <z>0.0</z>
+    </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>long_needle</object-name>
+  <property>fdm/jsbsim/velocities/ve-kts</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	5.0</dep></entry>
+    <entry><ind>	54.0</ind>	<dep>	23.0</dep></entry>
+    <entry><ind>	108.0</ind>	<dep>	75.0</dep></entry>
+    <entry><ind>	215.98</ind>	<dep>	181.0</dep></entry>
+    <entry><ind>	323.97</ind>	<dep>	274.0</dep></entry>
+    <entry><ind>	404.96</ind>	<dep>	340.0</dep></entry>
+  </interpolation>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+
+</PropertyList>

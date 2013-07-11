@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2008 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+
+<!-- Selector for ADF/VOR indicator USHDB
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>ushdb_selector.ac</path>
+<!-- Internal instruments lighting -->
+<!--<animation>
+  <type>material</type>
+  <object-name>rect</object-name>
+  <object-name>handle_1</object-name>
+  <object-name>handle_2</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>-->
+
+<animation>
+  <type>rotate</type>
+  <object-name>handle_1</object-name>
+  <property>tu154/switches/ushdb-sel-1</property>  
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	-60.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	60.0</dep></entry>
+  </interpolation>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>handle_2</object-name>
+  <property>tu154/switches/ushdb-sel-2</property>  
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	-60.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	60.0</dep></entry>
+  </interpolation>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!--Control-->
+<animation>
+  <type>pick</type>
+  <object-name>hotspot_1</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/ushdb-sel-1", 1.0, 0.1 );
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hotspot_2</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/ushdb-sel-1", 0.0, 0.1 );
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hotspot_3</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/ushdb-sel-2", 1.0, 0.1 );
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hotspot_4</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/ushdb-sel-2", 0.0, 0.1 );
+      </script>
+    </binding>
+  </action>
+</animation>
+
+
+</PropertyList>

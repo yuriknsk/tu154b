@@ -1,0 +1,232 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+
+<!-- RSBN  control
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>rsbn.ac</path>
+<!--External panel lighting-->
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+    <emission>
+    <red-prop>tu154/light/panel/ext-red</red-prop>
+    <green-prop>tu154/light/panel/ext-green</green-prop>
+    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+  </emission>
+</animation>
+
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>text</object-name>
+  <object-name>b1</object-name>
+  <object-name>b2</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>handle_1</object-name>
+  <property>tu154/instrumentation/rsbn/handle-1</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	30.0</dep></entry>
+    <entry><ind>	4.0</ind>	<dep>	150.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>-0.04229</y-m>
+    <z-m>-0.01822</z-m>
+  </center>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>handle_2</object-name>
+  <property>tu154/instrumentation/rsbn/handle-2</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	-60.0</dep></entry>
+    <entry><ind>	9.0</ind>	<dep>	210.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>0.04217</y-m>
+    <z-m>-0.01822</z-m>
+  </center>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+
+
+<!--Frequency-->
+<animation>
+  <type>pick</type>
+  <object-name>handle_1</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
+    <binding>
+      <command>nasal</command>      
+      <script>instruments.rsbn_set_f_1(1)</script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>handle_1</object-name>
+  <visible>true</visible>
+  <action>
+    <button>1</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
+    <binding>
+      <command>nasal</command>      
+      <script>instruments.rsbn_set_f_1(-1)</script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>handle_2</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
+    <binding>
+      <command>nasal</command>      
+      <script>instruments.rsbn_set_f_2(1)</script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>handle_2</object-name>
+  <visible>true</visible>
+  <action>
+    <button>1</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
+    <binding>
+      <command>nasal</command>      
+      <script>instruments.rsbn_set_f_2(-1)</script>
+    </binding>
+  </action>
+</animation>
+<!--Mouse wheel-->
+<animation>
+  <type>pick</type>
+  <object-name>handle_1</object-name>
+  <visible>true</visible>
+  <action>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>      
+      <script>instruments.rsbn_set_f_1(1)</script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>handle_1</object-name>
+  <visible>true</visible>
+  <action>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>      
+      <script>instruments.rsbn_set_f_1(-1)</script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>handle_2</object-name>
+  <visible>true</visible>
+  <action>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>      
+      <script>instruments.rsbn_set_f_2(1)</script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>handle_2</object-name>
+  <visible>true</visible>
+  <action>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>      
+      <script>instruments.rsbn_set_f_2(-1)</script>
+    </binding>
+  </action>
+</animation>
+
+<!--Sound-->
+
+<animation>
+  <type>pick</type>
+  <object-name>hs_1</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>instrumentation/nav[2]/volume</property>
+      <step>0.2</step>
+      <min>0.0</min>
+      <max>1.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_1</object-name>
+  <visible>false</visible>
+  <action>
+    <button>1</button>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>instrumentation/nav[2]/volume</property>
+      <step>-0.2</step>
+      <min>0.0</min>
+      <max>1.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+
+
+
+</PropertyList>

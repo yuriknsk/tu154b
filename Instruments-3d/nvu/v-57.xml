@@ -1,0 +1,516 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+
+<!-- V-57 NVU (navigation system) control
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>v-57.ac</path>
+<!--External panel lighting-->
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+    <emission>
+    <red-prop>tu154/light/panel/ext-red</red-prop>
+    <green-prop>tu154/light/panel/ext-green</green-prop>
+    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+  </emission>
+</animation>
+
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>text</object-name>
+  <object-name>digits</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+<!--Knobs-->
+<animation>
+  <type>pick</type>
+  <object-name>hs_1</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-toggle</command>
+      <property>tu154/instrumentation/v-57/button-1</property>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_2</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-toggle</command>
+      <property>tu154/instrumentation/v-57/button-2</property>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_3</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-toggle</command>
+      <property>tu154/instrumentation/v-57/button-3</property>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_4</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-toggle</command>
+      <property>tu154/instrumentation/v-57/button-4</property>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_5</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-toggle</command>
+      <property>tu154/instrumentation/v-57/button-5</property>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_6</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-toggle</command>
+      <property>tu154/instrumentation/v-57/button-6</property>
+    </binding>
+  </action>
+</animation>
+<!-- Digits I -->
+<!--*******************************************************************-->
+<animation>
+  <type>rotate</type>
+  <object-name>ones_1</object-name>
+  <property>tu154/instrumentation/v-57[0]/direction/indicated-wheels_ones</property>
+  <factor>36</factor>
+  <center>
+    <x-m>-0.03059</x-m>
+    <y-m>0</y-m>
+    <z-m>0.01779</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>dec_1</object-name>
+  <property>tu154/instrumentation/v-57[0]/direction/indicated-wheels_dec</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	0.9</ind>	<dep>	0.1</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
+    <entry><ind>	1.9</ind>	<dep>	36.1</dep></entry>
+    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
+    <entry><ind>	2.9</ind>	<dep>	72.1</dep></entry>
+    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
+    <entry><ind>	3.9</ind>	<dep>	108.1</dep></entry>
+    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
+    <entry><ind>	4.9</ind>	<dep>	144.1</dep></entry>
+    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
+    <entry><ind>	5.9</ind>	<dep>	180.1</dep></entry>
+    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
+    <entry><ind>	6.9</ind>	<dep>	216.1</dep></entry>
+    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
+    <entry><ind>	7.9</ind>	<dep>	252.1</dep></entry>
+    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
+    <entry><ind>	8.9</ind>	<dep>	288.1</dep></entry>
+    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
+    <entry><ind>	9.9</ind>	<dep>	324.1</dep></entry>
+    <entry><ind>	9.99</ind>	<dep>	359.9</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>-0.03059</x-m>
+    <y-m>0</y-m>
+    <z-m>0.01779</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>hund_1</object-name>
+  <property>tu154/instrumentation/v-57[0]/direction/indicated-wheels_hund</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	0.99</ind>	<dep>	0.1</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
+    <entry><ind>	1.99</ind>	<dep>	36.1</dep></entry>
+    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
+    <entry><ind>	2.99</ind>	<dep>	72.1</dep></entry>
+    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
+    <entry><ind>	3.99</ind>	<dep>	108.1</dep></entry>
+    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
+    <entry><ind>	4.99</ind>	<dep>	144.1</dep></entry>
+    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
+    <entry><ind>	5.99</ind>	<dep>	180.1</dep></entry>
+    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
+    <entry><ind>	6.99</ind>	<dep>	216.1</dep></entry>
+    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
+    <entry><ind>	7.99</ind>	<dep>	252.1</dep></entry>
+    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
+    <entry><ind>	8.99</ind>	<dep>	288.1</dep></entry>
+    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
+    <entry><ind>	9.99</ind>	<dep>	324.1</dep></entry>
+    <entry><ind>	9.999</ind>	<dep>	359.9</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>-0.03059</x-m>
+    <y-m>0</y-m>
+    <z-m>0.01779</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<!--Digits II-->
+<!--*******************************************************************-->
+
+<animation>
+  <type>rotate</type>
+  <object-name>ones_2</object-name>
+  <property>tu154/instrumentation/v-57[0]/fork/indicated-wheels_ones</property>
+  <factor>36</factor>
+  <center>
+    <x-m>-0.03059</x-m>
+    <y-m>0</y-m>
+    <z-m>0.01779</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>dec_2</object-name>
+  <property>tu154/instrumentation/v-57[0]/fork/indicated-wheels_dec</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	0.9</ind>	<dep>	0.1</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
+    <entry><ind>	1.9</ind>	<dep>	36.1</dep></entry>
+    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
+    <entry><ind>	2.9</ind>	<dep>	72.1</dep></entry>
+    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
+    <entry><ind>	3.9</ind>	<dep>	108.1</dep></entry>
+    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
+    <entry><ind>	4.9</ind>	<dep>	144.1</dep></entry>
+    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
+    <entry><ind>	5.9</ind>	<dep>	180.1</dep></entry>
+    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
+    <entry><ind>	6.9</ind>	<dep>	216.1</dep></entry>
+    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
+    <entry><ind>	7.9</ind>	<dep>	252.1</dep></entry>
+    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
+    <entry><ind>	8.9</ind>	<dep>	288.1</dep></entry>
+    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
+    <entry><ind>	9.9</ind>	<dep>	324.1</dep></entry>
+    <entry><ind>	9.99</ind>	<dep>	359.9</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>-0.03059</x-m>
+    <y-m>0</y-m>
+    <z-m>0.01779</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>hund_2</object-name>
+  <property>tu154/instrumentation/v-57[0]/fork/minus-indicated-wheels_ones</property>
+  <factor>36</factor>
+  <center>
+    <x-m>-0.03059</x-m>
+    <y-m>0</y-m>
+    <z-m>0.01779</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>ths_2</object-name>
+  <property>tu154/instrumentation/v-57[0]/fork/minus-indicated-wheels_dec</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	0.9</ind>	<dep>	0.1</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
+    <entry><ind>	1.9</ind>	<dep>	36.1</dep></entry>
+    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
+    <entry><ind>	2.9</ind>	<dep>	72.1</dep></entry>
+    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
+    <entry><ind>	3.9</ind>	<dep>	108.1</dep></entry>
+    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
+    <entry><ind>	4.9</ind>	<dep>	144.1</dep></entry>
+    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
+    <entry><ind>	5.9</ind>	<dep>	180.1</dep></entry>
+    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
+    <entry><ind>	6.9</ind>	<dep>	216.1</dep></entry>
+    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
+    <entry><ind>	7.9</ind>	<dep>	252.1</dep></entry>
+    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
+    <entry><ind>	8.9</ind>	<dep>	288.1</dep></entry>
+    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
+    <entry><ind>	9.9</ind>	<dep>	324.1</dep></entry>
+    <entry><ind>	9.99</ind>	<dep>	359.9</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>-0.03059</x-m>
+    <y-m>0</y-m>
+    <z-m>0.01779</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!--Hide unuse digits-->
+<animation>
+  <type>select</type>
+  <object-name>ones_2</object-name>
+  <object-name>dec_2</object-name>
+  <condition>
+    <greater-than>
+      <property>tu154/instrumentation/v-57/fork-deg</property>
+      <value>-1.0</value>
+    </greater-than>
+  </condition>
+</animation>
+
+<animation>
+  <type>select</type>
+  <object-name>hund_2</object-name>
+  <object-name>ths_2</object-name>
+  <condition>
+    <less-than>
+      <property>tu154/instrumentation/v-57/fork-deg</property>
+      <value>1.0</value>
+    </less-than>
+  </condition>
+</animation>
+
+<!-- Digits III -->
+<!--*******************************************************************-->
+<animation>
+  <type>rotate</type>
+  <object-name>ones_3</object-name>
+  <property>tu154/instrumentation/v-57[0]/speed/indicated-wheels_ones</property>
+  <factor>36</factor>
+  <center>
+    <x-m>-0.03059</x-m>
+    <y-m>0</y-m>
+    <z-m>0.01779</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>dec_3</object-name>
+  <property>tu154/instrumentation/v-57[0]/speed/indicated-wheels_dec</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	0.9</ind>	<dep>	0.1</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
+    <entry><ind>	1.9</ind>	<dep>	36.1</dep></entry>
+    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
+    <entry><ind>	2.9</ind>	<dep>	72.1</dep></entry>
+    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
+    <entry><ind>	3.9</ind>	<dep>	108.1</dep></entry>
+    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
+    <entry><ind>	4.9</ind>	<dep>	144.1</dep></entry>
+    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
+    <entry><ind>	5.9</ind>	<dep>	180.1</dep></entry>
+    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
+    <entry><ind>	6.9</ind>	<dep>	216.1</dep></entry>
+    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
+    <entry><ind>	7.9</ind>	<dep>	252.1</dep></entry>
+    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
+    <entry><ind>	8.9</ind>	<dep>	288.1</dep></entry>
+    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
+    <entry><ind>	9.9</ind>	<dep>	324.1</dep></entry>
+    <entry><ind>	9.99</ind>	<dep>	359.9</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>-0.03059</x-m>
+    <y-m>0</y-m>
+    <z-m>0.01779</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>hund_3</object-name>
+  <property>tu154/instrumentation/v-57[0]/speed/indicated-wheels_hund</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	0.99</ind>	<dep>	0.1</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
+    <entry><ind>	1.99</ind>	<dep>	36.1</dep></entry>
+    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
+    <entry><ind>	2.99</ind>	<dep>	72.1</dep></entry>
+    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
+    <entry><ind>	3.99</ind>	<dep>	108.1</dep></entry>
+    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
+    <entry><ind>	4.99</ind>	<dep>	144.1</dep></entry>
+    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
+    <entry><ind>	5.99</ind>	<dep>	180.1</dep></entry>
+    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
+    <entry><ind>	6.99</ind>	<dep>	216.1</dep></entry>
+    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
+    <entry><ind>	7.99</ind>	<dep>	252.1</dep></entry>
+    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
+    <entry><ind>	8.99</ind>	<dep>	288.1</dep></entry>
+    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
+    <entry><ind>	9.99</ind>	<dep>	324.1</dep></entry>
+    <entry><ind>	9.999</ind>	<dep>	359.9</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>-0.03059</x-m>
+    <y-m>0</y-m>
+    <z-m>0.01779</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+
+<!--Controls-->
+<!--Manually control of wind speed and direction not implemented yet - only DISS mode now -->
+<animation>
+  <type>pick</type>
+  <object-name>hs_7</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/v-57[0]/fork-deg</property>
+      <step>1.0</step>
+      <min>-90.0</min>
+      <max>90.0</max>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_7</object-name>
+  <visible>false</visible>
+  <action>
+    <button>1</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/v-57[0]/fork-deg</property>
+      <step>-1.0</step>
+      <min>-90.0</min>
+      <max>90.0</max>
+    </binding>
+  </action>
+</animation>
+<!--Mouse wheel-->
+<animation>
+  <type>pick</type>
+  <object-name>hs_7</object-name>
+  <visible>false</visible>
+  <action>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/v-57[0]/fork-deg</property>
+      <step>1.0</step>
+      <min>-90.0</min>
+      <max>90.0</max>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_7</object-name>
+  <visible>false</visible>
+  <action>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/v-57[0]/fork-deg</property>
+      <step>-1.0</step>
+      <min>-90.0</min>
+      <max>90.0</max>
+    </binding>
+  </action>
+</animation>
+
+
+</PropertyList>

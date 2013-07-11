@@ -1,0 +1,769 @@
+<?xml version="1.0"?>
+<!--
+
+  Author:   Yurik V. Nikiforoff, yurik@megasignal.com
+  Date:     nov 2008
+  Function: NVU navigation system TU-154B
+  License:  GPL
+-->
+<system name="NVU">
+  
+  <!--******************** Interface to NVU nav computer ************************ -->  
+  <!--<property>instrumentation/tks-heading</property>-->
+  
+  <property>instrumentation/nvu-selector</property>
+  <property>instrumentation/zpu-deg-1</property>
+  <property>instrumentation/zpu-deg-2</property>
+  <!--<property>ap/input-drift-deg</property>-->
+  <!--<property>instrumentation/input-vg-fps</property>-->
+  <!--RSBN correction-->
+  <property>instrumentation/rsbn-d-m</property>
+  <property>instrumentation/rsbn-angle-deg</property>
+  <property>instrumentation/rsbn-uk-deg</property>
+  <!--Speed from SVS-->
+  <property>instrumentation/svs-speed-kt</property>
+  <property>instrumentation/svs-enable</property>
+  <!--Enable RSBN correction-->
+  <property>instrumentation/rsbn-cft-1</property>
+  <property>instrumentation/rsbn-cft-2</property>
+  <!--Enable coordinate convertion-->
+  <property>instrumentation/enable-convertion</property>
+  <!--Enable coordinate count (value should be fps2kmh const) -->
+  <property>instrumentation/enable-count</property>
+  <!--Point Input S-1 -->
+  <property>instrumentation/p-input-s-1</property>
+  <!--Point Input S-2 -->
+  <property>instrumentation/p-input-s-2</property>
+  <!--Point Input Z-1 -->
+  <property>instrumentation/p-input-z-1</property>
+  <!--Point Input Z-2 -->
+  <property>instrumentation/p-input-z-2</property>
+  
+  <!--Aircraft Input S-1 -->
+  <property>instrumentation/a-input-s-1</property>
+  <!--Aircraft Input S-2 -->
+  <property>instrumentation/a-input-s-2</property>
+  <!--Aircraft Input Z-1 -->
+  <property>instrumentation/a-input-z-1</property>
+  <!--Aircraft Input Z-2 -->
+  <property>instrumentation/a-input-z-2</property>
+  
+  <!--Internal NVU variables. 
+               It's should be declared here, cause FDM not allowed forward declaration-->  
+  <!--Enable coordinate convertion-->
+  <property>instrumentation/corr-rsbn-s-1</property>
+  <property>instrumentation/corr-rsbn-z-1</property>
+  <property>instrumentation/corr-rsbn-s-2</property>
+  <property>instrumentation/corr-rsbn-z-2</property>
+  
+  <property>instrumentation/cc-s-1</property>
+  <property>instrumentation/cc-z-1</property>
+  <property>instrumentation/cc-s-2</property>
+  <property>instrumentation/cc-z-2</property>
+  
+  <property>instrumentation/aircraft-integrator-s-1</property>
+  <property>instrumentation/aircraft-integrator-z-1</property>
+  <property>instrumentation/point-integrator-s-1</property>
+  <property>instrumentation/point-integrator-z-1</property>
+  
+  <property>instrumentation/aircraft-integrator-s-2</property>
+  <property>instrumentation/aircraft-integrator-z-2</property>
+  <property>instrumentation/point-integrator-s-2</property>
+  <property>instrumentation/point-integrator-z-2</property>
+  
+<channel name="nvu">
+
+<!--**************************** NVU staff ******************************-->    
+<!--Ground speed from DISS or SVS -->
+<switch name="instrumentation/v-fps">
+  <default value="velocities/vg-fps"/>
+  <test value="velocities/vc-fps">
+    instrumentation/svs-enable ne 0
+  </test>
+</switch>
+
+<pure_gain name="instrumentation/vg-kmh">
+  <input>instrumentation/v-fps</input>
+  <gain>instrumentation/enable-count</gain><!--1.09728 from fps to kmh-->
+</pure_gain>
+
+<summer name="instrumentation/rsbn-angle">
+  <input>instrumentation/rsbn-angle-deg</input>
+  <input>-instrumentation/rsbn-uk-deg</input>
+</summer>
+
+<!-- RSBN -->
+<!--S-->
+<fcs_function name="instrumentation/rsbn-s-distance">
+  <description>cos(rsbn-angle)</description>
+  <function>
+    <product>
+      <property>instrumentation/rsbn-d-m</property>
+      <cos>
+        <product>
+          <property>instrumentation/rsbn-angle</property>
+          <value>0.0174533</value><!--to rad-->
+        </product>
+      </cos>
+    </product>
+  </function>
+</fcs_function>
+<!--Z-->
+<fcs_function name="instrumentation/rsbn-z-distance">
+  <description>sin(rsbn-angle)</description>
+  <function>
+    <product>
+      <property>instrumentation/rsbn-d-m</property>
+      <sin>
+        <product>
+          <property>instrumentation/rsbn-angle</property>
+          <value>0.0174533</value>
+        </product>
+      </sin>
+    </product>
+  </function>
+</fcs_function>
+<!-- ******************* Begin V-52[0] procedure ******************** -->
+<!--Ortodromic heading-->
+<!--<summer name="instrumentation/ort-hdg-raw-1">-->
+<summer name="instrumentation/ort-hdg-1">
+  <input>instrumentation/tks-heading</input>
+  <input>-instrumentation/zpu-deg-1</input>
+  <!--<input>ap/input-drift-deg</input>-->
+<input>instrumentation/drift-angle-deg</input>
+</summer>
+<!--
+<switch name="instrumentation/ort-hdg-bias-1">
+  <default value="0.0"/>
+  <test value="360.0">
+    instrumentation/ort-hdg-raw-1 lt -180
+  </test>
+  <test value="-360.0">
+    instrumentation/ort-hdg-raw-1 gt 180
+  </test>
+</switch>
+<summer name="instrumentation/ort-hdg-1">
+  <input>instrumentation/ort-hdg-raw-1</input>
+  <input>instrumentation/ort-hdg-bias-1</input>
+</summer>
+-->
+<!--Ortodromic heading here in ort-hdg -->
+<!--Aircraft-->
+<!--S-->
+<fcs_function name="instrumentation/aircraft-s-speed-1">
+  <description>cos(ort-hdg)</description>
+  <function>
+    <product>
+      <property>instrumentation/vg-kmh</property>
+      <cos>
+        <product>
+          <property>instrumentation/ort-hdg-1</property>
+          <value>0.0174533</value><!--to rad-->
+        </product>
+      </cos>
+    </product>
+  </function>
+</fcs_function>
+<!--Z-->
+<fcs_function name="instrumentation/aircraft-z-speed-1">
+  <description>sin(ort-hdg)</description>
+  <function>
+    <product>
+      <property>instrumentation/vg-kmh</property>
+      <sin>
+        <product>
+          <property>instrumentation/ort-hdg-1</property>
+          <value>0.0174533</value>
+        </product>
+      </sin>
+    </product>
+  </function>
+</fcs_function>
+<!--Count new coordinate (S, Z) for next ort -->
+<fcs_function name="instrumentation/s-next-1">
+  <description>S coordinate for next ort - block 1</description>
+  <function>
+    <difference>
+      <property>instrumentation/point-integrator-s-1</property>
+      <product>
+        <pow>
+          <sum>
+            <product>
+              <property>instrumentation/aircraft-integrator-s-2</property>
+              <property>instrumentation/aircraft-integrator-s-2</property>
+            </product>
+            <product>
+              <property>instrumentation/aircraft-integrator-z-2</property>
+              <property>instrumentation/aircraft-integrator-z-2</property>
+            </product>
+          </sum>
+          <value>0.5</value><!--we need sqrt-->
+        </pow>
+        <cos>
+          <sum>
+            <sum> <!--Alpha-->
+              <atan2>
+                <property>instrumentation/aircraft-integrator-z-2</property>
+                <property>instrumentation/aircraft-integrator-s-2</property>
+              </atan2>
+              <value>3.1415926</value>
+            </sum>
+            <product><!--Beta-->
+              <difference>
+                <property>instrumentation/zpu-deg-2</property>
+                <property>instrumentation/zpu-deg-1</property>
+              </difference>
+              <value>0.0174533</value><!--to rad -->
+            </product>
+          </sum>
+        </cos>
+      </product>
+    </difference>
+  </function>
+</fcs_function>
+
+<fcs_function name="instrumentation/z-next-1">
+  <description>Z coordinate for next ort - block 1</description>
+  <function>
+    <difference>
+      <property>instrumentation/point-integrator-z-1</property>
+      <product>
+        <pow>
+          <sum>
+            <product>
+              <property>instrumentation/aircraft-integrator-s-2</property>
+              <property>instrumentation/aircraft-integrator-s-2</property>
+            </product>
+            <product>
+              <property>instrumentation/aircraft-integrator-z-2</property>
+              <property>instrumentation/aircraft-integrator-z-2</property>
+            </product>
+          </sum>
+          <value>0.5</value>
+        </pow>
+        <sin>
+          <sum>
+            <sum> <!--Alpha-->
+              <atan2>
+                <property>instrumentation/aircraft-integrator-z-2</property>
+                <property>instrumentation/aircraft-integrator-s-2</property>
+              </atan2>
+              <value>3.1415926</value>
+            </sum>
+            <product><!--Beta-->
+              <difference>
+                <property>instrumentation/zpu-deg-2</property>
+                <property>instrumentation/zpu-deg-1</property>
+              </difference>
+              <value>0.0174533</value><!-- to rad -->
+            </product>
+          </sum>
+        </sin>
+      </product>
+    </difference>
+  </function>
+</fcs_function>
+
+<!--Input and  convertion procedures-->
+
+<!-- Point S -->
+<integrator name="instrumentation/p-i-s-1">
+  <input>instrumentation/p-input-s-1</input>
+  <c1>0.277778</c1>
+  <output>instrumentation/point-integrator-s-1</output>
+</integrator>
+
+<!--Deadband for point blanker-->
+<deadband name="instrumentation/p-blanker-db-s-1">
+  <input>instrumentation/point-integrator-s-1</input>
+  <width> 200 </width>
+</deadband>    
+
+<!-- Point Z -->
+<integrator name="instrumentation/p-i-z-1">
+  <input>instrumentation/p-input-z-1</input>
+  <c1>0.277778</c1>
+  <output>instrumentation/point-integrator-z-1</output>
+</integrator>
+
+<!--Deadband for point blanker-->
+<deadband name="instrumentation/p-blanker-db-z-1">
+  <input>instrumentation/point-integrator-z-1</input>
+  <width> 200 </width>
+</deadband>
+
+<switch name="instrumentation/a-s-switched-speed-1">
+  <default value="0.0"/>
+  <test value="instrumentation/aircraft-s-speed-1">
+    instrumentation/nvu-selector eq 1
+  </test>
+</switch>    
+<!--Aircraft S 1 Input -->    
+<summer name="instrumentation/inp-integr-s-1">
+  <input>instrumentation/a-s-switched-speed-1</input>
+  <input>instrumentation/corr-rsbn-s-1</input>
+  <input>instrumentation/cc-s-1</input>
+  <input>instrumentation/a-input-s-1</input>
+</summer>    
+<!-- Aircraft Integrator S -->
+<!--Distance in meters here!-->
+<integrator name="instrumentation/a-i-s-1"> 
+  <input>instrumentation/inp-integr-s-1</input>
+  <c1>0.277778</c1>
+  <output>instrumentation/aircraft-integrator-s-1</output>
+</integrator>
+<!--Deadband for aircraft blanker-->
+<deadband name="instrumentation/a-blanker-db-s-1">
+  <input>instrumentation/aircraft-integrator-s-1</input>
+  <width> 200 </width>
+</deadband>
+<!--Deadband for coordinate convertion - input from 2-nd block! -->
+<deadband name="instrumentation/a-cc-db-s-1">
+  <input>instrumentation/aircraft-integrator-s-2</input>
+  <width> 160000 </width> <!-- 80 km * 2 -->
+</deadband>
+<!--Switch for coordinate convertion-->
+<switch name="instrumentation/a-cc-sw-s-1">
+  <default value="0.0"/>
+  <test value="-5.0">
+    instrumentation/a-cc-db-s-1 eq 0
+  </test>
+  <!--      <output>instrumentation/cc-enable-1</output>-->
+</switch>
+<switch name="instrumentation/cc-enable-1">
+  <default value="0.0"/>
+  <test value="instrumentation/a-cc-sw-s-1">
+    instrumentation/nvu-selector eq 0
+  </test>
+</switch>    
+<!--Coordinate convertion for S-->
+<summer name="instrumentation/cc-s-error-raw-1">
+  <input>instrumentation/aircraft-integrator-s-1</input>
+  <input>-instrumentation/s-next-1</input>
+</summer>
+<pure_gain name="instrumentation/cc-blanked-s-error-1">
+  <input>instrumentation/cc-s-error-raw-1</input>
+  <gain>instrumentation/enable-convertion</gain>
+</pure_gain>    
+<pure_gain name="instrumentation/cc-s-error-1">
+  <input>instrumentation/cc-blanked-s-error-1</input>
+  <gain>instrumentation/cc-enable-1</gain>
+  <output>instrumentation/cc-s-1</output>
+  <clipto>
+    <min>-40001.0</min><!--Speed of convertion set here-->
+    <max>40001.0</max>
+  </clipto>
+</pure_gain>
+
+<!--RSBN S Correction-->
+<summer name="instrumentation/rsbn-s-error-raw-1">
+  <input>instrumentation/aircraft-integrator-s-1</input>
+  <input>-instrumentation/rsbn-s-distance</input>
+  <input>-instrumentation/point-integrator-s-1</input>
+</summer>        
+<pure_gain name="instrumentation/rsbn-s-error-1">
+  <input>instrumentation/rsbn-s-error-raw-1</input>
+  <gain>instrumentation/rsbn-cft-1</gain>
+  <output>instrumentation/corr-rsbn-s-1</output>
+  <clipto>
+    <min>-4001.0</min>
+    <max>4001.0</max>
+  </clipto>
+</pure_gain>
+
+<!--Aircraft Z 1 Input -->    
+<summer name="instrumentation/inp-integr-z-1">
+  <input>instrumentation/aircraft-z-speed-1</input>
+  <input>instrumentation/corr-rsbn-z-1</input>
+  <input>instrumentation/cc-z-1</input>
+  <input>instrumentation/a-input-z-1</input>
+</summer>    
+<!-- Aircraft Integrator Z -->
+<!--Distance in meters here!-->
+<integrator name="instrumentation/a-i-z-1"> 
+  <input>instrumentation/inp-integr-z-1</input>
+  <c1>0.277778</c1>
+  <output>instrumentation/aircraft-integrator-z-1</output>
+</integrator>
+<!--Deadband for aircraft blanker-->
+<deadband name="instrumentation/a-blanker-db-z-1">
+  <input>instrumentation/aircraft-integrator-z-1</input>
+  <width> 200 </width>
+</deadband>
+<!--Coordinate convertion for Z-->
+<summer name="instrumentation/cc-z-error-raw-1">
+  <input>instrumentation/aircraft-integrator-z-1</input>
+  <input>-instrumentation/z-next-1</input>
+</summer>        
+<pure_gain name="instrumentation/cc-blanked-z-error-1">
+  <input>instrumentation/cc-z-error-raw-1</input>
+  <gain>instrumentation/enable-convertion</gain>
+</pure_gain>    
+<pure_gain name="instrumentation/cc-z-error-1">
+  <input>instrumentation/cc-blanked-z-error-1</input>
+  <gain>instrumentation/cc-enable-1</gain>
+  <output>instrumentation/cc-z-1</output>
+  <clipto>
+    <min>-40001.0</min>
+    <max>40001.0</max>
+  </clipto>
+</pure_gain>
+
+<!--RSBN Z Correction-->
+<summer name="instrumentation/rsbn-z-error-raw-1">
+  <input>instrumentation/aircraft-integrator-z-1</input>
+  <input>-instrumentation/rsbn-z-distance</input>
+  <input>-instrumentation/point-integrator-z-1</input>
+</summer>    
+
+<pure_gain name="instrumentation/rsbn-z-error-1">
+  <input>instrumentation/rsbn-z-error-raw-1</input>
+  <gain>instrumentation/rsbn-cft-1</gain>
+  <output>instrumentation/corr-rsbn-z-1</output>
+  <clipto>
+    <min>-4001.0</min>
+    <max>4001.0</max>
+  </clipto>
+</pure_gain>
+<!--End RSBN Z Correction-->
+
+<!-- LUR 1 -->
+<!--    <deadband name="instrumentation/db-lur-1">
+  <input>instrumentation/aircraft-integrator-s-1</input>
+  <width> instrumentation/lur-1 </width>
+</deadband>-->
+<!-- ******************* END V-52[0] procedure ******************** -->
+<!-- ****************** BEGIN V-52[1] procedure ******************* -->
+<!--Ortodromic heading-->
+<!--<summer name="instrumentation/ort-hdg-raw-2">-->
+<summer name="instrumentation/ort-hdg-2">
+  <input>instrumentation/tks-heading</input>
+  <input>-instrumentation/zpu-deg-2</input>
+<!--  <input>ap/input-drift-deg</input>-->
+<input>instrumentation/drift-angle-deg</input>
+</summer>
+<!--
+<switch name="instrumentation/ort-hdg-bias-2">
+  <default value="0.0"/>
+  <test value="360.0">
+    instrumentation/ort-hdg-raw-2 lt -180
+  </test>
+  <test value="-360.0">
+    instrumentation/ort-hdg-raw-2 gt 180
+  </test>
+</switch>
+<summer name="instrumentation/ort-hdg-2">
+  <input>instrumentation/ort-hdg-raw-2</input>
+  <input>instrumentation/ort-hdg-bias-2</input>
+</summer>
+-->
+<!--Ortodromic heading here in ort-hdg -->
+<!--Aircraft-->
+<!--S-->
+<fcs_function name="instrumentation/aircraft-s-speed-2">
+  <description>cos(ort-hdg)</description>
+  <function>
+    <product>
+      <property>instrumentation/vg-kmh</property>
+      <cos>
+        <product>
+          <property>instrumentation/ort-hdg-2</property>
+          <value>0.0174533</value><!--to rad-->
+        </product>
+      </cos>
+    </product>
+  </function>
+</fcs_function>
+<!--Z-->
+<fcs_function name="instrumentation/aircraft-z-speed-2">
+  <description>sin(ort-hdg)</description>
+  <function>
+    <product>
+      <property>instrumentation/vg-kmh</property>
+      <sin>
+        <product>
+          <property>instrumentation/ort-hdg-2</property>
+          <value>0.0174533</value>
+        </product>
+      </sin>
+    </product>
+  </function>
+</fcs_function>
+<!--Count new coordinate (S, Z) for next ort -->
+<fcs_function name="instrumentation/s-next-2">
+  <description>S coordinate for next ort - block 2</description>
+  <function>
+    <difference>
+      <property>instrumentation/point-integrator-s-2</property>
+      <product>
+        <pow>
+          <sum>
+            <product>
+              <property>instrumentation/aircraft-integrator-s-1</property>
+              <property>instrumentation/aircraft-integrator-s-1</property>
+            </product>
+            <product>
+              <property>instrumentation/aircraft-integrator-z-1</property>
+              <property>instrumentation/aircraft-integrator-z-1</property>
+            </product>
+          </sum>
+          <value>0.5</value>
+        </pow>
+        <cos>
+          <sum>
+            <sum> <!--Alpha-->
+              <atan2>
+                <property>instrumentation/aircraft-integrator-z-1</property>
+                <property>instrumentation/aircraft-integrator-s-1</property>
+              </atan2>
+              <value>3.1415926</value>
+            </sum>
+            <product><!--Beta-->
+              <difference>
+                <property>instrumentation/zpu-deg-1</property>
+                <property>instrumentation/zpu-deg-2</property>
+              </difference>
+              <value>0.0174533</value><!--to rad -->
+            </product>
+          </sum>
+        </cos>
+      </product>
+    </difference>
+  </function>
+</fcs_function>
+
+<fcs_function name="instrumentation/z-next-2">
+  <description>Z coordinate for next ort - block 2</description>
+  <function>
+    <difference>
+      <property>instrumentation/point-integrator-z-2</property>
+      <product>
+        <pow>
+          <sum>
+            <product>
+              <property>instrumentation/aircraft-integrator-s-1</property>
+              <property>instrumentation/aircraft-integrator-s-1</property>
+            </product>
+            <product>
+              <property>instrumentation/aircraft-integrator-z-1</property>
+              <property>instrumentation/aircraft-integrator-z-1</property>
+            </product>
+          </sum>
+          <value>0.5</value>
+        </pow>
+        <sin>
+          <sum>
+            <sum> <!--Alpha-->
+              <atan2>
+                <property>instrumentation/aircraft-integrator-z-1</property>
+                <property>instrumentation/aircraft-integrator-s-1</property>
+              </atan2>
+              <value>3.1415926</value>
+            </sum>
+            <product><!--Beta-->
+              <difference>
+                <property>instrumentation/zpu-deg-1</property>
+                <property>instrumentation/zpu-deg-2</property>
+              </difference>
+              <value>0.0174533</value><!--to rad-->
+            </product>
+          </sum>
+        </sin>
+      </product>
+    </difference>
+  </function>
+</fcs_function>
+
+<!--Input and  convertion procedures-->
+
+<!-- Point S -->
+<integrator name="instrumentation/p-i-s-2">
+  <input>instrumentation/p-input-s-2</input>
+  <c1>0.277778</c1>
+  <output>instrumentation/point-integrator-s-2</output>
+</integrator>
+
+<!--Deadband for point blanker-->
+<deadband name="instrumentation/p-blanker-db-s-2">
+  <input>instrumentation/point-integrator-s-2</input>
+  <width> 200 </width>
+</deadband>    
+
+<!-- Point Z -->
+<integrator name="instrumentation/p-i-z-2">
+  <input>instrumentation/p-input-z-2</input>
+  <c1>0.277778</c1>
+  <output>instrumentation/point-integrator-z-2</output>
+</integrator>
+
+<!--Deadband for point blanker-->
+<deadband name="instrumentation/p-blanker-db-z-2">
+  <input>instrumentation/point-integrator-z-2</input>
+  <width> 200 </width>
+</deadband>
+
+<switch name="instrumentation/a-s-switched-speed-2">
+  <default value="0.0"/>
+  <test value="instrumentation/aircraft-s-speed-2">
+    instrumentation/nvu-selector eq 0
+  </test>
+</switch>
+
+<!--Aircraft S 2 Input -->    
+<summer name="instrumentation/inp-integr-s-2">
+  <input>instrumentation/a-s-switched-speed-2</input>
+  <input>instrumentation/corr-rsbn-s-2</input>
+  <input>instrumentation/cc-s-2</input>
+  <input>instrumentation/a-input-s-2</input>
+</summer>    
+<!--Integrator S -->
+<!--Distance in meters here!-->
+<integrator name="instrumentation/a-i-s-2"> 
+  <input>instrumentation/inp-integr-s-2</input>
+  <c1>0.277778</c1>
+  <output>instrumentation/aircraft-integrator-s-2</output>
+</integrator>
+<!--Deadband for aircraft blanker-->
+<deadband name="instrumentation/a-blanker-db-s-2">
+  <input>instrumentation/aircraft-integrator-s-2</input>
+  <width> 200 </width>
+</deadband>
+<!--Deadband for coordinate convertion - input from 1-st block! -->
+<deadband name="instrumentation/a-cc-db-s-2">
+  <input>instrumentation/aircraft-integrator-s-1</input>
+  <width> 160000 </width> <!-- 80 km * 2 -->
+</deadband>
+<!--Switch for coordinate convertion-->
+<switch name="instrumentation/a-cc-sw-s-2">
+  <default value="0.0"/>
+  <test value="-5.0">
+    instrumentation/a-cc-db-s-2 eq 0
+  </test>
+  <!--<output>instrumentation/cc-enable-2</output>-->
+</switch>
+<switch name="instrumentation/cc-enable-2">
+  <default value="0.0"/>
+  <test value="instrumentation/a-cc-sw-s-2">
+    instrumentation/nvu-selector eq 1
+  </test>
+</switch>
+<!--Coordinate convertion for S-->
+<summer name="instrumentation/cc-s-error-raw-2">
+  <input>instrumentation/aircraft-integrator-s-2</input>
+  <input>-instrumentation/s-next-2</input>
+</summer>
+<pure_gain name="instrumentation/cc-blanked-s-error-2">
+  <input>instrumentation/cc-s-error-raw-2</input>
+  <gain>instrumentation/enable-convertion</gain>
+</pure_gain>    
+<pure_gain name="instrumentation/cc-s-error-2">
+  <input>instrumentation/cc-blanked-s-error-2</input>
+  <gain>instrumentation/cc-enable-2</gain>
+  <output>instrumentation/cc-s-2</output>
+  <clipto>
+    <min>-40001.0</min>
+    <max>40001.0</max>
+  </clipto>
+</pure_gain>
+
+<!--RSBN S Correction-->
+<summer name="instrumentation/rsbn-s-error-raw-2">
+  <input>instrumentation/aircraft-integrator-s-2</input>
+  <input>-instrumentation/rsbn-s-distance</input>
+  <input>-instrumentation/point-integrator-s-2</input>
+</summer>        
+<pure_gain name="instrumentation/rsbn-s-error-2">
+  <input>instrumentation/rsbn-s-error-raw-2</input>
+  <gain>instrumentation/rsbn-cft-2</gain>
+  <output>instrumentation/corr-rsbn-s-2</output>
+  <clipto>
+    <min>-4001.0</min>
+    <max>4001.0</max>
+  </clipto>
+</pure_gain>
+
+<switch name="instrumentation/a-z-switched-speed-2">
+  <default value="0.0"/>
+  <test value="instrumentation/aircraft-z-speed-2">
+    instrumentation/nvu-selector eq 0
+  </test>
+</switch>
+
+<!--Aircraft Z 2 Input -->    
+<summer name="instrumentation/inp-integr-z-2">
+  <input>instrumentation/a-z-switched-speed-2</input>
+  <input>instrumentation/corr-rsbn-z-2</input>
+  <input>instrumentation/cc-z-2</input>
+  <input>instrumentation/a-input-z-2</input>
+</summer>    
+<!--Integrator Z -->
+<!--Distance in meters here!-->
+<integrator name="instrumentation/a-i-z-2"> 
+  <input>instrumentation/inp-integr-z-2</input>
+  <c1>0.277778</c1>
+  <output>instrumentation/aircraft-integrator-z-2</output>
+</integrator>
+<!--Deadband for aircraft blanker-->
+<deadband name="instrumentation/a-blanker-db-z-2">
+  <input>instrumentation/aircraft-integrator-z-2</input>
+  <width> 200 </width>
+</deadband>
+<!--Coordinate convertion for Z-->
+<summer name="instrumentation/cc-z-error-raw-2">
+  <input>instrumentation/aircraft-integrator-z-2</input>
+  <input>-instrumentation/z-next-2</input>
+</summer>
+<pure_gain name="instrumentation/cc-blanked-z-error-2">
+  <input>instrumentation/cc-z-error-raw-2</input>
+  <gain>instrumentation/enable-convertion</gain>
+</pure_gain>    
+<pure_gain name="instrumentation/cc-z-error-2">
+  <input>instrumentation/cc-blanked-z-error-2</input>
+  <gain>instrumentation/cc-enable-2</gain>
+  <output>instrumentation/cc-z-2</output>
+  <clipto>
+    <min>-40001.0</min>
+    <max>40001.0</max>
+  </clipto>
+</pure_gain>
+
+<!--RSBN Z Correction-->
+<summer name="instrumentation/rsbn-z-error-raw-2">
+  <input>instrumentation/aircraft-integrator-z-2</input>
+  <input>-instrumentation/rsbn-z-distance</input>
+  <input>-instrumentation/point-integrator-z-2</input>
+</summer>    
+
+<pure_gain name="instrumentation/rsbn-z-error-2">
+  <input>instrumentation/rsbn-z-error-raw-2</input>
+  <gain>instrumentation/rsbn-cft-2</gain>
+  <output>instrumentation/corr-rsbn-z-2</output>
+  <clipto>
+    <min>-4001.0</min>
+    <max>4001.0</max>
+  </clipto>
+</pure_gain>
+<!--End RSBN Z Correction-->
+
+<!-- ******************* END V-52[1] procedure ********************** -->
+
+<!--                  NVU OUTPUT      -->
+<switch name="instrumentation/nvu-out-z">
+  <default value="instrumentation/aircraft-integrator-z-2"/>
+  <test value="instrumentation/aircraft-integrator-z-1">
+    instrumentation/nvu-selector eq 1
+  </test>
+  <output>ap/input-z</output>
+</switch>    
+
+<switch name="instrumentation/nvu-out-hdg">
+  <default value="instrumentation/zpu-deg-2"/>
+  <test value="instrumentation/zpu-deg-1">
+    instrumentation/nvu-selector eq 1
+  </test>
+  <output>ap/input-heading-nvu</output>
+</switch>    
+
+<!--************************* END NVU staff **************************-->
+</channel>
+</system>

@@ -1,0 +1,208 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+
+<!-- B-8M NVU (navigation system) control
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>b-8m.ac</path>
+<!--External panel lighting-->
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+  <object-name>handle</object-name>
+    <emission>
+    <red-prop>tu154/light/panel/ext-red</red-prop>
+    <green-prop>tu154/light/panel/ext-green</green-prop>
+    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+  </emission>
+</animation>
+
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>text</object-name>
+  <object-name>inner</object-name>
+  <object-name>outer</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+
+<animation>
+  <type>rotate</type>
+  <object-name>inner</object-name>
+  <property>tu154/instrumentation/b-8m/inner</property>
+  <factor>1.0</factor>
+  <axis>
+    <x>1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>outer</object-name>
+  <property>tu154/instrumentation/b-8m/outer</property>
+  <factor>1.0</factor>
+  <axis>
+    <x>1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>handle</object-name>
+  <!--<property>tu154/switches/b-8m-handle</property>-->
+  <property>tu154/instrumentation/b-8m/outer</property>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>-0.00022</y-m>
+    <z-m>-0.03539</z-m>
+  </center>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+
+<!--Control-->
+<animation>
+  <type>pick</type>
+  <object-name>hs_1</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/b-8m/inner</property>
+      <step>-1.0</step>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_2</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/b-8m/inner</property>
+      <step>1.0</step>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_3</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/b-8m/outer</property>
+      <step>-10.0</step>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_4</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/b-8m/outer</property>
+      <step>10.0</step>
+    </binding>
+  </action>
+</animation>
+
+<!--Mouse wheel-->
+<animation>
+  <type>pick</type>
+  <object-name>hs_1</object-name>
+  <object-name>hs_2</object-name>
+  <visible>false</visible>
+  <action>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/b-8m/inner</property>
+      <step>-1.0</step>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_1</object-name>
+  <object-name>hs_2</object-name>
+  <visible>false</visible>
+  <action>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/b-8m/inner</property>
+      <step>1.0</step>
+    </binding>
+  </action>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>hs_3</object-name>
+  <object-name>hs_4</object-name>
+  <visible>false</visible>
+  <action>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/b-8m/outer</property>
+      <step>-10.0</step>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_3</object-name>
+  <object-name>hs_4</object-name>
+  <visible>false</visible>
+  <action>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/b-8m/outer</property>
+      <step>10.0</step>
+    </binding>
+  </action>
+</animation>
+
+
+
+
+</PropertyList>

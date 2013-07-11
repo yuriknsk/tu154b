@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+
+<!-- Red lamp
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>mini_lamp.ac</path>
+<!--Set-->
+
+<animation>
+  <type>select</type>
+  <object-name>lamp</object-name>
+  <condition>
+    <or>
+     <property>tu154/systems/electrical/indicators/engine-failure-1</property>
+     <property>tu154/systems/electrical/checking-lamps/engine-panel</property>
+    </or>
+  </condition>
+</animation>
+
+
+
+</PropertyList>

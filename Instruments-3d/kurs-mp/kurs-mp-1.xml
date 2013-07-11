@@ -1,0 +1,654 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+
+<!-- KURS-MP control gauge
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>kurs-mp.ac</path>
+<!--External panel lighting-->
+<animation>
+  <type>material</type>
+  <object-name>base_1</object-name>
+  <object-name>base_2</object-name>
+    <emission>
+    <red-prop>tu154/light/panel/ext-red</red-prop>
+    <green-prop>tu154/light/panel/ext-green</green-prop>
+    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+  </emission>
+</animation>
+
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>digits</object-name>
+  <object-name>mhz</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+
+
+<!--Selector lamps-->
+
+<!--Have voltage?-->
+<animation>
+  <type>material</type>
+  <object-name>na</object-name>
+  <object-name>ot</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>instrumentation/nav[0]/power-btn</factor-prop>
+  </emission>
+</animation>
+
+
+<animation>
+  <type>select</type>
+  <object-name>na</object-name>
+  <condition>
+    <property>instrumentation/nav[0]/to-flag</property>
+ </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>ot</object-name>
+  <condition>
+    <property>instrumentation/nav[0]/from-flag</property>
+  </condition>
+</animation>
+  
+
+
+
+<animation>
+  <type>rotate</type>
+  <object-name>dig_h_hund</object-name>
+  <property>tu154/instrumentation/kurs-mp-1/digit-h-hund</property>
+  <factor>35.5</factor>
+  <center>
+    <x-m>-0.02664</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.00025</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>dig_h_dec</object-name>
+  <property>tu154/instrumentation/kurs-mp-1/digit-h-dec</property>
+  <factor>35.5</factor>
+  <center>
+    <x-m>-0.02664</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.00025</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>dig_h_ones</object-name>
+  <property>tu154/instrumentation/kurs-mp-1/digit-h-ones</property>
+  <factor>35.5</factor>
+  <center>
+    <x-m>-0.02664</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.00025</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+
+<animation>
+  <type>rotate</type>
+  <object-name>dig_f_hi</object-name>
+  <property>tu154/instrumentation/kurs-mp-1/digit-f-hi</property>
+  <interpolation>
+    <entry><ind>	108.0</ind>	<dep>	-4.0</dep></entry>
+    <entry><ind>	117.0</ind>	<dep>	313.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>-0.01672</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.0059</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>dig_f_low</object-name>
+  <property>tu154/instrumentation/kurs-mp-1/digit-f-low</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	-2.0</dep></entry>
+    <entry><ind>	95.0</ind>	<dep>	338.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>-0.02751</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.00618</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!--Controls-->
+<!--Radial-->
+<animation>
+  <type>pick</type>
+  <object-name>hs_1</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/kurs-mp-1/digit-h-hund</property>
+      <step>1.0</step>
+      <min>0.0</min>
+      <max>3.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.kursmp_sync(0)</script>
+    </binding>    
+  </action>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>hs_2</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/kurs-mp-1/digit-h-hund</property>
+      <step>-1.0</step>
+      <min>0.0</min>
+      <max>3.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.kursmp_sync(0)</script>
+    </binding>    
+  </action>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>hs_3</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/kurs-mp-1/digit-h-dec</property>
+      <step>1.0</step>
+      <min>0.0</min>
+      <max>9.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.kursmp_sync(0)</script>
+    </binding>    
+  </action>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>hs_4</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/kurs-mp-1/digit-h-dec</property>
+      <step>-1.0</step>
+      <min>0.0</min>
+      <max>9.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.kursmp_sync(0)</script>
+    </binding>    
+  </action>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>hs_5</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/kurs-mp-1/digit-h-ones</property>
+      <step>1.0</step>
+      <min>0.0</min>
+      <max>9.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.kursmp_sync(0)</script>
+    </binding>    
+  </action>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>hs_6</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/kurs-mp-1/digit-h-ones</property>
+      <step>-1.0</step>
+      <min>0.0</min>
+      <max>9.0</max>
+      <wrap>true</wrap>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.kursmp_sync(0)</script>
+    </binding>    
+  </action>
+</animation>
+
+<!--Mouse wheel for radial-->
+
+<animation>
+  <type>pick</type>
+  <object-name>hs_1</object-name>
+  <object-name>hs_2</object-name>
+  <visible>false</visible>
+  <action>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/kurs-mp-1/digit-h-hund</property>
+      <step>1.0</step>
+      <min>0.0</min>
+      <max>3.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.kursmp_sync(0)</script>
+    </binding>    
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_1</object-name>
+  <object-name>hs_2</object-name>
+  <visible>false</visible>
+  <action>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/kurs-mp-1/digit-h-hund</property>
+      <step>-1.0</step>
+      <min>0.0</min>
+      <max>3.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.kursmp_sync(0)</script>
+    </binding>    
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_3</object-name>
+  <object-name>hs_4</object-name>
+  <visible>false</visible>
+  <action>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/kurs-mp-1/digit-h-dec</property>
+      <step>1.0</step>
+      <min>0.0</min>
+      <max>9.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.kursmp_sync(0)</script>
+    </binding>    
+  </action>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>hs_3</object-name>
+  <object-name>hs_4</object-name>
+  <visible>false</visible>
+  <action>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/kurs-mp-1/digit-h-dec</property>
+      <step>-1.0</step>
+      <min>0.0</min>
+      <max>9.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.kursmp_sync(0)</script>
+    </binding>    
+  </action>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>hs_5</object-name>
+  <object-name>hs_6</object-name>
+  <visible>false</visible>
+  <action>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/kurs-mp-1/digit-h-ones</property>
+      <step>1.0</step>
+      <min>0.0</min>
+      <max>9.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.kursmp_sync(0)</script>
+    </binding>    
+  </action>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>hs_6</object-name>
+  <object-name>hs_5</object-name>
+  <visible>false</visible>
+  <action>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/kurs-mp-1/digit-h-ones</property>
+      <step>-1.0</step>
+      <min>0.0</min>
+      <max>9.0</max>
+      <wrap>true</wrap>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.kursmp_sync(0)</script>
+    </binding>    
+  </action>
+</animation>
+
+
+<!--Frequency-->
+<animation>
+  <type>pick</type>
+  <object-name>hs_7</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/kurs-mp-1/digit-f-hi</property>
+      <step>1.0</step>
+      <min>108.0</min>
+      <max>117.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.kursmp_sync(0)</script>
+    </binding>    
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_8</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/kurs-mp-1/digit-f-hi</property>
+      <step>-1.0</step>
+      <min>108.0</min>
+      <max>117.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.kursmp_sync(0)</script>
+    </binding>    
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_9</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/kurs-mp-1/digit-f-low</property>
+      <step>5.0</step>
+      <min>0.0</min>
+      <max>95.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.kursmp_sync(0)</script>
+    </binding>    
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_10</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/kurs-mp-1/digit-f-low</property>
+      <step>-5.0</step>
+      <min>0.0</min>
+      <max>95.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.kursmp_sync(0)</script>
+    </binding>    
+  </action>
+</animation>
+
+<!--mouse wheel for frequency-->
+
+<animation>
+  <type>pick</type>
+  <object-name>hs_7</object-name>
+  <object-name>hs_8</object-name>
+  <visible>false</visible>
+  <action>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/kurs-mp-1/digit-f-hi</property>
+      <step>1.0</step>
+      <min>108.0</min>
+      <max>117.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.kursmp_sync(0)</script>
+    </binding>    
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_7</object-name>
+  <object-name>hs_8</object-name>
+  <visible>false</visible>
+  <action>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/kurs-mp-1/digit-f-hi</property>
+      <step>-1.0</step>
+      <min>108.0</min>
+      <max>117.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.kursmp_sync(0)</script>
+    </binding>    
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_9</object-name>
+  <object-name>hs_10</object-name>
+  <visible>false</visible>
+  <action>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/kurs-mp-1/digit-f-low</property>
+      <step>5.0</step>
+      <min>0.0</min>
+      <max>95.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.kursmp_sync(0)</script>
+    </binding>    
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_9</object-name>
+  <object-name>hs_10</object-name>
+  <visible>false</visible>
+  <action>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/kurs-mp-1/digit-f-low</property>
+      <step>-5.0</step>
+      <min>0.0</min>
+      <max>95.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.kursmp_sync(0)</script>
+    </binding>    
+  </action>
+</animation>
+
+<!--Sound volume-->
+
+<animation>
+  <type>pick</type>
+  <object-name>hs_11</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>instrumentation/nav[0]/volume</property>
+      <step>0.2</step>
+      <min>0.0</min>
+      <max>1.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_11</object-name>
+  <visible>false</visible>
+  <action>
+    <button>1</button>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>instrumentation/nav[0]/volume</property>
+      <step>-0.2</step>
+      <min>0.0</min>
+      <max>1.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+
+
+
+</PropertyList>

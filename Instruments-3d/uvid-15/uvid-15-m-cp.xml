@@ -1,0 +1,352 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff			 	  	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+<!-- Altimeter UVO-15 metric
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>uvid-15m-cp.ac</path>
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+  <object-name>dig_a_dec</object-name>
+  <object-name>dig_a_hund</object-name>
+  <object-name>dig_a_ths</object-name>
+  <object-name>dig_a_decths</object-name>
+  <object-name>dig_p_ones</object-name>
+  <object-name>dig_p_dec</object-name>
+  <object-name>dig_p_hund</object-name>
+  <object-name>needle</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+<!--Needles-->
+<animation>
+    <type>rotate</type>
+    <object-name>needle</object-name>
+    <property>instrumentation/altimeter/indicated-altitude-ft</property>
+    <factor>0.10973</factor>
+    <condition>
+     <property>tu154/systems/svs/powered</property>
+    </condition>
+    <axis>
+      <x>-1.0</x>
+      <y>0.0</y>
+      <z>0.0</z>
+    </axis>
+</animation>
+
+<!--Altitude digits-->
+<animation>
+  <type>rotate</type>
+  <object-name>dig_a_dec</object-name>
+  <property>tu154/instrumentation/altimeter/indicated-wheels_dec_m</property>
+  <factor>36</factor>
+  <center>
+    <x-m>-0.01866</x-m>
+    <y-m>0</y-m>
+    <z-m>0.00547</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>dig_a_hund</object-name>
+  <property>tu154/instrumentation/altimeter/indicated-wheels_hund_m</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	0.9</ind>	<dep>	0.1</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
+    <entry><ind>	1.9</ind>	<dep>	36.1</dep></entry>
+    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
+    <entry><ind>	2.9</ind>	<dep>	72.1</dep></entry>
+    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
+    <entry><ind>	3.9</ind>	<dep>	108.1</dep></entry>
+    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
+    <entry><ind>	4.9</ind>	<dep>	144.1</dep></entry>
+    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
+    <entry><ind>	5.9</ind>	<dep>	180.1</dep></entry>
+    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
+    <entry><ind>	6.9</ind>	<dep>	216.1</dep></entry>
+    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
+    <entry><ind>	7.9</ind>	<dep>	252.1</dep></entry>
+    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
+    <entry><ind>	8.9</ind>	<dep>	288.1</dep></entry>
+    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
+    <entry><ind>	9.9</ind>	<dep>	324.1</dep></entry>
+    <entry><ind>	9.99</ind>	<dep>	359.9</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>-0.01866</x-m>
+    <y-m>0</y-m>
+    <z-m>0.00547</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>dig_a_ths</object-name>
+  <property>tu154/instrumentation/altimeter/indicated-wheels_ths_m</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	0.99</ind>	<dep>	0.1</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
+    <entry><ind>	1.99</ind>	<dep>	36.1</dep></entry>
+    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
+    <entry><ind>	2.99</ind>	<dep>	72.1</dep></entry>
+    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
+    <entry><ind>	3.99</ind>	<dep>	108.1</dep></entry>
+    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
+    <entry><ind>	4.99</ind>	<dep>	144.1</dep></entry>
+    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
+    <entry><ind>	5.99</ind>	<dep>	180.1</dep></entry>
+    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
+    <entry><ind>	6.99</ind>	<dep>	216.1</dep></entry>
+    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
+    <entry><ind>	7.99</ind>	<dep>	252.1</dep></entry>
+    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
+    <entry><ind>	8.99</ind>	<dep>	288.1</dep></entry>
+    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
+    <entry><ind>	9.99</ind>	<dep>	324.1</dep></entry>
+    <entry><ind>	9.999</ind>	<dep>	359.9</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>-0.01866</x-m>
+    <y-m>0</y-m>
+    <z-m>0.00547</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>dig_a_decths</object-name>
+  <property>tu154/instrumentation/altimeter/indicated-wheels_decths_m</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	0.999</ind>	<dep>	0.1</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
+    <entry><ind>	1.999</ind>	<dep>	36.1</dep></entry>
+    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
+    <entry><ind>	2.999</ind>	<dep>	72.1</dep></entry>
+    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
+    <entry><ind>	3.999</ind>	<dep>	108.1</dep></entry>
+    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
+    <entry><ind>	4.999</ind>	<dep>	144.1</dep></entry>
+    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
+    <entry><ind>	5.999</ind>	<dep>	180.1</dep></entry>
+    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
+    <entry><ind>	6.999</ind>	<dep>	216.1</dep></entry>
+    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
+    <entry><ind>	7.999</ind>	<dep>	252.1</dep></entry>
+    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
+    <entry><ind>	8.999</ind>	<dep>	288.1</dep></entry>
+    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
+    <entry><ind>	9.999</ind>	<dep>	324.1</dep></entry>
+    <entry><ind>	9.9999</ind>	<dep>	359.9</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>-0.01866</x-m>
+    <y-m>0</y-m>
+    <z-m>0.00547</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+
+<!--Pressure digits-->
+<animation>
+  <type>rotate</type>
+  <object-name>dig_p_ones</object-name>
+  <property>tu154/instrumentation/altimeter/mmhg</property>
+  <factor>36.0</factor>
+  <center>
+    <x-m>-0.01138</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.0301</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>dig_p_dec</object-name>
+  <property>tu154/instrumentation/altimeter/mmhg-wheels_dec</property>  
+  
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	0.9</ind>	<dep>	0.1</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
+    <entry><ind>	1.9</ind>	<dep>	36.1</dep></entry>
+    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
+    <entry><ind>	2.9</ind>	<dep>	72.1</dep></entry>
+    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
+    <entry><ind>	3.9</ind>	<dep>	108.1</dep></entry>
+    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
+    <entry><ind>	4.9</ind>	<dep>	144.1</dep></entry>
+    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
+    <entry><ind>	5.9</ind>	<dep>	180.1</dep></entry>
+    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
+    <entry><ind>	6.9</ind>	<dep>	216.1</dep></entry>
+    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
+    <entry><ind>	7.9</ind>	<dep>	252.1</dep></entry>
+    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
+    <entry><ind>	8.9</ind>	<dep>	288.1</dep></entry>
+    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
+    <entry><ind>	9.9</ind>	<dep>	324.1</dep></entry>
+    <entry><ind>	9.99</ind>	<dep>	359.9</dep></entry>
+  </interpolation>
+  
+  <center>
+    <x-m>-0.01138</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.0301</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>dig_p_hund</object-name>
+  <property>tu154/instrumentation/altimeter/mmhg-wheels_hund</property>  
+  
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	0.99</ind>	<dep>	0.1</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
+    <entry><ind>	1.99</ind>	<dep>	36.1</dep></entry>
+    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
+    <entry><ind>	2.99</ind>	<dep>	72.1</dep></entry>
+    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
+    <entry><ind>	3.99</ind>	<dep>	108.1</dep></entry>
+    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
+    <entry><ind>	4.99</ind>	<dep>	144.1</dep></entry>
+    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
+    <entry><ind>	5.99</ind>	<dep>	180.1</dep></entry>
+    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
+    <entry><ind>	6.99</ind>	<dep>	216.1</dep></entry>
+    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
+    <entry><ind>	7.99</ind>	<dep>	252.1</dep></entry>
+    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
+    <entry><ind>	8.99</ind>	<dep>	288.1</dep></entry>
+    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
+    <entry><ind>	9.99</ind>	<dep>	324.1</dep></entry>
+    <entry><ind>	9.999</ind>	<dep>	359.9</dep></entry>
+  </interpolation>
+  
+  <center>
+    <x-m>-0.01138</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.0301</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!--Controls-->
+
+<animation>
+  <type>pick</type>
+  <object-name>hs</object-name>
+  <visible>false</visible>
+  <action>
+    <button>1</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
+    <binding>
+      <command>property-adjust</command>
+      <property>instrumentation/altimeter/setting-inhg</property>
+      <step>0.01</step>
+      <min>10.0</min>
+      <max>40.0</max>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
+    <binding>
+      <command>property-adjust</command>
+      <property>instrumentation/altimeter/setting-inhg</property>
+      <step>-0.01</step>
+      <min>10.0</min>
+      <max>40.0</max>
+    </binding>
+  </action>
+</animation>
+<!--Mouse wheel-->
+<animation>
+  <type>pick</type>
+  <object-name>hs</object-name>
+  <visible>false</visible>
+  <action>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>instrumentation/altimeter/setting-inhg</property>
+      <step>0.01</step>
+      <min>10.0</min>
+      <max>40.0</max>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs</object-name>
+  <visible>false</visible>
+  <action>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>instrumentation/altimeter/setting-inhg</property>
+      <step>-0.01</step>
+      <min>10.0</min>
+      <max>40.0</max>
+    </binding>
+  </action>
+</animation>
+
+</PropertyList>

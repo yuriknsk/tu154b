@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff			 	  	#
+    #    	yurik@megasignal.com					   	#
+    #    	Jul 2007						   	#
+    #############################################################################	  
+    -->
+<!-- Clock ACHS-2
+3D instrument -->
+<PropertyList>
+ <path>achs-2.ac</path>
+<!-- Internal instruments lighting -->
+
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+  <object-name>hour_needle</object-name>
+  <object-name>min_needle</object-name>
+  <object-name>sec_needle</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+
+  
+<!--Needles-->
+<animation>
+  <type>rotate</type>
+  <object-name>hour_needle</object-name>
+  <property>/instrumentation/clock/indicated-min</property>
+  <factor>-0.5</factor>
+  <axis>
+    <x>1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>hour_needle</object-name>
+  <property>/instrumentation/clock/local-hour</property>
+  <factor>-30.0</factor>
+  <axis>
+    <x>1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>min_needle</object-name>
+  <property>/instrumentation/clock/indicated-sec</property>
+  <factor>-0.1</factor>
+  <axis>
+    <x>1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>sec_needle</object-name>
+  <property>/instrumentation/clock/indicated-sec</property>
+  <factor>-6.0</factor>
+  <axis>
+    <x>1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+</PropertyList>

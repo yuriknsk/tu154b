@@ -1,0 +1,435 @@
+<?xml version="1.0"?>
+<PropertyList>
+	
+	<name>nav</name>	
+	<layout>vbox</layout>
+	<resizable>true</resizable>
+	<draggable>true</draggable>
+	<nasal>
+		
+		<open>
+			var route = props.globals.getNode("/autopilot/route-manager/route", 1);
+			var point = { lat : 0.0, lon : 0.0, num: 1 };
+			var beacon_node = props.globals.getNode("/tu154/systems/nvu-calc/beacons", 1);
+			result = cmdarg().getNode("list");
+			# convertor from deg.decimal to deg.minutes 
+		var dec2min = func{
+			var arg_copy = arg[0];
+
+			if( arg_copy > 360.0  ) arg_copy -= 360.0;
+			if( 0 > arg_copy  ) arg_copy += 360.0;
+			var integer = int( arg_copy );
+			var dec = arg_copy - integer;
+			return integer + dec * 0.6;
+			}
+		var min2dec = func{
+			var integer = int( arg[0] );
+			var min = arg[0] - integer;
+			return integer + min/0.6;
+			}
+		var nvu_calc = func{
+			# empty coord object - for departure, destination and beacon waypoints
+			var begin_wpt = geo.Coord.new();
+			var end_wpt = geo.Coord.new();
+			var beacon_wpt = geo.Coord.new();
+			
+			var wp = route.getChildren("wp");
+			var bc = beacon_node.getChildren("beacon");
+			var rtstr = "";
+			var az_corr = 0.0;
+			var total_dist = 0.0;
+			
+			var magvar_dep = num(getprop( "/tu154/systems/nvu-calc/magvar-dep" ));
+			if( magvar_dep == nil ) magvar_dep = 0.0;
+			
+			var magvar_dest = num( getprop( "/tu154/systems/nvu-calc/magvar-dest" ) );
+			if( magvar_dest == nil ) magvar_dest = 0.0;
+			var magvar_dep_current = num( getprop( "/tu154/systems/nvu-calc/magvar-dep-current" ) );
+			if( magvar_dep_current == nil ) magvar_dep_current = 0;
+			if( magvar_dep_current ) magvar_dep = getprop("/environment/magnetic-variation-deg");
+			
+			setprop( "/tu154/systems/nvu-calc/magvar-dep", magvar_dep );
+			setprop( "/tu154/systems/nvu-calc/magvar-dest", magvar_dest );
+				
+			# This cycle count fork only!
+			forindex (var i; wp) {
+			 if( i > 0 ) {
+				var id1 = wp[i-1].getNode("id").getValue();
+				# get route start coord 
+				begin_wpt.set_latlon ( 
+			wp[i-1].getNode("latitude-deg").getValue(),
+			wp[i-1].getNode("longitude-deg").getValue(), 0 );
+			
+				var id2 = wp[i].getNode("id").getValue();
+				# route end
+				end_wpt.set_latlon ( 
+				wp[i].getNode("latitude-deg").getValue(),
+				wp[i].getNode("longitude-deg").getValue(), 0 );
+				
+			# Calculate nav parameters:
+			var dist = begin_wpt.distance_to( end_wpt )/1000.0;
+			total_dist += dist;
+			var zipu = begin_wpt.course_to( end_wpt );
+			var ozipu = end_wpt.course_to( begin_wpt );
+			var zpu = zipu + az_corr;# az_corr = zero for first route	
+			az_corr += zipu - (ozipu - 180.0);
+#			if( az_corr > 360.0 ) az_corr -= 360.0;
+			if( az_corr > 180.0 ) az_corr -= 360.0;
+			if( -180.0 > az_corr ) az_corr += 360.0;
+
+			}}
+				
+			# Fork with mag variation
+			var fork = magvar_dep - magvar_dest - az_corr;			
+			setprop( "/tu154/systems/nvu-calc/fork", fork );
+			setprop( "/tu154/systems/nvu-calc/dist", total_dist );
+							
+			# clear list
+			result.removeChildren("value");
+			# This cycle count all nav parameters
+			az_corr = 0.0;
+			forindex (var i; wp) {
+			if( i > 0 ) {
+			var id1 = wp[i-1].getNode("id").getValue();
+			# get route start coord 
+			begin_wpt.set_latlon ( 
+			wp[i-1].getNode("latitude-deg").getValue(),
+			wp[i-1].getNode("longitude-deg").getValue(), 0 );
+			
+			var id2 = wp[i].getNode("id").getValue();
+			# route end
+			end_wpt.set_latlon ( 
+			wp[i].getNode("latitude-deg").getValue(),
+			wp[i].getNode("longitude-deg").getValue(), 0 );
+			
+			# Calculate nav parameters:
+			var dist = begin_wpt.distance_to( end_wpt )/1000.0;
+			var zipu = begin_wpt.course_to( end_wpt );
+			var ozipu = end_wpt.course_to( begin_wpt );
+			var zpu = zipu - magvar_dep + az_corr;# az_corr=zero for first route
+			var current_az_corr = zipu - (ozipu - 180.0);
+			az_corr += current_az_corr;
+			if( az_corr > 360.0 ) az_corr -= 360.0;
+			if( zpu > 360.0 ) zpu -= 360.0;
+			rtstr = sprintf("%d: %s - %s S: %.1f km ZPUdep: %.2f' ZPUdest: %.2f'", 
+			i, id1, id2, -dist, dec2min( zpu ), dec2min( zpu+fork ) );
+			# find beacon by route ident
+				forindex (var j; bc ) 
+				{
+				if( bc[j].getNode("num").getValue() == i )
+				  { # found beacon for current route
+				  # load beacon coordinates
+				  beacon_wpt.set_latlon( bc[j].getNode("lat").getValue(),
+				  	bc[j].getNode("lon").getValue(), 0 );
+				  # Convert to orthodromic coordinates
+				  var beacon_angle = end_wpt.course_to( beacon_wpt );
+				  var beacon_dist = end_wpt.distance_to(beacon_wpt)/1000.0;
+				  var uk = ozipu - 180.0;
+				  if( 0.0 > uk ) uk += 360.0;
+				  var s_beacon = beacon_dist * 
+				  	math.cos( (uk - beacon_angle)/57.2958 );
+				  var z_beacon = beacon_dist * 
+				  math.sin( (uk - beacon_angle)/57.2958 );
+				  var uk_az_corrected =  uk;
+				  if( current_az_corr > 360.0 ) current_az_corr -= 360.0;
+	 			  if( -360.0 > current_az_corr ) current_az_corr += 360.0;
+			if( dist ) uk_az_corrected = uk - current_az_corr * s_beacon / dist;
+					rtstr ~= sprintf(" Beacon S: %.1f km Z: %.1f km UK: %.2f'", s_beacon, -z_beacon, uk_az_corrected );
+					
+				}}
+			result.getChild("value", i-1, 1).setValue(rtstr);
+			}}
+			
+			fgcommand("dialog-update", props.Node.new({"object-name":"result", "dialog-name":"nav"}));	
+			} # nvu_calc
+			
+			# Beacon staff
+		var insert_beacon = func{
+			point.lat = num( getprop("/tu154/systems/nvu-calc/lat") );
+			if( point.lat == nil ) return; # drop point if empty
+			point.lon = num( getprop("/tu154/systems/nvu-calc/lon") );
+			if( point.lon == nil ) return;
+			point.num = num( getprop("/tu154/systems/nvu-calc/num") );
+			if( point.num == nil ) return;
+			var minutes = num( getprop("/tu154/systems/nvu-calc/minutes") );
+			if( minutes == nil ) minutes = 0;
+			# check minutes after dec point and convert to dec
+			if( minutes ) 
+				{
+				point.lat = min2dec( point.lat );
+				point.lon = min2dec( point.lon );
+				}
+			# create new empty node 
+			var beacon = beacon_node.getChild("beacon", size(beacon_node.getChildren("beacon")) ,1);
+			# store coordinates
+			beacon.setValues( point );
+			}
+			
+		var remove_beacon = func{
+			route_num = num( getprop("/tu154/systems/nvu-calc/num") );
+			if( route_num == nil ) return;
+			var bc = beacon_node.getChildren("beacon");
+			forindex (var i; bc ) {
+				if( bc[i].getNode("num").getValue() == route_num ) 
+					beacon_node.removeChild("beacon", i);
+					}
+			}
+			
+			
+		</open>
+		<close>
+
+		</close>
+	</nasal>
+	<group>
+		<layout>hbox</layout>
+		<empty><stretch>1</stretch></empty>
+		
+		<text>
+			<label>Navigation</label>
+		</text>
+		
+		<empty><stretch>1</stretch></empty>
+		
+		<button>
+			<pref-width>16</pref-width>
+			<pref-height>16</pref-height>
+			<legend></legend>
+			<default>1</default>
+			<keynum>27</keynum>
+			<border>2</border>
+			
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
+	</group>
+	
+	<hrule/>
+	<list>
+		<name>result</name>
+		<halign>fill</halign>
+		<valign>fill</valign>
+		<stretch>true</stretch>
+		<pref-height>260</pref-height>
+		<property>/tu154/systems/nvu-calc/list</property>
+		<binding>
+			<command>dialog-apply</command>
+			<object-name>result</object-name>
+		</binding>
+	</list>
+<!--	
+	<text>
+		<label>-9.9999</label>
+		<format> Selected: %s</format>
+		<property>/tu154/systems/nvu-calc/list</property>
+	</text>
+-->
+	<group>
+		<layout>hbox</layout>
+		<default-padding>4</default-padding>
+		<text>
+			<label>Departure mag var:</label>
+		</text>
+		
+		
+		<input>
+			<name>input-magvar-dep</name>
+			<!--<halign>fill</halign>-->
+			<stretch>false</stretch>
+			<pref-width>60</pref-width>
+			<property>/tu154/systems/nvu-calc/magvar-dep</property>
+		</input>
+		<checkbox>
+			<property>/tu154/systems/nvu-calc/magvar-dep-current</property>
+		</checkbox>
+		
+		<text>
+			<label>use current            </label>
+		</text>
+		<text>
+			<label>Destination mag var:</label>
+		</text>
+		
+		<input>
+			<name>input-magvar-dest</name>
+			<!--<halign>fill</halign>-->
+			<stretch>false</stretch>
+			<pref-width>60</pref-width>
+			<property>/tu154/systems/nvu-calc/magvar-dest</property>
+		</input>
+		
+		<text>
+			<label>Virtual navigator:</label>
+		</text>
+		
+		<checkbox>
+			<property>/tu154/systems/nvu-calc/vn</property>
+		</checkbox>
+
+	</group>
+	<group>
+		<layout>hbox</layout>
+		<default-padding>4</default-padding>
+		
+		<text>
+			<label>-9.9999</label>
+			<format> Fork: %-0.2f</format>
+			<property>/tu154/systems/nvu-calc/fork</property>
+		</text>
+		<button>
+			<legend>Apply fork</legend>
+			<default>true</default>
+			<pref-width>100</pref-width>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+			<binding>
+				<command>nasal</command>
+				<script>instruments.fork_loader()</script>
+			</binding>
+			<binding>
+				<command>dialog-update</command>
+			</binding>
+		</button>
+
+		<button>
+			<legend>Calculate</legend>
+			<default>true</default>
+			<pref-width>100</pref-width>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+			<binding>
+				<command>nasal</command>
+				<script>nvu_calc()</script>
+			</binding>
+			<binding>
+				<command>dialog-update</command>
+			</binding>
+			
+		</button>
+		
+		<text>
+			<label>9999999.9999999</label>
+			<format> Dist: %-0.1f km</format>
+			<property>/tu154/systems/nvu-calc/dist</property>
+		</text>
+		
+
+	</group>
+	
+	<hrule/>
+	<group>
+		<layout>hbox</layout>
+		<default-padding>4</default-padding>
+		
+		<text>
+			<label>Beacon for route:</label>
+		</text>
+		
+		
+		<input>
+			<name>input-num</name>
+			<halign>fill</halign>
+			<stretch>true</stretch>
+			<pref-width>40</pref-width>
+			<property>/tu154/systems/nvu-calc/num</property>
+		</input>
+		
+		<text>
+			<label>lat:</label>
+		</text>
+		
+		<input>
+			<name>input-lat</name>
+			<halign>fill</halign>
+			<stretch>true</stretch>
+			<pref-width>80</pref-width>
+			<property>/tu154/systems/nvu-calc/lat</property>
+		</input>
+		<text>
+			<label>lon:</label>
+		</text>
+
+		<input>
+			<name>input-lon</name>
+			<halign>fill</halign>
+			<stretch>true</stretch>
+			<pref-width>80</pref-width>
+			<property>/tu154/systems/nvu-calc/lon</property>
+		</input>
+		
+		<checkbox>
+			<property>/tu154/systems/nvu-calc/minutes</property>
+		</checkbox>
+		
+		<text>
+			<label>deg.min</label>
+		</text>
+
+		<button>
+			<legend>Add</legend>
+			<default>true</default>
+			<pref-width>50</pref-width>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+
+			<binding>
+				<command>nasal</command>
+				<script>insert_beacon()</script>
+			</binding>
+			<binding>
+				<command>dialog-update</command>
+			</binding>
+		</button>
+		<button>
+			<legend>Del</legend>
+			<default>true</default>
+			<pref-width>50</pref-width>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+			
+			<binding>
+				<command>nasal</command>
+				<script>remove_beacon()</script>
+			</binding>
+			<binding>
+				<command>dialog-update</command>
+			</binding>
+		</button>
+
+	</group>
+<!--	
+	<group>
+		<layout>hbox</layout>
+		<default-padding>4</default-padding>
+		<input>
+			<name>input-tst</name>
+			<halign>fill</halign>
+			<stretch>true</stretch>
+			<pref-width>80</pref-width>
+			<property>/tu154/systems/nvu-calc/test</property>
+		</input>
+
+		<button>
+			<legend>nav test</legend>
+			<default>true</default>
+			<pref-width>70</pref-width>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+			<binding>
+				<command>nasal</command>
+				<script>instruments.nvu_load();</script>
+			</binding>
+			<binding>
+				<command>dialog-update</command>
+			</binding>
+		</button>
+	</group>-->
+
+	
+  </PropertyList>

@@ -1,0 +1,217 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2006 by Yurik V. Nikiforoff - port for FGFS,  FDM,   	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+
+<!-- Engine 1 indicators
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>ind_15.ac</path>
+<!--External panel lighting-->
+<!--<animation>
+  <type>material</type>
+  <object-name>cover_1</object-name>
+  <object-name>cover_2</object-name>
+  <object-name>cover_3</object-name>
+  <object-name>cover_4</object-name>
+  <object-name>cover_5</object-name>
+  <object-name>cover_6</object-name>
+  <object-name>cover_7</object-name>
+  <emission>
+    <red-prop>tu154/light/panel/ext-red</red-prop>
+    <green-prop>tu154/light/panel/ext-green</green-prop>
+    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+  </emission>
+</animation>-->
+
+<effect>
+ <inherits-from>Effects/model-transparent</inherits-from>
+  <object-name>cover_1</object-name>
+  <object-name>cover_2</object-name>
+  <object-name>cover_3</object-name>
+  <object-name>cover_4</object-name>
+  <object-name>cover_5</object-name>
+  <object-name>cover_6</object-name>
+  <object-name>cover_7</object-name>
+</effect>
+
+<!--Indicators-->
+<animation>
+  <type>material</type>
+  <object-name>text_1</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/systems/electrical/indicators/engine-1/low-oil</factor-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>text_2</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/systems/electrical/indicators/engine-1/metal-in-oil</factor-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>text_3</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/systems/electrical/indicators/engine-1/overflow-oil</factor-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>text_4</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/systems/electrical/indicators/engine-1/p-oil</factor-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>text_5</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/systems/electrical/indicators/engine-1/p-fuel</factor-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>text_6</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/systems/electrical/indicators/engine-1/filter-clog</factor-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>text_7</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/systems/electrical/indicators/engine-1/egt-danger</factor-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>text_8</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/systems/electrical/indicators/engine-1/egt-stop</factor-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>text_9</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+  <factor-prop>tu154/systems/electrical/indicators/engine-1/t-bearing-danger</factor-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>text_10</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/systems/electrical/indicators/engine-1/vibration</factor-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>text_11</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>fdm/jsbsim/propulsion/engine[0]/bypass-switched</factor-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>text_12</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>fdm/jsbsim/propulsion/engine[0]/rna-lamp</factor-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>text_13</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/systems/electrical/indicators/engine-1/revers-lock</factor-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>text_14</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/systems/electrical/indicators/engine-1/revers-dampers</factor-prop>
+  </emission>
+</animation>
+
+
+
+<!--Check lamps procedure-->
+<!--
+<animation>
+  <type>material</type>
+  <object-name>text_1</object-name>
+  <object-name>text_2</object-name>
+  <object-name>text_3</object-name>
+  <object-name>text_4</object-name>
+  <object-name>text_5</object-name>
+  <object-name>text_6</object-name>
+  <object-name>text_7</object-name>
+  <object-name>text_8</object-name>
+  <object-name>text_9</object-name>
+  <object-name>text_10</object-name>
+  <object-name>text_11</object-name>
+  <object-name>text_12</object-name>
+  <object-name>text_13</object-name>
+  <object-name>text_14</object-name>
+  <condition>
+    <property>tu154/systems/electrical/checking-lamps/engine-panel</property>
+  </condition>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/systems/electrical/checking-lamps/engine-panel</factor-prop>
+  </emission>
+</animation>-->
+
+
+
+</PropertyList>

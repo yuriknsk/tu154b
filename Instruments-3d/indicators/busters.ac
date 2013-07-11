@@ -1,0 +1,47 @@
+AC3Db
+MATERIAL "mat_1" rgb 1 1 1 amb 1 1 1 emis 0 0 0 spec 1 1 1 shi 64 trans 0
+MATERIAL "mat_2" rgb 0.28 0.28 0.28 amb 0 0 0 emis 0 0 0 spec 0 0 0 shi 32 trans 0
+OBJECT world
+kids 2
+OBJECT poly
+name "cover"
+data 5
+cover
+texture "ind_2.png"
+texrep 1 1
+crease 30.000000
+numvert 4
+0.001 0.011059 -0.026891
+0.001 -0.011057 -0.026891
+0.001061 -0.011057 0.026891
+0.001 0.011059 0.026891
+numsurf 1
+SURF 0x00
+mat 1
+refs 4
+0 5.96046305645e-08 0.0
+3 0.999999880791 0.0
+2 0.999999940395 1.0
+1 0.0 0.999999761581
+kids 0
+OBJECT poly
+name "text"
+data 4
+text
+texture "busters.png"
+texrep 1 1
+crease 30.000000
+numvert 4
+0 -0.009553 0.020418
+0 0.009553 0.020418
+0 0.009553 -0.020418
+0 -0.009553 -0.020418
+numsurf 1
+SURF 0x00
+mat 1
+refs 4
+0 1.19209261129e-07 0.0
+3 0.999999761581 0.0
+2 0.999999880791 1.0
+1 0.0 0.999999761581
+kids 0

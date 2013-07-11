@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+
+<!-- AZS type 4
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>azs_3.ac</path>
+<!--External panel lighting-->
+<animation>
+  <type>material</type>
+  <object-name>handle</object-name>
+  <emission>
+    <red-prop>tu154/light/panel/ext-red</red-prop>
+    <green-prop>tu154/light/panel/ext-green</green-prop>
+    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+  </emission>
+</animation>
+
+  
+<animation>
+  <type>rotate</type>
+  <object-name>handle</object-name>
+  <property>tu154/switches/stab-manu-selector</property>  
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	-60.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	2.0</ind>	<dep>	60.0</dep></entry>
+  </interpolation>
+  <axis>
+    <x>0.0</x>
+    <y>1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>select</type>
+  <object-name>hotspot_2</object-name>
+</animation>
+<!--Control-->
+<animation>
+  <type>pick</type>
+  <object-name>hotspot_3</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/stab-manu-selector", 2.0, 0.1 );
+        if( 1.0 > getprop("fdm/jsbsim/fcs/stab-manu-cmd") ) controls.slewProp("fdm/jsbsim/fcs/stab-manu-cmd",0.1);
+      </script>
+    </binding>
+  <mod-up>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/stab-manu-selector", 1.0, 0.1 );
+      </script>
+    </binding>
+  </mod-up>
+  </action>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>hotspot_1</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/stab-manu-selector", 0.0, 0.1 );
+        if( getprop("fdm/jsbsim/fcs/stab-manu-cmd") > 0.0 ) controls.slewProp("fdm/jsbsim/fcs/stab-manu-cmd",-0.1);
+      </script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>nasal</command>
+        <script>
+          interpolate("tu154/switches/stab-manu-selector", 1.0, 0.1 );
+        </script>
+      </binding>
+    </mod-up>
+  </action>
+</animation>
+
+
+
+</PropertyList>

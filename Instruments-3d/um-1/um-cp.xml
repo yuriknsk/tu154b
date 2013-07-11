@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff			 	  	#
+    #    	yurik@megasignal.com					   	#
+    #    	Jul 2007						   	#
+    #############################################################################	  
+    -->
+
+<!-- UM-1 Mach indicator
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>um-cp.ac</path>
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+  <object-name>needle</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+<!-- External instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>cover</object-name>
+  <emission>
+    <red-prop>tu154/light/panel/ext-red</red-prop>
+    <green-prop>tu154/light/panel/ext-green</green-prop>
+    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+  </emission>
+</animation>
+
+
+
+
+<!--Needle-->
+<animation>
+    <type>rotate</type>
+    <object-name>needle</object-name>
+    <property>velocities/mach</property>
+    <interpolation>
+      <entry><ind>	0.0</ind>	<dep>	-180.0</dep></entry>
+      <entry><ind>	0.5</ind>	<dep>	-162.0</dep></entry>
+      <entry><ind>	0.6</ind>	<dep>	-95.0</dep></entry>
+      <entry><ind>	0.9</ind>	<dep>	85.0</dep></entry>
+      <entry><ind>	0.95</ind>	<dep>	116.0</dep></entry>
+      <entry><ind>	1.0</ind>	<dep>	158.0</dep></entry>
+    </interpolation>
+    <axis>
+      <x>-1.0</x>
+      <y>0.0</y>
+      <z>0.0</z>
+    </axis>
+</animation>
+
+
+</PropertyList>

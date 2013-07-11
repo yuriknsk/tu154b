@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2006 by Yurik V. Nikiforoff - port for FGFS,  FDM,   	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+
+<!-- Hydro system pressure indicator
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>mano_big.ac</path>
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+  <object-name>needle</object-name>
+  <object-name>face</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+  
+<!--Needles-->
+<animation>
+    <type>rotate</type>
+    <object-name>needle</object-name>
+    <property>fdm/jsbsim/hs/alarm-brake-pressure</property>
+    <interpolation>
+      <entry><ind>	0.0</ind>	<dep>	-65.0</dep></entry>
+      <entry><ind>	120.0</ind>	<dep>	0.0</dep></entry>
+      <entry><ind>	240.0</ind>	<dep>	65.0</dep></entry>
+    </interpolation>
+    <center>
+      <x-m>0.0</x-m>
+      <y-m>0.0</y-m>
+      <z-m>-0.00172</z-m>
+  </center>
+    <axis>
+      <x>-1.0</x>
+      <y>0.0</y>
+      <z>0.0</z>
+    </axis>
+</animation>
+
+
+
+</PropertyList>
