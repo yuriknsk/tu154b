@@ -811,6 +811,13 @@ setprop("tu154/systems/electrical/indicators/autothrottle", 1.0 );
 
 # Stop stabilize speed
 var absu_at_stop = func{
+var thr_pos0 = getprop("fdm/jsbsim/fcs/throttle-pos-norm[0]");
+var thr_pos1 = getprop("fdm/jsbsim/fcs/throttle-pos-norm[1]");
+var thr_pos2 = getprop("fdm/jsbsim/fcs/throttle-pos-norm[2]");
+setprop("controls/engines/engine[0]/throttle", thr_pos0);
+setprop("controls/engines/engine[1]/throttle", thr_pos1);
+setprop("controls/engines/engine[2]/throttle", thr_pos2);
+
 setprop("fdm/jsbsim/ap/at-podg", 1.0 );
 setprop("fdm/jsbsim/ap/at-hold-0", 0.0 );
 setprop("fdm/jsbsim/ap/at-hold-1", 0.0 );
