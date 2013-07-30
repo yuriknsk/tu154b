@@ -102,6 +102,12 @@
     </function>
 </fcs_function>
 
+<fcs_function name="instr/indicated-altitude-ft" >
+    <function>
+       <property>/instrumentation/altimeter/indicated-altitude-ft</property>
+    </function>
+</fcs_function>
+
 </channel>
 
 <!--ILS and VOR debug channel-->
@@ -336,7 +342,7 @@ adjust speed-pid to right state all time. -->
 	    
             <summer name="ap/altitude-error">
               <input>ap/input-altitude</input>
-              <input>-position/h-sl-ft</input>
+              <input>-instr/indicated-altitude-ft</input>
 	      <input>ap/altitude-error-vfps</input>
 <!--              <clipto>
                 <min>-100</min>
