@@ -171,6 +171,74 @@
     <z>1.5</z>
   </position>
 </voice>
+
+<voice>
+  <name>gear_up</name>
+  <path>Aircraft/tu154b/Sound/voice/2P_G_up_l.wav</path>
+  <condition>
+    <equals>
+      <property>fdm/jsbsim/gear/gear-pos-norm</property>
+      <value>0.0</value>
+    </equals>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>-22.0</x>
+    <y>1.0</y>
+    <z>1.5</z>
+  </position>
+</voice>
+
+<voice>
+  <name>gear_down</name>
+  <path>Aircraft/tu154b/Sound/voice/2P_G_down_l.wav</path>
+  <condition>
+    <equals>
+      <property>fdm/jsbsim/gear/gear-pos-norm</property>
+      <value>1.0</value>
+    </equals>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>-22.0</x>
+    <y>1.0</y>
+    <z>1.5</z>
+  </position>
+</voice>
+
+<voice>
+  <name>gear_hs</name>
+  <path>Aircraft/tu154b/Sound/voice/BI_Neutr_l.wav</path>
+  <condition>
+    <greater-than>
+      <property>tu154/systems/warning/voice/gear-hs-state</property>
+      <value>1.0</value>
+    </greater-than>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>-22.0</x>
+    <y>0.0</y>
+    <z>2.5</z>
+  </position>
+</voice>
+
+<voice>
+  <name>gear_neutr</name>
+  <path>Aircraft/tu154b/Sound/voice/2P_Neutr_l.wav</path>
+  <condition>
+    <greater-than>
+      <property>tu154/systems/warning/voice/gear-hs-state</property>
+      <value>1.14</value>
+    </greater-than>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>-22.0</x>
+    <y>1.0</y>
+    <z>1.5</z>
+  </position>
+</voice>
 <!--Flaps control-->
 <voice>
   <name>s_flaps_retract</name>
