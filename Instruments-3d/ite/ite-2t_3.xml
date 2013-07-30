@@ -29,7 +29,7 @@
 <animation>
     <type>rotate</type>
     <object-name>needle_1</object-name>
-    <property>/fdm/jsbsim/propulsion/engine[2]/n1-rna-filtered</property>
+    <property>engines/engine[2]/n2</property>
     <interpolation>
       <entry><ind>	0.0</ind>	<dep>	51.0</dep></entry>
       <entry><ind>	60.0</ind>	<dep>	236.0</dep></entry>
@@ -45,7 +45,7 @@
 <animation>
   <type>rotate</type>
   <object-name>needle_2</object-name>
-  <property>engines/engine[2]/n2</property>
+  <property>/fdm/jsbsim/propulsion/engine[2]/n1-rna-filtered</property>
   <interpolation>
     <entry><ind>	0.0</ind>	<dep>	51.0</dep></entry>
     <entry><ind>	60.0</ind>	<dep>	236.0</dep></entry>
