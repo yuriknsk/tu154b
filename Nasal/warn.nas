@@ -338,7 +338,7 @@ else alarm.switch(0);
 
 }
 
-var RV_OFFSET = 3.5;
+var RV_OFFSET = 4;
 var voice_handler = func{
 settimer( voice_handler, 0.0 ); # no need delay for voise
 if( getprop("tu154/instrumentation/rv-5m/serviceable") != 1 ) return; #power off
