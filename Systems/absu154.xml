@@ -761,6 +761,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
           <default value="0.0"/>
           <test value="ap/beam-error-adjusted">
             ap/roll-selector eq 3
+            ap/navigac == 1
           </test>
         </switch>
 
