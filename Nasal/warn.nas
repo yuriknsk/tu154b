@@ -922,7 +922,7 @@ if (getprop("fdm/jsbsim/gear/gear-pos-norm") == 0.0 or
 # Retract Gear indicator
 param = 0.0;
 if( getprop( "fdm/jsbsim/gear/gear-pos-norm" ) != 1.0 )
-	if( getprop( "controls/engines/engine/throttle" ) < 0.97 )
+	if( getprop( "controls/engines/engine/throttle" ) <= 0.91 )
 		if( getprop( "fdm/jsbsim/velocities/vc-kts" ) < 175.5 )
 		param = param + 1.0;
 
