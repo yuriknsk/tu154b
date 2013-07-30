@@ -41,7 +41,7 @@
   <property>fdm/jsbsim/fcs/at-throttle-cmd-norm[2]</property>
   <interpolation>
     <!--<entry><ind>	0.0</ind>	<dep>	-120.0</dep></entry>--><!--full revers-->
-    <entry><ind>	0.22</ind>	<dep>	-70.0</dep></entry><!--idle-->
+    <entry><ind>	0.0</ind>	<dep>	-40.0</dep></entry><!--idle-->
     <entry><ind>	0.57</ind>	<dep>	12.0</dep></entry><!--0.4-->
     <entry><ind>	0.7</ind>	<dep>	40.0</dep></entry><!--0.6-->
     <entry><ind>	0.75</ind>	<dep>	53.0</dep></entry><!--0.7-->
