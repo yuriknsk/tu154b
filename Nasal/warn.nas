@@ -517,20 +517,18 @@ if(  pwr < 13.0 )
 # Check lamps on captain panel
 if( getprop( "tu154/systems/electrical/checking-lamps/main-panel" ) == 1.0 ) return;
 
-var param = 0.0;
-
 # "Podg navigacii" switch control 
-if( getprop("tu154/switches/pn-5-posadk") ) param = param + 1;
-if( !getprop("tu154/switches/pn-5-navigac") ) param = param + 1;
-if( param == 2 ){
- 	setprop("tu154/instrumentation/pn-6/lamp-1", 1.0 );
- 	setprop("tu154/instrumentation/pn-6/lamp-2", 1.0 );
- 	setprop("tu154/instrumentation/pn-6/lamp-3", 1.0 );
-	}
-else {
- 	setprop("tu154/instrumentation/pn-6/lamp-1", 0.0 );
- 	setprop("tu154/instrumentation/pn-6/lamp-2", 0.0 );
- 	setprop("tu154/instrumentation/pn-6/lamp-3", 0.0 );
+var stu_enabled = (getprop("tu154/switches/pn-5-posadk") !=
+                   getprop("tu154/switches/pn-5-navigac"));
+if (stu_enabled) {
+    setprop("tu154/instrumentation/pn-6/lamp-1", 1.0);
+    var stu_posadk = getprop("tu154/switches/pn-5-posadk");
+    setprop("tu154/instrumentation/pn-6/lamp-2", stu_posadk);
+    setprop("tu154/instrumentation/pn-6/lamp-3", stu_posadk);
+} else {
+    setprop("tu154/instrumentation/pn-6/lamp-1", 0.0);
+    setprop("tu154/instrumentation/pn-6/lamp-2", 0.0);
+    setprop("tu154/instrumentation/pn-6/lamp-3", 0.0);
 }
 
 # not ready to takeoff
