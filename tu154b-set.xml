@@ -45,6 +45,10 @@
 	    <name>F2</name>
 	    <desc>Thrust reverser On</desc>
 	   </key>
+	   <key>
+	    <name>Delete</name>
+	    <desc>Center aileron, elevator, and rudder</desc>
+	   </key>
 	 </help>
 
 <menubar>
@@ -763,6 +767,14 @@
       <binding>
         <command>nasal</command>
         <script>view.forceView(5);</script>
+      </binding>
+    </key>
+    <key n="127">
+      <name>Delete</name>
+      <desc>Center aileron, elevator, and rudder</desc>
+      <binding>
+        <command>nasal</command>
+        <script>controls.centerFlightControls()</script>
       </binding>
     </key>
     
