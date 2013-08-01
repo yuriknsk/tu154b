@@ -18,6 +18,8 @@ var iso = aircraft.light.new("tu154/systems/warning/iso", [0.5, 0.5] );
 var ground = aircraft.light.new("tu154/systems/warning/ground", [0.3, 0.3] );
 var rvrn = aircraft.light.new("tu154/systems/warning/rvrn", [0.5, 0.6] );
 var slats = aircraft.light.new("tu154/systems/warning/slats", [0.4, 0.4] );
+var stab_on = aircraft.light.new("tu154/systems/electrical/indicators/stab-on",
+                                 [0.3, 0.3]);
 var gear = aircraft.light.new("tu154/systems/warning/gear", [0.5, 0.5] );
 var voice_h = aircraft.light.new("tu154/systems/warning/voice", [3.5, 1.0] );
 
@@ -72,7 +74,7 @@ setprop("tu154/systems/electrical/indicators/memory-diss", 0 );
 setprop("tu154/systems/electrical/indicators/rudder-trim-neutral", 0 );
 setprop("tu154/systems/electrical/indicators/aileron-trim-neutral", 0 );
 setprop("tu154/systems/electrical/indicators/elevator-trim-neutral", 0 );
-setprop("tu154/systems/electrical/indicators/stab-on", 0.0);	
+setprop("tu154/systems/electrical/indicators/stab-on/state", 0.0);
 setprop("tu154/systems/warning/run-stabilizer/state", 0.0 );		
 setprop("tu154/systems/electrical/indicators/flaps-1", 0.0 );
 setprop("tu154/systems/electrical/indicators/flaps-2", 0.0 );
@@ -131,6 +133,7 @@ alarm.switch(0);
 ground.switch(0);
 rvrn.switch(0);
 slats.switch(0);
+stab_on.switch(0);
 gear.switch(0);
 not_ready.switch(0);
 strobe.switch(0);
@@ -472,7 +475,7 @@ var check_lamps_capt = func{
         setprop("tu154/systems/electrical/indicators/rudder-trim-neutral", param );
         setprop("tu154/systems/electrical/indicators/aileron-trim-neutral", param );
         setprop("tu154/systems/electrical/indicators/elevator-trim-neutral", param );
-        setprop("tu154/systems/electrical/indicators/stab-on", param);	
+        setprop("tu154/systems/electrical/indicators/stab-on/state", param);
         setprop("tu154/systems/electrical/indicators/flaps-1", param );
         setprop("tu154/systems/electrical/indicators/flaps-2", param );
         setprop("tu154/systems/electrical/indicators/interceptor-outer", param );
@@ -829,8 +832,8 @@ else setprop("tu154/systems/electrical/indicators/elevator-trim-neutral", 0 );
 
 # stabilizer indicator
 if( getprop("tu154/systems/warning/run-stabilizer") == 1.0 )
-	setprop("tu154/systems/electrical/indicators/stab-on", 1.0 );
-else setprop("tu154/systems/electrical/indicators/stab-on", 0.0);	
+    stab_on.switch(1);
+else stab_on.switch(0);
 setprop("tu154/systems/warning/run-stabilizer", 0.0 );		
 
 # Flaps indicator
