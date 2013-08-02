@@ -659,7 +659,12 @@
 <!-- Turbine turn indicator ITE -->
 <model>
   <name>ite_1</name>
-  <path>Aircraft/tu154b/Instruments-3d/ite/ite_1.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/ite/ite.xml</path>
+  <overlay>
+    <params>
+      <n2>engines/engine[0]/n2</n2>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-22.613</x-m>
     <y-m>-0.196</y-m>
@@ -668,7 +673,12 @@
 </model>
 <model>
   <name>ite_2</name>
-  <path>Aircraft/tu154b/Instruments-3d/ite/ite_2.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/ite/ite.xml</path>
+  <overlay>
+    <params>
+      <n2>engines/engine[1]/n2</n2>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-22.613</x-m>
     <y-m>-0.11</y-m>
@@ -677,7 +687,12 @@
 </model>
 <model>
   <name>ite_3</name>
-  <path>Aircraft/tu154b/Instruments-3d/ite/ite_3.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/ite/ite.xml</path>
+  <overlay>
+    <params>
+      <n2>engines/engine[2]/n2</n2>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-22.613</x-m>
     <y-m>-0.026</y-m>

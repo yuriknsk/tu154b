@@ -4,12 +4,16 @@
     #    (C) 2007 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
     #	2d & 3d instruments, animations, systems and over.		   	#
     #    	yurik@megasignal.com					   	#
-    #############################################################################	  
+    #############################################################################
     -->
 
 <!-- Turbine turn indicator ITE
 3D instrument for Tu-154 -->
 <PropertyList>
+ <params>
+   <n2>engines/engine[0]/n2</n2>
+ </params>
+
  <path>ite.ac</path>
 <!-- Internal instruments lighting -->
 <animation>
@@ -23,12 +27,12 @@
   </emission>
 </animation>
 
-  
+
 <!--Needles-->
 <animation>
     <type>rotate</type>
     <object-name>needle</object-name>
-    <property>engines/engine[0]/n2</property>
+    <property alias="../../params/n2"/>
     <interpolation>
       <entry><ind>	0.0</ind>	<dep>	51.0</dep></entry>
       <entry><ind>	60.0</ind>	<dep>	236.0</dep></entry>
