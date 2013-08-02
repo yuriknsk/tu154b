@@ -10,6 +10,10 @@
 <!-- Fuel flow meter UMRT1-21
 3D instrument for Tu-154 -->
 <PropertyList>
+  <params>
+    <pph>engines/engine[0]/fuel-flow_pph</pph>
+  </params>
+
  <path>umrt1-21.ac</path>
 <!-- Internal instruments lighting -->
 <animation>
@@ -38,7 +42,7 @@
 <animation>
     <type>rotate</type>
     <object-name>needle</object-name>
-    <property>engines/engine[1]/fuel-flow_pph</property>
+    <property alias="../../params/pph"/>
     <!--Fuel flow pph -->
     <interpolation>
       <entry><ind>	881.0</ind>	<dep>	-142.0</dep></entry>

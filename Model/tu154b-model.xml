@@ -1674,7 +1674,12 @@
 <!--Fuel flow meter UMRT1-21-->
 <model>
   <name>umrt1-21_1</name>
-  <path>Aircraft/tu154b/Instruments-3d/umrt/umrt1-21_1.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/umrt/umrt1-21.xml</path>
+  <overlay>
+    <params>
+      <pph>engines/engine[0]/fuel-flow_pph</pph>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.77</x-m>
     <y-m>0.89</y-m>
@@ -1685,7 +1690,12 @@
 </model>
 <model>
   <name>umrt1-21_2</name>
-  <path>Aircraft/tu154b/Instruments-3d/umrt/umrt1-21_2.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/umrt/umrt1-21.xml</path>
+  <overlay>
+    <params>
+      <pph>engines/engine[1]/fuel-flow_pph</pph>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.656</x-m>
     <y-m>0.89</y-m>
@@ -1696,7 +1706,12 @@
 </model>
 <model>
   <name>umrt1-21_3</name>
-  <path>Aircraft/tu154b/Instruments-3d/umrt/umrt1-21_3.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/umrt/umrt1-21.xml</path>
+  <overlay>
+    <params>
+      <pph>engines/engine[2]/fuel-flow_pph</pph>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.545</x-m>
     <y-m>0.89</y-m>
