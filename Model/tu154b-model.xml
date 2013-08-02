@@ -254,7 +254,13 @@
 <!-- Hydro system #1 pressure indicator  -->
 <model>
   <name>hs-1</name>
-  <path>Aircraft/tu154b/Instruments-3d/manometer/mano_1.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/manometer/mano.xml</path>
+  <overlay>
+    <params>
+      <pressure>fdm/jsbsim/hs/hs1-pressure</pressure>
+      <path>mano.ac</path>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-22.613</x-m>
     <y-m>-0.606</y-m>
@@ -264,7 +270,13 @@
 <!-- Hydro system #2 pressure indicator  -->
 <model>
   <name>hs-2</name>
-  <path>Aircraft/tu154b/Instruments-3d/manometer/mano_2.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/manometer/mano.xml</path>
+  <overlay>
+    <params>
+      <pressure>fdm/jsbsim/hs/hs2-pressure</pressure>
+      <path>mano.ac</path>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-22.613</x-m>
     <y-m>-0.557</y-m>
@@ -274,7 +286,13 @@
 <!-- Hydro system #3 pressure indicator  -->
 <model>
   <name>hs-3</name>
-  <path>Aircraft/tu154b/Instruments-3d/manometer/mano_3.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/manometer/mano.xml</path>
+  <overlay>
+    <params>
+      <pressure>fdm/jsbsim/hs/hs3-pressure</pressure>
+      <path>mano.ac</path>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-22.613</x-m>
     <y-m>-0.507</y-m>
@@ -284,7 +302,13 @@
 <!-- Brake hydro sysrem pressure indicator  -->
 <model>
   <name>hs_brk</name>
-  <path>Aircraft/tu154b/Instruments-3d/manometer/mano_brake.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/manometer/mano.xml</path>
+  <overlay>
+    <params>
+      <pressure>fdm/jsbsim/hs/emergency-brake-pressure</pressure>
+      <path>mano.ac</path>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-22.613</x-m>
     <y-m>-0.354</y-m>
@@ -1733,7 +1757,13 @@
 <!-- Hydro system #1 pressure indicator on Flight Engineer panel  -->
 <model>
   <name>hs-1-fe</name>
-  <path>Aircraft/tu154b/Instruments-3d/manometer/mano_1_fe.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/manometer/mano.xml</path>
+  <overlay>
+    <params>
+      <pressure>fdm/jsbsim/hs/hs1-pressure</pressure>
+      <path>mano_big.ac</path>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.459</x-m>
     <y-m>0.902</y-m>
@@ -1745,7 +1775,13 @@
 <!-- Hydro system #2 pressure indicator on Flight Engineer panel  -->
 <model>
   <name>hs-2-fe</name>
-  <path>Aircraft/tu154b/Instruments-3d/manometer/mano_2_fe.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/manometer/mano.xml</path>
+  <overlay>
+    <params>
+      <pressure>fdm/jsbsim/hs/hs2-pressure</pressure>
+      <path>mano_big.ac</path>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.381</x-m>
     <y-m>0.902</y-m>
@@ -1757,7 +1793,13 @@
 <!-- Hydro system #3 pressure indicator on Flight Engineer panel  -->
 <model>
   <name>hs-3-fe</name>
-  <path>Aircraft/tu154b/Instruments-3d/manometer/mano_3_fe.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/manometer/mano.xml</path>
+  <overlay>
+    <params>
+      <pressure>fdm/jsbsim/hs/hs3-pressure</pressure>
+      <path>mano_big.ac</path>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.308</x-m>
     <y-m>0.902</y-m>
@@ -1769,7 +1811,13 @@
 <!-- Brake hydro sysrem pressure indicator on Flight Engineer panel  -->
 <model>
   <name>hs-brk-fe</name>
-  <path>Aircraft/tu154b/Instruments-3d/manometer/mano_brake_fe.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/manometer/mano.xml</path>
+  <overlay>
+    <params>
+      <pressure>fdm/jsbsim/hs/emergency-brake-pressure</pressure>
+      <path>mano_big.ac</path>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.225</x-m>
     <y-m>0.902</y-m>
