@@ -1625,7 +1625,12 @@
 <!--Turbine gauge UIZ-3-->
 <model>
   <name>uiz-3_1</name>
-  <path>Aircraft/tu154b/Instruments-3d/uiz/uiz-3_1.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/uiz/uiz-3.xml</path>
+  <overlay>
+    <params>
+      <pressure>engines/engine[0]/oil-pressure-psi</pressure>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.766</x-m>
     <y-m>0.912</y-m>
@@ -1636,7 +1641,12 @@
 </model>
 <model>
   <name>uiz-3_2</name>
-  <path>Aircraft/tu154b/Instruments-3d/uiz/uiz-3_2.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/uiz/uiz-3.xml</path>
+  <overlay>
+    <params>
+      <pressure>engines/engine[1]/oil-pressure-psi</pressure>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.66</x-m>
     <y-m>0.912</y-m>
@@ -1647,7 +1657,12 @@
 </model>
 <model>
   <name>uiz-3_3</name>
-  <path>Aircraft/tu154b/Instruments-3d/uiz/uiz-3_3.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/uiz/uiz-3.xml</path>
+  <overlay>
+    <params>
+      <pressure>engines/engine[2]/oil-pressure-psi</pressure>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.552</x-m>
     <y-m>0.912</y-m>
