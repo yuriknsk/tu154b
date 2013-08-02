@@ -4,12 +4,16 @@
     #    (C) 2007 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
     #	2d & 3d instruments, animations, systems and over.		   	#
     #    	yurik@megasignal.com					   	#
-    #############################################################################	  
+    #############################################################################
     -->
 
 <!-- Exhaust gas temperature indicator UT-7A-710
 3D instrument for Tu-154 -->
 <PropertyList>
+  <params>
+    <egt>fdm/jsbsim/propulsion/engine[0]/egt-filtered</egt>
+  </params>
+
  <path>ut-7a.ac</path>
 <!-- Internal instruments lighting -->
 <animation>
@@ -24,12 +28,12 @@
   </emission>
 </animation>
 
-  
+
 <!--Needles-->
 <animation>
     <type>rotate</type>
     <object-name>needle_1</object-name>
-    <property>fdm/jsbsim/propulsion/engine[2]/egt-filtered</property>
+    <property alias="../../params/egt"/>
 <!--Farenheit-->
 <!--    <interpolation>
       <entry><ind>	0.0</ind>	<dep>	-134.0</dep></entry>
@@ -51,7 +55,7 @@
 <animation>
   <type>rotate</type>
   <object-name>needle_2</object-name>
-  <property>fdm/jsbsim/propulsion/engine[2]/egt-filtered</property>
+  <property alias="../../params/egt"/>
   <factor>3.6</factor>
   <offset-deg>180.0</offset-deg>
   <center>

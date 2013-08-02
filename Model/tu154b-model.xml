@@ -1579,7 +1579,12 @@
 <!--Exhaust gas temperature indicator UT-7A-710-->
 <model>
   <name>ut-7a_1</name>
-  <path>Aircraft/tu154b/Instruments-3d/ut/ut-7a_1.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/ut/ut-7a.xml</path>
+  <overlay>
+    <params>
+      <egt>fdm/jsbsim/propulsion/engine[0]/egt-filtered</egt>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.773</x-m>
     <y-m>0.924</y-m>
@@ -1589,7 +1594,12 @@
 </model>
 <model>
   <name>ut-7a_2</name>
-  <path>Aircraft/tu154b/Instruments-3d/ut/ut-7a_2.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/ut/ut-7a.xml</path>
+  <overlay>
+    <params>
+      <egt>fdm/jsbsim/propulsion/engine[1]/egt-filtered</egt>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.666</x-m>
     <y-m>0.924</y-m>
@@ -1599,7 +1609,12 @@
 </model>
 <model>
   <name>ut-7a_3</name>
-  <path>Aircraft/tu154b/Instruments-3d/ut/ut-7a_3.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/ut/ut-7a.xml</path>
+  <overlay>
+    <params>
+      <egt>fdm/jsbsim/propulsion/engine[2]/egt-filtered</egt>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.559</x-m>
     <y-m>0.924</y-m>
