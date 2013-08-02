@@ -1491,7 +1491,13 @@
 <!--Turbine turn indicator ITE-2t (two needles)-->
 <model>
   <name>ite-2t_1</name>
-  <path>Aircraft/tu154b/Instruments-3d/ite/ite-2t_1.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/ite/ite-2t.xml</path>
+  <overlay>
+    <params>
+      <n1>/fdm/jsbsim/propulsion/engine[0]/n1-rna-filtered</n1>
+      <n2>engines/engine[0]/n2</n2>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.764</x-m><!--+3-->
     <y-m>0.924</y-m>
@@ -1501,7 +1507,13 @@
 </model>
 <model>
   <name>ite-2t_2</name>
-  <path>Aircraft/tu154b/Instruments-3d/ite/ite-2t_2.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/ite/ite-2t.xml</path>
+  <overlay>
+    <params>
+      <n1>/fdm/jsbsim/propulsion/engine[1]/n1-rna-filtered</n1>
+      <n2>engines/engine[1]/n2</n2>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.659</x-m>
     <y-m>0.924</y-m>
@@ -1511,7 +1523,13 @@
 </model>
 <model>
   <name>ite-2t_3</name>
-  <path>Aircraft/tu154b/Instruments-3d/ite/ite-2t_3.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/ite/ite-2t.xml</path>
+  <overlay>
+    <params>
+      <n1>/fdm/jsbsim/propulsion/engine[2]/n1-rna-filtered</n1>
+      <n2>engines/engine[2]/n2</n2>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.552</x-m>
     <y-m>0.924</y-m>
