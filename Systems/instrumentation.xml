@@ -177,30 +177,23 @@
     
     
     <!-- ******************* RV-5M staff ****************** -->   
-    <pure_gain name="instrumentation/pitch-clipped-cone">
+    <pure_gain name="instrumentation/pitch-clipped">
       <input>attitude/pitch-rad</input>
       <gain>1.0</gain>
       <clipto>
-        <min>-0.26</min>
-        <max>0.26</max>
+        <min>-0.3</min>
+        <max>0.3</max>
       </clipto>
     </pure_gain>
-    <summer name="instrumentation/pitch-clipped">
-      <input>attitude/pitch-rad</input>
-      <input>-instrumentation/pitch-clipped-cone</input>
-    </summer>
-    <pure_gain name="instrumentation/roll-clipped-cone">
+    <pure_gain name="instrumentation/roll-clipped">
       <input>attitude/roll-rad</input>
       <gain>1.0</gain>
       <clipto>
-        <min>-0.26</min>
-        <max>0.26</max>
+        <min>-0.3</min>
+        <max>0.3</max>
       </clipto>
     </pure_gain>
-    <summer name="instrumentation/roll-clipped">
-      <input>attitude/roll-rad</input>
-      <input>-instrumentation/roll-clipped-cone</input>
-    </summer>
+    
     
     <fcs_function name="instrumentation/h-angle-corr">
       <description>cos from pitch and roll</description>
@@ -261,8 +254,8 @@
             </pure_gain>
 	    
             <pure_gain name="instrumentation/tks-timeoffset-deg">
-             <!--<input>simulation/sim-time-sec</input> -->
-	      <input>sim-time-sec</input>
+             <input>simulation/sim-time-sec</input>
+<!--<input>sim-time-sec</input>-->
               <gain>0.0041666667</gain>
             </pure_gain>
             
