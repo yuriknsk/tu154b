@@ -1460,7 +1460,12 @@
 <!--Throttle lever indicator IP21-08-->
 <model>
   <name>ip21_1</name>
-  <path>Aircraft/tu154b/Instruments-3d/ip21/ip21_1.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/ip21/ip21.xml</path>
+  <overlay>
+    <params>
+      <throttle>fdm/jsbsim/fcs/at-throttle-cmd-norm[0]</throttle>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.772</x-m>
     <y-m>0.924</y-m>
@@ -1470,7 +1475,12 @@
 </model>
 <model>
   <name>ip21_2</name>
-  <path>Aircraft/tu154b/Instruments-3d/ip21/ip21_2.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/ip21/ip21.xml</path>
+  <overlay>
+    <params>
+      <throttle>fdm/jsbsim/fcs/at-throttle-cmd-norm[1]</throttle>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.665</x-m>
     <y-m>0.924</y-m>
@@ -1480,7 +1490,12 @@
 </model>
 <model>
   <name>ip21_3</name>
-  <path>Aircraft/tu154b/Instruments-3d/ip21/ip21_3.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/ip21/ip21.xml</path>
+  <overlay>
+    <params>
+      <throttle>fdm/jsbsim/fcs/at-throttle-cmd-norm[2]</throttle>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.559</x-m>
     <y-m>0.924</y-m>

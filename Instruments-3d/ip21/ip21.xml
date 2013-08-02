@@ -4,12 +4,16 @@
     #    (C) 2007 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
     #	2d & 3d instruments, animations, systems and over.		   	#
     #    	yurik@megasignal.com					   	#
-    #############################################################################	  
+    #############################################################################
     -->
 
 <!-- Throttle lever indicator IP21-08
 3D instrument for Tu-154 -->
 <PropertyList>
+ <params>
+   <throttle>fdm/jsbsim/fcs/at-throttle-cmd-norm[0]</throttle>
+ </params>
+
  <path>ip21.ac</path>
 <!-- Internal instruments lighting -->
 <animation>
@@ -33,12 +37,12 @@
   </emission>
 </animation>
 
-  
+
 <!--Needles-->
 <animation>
     <type>rotate</type>
     <object-name>needle</object-name>
-    <property>fdm/jsbsim/fcs/at-throttle-cmd-norm[0]</property>
+    <property alias="../../params/throttle"/>
     <interpolation>
       <!--<entry><ind>	0.0</ind>	<dep>	-120.0</dep></entry>--><!--full revers-->
       <entry><ind>	0.0</ind>	<dep>	-40.0</dep></entry><!--idle-->
