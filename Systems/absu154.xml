@@ -108,17 +108,13 @@
 
 <!--ILS and VOR debug channel-->
 
-<channel name="Debug">
+<!--<channel name="Debug">
 
  <waypoint_heading name="debug/wp-heading" unit="DEG">
    <source_latitude unit="DEG">debug/wp-lat-deg</source_latitude>
    <source_longitude unit="DEG">debug/wp-lon-deg</source_longitude>
    <target_latitude unit="RAD">position/lat-gc-rad</target_latitude>
    <target_longitude unit="RAD">position/long-gc-rad</target_longitude>
-<!--   <clipto>
-      <min> -10 </min>
-      <max> 10 </max>
-   </clipto>-->
  </waypoint_heading>
 
  <waypoint_distance name="debug/wp-distance" unit="M">
@@ -137,7 +133,7 @@
    </clipto>
  </summer>
  
-  </channel>
+  </channel>-->
 
 
 <!--************************** ABSU staff ****************************-->
