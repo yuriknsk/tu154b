@@ -917,7 +917,7 @@ if (getprop("fdm/jsbsim/gear/gear-pos-norm") == 0.0 or
         interpolate("tu154/systems/warning/voice/gear-hs-state", 1.15, 23.0);
     }
 } else {
-    setprop("tu154/systems/warning/voice/gear-hs-state", 0.0);
+    interpolate("tu154/systems/warning/voice/gear-hs-state", 0.0, 0.0);
 }
 
 # Retract Gear indicator
