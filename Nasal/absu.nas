@@ -588,8 +588,6 @@ if( getprop("tu154/switches/pu-46-kren" ) == 1.0 )
 # Approach
 var absu_approach = func{
 if( absu_powered() == 0 ) return;
-if( getprop("tu154/switches/pn-5-posadk") != 1.0)return;# "podgotovka posadki" not engaged
-if( getprop("tu154/switches/pn-5-navigac" ) != 0.0 ) return; # wrong control!
 #if( getprop("instrumentation/nav[0]/data-is-valid" ) != 1 ) return; # Silence in air!
 #if( getprop("instrumentation/nav[0]/nav-loc" ) != 1 ) return; # has not localizer signal from nav radio!
 # deviation too big:
@@ -600,8 +598,13 @@ restore_pnp_needles();
 setprop("fdm/jsbsim/ap/roll-selector", 5 ); # ILS approach code
 setprop("tu154/instrumentation/pn-5/zahod", 1.0 );
 if( getprop("tu154/switches/pu-46-kren" ) == 1.0 )
-	if( getprop("tu154/instrumentation/pu-46/stab" ) == 1.0 )
-		setprop("tu154/systems/electrical/indicators/heading", 1.0 );
+    if( getprop("tu154/instrumentation/pu-46/stab" ) == 1.0 ) {
+        if(getprop("tu154/switches/pn-5-navigac") == 0.0 and
+           getprop("tu154/switches/pn-5-posadk") == 1.0)
+	    setprop("tu154/systems/electrical/indicators/heading", 1.0 );
+        else
+            setprop("tu154/systems/electrical/indicators/stab-heading", 1.0);
+    }
 }
 
 
