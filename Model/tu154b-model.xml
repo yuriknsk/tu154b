@@ -6394,7 +6394,7 @@
 
   
 <model>
-    <path>Aircraft/tu154b/Model/Effects/stream failure.xml</path>
+    <path>Aircraft/tu154b/Model/Effects/stream-failure.xml</path>
     <offsets>
       <x-m>   6.916 </x-m>
       <y-m> -18.742 </y-m>
@@ -6403,7 +6403,7 @@
   </model>11
   
   <model>
-    <path>Aircraft/tu154b/Model/Effects/stream failure.xml</path>
+    <path>Aircraft/tu154b/Model/Effects/stream-failure.xml</path>
     <offsets>
       <x-m>  6.916 </x-m>
       <y-m> 18.782 </y-m>
