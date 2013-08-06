@@ -247,6 +247,12 @@
 <model>
   <name>idr-1</name>
   <path>Aircraft/tu154b/Instruments-3d/idr-1/idr-1.xml</path>
+  <overlay>
+    <params>
+      <distance>tu154/instrumentation/idr-1[0]/distance</distance>
+      <blank>tu154/instrumentation/idr-1[0]/blank</blank>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-22.613</x-m>
     <y-m>-0.449</y-m>
@@ -571,6 +577,12 @@
 <model>
   <name>idr-1-cp</name>
   <path>Aircraft/tu154b/Instruments-3d/idr-1/idr-1.xml</path>
+  <overlay>
+    <params>
+      <distance>tu154/instrumentation/idr-1[1]/distance</distance>
+      <blank>tu154/instrumentation/idr-1[1]/blank</blank>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-22.613</x-m>
     <y-m>0.384</y-m>

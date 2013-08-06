@@ -314,6 +314,53 @@ setlistener("instrumentation/nav[0]/gs-in-range", pnp_both_mode_update, 0, 0);
 
 
 ######################################################################
+#
+# IDR-1
+#
+# Implementation:
+#
+# Note that DME cannel in VOR-DME and ILS-DME operates in the same way
+# so IDR-1 works with both.
+#
+
+var idr_mode_update = func(i, selector) {
+    var sel = getprop(selector);
+    if (int(sel) != sel) # The switch is in transition.
+        return;
+    var ni = (sel ? 3 - sel : 0); # 2 -> 1, 1 -> 2, 0 -> 0
+    var distance = 0;
+    var blank = 1;
+    if (getprop("instrumentation/nav["~ni~"]/in-range")) {
+        distance = "instrumentation/nav["~ni~"]/nav-distance";
+        blank = 0;
+    }
+    realias("/tu154/instrumentation/idr-1["~i~"]/distance", distance, 0.5);
+    setprop("tu154/instrumentation/idr-1["~i~"]/blank", blank);
+}
+
+var idr0_mode_update = func {
+    idr_mode_update(0, "tu154/switches/capt-idr-selector");
+}
+
+var idr1_mode_update = func {
+    idr_mode_update(1, "tu154/switches/copilot-idr-selector");
+}
+
+var idr_both_mode_update = func {
+    idr0_mode_update();
+    idr1_mode_update();
+}
+
+setlistener("tu154/switches/capt-idr-selector", idr0_mode_update, 1);
+
+setlistener("tu154/switches/copilot-idr-selector", idr1_mode_update, 1);
+
+setlistener("instrumentation/nav[0]/in-range", idr_both_mode_update, 0, 0);
+setlistener("instrumentation/nav[1]/in-range", idr_both_mode_update, 0, 0);
+setlistener("instrumentation/nav[2]/in-range", idr_both_mode_update, 0, 0);
+
+
+######################################################################
 
 # digit wheels support for UVO-15 SVS altimeter
 # meters
@@ -867,66 +914,6 @@ setlistener("tu154/switches/PKP-left", mgv_1_power,0,0);
 setlistener("tu154/switches/PKP-right", mgv_2_power,0,0);
 setlistener("tu154/switches/MGV-contr", mgv_c_power,0,0);
 
-# =============================== IDR-1 support =============================
-idr_capt_handler = func{
-settimer( idr_capt_handler, 0 );
-var distance = 0.0;
-var caged = 1;
-if( getprop("tu154/switches/capt-idr-selector") == nil )
- 		setprop("tu154/switches/capt-idr-selector", 0.0 );
- 		
-if( getprop("tu154/switches/capt-idr-selector") == 0 )
-	{
-	if( getprop( "instrumentation/nav[0]/in-range") == 1 ) {
-	  if( (getprop( "instrumentation/nav[0]/nav-loc") == 0 ) # not ILS (VOR)
-	      or (getprop( "instrumentation/nav[0]/dme-in-range") == 1 ) # ILS with DME
-		) {
-	     setprop("tu154/instrumentation/idr-1[0]/caged-flag",0 );
-	     distance = getprop("instrumentation/nav[0]/nav-distance");     
-	     caged = 0;
-		}
-	else distance = 0.0;
-	}}
-if( getprop("tu154/switches/capt-idr-selector") == 1 )
-	{
-	if( getprop( "instrumentation/nav[2]/in-range") == 1 ) {
-	  if( (getprop( "instrumentation/nav[2]/nav-loc") == 0 ) # not ILS
-	      or (getprop( "instrumentation/nav[2]/dme-in-range") == 1 ) # ILS with DME
-		) {
-	     setprop("tu154/instrumentation/idr-1[0]/caged-flag",0 );
-	     distance = getprop("instrumentation/nav[2]/nav-distance");     
-	     caged = 0;
-		}}
-	else distance = 0.0;
-	}
-	
-if( getprop("tu154/switches/capt-idr-selector") == 2 )
-	{
-	if( getprop( "instrumentation/nav[1]/in-range") == 1 ) {
-	  if( (getprop( "instrumentation/nav[1]/nav-loc") == 0 ) # not ILS
-		or (getprop( "instrumentation/nav[1]/dme-in-range") == 1 ) # ILS with DME
-		) {
-	     setprop("tu154/instrumentation/idr-1[0]/caged-flag",0 );
-	     distance = getprop("instrumentation/nav[1]/nav-distance");     
-	     caged = 0;
-		}}
-	else  distance = 0.0;
-	}
-setprop("tu154/instrumentation/idr-1[0]/caged-flag", caged );
-
-if( distance == nil ){ setprop("tu154/instrumentation/idr-1[0]/caged-flag",1 ); return; } 
-  distance = distance/10.0; # to dec meters, it need for correct work of digit wheels
-  setprop("tu154/instrumentation/idr-1[0]/indicated-wheels_dec_m", 
-  (distance/10.0) - int( distance/100.0 )*10.0 );
-  setprop("tu154/instrumentation/idr-1[0]/indicated-wheels_hund_m", 
-  (distance/100.0) - int( distance/1000.0 )*10.0 );
-  setprop("tu154/instrumentation/idr-1[0]/indicated-wheels_ths_m", 
-  (distance/1000.0) - int( distance/10000.0 )*10.0 );
-  setprop("tu154/instrumentation/idr-1[0]/indicated-wheels_decths_m", 
-  (distance/10000.0) - int( distance/100000.0 )*10.0 );
-}
-
-idr_capt_handler();
 
 # ************************* TKS staff ***********************************
 
