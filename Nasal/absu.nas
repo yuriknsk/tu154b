@@ -374,6 +374,7 @@ setprop("tu154/systems/electrical/indicators/reject", 0.0 );
 var absu_reset = func {
 if( absu_powered() == 0 ) return;
 clr_heading_lamp();
+setprop("fdm/jsbsim/ap/roll-selector", 0.0 );
 setprop("tu154/instrumentation/pn-5/sbros", 1.0  );
 if( getprop("fdm/jsbsim/ap/pitch-selector" ) == 5 )
 	if( getprop("tu154/instrumentation/pu-46/stab" ) == 1.0 )
@@ -382,7 +383,6 @@ if( getprop("fdm/jsbsim/ap/pitch-selector" ) == 5 )
 setprop("tu154/instrumentation/pn-5/gliss", 0.0  );
 setprop("tu154/systems/electrical/indicators/glideslope", 0.0 );
 
-restore_pnp_needles();
 setprop("fdm/jsbsim/ap/go-around", 0.0);
 setprop("tu154/systems/electrical/indicators/reject", 0.0 );
 
@@ -395,14 +395,6 @@ if( getprop("tu154/instrumentation/pu-46/stab" ) == 1.0
     }
 }
 
-
-# restore PNP needles
-var restore_pnp_needles = func{
-interpolate( "tu154/instrumentation/pnp[0]/plane-deg", 
-getprop( "tu154/instrumentation/pnp[0]/plane-deg-delayed"), 0.5 );
-interpolate( "tu154/instrumentation/pnp[1]/plane-deg", 
-getprop( "tu154/instrumentation/pnp[1]/plane-deg-delayed"), 0.5 );
-}
 
 # --------------- Pitch modes ------------------------------
 
@@ -497,7 +489,6 @@ if( absu_powered() == 0 ) return;
 #if( getprop("tu154/switches/pu-46-kren" ) != 1.0 ) return;
 #if( getprop("tu154/instrumentation/pu-46/stab" ) != 1.0 ) return;
 clr_heading_lamp();
-restore_pnp_needles();
 setprop("fdm/jsbsim/ap/roll-selector", 2 ); # ZK code
 setprop("tu154/instrumentation/pn-5/zk", 1.0 );
 if( getprop("tu154/switches/pu-46-kren" ) == 1.0 )
@@ -511,18 +502,9 @@ if( absu_powered() == 0 ) return;
 #if( getprop("instrumentation/nav[0]/nav-loc" ) != 0 ) return; # Is it ILS?
 
 clr_heading_lamp();
-# PNP VOR procedure
-var zpu_src = getprop( "tu154/switches/pn-5-pnp-selector" );
-if( zpu_src == nil ) zpu_src = 0;
-if( zpu_src == 0 )
-  var heading = getprop( "tu154/instrumentation/pnp[0]/plane-deg-delayed");
-else  var heading = getprop( "tu154/instrumentation/pnp[1]/plane-deg-delayed");
-if( heading == nil ) heading = 0.0;
-interpolate( "tu154/instrumentation/pnp[0]/plane-deg", heading, 0.5 );
-interpolate( "tu154/instrumentation/pnp[1]/plane-deg", heading, 0.5 );
 
-setprop("fdm/jsbsim/ap/roll-selector", 3 ); # VOR code
 setprop("tu154/instrumentation/pn-5/az-1", 1.0 );
+setprop("fdm/jsbsim/ap/roll-selector", 3 ); # VOR code
 
 if( getprop("tu154/switches/pu-46-kren" ) == 1.0 )
     if( getprop("tu154/instrumentation/pu-46/stab") == 1.0) {
@@ -540,18 +522,9 @@ if( absu_powered() == 0 ) return;
 #if( getprop("instrumentation/nav[1]/nav-loc" ) != 0 ) return; # Is it ILS?
 
 clr_heading_lamp();
-# PNP VOR procedure
-var zpu_src = getprop( "tu154/switches/pn-5-pnp-selector" );
-if( zpu_src == nil ) zpu_src = 0;
-if( zpu_src == 0 )
-  var heading = getprop( "tu154/instrumentation/pnp[0]/plane-deg-delayed");
-else  var heading = getprop( "tu154/instrumentation/pnp[1]/plane-deg-delayed");
-if( heading == nil ) heading = 0.0;
-interpolate( "tu154/instrumentation/pnp[0]/plane-deg", heading, 0.5 );
-interpolate( "tu154/instrumentation/pnp[1]/plane-deg", heading, 0.5 );
 
-setprop("fdm/jsbsim/ap/roll-selector", 3 ); # VOR code
 setprop("tu154/instrumentation/pn-5/az-2", 1.0 );
+setprop("fdm/jsbsim/ap/roll-selector", 3 ); # VOR code
 if( getprop("tu154/switches/pu-46-kren" ) == 1.0 )
     if( getprop("tu154/instrumentation/pu-46/stab") == 1.0) {
         if(getprop("tu154/switches/pn-5-navigac") == 1.0 and
@@ -565,13 +538,6 @@ if( getprop("tu154/switches/pu-46-kren" ) == 1.0 )
 var absu_nvu = func{
 if( absu_powered() == 0 ) return;
 clr_heading_lamp();
-# PNP NVU procedure
-if( getprop( "fdm/jsbsim/instrumentation/nvu-selector") )
-	var heading = getprop( "fdm/jsbsim/instrumentation/zpu-deg-1");
-else  	var heading = getprop( "fdm/jsbsim/instrumentation/zpu-deg-2");
-if( heading == nil ) heading = 0.0;
-interpolate( "tu154/instrumentation/pnp[0]/plane-deg", heading, 0.5 );
-interpolate( "tu154/instrumentation/pnp[1]/plane-deg", heading, 0.5 );
 
 setprop("fdm/jsbsim/ap/roll-selector", 4 ); # NVU code
 setprop("tu154/instrumentation/pn-5/nvu", 1.0 );
@@ -594,7 +560,6 @@ if( absu_powered() == 0 ) return;
 #if(  getprop("fdm/jsbsim/ap/ils-angle-deviation-abs") > HEADING_DEVIATION_LIMIT ) return;
 
 clr_heading_lamp();
-restore_pnp_needles();
 setprop("fdm/jsbsim/ap/roll-selector", 5 ); # ILS approach code
 setprop("tu154/instrumentation/pn-5/zahod", 1.0 );
 if( getprop("tu154/switches/pu-46-kren" ) == 1.0 )

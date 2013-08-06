@@ -887,16 +887,12 @@
       <alpha-limit-deg type="double" >11.5</alpha-limit-deg>
     </uap-12>   
     <pnp>
-      <plane-deg>252.0</plane-deg>
-      <plane-deg-local>252.0</plane-deg-local>
-      <plane-deg-delayed>252.0</plane-deg-delayed>
+      <plane-dialed>252.0</plane-dialed>
 <!--      <heading-deg>161.0</heading-deg>
       <heading-deg-delayed>161.0</heading-deg-delayed>-->
     </pnp>
     <pnp>
-      <plane-deg>252.0</plane-deg>
-      <plane-deg-local>252.0</plane-deg-local>
-      <plane-deg-delayed>252.0</plane-deg-delayed>
+      <plane-dialed>252.0</plane-dialed>
 <!--      <heading-deg>161.0</heading-deg>
       <heading-deg-delayed>161.0</heading-deg-delayed>-->
     </pnp>

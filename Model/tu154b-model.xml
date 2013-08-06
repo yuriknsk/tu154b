@@ -136,6 +136,15 @@
 <model>
   <name>pkp-capt</name>
   <path>Aircraft/tu154b/Instruments-3d/pkp/pkp.xml</path>
+  <overlay>
+    <params>
+      <defl-course>tu154/instrumentation/pnp[0]/defl-course</defl-course>
+      <defl-gs>tu154/instrumentation/pnp[0]/defl-gs</defl-gs>
+      <blank-course>tu154/instrumentation/pnp[0]/blank-course</blank-course>
+      <blank-gs>tu154/instrumentation/pnp[0]/blank-gs</blank-gs>
+      <failed>tu154/instrumentation/bkk/mgv-1-failure</failed>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-22.604</x-m>
     <y-m>-0.567</y-m>
@@ -145,7 +154,23 @@
 <!-- Heading indicator PNP  -->
 <model>
   <name>pnp-capt</name>
-  <path>Aircraft/tu154b/Instruments-3d/pnp/pnp-1.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/pnp/pnp.xml</path>
+  <overlay>
+    <params>
+      <mode>tu154/instrumentation/pnp[0]/mode</mode>
+      <distance>tu154/instrumentation/pnp[0]/distance</distance>
+      <compass>fdm/jsbsim/instrumentation/pnp-heading-left</compass>
+      <plane-dialed>tu154/instrumentation/pnp[0]/plane-dialed</plane-dialed>
+      <dir-course>tu154/instrumentation/pnp[0]/heading-deg</dir-course>
+      <dir-plane>tu154/instrumentation/pnp[0]/plane-deg</dir-plane>
+      <defl-course>tu154/instrumentation/pnp[0]/defl-course</defl-course>
+      <defl-gs>tu154/instrumentation/pnp[0]/defl-gs</defl-gs>
+      <serviceable>instrumentation/heading-indicator[0]/serviceable</serviceable>
+      <blank-course>tu154/instrumentation/pnp[0]/blank-course</blank-course>
+      <blank-gs>tu154/instrumentation/pnp[0]/blank-gs</blank-gs>
+      <blank-dist>tu154/instrumentation/pnp[0]/blank-dist</blank-dist>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-22.611</x-m>
     <y-m>-0.567</y-m>
@@ -418,6 +443,15 @@
 <model>
   <name>pkp-cp</name>
   <path>Aircraft/tu154b/Instruments-3d/pkp/pkp.xml</path>
+  <overlay>
+    <params>
+      <defl-course>tu154/instrumentation/pnp[1]/defl-course</defl-course>
+      <defl-gs>tu154/instrumentation/pnp[1]/defl-gs</defl-gs>
+      <blank-course>tu154/instrumentation/pnp[1]/blank-course</blank-course>
+      <blank-gs>tu154/instrumentation/pnp[1]/blank-gs</blank-gs>
+      <failed>tu154/instrumentation/bkk/mgv-2-failure</failed>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-22.604</x-m>
     <y-m>0.505</y-m>
@@ -427,9 +461,25 @@
 <!-- Heading indicator PNP  -->
 <model>
   <name>pnp-cp</name>
-  <path>Aircraft/tu154b/Instruments-3d/pnp/pnp-2.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/pnp/pnp.xml</path>
+  <overlay>
+    <params>
+      <mode>tu154/instrumentation/pnp[1]/mode</mode>
+      <distance>tu154/instrumentation/pnp[1]/distance</distance>
+      <compass>fdm/jsbsim/instrumentation/pnp-heading-right</compass>
+      <plane-dialed>tu154/instrumentation/pnp[1]/plane-dialed</plane-dialed>
+      <dir-course>tu154/instrumentation/pnp[1]/heading-deg</dir-course>
+      <dir-plane>tu154/instrumentation/pnp[1]/plane-deg</dir-plane>
+      <defl-course>tu154/instrumentation/pnp[1]/defl-course</defl-course>
+      <defl-gs>tu154/instrumentation/pnp[1]/defl-gs</defl-gs>
+      <serviceable>instrumentation/heading-indicator[1]/serviceable</serviceable>
+      <blank-course>tu154/instrumentation/pnp[1]/blank-course</blank-course>
+      <blank-gs>tu154/instrumentation/pnp[1]/blank-gs</blank-gs>
+      <blank-dist>tu154/instrumentation/pnp[1]/blank-dist</blank-dist>
+    </params>
+  </overlay>
   <offsets>
-    <x-m>-22.613</x-m>
+    <x-m>-22.611</x-m>
     <y-m>0.507</y-m>
     <z-m>1.712</z-m>
   </offsets>
