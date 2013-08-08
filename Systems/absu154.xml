@@ -103,6 +103,11 @@
     </function>
 </fcs_function>
 
+<fcs_function name="instr/indicated-altitude-ft" >
+    <function>
+       <property>/instrumentation/altimeter/indicated-altitude-ft</property>
+    </function>
+</fcs_function>
 
 </channel>
 
@@ -309,7 +314,7 @@ adjust speed-pid to right state all time. -->
 	    
             <summer name="ap/altitude-error">
               <input>ap/input-altitude</input>
-              <input>-position/h-sl-ft</input>
+              <input>-instr/indicated-altitude-ft</input>
 	      <input>ap/altitude-error-vfps</input>
 <!--              <clipto>
                 <min>-100</min>
@@ -728,6 +733,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
           <default value="0.0"/>
           <test value="ap/beam-error-adjusted">
             ap/roll-selector eq 3
+            ap/navigac == 1
           </test>
         </switch>
 
