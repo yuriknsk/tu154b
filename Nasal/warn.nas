@@ -344,7 +344,11 @@ else alarm.switch(0);
 var RV_OFFSET = 4;
 var voice_handler = func{
 settimer( voice_handler, 0.0 ); # no need delay for voise
-if( getprop("tu154/instrumentation/rv-5m/serviceable") != 1 ) return; #power off
+
+if (getprop("tu154/instrumentation/rv-5m[0]/blank") and
+    getprop("tu154/instrumentation/rv-5m[1]/blank"))
+    return;
+
 var alt = getprop( "fdm/jsbsim/instrumentation/indicated-altitude-m" );
 if( alt == nil ) alt = 0.0;
 # flash control

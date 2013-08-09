@@ -192,6 +192,14 @@
 <model>
   <name>rv-5m</name>
   <path>Aircraft/tu154b/Instruments-3d/rv-5m/rv-5m.xml</path>
+  <overlay>
+    <params>
+      <altitude>tu154/instrumentation/rv-5m[0]/altitude</altitude>
+      <blank>tu154/instrumentation/rv-5m[0]/blank</blank>
+      <warn>tu154/instrumentation/rv-5m[0]/warn</warn>
+      <dialed>tu154/instrumentation/rv-5m[0]/dialed</dialed>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-22.612</x-m>
     <y-m>-0.357</y-m>
@@ -527,6 +535,14 @@
 <model>
   <name>rv-5m-cp</name>
   <path>Aircraft/tu154b/Instruments-3d/rv-5m/rv-5m.xml</path>
+  <overlay>
+    <params>
+      <altitude>tu154/instrumentation/rv-5m[1]/altitude</altitude>
+      <blank>tu154/instrumentation/rv-5m[1]/blank</blank>
+      <warn>tu154/instrumentation/rv-5m[1]/warn</warn>
+      <dialed>tu154/instrumentation/rv-5m[1]/dialed</dialed>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-22.612</x-m>
     <y-m>0.736</y-m>

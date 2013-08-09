@@ -361,6 +361,69 @@ setlistener("instrumentation/nav[2]/in-range", idr_both_mode_update, 0, 0);
 
 
 ######################################################################
+#
+# RV-5M
+#
+
+var rv_mode_update = func(i, toggled) {
+    # Temporal hack to wait electrical initialization.
+    if (getprop("tu154/switches/main-battery") == nil) {
+        settimer(func { rv_mode_update(i, 1) }, 0.5);
+        return;
+    }
+
+    if (i == 0) {
+        var ac_obj = electrical.AC3x200_bus_1L;
+        var volts = "tu154/systems/electrical/buses/AC3x200-bus-1L/volts";
+    } else {
+        var ac_obj = electrical.AC3x200_bus_3R;
+        var volts = "tu154/systems/electrical/buses/AC3x200-bus-3L/volts";
+    }
+    volts = getprop(volts) or 0;
+    var powered = (volts > 150.0);
+    var altitude = "tu154/instrumentation/rv-5m["~i~"]/altitude";
+    var switch = "RV-5-"~(i + 1);
+    var warn = 0;
+    var blank = 1;
+    if (powered and getprop("tu154/switches/"~switch)) {
+        if (toggled) {
+            ac_obj.add_output(switch, 10.0);
+            realias(altitude, 850, 3);
+            settimer(func {
+                realias(altitude,
+                        "fdm/jsbsim/instrumentation/indicated-altitude-m", 3);
+                settimer(func { rv_mode_update(i, 0) }, 3);
+            }, 15); # Up to 2 minutes in reality.
+        } else {
+            warn = (getprop(altitude) <=
+                    getprop("tu154/instrumentation/rv-5m["~i~"]/dialed"));
+            blank = 0;
+            var agl = getprop("position/altitude-agl-ft");
+            if (agl < 4000) { # < ~1200m
+                settimer(func { rv_mode_update(i, 0) }, 0.1);
+            } else {
+                # FIXME: RV should be switched off, but for now we have
+                # to track power state.
+                settimer(func { rv_mode_update(i, 0) }, 0.5);
+            }
+        }
+    } else {
+        if (!toggled) {
+            ac_obj.rm_output(switch);
+            realias(altitude, 0, 3);
+        }
+        settimer(func { rv_mode_update(i, 1) }, 0.5);
+    }
+
+    setprop("tu154/instrumentation/rv-5m["~i~"]/warn", warn);
+    setprop("tu154/instrumentation/rv-5m["~i~"]/blank", blank);
+}
+
+rv_mode_update(0, 1);
+rv_mode_update(1, 1);
+
+
+######################################################################
 
 # digit wheels support for UVO-15 SVS altimeter
 # meters
@@ -566,62 +629,6 @@ setprop("tu154/instrumentation/iku-1[1]/indicated-heading-r", param_white );
 }
 
 iku_handler();
-
-# RV-5M support
-rv5m_handler = func{
-settimer( rv5m_handler, 0.1 );
-# Arretir:
-if( getprop("tu154/instrumentation/rv-5m/caged-flag" ) != 0 )
-	{
-	setprop("tu154/instrumentation/rv-5m/warn", 0 );
-	setprop("tu154/instrumentation/rv-5m/indicated-altitude-m", 0.0 );
-	return;
-	}
-if( getprop("tu154/instrumentation/rv-5m/serviceable" ) != 1 ) 
-	{
-        setprop("tu154/instrumentation/rv-5m/warn", 0 );
-        return;
-	}
-# get altitude and check if device is warmed
-var alt = getprop("fdm/jsbsim/instrumentation/indicated-altitude-m");
-var hot = getprop("tu154/instrumentation/rv-5m/hot");
-if( alt == nil ) alt = 0.0;
-if( hot == nil ) hot = 0.0;
-if( alt < hot ) alt = hot;
-interpolate("tu154/instrumentation/rv-5m/indicated-altitude-m", alt, 0.1 );
-# check warning
-var limit = getprop("tu154/instrumentation/rv-5m/index-m");
-if( limit == nil ) return;
-if( alt < limit ) 
-	{
-	setprop("tu154/instrumentation/rv-5m/warn", 1 );
-#	interpolate("tu154/systems/electrical/indicators/radioaltimeter-limit", 1.0, 0.1);
-	}
-else { 
-	setprop("tu154/instrumentation/rv-5m/warn", 0 );
-#	interpolate("tu154/systems/electrical/indicators/radioaltimeter-limit", 0.0, 0.1);
-	}
-}
-
-rv5m_power = func{
-if( getprop( "tu154/switches/RV-5-1" ) == 1.0 )
-	{
-	setprop("tu154/instrumentation/rv-5m/hot", 5000.0 );
-	electrical.AC3x200_bus_1L.add_output( "RV-5-1", 10.0);
-	if( getprop( "tu154/systems/electrical/buses/AC3x200-bus-1L/volts" ) > 150.0 )
-		interpolate("tu154/instrumentation/rv-5m/hot", -1.0, 20.0 );
-	}
-else {
-	setprop("tu154/instrumentation/rv-5m/hot", 0 );
-	electrical.AC3x200_bus_1L.rm_output( "RV-5-1" );
-	}
-}
-
-setlistener("tu154/switches/RV-5-1", rv5m_power,0,0);
-setlistener("tu154/instrumentation/rv-5m/serviceable", rv5m_power,0,0);
-
-
-rv5m_handler();
 
 # COM radio support
 var com_1_handler = func {
@@ -2852,11 +2859,6 @@ if( ac200 > 150.0 )
 		setprop("tu154/instrumentation/diss/powered", 1 );
 	else	setprop("tu154/instrumentation/diss/powered", 0 );
 
-	# RV-5M-1	
-	if( getprop( "tu154/switches/RV-5-1" ) == 1.0 )
-		setprop("tu154/instrumentation/rv-5m/serviceable", 1 );
-	else	setprop("tu154/instrumentation/rv-5m/serviceable", 0 );
-		
 	# SVS	
 	if( getprop( "tu154/switches/SVS-power" ) == 1.0 )
 		setprop("tu154/systems/svs/powered", 1 );
@@ -2907,7 +2909,6 @@ else	{
 	setprop("fdm/jsbsim/instrumentation/bgmk-failure-1", 1 );
 	setprop("tu154/instrumentation/bkk/serviceable", 0 );
 	setprop("tu154/instrumentation/diss/powered", 0 );
-	setprop("tu154/instrumentation/rv-5m/serviceable", 0 );
 	setprop("tu154/systems/svs/powered", 0 );
 	setprop("tu154/instrumentation/altimeter[1]/powered", 0 );
 	setprop("instrumentation/attitude-indicator[3]/caged-flag", 1 );

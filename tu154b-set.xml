@@ -871,11 +871,13 @@
       <stab type="double" >false</stab>
       <mode type="double" >0.0</mode>
     </pn-6>
-    <rv-5m>
-      <warn type="bool" >false</warn>
-      <caged-flag type="bool" >false</caged-flag>
-      <serviceable type="bool" >true</serviceable>
-      <index-m type="double" >200.0</index-m>
+    <rv-5m n="0">
+      <altitude type="double">0.0</altitude>
+      <dialed type="double">200.0</dialed>
+    </rv-5m>
+    <rv-5m n="1">
+      <altitude type="double">0.0</altitude>
+      <dialed type="double">0.0</dialed>
     </rv-5m>
     <idr-1>
       <caged-flag type="bool" >true</caged-flag>
