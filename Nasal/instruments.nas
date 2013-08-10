@@ -424,6 +424,78 @@ rv_mode_update(1, 1);
 
 
 ######################################################################
+#
+# IKU-1
+#
+
+var iku_vor_bearing = func(i) {
+    setprop("tu154/instrumentation/nav["~i~"]/bearing-deg",
+            getprop("instrumentation/nav["~i~"]/radials/reciprocal-radial-deg")
+            - getprop("fdm/jsbsim/instrumentation/bgmk-"~(i+1)));
+}
+iku_vor_bearing_timer = [maketimer(0.1, func { iku_vor_bearing(0) }),
+                         maketimer(0.1, func { iku_vor_bearing(1) })];
+
+var iku_mode_update = func(i, b) {
+    var sel = getprop("tu154/instrumentation/iku-1["~i~"]/mode-"~b);
+    var bearing = 90;
+    var j = b - 1;
+    if (sel) {
+        if (getprop("instrumentation/nav["~j~"]/in-range")
+            and !getprop("instrumentation/nav["~j~"]/nav-loc")) {
+            iku_vor_bearing_timer[j].start();
+            bearing = "tu154/instrumentation/nav["~j~"]/bearing-deg";
+        }
+    } else {
+        if (getprop("instrumentation/adf["~j~"]/in-range")) {
+            iku_vor_bearing_timer[j].stop();
+            bearing = "instrumentation/adf["~j~"]/indicated-bearing-deg";
+        }
+    }
+
+    interpolate("tu154/instrumentation/iku-1["~i~"]/trans-"~b, sel, 0.1);
+    realias("tu154/instrumentation/iku-1["~i~"]/heading-"~b, bearing, 0.5,
+            [0, 360]);
+}
+
+var iku0_mode1_update = func {
+    iku_mode_update(0, 1);
+}
+
+var iku0_mode2_update = func {
+    iku_mode_update(0, 2);
+}
+
+var iku1_mode1_update = func {
+    iku_mode_update(1, 1);
+}
+
+var iku1_mode2_update = func {
+    iku_mode_update(1, 2);
+}
+
+var iku_both_mode1_update = func {
+    iku0_mode1_update();
+    iku1_mode1_update();
+}
+
+var iku_both_mode2_update = func {
+    iku0_mode2_update();
+    iku1_mode2_update();
+}
+
+setlistener("instrumentation/adf[0]/in-range", iku_both_mode1_update, 0, 0);
+setlistener("instrumentation/nav[0]/in-range", iku_both_mode1_update, 0, 0);
+setlistener("instrumentation/nav[0]/nav-loc", iku_both_mode1_update, 0, 0);
+setlistener("instrumentation/adf[1]/in-range", iku_both_mode2_update, 0, 0);
+setlistener("instrumentation/nav[1]/in-range", iku_both_mode2_update, 0, 0);
+setlistener("instrumentation/nav[1]/nav-loc", iku_both_mode2_update, 0, 0);
+setlistener("tu154/instrumentation/iku-1[0]/mode-1", iku0_mode1_update, 1);
+setlistener("tu154/instrumentation/iku-1[0]/mode-2", iku0_mode2_update, 1);
+setlistener("tu154/instrumentation/iku-1[1]/mode-1", iku1_mode1_update, 1);
+setlistener("tu154/instrumentation/iku-1[1]/mode-2", iku1_mode2_update, 1);
+
+
 
 # digit wheels support for UVO-15 SVS altimeter
 # meters
@@ -574,61 +646,6 @@ setlistener("tu154/instrumentation/skawk/handle-5", skawk_handler,0,0 );
 
 if( getprop( "instrumentation/transponder/inputs/digit" ) != nil ) skawk_init();
 
-
-# IKU support
-iku_handler = func {
-settimer( iku_handler, 0.1 );
-
-#Captain panel
-# yellow needle
-var sel_yellow = getprop("tu154/instrumentation/iku-1[0]/l-mode");
-if( sel_yellow == nil ) sel_yellow = 0.0;
-var param_yellow = getprop("instrumentation/nav[0]/radials/reciprocal-radial-deg");
-if( param_yellow == nil ) param_yellow = 0.0;
-var compass = getprop("fdm/jsbsim/instrumentation/bgmk-1");
-if( compass == nil ) compass = 0.0;
-if( sel_yellow == 0.0 ) # ADF
-	param_yellow = getprop("instrumentation/adf[0]/indicated-bearing-deg");
-else param_yellow -= compass;
-if( param_yellow == nil ) param_yellow = 0.0;
-setprop("tu154/instrumentation/iku-1[0]/indicated-heading-l", param_yellow );
-# White needle
-var sel_white = getprop("tu154/instrumentation/iku-1[0]/r-mode");
-if( sel_white == nil ) sel_white = 0.0;
-var param_white = getprop("instrumentation/nav[1]/radials/reciprocal-radial-deg");
-if( param_white == nil ) param_white = 0.0;
-if( sel_white == 0.0 ) # ADF
-	param_white = getprop("instrumentation/adf[1]/indicated-bearing-deg");
-else param_white -= compass;
-if( param_white == nil ) param_white = 0.0;
-setprop("tu154/instrumentation/iku-1[0]/indicated-heading-r", param_white );
-
-#Copilot panel
-compass = getprop("fdm/jsbsim/instrumentation/bgmk-2");
-if( compass == nil ) compass = 0.0;
-# yellow needle
-sel_yellow = getprop("tu154/instrumentation/iku-1[1]/l-mode");
-if( sel_yellow == nil ) sel_yellow = 0.0; 
-param_yellow = getprop("instrumentation/nav[0]/radials/reciprocal-radial-deg");
-if( param_yellow == nil ) param_yellow = 0.0;
-if( sel_yellow == 0.0 ) # ADF
-	param_yellow = getprop("instrumentation/adf[0]/indicated-bearing-deg");
-else param_yellow -= compass;
-if( param_yellow == nil ) param_yellow = 0.0;
-setprop("tu154/instrumentation/iku-1[1]/indicated-heading-l", param_yellow );
-# White needle
-sel_white = getprop("tu154/instrumentation/iku-1[1]/r-mode");
-if( sel_white == nil ) sel_white = 0.0; 
- getprop("instrumentation/nav[1]/radials/reciprocal-radial-deg");
-if( param_white == nil ) param_white = 0.0;
-if( sel_white == 0.0 ) # ADF
-	param_white = getprop("instrumentation/adf[1]/indicated-bearing-deg");
-else param_white -= compass;
-if( param_white == nil ) param_white = 0.0;
-setprop("tu154/instrumentation/iku-1[1]/indicated-heading-r", param_white );
-}
-
-iku_handler();
 
 # COM radio support
 var com_1_handler = func {

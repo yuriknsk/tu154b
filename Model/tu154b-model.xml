@@ -221,7 +221,18 @@
 <!-- IKU-1 heading indicator  -->
 <model>
   <name>iku-1</name>
-  <path>Aircraft/tu154b/Instruments-3d/iku-1/iku-1-1.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/iku-1/iku-1.xml</path>
+  <overlay>
+    <params>
+      <compass>fdm/jsbsim/instrumentation/bgmk-1</compass>
+      <heading-1>tu154/instrumentation/iku-1[0]/heading-1</heading-1>
+      <heading-2>tu154/instrumentation/iku-1[0]/heading-2</heading-2>
+      <mode-1>tu154/instrumentation/iku-1[0]/mode-1</mode-1>
+      <mode-2>tu154/instrumentation/iku-1[0]/mode-2</mode-2>
+      <trans-1>tu154/instrumentation/iku-1[0]/trans-1</trans-1>
+      <trans-2>tu154/instrumentation/iku-1[0]/trans-2</trans-2>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-22.613</x-m>
     <y-m>-0.446</y-m>
@@ -524,7 +535,18 @@
 <!-- IKU-1 heading indicator  -->
 <model>
   <name>iku-1-cp</name>
-  <path>Aircraft/tu154b/Instruments-3d/iku-1/iku-1-cp.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/iku-1/iku-1.xml</path>
+  <overlay>
+    <params>
+      <compass>fdm/jsbsim/instrumentation/bgmk-2</compass>
+      <heading-1>tu154/instrumentation/iku-1[1]/heading-1</heading-1>
+      <heading-2>tu154/instrumentation/iku-1[1]/heading-2</heading-2>
+      <mode-1>tu154/instrumentation/iku-1[1]/mode-1</mode-1>
+      <mode-2>tu154/instrumentation/iku-1[1]/mode-2</mode-2>
+      <trans-1>tu154/instrumentation/iku-1[1]/trans-1</trans-1>
+      <trans-2>tu154/instrumentation/iku-1[1]/trans-2</trans-2>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-22.612</x-m>
     <y-m>0.633</y-m>
