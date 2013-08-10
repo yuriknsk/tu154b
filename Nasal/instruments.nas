@@ -496,6 +496,50 @@ setlistener("tu154/instrumentation/iku-1[1]/mode-1", iku1_mode1_update, 1);
 setlistener("tu154/instrumentation/iku-1[1]/mode-2", iku1_mode2_update, 1);
 
 
+######################################################################
+#
+# UShDB
+#
+
+var ushdb_mode_update = func(b) {
+    var sel = getprop("tu154/switches/ushdb-sel-"~b);
+    if (int(sel) != sel) # The switch is in transition.
+        return;
+    var bearing = 90;
+    var j = b - 1;
+    if (sel) {
+        if (getprop("instrumentation/nav["~j~"]/in-range")
+            and !getprop("instrumentation/nav["~j~"]/nav-loc"))
+            bearing =
+                "instrumentation/nav["~j~"]/radials/reciprocal-radial-deg";
+    } else {
+        if (getprop("instrumentation/adf["~j~"]/in-range"))
+            bearing = "instrumentation/adf["~j~"]/indicated-bearing-deg";
+    }
+
+    realias("tu154/instrumentation/ushdb/heading-deg-"~b, bearing, 0.5,
+            [0, 360]);
+}
+
+var ushdb_mode1_update = func {
+    ushdb_mode_update(1);
+}
+
+var ushdb_mode2_update = func {
+    ushdb_mode_update(2);
+}
+
+setlistener("instrumentation/adf[0]/in-range", ushdb_mode1_update, 0, 0);
+setlistener("instrumentation/nav[0]/in-range", ushdb_mode1_update, 0, 0);
+setlistener("instrumentation/nav[0]/nav-loc", ushdb_mode1_update, 0, 0);
+setlistener("instrumentation/adf[1]/in-range", ushdb_mode2_update, 0, 0);
+setlistener("instrumentation/nav[1]/in-range", ushdb_mode2_update, 0, 0);
+setlistener("instrumentation/nav[1]/nav-loc", ushdb_mode2_update, 0, 0);
+setlistener("tu154/switches/ushdb-sel-1", ushdb_mode1_update, 1);
+setlistener("tu154/switches/ushdb-sel-2", ushdb_mode2_update, 1);
+
+
+######################################################################
 
 # digit wheels support for UVO-15 SVS altimeter
 # meters
@@ -2590,25 +2634,6 @@ setlistener("instrumentation/nav[2]/powered", rsbn_pwr_watchdog, 0,0 );
 setlistener("instrumentation/nav[2]/in-range", rsbn_range_watchdog,0,0 );
 
 
-
-# USHDB support
-var ushdb_handler = func{
-settimer(ushdb_handler, 0.0);
-
-if( getprop( "tu154/switches/ushdb-sel-1" ) == 1.0 ) 
-	var hdg_1 = getprop( "instrumentation/nav[0]/radials/reciprocal-radial-deg");
-else var hdg_1 = getprop( "instrumentation/adf[0]/indicated-bearing-deg");
-	if( hdg_1 == nil ) hdg_1 = 0.0;
-if( getprop( "tu154/switches/ushdb-sel-2" ) == 1.0 )
-	var hdg_2 = getprop( "instrumentation/nav[1]/radials/reciprocal-radial-deg");
-else var hdg_2 = getprop( "instrumentation/adf[1]/indicated-bearing-deg");
-	if( hdg_2 == nil ) hdg_2 = 0.0;
-setprop( "tu154/instrumentation/ushdb/heading-deg-1", hdg_1 );	
-setprop( "tu154/instrumentation/ushdb/heading-deg-2", hdg_2 );	
-
-}
-
-ushdb_handler();
 
 # ARK support
 
