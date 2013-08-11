@@ -540,30 +540,32 @@ setlistener("tu154/switches/ushdb-sel-2", ushdb_mode2_update, 1);
 
 
 ######################################################################
+#
+# UVID
+#
 
-# digit wheels support for UVO-15 SVS altimeter
-# meters
-altimeter1_handler = func {
-settimer( altimeter1_handler, 0 );
-if( getprop("tu154/systems/svs/powered") != 1 ) return;
-var alt = getprop("instrumentation/altimeter/indicated-altitude-ft");
-if( alt == nil ) { return; }
+var uvid_inhg = func(i) {
+    var inhgX100 = getprop("tu154/instrumentation/altimeter["~i~"]/inhgX100");
+    setprop("instrumentation/altimeter["~i~"]/setting-inhg", inhgX100 / 100.0);
 
-alt = alt * 0.3048;	# go to meters
+    if (i == 0) {
+        setprop("tu154/instrumentation/altimeter["~i~"]/mmhg",
+                inhgX100 * 0.254);
+    }
 
-setprop("tu154/instrumentation/altimeter/indicated-wheels_dec_m", 
-(alt/10.0) - int( alt/100.0 )*10.0 );
-
-setprop("tu154/instrumentation/altimeter/indicated-wheels_hund_m", 
-(alt/100.0) - int( alt/1000.0 )*10.0 );
-
-setprop("tu154/instrumentation/altimeter/indicated-wheels_ths_m", 
-(alt/1000.0) - int( alt/10000.0 )*10.0 );
-
-setprop("tu154/instrumentation/altimeter/indicated-wheels_decths_m", 
-(alt/10000.0) - int( alt/100000.0 )*10.0 );
-
+    if (getprop("tu154/instrumentation/altimeters-sync-inhg")) {
+        setprop("tu154/instrumentation/altimeter["~(1-i)~"]/inhgX100",
+                inhgX100);
+    }
 }
+
+setlistener("tu154/instrumentation/altimeter[0]/inhgX100",
+            func { uvid_inhg(0) }, 1);
+setlistener("tu154/instrumentation/altimeter[1]/inhgX100",
+            func { uvid_inhg(1) }, 1);
+
+
+######################################################################
 
 svs_power = func{
 if( getprop( "tu154/switches/SVS-power" ) == 1.0 )
@@ -573,28 +575,7 @@ else electrical.AC3x200_bus_1L.rm_output( "SVS" );
 
 setlistener("tu154/switches/SVS-power", svs_power, 0, 0);
 
-
-
 # feet
-altimeter2_handler = func {
-settimer( altimeter2_handler, 0 );
-if( getprop("tu154/instrumentation/altimeter[1]/powered") != 1 ) return;
-var alt = getprop("instrumentation/altimeter[1]/indicated-altitude-ft");
-if( alt == nil ) { return; }
-
-setprop("tu154/instrumentation/altimeter[1]/indicated-wheels_dec_ft", 
-(alt/10.0) - int( alt/100.0 )*10.0 );
-
-setprop("tu154/instrumentation/altimeter[1]/indicated-wheels_hund_ft", 
-(alt/100.0) - int( alt/1000.0 )*10.0 );
-
-setprop("tu154/instrumentation/altimeter[1]/indicated-wheels_ths_ft", 
-(alt/1000.0) - int( alt/10000.0 )*10.0 );
-
-setprop("tu154/instrumentation/altimeter[1]/indicated-wheels_decths_ft", 
-(alt/10000.0) - int( alt/100000.0 )*10.0 );
-}
-
 uvid15_power = func{
 if( getprop( "tu154/switches/UVID" ) == 1.0 )
 	electrical.AC3x200_bus_1L.add_output( "UVID-15", 10.0);
@@ -603,50 +584,6 @@ else electrical.AC3x200_bus_1L.rm_output( "UVID-15" );
 
 setlistener("tu154/switches/UVID", uvid15_power, 0, 0 );
 
-
-#pressure setting
-altimeter1_pressure_handler = func{
-var pressure = getprop("instrumentation/altimeter/setting-inhg");
-if( pressure == nil ) { return; }
-pressure = pressure * 25.4;	# go to metrics (mmhg)
-
-setprop("tu154/instrumentation/altimeter/mmhg", pressure );
-
-setprop("tu154/instrumentation/altimeter/mmhg-wheels_dec", 
-(pressure/10.0) - int( pressure/100.0 )*10.0 );
-
-setprop("tu154/instrumentation/altimeter/mmhg-wheels_hund", 
-(pressure/100.0) - int( pressure/1000.0 )*10.0 );
-
-}
-
-altimeter2_pressure_handler = func{
-var pressure = getprop("instrumentation/altimeter[1]/setting-inhg");
-if( pressure == nil ) { return; }
-pressure = pressure * 100.0;
-setprop("tu154/instrumentation/altimeter[1]/inhg", pressure );
-
-setprop("tu154/instrumentation/altimeter[1]/inhg-wheels_dec", 
-(pressure/10.0) - int( pressure/100.0 )*10.0 );
-
-setprop("tu154/instrumentation/altimeter[1]/inhg-wheels_hund", 
-(pressure/100.0) - int( pressure/1000.0 )*10.0 );
-
-setprop("tu154/instrumentation/altimeter[1]/inhg-wheels_ths", 
-(pressure/1000.0) - int( pressure/10000.0 )*10.0 );
-}
-
-setlistener("instrumentation/altimeter/setting-inhg", altimeter1_pressure_handler, 0, 0);
-setlistener("instrumentation/altimeter[1]/setting-inhg", altimeter2_pressure_handler, 0, 0);
-
-
-
-
-altimeter1_handler();
-altimeter2_handler();
-
-altimeter1_pressure_handler();
-altimeter2_pressure_handler();
 
 # SKAWK support
 

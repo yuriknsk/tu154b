@@ -360,6 +360,9 @@
     <volume-norm type="double" >0.2</volume-norm>
     <serviceable type="bool">false</serviceable>
   </adf>
+  <altimeter n="0">
+    <serviceable type="bool" >true</serviceable>
+  </altimeter>
   <altimeter n="1">
     <serviceable type="bool" >true</serviceable>
   </altimeter>
@@ -857,6 +860,13 @@
   
   <instrumentation>
     <distance-to-pnp type="bool">true</distance-to-pnp>
+    <altimeters-sync-inhg type="bool">true</altimeters-sync-inhg>
+    <altimeter n="0">
+      <inhgX100 type="int">2992</inhgX100>
+    </altimeter>
+    <altimeter n="1">
+      <inhgX100 type="int">2992</inhgX100>
+    </altimeter>
     <ark-15 n="0">
       <powered type="bool">false</powered>
     </ark-15>

@@ -523,7 +523,7 @@
 <!-- Altimeter UVID-15 metric  -->
 <model>
   <name>uvid-15m-cp</name>
-  <path>Aircraft/tu154b/Instruments-3d/uvid-15/uvid-15-m-cp.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/uvid-15/uvid-15-m.xml</path>
   <offsets>
     <x-m>-22.612</x-m>
     <y-m>0.629</y-m>
