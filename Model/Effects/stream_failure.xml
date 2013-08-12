@@ -3,7 +3,7 @@
 <PropertyList>
 
   <particlesystem>
-    <name>stream failure</name>
+    <name>stream_failure</name>
     <type>trail</type>
     <texture>smoke3.png</texture>
     <emissive>false</emissive>
