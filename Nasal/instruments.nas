@@ -170,24 +170,19 @@ var realias = func(src, dst, delay, wrap=nil) {
 #
 
 # Track NVU Z offset.
-setlistener("fdm/jsbsim/instrumentation/aircraft-integrator-z-1", func {
-    var offset = getprop("fdm/jsbsim/instrumentation/aircraft-integrator-z-1");
+var nvu_z_offset_norm = func(i) {
+    var offset = getprop("fdm/jsbsim/instrumentation/aircraft-integrator-z-"~i);
     offset /= 4000;
     if (offset < -1)
         offset = -1;
     else if (offset > 1)
         offset = 1;
-    setprop("tu154/systems/nvu-calc/z-1-offset-norm", -offset);
-}, 1);
-setlistener("fdm/jsbsim/instrumentation/aircraft-integrator-z-2", func {
-    var offset = getprop("fdm/jsbsim/instrumentation/aircraft-integrator-z-2");
-    offset /= 4000;
-    if (offset < -1)
-        offset = -1;
-    else if (offset > 1)
-        offset = 1;
-    setprop("tu154/systems/nvu-calc/z-2-offset-norm", -offset);
-}, 1);
+    setprop("tu154/instrumentation/nvu/z-"~i~"-offset-norm", -offset);
+}
+setlistener("fdm/jsbsim/instrumentation/aircraft-integrator-z-1",
+            func { nvu_z_offset_norm(1) }, 1);
+setlistener("fdm/jsbsim/instrumentation/aircraft-integrator-z-2",
+            func { nvu_z_offset_norm(2) }, 1);
 
 var pnp_mode_update = func(i, mode) {
     var plane = "/tu154/instrumentation/pnp["~i~"]/plane-dialed";
@@ -200,10 +195,10 @@ var pnp_mode_update = func(i, mode) {
     if (mode == 1 and getprop("tu154/systems/nvu/serviceable")) { # NVU
         if (getprop("fdm/jsbsim/instrumentation/nvu-selector")) {
             plane = "fdm/jsbsim/instrumentation/zpu-deg-1";
-            defl_course = "tu154/systems/nvu-calc/z-1-offset-norm";
+            defl_course = "tu154/instrumentation/nvu/z-1-offset-norm";
         } else {
             plane = "fdm/jsbsim/instrumentation/zpu-deg-2";
-            defl_course = "tu154/systems/nvu-calc/z-2-offset-norm";
+            defl_course = "tu154/instrumentation/nvu/z-2-offset-norm";
         }
         blank_course = 0;
         if (getprop("tu154/instrumentation/distance-to-pnp")) {
