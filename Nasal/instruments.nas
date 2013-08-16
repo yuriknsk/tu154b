@@ -260,10 +260,10 @@ var pnp_mode_update = func(i, mode) {
 
 # PNP mode for first pilot.
 var pnp0_mode_update = func {
-    var sel = getprop("fdm/jsbsim/ap/roll-selector");
+    var sel = getprop("fdm/jsbsim/ap/roll-selector") or 0;
     if (!getprop("instrumentation/heading-indicator[0]/serviceable")
         or !getprop("tu154/systems/absu/serviceable"))
-        sel = 0;
+        sel = -1;
 
     var mode = 0; # Disabled or Stab or ZK (sel == 0 or sel == 1 or sel == 2)
     if (sel == 3) { # VOR
@@ -274,14 +274,23 @@ var pnp0_mode_update = func {
         mode = 1;
     } else if (sel == 5) { # SP
         mode = 4;
+    } else if (sel != -1) {
+        if (getprop("tu154/switches/pn-5-navigac") == 0
+            and getprop("tu154/switches/pn-5-posadk") == 1
+            and getprop("instrumentation/nav[0]/nav-loc")
+            and (getprop("instrumentation/nav[0]/in-range")
+                 or getprop("instrumentation/nav[0]/gs-in-range")))
+            mode = 4;
     }
     pnp_mode_update(0, mode);
 }
 
 # PNP mode for second pilot.
 var pnp1_mode_update = func {
-    var mode = getprop("tu154/switches/pn-6-selector") or 0;
-    pnp_mode_update(1, mode);
+    var sel = getprop("tu154/switches/pn-6-selector") or 0;
+    if (!getprop("instrumentation/heading-indicator[1]/serviceable"))
+        sel = 0;
+    pnp_mode_update(1, sel);
 }
 
 var pnp_both_mode_update = func {
@@ -290,6 +299,8 @@ var pnp_both_mode_update = func {
 }
 
 setlistener("tu154/systems/absu/serviceable", pnp0_mode_update, 0, 0);
+setlistener("tu154/switches/pn-5-navigac", pnp0_mode_update);
+setlistener("tu154/switches/pn-5-posadk", pnp0_mode_update);
 setlistener("fdm/jsbsim/ap/roll-selector", pnp0_mode_update);
 setlistener("instrumentation/heading-indicator[0]/serviceable",
             pnp0_mode_update, 1, 0);
