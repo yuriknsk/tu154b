@@ -360,6 +360,32 @@ setlistener("instrumentation/nav[2]/in-range", idr_both_mode_update, 0, 0);
 # RV-5M
 #
 
+var rv_altitude_update = func {
+    var alt_m = getprop("position/altitude-agl-ft") * 0.3048;
+    settimer(rv_altitude_update, (alt_m < 1200 ? 0.1 : (alt_m - 900) / 300));
+    if (alt_m > 0) {
+        var pitch_deg = getprop("orientation/pitch-deg");
+        var roll_deg = getprop("orientation/roll-deg");
+        if (-90 < pitch_deg and pitch_deg < 90
+            and -90 < roll_deg and roll_deg < 90) {
+            var beam_rad = math.acos(math.cos(pitch_deg / 57.3)
+                                     * math.cos(roll_deg / 57.3));
+            if (beam_rad > 0.262) { # > 15 degrees
+                beam_rad -= 0.262;
+                alt_m /= math.cos(beam_rad);
+            }
+            if (alt_m > 850)
+                alt_m = 850;
+        } else {
+            alt_m = 850;
+        }
+    } else {
+        alt_m = 0;
+    }
+    setprop("fdm/jsbsim/instrumentation/indicated-altitude-m", alt_m);
+}
+settimer(rv_altitude_update, 0.1);
+
 var rv_mode_update = func(i, toggled) {
     # Temporal hack to wait electrical initialization.
     if (getprop("tu154/switches/main-battery") == nil) {

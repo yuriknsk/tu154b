@@ -467,6 +467,7 @@
       <pnp-left-selector>0</pnp-left-selector>
       <bgmk-offset-1>50</bgmk-offset-1>
       <bgmk-offset-2>250</bgmk-offset-2>
+      <indicated-altitude-m>0</indicated-altitude-m>
     </instrumentation>
     <ap>
 <!--      <gs-gain>8.0</gs-gain>-->
