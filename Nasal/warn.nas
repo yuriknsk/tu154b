@@ -140,8 +140,8 @@ strobe.switch(0);
 #strobe_2.switch(0);
 
 # PKP blankers
-setprop("tu154/instrumentation/pkp/kurs-blanker", 1 );
-setprop("tu154/instrumentation/pkp/gliss-blanker", 1 );
+setprop("tu154/instrumentation/pkp/kurs-failure", 0 );
+setprop("tu154/instrumentation/pkp/gliss-failure", 0 );
 }
 
 var nav_lighting = func{
@@ -527,9 +527,9 @@ if( getprop( "tu154/systems/electrical/checking-lamps/main-panel" ) == 1.0 ) ret
 # "Podg navigacii" switch control 
 var stu_enabled = (getprop("tu154/switches/pn-5-posadk") !=
                    getprop("tu154/switches/pn-5-navigac"));
+var stu_posadk = getprop("tu154/switches/pn-5-posadk");
 if (stu_enabled) {
     setprop("tu154/instrumentation/pn-6/lamp-1", 1.0);
-    var stu_posadk = getprop("tu154/switches/pn-5-posadk");
     setprop("tu154/instrumentation/pn-6/lamp-2", stu_posadk);
     setprop("tu154/instrumentation/pn-6/lamp-3", stu_posadk);
 } else {
@@ -620,12 +620,12 @@ if( getprop( "fdm/jsbsim/ap/roll-hold" ) == 1.0 )
          setprop("tu154/systems/warning/absu", 1 );
          setprop("tu154/systems/electrical/indicators/heading", 0 );
          setprop("tu154/systems/electrical/indicators/vor", 0 );
-         setprop("tu154/instrumentation/pkp/kurs-blanker", 1 );
  }
  else  { setprop("tu154/systems/electrical/indicators/bank", 0 );
          setprop("tu154/systems/warning/absu", 0 );
  }
- 	
+ setprop("tu154/instrumentation/pkp/kurs-failure",
+         (!stu_enabled or param > 0));
 	
 	
 # ABSU pitch hydrosystem failure
@@ -654,11 +654,13 @@ if( param > 0.0 ) {
         setprop("tu154/systems/electrical/indicators/pitch", 1 );
         setprop("tu154/systems/warning/absu", 1 );
         setprop("tu154/systems/electrical/indicators/glideslope", 0 );
-        setprop("tu154/instrumentation/pkp/gliss-blanker", 1 );
 }
 else  { setprop("tu154/systems/electrical/indicators/pitch", 0 );
         setprop("tu154/systems/warning/absu", 0 );
 }
+setprop("tu154/instrumentation/pkp/gliss-failure",
+        (!stu_enabled or !stu_posadk or param > 0));
+
 # ISO
 param = 0.0;
 if( getprop( "fdm/jsbsim/instrumentation/indicated-altitude-m" ) < 60.0 )

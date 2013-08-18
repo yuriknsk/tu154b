@@ -11,8 +11,6 @@
   <params>
     <defl-course>tu154/instrumentation/pnp[0]/defl-course</defl-course>
     <defl-gs>tu154/instrumentation/pnp[0]/defl-gs</defl-gs>
-    <blank-course>tu154/instrumentation/pnp[0]/blank-course</blank-course>
-    <blank-gs>tu154/instrumentation/pnp[0]/blank-gs</blank-gs>
     <failed>tu154/instrumentation/bkk/mgv-1-failure</failed>
   </params>
 
@@ -215,9 +213,17 @@
 <animation>
   <type>rotate</type>
   <object-name>kurs_flag</object-name>
-  <property alias="../../params/blank-gs"/>
-  <factor>180.0</factor>
-  <offset-deg>180.0</offset-deg>
+  <expression>
+    <table>
+      <sum>
+        <property>tu154/instrumentation/pnp[0]/blank-gs</property>
+        <property>tu154/instrumentation/pkp/gliss-failure</property>
+      </sum>
+      <entry><ind>0</ind><dep>180</dep></entry>
+      <entry><ind>1</ind><dep>360</dep></entry>
+      <entry><ind>2</ind><dep>360</dep></entry>
+    </table>
+  </expression>
   <center>
     <x-m>0.0</x-m>
     <y-m>0.024</y-m>
@@ -233,9 +239,17 @@
 <animation>
   <type>rotate</type>
   <object-name>gliss_flag</object-name>
-  <property alias="../../params/blank-course"/>
-  <factor>180.0</factor>
-  <offset-deg>180.0</offset-deg>
+  <expression>
+    <table>
+      <sum>
+        <property>tu154/instrumentation/pnp[0]/blank-course</property>
+        <property>tu154/instrumentation/pkp/kurs-failure</property>
+      </sum>
+      <entry><ind>0</ind><dep>180</dep></entry>
+      <entry><ind>1</ind><dep>360</dep></entry>
+      <entry><ind>2</ind><dep>360</dep></entry>
+    </table>
+  </expression>
   <center>
     <x-m>0.0</x-m>
     <y-m>-0.055</y-m>

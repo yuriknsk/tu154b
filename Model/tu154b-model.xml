@@ -140,8 +140,6 @@
     <params>
       <defl-course>tu154/instrumentation/pnp[0]/defl-course</defl-course>
       <defl-gs>tu154/instrumentation/pnp[0]/defl-gs</defl-gs>
-      <blank-course>tu154/instrumentation/pnp[0]/blank-course</blank-course>
-      <blank-gs>tu154/instrumentation/pnp[0]/blank-gs</blank-gs>
       <failed>tu154/instrumentation/bkk/mgv-1-failure</failed>
     </params>
   </overlay>
@@ -472,8 +470,6 @@
     <params>
       <defl-course>tu154/instrumentation/pnp[1]/defl-course</defl-course>
       <defl-gs>tu154/instrumentation/pnp[1]/defl-gs</defl-gs>
-      <blank-course>tu154/instrumentation/pnp[1]/blank-course</blank-course>
-      <blank-gs>tu154/instrumentation/pnp[1]/blank-gs</blank-gs>
       <failed>tu154/instrumentation/bkk/mgv-2-failure</failed>
     </params>
   </overlay>
