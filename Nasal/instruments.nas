@@ -146,9 +146,6 @@ var realias = func(src, dst, delay, wrap=nil) {
 # right KURS-MP to ILS will result in VOR2 mode blanked on both
 # channels.
 #
-# The same state of course and glideslope deflections and their
-# blankers is shown on corresponding PKP instruments.
-#
 # When /tu154/instrumentation/distance-to-pnp is set to true distance
 # digit wheels show active abs(S) in NVU mode, DME value in VOR modes,
 # ILS-DME value in SP mode, or blanked zeroes in normal mode or when
@@ -407,7 +404,7 @@ var rv_altitude_update = func {
     }
     setprop("fdm/jsbsim/instrumentation/indicated-altitude-m", alt_m);
 }
-settimer(rv_altitude_update, 0.1);
+rv_altitude_update();
 
 var rv_mode_update = func(i, toggled) {
     # Temporal hack to wait electrical initialization.
@@ -489,12 +486,13 @@ var iku_mode_update = func(i, b) {
             and !getprop("instrumentation/nav["~j~"]/nav-loc")) {
             iku_vor_bearing_timer[j].start();
             bearing = "tu154/instrumentation/nav["~j~"]/bearing-deg";
+        } else {
+            iku_vor_bearing_timer[j].stop();
         }
     } else {
-        if (getprop("instrumentation/adf["~j~"]/in-range")) {
-            iku_vor_bearing_timer[j].stop();
+        iku_vor_bearing_timer[j].stop();
+        if (getprop("instrumentation/adf["~j~"]/in-range"))
             bearing = "instrumentation/adf["~j~"]/indicated-bearing-deg";
-        }
     }
 
     interpolate("tu154/instrumentation/iku-1["~i~"]/trans-"~b, sel, 0.1);
