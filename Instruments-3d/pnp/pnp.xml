@@ -290,8 +290,8 @@
   <object-name>dig_heading_ones</object-name>
   <expression>
     <product>
-      <abs><property alias="../../../../../params/distance"/></abs>
-      <value>0.036</value>
+      <property alias="../../../../params/distance"/>
+      <value>66.672</value><!-- 0.036 * 1852 -->
     </product>
   </expression>
   <center>
@@ -311,7 +311,10 @@
   <expression>
     <table>
       <mod>
-        <abs><property alias="../../../../../../params/distance"/></abs>
+        <product>
+          <property alias="../../../../../../params/distance"/>
+          <value>1852</value>
+        </product>
         <value>100000</value>
       </mod>
       <entry><ind>	    0</ind>	<dep>	0</dep></entry>
@@ -354,7 +357,10 @@
   <expression>
     <table>
       <mod>
-        <abs><property alias="../../../../../../params/distance"/></abs>
+        <product>
+          <property alias="../../../../../../params/distance"/>
+          <value>1852</value>
+        </product>
         <value>1000000</value>
       </mod>
       <entry><ind>	     0</ind>	<dep>	0</dep></entry>

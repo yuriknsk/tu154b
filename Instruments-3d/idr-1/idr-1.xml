@@ -43,7 +43,7 @@
   <type>rotate</type>
   <object-name>dig_hm</object-name>
   <property alias="../../params/distance"/>
-  <factor>0.36</factor>
+  <factor>666.72</factor><!-- 0.36 * 1852 -->
   <center>
     <x-m>-0.02264</x-m>
     <y-m>0.0</y-m>
@@ -63,7 +63,10 @@
   <expression>
     <table>
       <mod>
-        <abs><property alias="../../../../../../params/distance"/></abs>
+        <product>
+          <property alias="../../../../../../params/distance"/>
+          <value>1852</value>
+        </product>
         <value>10000</value>
       </mod>
       <entry><ind>	   0</ind>	<dep>	0</dep></entry>
@@ -107,7 +110,10 @@
   <expression>
     <table>
       <mod>
-        <abs><property alias="../../../../../../params/distance"/></abs>
+        <product>
+          <property alias="../../../../../../params/distance"/>
+          <value>1852</value>
+        </product>
         <value>100000</value>
       </mod>
       <entry><ind>	    0</ind>	<dep>	0</dep></entry>
@@ -151,7 +157,10 @@
   <expression>
     <table>
       <mod>
-        <abs><property alias="../../../../../../params/distance"/></abs>
+        <product>
+          <property alias="../../../../../../params/distance"/>
+          <value>1852</value>
+        </product>
         <value>1000000</value>
       </mod>
       <entry><ind>	     0</ind>	<dep>	0</dep></entry>
