@@ -166,16 +166,24 @@ var realias = func(src, dst, delay, wrap=nil) {
 # NVU is active.
 #
 
-# Convert NVU S distance to NM.
-var nvu_s_nm = func(i) {
-    var dist = getprop("fdm/jsbsim/instrumentation/aircraft-integrator-s-"~i);
-    dist /= 1852;
-    setprop("tu154/instrumentation/nvu/s-"~i~"-nm", abs(dist));
+# Smooth DME updates.
+var dme_distance = func(i) {
+    var distance = getprop("instrumentation/dme["~i~"]/indicated-distance-nm");
+    # We ignore exact zero distance because it signifies out of range
+    # condition, and we want to keep last value in this case.  Within DME
+    # proximity exact zero distance is highly unlikely, and close to zero
+    # update will be enough.
+    if (distance) {
+        distance = int(distance * 18.52) * 100;
+        interpolate("tu154/instrumentation/dme["~i~"]/distance", distance, 0.2);
+    }
 }
-setlistener("fdm/jsbsim/instrumentation/aircraft-integrator-s-1",
-            func { nvu_s_nm(1) }, 1);
-setlistener("fdm/jsbsim/instrumentation/aircraft-integrator-s-2",
-            func { nvu_s_nm(2) }, 1);
+setlistener("instrumentation/dme[0]/indicated-distance-nm",
+            func { dme_distance(0) }, 0, 0);
+setlistener("instrumentation/dme[1]/indicated-distance-nm",
+            func { dme_distance(1) }, 0, 0);
+setlistener("instrumentation/dme[2]/indicated-distance-nm",
+            func { dme_distance(2) }, 0, 0);
 
 # Normalize NVU Z offset.
 var nvu_z_offset_norm = func(i) {
@@ -196,7 +204,7 @@ var pnp_mode_update = func(i, mode) {
     var plane = "/tu154/instrumentation/pnp["~i~"]/plane-dialed";
     var defl_course = 0;
     var defl_gs = 0;
-    var distance = 0;
+    var distance = getprop("/tu154/instrumentation/pnp["~i~"]/distance");
     var blank_course = 1;
     var blank_gs = 1;
     var blank_dist = 1;
@@ -211,9 +219,9 @@ var pnp_mode_update = func(i, mode) {
         blank_course = 0;
         if (getprop("tu154/instrumentation/distance-to-pnp")) {
             if (getprop("fdm/jsbsim/instrumentation/nvu-selector"))
-                distance = "tu154/instrumentation/nvu/s-1-nm";
+                distance = "fdm/jsbsim/instrumentation/aircraft-integrator-s-1";
             else
-                distance = "tu154/instrumentation/nvu/s-2-nm";
+                distance = "fdm/jsbsim/instrumentation/aircraft-integrator-s-2";
             blank_dist = 0;
         }
     } else if (mode == 2 and !getprop("instrumentation/nav[0]/nav-loc")) { #VOR1
@@ -224,7 +232,7 @@ var pnp_mode_update = func(i, mode) {
         }
         if (getprop("tu154/instrumentation/distance-to-pnp")
             and getprop("instrumentation/dme[0]/in-range")) {
-            distance = "instrumentation/dme[0]/indicated-distance-nm";
+            distance = "tu154/instrumentation/dme[0]/distance";
             blank_dist = 0;
         }
     } else if (mode == 3 and !getprop("instrumentation/nav[1]/nav-loc")) { #VOR2
@@ -235,7 +243,7 @@ var pnp_mode_update = func(i, mode) {
         }
         if (getprop("tu154/instrumentation/distance-to-pnp")
             and getprop("instrumentation/dme[1]/in-range")) {
-            distance = "instrumentation/dme[1]/indicated-distance-nm";
+            distance = "tu154/instrumentation/dme[1]/distance";
             blank_dist = 0;
         }
     } else if (mode == 4 and getprop("instrumentation/nav[0]/nav-loc")) { # SP
@@ -250,7 +258,7 @@ var pnp_mode_update = func(i, mode) {
         }
         if (getprop("tu154/instrumentation/distance-to-pnp")
             and getprop("instrumentation/dme[0]/in-range")) {
-            distance = "instrumentation/dme[0]/indicated-distance-nm";
+            distance = "tu154/instrumentation/dme[0]/distance";
             blank_dist = 0;
         }
     }
@@ -343,10 +351,10 @@ var idr_mode_update = func(i, selector) {
     if (int(sel) != sel) # The switch is in transition.
         return;
     var ni = (sel ? 3 - sel : 0); # 2 -> 1, 1 -> 2, 0 -> 0
-    var distance = 0;
+    var distance = getprop("/tu154/instrumentation/idr-1["~i~"]/distance");
     var blank = 1;
     if (getprop("instrumentation/dme["~ni~"]/in-range")) {
-        distance = "instrumentation/dme["~ni~"]/indicated-distance-nm";
+        distance = "tu154/instrumentation/dme["~ni~"]/distance";
         blank = 0;
     }
     realias("/tu154/instrumentation/idr-1["~i~"]/distance", distance, 0.5);
@@ -2410,8 +2418,7 @@ settimer(rsbn_handler, 0.0);
 
 if( getprop("tu154/instrumentation/rsbn/serviceable" ) != 1 ) return; # Something is wrong
 
-var distance = getprop("instrumentation/dme[2]/indicated-distance-nm") * 1852;
-if( distance == nil ) distance = 0.0;
+var distance = getprop("tu154/instrumentation/dme[2]/distance");
 setprop( "tu154/instrumentation/rsbn/distance-m", distance ); 
 setprop( "fdm/jsbsim/instrumentation/rsbn-d-m", distance ); 
 var hdg = getprop("instrumentation/nav[2]/radials/actual-deg"); 

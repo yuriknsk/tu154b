@@ -893,6 +893,15 @@
     <ark-15 n="1">
       <powered type="bool" >false</powered>
     </ark-15>
+    <dme>
+      <distance type="double">0</distance>
+    </dme>
+    <dme>
+      <distance type="double">0</distance>
+    </dme>
+    <dme>
+      <distance type="double">0</distance>
+    </dme>
     <pn-5>
       <heading-state type="double" >0.0</heading-state>
       <pitch-state type="double" >0.0</pitch-state>
@@ -912,7 +921,10 @@
       <dialed type="double">0.0</dialed>
     </rv-5m>
     <idr-1>
-      <caged-flag type="bool" >true</caged-flag>
+      <distance type="double">0</distance>
+    </idr-1>
+    <idr-1>
+      <distance type="double">0</distance>
     </idr-1>
     <uap-12>
       <warn type="bool" >false</warn>
@@ -922,11 +934,13 @@
     </uap-12>   
     <pnp>
       <plane-dialed>252.0</plane-dialed>
+      <distance type="double">0</distance>
 <!--      <heading-deg>161.0</heading-deg>
       <heading-deg-delayed>161.0</heading-deg-delayed>-->
     </pnp>
     <pnp>
       <plane-dialed>252.0</plane-dialed>
+      <distance type="double">0</distance>
 <!--      <heading-deg>161.0</heading-deg>
       <heading-deg-delayed>161.0</heading-deg-delayed>-->
     </pnp>
