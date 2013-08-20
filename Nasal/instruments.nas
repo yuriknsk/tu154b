@@ -598,10 +598,8 @@ var uvid_inhg = func(i) {
     var inhgX100 = getprop("tu154/instrumentation/altimeter["~i~"]/inhgX100");
     setprop("instrumentation/altimeter["~i~"]/setting-inhg", inhgX100 / 100.0);
 
-    if (i == 0) {
-        setprop("tu154/instrumentation/altimeter["~i~"]/mmhg",
-                inhgX100 * 0.254);
-    }
+    if (i == 0)
+        setprop("tu154/instrumentation/altimeter[0]/mmhg", inhgX100 * 0.254);
 
     if (getprop("tu154/instrumentation/altimeters-sync-inhg")) {
         setprop("tu154/instrumentation/altimeter["~(1-i)~"]/inhgX100",
@@ -610,9 +608,9 @@ var uvid_inhg = func(i) {
 }
 
 setlistener("tu154/instrumentation/altimeter[0]/inhgX100",
-            func { uvid_inhg(0) }, 1);
+            func { uvid_inhg(0) }, 1, 0);
 setlistener("tu154/instrumentation/altimeter[1]/inhgX100",
-            func { uvid_inhg(1) }, 1);
+            func { uvid_inhg(1) }, 1, 0);
 
 
 ######################################################################
