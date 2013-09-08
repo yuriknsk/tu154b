@@ -10,7 +10,13 @@
 <!-- Hydro system pressure indicator
 3D instrument for Tu-154 -->
 <PropertyList>
- <path>mano.ac</path>
+ <params>
+   <path>mano.ac</path>
+   <pressure>fdm/jsbsim/hs/hs1-pressure</pressure>
+ </params>
+
+ <path alias="../params/path"/>
+
 <!-- Internal instruments lighting -->
 <animation>
   <type>material</type>
@@ -29,7 +35,7 @@
 <animation>
     <type>rotate</type>
     <object-name>needle</object-name>
-    <property>fdm/jsbsim/hs/hs1-pressure</property>
+    <property alias="../../params/pressure"/>
     <interpolation>
       <entry><ind>	0.0</ind>	<dep>	-65.0</dep></entry>
       <entry><ind>	120.0</ind>	<dep>	0.0</dep></entry>

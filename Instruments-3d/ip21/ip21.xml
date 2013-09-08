@@ -4,13 +4,17 @@
     #    (C) 2007 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
     #	2d & 3d instruments, animations, systems and over.		   	#
     #    	yurik@megasignal.com					   	#
-    #############################################################################	  
+    #############################################################################
     -->
 
-<!-- Fuel flow meter UMRT1-21
+<!-- Throttle lever indicator IP21-08
 3D instrument for Tu-154 -->
 <PropertyList>
- <path>umrt1-21.ac</path>
+ <params>
+   <throttle>fdm/jsbsim/fcs/at-throttle-cmd-norm[0]</throttle>
+ </params>
+
+ <path>ip21.ac</path>
 <!-- Internal instruments lighting -->
 <animation>
   <type>material</type>
@@ -33,34 +37,22 @@
   </emission>
 </animation>
 
-  
+
 <!--Needles-->
 <animation>
     <type>rotate</type>
     <object-name>needle</object-name>
-    <property>engines/engine[1]/fuel-flow_pph</property>
-    <!--Fuel flow pph -->
+    <property alias="../../params/throttle"/>
     <interpolation>
-      <entry><ind>	881.0</ind>	<dep>	-142.0</dep></entry>
-      <entry><ind>	2202.0</ind>	<dep>	-117.0</dep></entry>
-      <entry><ind>	4405.0</ind>	<dep>	-70.0</dep></entry>
-      <entry><ind>	6607.0</ind>	<dep>	-25.0</dep></entry>
-      <entry><ind>	9876.0</ind>	<dep>	21.0</dep></entry>
-      <entry><ind>	11013.0</ind>	<dep>	65.0</dep></entry>
-      <entry><ind>	13215.0</ind>	<dep>	110.0</dep></entry>
-      <entry><ind>	15418.0</ind>	<dep>	154.0</dep></entry>
+      <!--<entry><ind>	0.0</ind>	<dep>	-120.0</dep></entry>--><!--full revers-->
+      <entry><ind>	0.0</ind>	<dep>	-40.0</dep></entry><!--idle-->
+      <entry><ind>	0.57</ind>	<dep>	12.0</dep></entry><!--0.4-->
+      <entry><ind>	0.7</ind>	<dep>	40.0</dep></entry><!--0.6-->
+      <entry><ind>	0.75</ind>	<dep>	53.0</dep></entry><!--0.7-->
+      <entry><ind>	0.84</ind>	<dep>	73.0</dep></entry><!--0.85-->
+      <entry><ind>	0.93</ind>	<dep>	92.0</dep></entry><!--nominal-->
+      <entry><ind>	1.0</ind>	<dep>	108.0</dep></entry><!--miltrust-->
     </interpolation>
-    <!--Fuel flow kg/h -->
-<!--    <interpolation>
-      <entry><ind>	400.0</ind>	<dep>	-142.0</dep></entry>
-      <entry><ind>	1000.0</ind>	<dep>	-117.0</dep></entry>
-      <entry><ind>	2000.0</ind>	<dep>	-70.0</dep></entry>
-      <entry><ind>	3000.0</ind>	<dep>	-25.0</dep></entry>
-      <entry><ind>	4000.0</ind>	<dep>	21.0</dep></entry>
-      <entry><ind>	5000.0</ind>	<dep>	65.0</dep></entry>
-      <entry><ind>	6000.0</ind>	<dep>	110.0</dep></entry>
-      <entry><ind>	7000.0</ind>	<dep>	154.0</dep></entry>
-    </interpolation>-->
     <axis>
       <x>-1.0</x>
       <y>0.0</y>

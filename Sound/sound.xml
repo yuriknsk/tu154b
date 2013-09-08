@@ -760,9 +760,20 @@
 </voice>
 <!--PNK sound-->  
 <pnk>
-  <name>rv_altitude</name>
+  <name>rv1_altitude</name>
   <path>Aircraft/tu154b/Sound/misc/telefony.wav</path>
-  <property>tu154/instrumentation/rv-5m/warn</property>
+  <property>tu154/instrumentation/rv-5m[0]/warn</property>
+  <mode>once</mode>
+  <position>
+    <x>-22.0</x>
+    <y>0.0</y>
+    <z>2.5</z>
+  </position>
+</pnk>
+<pnk>
+  <name>rv2_altitude</name>
+  <path>Aircraft/tu154b/Sound/misc/telefony.wav</path>
+  <property>tu154/instrumentation/rv-5m[1]/warn</property>
   <mode>once</mode>
   <position>
     <x>-22.0</x>

@@ -1,22 +1,25 @@
 <?xml version="1.0"?>
 <!--
     #############################################################################
-    #    (C) 2006 by Yurik V. Nikiforoff - port for FGFS,  FDM,   	#
+    #    (C) 2007 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
     #	2d & 3d instruments, animations, systems and over.		   	#
     #    	yurik@megasignal.com					   	#
-    #############################################################################	  
+    #############################################################################
     -->
 
-<!-- Hydro system pressure indicator
+<!-- Turbine turn indicator ITE
 3D instrument for Tu-154 -->
 <PropertyList>
- <path>mano_big.ac</path>
+ <params>
+   <n2>engines/engine[0]/n2</n2>
+ </params>
+
+ <path>ite.ac</path>
 <!-- Internal instruments lighting -->
 <animation>
   <type>material</type>
   <object-name>base</object-name>
   <object-name>needle</object-name>
-  <object-name>face</object-name>
   <emission>
     <red-prop>tu154/light/instruments/int-red</red-prop>
     <green-prop>tu154/light/instruments/int-green</green-prop>
@@ -24,29 +27,24 @@
   </emission>
 </animation>
 
-  
+
 <!--Needles-->
 <animation>
     <type>rotate</type>
     <object-name>needle</object-name>
-    <property>fdm/jsbsim/hs/hs1-pressure</property>
+    <property alias="../../params/n2"/>
     <interpolation>
-      <entry><ind>	0.0</ind>	<dep>	-65.0</dep></entry>
-      <entry><ind>	120.0</ind>	<dep>	0.0</dep></entry>
-      <entry><ind>	240.0</ind>	<dep>	65.0</dep></entry>
+      <entry><ind>	0.0</ind>	<dep>	51.0</dep></entry>
+      <entry><ind>	60.0</ind>	<dep>	236.0</dep></entry>
+      <entry><ind>	100.0</ind>	<dep>	360.0</dep></entry>
+      <entry><ind>	110.0</ind>	<dep>	392.0</dep></entry>
     </interpolation>
-    <center>
-      <x-m>0.0</x-m>
-      <y-m>0.0</y-m>
-      <z-m>-0.00172</z-m>
-  </center>
     <axis>
       <x>-1.0</x>
       <y>0.0</y>
       <z>0.0</z>
     </axis>
 </animation>
-
 
 
 </PropertyList>

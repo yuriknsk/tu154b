@@ -8,6 +8,12 @@
 <!-- Attitude indicator
      3D instrument for Tu-154 -->
 <PropertyList>
+  <params>
+    <defl-course>tu154/instrumentation/pnp[0]/defl-course</defl-course>
+    <defl-gs>tu154/instrumentation/pnp[0]/defl-gs</defl-gs>
+    <failed>tu154/instrumentation/bkk/mgv-1-failure</failed>
+  </params>
+
   <path>pkp.ac</path>
   <!--External panel lighting-->
   <animation>
@@ -91,10 +97,8 @@
 <animation>
   <type>rotate</type>
   <object-name>gliss_marker</object-name>
-  <property>fdm/jsbsim/ap/gs-needle-deflection</property>
-  <factor>30.0</factor>
-  <max-deg>30.0</max-deg>
-  <min-deg>-30.0</min-deg>
+  <property alias="../../params/defl-gs"/>
+  <factor>25.0</factor>
   <center>
     <x-m>-0.06405</x-m>
     <y-m>0.0</y-m>
@@ -129,10 +133,8 @@
 <animation>
   <type>rotate</type>
   <object-name>kurs_marker</object-name>
-  <property>fdm/jsbsim/ap/heading-needle-deflection</property>
+  <property alias="../../params/defl-course"/>
   <factor>25.0</factor>
-  <max-deg>30.0</max-deg>
-  <min-deg>-30.0</min-deg>
   <center>
     <x-m>-0.05872</x-m>
     <y-m>0.0</y-m>
@@ -211,9 +213,17 @@
 <animation>
   <type>rotate</type>
   <object-name>kurs_flag</object-name>
-  <property>tu154/instrumentation/pkp[0]/gliss-blanker</property>
-  <factor>180.0</factor>
-  <offset-deg>180.0</offset-deg>
+  <expression>
+    <table>
+      <sum>
+        <property>tu154/instrumentation/pnp[0]/blank-gs</property>
+        <property>tu154/instrumentation/pkp/gliss-failure</property>
+      </sum>
+      <entry><ind>0</ind><dep>180</dep></entry>
+      <entry><ind>1</ind><dep>360</dep></entry>
+      <entry><ind>2</ind><dep>360</dep></entry>
+    </table>
+  </expression>
   <center>
     <x-m>0.0</x-m>
     <y-m>0.024</y-m>
@@ -229,9 +239,17 @@
 <animation>
   <type>rotate</type>
   <object-name>gliss_flag</object-name>
-  <property>tu154/instrumentation/pkp[0]/kurs-blanker</property>
-  <factor>180.0</factor>
-  <offset-deg>180.0</offset-deg>
+  <expression>
+    <table>
+      <sum>
+        <property>tu154/instrumentation/pnp[0]/blank-course</property>
+        <property>tu154/instrumentation/pkp/kurs-failure</property>
+      </sum>
+      <entry><ind>0</ind><dep>180</dep></entry>
+      <entry><ind>1</ind><dep>360</dep></entry>
+      <entry><ind>2</ind><dep>360</dep></entry>
+    </table>
+  </expression>
   <center>
     <x-m>0.0</x-m>
     <y-m>-0.055</y-m>
@@ -247,7 +265,7 @@
 <animation>
   <type>rotate</type>
   <object-name>ag_flag</object-name>
-  <property>tu154/instrumentation/bkk/mgv-1-failure</property>  
+  <property alias="../../params/failed"/>
   <factor>180.0</factor>
   <offset-deg>180.0</offset-deg>
   <center>
