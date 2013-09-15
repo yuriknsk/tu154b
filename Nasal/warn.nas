@@ -195,10 +195,10 @@ if( arg[0] ) {
 	setprop("tu154/light/panel/amb-red",
 		getprop("tu154/light/panel/amb-red-def") );
 	# night VC textures
-	setprop("tu154/textures/capt-panel","vc01_night.rgb" );
-	setprop("tu154/textures/copilot-panel","vc02_night.rgb" );
-	setprop("tu154/textures/overhead-panel","vc06_l.rgb" );
-        setprop("tu154/textures/fe-panel","vc08_l.rgb" );
+	setprop("tu154/textures/capt-panel","vc01_night.png" );
+	setprop("tu154/textures/copilot-panel","vc02_night.png" );
+	setprop("tu154/textures/overhead-panel","vc06_l.png" );
+        setprop("tu154/textures/fe-panel","vc08_l.png" );
 	setprop("tu154/textures/tablo","tablo_1_n.rgb" );
 	setprop("tu154/textures/tablo_1","tablo_2_n.rgb" );
 	setprop("tu154/textures/tablo_2","tablo_3_n.rgb" );
@@ -230,10 +230,10 @@ else {
         setprop("tu154/light/panel/amb-green",0.0);
         setprop("tu154/light/panel/amb-red",0.0);
 	# Daily VC textures
-        setprop("tu154/textures/capt-panel","vc01_t.rgb" );
-        setprop("tu154/textures/copilot-panel","vc02_t.rgb" );
-        setprop("tu154/textures/overhead-panel","vc06_t.rgb" );
-        setprop("tu154/textures/fe-panel","vc08_t.rgb" );
+        setprop("tu154/textures/capt-panel","vc01_t.png" );
+        setprop("tu154/textures/copilot-panel","vc02_t.png" );
+        setprop("tu154/textures/overhead-panel","vc06_t.png" );
+        setprop("tu154/textures/fe-panel","vc08_t.png" );
         setprop("tu154/textures/tablo","tablo_1.rgb" );
         setprop("tu154/textures/tablo_1","tablo_2.rgb" );
 	setprop("tu154/textures/tablo_2","tablo_3.rgb" );
