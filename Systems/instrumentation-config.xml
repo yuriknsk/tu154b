@@ -80,6 +80,14 @@ TU154B project
     <name>dme</name>
     <number>0</number>
   </dme>
+  <dme>
+    <name>dme</name>
+    <number>1</number>
+  </dme>
+  <dme>
+    <name>dme</name>
+    <number>2</number>
+  </dme>
   
   <altimeter>
     <name>encoder</name>

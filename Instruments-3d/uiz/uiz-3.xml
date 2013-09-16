@@ -10,6 +10,10 @@
 <!-- Turbine gauge UIZ-3
 3D instrument for Tu-154 -->
 <PropertyList>
+  <params>
+    <pressure>engines/engine[0]/oil-pressure-psi</pressure>
+  </params>
+
  <path>uiz-3.ac</path>
 <!-- Internal instruments lighting -->
 <animation>
@@ -56,7 +60,7 @@
 <animation>
   <type>rotate</type>
   <object-name>needle_2</object-name>
-  <property>engines/engine[2]/oil-pressure-psi</property>-->
+  <property alias="../../params/pressure"/>
   <!--Oil pressure Kg/sm-->
   <!--Kg/sm-->
 <!--  <interpolation>

@@ -197,10 +197,9 @@ var autostart_helper_2 = func{
 	setprop("instrumentation/heading-indicator[1]/offset-deg", 
 		-getprop("environment/magnetic-variation-deg") );
 	# Altimeters
-	setprop("instrumentation/altimeter[0]/setting-inhg", 
-		getprop("environment/pressure-inhg") );
-	setprop("instrumentation/altimeter[1]/setting-inhg", 
-		getprop("environment/pressure-inhg") );
+        var inhgX100 = int(getprop("environment/pressure-inhg") * 100 + 0.5);
+	setprop("tu154/instrumentation/altimeter[0]/inhgX100", inhgX100);
+	setprop("tu154/instrumentation/altimeter[1]/inhgX100", inhgX100);
 	# Steering
 	setprop("tu154/switches/steering-limit", 1.0 );
 	setprop("tu154/switches/steering", 1.0 );

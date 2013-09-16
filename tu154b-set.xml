@@ -352,12 +352,17 @@
     <error-deg type="double" >0.0</error-deg>
     <mode type="string" >adf</mode>
     <volume-norm type="double" >0.2</volume-norm>
+    <serviceable type="bool">false</serviceable>
   </adf>
   <adf n="1">
     <error-deg type="double" >0.0</error-deg>
     <mode type="string" >adf</mode>
     <volume-norm type="double" >0.2</volume-norm>
+    <serviceable type="bool">false</serviceable>
   </adf>
+  <altimeter n="0">
+    <serviceable type="bool" >true</serviceable>
+  </altimeter>
   <altimeter n="1">
     <serviceable type="bool" >true</serviceable>
   </altimeter>
@@ -389,6 +394,25 @@
    <powered type="bool" >false</powered>
    <volume type="double" >0.2</volume>
   </nav>
+
+  <dme n="0">
+    <serviceable type="bool">false</serviceable>
+    <frequencies>
+      <source>/instrumentation/nav[0]/frequencies/selected-mhz</source>
+    </frequencies>
+  </dme>
+  <dme n="1">
+    <serviceable type="bool">false</serviceable>
+    <frequencies>
+      <source>/instrumentation/nav[1]/frequencies/selected-mhz</source>
+    </frequencies>
+  </dme>
+  <dme n="2">
+    <serviceable type="bool">false</serviceable>
+    <frequencies>
+      <source>/instrumentation/nav[2]/frequencies/selected-mhz</source>
+    </frequencies>
+  </dme>
   
   <marker-beacon>
     <serviceable type="bool" >false</serviceable>
@@ -462,6 +486,7 @@
       <pnp-left-selector>0</pnp-left-selector>
       <bgmk-offset-1>50</bgmk-offset-1>
       <bgmk-offset-2>250</bgmk-offset-2>
+      <indicated-altitude-m>0</indicated-altitude-m>
     </instrumentation>
     <ap>
 <!--      <gs-gain>8.0</gs-gain>-->
@@ -855,12 +880,28 @@
   
   <instrumentation>
     <distance-to-pnp type="bool">true</distance-to-pnp>
+    <altimeters-sync-inhg type="bool">true</altimeters-sync-inhg>
+    <altimeter n="0">
+      <inhgX100 type="int">2992</inhgX100>
+    </altimeter>
+    <altimeter n="1">
+      <inhgX100 type="int">2992</inhgX100>
+    </altimeter>
     <ark-15 n="0">
       <powered type="bool">false</powered>
     </ark-15>
     <ark-15 n="1">
       <powered type="bool" >false</powered>
     </ark-15>
+    <dme>
+      <distance type="double">0</distance>
+    </dme>
+    <dme>
+      <distance type="double">0</distance>
+    </dme>
+    <dme>
+      <distance type="double">0</distance>
+    </dme>
     <pn-5>
       <heading-state type="double" >0.0</heading-state>
       <pitch-state type="double" >0.0</pitch-state>
@@ -871,14 +912,19 @@
       <stab type="double" >false</stab>
       <mode type="double" >0.0</mode>
     </pn-6>
-    <rv-5m>
-      <warn type="bool" >false</warn>
-      <caged-flag type="bool" >false</caged-flag>
-      <serviceable type="bool" >true</serviceable>
-      <index-m type="double" >200.0</index-m>
+    <rv-5m n="0">
+      <altitude type="double">0.0</altitude>
+      <dialed type="double">200.0</dialed>
+    </rv-5m>
+    <rv-5m n="1">
+      <altitude type="double">0.0</altitude>
+      <dialed type="double">0.0</dialed>
     </rv-5m>
     <idr-1>
-      <caged-flag type="bool" >true</caged-flag>
+      <distance type="double">0</distance>
+    </idr-1>
+    <idr-1>
+      <distance type="double">0</distance>
     </idr-1>
     <uap-12>
       <warn type="bool" >false</warn>
@@ -887,16 +933,14 @@
       <alpha-limit-deg type="double" >11.5</alpha-limit-deg>
     </uap-12>   
     <pnp>
-      <plane-deg>252.0</plane-deg>
-      <plane-deg-local>252.0</plane-deg-local>
-      <plane-deg-delayed>252.0</plane-deg-delayed>
+      <plane-dialed>252.0</plane-dialed>
+      <distance type="double">0</distance>
 <!--      <heading-deg>161.0</heading-deg>
       <heading-deg-delayed>161.0</heading-deg-delayed>-->
     </pnp>
     <pnp>
-      <plane-deg>252.0</plane-deg>
-      <plane-deg-local>252.0</plane-deg-local>
-      <plane-deg-delayed>252.0</plane-deg-delayed>
+      <plane-dialed>252.0</plane-dialed>
+      <distance type="double">0</distance>
 <!--      <heading-deg>161.0</heading-deg>
       <heading-deg-delayed>161.0</heading-deg-delayed>-->
     </pnp>
@@ -904,12 +948,20 @@
       <stab type="double" >0.0</stab>
     </pu-46>
     <iku-1>
-      <l-mode type="double" >0.0</l-mode>
-      <r-mode type="double" >0.0</r-mode>
+      <heading-1 type="double">270</heading-1>
+      <heading-2 type="double">270</heading-2>
+      <mode-1 type="int">0</mode-1>
+      <mode-2 type="int">0</mode-2>
+      <trans-1 type="double">0</trans-1>
+      <trans-2 type="double">0</trans-2>
     </iku-1>
     <iku-1>
-      <l-mode type="double" >0.0</l-mode>
-      <r-mode type="double" >0.0</r-mode>
+      <heading-1 type="double">270</heading-1>
+      <heading-2 type="double">270</heading-2>
+      <mode-1 type="int">0</mode-1>
+      <mode-2 type="int">0</mode-2>
+      <trans-1 type="double">0</trans-1>
+      <trans-2 type="double">0</trans-2>
     </iku-1>
   <diss>
     <powered type="bool" >false</powered>

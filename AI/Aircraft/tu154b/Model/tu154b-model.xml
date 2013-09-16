@@ -2153,7 +2153,7 @@ This file is under GPL licensy.
 
   
 <model>
-    <path>Aircraft/tu154b/Model/Effects/stream failure.xml</path>
+    <path>Aircraft/tu154b/Model/Effects/stream_failure.xml</path>
     <offsets>
       <x-m>11.18</x-m>
       <y-m>-19.73</y-m>
@@ -2162,7 +2162,7 @@ This file is under GPL licensy.
   </model>11
   
   <model>
-    <path>Aircraft/tu154b/Model/Effects/stream failure.xml</path>
+    <path>Aircraft/tu154b/Model/Effects/stream_failure.xml</path>
     <offsets>
        <x-m>11.18</x-m>
       <y-m>19.73</y-m>

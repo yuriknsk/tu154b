@@ -4,13 +4,17 @@
     #    (C) 2007 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
     #	2d & 3d instruments, animations, systems and over.		   	#
     #    	yurik@megasignal.com					   	#
-    #############################################################################	  
+    #############################################################################
     -->
 
-<!-- Turbine turn indicator ITE-2t (two needles)
+<!-- Exhaust gas temperature indicator UT-7A-710
 3D instrument for Tu-154 -->
 <PropertyList>
- <path>ite-2t.ac</path>
+  <params>
+    <egt>fdm/jsbsim/propulsion/engine[0]/egt-filtered</egt>
+  </params>
+
+ <path>ut-7a.ac</path>
 <!-- Internal instruments lighting -->
 <animation>
   <type>material</type>
@@ -24,18 +28,23 @@
   </emission>
 </animation>
 
-  
-<!--Needles-->
 
+<!--Needles-->
 <animation>
     <type>rotate</type>
     <object-name>needle_1</object-name>
-    <property>engines/engine[0]/n2</property>
+    <property alias="../../params/egt"/>
+<!--Farenheit-->
+<!--    <interpolation>
+      <entry><ind>	0.0</ind>	<dep>	-134.0</dep></entry>
+      <entry><ind>	1110.7</ind>	<dep>	0.0</dep></entry>
+      <entry><ind>	2190.6</ind>	<dep>	134.0</dep></entry>
+    </interpolation>-->
+<!--Celsius-->
     <interpolation>
-      <entry><ind>	0.0</ind>	<dep>	51.0</dep></entry>
-      <entry><ind>	60.0</ind>	<dep>	236.0</dep></entry>
-      <entry><ind>	100.0</ind>	<dep>	360.0</dep></entry>
-      <entry><ind>	110.0</ind>	<dep>	392.0</dep></entry>
+      <entry><ind>	0.0</ind>	<dep>	-134.0</dep></entry>
+      <entry><ind>	600.0</ind>	<dep>	0.0</dep></entry>
+      <entry><ind>	1200.0</ind>	<dep>	134.0</dep></entry>
     </interpolation>
     <axis>
       <x>-1.0</x>
@@ -43,17 +52,17 @@
       <z>0.0</z>
     </axis>
 </animation>
-
 <animation>
   <type>rotate</type>
   <object-name>needle_2</object-name>
-  <property>/fdm/jsbsim/propulsion/engine[0]/n1-rna-filtered</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	51.0</dep></entry>
-    <entry><ind>	60.0</ind>	<dep>	236.0</dep></entry>
-    <entry><ind>	100.0</ind>	<dep>	360.0</dep></entry>
-    <entry><ind>	110.0</ind>	<dep>	392.0</dep></entry>
-  </interpolation>
+  <property alias="../../params/egt"/>
+  <factor>3.6</factor>
+  <offset-deg>180.0</offset-deg>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.02104</z-m>
+  </center>
   <axis>
     <x>-1.0</x>
     <y>0.0</y>

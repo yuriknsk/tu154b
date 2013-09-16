@@ -66,61 +66,16 @@
 <!-- Controls -->
 
 <animation>
-  <type>pick</type>
+  <type>knob</type>
   <object-name>hs</object-name>
   <visible>false</visible>
   <action>
-    <button>0</button>
-    <repeatable>true</repeatable>
-    <interval-sec>0.15</interval-sec>
     <binding>
       <command>property-adjust</command>
       <property>tu154/instrumentation/ushdb/compass</property>
-      <step>1.0</step>
-    </binding>
-  </action>
-</animation>
-<animation>
-  <type>pick</type>
-  <object-name>hs</object-name>
-  <visible>false</visible>
-  <action>
-    <button>1</button>
-    <repeatable>true</repeatable>
-    <interval-sec>0.15</interval-sec>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/instrumentation/ushdb/compass</property>
-      <step>-1.0</step>
-    </binding>
-  </action>
-</animation>
-<!--Mouse wheel-->
-<animation>
-  <type>pick</type>
-  <object-name>hs</object-name>
-  <visible>false</visible>
-  <action>
-    <button>3</button>
-    <repeatable>false</repeatable>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/instrumentation/ushdb/compass</property>
-      <step>1.0</step>
-    </binding>
-  </action>
-</animation>
-<animation>
-  <type>pick</type>
-  <object-name>hs</object-name>
-  <visible>false</visible>
-  <action>
-    <button>4</button>
-    <repeatable>false</repeatable>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/instrumentation/ushdb/compass</property>
-      <step>-1.0</step>
+      <min>0</min>
+      <max>360</max>
+      <wrap>true</wrap>
     </binding>
   </action>
 </animation>

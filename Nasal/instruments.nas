@@ -6,29 +6,614 @@
 #
 
 
-# digit wheels support for UVO-15 SVS altimeter
-# meters
-altimeter1_handler = func {
-settimer( altimeter1_handler, 0 );
-if( getprop("tu154/systems/svs/powered") != 1 ) return;
-var alt = getprop("instrumentation/altimeter/indicated-altitude-ft");
-if( alt == nil ) { return; }
+######################################################################
+#
+# Utility classes and functions.
+#
 
-alt = alt * 0.3048;	# go to meters
+# Chase() works like interpolate(), but tracks value changes, supports
+# wraparound, and allows cancellation.
+var Chase = {
+    _active: {},
+    new: func(src, dst, delay, wrap=nil) {
+        var m = {
+            parents: [Chase],
+            src: src,
+            dst: dst,
+            left: delay,
+            wrap: wrap,
+            ts: systime()
+        };
+        var om = Chase._active[src];
+        if (om != nil)
+            om.del();
+        Chase._active[src] = m;
+        m.t = maketimer(0, m, Chase._update);
+        m.t.start();
+        return m;
+    },
+    active: func {
+        return (Chase._active[me.src] == me);
+    },
+    del: func {
+        Chase._active[me.src] = nil;
+        me.t.stop();
+    },
+    _update: func {
+        var ts = systime();
+        var passed = ts - me.ts;
+        var dv = (num(me.dst) == nil ? getprop(me.dst) : me.dst);
+        if (me.left > passed) {
+            var sv = getprop(me.src);
+            if (dv == nil)
+                dv = sv;
+            var delta = dv - sv;
+            var w = (me.wrap != nil
+                     and abs(delta) > (me.wrap[1] - me.wrap[0]) / 2.0);
+            if (w) {
+                if (sv < dv)
+                    delta -= me.wrap[1] - me.wrap[0];
+                else
+                    delta += me.wrap[1] - me.wrap[0];
+            }
+            var nsv = sv + delta * passed / me.left;
+            if (w) {
+                if (sv < dv)
+                    nsv += (nsv < me.wrap[0] ? me.wrap[1] : 0);
+                else
+                    nsv -= (nsv >= me.wrap[1] ? me.wrap[1] : 0);
+            }
+            setprop(me.src, nsv);
+            me.ts = ts;
+            me.left -= passed;
+        } else {
+            setprop(me.src, dv);
+            me.t.stop();
+        }
+    }
+};
 
-setprop("tu154/instrumentation/altimeter/indicated-wheels_dec_m", 
-(alt/10.0) - int( alt/100.0 )*10.0 );
+# Smooth property re-aliasing.
+var realias = func(src, dst, delay, wrap=nil) {
+    if (src == dst)
+        return;
 
-setprop("tu154/instrumentation/altimeter/indicated-wheels_hund_m", 
-(alt/100.0) - int( alt/1000.0 )*10.0 );
-
-setprop("tu154/instrumentation/altimeter/indicated-wheels_ths_m", 
-(alt/1000.0) - int( alt/10000.0 )*10.0 );
-
-setprop("tu154/instrumentation/altimeter/indicated-wheels_decths_m", 
-(alt/10000.0) - int( alt/100000.0 )*10.0 );
-
+    var obj = props.globals.getNode(src, 1);
+    var v = getprop(src);
+    obj.unalias();
+    if (v != nil) {
+        setprop(src, v);
+        var c = Chase.new(src, dst, delay, wrap);
+        settimer(func {
+            if (c.active()) {
+                c.del();
+                if (num(dst) == nil)
+                    obj.alias(dst);
+                else
+                    setprop(src, dst);
+            }
+        }, delay);
+    } else {
+        if (num(dst) == nil)
+            obj.alias(dst);
+        else
+            setprop(src, dst);
+    }
 }
+
+
+######################################################################
+#
+# PNP
+#
+# Operation:
+#
+# Both left and right PNPs are instances of the same pnp.xml model
+# parameterized with corresponding properties, and behave identically.
+# Each PNP has five modes of operation: normal (no indication), NVU
+# (NV indication), VOR1 and VOR2 (both have VOR indication), and SP
+# (SP indication).  Left PNP mode is selected with ABSU mode buttons
+# (Reset and Heading buttons correspond to normal mode, Landing button
+# corresponds to SP mode, and the rest button correspondence is
+# one-to-one).  Right PNP mode is selected with the dedicated switch
+# on PN-6.
+#
+# In all modes of PNP operation left handle sets heading (yellow
+# rotating marks) and right handle sets course in degrees (shown with
+# digit wheels in the top right corner of PNP).  In all modes but NVU
+# course needle also points to the dialed course.  In NVU mode course
+# needle points to current NVU course from active V-140 set.
+#
+# Course deflection needle in VOR1 or VOR2 mode shows offset in
+# degrees of the VOR radial selected on corresponding KURS-MP up to 10
+# degrees at full scale.  In SP mode it shows offset in degrees of the
+# ILS-LOC radial (again, up to 10 degrees; ILS frequency is set in
+# left KURS-MP set). In NVU mode the needle shows Z offset of NVU
+# course in km up to 4 km at full scale (that is, negated Z value from
+# active NVU counter clipped to 4 km).  In normal mode (or when
+# there's no VOR or ILS-LOC in range) the needle is not deflected and
+# course blanker is shown.
+#
+# Glideslope deflection needle in SP mode shows offset in degrees to
+# the ILS-GS up to 0.7 degrees at full scale (ILS frequency is set in
+# left KURS-MP set).  In other modes (or when there's no ILS-GS in
+# range) the needle is not deflected and glideslope blanker is shown.
+#
+# Note that VOR1 and SP modes are mutually exclusive: when you tune
+# left KURS-MP to VOR then PNP in SP mode will be blanked on both
+# channels.  Likewise, when you tune left KURS-MP to ILS then PNP in
+# VOR1 mode will be blanked on both channels.  Also note that tuning
+# right KURS-MP to ILS will result in VOR2 mode blanked on both
+# channels.
+#
+# When /tu154/instrumentation/distance-to-pnp is set to true distance
+# digit wheels show active abs(S) in NVU mode, DME value in VOR modes,
+# ILS-DME value in SP mode, or blanked zeroes in normal mode or when
+# there's no DME in range.
+#
+#
+# Implementation:
+#
+# With setlistener() we track changes to all properties that determine
+# PNP mode and blankers (but not needle input values).  When any such
+# change occurs we recompute PNP mode, set blankers accordingly, and
+# alias() PNP needle properties to relevant inputs so that needle
+# value updates happen implicitly after that.  This way we track only
+# infrequent changes (like button presses or switch toggling), but do
+# not have to recompute needle values every frame.  The only exception
+# is active NVU Z offset which we can't alias directly but have to
+# scale, normalize, and negate, and which is updated every frame when
+# NVU is active.
+#
+
+# Smooth DME updates.
+var dme_distance = func(i) {
+    var distance = getprop("instrumentation/dme["~i~"]/indicated-distance-nm");
+    # We ignore exact zero distance because it signifies out of range
+    # condition, and we want to keep last value in this case.  Within DME
+    # proximity exact zero distance is highly unlikely, and close to zero
+    # update will be enough.
+    if (distance) {
+        distance = int(distance * 18.52) * 100;
+        interpolate("tu154/instrumentation/dme["~i~"]/distance", distance, 0.2);
+    }
+}
+setlistener("instrumentation/dme[0]/indicated-distance-nm",
+            func { dme_distance(0) }, 0, 0);
+setlistener("instrumentation/dme[1]/indicated-distance-nm",
+            func { dme_distance(1) }, 0, 0);
+setlistener("instrumentation/dme[2]/indicated-distance-nm",
+            func { dme_distance(2) }, 0, 0);
+
+# Normalize NVU Z offset.
+var nvu_z_offset_norm = func(i) {
+    var offset = getprop("fdm/jsbsim/instrumentation/aircraft-integrator-z-"~i);
+    offset /= 4000;
+    if (offset < -1)
+        offset = -1;
+    else if (offset > 1)
+        offset = 1;
+    setprop("tu154/instrumentation/nvu/z-"~i~"-offset-norm", -offset);
+}
+setlistener("fdm/jsbsim/instrumentation/aircraft-integrator-z-1",
+            func { nvu_z_offset_norm(1) }, 1);
+setlistener("fdm/jsbsim/instrumentation/aircraft-integrator-z-2",
+            func { nvu_z_offset_norm(2) }, 1);
+
+var pnp_mode_update = func(i, mode) {
+    var plane = "/tu154/instrumentation/pnp["~i~"]/plane-dialed";
+    var defl_course = 0;
+    var defl_gs = 0;
+    var distance = getprop("/tu154/instrumentation/pnp["~i~"]/distance");
+    var blank_course = 1;
+    var blank_gs = 1;
+    var blank_dist = 1;
+    if (mode == 1 and getprop("tu154/systems/nvu/serviceable")) { # NVU
+        if (getprop("fdm/jsbsim/instrumentation/nvu-selector")) {
+            plane = "fdm/jsbsim/instrumentation/zpu-deg-1";
+            defl_course = "tu154/instrumentation/nvu/z-1-offset-norm";
+        } else {
+            plane = "fdm/jsbsim/instrumentation/zpu-deg-2";
+            defl_course = "tu154/instrumentation/nvu/z-2-offset-norm";
+        }
+        blank_course = 0;
+        if (getprop("tu154/instrumentation/distance-to-pnp")) {
+            if (getprop("fdm/jsbsim/instrumentation/nvu-selector"))
+                distance = "fdm/jsbsim/instrumentation/aircraft-integrator-s-1";
+            else
+                distance = "fdm/jsbsim/instrumentation/aircraft-integrator-s-2";
+            blank_dist = 0;
+        }
+    } else if (mode == 2 and !getprop("instrumentation/nav[0]/nav-loc")) { #VOR1
+        if (getprop("instrumentation/nav[0]/in-range")) {
+            defl_course =
+                "instrumentation/nav[0]/heading-needle-deflection-norm";
+            blank_course = 0;
+        }
+        if (getprop("tu154/instrumentation/distance-to-pnp")
+            and getprop("instrumentation/dme[0]/in-range")) {
+            distance = "tu154/instrumentation/dme[0]/distance";
+            blank_dist = 0;
+        }
+    } else if (mode == 3 and !getprop("instrumentation/nav[1]/nav-loc")) { #VOR2
+        if (getprop("instrumentation/nav[1]/in-range")) {
+            defl_course =
+                "instrumentation/nav[1]/heading-needle-deflection-norm";
+            blank_course = 0;
+        }
+        if (getprop("tu154/instrumentation/distance-to-pnp")
+            and getprop("instrumentation/dme[1]/in-range")) {
+            distance = "tu154/instrumentation/dme[1]/distance";
+            blank_dist = 0;
+        }
+    } else if (mode == 4 and getprop("instrumentation/nav[0]/nav-loc")) { # SP
+        if (getprop("instrumentation/nav[0]/in-range")) {
+            defl_course =
+                "instrumentation/nav[0]/heading-needle-deflection-norm";
+            blank_course = 0;
+        }
+        if (getprop("instrumentation/nav[0]/gs-in-range")) {
+            defl_gs = "instrumentation/nav[0]/gs-needle-deflection-norm";
+            blank_gs = 0;
+        }
+        if (getprop("tu154/instrumentation/distance-to-pnp")
+            and getprop("instrumentation/dme[0]/in-range")) {
+            distance = "tu154/instrumentation/dme[0]/distance";
+            blank_dist = 0;
+        }
+    }
+    setprop("tu154/instrumentation/pnp["~i~"]/mode", mode);
+    realias("/tu154/instrumentation/pnp["~i~"]/plane-deg", plane, 0.5,
+            [0, 360]);
+    realias("/tu154/instrumentation/pnp["~i~"]/defl-course", defl_course, 0.5);
+    realias("/tu154/instrumentation/pnp["~i~"]/defl-gs", defl_gs, 0.5);
+    realias("/tu154/instrumentation/pnp["~i~"]/distance", distance, 0.5);
+    setprop("tu154/instrumentation/pnp["~i~"]/blank-course", blank_course);
+    setprop("tu154/instrumentation/pnp["~i~"]/blank-gs", blank_gs);
+    setprop("tu154/instrumentation/pnp["~i~"]/blank-dist", blank_dist);
+}
+
+# PNP mode for first pilot.
+var pnp0_mode_update = func {
+    var sel = getprop("fdm/jsbsim/ap/roll-selector") or 0;
+    if (!getprop("instrumentation/heading-indicator[0]/serviceable")
+        or !getprop("tu154/systems/absu/serviceable"))
+        sel = -1;
+
+    var mode = 0; # Disabled or Stab or ZK (sel == 0 or sel == 1 or sel == 2)
+    if (sel == 3) { # VOR
+        mode = 2;
+        if (getprop("tu154/instrumentation/pn-5/az-2"))
+            mode = 3;
+    } else if (sel == 4) { # NVU
+        mode = 1;
+    } else if (sel == 5) { # SP
+        mode = 4;
+    } else if (sel != -1) {
+        if (getprop("tu154/switches/pn-5-navigac") == 0
+            and getprop("tu154/switches/pn-5-posadk") == 1
+            and getprop("instrumentation/nav[0]/nav-loc")
+            and (getprop("instrumentation/nav[0]/in-range")
+                 or getprop("instrumentation/nav[0]/gs-in-range")))
+            mode = 4;
+    }
+    pnp_mode_update(0, mode);
+}
+
+# PNP mode for second pilot.
+var pnp1_mode_update = func {
+    var sel = getprop("tu154/switches/pn-6-selector") or 0;
+    if (!getprop("instrumentation/heading-indicator[1]/serviceable"))
+        sel = 0;
+    pnp_mode_update(1, sel);
+}
+
+var pnp_both_mode_update = func {
+    pnp0_mode_update();
+    pnp1_mode_update();
+}
+
+setlistener("tu154/systems/absu/serviceable", pnp0_mode_update, 0, 0);
+setlistener("tu154/switches/pn-5-navigac", pnp0_mode_update);
+setlistener("tu154/switches/pn-5-posadk", pnp0_mode_update);
+setlistener("fdm/jsbsim/ap/roll-selector", pnp0_mode_update);
+setlistener("instrumentation/heading-indicator[0]/serviceable",
+            pnp0_mode_update, 1, 0);
+
+setlistener("tu154/switches/pn-6-selector", pnp1_mode_update);
+setlistener("instrumentation/heading-indicator[1]/serviceable",
+            pnp1_mode_update, 1, 0);
+
+setlistener("tu154/systems/nvu/serviceable", pnp_both_mode_update, 0, 0);
+setlistener("fdm/jsbsim/instrumentation/nvu-selector", pnp_both_mode_update);
+setlistener("tu154/instrumentation/distance-to-pnp", pnp_both_mode_update);
+setlistener("instrumentation/dme[0]/in-range", pnp_both_mode_update, 0, 0);
+setlistener("instrumentation/dme[1]/in-range", pnp_both_mode_update, 0, 0);
+setlistener("instrumentation/nav[0]/nav-loc", pnp_both_mode_update, 0, 0);
+setlistener("instrumentation/nav[1]/nav-loc", pnp_both_mode_update, 0, 0);
+setlistener("instrumentation/nav[0]/in-range", pnp_both_mode_update, 0, 0);
+setlistener("instrumentation/nav[1]/in-range", pnp_both_mode_update, 0, 0);
+setlistener("instrumentation/nav[0]/gs-in-range", pnp_both_mode_update, 0, 0);
+
+
+######################################################################
+#
+# IDR-1
+#
+# Implementation:
+#
+# Note that DME cannel in VOR-DME and ILS-DME operates in the same way
+# so IDR-1 works with both.
+#
+
+var idr_mode_update = func(i, selector) {
+    var sel = getprop(selector);
+    if (int(sel) != sel) # The switch is in transition.
+        return;
+    var ni = (sel ? 3 - sel : 0); # 2 -> 1, 1 -> 2, 0 -> 0
+    var distance = getprop("/tu154/instrumentation/idr-1["~i~"]/distance");
+    var blank = 1;
+    if (getprop("instrumentation/dme["~ni~"]/in-range")) {
+        distance = "tu154/instrumentation/dme["~ni~"]/distance";
+        blank = 0;
+    }
+    realias("/tu154/instrumentation/idr-1["~i~"]/distance", distance, 0.5);
+    setprop("tu154/instrumentation/idr-1["~i~"]/blank", blank);
+}
+
+var idr0_mode_update = func {
+    idr_mode_update(0, "tu154/switches/capt-idr-selector");
+}
+
+var idr1_mode_update = func {
+    idr_mode_update(1, "tu154/switches/copilot-idr-selector");
+}
+
+var idr_both_mode_update = func {
+    idr0_mode_update();
+    idr1_mode_update();
+}
+
+setlistener("tu154/switches/capt-idr-selector", idr0_mode_update, 1);
+
+setlistener("tu154/switches/copilot-idr-selector", idr1_mode_update, 1);
+
+setlistener("instrumentation/dme[0]/in-range", idr_both_mode_update, 0, 0);
+setlistener("instrumentation/dme[1]/in-range", idr_both_mode_update, 0, 0);
+setlistener("instrumentation/dme[2]/in-range", idr_both_mode_update, 0, 0);
+
+
+######################################################################
+#
+# RV-5M
+#
+
+var rv_altitude_update = func {
+    var alt_m = getprop("position/altitude-agl-ft") * 0.3048;
+    settimer(rv_altitude_update, (alt_m < 1200 ? 0.1 : (alt_m - 900) / 300));
+    if (alt_m > 0) {
+        var pitch_deg = getprop("orientation/pitch-deg");
+        var roll_deg = getprop("orientation/roll-deg");
+        if (-90 < pitch_deg and pitch_deg < 90
+            and -90 < roll_deg and roll_deg < 90) {
+            var beam_rad = math.acos(math.cos(pitch_deg / 57.3)
+                                     * math.cos(roll_deg / 57.3));
+            if (beam_rad > 0.262) { # > 15 degrees
+                beam_rad -= 0.262;
+                alt_m /= math.cos(beam_rad);
+            }
+            if (alt_m > 850)
+                alt_m = 850;
+        } else {
+            alt_m = 850;
+        }
+    } else {
+        alt_m = 0;
+    }
+    setprop("fdm/jsbsim/instrumentation/indicated-altitude-m", alt_m);
+}
+rv_altitude_update();
+
+var rv_mode_update = func(i, toggled) {
+    # Temporal hack to wait electrical initialization.
+    if (getprop("tu154/switches/main-battery") == nil) {
+        settimer(func { rv_mode_update(i, 1) }, 0.5);
+        return;
+    }
+
+    if (i == 0) {
+        var ac_obj = electrical.AC3x200_bus_1L;
+        var volts = "tu154/systems/electrical/buses/AC3x200-bus-1L/volts";
+    } else {
+        var ac_obj = electrical.AC3x200_bus_3R;
+        var volts = "tu154/systems/electrical/buses/AC3x200-bus-3L/volts";
+    }
+    volts = getprop(volts) or 0;
+    var powered = (volts > 150.0);
+    var altitude = "tu154/instrumentation/rv-5m["~i~"]/altitude";
+    var switch = "RV-5-"~(i + 1);
+    var warn = 0;
+    var blank = 1;
+    if (powered and getprop("tu154/switches/"~switch)) {
+        if (toggled) {
+            ac_obj.add_output(switch, 10.0);
+            realias(altitude, 850, 3);
+            settimer(func {
+                realias(altitude,
+                        "fdm/jsbsim/instrumentation/indicated-altitude-m", 3);
+                settimer(func { rv_mode_update(i, 0) }, 3);
+            }, 15); # Up to 2 minutes in reality.
+        } else {
+            warn = (getprop(altitude) <=
+                    getprop("tu154/instrumentation/rv-5m["~i~"]/dialed"));
+            blank = 0;
+            var agl = getprop("position/altitude-agl-ft");
+            if (agl < 4000) { # < ~1200m
+                settimer(func { rv_mode_update(i, 0) }, 0.1);
+            } else {
+                # FIXME: RV should be switched off, but for now we have
+                # to track power state.
+                settimer(func { rv_mode_update(i, 0) }, 0.5);
+            }
+        }
+    } else {
+        if (!toggled) {
+            ac_obj.rm_output(switch);
+            realias(altitude, 0, 3);
+        }
+        settimer(func { rv_mode_update(i, 1) }, 0.5);
+    }
+
+    setprop("tu154/instrumentation/rv-5m["~i~"]/warn", warn);
+    setprop("tu154/instrumentation/rv-5m["~i~"]/blank", blank);
+}
+
+rv_mode_update(0, 1);
+rv_mode_update(1, 1);
+
+
+######################################################################
+#
+# IKU-1
+#
+
+var iku_vor_bearing = func(i) {
+    setprop("tu154/instrumentation/nav["~i~"]/bearing-deg",
+            getprop("instrumentation/nav["~i~"]/radials/reciprocal-radial-deg")
+            - getprop("fdm/jsbsim/instrumentation/bgmk-"~(i+1)));
+}
+iku_vor_bearing_timer = [maketimer(0.1, func { iku_vor_bearing(0) }),
+                         maketimer(0.1, func { iku_vor_bearing(1) })];
+
+var iku_mode_update = func(i, b) {
+    var sel = getprop("tu154/instrumentation/iku-1["~i~"]/mode-"~b);
+    var bearing = 90;
+    var j = b - 1;
+    if (sel) {
+        if (getprop("instrumentation/nav["~j~"]/in-range")
+            and !getprop("instrumentation/nav["~j~"]/nav-loc")) {
+            iku_vor_bearing_timer[j].start();
+            bearing = "tu154/instrumentation/nav["~j~"]/bearing-deg";
+        } else {
+            iku_vor_bearing_timer[j].stop();
+        }
+    } else {
+        iku_vor_bearing_timer[j].stop();
+        if (getprop("instrumentation/adf["~j~"]/in-range"))
+            bearing = "instrumentation/adf["~j~"]/indicated-bearing-deg";
+    }
+
+    interpolate("tu154/instrumentation/iku-1["~i~"]/trans-"~b, sel, 0.1);
+    realias("tu154/instrumentation/iku-1["~i~"]/heading-"~b, bearing, 0.5,
+            [0, 360]);
+}
+
+var iku0_mode1_update = func {
+    iku_mode_update(0, 1);
+}
+
+var iku0_mode2_update = func {
+    iku_mode_update(0, 2);
+}
+
+var iku1_mode1_update = func {
+    iku_mode_update(1, 1);
+}
+
+var iku1_mode2_update = func {
+    iku_mode_update(1, 2);
+}
+
+var iku_both_mode1_update = func {
+    iku0_mode1_update();
+    iku1_mode1_update();
+}
+
+var iku_both_mode2_update = func {
+    iku0_mode2_update();
+    iku1_mode2_update();
+}
+
+setlistener("instrumentation/adf[0]/in-range", iku_both_mode1_update, 0, 0);
+setlistener("instrumentation/nav[0]/in-range", iku_both_mode1_update, 0, 0);
+setlistener("instrumentation/nav[0]/nav-loc", iku_both_mode1_update, 0, 0);
+setlistener("instrumentation/adf[1]/in-range", iku_both_mode2_update, 0, 0);
+setlistener("instrumentation/nav[1]/in-range", iku_both_mode2_update, 0, 0);
+setlistener("instrumentation/nav[1]/nav-loc", iku_both_mode2_update, 0, 0);
+setlistener("tu154/instrumentation/iku-1[0]/mode-1", iku0_mode1_update, 1);
+setlistener("tu154/instrumentation/iku-1[0]/mode-2", iku0_mode2_update, 1);
+setlistener("tu154/instrumentation/iku-1[1]/mode-1", iku1_mode1_update, 1);
+setlistener("tu154/instrumentation/iku-1[1]/mode-2", iku1_mode2_update, 1);
+
+
+######################################################################
+#
+# UShDB
+#
+
+var ushdb_mode_update = func(b) {
+    var sel = getprop("tu154/switches/ushdb-sel-"~b);
+    if (int(sel) != sel) # The switch is in transition.
+        return;
+    var bearing = 90;
+    var j = b - 1;
+    if (sel) {
+        if (getprop("instrumentation/nav["~j~"]/in-range")
+            and !getprop("instrumentation/nav["~j~"]/nav-loc"))
+            bearing =
+                "instrumentation/nav["~j~"]/radials/reciprocal-radial-deg";
+    } else {
+        if (getprop("instrumentation/adf["~j~"]/in-range"))
+            bearing = "instrumentation/adf["~j~"]/indicated-bearing-deg";
+    }
+
+    realias("tu154/instrumentation/ushdb/heading-deg-"~b, bearing, 0.5,
+            [0, 360]);
+}
+
+var ushdb_mode1_update = func {
+    ushdb_mode_update(1);
+}
+
+var ushdb_mode2_update = func {
+    ushdb_mode_update(2);
+}
+
+setlistener("instrumentation/adf[0]/in-range", ushdb_mode1_update, 0, 0);
+setlistener("instrumentation/nav[0]/in-range", ushdb_mode1_update, 0, 0);
+setlistener("instrumentation/nav[0]/nav-loc", ushdb_mode1_update, 0, 0);
+setlistener("instrumentation/adf[1]/in-range", ushdb_mode2_update, 0, 0);
+setlistener("instrumentation/nav[1]/in-range", ushdb_mode2_update, 0, 0);
+setlistener("instrumentation/nav[1]/nav-loc", ushdb_mode2_update, 0, 0);
+setlistener("tu154/switches/ushdb-sel-1", ushdb_mode1_update, 1);
+setlistener("tu154/switches/ushdb-sel-2", ushdb_mode2_update, 1);
+
+
+######################################################################
+#
+# UVID
+#
+
+var uvid_inhg = func(i) {
+    var inhgX100 = getprop("tu154/instrumentation/altimeter["~i~"]/inhgX100");
+    setprop("instrumentation/altimeter["~i~"]/setting-inhg", inhgX100 / 100.0);
+
+    if (i == 0)
+        setprop("tu154/instrumentation/altimeter[0]/mmhg", inhgX100 * 0.254);
+
+    if (getprop("tu154/instrumentation/altimeters-sync-inhg")) {
+        setprop("tu154/instrumentation/altimeter["~(1-i)~"]/inhgX100",
+                inhgX100);
+    }
+}
+
+setlistener("tu154/instrumentation/altimeter[0]/inhgX100",
+            func { uvid_inhg(0) }, 1, 0);
+setlistener("tu154/instrumentation/altimeter[1]/inhgX100",
+            func { uvid_inhg(1) }, 1, 0);
+
+
+######################################################################
 
 svs_power = func{
 if( getprop( "tu154/switches/SVS-power" ) == 1.0 )
@@ -38,28 +623,7 @@ else electrical.AC3x200_bus_1L.rm_output( "SVS" );
 
 setlistener("tu154/switches/SVS-power", svs_power, 0, 0);
 
-
-
 # feet
-altimeter2_handler = func {
-settimer( altimeter2_handler, 0 );
-if( getprop("tu154/instrumentation/altimeter[1]/powered") != 1 ) return;
-var alt = getprop("instrumentation/altimeter[1]/indicated-altitude-ft");
-if( alt == nil ) { return; }
-
-setprop("tu154/instrumentation/altimeter[1]/indicated-wheels_dec_ft", 
-(alt/10.0) - int( alt/100.0 )*10.0 );
-
-setprop("tu154/instrumentation/altimeter[1]/indicated-wheels_hund_ft", 
-(alt/100.0) - int( alt/1000.0 )*10.0 );
-
-setprop("tu154/instrumentation/altimeter[1]/indicated-wheels_ths_ft", 
-(alt/1000.0) - int( alt/10000.0 )*10.0 );
-
-setprop("tu154/instrumentation/altimeter[1]/indicated-wheels_decths_ft", 
-(alt/10000.0) - int( alt/100000.0 )*10.0 );
-}
-
 uvid15_power = func{
 if( getprop( "tu154/switches/UVID" ) == 1.0 )
 	electrical.AC3x200_bus_1L.add_output( "UVID-15", 10.0);
@@ -68,108 +632,6 @@ else electrical.AC3x200_bus_1L.rm_output( "UVID-15" );
 
 setlistener("tu154/switches/UVID", uvid15_power, 0, 0 );
 
-
-#pressure setting
-altimeter1_pressure_handler = func{
-var pressure = getprop("instrumentation/altimeter/setting-inhg");
-if( pressure == nil ) { return; }
-pressure = pressure * 25.4;	# go to metrics (mmhg)
-
-setprop("tu154/instrumentation/altimeter/mmhg", pressure );
-
-setprop("tu154/instrumentation/altimeter/mmhg-wheels_dec", 
-(pressure/10.0) - int( pressure/100.0 )*10.0 );
-
-setprop("tu154/instrumentation/altimeter/mmhg-wheels_hund", 
-(pressure/100.0) - int( pressure/1000.0 )*10.0 );
-
-}
-
-altimeter2_pressure_handler = func{
-var pressure = getprop("instrumentation/altimeter[1]/setting-inhg");
-if( pressure == nil ) { return; }
-pressure = pressure * 100.0;
-setprop("tu154/instrumentation/altimeter[1]/inhg", pressure );
-
-setprop("tu154/instrumentation/altimeter[1]/inhg-wheels_dec", 
-(pressure/10.0) - int( pressure/100.0 )*10.0 );
-
-setprop("tu154/instrumentation/altimeter[1]/inhg-wheels_hund", 
-(pressure/100.0) - int( pressure/1000.0 )*10.0 );
-
-setprop("tu154/instrumentation/altimeter[1]/inhg-wheels_ths", 
-(pressure/1000.0) - int( pressure/10000.0 )*10.0 );
-}
-
-setlistener("instrumentation/altimeter/setting-inhg", altimeter1_pressure_handler, 0, 0);
-setlistener("instrumentation/altimeter[1]/setting-inhg", altimeter2_pressure_handler, 0, 0);
-
-
-
-
-altimeter1_handler();
-altimeter2_handler();
-
-altimeter1_pressure_handler();
-altimeter2_pressure_handler();
-
-# PNP support
-
-pnp0_hdg_handler = func{
-#settimer( pnp0_hdg_handler, 0 );
-var hdg = getprop("tu154/instrumentation/pnp[0]/distance-km");
-if( hdg == nil )return; 
-setprop("tu154/instrumentation/pnp[0]/heading/ones", hdg );
-setprop("tu154/instrumentation/pnp[0]/heading/dec", 
-(hdg/10.0) - int( hdg/100.0 )*10.0 );
-setprop("tu154/instrumentation/pnp[0]/heading/hund", 
-(hdg/100.0) - int( hdg/1000.0 )*10.0 );
-}
-pnp1_hdg_handler = func{
-#settimer( pnp0_hdg_handler, 0 );
-var hdg = getprop("tu154/instrumentation/pnp[1]/distance-km");
-if( hdg == nil )return; 
-setprop("tu154/instrumentation/pnp[1]/heading/ones", hdg );
-setprop("tu154/instrumentation/pnp[1]/heading/dec", 
-(hdg/10.0) - int( hdg/100.0 )*10.0 );
-setprop("tu154/instrumentation/pnp[1]/heading/hund", 
-(hdg/100.0) - int( hdg/1000.0 )*10.0 );
-}
-
-
-pnp0_plane_handler = func{
-var hdg = getprop("tu154/instrumentation/pnp[0]/plane-deg-delayed");
-if( hdg == nil )return; 
-setprop("tu154/instrumentation/pnp[0]/plane/ones", hdg );
-setprop("tu154/instrumentation/pnp[0]/plane/dec", 
-(hdg/10.0) - int( hdg/100.0 )*10.0 );
-setprop("tu154/instrumentation/pnp[0]/plane/hund", 
-(hdg/100.0) - int( hdg/1000.0 )*10.0 );
-}
-
-pnp1_plane_handler = func{
-var hdg = getprop("tu154/instrumentation/pnp[1]/plane-deg-delayed");
-if( hdg == nil )return; 
-setprop("tu154/instrumentation/pnp[1]/plane/ones", hdg );
-setprop("tu154/instrumentation/pnp[1]/plane/dec", 
-(hdg/10.0) - int( hdg/100.0 )*10.0 );
-setprop("tu154/instrumentation/pnp[1]/plane/hund", 
-(hdg/100.0) - int( hdg/1000.0 )*10.0 );
-}
-
-# Tu-154 not use hdg digit, yellow bug only!
-setlistener("tu154/instrumentation/pnp[0]/distance-km", pnp0_hdg_handler,0,0 );
-setlistener("tu154/instrumentation/pnp[1]/distance-km", pnp1_hdg_handler,0,0 );
-
-
-setlistener("tu154/instrumentation/pnp[0]/plane-deg-delayed", pnp0_plane_handler,0,0 );
-setlistener("tu154/instrumentation/pnp[1]/plane-deg-delayed", pnp1_plane_handler,0,0 );
-
-
-pnp0_hdg_handler();
-pnp0_plane_handler();
-pnp1_hdg_handler();
-pnp1_plane_handler();
 
 # SKAWK support
 
@@ -213,169 +675,6 @@ setlistener("tu154/instrumentation/skawk/handle-5", skawk_handler,0,0 );
 
 if( getprop( "instrumentation/transponder/inputs/digit" ) != nil ) skawk_init();
 
-
-# IKU support
-iku_handler = func {
-settimer( iku_handler, 0.1 );
-
-#Captain panel
-# yellow needle
-var sel_yellow = getprop("tu154/instrumentation/iku-1[0]/l-mode");
-if( sel_yellow == nil ) sel_yellow = 0.0;
-var param_yellow = getprop("instrumentation/nav[0]/radials/reciprocal-radial-deg");
-if( param_yellow == nil ) param_yellow = 0.0;
-var compass = getprop("fdm/jsbsim/instrumentation/bgmk-1");
-if( compass == nil ) compass = 0.0;
-if( sel_yellow == 0.0 ) # ADF
-	param_yellow = getprop("instrumentation/adf[0]/indicated-bearing-deg");
-else param_yellow -= compass;
-if( param_yellow == nil ) param_yellow = 0.0;
-setprop("tu154/instrumentation/iku-1[0]/indicated-heading-l", param_yellow );
-# White needle
-var sel_white = getprop("tu154/instrumentation/iku-1[0]/r-mode");
-if( sel_white == nil ) sel_white = 0.0;
-var param_white = getprop("instrumentation/nav[1]/radials/reciprocal-radial-deg");
-if( param_white == nil ) param_white = 0.0;
-if( sel_white == 0.0 ) # ADF
-	param_white = getprop("instrumentation/adf[1]/indicated-bearing-deg");
-else param_white -= compass;
-if( param_white == nil ) param_white = 0.0;
-setprop("tu154/instrumentation/iku-1[0]/indicated-heading-r", param_white );
-
-#Copilot panel
-compass = getprop("fdm/jsbsim/instrumentation/bgmk-2");
-if( compass == nil ) compass = 0.0;
-# yellow needle
-sel_yellow = getprop("tu154/instrumentation/iku-1[1]/l-mode");
-if( sel_yellow == nil ) sel_yellow = 0.0; 
-param_yellow = getprop("instrumentation/nav[0]/radials/reciprocal-radial-deg");
-if( param_yellow == nil ) param_yellow = 0.0;
-if( sel_yellow == 0.0 ) # ADF
-	param_yellow = getprop("instrumentation/adf[0]/indicated-bearing-deg");
-else param_yellow -= compass;
-if( param_yellow == nil ) param_yellow = 0.0;
-setprop("tu154/instrumentation/iku-1[1]/indicated-heading-l", param_yellow );
-# White needle
-sel_white = getprop("tu154/instrumentation/iku-1[1]/r-mode");
-if( sel_white == nil ) sel_white = 0.0; 
- getprop("instrumentation/nav[1]/radials/reciprocal-radial-deg");
-if( param_white == nil ) param_white = 0.0;
-if( sel_white == 0.0 ) # ADF
-	param_white = getprop("instrumentation/adf[1]/indicated-bearing-deg");
-else param_white -= compass;
-if( param_white == nil ) param_white = 0.0;
-setprop("tu154/instrumentation/iku-1[1]/indicated-heading-r", param_white );
-}
-
-iku_handler();
-
-# Heading (yellow index, left handle)
-
-compass_adjust_hdg = func {
-var prop = "tu154/instrumentation/pnp[0]/heading-deg";
-if( arg[0] == 1 ) prop = "tu154/instrumentation/pnp[1]/heading-deg";
-
-var delta = arg[1];
-var heading = getprop( prop );
-if( heading == nil ) heading = 0.0;
-
-heading = heading + delta;
-if( heading >= 360.0 ) heading = heading - 360.0;
-if( 0 > heading ) heading = heading + 360.0; 
-setprop( prop, heading );
-
-}
-
-# "Plane" (white needle, right handle with plane symbol)
-
-compass_adjust_plane = func {
-var prop = "tu154/instrumentation/pnp[0]/plane-deg";
-if( arg[0] == 1 ) prop = "tu154/instrumentation/pnp[1]/plane-deg";
-
-var delta = arg[1];
-# proceed delayed property for smooth digit wheel animation
-var delayed_prop = sprintf("%s-delayed", prop);
-var local_prop = sprintf("%s-local", prop);
-
-var heading = getprop( local_prop );
-if( heading == nil ) heading = 0.0;
-heading = heading + delta;
-if( heading >= 360.0 ) heading = heading - 360.0;
-if( 0 > heading ) heading = heading + 360.0; 
-
-setprop( local_prop, heading );
-interpolate( delayed_prop, heading, 0.2 );
-# proceed white needle
-var absu_roll_mode = getprop( "fdm/jsbsim/ap/roll-selector" );
-if( absu_roll_mode == nil ) absu_roll_mode = 0;
-if( absu_roll_mode == 4 ) return; # NVU selected; needle will operate from NVU source
-if( absu_roll_mode == 3 ) # VOR selected
-      {
-      var zpu_src = getprop( "tu154/switches/pn-5-pnp-selector" );
-      if( zpu_src == nil ) zpu_src = 0;
-      if( zpu_src != arg[0] ) return; # Both needles operate from another PNP
-      setprop( "tu154/instrumentation/pnp[0]/plane-deg", heading );
-      setprop( "tu154/instrumentation/pnp[1]/plane-deg", heading );
-      }
-else { setprop( prop, heading ); }
-}
-
-
-# RV-5M support
-rv5m_handler = func{
-settimer( rv5m_handler, 0.1 );
-# Arretir:
-if( getprop("tu154/instrumentation/rv-5m/caged-flag" ) != 0 )
-	{
-	setprop("tu154/instrumentation/rv-5m/warn", 0 );
-	setprop("tu154/instrumentation/rv-5m/indicated-altitude-m", 0.0 );
-	return;
-	}
-if( getprop("tu154/instrumentation/rv-5m/serviceable" ) != 1 ) 
-	{
-        setprop("tu154/instrumentation/rv-5m/warn", 0 );
-        return;
-	}
-# get altitude and check if device is warmed
-var alt = getprop("fdm/jsbsim/instrumentation/indicated-altitude-m");
-var hot = getprop("tu154/instrumentation/rv-5m/hot");
-if( alt == nil ) alt = 0.0;
-if( hot == nil ) hot = 0.0;
-if( alt < hot ) alt = hot;
-interpolate("tu154/instrumentation/rv-5m/indicated-altitude-m", alt, 0.1 );
-# check warning
-var limit = getprop("tu154/instrumentation/rv-5m/index-m");
-if( limit == nil ) return;
-if( alt < limit ) 
-	{
-	setprop("tu154/instrumentation/rv-5m/warn", 1 );
-#	interpolate("tu154/systems/electrical/indicators/radioaltimeter-limit", 1.0, 0.1);
-	}
-else { 
-	setprop("tu154/instrumentation/rv-5m/warn", 0 );
-#	interpolate("tu154/systems/electrical/indicators/radioaltimeter-limit", 0.0, 0.1);
-	}
-}
-
-rv5m_power = func{
-if( getprop( "tu154/switches/RV-5-1" ) == 1.0 )
-	{
-	setprop("tu154/instrumentation/rv-5m/hot", 5000.0 );
-	electrical.AC3x200_bus_1L.add_output( "RV-5-1", 10.0);
-	if( getprop( "tu154/systems/electrical/buses/AC3x200-bus-1L/volts" ) > 150.0 )
-		interpolate("tu154/instrumentation/rv-5m/hot", -1.0, 20.0 );
-	}
-else {
-	setprop("tu154/instrumentation/rv-5m/hot", 0 );
-	electrical.AC3x200_bus_1L.rm_output( "RV-5-1" );
-	}
-}
-
-setlistener("tu154/switches/RV-5-1", rv5m_power,0,0);
-setlistener("tu154/instrumentation/rv-5m/serviceable", rv5m_power,0,0);
-
-
-rv5m_handler();
 
 # COM radio support
 var com_1_handler = func {
@@ -466,13 +765,14 @@ var param = getprop("tu154/instrumentation/bkk/serviceable");
 if( param == nil ) return;
 if( param == 0 )
 	{
+	setprop("tu154/instrumentation/bkk/mgv-1-failure", 1.0);
+	setprop("tu154/instrumentation/bkk/mgv-2-failure", 1.0);
+	setprop("tu154/instrumentation/bkk/mgv-contr-failure", 1.0);
+
 	var lamp_pwr = getprop("tu154/systems/electrical/buses/DC27-bus-L/volts");
 	if( lamp_pwr == nil ) lamp_pwr = 0.0;
 	if( lamp_pwr > 0 ) lamp_pwr = 1.0;
 	setprop("tu154/systems/electrical/indicators/contr-gyro", lamp_pwr );
-	setprop("tu154/instrumentation/bkk/mgv-1-failure", lamp_pwr);
-	setprop("tu154/instrumentation/bkk/mgv-2-failure", lamp_pwr);
-	setprop("tu154/instrumentation/bkk/mgv-contr-failure", lamp_pwr);
 	setprop("tu154/systems/electrical/indicators/mgvk-failure", lamp_pwr);
 	return;
 	}
@@ -667,104 +967,6 @@ setlistener("tu154/switches/PKP-left", mgv_1_power,0,0);
 setlistener("tu154/switches/PKP-right", mgv_2_power,0,0);
 setlistener("tu154/switches/MGV-contr", mgv_c_power,0,0);
 
-# =============================== IDR-1 support =============================
-idr_capt_handler = func{
-settimer( idr_capt_handler, 0 );
-var distance = 0.0;
-var caged = 1;
-if( getprop("tu154/switches/capt-idr-selector") == nil )
- 		setprop("tu154/switches/capt-idr-selector", 0.0 );
- 		
-if( getprop("tu154/switches/capt-idr-selector") == 0 )
-	{
-	if( getprop( "instrumentation/nav[0]/in-range") == 1 ) {
-	  if( (getprop( "instrumentation/nav[0]/nav-loc") == 0 ) # not ILS (VOR)
-	      or (getprop( "instrumentation/nav[0]/dme-in-range") == 1 ) # ILS with DME
-		) {
-	     setprop("tu154/instrumentation/idr-1[0]/caged-flag",0 );
-	     distance = getprop("instrumentation/nav[0]/nav-distance");     
-	     caged = 0;
-		}
-	else distance = 0.0;
-	}}
-if( getprop("tu154/switches/capt-idr-selector") == 1 )
-	{
-	if( getprop( "instrumentation/nav[2]/in-range") == 1 ) {
-	  if( (getprop( "instrumentation/nav[2]/nav-loc") == 0 ) # not ILS
-	      or (getprop( "instrumentation/nav[2]/dme-in-range") == 1 ) # ILS with DME
-		) {
-	     setprop("tu154/instrumentation/idr-1[0]/caged-flag",0 );
-	     distance = getprop("instrumentation/nav[2]/nav-distance");     
-	     caged = 0;
-		}}
-	else distance = 0.0;
-	}
-	
-if( getprop("tu154/switches/capt-idr-selector") == 2 )
-	{
-	if( getprop( "instrumentation/nav[1]/in-range") == 1 ) {
-	  if( (getprop( "instrumentation/nav[1]/nav-loc") == 0 ) # not ILS
-		or (getprop( "instrumentation/nav[1]/dme-in-range") == 1 ) # ILS with DME
-		) {
-	     setprop("tu154/instrumentation/idr-1[0]/caged-flag",0 );
-	     distance = getprop("instrumentation/nav[1]/nav-distance");     
-	     caged = 0;
-		}}
-	else  distance = 0.0;
-	}
-setprop("tu154/instrumentation/idr-1[0]/caged-flag", caged );
-
-# Translate distance to pkp.
-# Added by Yurik jun 2013
-  if( getprop( "tu154/instrumentation/distance-to-pnp" ) ) # Absent in real life
-  {
-    if( getprop("tu154/instrumentation/idr-1[0]/caged-flag" ) == 0.0 ) {	# Set distance from IDR
-	  setprop( "tu154/instrumentation/pnp[0]/distance-km", distance/1000.0 );
-	  setprop( "tu154/instrumentation/pnp[1]/distance-km", distance/1000.0 );
-	  setprop( "tu154/instrumentation/pnp[0]/blanker-dkm", 0 );
-	  setprop( "tu154/instrumentation/pnp[1]/blanker-dkm", 0 );
-    }
-    else {	# Check if NVU ready and set distance from there.
-	if( getprop("tu154/systems/nvu/selector" ) == 1 ) { # selected NVU block 1
-	      setprop( "tu154/instrumentation/pnp[0]/distance-km",
-		abs( getprop("fdm/jsbsim/instrumentation/aircraft-integrator-s-1")/1000.0 ) );
-	      setprop( "tu154/instrumentation/pnp[1]/distance-km",
-		abs( getprop("fdm/jsbsim/instrumentation/aircraft-integrator-s-1")/1000.0 ) );
-	      }
-	else  {  # selected NVU block 0
-	      setprop( "tu154/instrumentation/pnp[0]/distance-km",
-		abs( getprop("fdm/jsbsim/instrumentation/aircraft-integrator-s-2")/1000.0 ) );
-	      setprop( "tu154/instrumentation/pnp[1]/distance-km",
-		abs( getprop("fdm/jsbsim/instrumentation/aircraft-integrator-s-2")/1000.0 ) );
-
-	      }
-	if( ( getprop("tu154/systems/nvu/powered" ) == 1 ) and ( getprop("tu154/systems/nvu/serviceable" ) == 1 ) ) {
-        setprop( "tu154/instrumentation/pnp[0]/blanker-dkm", 0 );
-	setprop( "tu154/instrumentation/pnp[1]/blanker-dkm", 0 );
-	}
-	else {
-	      setprop( "tu154/instrumentation/pnp[0]/blanker-dkm", 1 );
-	      setprop( "tu154/instrumentation/pnp[1]/blanker-dkm", 1 );
-	}
-    }
-  }
-  else {
-  setprop( "tu154/instrumentation/pnp[0]/blanker-dkm", 1 );
-  setprop( "tu154/instrumentation/pnp[1]/blanker-dkm", 1 );
-  }
-if( distance == nil ){ setprop("tu154/instrumentation/idr-1[0]/caged-flag",1 ); return; } 
-  distance = distance/10.0; # to dec meters, it need for correct work of digit wheels
-  setprop("tu154/instrumentation/idr-1[0]/indicated-wheels_dec_m", 
-  (distance/10.0) - int( distance/100.0 )*10.0 );
-  setprop("tu154/instrumentation/idr-1[0]/indicated-wheels_hund_m", 
-  (distance/100.0) - int( distance/1000.0 )*10.0 );
-  setprop("tu154/instrumentation/idr-1[0]/indicated-wheels_ths_m", 
-  (distance/1000.0) - int( distance/10000.0 )*10.0 );
-  setprop("tu154/instrumentation/idr-1[0]/indicated-wheels_decths_m", 
-  (distance/10000.0) - int( distance/100000.0 )*10.0 );
-}
-
-idr_capt_handler();
 
 # ************************* TKS staff ***********************************
 
@@ -923,165 +1125,6 @@ settimer(tks_az_handler, 60.0 );
 
 
 # ************************* End TKS staff ***********************************
-var HEADING_DEVIATION_LIMIT = 10.0;
-var GLIDESLOPE_DEVIATION_LIMIT = 4.0;
-
-# Blankers
-var blanker_support = func{
-settimer( blanker_support, 1.0 );
-var param = 0.0;
-
-# --------------------------- Captain -----------------------------------
-	var mode = get_mp_mode( 0 );
-	# ILS
-	if( mode == 4 )
-	{ # Heading
-          param = 0.0;
-          if( getprop("instrumentation/nav[0]/in-range" ) == 1 ) param = 1.0;
-          if(  abs( getprop("instrumentation/nav[0]/heading-needle-deflection") ) < HEADING_DEVIATION_LIMIT ) param = param + 1.0;
-          if( param == 2.0 ) {
-                  setprop("tu154/instrumentation/pkp[0]/kurs-blanker", 0.0 );
-                  setprop("tu154/instrumentation/pnp[0]/kurs-blanker", 0.0 );
-                  }
-          else {	
-          setprop("tu154/instrumentation/pkp[0]/kurs-blanker", 1.0 );
-          setprop("tu154/instrumentation/pnp[0]/kurs-blanker", 1.0 );
-          }
-	  # Glideslope
-          param = 0.0;
-          if( getprop("instrumentation/nav[0]/in-range" ) == 1 ) param = 1.0;
-          if(  abs( getprop("instrumentation/nav[0]/gs-needle-deflection") ) < GLIDESLOPE_DEVIATION_LIMIT ) param = param + 1.0;
-          if( param == 2.0 ) {
-          setprop("tu154/instrumentation/pkp[0]/gliss-blanker", 0.0 );
-          setprop("tu154/instrumentation/pnp[0]/gliss-blanker", 0.0 );
-          }
-          else {	
-          setprop("tu154/instrumentation/pkp[0]/gliss-blanker", 1.0 );
-          setprop("tu154/instrumentation/pnp[0]/gliss-blanker", 1.0 );
-          }
-	} # end mode == 4
-	if( mode == 2 ) {
-	# VOR-1
-	if( getprop("instrumentation/nav[0]/in-range" ) == 1 )
-		setprop("tu154/instrumentation/pnp[0]/kurs-blanker", 0.0 );
-	else setprop("tu154/instrumentation/pnp[0]/kurs-blanker", 1.0 );
-	setprop("tu154/instrumentation/pnp[0]/gliss-blanker", 1.0 );
-	setprop("tu154/instrumentation/pkp[0]/kurs-blanker", 1.0 );
-	setprop("tu154/instrumentation/pkp[0]/gliss-blanker", 1.0 );
-	} # end mode == 2
-	if( mode == 3 ) {
-	# VOR-2
-	if( getprop("instrumentation/nav[1]/in-range" ) == 1 )
-		setprop("tu154/instrumentation/pnp[0]/kurs-blanker", 0.0 );
-	else setprop("tu154/instrumentation/pnp[0]/kurs-blanker", 1.0 );
-	setprop("tu154/instrumentation/pnp[0]/gliss-blanker", 1.0 );
-	setprop("tu154/instrumentation/pkp[0]/kurs-blanker", 1.0 );
-	setprop("tu154/instrumentation/pkp[0]/gliss-blanker", 1.0 );
-	} # end mode == 3
-	if( mode == 1 ) {
-	# NVU
-	if( getprop("tu154/instrumentation/pn-5/nvu" ) == 1 )
-	    if( getprop("tu154/systems/nvu/powered" ) == 1 )
-		setprop("tu154/instrumentation/pnp[0]/kurs-blanker", 0.0 );
-	else setprop("tu154/instrumentation/pnp[0]/kurs-blanker", 1.0 );
-	setprop("tu154/instrumentation/pnp[0]/gliss-blanker", 1.0 );
-	setprop("tu154/instrumentation/pkp[0]/kurs-blanker", 1.0 );
-	setprop("tu154/instrumentation/pkp[0]/gliss-blanker", 1.0 );
-	} # end mode == 1
-	if( mode == 0 ) {
-	# Off-line
-	setprop("tu154/instrumentation/pnp[0]/kurs-blanker", 1.0 );
-	setprop("tu154/instrumentation/pnp[0]/gliss-blanker", 1.0 );
-	setprop("tu154/instrumentation/pkp[0]/kurs-blanker", 1.0 );
-	setprop("tu154/instrumentation/pkp[0]/gliss-blanker", 1.0 );
-	} # end mode == 1
-# --------------------------- second pilot -----------------------------------
-	mode = get_mp_mode( 1 );
-# ILS
-	if( mode == 4 )
-	{ # Heading
-          param = 0.0;
-          if( getprop("instrumentation/nav[0]/in-range" ) == 1 ) param = 1.0;
-          if(  abs( getprop("instrumentation/nav[0]/heading-needle-deflection") ) < HEADING_DEVIATION_LIMIT ) param = param + 1.0;
-          if( param == 2.0 ) {
-                  setprop("tu154/instrumentation/pkp[1]/kurs-blanker", 0.0 );
-                  setprop("tu154/instrumentation/pnp[1]/kurs-blanker", 0.0 );
-	}
-          else {	
-          setprop("tu154/instrumentation/pkp[1]/kurs-blanker", 1.0 );
-          setprop("tu154/instrumentation/pnp[1]/kurs-blanker", 1.0 );
-	}
-	# Glideslope
-          param = 0.0;
-          if( getprop("instrumentation/nav[0]/in-range" ) == 1 ) param = 1.0;
-          if(  abs( getprop("instrumentation/nav[0]/gs-needle-deflection") ) < GLIDESLOPE_DEVIATION_LIMIT ) param = param + 1.0;
-          if( param == 2.0 ) {
-          setprop("tu154/instrumentation/pkp[1]/gliss-blanker", 0.0 );
-          setprop("tu154/instrumentation/pnp[1]/gliss-blanker", 0.0 );
-	}
-          else {	
-          setprop("tu154/instrumentation/pkp[1]/gliss-blanker", 1.0 );
-          setprop("tu154/instrumentation/pnp[1]/gliss-blanker", 1.0 );
-	}
-	} # end mode == 4
-	if( mode == 2 ) {
-	# VOR-1
-	if( getprop("instrumentation/nav[0]/in-range" ) == 1 )
-		setprop("tu154/instrumentation/pnp[1]/kurs-blanker", 0.0 );
-	else setprop("tu154/instrumentation/pnp[1]/kurs-blanker", 1.0 );
-	setprop("tu154/instrumentation/pnp[1]/gliss-blanker", 1.0 );
-	setprop("tu154/instrumentation/pkp[1]/kurs-blanker", 1.0 );
-	setprop("tu154/instrumentation/pkp[1]/gliss-blanker", 1.0 );
-	} # end mode == 2
-	if( mode == 3 ) {
-	# VOR-2
-	if( getprop("instrumentation/nav[1]/in-range" ) == 1 )
-		setprop("tu154/instrumentation/pnp[1]/kurs-blanker", 0.0 );
-	else setprop("tu154/instrumentation/pnp[1]/kurs-blanker", 1.0 );
-	setprop("tu154/instrumentation/pnp[1]/gliss-blanker", 1.0 );
-	setprop("tu154/instrumentation/pkp[1]/kurs-blanker", 1.0 );
-	setprop("tu154/instrumentation/pkp[1]/gliss-blanker", 1.0 );
-	} # end mode == 3
-	if( mode == 1 ) {
-	# NVU
-	if( getprop("tu154/instrumentation/pn-5/nvu" ) == 1 )
-	    if( getprop("tu154/systems/nvu/powered" ) == 1 )
-		setprop("tu154/instrumentation/pnp[1]/kurs-blanker", 0.0 );
-	else setprop("tu154/instrumentation/pnp[1]/kurs-blanker", 1.0 );
-	setprop("tu154/instrumentation/pnp[1]/gliss-blanker", 1.0 );
-	setprop("tu154/instrumentation/pkp[1]/kurs-blanker", 1.0 );
-	setprop("tu154/instrumentation/pkp[1]/gliss-blanker", 1.0 );
-	} # end mode == 1
-	if( mode == 0 ) {
-	# Off-line
-	setprop("tu154/instrumentation/pnp[1]/kurs-blanker", 1.0 );
-	setprop("tu154/instrumentation/pnp[1]/gliss-blanker", 1.0 );
-	setprop("tu154/instrumentation/pkp[1]/kurs-blanker", 1.0 );
-	setprop("tu154/instrumentation/pkp[1]/gliss-blanker", 1.0 );
-	} # end mode == 1
-	
-}
-
-
-var get_mp_mode = func{
-if( arg[0] == 0 ){ # captain pkp - pnp
-        if( getprop("tu154/switches/pn-5-posadk") == 1.0)
-        if( getprop("tu154/switches/pn-5-navigac" ) == 0.0 ) return 4; # ILS mode
-        # VOR
-        if( getprop("tu154/instrumentation/pn-5/az-1") == 1.0 ) return 2; # VOR-1
-        if( getprop("tu154/instrumentation/pn-5/az-2") == 1.0 ) return 3; # VOR-2
-        # NVU
-        if( getprop("tu154/instrumentation/pn-5/nvu") == 1.0 ) return 1; # NVU
-	return 0; # idle
-	}
-else {	# second pilot pkp-pnp
-	var param = getprop("tu154/switches/pn-6-selector" );
-	if( param == nil ) param = 0.0;
-	return param;
-	}
-}
-
-blanker_support();
 
 #                           KURS-MP frequency support
 
@@ -2016,12 +2059,6 @@ if( multiplier > 5.0  ) multiplier = multiplier * 10;
 	if( zpu < 0.0 ) zpu = zpu + 360.0;
      	setprop("fdm/jsbsim/instrumentation/zpu-deg-1", zpu );
      	interpolate("tu154/instrumentation/v-140[0]/zpu-1-delayed", zpu, 0.15 );
-# PNP needles
-if( getprop( "fdm/jsbsim/instrumentation/nvu-selector") )
-	{
-	interpolate( "tu154/instrumentation/pnp[0]/plane-deg", zpu, 0.5 );
-	interpolate( "tu154/instrumentation/pnp[1]/plane-deg", zpu, 0.5 );
-	}
 }
 
 
@@ -2039,13 +2076,6 @@ if( multiplier > 5.0  ) multiplier = multiplier * 10;
 	if( zpu < 0.0 ) zpu = zpu + 360.0;
      	setprop("fdm/jsbsim/instrumentation/zpu-deg-2", zpu );
      	interpolate("tu154/instrumentation/v-140[0]/zpu-2-delayed", zpu, 0.15 );
-# PNP needles
-	if( !getprop( "fdm/jsbsim/instrumentation/nvu-selector") )
-	{
-	interpolate( "tu154/instrumentation/pnp[0]/plane-deg", zpu, 0.5 );
-	interpolate( "tu154/instrumentation/pnp[1]/plane-deg", zpu, 0.5 );
-	}
-
 }
 
 
@@ -2167,12 +2197,6 @@ setprop("tu154/systems/electrical/indicators/change-waypoint", 1 );
 	# change active selector
 		setprop("tu154/systems/nvu/selector", 0 );
 		setprop("fdm/jsbsim/instrumentation/nvu-selector", 0 );
-	# PNP needles procedure
-		if( getprop( "fdm/jsbsim/ap/roll-selector") == 4 ){
-		 var heading = getprop( "fdm/jsbsim/instrumentation/zpu-deg-2");
-		 interpolate( "tu154/instrumentation/pnp[0]/plane-deg", heading, 0.5 );
-		 interpolate( "tu154/instrumentation/pnp[1]/plane-deg", heading, 0.5 );
-		}
 	}
 	else #if( getprop("tu154/systems/nvu/selector" ) == 0 )
 	{
@@ -2190,13 +2214,8 @@ setprop("tu154/systems/electrical/indicators/change-waypoint", 1 );
 	# change active selector
 		setprop("tu154/systems/nvu/selector", 1 );
 		setprop("fdm/jsbsim/instrumentation/nvu-selector", 1 );
-	# PNP needles procedure
-		if( getprop( "fdm/jsbsim/ap/roll-selector") == 4 ){
-		 var heading = getprop( "fdm/jsbsim/instrumentation/zpu-deg-1");
-		 interpolate( "tu154/instrumentation/pnp[0]/plane-deg", heading, 0.5 );
-		 interpolate( "tu154/instrumentation/pnp[1]/plane-deg", heading, 0.5 );
-		}
 	}
+
 # virtual navigator
 var ena_vn = num( getprop("/tu154/systems/nvu-calc/vn") );
 if( ena_vn == nil ) ena_vn = 0;
@@ -2397,8 +2416,7 @@ settimer(rsbn_handler, 0.0);
 
 if( getprop("tu154/instrumentation/rsbn/serviceable" ) != 1 ) return; # Something is wrong
 
-var distance = getprop("instrumentation/nav[2]/nav-distance"); 
-if( distance == nil ) distance = 0.0;
+var distance = getprop("tu154/instrumentation/dme[2]/distance");
 setprop( "tu154/instrumentation/rsbn/distance-m", distance ); 
 setprop( "fdm/jsbsim/instrumentation/rsbn-d-m", distance ); 
 var hdg = getprop("instrumentation/nav[2]/radials/actual-deg"); 
@@ -2528,11 +2546,13 @@ if( arg[0] == 1 )
 	  rsbn_set_f_2(0);
 	  electrical.AC3x200_bus_1L.add_output( "RSBN", 50.0);
 	  setprop("instrumentation/nav[2]/power-btn", 1 );
+          setprop("instrumentation/dme[2]/serviceable", 1 );
 	  }
 	}
 else { 
 	electrical.AC3x200_bus_1L.rm_output( "RSBN" );
 #	setprop("instrumentation/nav[2]/serviceable", 0 ); 
+	setprop("instrumentation/dme[2]/serviceable", 0 );
 	setprop("instrumentation/nav[2]/power-btn", 0 );
 	setprop("tu154/instrumentation/rsbn/serviceable", 0 );
 	setprop("instrumentation/nav[2]/powered", 0 );
@@ -2543,6 +2563,7 @@ var rsbn_pwr_watchdog = func{
 if( getprop("instrumentation/nav[2]/powered" ) != 1 ) # power off
 	{
 #	setprop("instrumentation/nav[2]/serviceable", 0 );
+	setprop("instrumentation/dme[2]/serviceable", 0 );
 	setprop("instrumentation/nav[2]/power-btn", 0 );
 #	setprop("tu154/systems/electrical/indicators/range-avton", 0 );  
 #	setprop("tu154/systems/electrical/indicators/azimuth-avton", 0 );
@@ -2553,6 +2574,7 @@ else 	{
 	if( getprop( "tu154/switches/RSBN-power" ) == 1.0 ) 
 	    {
 	    setprop("instrumentation/nav[2]/power-btn", 1 );
+            setprop("instrumentation/dme[2]/serviceable", 1 );
 	    setprop("tu154/instrumentation/rsbn/serviceable", 1 ); 
 	    }
 	}
@@ -2561,6 +2583,7 @@ if( getprop( "tu154/switches/RSBN-power" ) != 1.0 )
         {
         setprop("tu154/instrumentation/rsbn/serviceable", 0 );
 	setprop("instrumentation/nav[2]/power-btn", 0 );
+        setprop("instrumentation/dme[2]/serviceable", 0 );
         return;
         }
 }
@@ -2600,25 +2623,6 @@ setlistener("instrumentation/nav[2]/powered", rsbn_pwr_watchdog, 0,0 );
 setlistener("instrumentation/nav[2]/in-range", rsbn_range_watchdog,0,0 );
 
 
-
-# USHDB support
-var ushdb_handler = func{
-settimer(ushdb_handler, 0.0);
-
-if( getprop( "tu154/switches/ushdb-sel-1" ) == 1.0 ) 
-	var hdg_1 = getprop( "instrumentation/nav[0]/radials/reciprocal-radial-deg");
-else var hdg_1 = getprop( "instrumentation/adf[0]/indicated-bearing-deg");
-	if( hdg_1 == nil ) hdg_1 = 0.0;
-if( getprop( "tu154/switches/ushdb-sel-2" ) == 1.0 )
-	var hdg_2 = getprop( "instrumentation/nav[1]/radials/reciprocal-radial-deg");
-else var hdg_2 = getprop( "instrumentation/adf[1]/indicated-bearing-deg");
-	if( hdg_2 == nil ) hdg_2 = 0.0;
-setprop( "tu154/instrumentation/ushdb/heading-deg-1", hdg_1 );	
-setprop( "tu154/instrumentation/ushdb/heading-deg-2", hdg_2 );	
-
-}
-
-ushdb_handler();
 
 # ARK support
 
@@ -2852,18 +2856,21 @@ if( ac200 > 150.0 )
 	{ # 200 V 400 Hz Line 1 Power OK
 	setprop("tu154/instrumentation/ark-15[0]/powered", 1 ); 
 	setprop("instrumentation/nav[2]/powered", 1 ); 
+	setprop("instrumentation/dme[2]/serviceable", 1 );
 	setprop("tu154/systems/nvu/powered", 1.0 );
 	# KURS-MP left
 	if( getprop( "tu154/switches/KURS-MP-1" ) == 1.0 )
 		{
 		setprop("instrumentation/nav[0]/power-btn", 1 );
 		setprop("instrumentation/nav[0]/serviceable", 1 );
+		setprop("instrumentation/dme[0]/serviceable", 1 );
 		setprop("instrumentation/marker-beacon[0]/power-btn", 1 );
 		setprop("instrumentation/marker-beacon[0]/serviceable", 1 );		
 		}
 	else	{
 		setprop("instrumentation/nav[0]/power-btn", 0 );
 		setprop("instrumentation/nav[0]/serviceable", 0 );
+		setprop("instrumentation/dme[0]/serviceable", 0 );
 		setprop("instrumentation/marker-beacon[0]/power-btn", 0 );
 		setprop("instrumentation/marker-beacon[0]/serviceable", 0 );
 		}
@@ -2886,11 +2893,6 @@ if( ac200 > 150.0 )
 		setprop("tu154/instrumentation/diss/powered", 1 );
 	else	setprop("tu154/instrumentation/diss/powered", 0 );
 
-	# RV-5M-1	
-	if( getprop( "tu154/switches/RV-5-1" ) == 1.0 )
-		setprop("tu154/instrumentation/rv-5m/serviceable", 1 );
-	else	setprop("tu154/instrumentation/rv-5m/serviceable", 0 );
-		
 	# SVS	
 	if( getprop( "tu154/switches/SVS-power" ) == 1.0 )
 		setprop("tu154/systems/svs/powered", 1 );
@@ -2934,6 +2936,7 @@ if( ac200 > 150.0 )
 else	{
 	setprop("tu154/instrumentation/ark-15[0]/powered", 0 ); 
 	setprop("instrumentation/nav[2]/powered", 0 ); 
+	setprop("instrumentation/dme[2]/serviceable", 0 );
 	setprop("tu154/systems/nvu/powered", 0.0 );
 	setprop("instrumentation/nav[0]/power-btn", 0 );
 	setprop("instrumentation/nav[0]/serviceable", 0 );
@@ -2941,7 +2944,6 @@ else	{
 	setprop("fdm/jsbsim/instrumentation/bgmk-failure-1", 1 );
 	setprop("tu154/instrumentation/bkk/serviceable", 0 );
 	setprop("tu154/instrumentation/diss/powered", 0 );
-	setprop("tu154/instrumentation/rv-5m/serviceable", 0 );
 	setprop("tu154/systems/svs/powered", 0 );
 	setprop("tu154/instrumentation/altimeter[1]/powered", 0 );
 	setprop("instrumentation/attitude-indicator[3]/caged-flag", 1 );
@@ -2964,10 +2966,12 @@ if( ac200 > 150.0 )
 		{
 		setprop("instrumentation/nav[1]/power-btn", 1 );
 		setprop("instrumentation/nav[1]/serviceable", 1 );
+		setprop("instrumentation/dme[1]/serviceable", 1 );
 		}
 	else	{
 		setprop("instrumentation/nav[1]/power-btn", 0 );
 		setprop("instrumentation/nav[1]/serviceable", 0 );
+		setprop("instrumentation/dme[1]/serviceable", 0 );
 		}
 	# GA3-2
 	if( getprop( "tu154/switches/TKC-power-2" ) == 1.0 )
