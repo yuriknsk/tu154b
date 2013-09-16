@@ -2531,7 +2531,7 @@ var channel = handle_1 * 10 + handle_2;
 if( channel < 1.0 ) channel = 1.0;
 if( channel > 40.0 ) channel = 40.0;
 
-var freq = 115.95 + channel * 0.05;
+var freq = 959.95 + channel * 0.05;
 setprop("tu154/instrumentation/rsbn/frequency", freq );
 setprop("instrumentation/nav[2]/frequencies/selected-mhz", freq );
 }
