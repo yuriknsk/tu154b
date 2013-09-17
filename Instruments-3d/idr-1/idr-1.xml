@@ -59,7 +59,6 @@
 <animation>
   <type>rotate</type>
   <object-name>dig_ones</object-name>
-  <property alias="../../params/distance"/>
   <expression>
     <table>
       <mod>
