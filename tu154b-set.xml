@@ -983,8 +983,9 @@
     <handle-2 type="double" >0.0</handle-2>
     <mode type="bool" >false</mode>
     <serviceable type="bool" >false</serviceable>
-    <distance-m type="double" >0.0</distance-m>
-    <heading-deg type="double" >0.0</heading-deg>
+    <distance type="double" >0</distance>
+    <radial type="double" >0</radial>
+    <twist type="double" >0</twist>
   </rsbn>
   
   <uap-12>
