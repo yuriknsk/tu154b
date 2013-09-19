@@ -653,9 +653,14 @@ var rsbn_corr = func {
         else if (radial < 0)
             radial += 360;
         var distance = math.sqrt(ds * ds + dz * dz);
+        distance = int(distance / 100) * 100;
 
         setprop("tu154/instrumentation/rsbn/radial-auto", radial);
-        setprop("tu154/instrumentation/rsbn/distance-auto", distance);
+        if (getprop("tu154/instrumentation/rsbn/distance-target") != distance) {
+            setprop("tu154/instrumentation/rsbn/distance-target", distance);
+            interpolate("tu154/instrumentation/rsbn/distance-auto", distance,
+                        0.2);
+        }
     }
 }
 var rsbn_corr_timer = maketimer(0.1, rsbn_corr);
