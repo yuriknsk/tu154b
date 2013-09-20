@@ -20,6 +20,8 @@ var rvrn = aircraft.light.new("tu154/systems/warning/rvrn", [0.5, 0.6] );
 var slats = aircraft.light.new("tu154/systems/warning/slats", [0.4, 0.4] );
 var stab_on = aircraft.light.new("tu154/systems/electrical/indicators/stab-on",
                                  [0.3, 0.3]);
+var fuel_2500 = aircraft.light.new("tu154/systems/electrical/indicators/fuel-2500",
+                                   [0.3, 0.3]);
 var gear = aircraft.light.new("tu154/systems/warning/gear", [0.5, 0.5] );
 var voice_h = aircraft.light.new("tu154/systems/warning/voice", [3.5, 1.0] );
 
@@ -43,7 +45,6 @@ setprop("tu154/systems/electrical/indicators/autothrottle", 0 );
 setprop("tu154/systems/electrical/indicators/wrong-approach-h", 0 );
 setprop("tu154/systems/electrical/indicators/wrong-approach-v", 0 );
 setprop("tu154/systems/electrical/indicators/fire", 0 );
-setprop("tu154/systems/electrical/indicators/fuel-2500", 0 );
 setprop("tu154/systems/electrical/indicators/speed-limit", 0 );
 setprop("tu154/systems/electrical/indicators/acceleration", 0 );
 setprop("tu154/systems/electrical/indicators/alpha", 0 );
@@ -75,6 +76,7 @@ setprop("tu154/systems/electrical/indicators/rudder-trim-neutral", 0 );
 setprop("tu154/systems/electrical/indicators/aileron-trim-neutral", 0 );
 setprop("tu154/systems/electrical/indicators/elevator-trim-neutral", 0 );
 setprop("tu154/systems/electrical/indicators/stab-on/state", 0.0);
+setprop("tu154/systems/electrical/indicators/fuel-2500/state", 0.0);
 setprop("tu154/systems/warning/run-stabilizer/state", 0.0 );		
 setprop("tu154/systems/electrical/indicators/flaps-1", 0.0 );
 setprop("tu154/systems/electrical/indicators/flaps-2", 0.0 );
@@ -134,6 +136,7 @@ ground.switch(0);
 rvrn.switch(0);
 slats.switch(0);
 stab_on.switch(0);
+fuel_2500.switch(0);
 gear.switch(0);
 not_ready.switch(0);
 strobe.switch(0);
@@ -327,7 +330,7 @@ if( getprop( "tu154/systems/electrical/indicators/speed-limit" ) > 0.0 )
 		alarm_pulse_src = alarm_pulse_src + 1.0;
 
 # Fuel
-if( getprop( "tu154/systems/electrical/indicators/fuel-2500" ) > 0.0 )
+if( getprop("tu154/systems/electrical/indicators/fuel-2500/enabled") )
 		alarm_pulse_src = alarm_pulse_src + 1.0;
 # Checking lamps
 if( getprop( "tu154/systems/electrical/checking-lamps/main-panel" ) > 0.0 )
@@ -452,7 +455,6 @@ var check_lamps_capt = func{
         setprop("tu154/systems/electrical/indicators/wrong-approach-h", param );
         setprop("tu154/systems/electrical/indicators/wrong-approach-v", param );
         setprop("tu154/systems/electrical/indicators/fire", param );
-        setprop("tu154/systems/electrical/indicators/fuel-2500", param );
         setprop("tu154/systems/electrical/indicators/speed-limit", param );
         setprop("tu154/systems/electrical/indicators/acceleration", param );
         setprop("tu154/systems/electrical/indicators/alpha", param );
@@ -480,6 +482,7 @@ var check_lamps_capt = func{
         setprop("tu154/systems/electrical/indicators/aileron-trim-neutral", param );
         setprop("tu154/systems/electrical/indicators/elevator-trim-neutral", param );
         setprop("tu154/systems/electrical/indicators/stab-on/state", param);
+        setprop("tu154/systems/electrical/indicators/fuel-2500/state", param);
         setprop("tu154/systems/electrical/indicators/flaps-1", param );
         setprop("tu154/systems/electrical/indicators/flaps-2", param );
         setprop("tu154/systems/electrical/indicators/interceptor-outer", param );
@@ -724,8 +727,8 @@ else setprop("tu154/systems/electrical/indicators/fire", 0 );
 param = getprop( "consumables/fuel/tank[0]/level-gal_us" );
 if ( param == nil ) param = 0.0;
 if(  param < 826 ) # 2500 kg 0.8 kg/l 3.78 l/gal
-    	setprop("tu154/systems/electrical/indicators/fuel-2500", 1 );
-else setprop("tu154/systems/electrical/indicators/fuel-2500", 0 );
+     fuel_2500.switch(1);
+else fuel_2500.switch(0);
 
 # Ground
 param = 0.0;
