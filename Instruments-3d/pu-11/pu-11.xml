@@ -200,10 +200,28 @@
 </animation>
 <!--Latitude handle-->
 <animation>
-  <type>rotate</type>
+  <type>knob</type>
   <object-name>handle_fi</object-name>
   <property>fdm/jsbsim/instrumentation/pu11-latitude</property>
   <factor>20.0</factor>
+  <visible>true</visible>
+  <action>
+    <binding>
+      <command>property-adjust</command>
+      <property>fdm/jsbsim/instrumentation/pu11-latitude</property>
+      <min>-90.0</min>
+      <max>90.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+  <hovered>
+    <binding>
+      <command>set-tooltip</command>
+      <tooltip-id>pu-11-latitude</tooltip-id>
+      <label>Latitude: %+03d°</label>
+      <property>fdm/jsbsim/instrumentation/pu11-latitude</property>
+    </binding>
+  </hovered>
   <center>
     <x-m>0.0</x-m>
     <y-m>0.05483</y-m>
@@ -477,79 +495,6 @@
         </script>
       </binding>      
     </mod-up>
-  </action>
-</animation>
-
-<animation>
-  <type>pick</type>
-  <object-name>handle_fi</object-name>
-  <visible>true</visible>
-  <action>
-    <button>0</button>
-    <repeatable>true</repeatable>
-    <interval-sec>0.15</interval-sec>
-    <binding>
-      <command>property-adjust</command>
-      <property>fdm/jsbsim/instrumentation/pu11-latitude</property>
-      <step>1.0</step>
-      <min>-90.0</min>
-      <max>90.0</max>
-      <wrap>false</wrap>
-    </binding>
-  </action>
-</animation>
-<animation>
-  <type>pick</type>
-  <object-name>handle_fi</object-name>
-  <visible>true</visible>
-  <action>
-    <button>1</button>
-    <repeatable>true</repeatable>
-    <interval-sec>0.15</interval-sec>
-    <binding>
-      <command>property-adjust</command>
-      <property>fdm/jsbsim/instrumentation/pu11-latitude</property>
-      <step>-1.0</step>
-      <min>-90.0</min>
-      <max>90.0</max>
-      <wrap>false</wrap>
-    </binding>
-  </action>
-</animation>
-
-<!--Mouse wheel-->
-<animation>
-  <type>pick</type>
-  <object-name>handle_fi</object-name>
-  <visible>true</visible>
-  <action>
-    <button>3</button>
-    <repeatable>false</repeatable>
-    <binding>
-      <command>property-adjust</command>
-      <property>fdm/jsbsim/instrumentation/pu11-latitude</property>
-      <step>1.0</step>
-      <min>-90.0</min>
-      <max>90.0</max>
-      <wrap>false</wrap>
-    </binding>
-  </action>
-</animation>
-<animation>
-  <type>pick</type>
-  <object-name>handle_fi</object-name>
-  <visible>true</visible>
-  <action>
-    <button>4</button>
-    <repeatable>false</repeatable>
-    <binding>
-      <command>property-adjust</command>
-      <property>fdm/jsbsim/instrumentation/pu11-latitude</property>
-      <step>-1.0</step>
-      <min>-90.0</min>
-      <max>90.0</max>
-      <wrap>false</wrap>
-    </binding>
   </action>
 </animation>
 
