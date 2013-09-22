@@ -41,7 +41,7 @@
   <type>rotate</type>
   <object-name>inner</object-name>
   <property>tu154/instrumentation/b-8m/inner</property>
-  <factor>1.0</factor>
+  <factor>3.6</factor>
   <axis>
     <x>1.0</x>
     <y>0.0</y>
@@ -79,130 +79,65 @@
 
 <!--Control-->
 <animation>
-  <type>pick</type>
-  <object-name>hs_1</object-name>
-  <visible>false</visible>
-  <action>
-    <button>0</button>
-    <repeatable>true</repeatable>
-    <interval-sec>0.15</interval-sec>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/instrumentation/b-8m/inner</property>
-      <step>-1.0</step>
-    </binding>
-  </action>
-</animation>
-<animation>
-  <type>pick</type>
-  <object-name>hs_2</object-name>
-  <visible>false</visible>
-  <action>
-    <button>0</button>
-    <repeatable>true</repeatable>
-    <interval-sec>0.15</interval-sec>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/instrumentation/b-8m/inner</property>
-      <step>1.0</step>
-    </binding>
-  </action>
-</animation>
-<animation>
-  <type>pick</type>
-  <object-name>hs_3</object-name>
-  <visible>false</visible>
-  <action>
-    <button>0</button>
-    <repeatable>true</repeatable>
-    <interval-sec>0.15</interval-sec>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/instrumentation/b-8m/outer</property>
-      <step>-10.0</step>
-    </binding>
-  </action>
-</animation>
-<animation>
-  <type>pick</type>
-  <object-name>hs_4</object-name>
-  <visible>false</visible>
-  <action>
-    <button>0</button>
-    <repeatable>true</repeatable>
-    <interval-sec>0.15</interval-sec>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/instrumentation/b-8m/outer</property>
-      <step>10.0</step>
-    </binding>
-  </action>
-</animation>
-
-<!--Mouse wheel-->
-<animation>
-  <type>pick</type>
+  <type>knob</type>
   <object-name>hs_1</object-name>
   <object-name>hs_2</object-name>
   <visible>false</visible>
   <action>
-    <button>3</button>
-    <repeatable>false</repeatable>
     <binding>
       <command>property-adjust</command>
       <property>tu154/instrumentation/b-8m/inner</property>
-      <step>-1.0</step>
+      <min>0</min>
+      <max>100</max>
+      <wrap>true</wrap>
     </binding>
   </action>
-</animation>
-<animation>
-  <type>pick</type>
-  <object-name>hs_1</object-name>
-  <object-name>hs_2</object-name>
-  <visible>false</visible>
-  <action>
-    <button>4</button>
-    <repeatable>false</repeatable>
+  <hovered>
     <binding>
-      <command>property-adjust</command>
+      <command>set-tooltip</command>
+      <tooltip-id>b-8m-inner</tooltip-id>
+      <label>True heading: %s</label>
       <property>tu154/instrumentation/b-8m/inner</property>
-      <step>1.0</step>
+      <mapping>nasal</mapping>
+      <script>
+        var outer = getprop("tu154/instrumentation/b-8m/outer");
+        var inner = arg[0];
+        return sprintf("%03d°%02d'", outer + int(inner / 10),
+                       (inner - int(inner / 10) * 10) * 6);
+      </script>
     </binding>
-  </action>
+  </hovered>
 </animation>
-
 <animation>
-  <type>pick</type>
+  <type>knob</type>
   <object-name>hs_3</object-name>
   <object-name>hs_4</object-name>
   <visible>false</visible>
   <action>
-    <button>3</button>
-    <repeatable>false</repeatable>
     <binding>
       <command>property-adjust</command>
       <property>tu154/instrumentation/b-8m/outer</property>
-      <step>-10.0</step>
+      <factor>10</factor>
+      <min>0</min>
+      <max>360</max>
+      <wrap>true</wrap>
     </binding>
   </action>
-</animation>
-<animation>
-  <type>pick</type>
-  <object-name>hs_3</object-name>
-  <object-name>hs_4</object-name>
-  <visible>false</visible>
-  <action>
-    <button>4</button>
-    <repeatable>false</repeatable>
+  <hovered>
     <binding>
-      <command>property-adjust</command>
+      <command>set-tooltip</command>
+      <tooltip-id>b-8m-outer</tooltip-id>
+      <label>True heading: %s</label>
       <property>tu154/instrumentation/b-8m/outer</property>
-      <step>10.0</step>
+      <mapping>nasal</mapping>
+      <script>
+        var outer = arg[0];
+        var inner = getprop("tu154/instrumentation/b-8m/inner");
+        return sprintf("%03d°%02d'", outer + int(inner / 10),
+                       (inner - int(inner / 10) * 10) * 6);
+      </script>
     </binding>
-  </action>
+  </hovered>
 </animation>
-
-
-
 
 </PropertyList>

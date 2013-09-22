@@ -16,6 +16,9 @@
 		var dec2min = func{
 			var arg_copy = arg[0];
 
+                        # Round to 6 minute step.
+                        arg_copy = int(arg_copy * 10 + 0.5) / 10;
+
 			if( arg_copy > 360.0  ) arg_copy -= 360.0;
 			if( 0 > arg_copy  ) arg_copy += 360.0;
 			var integer = int( arg_copy );
@@ -134,7 +137,7 @@
 				  if( current_az_corr > 360.0 ) current_az_corr -= 360.0;
 	 			  if( -360.0 > current_az_corr ) current_az_corr += 360.0;
 			if( dist ) uk_az_corrected = uk - current_az_corr * s_beacon / dist;
-					rtstr ~= sprintf(" Beacon S: %.1f km Z: %.1f km UK: %.2f'", s_beacon, -z_beacon, uk_az_corrected );
+					rtstr ~= sprintf(" Beacon S: %.1f km Z: %.1f km UK: %.2f'", s_beacon, -z_beacon, dec2min(uk_az_corrected) );
 					
 				}}
 			result.getChild("value", i-1, 1).setValue(rtstr);

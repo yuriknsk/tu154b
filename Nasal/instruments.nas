@@ -1721,51 +1721,32 @@ var fork = getprop( "/tu154/systems/nvu-calc/fork" );
 if( fork == nil ) fork = 0.0;
 
 if( !fork_flag ) {	# Apply fork
-	var offset = getprop("instrumentation/heading-indicator[0]/offset-deg");
-	if( offset == nil ) offset = 0.0;
-	offset += fork;
-	setprop("instrumentation/heading-indicator[0]/offset-deg", offset );
-	offset = getprop("instrumentation/heading-indicator[1]/offset-deg");
-	if( offset == nil ) offset = 0.0;
-	offset += fork;
-	setprop("instrumentation/heading-indicator[1]/offset-deg", offset );
-	# re-write ZPU
-	var zpu = getprop("fdm/jsbsim/instrumentation/zpu-deg-1" );
-	if( zpu == nil ) zpu = 0.0;
-	zpu += fork;
-     	setprop("fdm/jsbsim/instrumentation/zpu-deg-1", zpu );
-     	interpolate("tu154/instrumentation/v-140[0]/zpu-1-delayed", zpu, 1.0 );
-	zpu = getprop("fdm/jsbsim/instrumentation/zpu-deg-2" );
-	if( zpu == nil ) zpu = 0.0;
-	zpu += fork;
-     	setprop("fdm/jsbsim/instrumentation/zpu-deg-2", zpu );
-     	interpolate("tu154/instrumentation/v-140[0]/zpu-2-delayed", zpu, 1.0 );
 	setprop( "/tu154/systems/nvu-calc/fork-flag", 1 );
-	}
-else {	# Revert fork
-	var offset = getprop("instrumentation/heading-indicator[0]/offset-deg");
-	if( offset == nil ) offset = 0.0;
-	offset -= fork;
-	setprop("instrumentation/heading-indicator[0]/offset-deg", offset );
-	offset = getprop("instrumentation/heading-indicator[1]/offset-deg");
-	if( offset == nil ) offset = 0.0;
-	offset -= fork;
-	setprop("instrumentation/heading-indicator[1]/offset-deg", offset );
-	# re-write ZPU
-	var zpu = getprop("fdm/jsbsim/instrumentation/zpu-deg-1" );
-	if( zpu == nil ) zpu = 0.0;
-	zpu -= fork;
-     	setprop("fdm/jsbsim/instrumentation/zpu-deg-1", zpu );
-     	interpolate("tu154/instrumentation/v-140[0]/zpu-1-delayed", zpu, 1.0 );
-	zpu = getprop("fdm/jsbsim/instrumentation/zpu-deg-2" );
-	if( zpu == nil ) zpu = 0.0;
-	zpu -= fork;
-     	setprop("fdm/jsbsim/instrumentation/zpu-deg-2", zpu );
-     	interpolate("tu154/instrumentation/v-140[0]/zpu-2-delayed", zpu, 1.0 );
-
+} else {
 	setprop( "/tu154/systems/nvu-calc/fork-flag", 0 );
-	}
-
+        fork = -fork;
+}
+var offset = getprop("instrumentation/heading-indicator[0]/offset-deg");
+if( offset == nil ) offset = 0.0;
+offset += fork;
+setprop("instrumentation/heading-indicator[0]/offset-deg", offset );
+offset = getprop("instrumentation/heading-indicator[1]/offset-deg");
+if( offset == nil ) offset = 0.0;
+offset += fork;
+setprop("instrumentation/heading-indicator[1]/offset-deg", offset );
+# re-write ZPU
+var zpu = getprop("fdm/jsbsim/instrumentation/zpu-deg-1" );
+if( zpu == nil ) zpu = 0.0;
+zpu += fork;
+zpu = int(zpu * 10 + 0.5) / 10;
+setprop("fdm/jsbsim/instrumentation/zpu-deg-1", zpu );
+interpolate("tu154/instrumentation/v-140[0]/zpu-1-delayed", zpu, 1.0 );
+zpu = getprop("fdm/jsbsim/instrumentation/zpu-deg-2" );
+if( zpu == nil ) zpu = 0.0;
+zpu += fork;
+zpu = int(zpu * 10 + 0.5) / 10;
+setprop("fdm/jsbsim/instrumentation/zpu-deg-2", zpu );
+interpolate("tu154/instrumentation/v-140[0]/zpu-2-delayed", zpu, 1.0 );
 }
 
 #Virtual navigator
@@ -1820,7 +1801,7 @@ var uk = props.globals.getNode("/tu154/systems/nvu-calc/uk-next", 1);
 if( size(vect) > 13 ) {
 setprop( "/tu154/systems/nvu-calc/sm-next", num(vect[13]) * 1000.0 );
 setprop( "/tu154/systems/nvu-calc/zm-next", num(vect[16]) * 1000.0 );
-setprop( "/tu154/systems/nvu-calc/uk-next", num(substr(vect[19], 0, size(vect[19])-1)) );
+setprop( "/tu154/systems/nvu-calc/uk-next", min2dec(num(substr(vect[19], 0, size(vect[19])-1))) );
 			}
 else	{
 sm.remove();
@@ -1856,7 +1837,7 @@ if( (max_route >= route_num) and (count == 0) ) {
 	if( size(vect) > 13 ) {
 	setprop( "/tu154/systems/nvu-calc/sm-next", num(vect[13]) * 1000.0 );
 	setprop( "/tu154/systems/nvu-calc/zm-next", num(vect[16]) * 1000.0 );
-	setprop( "/tu154/systems/nvu-calc/uk-next", num(substr(vect[19], 0, size(vect[19])-1)) );
+	setprop( "/tu154/systems/nvu-calc/uk-next", min2dec(num(substr(vect[19], 0, size(vect[19])-1))) );
 		}
 
 	}
@@ -2058,9 +2039,11 @@ else {			# Second b-52 block
 }
 
 if( uk_selected != nil ) {
-# Load UK
-setprop("tu154/instrumentation/b-8m/outer", int(uk_selected/10.0)*10.0 );
-setprop("tu154/instrumentation/b-8m/inner", ( uk_selected - int(uk_selected/10.0)*10.0 )*36.0 );
+    # Load UK
+    var outer = int(uk_selected / 10) * 10;
+    setprop("tu154/instrumentation/b-8m/outer", outer);
+    setprop("tu154/instrumentation/b-8m/inner",
+            int((uk_selected - outer) * 10 + 0.5));
 }
 
 } # -------------------------- END NVU LOADER ----------------------------------
@@ -2476,20 +2459,9 @@ nvu_watchdog();
 
 # UK gauge support
 var b_8m_handler = func{
-var outer_deg = getprop("tu154/instrumentation/b-8m/outer");
-if( outer_deg == nil ) outer_deg = 0.0;
-if( outer_deg >= 360.0 ) outer_deg = outer_deg - 360.0;
-if( outer_deg < 0.0 ) outer_deg = outer_deg + 360.0;
-setprop("tu154/instrumentation/b-8m/outer", outer_deg );
-var inner_deg = getprop("tu154/instrumentation/b-8m/inner");
-if( inner_deg == nil ) inner_deg = 0.0;
-if( inner_deg >= 360.0 ) inner_deg = inner_deg - 360.0;
-if( inner_deg < 0.0 ) inner_deg = inner_deg + 360.0;
-setprop("tu154/instrumentation/b-8m/inner", inner_deg );
-
-var uk_deg = int( outer_deg/10.0 )*10.0 + inner_deg/36.0;
-setprop("fdm/jsbsim/instrumentation/rsbn-uk-deg", uk_deg );
-help.uk();
+    var outer = getprop("tu154/instrumentation/b-8m/outer");
+    var inner = getprop("tu154/instrumentation/b-8m/inner");
+    setprop("fdm/jsbsim/instrumentation/rsbn-uk-deg", outer + inner / 10);
 }
 
 

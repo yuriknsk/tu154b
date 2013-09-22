@@ -987,6 +987,10 @@
     <radial type="double" >0</radial>
     <twist type="double" >0</twist>
   </rsbn>
+    <b-8m>
+      <outer type="int">0</outer>
+      <inner type="int">0</inner>
+    </b-8m>
   
   <uap-12>
     <accelerate-max type="double" >-1.0</accelerate-max>
