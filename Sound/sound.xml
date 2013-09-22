@@ -383,10 +383,16 @@
     <name>s_v_220</name>
     <path>Aircraft/tu154b/Sound/voice/St_V_220.wav</path>
     <condition>
-      <greater-than>
-        <property>fdm/jsbsim/instrumentation/vc-kmh</property>
-        <value>220.0</value>
-      </greater-than>
+      <and>
+        <greater-than>
+          <property>fdm/jsbsim/instrumentation/vc-kmh</property>
+          <value>215</value>
+        </greater-than>
+        <less-than>
+          <property>fdm/jsbsim/instrumentation/vc-kmh</property>
+          <value>225</value>
+        </less-than>
+      </and>
     </condition>
     <mode>once</mode>
     <position>
@@ -400,10 +406,16 @@
     <name>s_v_200</name>
     <path>Aircraft/tu154b/Sound/voice/St_V_200.wav</path>
     <condition>
-      <greater-than>
-        <property>fdm/jsbsim/instrumentation/vc-kmh</property>
-        <value>200.0</value>
-      </greater-than>
+      <and>
+        <greater-than>
+          <property>fdm/jsbsim/instrumentation/vc-kmh</property>
+          <value>195</value>
+        </greater-than>
+        <less-than>
+          <property>fdm/jsbsim/instrumentation/vc-kmh</property>
+          <value>205</value>
+        </less-than>
+      </and>
     </condition>
     <mode>once</mode>
     <position>
@@ -417,10 +429,16 @@
     <name>s_v_180</name>
     <path>Aircraft/tu154b/Sound/voice/St_V_180.wav</path>
     <condition>
-      <greater-than>
-        <property>fdm/jsbsim/instrumentation/vc-kmh</property>
-        <value>180.0</value>
-      </greater-than>
+      <and>
+        <greater-than>
+          <property>fdm/jsbsim/instrumentation/vc-kmh</property>
+          <value>175</value>
+        </greater-than>
+        <less-than>
+          <property>fdm/jsbsim/instrumentation/vc-kmh</property>
+          <value>185</value>
+        </less-than>
+      </and>
     </condition>
     <mode>once</mode>
     <position>
@@ -434,10 +452,16 @@
     <name>s_v_160</name>
     <path>Aircraft/tu154b/Sound/voice/St_V_160.wav</path>
     <condition>
-      <greater-than>
-        <property>fdm/jsbsim/instrumentation/vc-kmh</property>
-        <value>160.0</value>
-      </greater-than>
+      <and>
+        <greater-than>
+          <property>fdm/jsbsim/instrumentation/vc-kmh</property>
+          <value>155</value>
+        </greater-than>
+        <less-than>
+          <property>fdm/jsbsim/instrumentation/vc-kmh</property>
+          <value>168</value>
+        </less-than>
+      </and>
     </condition>
     <mode>once</mode>
     <position>
@@ -451,10 +475,16 @@
     <name>s_v_140</name>
     <path>Aircraft/tu154b/Sound/voice/St_V_140.wav</path>
     <condition>
-      <greater-than>
-        <property>fdm/jsbsim/instrumentation/vc-kmh</property>
-        <value>140.0</value>
-      </greater-than>
+      <and>
+        <greater-than>
+          <property>fdm/jsbsim/instrumentation/vc-kmh</property>
+          <value>135</value>
+        </greater-than>
+        <less-than>
+          <property>fdm/jsbsim/instrumentation/vc-kmh</property>
+          <value>148</value>
+        </less-than>
+      </and>
     </condition>
     <mode>once</mode>
     <position>
