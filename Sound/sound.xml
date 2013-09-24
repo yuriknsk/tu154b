@@ -511,6 +511,62 @@
     </position>
 </voice>
 
+<!--Headlights-->
+<voice>
+    <name>s_f_ub</name>
+    <path>Aircraft/tu154b/Sound/voice/St_F_ub.wav</path>
+    <condition>
+      <and>
+        <not-equals>
+          <property>tu154/light/retract</property>
+          <value>1</value>
+        </not-equals>
+        <not><property>tu154/light/headlight-selector</property></not>
+      </and>
+    </condition>
+    <mode>once</mode>
+    <position>
+      <x>-22.0</x>
+      <y>0.0</y>
+      <z>2.5</z>
+    </position>
+</voice>
+
+<voice>
+    <name>s_f_vyp</name>
+    <path>Aircraft/tu154b/Sound/voice/St_F_vyp.wav</path>
+    <condition>
+      <equals>
+        <property>tu154/light/retract</property>
+        <value>1</value>
+      </equals>
+    </condition>
+    <mode>once</mode>
+    <position>
+      <x>-22.0</x>
+      <y>0.0</y>
+      <z>2.5</z>
+    </position>
+</voice>
+
+<voice>
+    <name>s_f_l</name>
+    <path>Aircraft/tu154b/Sound/voice/St_F_L.wav</path>
+    <condition>
+      <equals>
+        <property>tu154/light/headlight-selector</property>
+        <value>1</value>
+      </equals>
+    </condition>
+    <mode>once</mode>
+    <position>
+      <x>-22.0</x>
+      <y>0.0</y>
+      <z>2.5</z>
+    </position>
+</voice>
+
+
 <!--Navigator radio altimeter count-->
 <voice>
     <name>s_h_250</name>
