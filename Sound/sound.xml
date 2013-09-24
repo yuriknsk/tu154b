@@ -566,6 +566,80 @@
     </position>
 </voice>
 
+<!--Speed limits-->
+<voice>
+    <name>s_v</name>
+    <path>Aircraft/tu154b/Sound/voice/St_V_alert.wav</path>
+    <condition>
+      <or>
+        <and>
+          <greater-than>
+            <property>fdm/jsbsim/instrumentation/vc-kmh</property>
+            <value>420</value>
+          </greater-than>
+          <equals>
+            <property>controls/flight/flaps</property>
+            <value>0.3333</value>
+          </equals>
+        </and>
+        <and>
+          <greater-than>
+            <property>fdm/jsbsim/instrumentation/vc-kmh</property>
+            <value>360</value>
+          </greater-than>
+          <equals>
+            <property>controls/flight/flaps</property>
+            <value>0.62</value>
+          </equals>
+        </and>
+        <and>
+          <greater-than>
+            <property>fdm/jsbsim/instrumentation/vc-kmh</property>
+            <value>300</value>
+          </greater-than>
+          <equals>
+            <property>controls/flight/flaps</property>
+            <value>1</value>
+          </equals>
+        </and>
+        <and>
+          <greater-than>
+            <property>fdm/jsbsim/instrumentation/vc-kmh</property>
+            <value>400</value>
+          </greater-than>
+          <not-equals>
+            <property>fdm/jsbsim/gear/gear-pos-norm</property>
+            <value>0</value>
+          </not-equals>
+          <not-equals>
+            <property>fdm/jsbsim/gear/gear-pos-norm</property>
+            <value>1</value>
+          </not-equals>
+        </and>
+        <and>
+          <greater-than>
+            <property>fdm/jsbsim/instrumentation/vc-kmh</property>
+            <value>340</value>
+          </greater-than>
+          <property>tu154/switches/landing-light-retract</property>
+        </and>
+        <and>
+          <greater-than>
+            <property>fdm/jsbsim/instrumentation/vc-kmh</property>
+            <value>525</value>
+          </greater-than>
+          <property>engines/engine[3]/running</property>
+        </and>
+      </or>
+    </condition>
+    <mode>once</mode>
+    <position>
+      <x>-22.0</x>
+      <y>0.0</y>
+      <z>2.5</z>
+    </position>
+</voice>
+
 
 <!--Navigator radio altimeter count-->
 <voice>
