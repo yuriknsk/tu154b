@@ -1713,19 +1713,23 @@ return integer + min/0.6;
 }
 
 # Proceed fork
+setprop("/tu154/systems/nvu-calc/fork-flag", "not applied");
 var fork_loader = func{
 
 var fork_flag = getprop( "/tu154/systems/nvu-calc/fork-flag" );
-if( fork_flag == nil ) fork_flag = 0;
 var fork = getprop( "/tu154/systems/nvu-calc/fork" );
 if( fork == nil ) fork = 0.0;
 
-if( !fork_flag ) {	# Apply fork
-	setprop( "/tu154/systems/nvu-calc/fork-flag", 1 );
+if (fork_flag == "not applied") {
+    setprop("/tu154/systems/nvu-calc/fork-flag", "applied");
 } else {
-	setprop( "/tu154/systems/nvu-calc/fork-flag", 0 );
-        fork = -fork;
+    setprop("/tu154/systems/nvu-calc/fork-flag", "not applied");
+    fork = -fork;
 }
+
+if (num(getprop("/tu154/systems/nvu-calc/fork-route-only")))
+   return;
+
 var offset = getprop("instrumentation/heading-indicator[0]/offset-deg");
 if( offset == nil ) offset = 0.0;
 offset += fork;
@@ -1848,10 +1852,10 @@ var gradient = 0.0;
 var selector = getprop("tu154/systems/nvu/selector" );
 if( selector == nil ) selector = 0;
 var fork_flag = getprop( "/tu154/systems/nvu-calc/fork-flag" );
-if( fork_flag == nil ) fork_flag = 0;
+if( fork_flag == nil ) fork_flag = "not applied";
 # We use departure OZPU obviosly.
 # If fork applied, operate with destination OZPU instead
-if( fork_flag ) var zpu_selected = zpu_dest_selected;
+if( fork_flag == "applied" ) var zpu_selected = zpu_dest_selected;
 else var zpu_selected = zpu_dep_selected;
 
 

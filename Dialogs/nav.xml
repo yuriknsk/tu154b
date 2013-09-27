@@ -293,10 +293,16 @@
 		<default-padding>4</default-padding>
 		
 		<text>
-			<label>-9.9999</label>
+			<label> Fork: -179.99</label>
 			<format> Fork: %-0.2f</format>
 			<property>/tu154/systems/nvu-calc/fork</property>
 		</text>
+		<text>
+			<label>(not applied)    </label>
+			<format>(%s)    </format>
+			<property>/tu154/systems/nvu-calc/fork-flag</property>
+		</text>
+
 		<button>
 			<legend>Apply fork</legend>
 			<default>true</default>
@@ -312,6 +318,14 @@
 				<command>dialog-update</command>
 			</binding>
 		</button>
+		<checkbox>
+			<property>/tu154/systems/nvu-calc/fork-route-only</property>
+		</checkbox>
+		<text>
+			<label>update route only</label>
+		</text>
+
+		<empty><stretch>1</stretch></empty>
 
 		<button>
 			<legend>Calculate</legend>
