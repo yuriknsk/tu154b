@@ -37,6 +37,7 @@
 			var beacon_wpt = geo.Coord.new();
 			
 			var wp = route.getChildren("wp");
+                        var wp_size = size(wp);
 			var bc = beacon_node.getChildren("beacon");
 			var rtstr = "";
 			var az_corr = 0.0;
@@ -48,10 +49,19 @@
 			var magvar_dest = num( getprop( "/tu154/systems/nvu-calc/magvar-dest" ) );
 			if( magvar_dest == nil ) magvar_dest = 0.0;
 			var magvar_dep_current = num( getprop( "/tu154/systems/nvu-calc/magvar-dep-current" ) );
-			if( magvar_dep_current == nil ) magvar_dep_current = 0;
-			if( magvar_dep_current ) magvar_dep = getprop("/environment/magnetic-variation-deg");
-			
+			if (wp_size and magvar_dep_current) {
+                            magvar_dep =
+                               magvar(wp[0].getNode("latitude-deg").getValue(),
+                                      wp[0].getNode("longitude-deg").getValue());
+			}
 			setprop( "/tu154/systems/nvu-calc/magvar-dep", magvar_dep );
+			var magvar_dest_current = num( getprop( "/tu154/systems/nvu-calc/magvar-dest-current" ) );
+			if (wp_size and magvar_dest_current) {
+                            var e = wp_size - 1;
+                            magvar_dest =
+                               magvar(wp[e].getNode("latitude-deg").getValue(),
+                                      wp[e].getNode("longitude-deg").getValue());
+			}
 			setprop( "/tu154/systems/nvu-calc/magvar-dest", magvar_dest );
 				
 			# This cycle count fork only!
@@ -248,7 +258,7 @@
 		</checkbox>
 		
 		<text>
-			<label>use current            </label>
+			<label>at location            </label>
 		</text>
 		<text>
 			<label>Destination mag var:</label>
@@ -261,7 +271,14 @@
 			<pref-width>60</pref-width>
 			<property>/tu154/systems/nvu-calc/magvar-dest</property>
 		</input>
+		<checkbox>
+			<property>/tu154/systems/nvu-calc/magvar-dest-current</property>
+		</checkbox>
 		
+		<text>
+			<label>at location            </label>
+		</text>
+
 		<text>
 			<label>Virtual navigator:</label>
 		</text>
