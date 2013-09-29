@@ -925,9 +925,7 @@
     <system file="hydrosystems"/>
     <system file="instrumentation"/>
     <system file="nvu"/>
-    
-<!--    <system file="pushback"/>-->
-    
+    <system file="pushback"/>
     <autopilot file="Systems/absu154"/>
 <!--    <autopilot file="absu154"/>-->
     
@@ -1494,14 +1492,14 @@
         <propulsion> ON </propulsion>
 	<property>velocities/v-down-fps</property>
 	<property>velocities/vc-fps</property>
-	<property>debug/wp-heading</property>
-	<property>debug/wp-distance</property>
-	<property>debug/wp-hdg-corrected</property>
+	<property>fcs/flap-pos-deg</property>
+	<property>ap/speed-pid</property>
+	<property>ap/speed-error-switched</property>
 	<property>instrumentation/pnp-heading</property>
 	<property>ap/gs-trigger</property>
 	<property>ap/gs-pid</property>
 	<property>ap/gs-error-switched</property>
 	<property>ap/gs-error</property>
-    </output>-->
-
+    </output>
+    -->
   </fdm_config>

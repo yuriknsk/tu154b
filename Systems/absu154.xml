@@ -89,7 +89,6 @@
   <property>ap/ena-needles</property>
 
 <channel name="Glue">
-							<!--RESTORE IT FOR RELEASE!!!-->
 
 <fcs_function name="ap/navigac" >
     <function>
@@ -112,32 +111,61 @@
 </channel>
 
 <!--ILS and VOR debug channel-->
-
-<!--<channel name="Debug">
-
- <waypoint_heading name="debug/wp-heading" unit="DEG">
-   <source_latitude unit="DEG">debug/wp-lat-deg</source_latitude>
-   <source_longitude unit="DEG">debug/wp-lon-deg</source_longitude>
-   <target_latitude unit="RAD">position/lat-gc-rad</target_latitude>
-   <target_longitude unit="RAD">position/long-gc-rad</target_longitude>
- </waypoint_heading>
-
- <waypoint_distance name="debug/wp-distance" unit="M">
-   <source_latitude unit="DEG">debug/wp-lat-deg</source_latitude>
-   <source_longitude unit="DEG">debug/wp-lon-deg</source_longitude>
-   <target_latitude unit="RAD">position/lat-gc-rad</target_latitude>
-   <target_longitude unit="RAD">position/long-gc-rad</target_longitude>
- </waypoint_distance>
-
- <summer name="debug/wp-hdg-corrected">
-   <input>debug/wp-heading</input>
-   <bias>-270.0</bias>
-   <clipto>
-    <min>-10.0</min>
-    <max>10.0</max>
-   </clipto>
- </summer>
- 
+<!--
+<channel name="Debug">
+  <fcs_function>
+    <function>
+       <property>/controls/engines/engine/throttle</property>
+    </function>
+    <output>
+      fcs/throttle-pos-norm
+    </output>
+  </fcs_function>
+  
+    <summer name="debug/latitude-track-rad">
+      <bias>0.819</bias>
+    </summer>
+    <summer name="debug/longitude-runway-rad">
+      <bias>2.134</bias>
+    </summer>
+    
+    <summer name="debug/latitude-distance-rad">
+      <input>debug/latitude-track-rad</input>
+      <input>-position/lat-gc-rad</input>
+    </summer>
+    
+    <pure_gain name="debug/latitude-distance-m"> 
+      <input>debug/latitude-distance-rad</input>
+      <gain>6378138.12</gain>
+    </pure_gain>
+    
+    <summer name="debug/longitude-distance-rad">
+      <input>debug/longitude-runway-rad</input>
+      <input>-position/long-gc-rad</input>
+    </summer>
+    <pure_gain name="debug/longitude-distance-m">
+      <input>debug/longitude-distance-rad</input>
+      <gain>4355962.26</gain>
+    </pure_gain>
+    
+    <fcs_function name="debug/deviation-deg">
+      <description>Arctang</description>
+      <function>
+        <product>
+          <atan2>
+              <property>debug/latitude-distance-m</property>
+              <property>debug/longitude-distance-m</property>
+          </atan2>  
+          <value>57.2958</value>
+        </product>
+      </function>
+    </fcs_function>
+    
+    <summer name="debug/heading-deg">
+      <input>debug/deviation-deg</input>
+      <bias>90</bias>
+    </summer>
+    
   </channel>-->
 
 
@@ -739,8 +767,8 @@ There is a system for enchance pitch control. It read pitch trimmer position and
 
         <!--******************************* ZK Staff ***************************-->
         <summer name="ap/heading-error-zk">
-<input> -attitude/psi-deg </input>			<!--COMMENT IT FOR RELEASE!!!-->
-<!--<input> -instrumentation/pnp-heading </input>-->    <!--RESTORE IT FOR RELEASE!!!-->
+<!--<input> -ap/heading-true-deg </input>-->
+<input> -instrumentation/pnp-heading </input>
           <input> ap/input-heading-zk </input>
         </summer>
         <!--******************************* NVU Staff ***************************-->
@@ -762,8 +790,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
 
 <!--******************************* ILS Staff ***************************-->
         <summer name="ap/heading-error-ils">
-<!--<input> -attitude/psi-deg </input>-->					<!--COMMENT IT FOR RELEASE!!!-->
-<input> -instrumentation/pnp-heading </input>		<!--RESTORE IT FOR RELEASE!!!-->
+          <input> -instrumentation/pnp-heading </input>
           <input> ap/input-heading-pnp </input>
 	  <input> -instrumentation/drift-angle-deg </input>
         </summer>
@@ -785,64 +812,62 @@ There is a system for enchance pitch control. It read pitch trimmer position and
           </test>
         </switch>
 
-        <pure_gain name="ap/ils-k10">
-<!--<input> debug/wp-hdg-corrected</input>-->				<!--COMMENT IT FOR RELEASE!!!-->
-          <input> ap/ils-epsilon </input><!---10...10-->	<!--RESTORE IT FOR RELEASE!!!-->
-
-          <gain> 0.07 </gain><!--25 deg from compass hdg for approach-->
-<!--          <clipto>
-            <min> -0.15 </min>
-            <max> 0.15 </max>
-          </clipto>-->
+        <pure_gain name="ap/ils-beam-error">
+<!--<input> -debug/heading-deg</input>-->
+          <input> ap/ils-epsilon </input><!---10...10-->
+          <!--<input> ap/ils-angle-deviation </input>-->
+          <gain> 2.5 </gain><!--25 deg from compass hdg for approach-->
+          <clipto>
+            <min> -25 </min>
+            <max> 25 </max>
+          </clipto>
         </pure_gain>
         
-<!--        <lag_filter name="ap/ils-beam-filtered">
+        <lag_filter name="ap/ils-beam-filtered">
           <input>ap/ils-beam-error</input>
           <c1>5.0</c1>
-        </lag_filter> -->
+        </lag_filter> 
         
 
- <!-- ILS heading  -->
-<!-- modified by Yurik jul 2013
- Based on:
- ABSU-154-2 RTE part 1 022.01.00 p.24-->
-        <summer name="ap/ils-hdg-deviation">
+ <!--ILS heading       -->
+        <summer name="ap/ils-deviation">
           <input> ap/ils-error-bias-switch </input>
           <input> ap/heading-error-ils </input>
+	  <input> ap/ils-beam-filtered </input>
         </summer>
 	
+	<deadband name="ap/ils-hdg-windup">
+	 <input> ap/ils-deviation </input>
+	 <width> 40.0 </width>
+	</deadband >
 	
-        <pure_gain name="ap/ils-hdg-k6">
-	  <input> ap/ils-hdg-deviation </input>
-          <gain> 0.05 </gain>
-        </pure_gain>
+	<switch name="ap/ils-hdg-stop-int">
+		<default value="-1.0"/>
+		<test value="0.0">
+			ap/roll-selector == 5
+			ap/ils-hdg-windup == 0
+		</test>
+	</switch>
 
-        <pure_gain name="ap/ils-hdg-k3">
-	  <input> ap/ils-hdg-deviation </input>
-          <gain> -0.05 </gain>
-        </pure_gain>
+        <pid name="ap/ils-hdg-pid">
+          <input>ap/ils-deviation</input>
+          <kp> 0.03 </kp><!--0.042-->
+	  <ki> ap/ils-beam-ki </ki><!--0.002 - 0.005-->
+          <kd> 0.047 </kd><!--0.047-->
+	  <trigger>ap/ils-hdg-stop-int</trigger>
+        </pid>
+<!--	
+        <switch name="ap/ils-hdg-switched">
+          <default value="0.0"/>
+          <test value="ap/ils-hdg-pid">
+            ap/pitch-selector ne 5
+          </test>
+        </switch>-->
 
-        <washout_filter name="ap/ils-k17">
-<!--<input> debug/wp-hdg-corrected</input>-->				<!--COMMENT IT FOR RELEASE!!!-->
-          <input> ap/ils-epsilon </input><!---10...10-->	<!--RESTORE IT FOR RELEASE!!!-->
-
-          <c1>0.3</c1>
-        </washout_filter>
-
-        <summer name="ap/ils-hdg-f1">
-         <input> ap/ils-hdg-k3 </input>
-	 <input> ap/ils-k10 </input>
-         <clipto>
-           <min> -0.4 </min>
-           <max> 0.4 </max>
-         </clipto>
-        </summer>
-
-        
         <summer name="ap/ils-out">
-         <input> ap/ils-hdg-k6 </input>
-	 <input> ap/ils-hdg-f1 </input>
-	 <input> ap/ils-k17 </input>
+<!--         <input> ap/ils-beam-pid </input>
+         <input> ap/ils-beam-integrator </input>-->
+         <input> ap/ils-hdg-pid </input>
          <clipto>
            <min> -0.38 </min>
            <max> 0.38 </max>
