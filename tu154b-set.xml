@@ -434,6 +434,9 @@
 	<instruments>
           <file>Aircraft/tu154b/Nasal/instruments.nas</file>
 	</instruments>
+	<mapcase>
+          <file>Aircraft/tu154b/Nasal/mapcase.nas</file>
+	</mapcase>
         <electrical>
           <file>Aircraft/tu154b/Nasal/electrical.nas</file>
         </electrical>
