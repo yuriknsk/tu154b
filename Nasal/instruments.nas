@@ -1763,9 +1763,13 @@ var route_list = props.globals.getNode("/sim/gui/dialogs/Tu-154B-2/nav/dialog/li
 var route = route_list.getChildren("value");
 var max_route = size( route );
 
+if (route_num > 0) {
+   help.messenger(sprintf("Virtual navigator: next route %s",
+                          route[route_num-1].getValue()));
+}
+
 # Select new route
 if( route_num >= max_route ) return; # end of route list ashieved
-help.messenger(sprintf("Virtual navigator: next route %s", route[route_num].getValue() ));
 # Save result
 setprop( "/tu154/systems/nvu-calc/list", route[route_num].getValue() );
 # Loader into NVU
