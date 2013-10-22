@@ -30,17 +30,18 @@
     <type>rotate</type>
     <object-name>needle</object-name>
     <property>instrumentation/turn-indicator/indicated-turn-rate</property>
-    <condition>
-      <property>tu154/instrumentation/eup/powered</property>
-    </condition>
     <interpolation>
-      <entry><ind>	-1.13</ind>	<dep>	-35.5</dep></entry>
-      <entry><ind>	1.13</ind>	<dep>	35.5</dep></entry>
+      <entry><ind>	-1.3485</ind>	<dep>	-25</dep></entry>
+      <entry><ind>	-0.7786</ind>	<dep>	-16.6667</dep></entry>
+      <entry><ind>	-0.3613</ind>	<dep>	-8.3333</dep></entry>
+      <entry><ind>	 0.3613</ind>	<dep>	 8.3333</dep></entry>
+      <entry><ind>	 0.7786</ind>	<dep>	 16.6667</dep></entry>
+      <entry><ind>	 1.3485</ind>	<dep>	 25</dep></entry>
     </interpolation>
     <center>
       <x-m>0.0</x-m>
       <y-m>0.0</y-m>
-      <z-m>-0.01</z-m>
+      <z-m>-0.025</z-m>
     </center>
     <axis>
       <x>-1.0</x>
@@ -53,9 +54,6 @@
   <type>rotate</type>
   <object-name>ball</object-name>
   <property>instrumentation/slip-skid-ball/indicated-slip-skid</property>
-  <condition>
-    <property>tu154/instrumentation/eup/powered</property>
-  </condition>
   <interpolation>
     <entry><ind>	-3.0</ind>	<dep>	-10.0</dep></entry>
     <entry><ind>	3.0</ind>	<dep>	10.0</dep></entry>
