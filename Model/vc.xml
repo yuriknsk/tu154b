@@ -452,8 +452,8 @@
   <object-name>MESH82</object-name>
   <object-name>MESH84</object-name>
   <property>controls/flight/rudder</property>
-  <factor>-0.05</factor>
-  <offset-m>-0.05</offset-m>
+  <factor>-0.0565</factor>
+  <offset-m>-0.0565</offset-m>
   <axis>
     <x>-1.0</x>
     <y>0.0</y>
@@ -465,11 +465,45 @@
   <object-name>MESH83</object-name>
   <object-name>MESH85</object-name>
   <property>controls/flight/rudder</property>
-  <factor>-0.05</factor>
-  <offset-m>-0.05</offset-m>
+  <factor>-0.0565</factor>
+  <offset-m>-0.0565</offset-m>
   <axis>
     <x>1.0</x>
     <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>MESH82</object-name>
+  <object-name>MESH84</object-name>
+  <property>controls/gear/brake-left</property>
+  <factor>-45</factor>
+  <center>
+    <x-m>0.4600</x-m>
+    <y-m>0</y-m>
+    <z-m>0.1691</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>MESH83</object-name>
+  <object-name>MESH85</object-name>
+  <property>controls/gear/brake-right</property>
+  <factor>-45</factor>
+  <center>
+    <x-m>0.5730</x-m>
+    <y-m>0</y-m>
+    <z-m>0.1691</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>1.0</y>
     <z>0.0</z>
   </axis>
 </animation>

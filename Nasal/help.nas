@@ -29,12 +29,6 @@ var at = func {
 help_win.write(sprintf("Autothrottle speed: %.2f kmh", at_speed*1.852) );
 }
 
-var uk = func {
-   var uk_deg = getprop("fdm/jsbsim/instrumentation/rsbn-uk-deg");
-   if(  uk_deg == nil ) uk_deg = 0.0;
-help_win.write(sprintf("Angle map: %.2f deg", uk_deg) );
-}
-
 var km = func {
    var km_deg_1 = getprop("fdm/jsbsim/instrumentation/km-5-magvar-1");
    if(  km_deg_1 == nil ) km_deg_1 = 0.0;

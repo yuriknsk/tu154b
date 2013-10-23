@@ -434,6 +434,9 @@
 	<instruments>
           <file>Aircraft/tu154b/Nasal/instruments.nas</file>
 	</instruments>
+	<mapcase>
+          <file>Aircraft/tu154b/Nasal/mapcase.nas</file>
+	</mapcase>
         <electrical>
           <file>Aircraft/tu154b/Nasal/electrical.nas</file>
         </electrical>
@@ -983,9 +986,14 @@
     <handle-2 type="double" >0.0</handle-2>
     <mode type="bool" >false</mode>
     <serviceable type="bool" >false</serviceable>
-    <distance-m type="double" >0.0</distance-m>
-    <heading-deg type="double" >0.0</heading-deg>
+    <distance type="double" >0</distance>
+    <radial type="double" >0</radial>
+    <twist type="double" >0</twist>
   </rsbn>
+    <b-8m>
+      <outer type="int">0</outer>
+      <inner type="int">0</inner>
+    </b-8m>
   
   <uap-12>
     <accelerate-max type="double" >-1.0</accelerate-max>

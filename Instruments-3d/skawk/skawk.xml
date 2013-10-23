@@ -39,13 +39,22 @@
 </animation>
 
 <animation>
-  <type>rotate</type>
+  <type>knob</type>
   <object-name>handle_1</object-name>
   <property>tu154/instrumentation/skawk/handle-1</property>
   <interpolation>
     <entry><ind>	0.0</ind>	<dep>	-90.0</dep></entry>
     <entry><ind>	7.0</ind>	<dep>	120.0</dep></entry>
   </interpolation>
+  <visible>true</visible>
+  <action>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/skawk/handle-1</property>
+      <min>0</min>
+      <max>7</max>
+    </binding>
+  </action>
   <center>
     <x-m>0.0</x-m>
     <y-m>-0.06248</y-m>
@@ -57,15 +66,22 @@
     <z>0.0</z>
   </axis>
 </animation>
-
 <animation>
-  <type>rotate</type>
+  <type>knob</type>
   <object-name>handle_2</object-name>
   <property>tu154/instrumentation/skawk/handle-2</property>
   <interpolation>
     <entry><ind>	0.0</ind>	<dep>	-120.0</dep></entry>
     <entry><ind>	7.0</ind>	<dep>	90.0</dep></entry>
   </interpolation>
+  <action>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/skawk/handle-2</property>
+      <min>0</min>
+      <max>7</max>
+    </binding>
+  </action>
   <center>
     <x-m>0.0</x-m>
     <y-m>-0.02178</y-m>
@@ -78,13 +94,21 @@
   </axis>
 </animation>
 <animation>
-  <type>rotate</type>
+  <type>knob</type>
   <object-name>handle_3</object-name>
   <property>tu154/instrumentation/skawk/handle-3</property>
   <interpolation>
     <entry><ind>	0.0</ind>	<dep>	-90.0</dep></entry>
     <entry><ind>	7.0</ind>	<dep>	120.0</dep></entry>
   </interpolation>
+  <action>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/skawk/handle-3</property>
+      <min>0</min>
+      <max>7</max>
+    </binding>
+  </action>
   <center>
     <x-m>0.0</x-m>
     <y-m>0.01985</y-m>
@@ -96,15 +120,22 @@
     <z>0.0</z>
   </axis>
 </animation>
-
 <animation>
-  <type>rotate</type>
+  <type>knob</type>
   <object-name>handle_4</object-name>
   <property>tu154/instrumentation/skawk/handle-4</property>
   <interpolation>
     <entry><ind>	0.0</ind>	<dep>	-120.0</dep></entry>
     <entry><ind>	7.0</ind>	<dep>	90.0</dep></entry>
   </interpolation>
+  <action>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/skawk/handle-4</property>
+      <min>0</min>
+      <max>7</max>
+    </binding>
+  </action>
   <center>
     <x-m>0.0</x-m>
     <y-m>0.06092</y-m>
@@ -118,13 +149,34 @@
 </animation>
 
 <animation>
-  <type>rotate</type>
+  <type>knob</type>
   <object-name>handle_5</object-name>
   <property>tu154/instrumentation/skawk/handle-5</property>
   <interpolation>
     <entry><ind>	0.0</ind>	<dep>	-120.0</dep></entry>
     <entry><ind>	7.0</ind>	<dep>	90.0</dep></entry>
   </interpolation>
+  <action>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/skawk/handle-5</property>
+      <min>0</min>
+      <max>3</max>
+    </binding>
+  </action>
+  <hovered>
+    <binding>
+      <command>set-tooltip</command>
+      <tooltip-id>squawk-mode</tooltip-id>
+      <label>Transponder mode: %s</label>
+      <property>tu154/instrumentation/skawk/handle-5</property>
+      <mapping>nasal</mapping>
+      <script>
+        var modes = ['on', 'standby', 'altitude', 'ground'];
+        return modes[arg[0]];
+      </script>
+    </binding>
+  </hovered>
   <center>
     <x-m>0.0</x-m>
     <y-m>0.0</y-m>
@@ -135,189 +187,6 @@
     <y>0.0</y>
     <z>0.0</z>
   </axis>
-</animation>
-
-
-<!--Code-->
-<animation>
-  <type>pick</type>
-  <object-name>handle_1</object-name>
-  <visible>true</visible>
-  <action>
-    <button>0</button>
-    <button>3</button>
-    <repeatable>false</repeatable>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/instrumentation/skawk/handle-1</property>
-      <step>1.0</step>
-      <min>0.0</min>
-      <max>7.0</max>
-      <wrap>false</wrap>
-    </binding>
-  </action>
-</animation>
-<animation>
-  <type>pick</type>
-  <object-name>handle_1</object-name>
-  <visible>true</visible>
-  <action>
-    <button>1</button>
-    <button>4</button>
-    <repeatable>false</repeatable>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/instrumentation/skawk/handle-1</property>
-      <step>-1.0</step>
-      <min>0.0</min>
-      <max>7.0</max>
-      <wrap>false</wrap>
-    </binding>
-  </action>
-</animation>
-<animation>
-  <type>pick</type>
-  <object-name>handle_2</object-name>
-  <visible>true</visible>
-  <action>
-    <button>0</button>
-    <button>3</button>
-    <repeatable>false</repeatable>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/instrumentation/skawk/handle-2</property>
-      <step>1.0</step>
-      <min>0.0</min>
-      <max>7.0</max>
-      <wrap>false</wrap>
-    </binding>
-  </action>
-</animation>
-<animation>
-  <type>pick</type>
-  <object-name>handle_2</object-name>
-  <visible>true</visible>
-  <action>
-    <button>1</button>
-    <button>4</button>
-    <repeatable>false</repeatable>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/instrumentation/skawk/handle-2</property>
-      <step>-1.0</step>
-      <min>0.0</min>
-      <max>7.0</max>
-      <wrap>false</wrap>
-    </binding>
-  </action>
-</animation>
-<animation>
-  <type>pick</type>
-  <object-name>handle_3</object-name>
-  <visible>true</visible>
-  <action>
-    <button>0</button>
-    <button>3</button>
-    <repeatable>false</repeatable>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/instrumentation/skawk/handle-3</property>
-      <step>1.0</step>
-      <min>0.0</min>
-      <max>7.0</max>
-      <wrap>false</wrap>
-    </binding>
-  </action>
-</animation>
-<animation>
-  <type>pick</type>
-  <object-name>handle_3</object-name>
-  <visible>true</visible>
-  <action>
-    <button>1</button>
-    <button>4</button>
-    <repeatable>false</repeatable>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/instrumentation/skawk/handle-3</property>
-      <step>-1.0</step>
-      <min>0.0</min>
-      <max>7.0</max>
-      <wrap>false</wrap>
-    </binding>
-  </action>
-</animation>
-<animation>
-  <type>pick</type>
-  <object-name>handle_4</object-name>
-  <visible>true</visible>
-  <action>
-    <button>0</button>
-    <button>3</button>
-    <repeatable>false</repeatable>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/instrumentation/skawk/handle-4</property>
-      <step>1.0</step>
-      <min>0.0</min>
-      <max>7.0</max>
-      <wrap>false</wrap>
-    </binding>
-  </action>
-</animation>
-<animation>
-  <type>pick</type>
-  <object-name>handle_4</object-name>
-  <visible>true</visible>
-  <action>
-    <button>1</button>
-    <button>4</button>
-    <repeatable>false</repeatable>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/instrumentation/skawk/handle-4</property>
-      <step>-1.0</step>
-      <min>0.0</min>
-      <max>7.0</max>
-      <wrap>false</wrap>
-    </binding>
-  </action>
-</animation>
-<animation>
-  <type>pick</type>
-  <object-name>handle_5</object-name>
-  <visible>true</visible>
-  <action>
-    <button>0</button>
-    <button>3</button>
-    <repeatable>false</repeatable>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/instrumentation/skawk/handle-5</property>
-      <step>1.0</step>
-      <min>0.0</min>
-      <max>3.0</max>
-      <wrap>false</wrap>
-    </binding>
-  </action>
-</animation>
-<animation>
-  <type>pick</type>
-  <object-name>handle_5</object-name>
-  <visible>true</visible>
-  <action>
-    <button>1</button>
-    <button>4</button>
-    <repeatable>false</repeatable>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/instrumentation/skawk/handle-5</property>
-      <step>-1.0</step>
-      <min>0.0</min>
-      <max>3.0</max>
-      <wrap>false</wrap>
-    </binding>
-  </action>
 </animation>
 
 </PropertyList>
