@@ -209,8 +209,8 @@
             </pure_gain>
 	    
             <pure_gain name="instrumentation/tks-timeoffset-deg">
-             <input>simulation/sim-time-sec</input>
-<!--<input>sim-time-sec</input>-->
+             <!--<input>simulation/sim-time-sec</input> -->
+	      <input>sim-time-sec</input>
               <gain>0.0041666667</gain>
             </pure_gain>
             

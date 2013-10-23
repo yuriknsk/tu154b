@@ -18,7 +18,7 @@
         <property>fcs/stabilizer-pos-rad</property>-->
 <!--        <property>fcs/stab-manu-cmd</property>-->
         <property>fcs/stab-manu-switch</property>
-        
+        <!--<property value="2.0">fcs/stab-auto-cmd</property>--> <!--0-1-2-->
         <!--Hydro power support-->
         <property>fcs/elevator-pos-static</property>
         <property>fcs/aileron-pos-static</property>
@@ -42,47 +42,6 @@
       <property>tu154/systems/flight/fl</property>
       <property>tu154/systems/flight/dist</property>
 
-      <!--For script controlled flight-->
-<!--      
-      <property value="2.0">fcs/stab-auto-cmd</property>
-      <property>fcs/stabilizer-cmd-norm</property>
-            
-      <property>systems/electrical-ok</property>
-      
-      <property>hs/max-pressure</property>
-      
-      <property>hs/buster-1-switch</property>
-      <property>hs/buster-2-switch</property>
-      <property>hs/buster-3-switch</property>
-      
-      <property>hs/ra56-pitch-1</property>
-      <property>hs/ra56-pitch-2</property>
-      <property>hs/ra56-pitch-3</property>
-      
-      <property>hs/ra56-roll-1</property>
-      <property>hs/ra56-roll-2</property>
-      <property>hs/ra56-roll-3</property>
 
-      <property>hs/ra56-yaw-1</property>
-      <property>hs/ra56-yaw-2</property>
-      <property>hs/ra56-yaw-3</property>
-
-
-      <property>instrumentation/pu11-latitude</property>
-      <property>instrumentation/tks-latitude-auto</property>
-      <property>instrumentation/tks-consumers</property>
-      <property>instrumentation/pnp-left-selector</property>
-      
-      <property>instrumentation/pnp-left-selector</property>
-
-      <property>ap/navigac</property>
-      <property>ap/posadk</property>
-      
-      <property>fcs/revers-1-limit</property>
-      <property>fcs/revers-2-limit</property>
-      <property>gear/gear-cmd-static</property>
-      
-      <property value="7.2">debug/wp-lat-deg</property>
-      <property value="150.2">debug/wp-lon-deg</property>-->
-      
+  
 </system>
