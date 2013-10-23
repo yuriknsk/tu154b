@@ -328,6 +328,69 @@
   </multiplay>
 </sim>
 
+ <payload>
+  <weight>
+   <name type="string">Front passengers cabin (Rows 1-15)</name>
+   <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[1]"/>
+   <min-lb type="double">0.0</min-lb>
+   <max-lb type="double">13750.0</max-lb>
+  </weight>
+  <weight>
+   <name type="string">Middle passengers cabin (Rows 16-25)</name>
+   <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[2]"/>
+   <min-lb type="double">0.0</min-lb>
+   <max-lb type="double">10000.0</max-lb>
+  </weight>
+  <weight>
+   <name type="string">Rear passengers cabin (Rows 26-33)</name>
+   <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[3]"/>
+   <min-lb type="double">0.0</min-lb>
+   <max-lb type="double">7580.0</max-lb>
+  </weight>
+  <weight>
+   <name type="string">Front luggage (part 1)</name>
+   <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[4]"/>
+   <min-lb type="double">0.0</min-lb>
+   <max-lb type="double">4890.0</max-lb>
+  </weight>
+  <weight>
+   <name type="string">Front luggage (part 2)</name>
+   <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[5]"/>
+   <min-lb type="double">0.0</min-lb>
+   <max-lb type="double">3700.0</max-lb>
+  </weight>
+  <weight>
+   <name type="string">Front luggage (part 3)</name>
+   <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[6]"/>
+   <min-lb type="double">0.0</min-lb>
+   <max-lb type="double">9910.0</max-lb>
+  </weight>
+  <weight>
+   <name type="string">Front luggage (part 4)</name>
+   <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[7]"/>
+   <min-lb type="double">0.0</min-lb>
+   <max-lb type="double">9910.0</max-lb>
+  </weight>
+  <weight>
+   <name type="string">Rear luggage (part 1)</name>
+   <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[8]"/>
+   <min-lb type="double">0.0</min-lb>
+   <max-lb type="double">11500.0</max-lb>
+  </weight>
+  <weight>
+   <name type="string">Rear luggage (part 2)</name>
+   <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[9]"/>
+   <min-lb type="double">0.0</min-lb>
+   <max-lb type="double">3700.0</max-lb>
+  </weight>
+  <weight>
+   <name type="string">Rear luggage (part 3)</name>
+   <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[10]"/>
+   <min-lb type="double">0.0</min-lb>
+   <max-lb type="double">7660.0</max-lb>
+  </weight>
+ </payload>
+
  <gear>
     <gear n="0">
       <tyre-smoke type="int">0</tyre-smoke>
@@ -345,6 +408,17 @@
       <spray-density type="double">0</spray-density>
     </gear>
  </gear>
+
+<consumables>
+ <fuel>
+  <tank n="0"><name>Feed tank (1)</name></tank>
+  <tank n="1"><name>Inner wing left (2 LEFT)</name></tank>
+  <tank n="2"><name>Outer wing left (3 LEFT)</name></tank>
+  <tank n="3"><name>Inner wing right (2 RIGHT)</name></tank>
+  <tank n="4"><name>Outer wing right (3 RIGHT)</name></tank>
+  <tank n="5"><name>Ballast tank (4)</name></tank>
+ </fuel>
+</consumables>
 
 <instrumentation>
   <adf n="0">
