@@ -614,6 +614,104 @@ setlistener("tu154/instrumentation/altimeter[1]/inhgX100",
 
 
 ######################################################################
+#
+# RSBN & PPDA
+#
+# Implementation note:
+#
+# instrumentation/nav doesn't export true radial value, only twisted
+# one.  Instead of computing true azimuth in Nasal we remember twist
+# value (which is zero for RSBN but non-zero for VOR) and alias to
+# twisted radial.  rsbn_corr() is sill called every 0.1 second, but
+# only when correction is enabled.
+#
+
+var rsbn_corr = func {
+    var twist = getprop("tu154/instrumentation/rsbn/twist");
+    if (!getprop("instrumentation/nav[2]/nav-loc")
+        and getprop("instrumentation/nav[2]/in-range")
+        and getprop("instrumentation/dme[2]/in-range")) {
+        setprop("fdm/jsbsim/instrumentation/rsbn-angle-deg",
+                getprop("tu154/instrumentation/rsbn/radial") + twist);
+        setprop("fdm/jsbsim/instrumentation/rsbn-d-m",
+                getprop("tu154/instrumentation/rsbn/distance"));
+    } else {
+        var i = 2 - getprop("tu154/systems/nvu/selector");
+        var S = getprop("fdm/jsbsim/instrumentation/aircraft-integrator-s-"~i);
+        var Z = getprop("fdm/jsbsim/instrumentation/aircraft-integrator-z-"~i);
+        var Sm = getprop("fdm/jsbsim/instrumentation/point-integrator-s-"~i);
+        var Zm = getprop("fdm/jsbsim/instrumentation/point-integrator-z-"~i);
+        var zpu = getprop("fdm/jsbsim/instrumentation/zpu-deg-"~i);
+        var tks_heading = getprop("fdm/jsbsim/instrumentation/tks-heading");
+
+        var ds = S - Sm;
+        var dz = Z - Zm;
+        var deg = (ds or dz ? math.atan2(dz, ds) * 57.3 : 0);
+        var radial = deg + tks_heading - zpu - twist;
+        if (radial >= 360)
+            radial -= 360;
+        else if (radial < 0)
+            radial += 360;
+        var distance = math.sqrt(ds * ds + dz * dz);
+        distance = int(distance / 100) * 100;
+
+        setprop("tu154/instrumentation/rsbn/radial-auto", radial);
+        if (getprop("tu154/instrumentation/rsbn/distance-target") != distance) {
+            setprop("tu154/instrumentation/rsbn/distance-target", distance);
+            interpolate("tu154/instrumentation/rsbn/distance-auto", distance,
+                        0.2);
+        }
+    }
+}
+var rsbn_corr_timer = maketimer(0.1, rsbn_corr);
+
+var ppda_mode_update = func {
+    var radial = getprop("tu154/instrumentation/rsbn/radial");
+    var distance = getprop("tu154/instrumentation/rsbn/distance");
+    var nav_in_range = 1;
+    var dme_in_range = 1;
+    var twist = 0;
+
+    rsbn_corr_timer.stop();
+    if (getprop("tu154/instrumentation/rsbn/serviceable")) {
+        if (!getprop("instrumentation/nav[2]/nav-loc")) {
+           nav_in_range = getprop("instrumentation/nav[2]/in-range");
+           dme_in_range = getprop("instrumentation/dme[2]/in-range");
+        }
+        if (nav_in_range) {
+            radial = "instrumentation/nav[2]/radials/actual-deg";
+            twist = getprop("instrumentation/nav[2]/radials/target-radial-deg");
+        }
+        if (dme_in_range) {
+            distance = "tu154/instrumentation/dme[2]/distance";
+        }
+        if (getprop("tu154/systems/nvu/powered")
+            and getprop("tu154/switches/v-51-corr") == 1) {
+            if (!nav_in_range)
+                radial = "tu154/instrumentation/rsbn/radial-auto";
+            if (!dme_in_range)
+                distance = "tu154/instrumentation/rsbn/distance-auto";
+            rsbn_corr_timer.start();
+        }
+    }
+
+    interpolate("tu154/instrumentation/rsbn/twist", twist, 0.5);
+    realias("/tu154/instrumentation/rsbn/radial", radial, 0.5, [0, 360]);
+    realias("/tu154/instrumentation/rsbn/distance", distance, 0.5);
+    setprop("tu154/systems/electrical/indicators/azimuth-avton", !nav_in_range);
+    setprop("tu154/systems/electrical/indicators/range-avton", !dme_in_range);
+}
+
+setlistener("tu154/instrumentation/rsbn/serviceable", ppda_mode_update, 1, 0);
+setlistener("instrumentation/nav[2]/nav-loc", ppda_mode_update, 0, 0);
+setlistener("instrumentation/nav[2]/in-range", ppda_mode_update, 0, 0);
+setlistener("instrumentation/dme[2]/in-range", ppda_mode_update, 0, 0);
+setlistener("tu154/systems/nvu/powered", ppda_mode_update, 0, 0);
+setlistener("tu154/switches/v-51-corr", ppda_mode_update, 0, 0);
+setlistener("tu154/systems/nvu/selector", ppda_mode_update, 0, 0);
+
+
+######################################################################
 
 svs_power = func{
 if( getprop( "tu154/switches/SVS-power" ) == 1.0 )
@@ -1615,59 +1713,44 @@ return integer + min/0.6;
 }
 
 # Proceed fork
+setprop("/tu154/systems/nvu-calc/fork-flag", "not applied");
 var fork_loader = func{
 
 var fork_flag = getprop( "/tu154/systems/nvu-calc/fork-flag" );
-if( fork_flag == nil ) fork_flag = 0;
 var fork = getprop( "/tu154/systems/nvu-calc/fork" );
 if( fork == nil ) fork = 0.0;
 
-if( !fork_flag ) {	# Apply fork
-	var offset = getprop("instrumentation/heading-indicator[0]/offset-deg");
-	if( offset == nil ) offset = 0.0;
-	offset += fork;
-	setprop("instrumentation/heading-indicator[0]/offset-deg", offset );
-	offset = getprop("instrumentation/heading-indicator[1]/offset-deg");
-	if( offset == nil ) offset = 0.0;
-	offset += fork;
-	setprop("instrumentation/heading-indicator[1]/offset-deg", offset );
-	# re-write ZPU
-	var zpu = getprop("fdm/jsbsim/instrumentation/zpu-deg-1" );
-	if( zpu == nil ) zpu = 0.0;
-	zpu += fork;
-     	setprop("fdm/jsbsim/instrumentation/zpu-deg-1", zpu );
-     	interpolate("tu154/instrumentation/v-140[0]/zpu-1-delayed", zpu, 1.0 );
-	zpu = getprop("fdm/jsbsim/instrumentation/zpu-deg-2" );
-	if( zpu == nil ) zpu = 0.0;
-	zpu += fork;
-     	setprop("fdm/jsbsim/instrumentation/zpu-deg-2", zpu );
-     	interpolate("tu154/instrumentation/v-140[0]/zpu-2-delayed", zpu, 1.0 );
-	setprop( "/tu154/systems/nvu-calc/fork-flag", 1 );
-	}
-else {	# Revert fork
-	var offset = getprop("instrumentation/heading-indicator[0]/offset-deg");
-	if( offset == nil ) offset = 0.0;
-	offset -= fork;
-	setprop("instrumentation/heading-indicator[0]/offset-deg", offset );
-	offset = getprop("instrumentation/heading-indicator[1]/offset-deg");
-	if( offset == nil ) offset = 0.0;
-	offset -= fork;
-	setprop("instrumentation/heading-indicator[1]/offset-deg", offset );
-	# re-write ZPU
-	var zpu = getprop("fdm/jsbsim/instrumentation/zpu-deg-1" );
-	if( zpu == nil ) zpu = 0.0;
-	zpu -= fork;
-     	setprop("fdm/jsbsim/instrumentation/zpu-deg-1", zpu );
-     	interpolate("tu154/instrumentation/v-140[0]/zpu-1-delayed", zpu, 1.0 );
-	zpu = getprop("fdm/jsbsim/instrumentation/zpu-deg-2" );
-	if( zpu == nil ) zpu = 0.0;
-	zpu -= fork;
-     	setprop("fdm/jsbsim/instrumentation/zpu-deg-2", zpu );
-     	interpolate("tu154/instrumentation/v-140[0]/zpu-2-delayed", zpu, 1.0 );
+if (fork_flag == "not applied") {
+    setprop("/tu154/systems/nvu-calc/fork-flag", "applied");
+} else {
+    setprop("/tu154/systems/nvu-calc/fork-flag", "not applied");
+    fork = -fork;
+}
 
-	setprop( "/tu154/systems/nvu-calc/fork-flag", 0 );
-	}
+if (num(getprop("/tu154/systems/nvu-calc/fork-route-only")))
+   return;
 
+var offset = getprop("instrumentation/heading-indicator[0]/offset-deg");
+if( offset == nil ) offset = 0.0;
+offset += fork;
+setprop("instrumentation/heading-indicator[0]/offset-deg", offset );
+offset = getprop("instrumentation/heading-indicator[1]/offset-deg");
+if( offset == nil ) offset = 0.0;
+offset += fork;
+setprop("instrumentation/heading-indicator[1]/offset-deg", offset );
+# re-write ZPU
+var zpu = getprop("fdm/jsbsim/instrumentation/zpu-deg-1" );
+if( zpu == nil ) zpu = 0.0;
+zpu += fork;
+zpu = int(zpu * 10 + 0.5) / 10;
+setprop("fdm/jsbsim/instrumentation/zpu-deg-1", zpu );
+interpolate("tu154/instrumentation/v-140[0]/zpu-1-delayed", zpu, 1.0 );
+zpu = getprop("fdm/jsbsim/instrumentation/zpu-deg-2" );
+if( zpu == nil ) zpu = 0.0;
+zpu += fork;
+zpu = int(zpu * 10 + 0.5) / 10;
+setprop("fdm/jsbsim/instrumentation/zpu-deg-2", zpu );
+interpolate("tu154/instrumentation/v-140[0]/zpu-2-delayed", zpu, 1.0 );
 }
 
 #Virtual navigator
@@ -1680,9 +1763,13 @@ var route_list = props.globals.getNode("/sim/gui/dialogs/Tu-154B-2/nav/dialog/li
 var route = route_list.getChildren("value");
 var max_route = size( route );
 
+if (route_num > 0) {
+   help.messenger(sprintf("Virtual navigator: next route %s",
+                          route[route_num-1].getValue()));
+}
+
 # Select new route
 if( route_num >= max_route ) return; # end of route list ashieved
-help.messenger(sprintf("Virtual navigator: next route %s", route[route_num].getValue() ));
 # Save result
 setprop( "/tu154/systems/nvu-calc/list", route[route_num].getValue() );
 # Loader into NVU
@@ -1722,7 +1809,7 @@ var uk = props.globals.getNode("/tu154/systems/nvu-calc/uk-next", 1);
 if( size(vect) > 13 ) {
 setprop( "/tu154/systems/nvu-calc/sm-next", num(vect[13]) * 1000.0 );
 setprop( "/tu154/systems/nvu-calc/zm-next", num(vect[16]) * 1000.0 );
-setprop( "/tu154/systems/nvu-calc/uk-next", num(substr(vect[19], 0, size(vect[19])-1)) );
+setprop( "/tu154/systems/nvu-calc/uk-next", min2dec(num(substr(vect[19], 0, size(vect[19])-1))) );
 			}
 else	{
 sm.remove();
@@ -1758,7 +1845,7 @@ if( (max_route >= route_num) and (count == 0) ) {
 	if( size(vect) > 13 ) {
 	setprop( "/tu154/systems/nvu-calc/sm-next", num(vect[13]) * 1000.0 );
 	setprop( "/tu154/systems/nvu-calc/zm-next", num(vect[16]) * 1000.0 );
-	setprop( "/tu154/systems/nvu-calc/uk-next", num(substr(vect[19], 0, size(vect[19])-1)) );
+	setprop( "/tu154/systems/nvu-calc/uk-next", min2dec(num(substr(vect[19], 0, size(vect[19])-1))) );
 		}
 
 	}
@@ -1769,10 +1856,10 @@ var gradient = 0.0;
 var selector = getprop("tu154/systems/nvu/selector" );
 if( selector == nil ) selector = 0;
 var fork_flag = getprop( "/tu154/systems/nvu-calc/fork-flag" );
-if( fork_flag == nil ) fork_flag = 0;
+if( fork_flag == nil ) fork_flag = "not applied";
 # We use departure OZPU obviosly.
 # If fork applied, operate with destination OZPU instead
-if( fork_flag ) var zpu_selected = zpu_dest_selected;
+if( fork_flag == "applied" ) var zpu_selected = zpu_dest_selected;
 else var zpu_selected = zpu_dep_selected;
 
 
@@ -1960,9 +2047,11 @@ else {			# Second b-52 block
 }
 
 if( uk_selected != nil ) {
-# Load UK
-setprop("tu154/instrumentation/b-8m/outer", int(uk_selected/10.0)*10.0 );
-setprop("tu154/instrumentation/b-8m/inner", ( uk_selected - int(uk_selected/10.0)*10.0 )*36.0 );
+    # Load UK
+    var outer = int(uk_selected / 10) * 10;
+    setprop("tu154/instrumentation/b-8m/outer", outer);
+    setprop("tu154/instrumentation/b-8m/inner",
+            int((uk_selected - outer) * 10 + 0.5));
 }
 
 } # -------------------------- END NVU LOADER ----------------------------------
@@ -2118,7 +2207,6 @@ if( getprop( "tu154/systems/electrical/buses/AC3x200-bus-1L/volts" ) > 150.0 )
  nvu_watchdog();
  nvu_ort_changer();
  }
-rsbn_range_watchdog();	# kick on RSBN warn lamps first time
 }
 
 var nvu_power_off = func{
@@ -2126,8 +2214,6 @@ var nvu_power_off = func{
  setprop("tu154/systems/nvu/serviceable", 0.0 );
  electrical.AC3x200_bus_1L.rm_output( "NVU" );
  nvu_watchdog();
-# Clear RSBN lamps
-rsbn_range_watchdog();
 }
 
 var nvu_start_corr = func{
@@ -2297,21 +2383,21 @@ if( getprop("tu154/systems/nvu/serviceable" ) == 0 ) # inop
 # RSBN correction control
 if( getprop("tu154/switches/v-51-corr" ) == 1.0 )
 	{
-	if( getprop("tu154/instrumentation/rsbn/serviceable" ) == 1 )
+        if(getprop("tu154/instrumentation/rsbn/serviceable")
+           and !getprop("instrumentation/nav[2]/nav-loc")
+           and getprop("instrumentation/nav[2]/in-range")
+           and getprop("instrumentation/dme[2]/in-range"))
 		{ 
-		setprop("tu154/systems/electrical/indicators/nvu-vor-avton", 0 ); 
 		setprop("tu154/systems/nvu/rsbn-corr", 1 );
 		setprop("tu154/systems/electrical/indicators/nvu-correction-on", 1 ); 
 		nvu_start_corr();
 		}
 	else {
-              setprop("tu154/systems/electrical/indicators/nvu-vor-avton", 1 ); 
               setprop("tu154/systems/nvu/rsbn-corr", 0 ); 
               setprop("tu154/systems/electrical/indicators/nvu-correction-on", 0 ); 
               nvu_stop_corr();	
 		} }	
 else	{
-	setprop("tu154/systems/electrical/indicators/nvu-vor-avton", 0 ); 
 	setprop("tu154/systems/nvu/rsbn-corr", 0 ); 
 	setprop("tu154/systems/electrical/indicators/nvu-correction-on", 0 ); 
 	nvu_stop_corr();
@@ -2381,20 +2467,9 @@ nvu_watchdog();
 
 # UK gauge support
 var b_8m_handler = func{
-var outer_deg = getprop("tu154/instrumentation/b-8m/outer");
-if( outer_deg == nil ) outer_deg = 0.0;
-if( outer_deg >= 360.0 ) outer_deg = outer_deg - 360.0;
-if( outer_deg < 0.0 ) outer_deg = outer_deg + 360.0;
-setprop("tu154/instrumentation/b-8m/outer", outer_deg );
-var inner_deg = getprop("tu154/instrumentation/b-8m/inner");
-if( inner_deg == nil ) inner_deg = 0.0;
-if( inner_deg >= 360.0 ) inner_deg = inner_deg - 360.0;
-if( inner_deg < 0.0 ) inner_deg = inner_deg + 360.0;
-setprop("tu154/instrumentation/b-8m/inner", inner_deg );
-
-var uk_deg = int( outer_deg/10.0 )*10.0 + inner_deg/36.0;
-setprop("fdm/jsbsim/instrumentation/rsbn-uk-deg", uk_deg );
-help.uk();
+    var outer = getprop("tu154/instrumentation/b-8m/outer");
+    var inner = getprop("tu154/instrumentation/b-8m/inner");
+    setprop("fdm/jsbsim/instrumentation/rsbn-uk-deg", outer + inner / 10);
 }
 
 
@@ -2411,41 +2486,6 @@ setlistener( "tu154/instrumentation/v-140[0]/zpu-2-delayed", zpu_2_handler ,0,0)
 #*****************************************************************************
 
 #RSBN support
-var rsbn_handler = func{
-settimer(rsbn_handler, 0.0);
-
-if( getprop("tu154/instrumentation/rsbn/serviceable" ) != 1 ) return; # Something is wrong
-
-var distance = getprop("tu154/instrumentation/dme[2]/distance");
-setprop( "tu154/instrumentation/rsbn/distance-m", distance ); 
-setprop( "fdm/jsbsim/instrumentation/rsbn-d-m", distance ); 
-var hdg = getprop("instrumentation/nav[2]/radials/actual-deg"); 
-if( hdg == nil ) hdg = 0.0;
-# 
-var magvar = getprop("instrumentation/nav[2]/radials/target-radial-deg");
-if( magvar == nil ) magvar = 0.0;
-hdg = hdg + magvar;
-#hdg = hdg + 180.0;
-if( hdg >= 360.0 ) hdg = hdg - 360.0;
-if( hdg < 0.0 ) hdg = hdg + 360.0;
-
-setprop( "fdm/jsbsim/instrumentation/rsbn-angle-deg", hdg ); 
-setprop( "tu154/instrumentation/rsbn/heading-deg", hdg );
-
-distance = distance/10.0;
-setprop("tu154/instrumentation/rsbn/indicated-wheels_ones", 
-(distance/10.0) - int( distance/100.0 )*10.0 );
-setprop("tu154/instrumentation/rsbn/indicated-wheels_dec", 
-(distance/100.0) - int( distance/1000.0 )*10.0 );
-setprop("tu154/instrumentation/rsbn/indicated-wheels_hund", 
-(distance/1000.0) - int( distance/10000.0 )*10.0 );
-setprop("tu154/instrumentation/rsbn/indicated-wheels_ths", 
-(distance/10000.0) - int( distance/100000.0 )*10.0 );
-
-}
-
-rsbn_handler();
-
 var rsbn_set_f_1 = func{
 var handle = getprop("tu154/instrumentation/rsbn/handle-1");
 if( handle == nil ) handle = 0.0;
@@ -2531,7 +2571,7 @@ var channel = handle_1 * 10 + handle_2;
 if( channel < 1.0 ) channel = 1.0;
 if( channel > 40.0 ) channel = 40.0;
 
-var freq = 115.95 + channel * 0.05;
+var freq = 959.95 + channel * 0.05;
 setprop("tu154/instrumentation/rsbn/frequency", freq );
 setprop("instrumentation/nav[2]/frequencies/selected-mhz", freq );
 }
@@ -2547,6 +2587,7 @@ if( arg[0] == 1 )
 	  electrical.AC3x200_bus_1L.add_output( "RSBN", 50.0);
 	  setprop("instrumentation/nav[2]/power-btn", 1 );
           setprop("instrumentation/dme[2]/serviceable", 1 );
+	setprop("tu154/instrumentation/rsbn/serviceable", 1 );
 	  }
 	}
 else { 
@@ -2587,40 +2628,8 @@ if( getprop( "tu154/switches/RSBN-power" ) != 1.0 )
         return;
         }
 }
-#var rsbn_serv_watchdog = func{
-#if( getprop("instrumentation/nav[2]/serviceable" ) != 1 ) # inop
-#	{
-#	setprop("tu154/systems/electrical/indicators/range-avton", 1 );  
-#	setprop("tu154/systems/electrical/indicators/azimuth-avton", 1 );
-#	setprop("tu154/instrumentation/rsbn/serviceable", 0 );
-#	}
-#}
-
-var rsbn_range_watchdog = func{
-if( getprop("tu154/systems/nvu/serviceable" ) ){
-	if( getprop("instrumentation/nav[2]/in-range" ) != 1 ) # out of range
-	{
-		setprop("tu154/systems/electrical/indicators/range-avton", 1 );  
-		setprop("tu154/systems/electrical/indicators/azimuth-avton", 1 );
-		setprop("tu154/instrumentation/rsbn/serviceable", 0 );
-	}
-	else
-	{
-		setprop("tu154/systems/electrical/indicators/range-avton", 0 );  
-		setprop("tu154/systems/electrical/indicators/azimuth-avton", 0 );
-		setprop("tu154/instrumentation/rsbn/serviceable", 1 );
-	}
-}
-else {
-	setprop("tu154/systems/electrical/indicators/range-avton", 0 );  
-	setprop("tu154/systems/electrical/indicators/azimuth-avton", 0 );
-	setprop("tu154/instrumentation/rsbn/serviceable", 1 );
-	}
-}
 
 setlistener("instrumentation/nav[2]/powered", rsbn_pwr_watchdog, 0,0 );
-#setlistener("instrumentation/nav[2]/serviceable", rsbn_serv_watchdog, 0,0 );
-setlistener("instrumentation/nav[2]/in-range", rsbn_range_watchdog,0,0 );
 
 
 

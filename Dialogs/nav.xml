@@ -16,6 +16,9 @@
 		var dec2min = func{
 			var arg_copy = arg[0];
 
+                        # Round to 6 minute step.
+                        arg_copy = int(arg_copy * 10 + 0.5) / 10;
+
 			if( arg_copy > 360.0  ) arg_copy -= 360.0;
 			if( 0 > arg_copy  ) arg_copy += 360.0;
 			var integer = int( arg_copy );
@@ -34,6 +37,7 @@
 			var beacon_wpt = geo.Coord.new();
 			
 			var wp = route.getChildren("wp");
+                        var wp_size = size(wp);
 			var bc = beacon_node.getChildren("beacon");
 			var rtstr = "";
 			var az_corr = 0.0;
@@ -45,10 +49,19 @@
 			var magvar_dest = num( getprop( "/tu154/systems/nvu-calc/magvar-dest" ) );
 			if( magvar_dest == nil ) magvar_dest = 0.0;
 			var magvar_dep_current = num( getprop( "/tu154/systems/nvu-calc/magvar-dep-current" ) );
-			if( magvar_dep_current == nil ) magvar_dep_current = 0;
-			if( magvar_dep_current ) magvar_dep = getprop("/environment/magnetic-variation-deg");
-			
+			if (wp_size and magvar_dep_current) {
+                            magvar_dep =
+                               magvar(wp[0].getNode("latitude-deg").getValue(),
+                                      wp[0].getNode("longitude-deg").getValue());
+			}
 			setprop( "/tu154/systems/nvu-calc/magvar-dep", magvar_dep );
+			var magvar_dest_current = num( getprop( "/tu154/systems/nvu-calc/magvar-dest-current" ) );
+			if (wp_size and magvar_dest_current) {
+                            var e = wp_size - 1;
+                            magvar_dest =
+                               magvar(wp[e].getNode("latitude-deg").getValue(),
+                                      wp[e].getNode("longitude-deg").getValue());
+			}
 			setprop( "/tu154/systems/nvu-calc/magvar-dest", magvar_dest );
 				
 			# This cycle count fork only!
@@ -134,7 +147,7 @@
 				  if( current_az_corr > 360.0 ) current_az_corr -= 360.0;
 	 			  if( -360.0 > current_az_corr ) current_az_corr += 360.0;
 			if( dist ) uk_az_corrected = uk - current_az_corr * s_beacon / dist;
-					rtstr ~= sprintf(" Beacon S: %.1f km Z: %.1f km UK: %.2f'", s_beacon, -z_beacon, uk_az_corrected );
+					rtstr ~= sprintf(" Beacon S: %.1f km Z: %.1f km UK: %.2f'", s_beacon, -z_beacon, dec2min(uk_az_corrected) );
 					
 				}}
 			result.getChild("value", i-1, 1).setValue(rtstr);
@@ -245,7 +258,7 @@
 		</checkbox>
 		
 		<text>
-			<label>use current            </label>
+			<label>at location            </label>
 		</text>
 		<text>
 			<label>Destination mag var:</label>
@@ -258,7 +271,14 @@
 			<pref-width>60</pref-width>
 			<property>/tu154/systems/nvu-calc/magvar-dest</property>
 		</input>
+		<checkbox>
+			<property>/tu154/systems/nvu-calc/magvar-dest-current</property>
+		</checkbox>
 		
+		<text>
+			<label>at location            </label>
+		</text>
+
 		<text>
 			<label>Virtual navigator:</label>
 		</text>
@@ -273,10 +293,16 @@
 		<default-padding>4</default-padding>
 		
 		<text>
-			<label>-9.9999</label>
+			<label> Fork: -179.99</label>
 			<format> Fork: %-0.2f</format>
 			<property>/tu154/systems/nvu-calc/fork</property>
 		</text>
+		<text>
+			<label>(not applied)    </label>
+			<format>(%s)    </format>
+			<property>/tu154/systems/nvu-calc/fork-flag</property>
+		</text>
+
 		<button>
 			<legend>Apply fork</legend>
 			<default>true</default>
@@ -292,6 +318,14 @@
 				<command>dialog-update</command>
 			</binding>
 		</button>
+		<checkbox>
+			<property>/tu154/systems/nvu-calc/fork-route-only</property>
+		</checkbox>
+		<text>
+			<label>update route only</label>
+		</text>
+
+		<empty><stretch>1</stretch></empty>
 
 		<button>
 			<legend>Calculate</legend>

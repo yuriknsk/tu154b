@@ -831,47 +831,31 @@
         
         <channel name="Brake">
 <!--Left-->
-          <summer name="gear/left-brake-cmd-norm">
-            <input>gear/brake-left</input>
-            <input>gear/brake-parking</input>
-            <clipto>
-              <min>0.0</min>
-              <max>1.0</max>
-            </clipto>
-          </summer>
-          
           <pure_gain name="gear/left-brake-cmd">
-            <input>gear/left-brake-cmd-norm</input>
+            <input>gear/brake-left</input>
   <!--You can change current static friction here, for model of ice condition etc. -->
   	    <gain>gear/static-friction</gain> <!--default: 0.6 --> 
           </pure_gain>
 <!--Check hydro power for brake-->
           <switch name="gear/left-brake-cmd-switched">
             <default value="0.0"/>
-            <test value="gear/left-brake-cmd">
+            <test logic="OR" value="gear/left-brake-cmd">
               hs/hs1-busters-ok > 0
+              gear/brake-parking > 0
             </test>
             <output>fcs/left-brake-cmd-norm</output>
           </switch>
 <!--Right-->
-          <summer name="gear/right-brake-cmd-norm">
-            <input>gear/brake-right</input>
-            <input>gear/brake-parking</input>
-            <clipto>
-              <min>0.0</min>
-              <max>1.0</max>
-            </clipto>
-          </summer>
-          
           <pure_gain name="gear/right-brake-cmd">
-            <input>gear/right-brake-cmd-norm</input>
+            <input>gear/brake-right</input>
             <gain>gear/static-friction</gain>
           </pure_gain>
           
           <switch name="gear/right-brake-cmd-switched">
             <default value="0.0"/>
-            <test value="gear/right-brake-cmd">
+            <test logic="OR" value="gear/right-brake-cmd">
               hs/hs1-busters-ok > 0
+              gear/brake-parking > 0
             </test>
             <output>fcs/right-brake-cmd-norm</output>
           </switch>
@@ -925,9 +909,7 @@
     <system file="hydrosystems"/>
     <system file="instrumentation"/>
     <system file="nvu"/>
-    
-<!--    <system file="pushback"/>-->
-    
+    <system file="pushback"/>
     <autopilot file="Systems/absu154"/>
 <!--    <autopilot file="absu154"/>-->
     
@@ -1494,14 +1476,14 @@
         <propulsion> ON </propulsion>
 	<property>velocities/v-down-fps</property>
 	<property>velocities/vc-fps</property>
-	<property>debug/wp-heading</property>
-	<property>debug/wp-distance</property>
-	<property>debug/wp-hdg-corrected</property>
+	<property>fcs/flap-pos-deg</property>
+	<property>ap/speed-pid</property>
+	<property>ap/speed-error-switched</property>
 	<property>instrumentation/pnp-heading</property>
 	<property>ap/gs-trigger</property>
 	<property>ap/gs-pid</property>
 	<property>ap/gs-error-switched</property>
 	<property>ap/gs-error</property>
-    </output>-->
-
+    </output>
+    -->
   </fdm_config>

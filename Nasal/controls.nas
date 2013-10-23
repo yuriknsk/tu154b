@@ -24,6 +24,29 @@ var elevatorTrim = func {
 	}
 
 
+#
+# Brakes
+#
+
+var origApplyBrakes = applyBrakes;
+var applyBrakes = func(v, which = 0) {
+    if (v and getprop("controls/gear/brake-parking")) {
+       setprop("controls/gear/brake-parking", 0);
+       origApplyBrakes(0);
+    }
+    origApplyBrakes(v, which);
+}
+
+var origApplyParkingBrake = applyParkingBrake;
+var applyParkingBrake = func(v) {
+    if (v) {
+        v = origApplyParkingBrake(1);
+        origApplyBrakes(v, 0);
+    }
+    return v;
+}
+applyParkingBrake(1);
+
 
 # Autostart
 # may 2010
