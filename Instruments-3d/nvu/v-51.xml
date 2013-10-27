@@ -4,7 +4,7 @@
     #    (C) 2007 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
     #	2d & 3d instruments, animations, systems and over.		   	#
     #    	yurik@megasignal.com					   	#
-    #############################################################################	  
+    #############################################################################
     -->
 
 <!-- V-51 NVU (navigation system) control
@@ -54,19 +54,29 @@
 
 <!--selectors-->
 <animation>
-  <type>rotate</type>
+  <type>knob</type>
   <object-name>selector_1</object-name>
   <property>tu154/switches/v-51-selector-1</property>
+  <visible>true</visible>
+  <action>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/v-51-selector-1</property>
+      <min>-4</min>
+      <max>4</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
   <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	-130.0</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	-95.0</dep></entry>
-    <entry><ind>	2.0</ind>	<dep>	-62.0</dep></entry>
-    <entry><ind>	3.0</ind>	<dep>	-31.0</dep></entry>
-    <entry><ind>	4.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	5.0</ind>	<dep>	31.0</dep></entry>
-    <entry><ind>	6.0</ind>	<dep>	62.0</dep></entry>
-    <entry><ind>	7.0</ind>	<dep>	98.0</dep></entry>
-    <entry><ind>	8.0</ind>	<dep>	130.0</dep></entry>
+    <entry><ind>	-4</ind>	<dep>	-130.0</dep></entry>
+    <entry><ind>	-3</ind>	<dep>	-95.0</dep></entry>
+    <entry><ind>	-2</ind>	<dep>	-62.0</dep></entry>
+    <entry><ind>	-1</ind>	<dep>	-31.0</dep></entry>
+    <entry><ind>	 0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	 1</ind>	<dep>	31.0</dep></entry>
+    <entry><ind>	 2</ind>	<dep>	62.0</dep></entry>
+    <entry><ind>	 3</ind>	<dep>	98.0</dep></entry>
+    <entry><ind>	 4</ind>	<dep>	130.0</dep></entry>
   </interpolation>
   <center>
     <x-m>0.0</x-m>
@@ -80,12 +90,30 @@
   </axis>
 </animation>
 <animation>
-  <type>rotate</type>
+  <type>knob</type>
   <object-name>selector_2</object-name>
   <property>tu154/switches/v-51-selector-2</property>
-    <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	-90.0</dep></entry>
-    <entry><ind>	6.0</ind>	<dep>	90.0</dep></entry>
+  <visible>true</visible>
+  <action>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/v-51-selector-2</property>
+      <min>-1</min>
+      <max>5</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>
+        var v = getprop("tu154/switches/v-51-selector-2");
+        v = (v > 0 ? v * 5000 + 2000 : 0);
+        setprop("fdm/jsbsim/instrumentation/nvu/LUR-2km", v);
+      </script>
+    </binding>
+  </action>
+  <interpolation>
+    <entry><ind>	-1</ind>	<dep>	-90.0</dep></entry>
+    <entry><ind>	 5</ind>	<dep>	90.0</dep></entry>
   </interpolation>
   <center>
     <x-m>0.0</x-m>
@@ -161,15 +189,17 @@
   <type>select</type>
   <object-name>lamp_1_on</object-name>
   <condition>
-    <property>tu154/systems/nvu/powered</property>
-    <property>tu154/systems/nvu/serviceable</property>
+    <property>fdm/jsbsim/instrumentation/nvu/active</property>
+    <property>fdm/jsbsim/instrumentation/nvu/mode-out</property>
   </condition>
 </animation>
 <animation>
   <type>select</type>
   <object-name>lamp_2_on</object-name>
   <condition>
-    <property>tu154/systems/nvu/rsbn-corr</property>
+    <property>fdm/jsbsim/instrumentation/nvu/active</property>
+    <property>fdm/jsbsim/instrumentation/nvu/mode-out</property>
+    <property>tu154/switches/v-51-corr</property>
   </condition>
 </animation>
 
@@ -187,10 +217,6 @@
         interpolate("tu154/switches/v-51-power", 1.0, 0.1 );
       </script>
     </binding>
-    <binding>
-      <command>nasal</command>
-      <script>instruments.nvu_power_on()</script>
-    </binding>
   </action>
 </animation>
 <animation>
@@ -206,10 +232,6 @@
         interpolate("tu154/switches/v-51-power", 0.0, 0.1 );
       </script>
     </binding>
-    <binding>
-      <command>nasal</command>
-      <script>instruments.nvu_power_off()</script>
-    </binding>
   </action>
 </animation>
 <animation>
@@ -223,11 +245,8 @@
       <command>nasal</command>
       <script>
         interpolate("tu154/switches/v-51-count", 1.0, 0.1 );
+        setprop("fdm/jsbsim/instrumentation/nvu/stopped", 0);
       </script>
-    </binding>
-    <binding>
-      <command>nasal</command>
-      <script>instruments.nvu_start_count()</script>
     </binding>
   </action>
 </animation>
@@ -242,11 +261,12 @@
       <command>nasal</command>
       <script>
         interpolate("tu154/switches/v-51-count", 0.0, 0.1 );
+        setprop("fdm/jsbsim/instrumentation/nvu/stopped", 1);
       </script>
     </binding>
     <binding>
       <command>nasal</command>
-      <script>instruments.nvu_stop_count()</script>
+      <script></script>
     </binding>
   </action>
 </animation>
@@ -263,10 +283,6 @@
         interpolate("tu154/switches/v-51-corr", 1.0, 0.1 );
       </script>
     </binding>
-    <binding>
-      <command>nasal</command>
-      <script>instruments.nvu_start_corr()</script>
-    </binding>
   </action>
 </animation>
 <animation>
@@ -282,32 +298,28 @@
         interpolate("tu154/switches/v-51-corr", 0.0, 0.1 );
       </script>
     </binding>
-    <binding>
-      <command>nasal</command>
-      <script>instruments.nvu_stop_corr()</script>
-    </binding>
   </action>
 </animation>
 
-<!--Knobs-->
-
+<!--Buttons-->
 <animation>
   <type>pick</type>
   <object-name>hs_7</object-name>
   <visible>false</visible>
   <action>
     <button>0</button>
-    <repeatable>false</repeatable>
+    <repeatable>true</repeatable>
+    <interval-sec>600</interval-sec>
     <binding>
       <command>nasal</command>
-      <script>instruments.nvu_set_d(-1)</script>
+      <script>instruments.nvu_distance_adjust(-1)</script>
     </binding>
-   <mod-up>
-    <binding>
-      <command>nasal</command>
-      <script>instruments.nvu_set_d(0)</script>
-    </binding>
-   </mod-up>
+    <mod-up>
+      <binding>
+        <command>nasal</command>
+        <script>instruments.nvu_distance_adjust(0)</script>
+      </binding>
+    </mod-up>
   </action>
 </animation>
 <animation>
@@ -318,10 +330,24 @@
     <button>0</button>
     <repeatable>false</repeatable>
     <binding>
-      <command>nasal</command>
-      <script>instruments.nvu_toggle_multiplier(1)</script>
+      <command>property-cycle</command>
+      <property>tu154/instrumentation/v-51/adjust-speed</property>
+      <value>500</value>
+      <value>5000</value>
     </binding>
   </action>
+  <hovered>
+    <binding>
+      <command>set-tooltip</command>
+      <tooltip-id>nvu-adjust-speed</tooltip-id>
+      <label>Adjust speed: %d m/s</label>
+      <property>tu154/instrumentation/v-51/adjust-speed</property>
+      <mapping>nasal</mapping>
+      <script>
+        return arg[0] / getprop("tu154/instrumentation/v-51/scale");
+      </script>
+    </binding>
+  </hovered>
 </animation>
 <animation>
   <type>pick</type>
@@ -329,160 +355,22 @@
   <visible>false</visible>
   <action>
     <button>0</button>
-    <repeatable>false</repeatable>
+    <repeatable>true</repeatable>
+    <interval-sec>600</interval-sec>
     <binding>
       <command>nasal</command>
-      <script>instruments.nvu_set_d(1)</script>
+      <script>instruments.nvu_distance_adjust(1)</script>
     </binding>
     <mod-up>
       <binding>
         <command>nasal</command>
-        <script>instruments.nvu_set_d(0)</script>
+        <script>instruments.nvu_distance_adjust(0)</script>
       </binding>
     </mod-up>
   </action>
 </animation>
 
-<!--Selectors-->
-<animation>
-  <type>pick</type>
-  <object-name>selector_1</object-name>
-  <visible>true</visible>
-  <action>
-    <button>0</button>
-    <repeatable>false</repeatable>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/switches/v-51-selector-1</property>
-      <step>1.0</step>
-      <min>0.0</min>
-      <max>8.0</max>
-      <wrap>false</wrap>
-    </binding>
-  </action>
-</animation>
-<animation>
-  <type>pick</type>
-  <object-name>selector_1</object-name>
-  <visible>true</visible>
-  <action>
-    <button>1</button>
-    <repeatable>false</repeatable>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/switches/v-51-selector-1</property>
-      <step>-1.0</step>
-      <min>0.0</min>
-      <max>8.0</max>
-      <wrap>false</wrap>
-    </binding>
-  </action>
-</animation>
-<!--Mouse wheel-->
-<animation>
-  <type>pick</type>
-  <object-name>selector_1</object-name>
-  <visible>true</visible>
-  <action>
-    <button>3</button>
-    <repeatable>false</repeatable>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/switches/v-51-selector-1</property>
-      <step>1.0</step>
-      <min>0.0</min>
-      <max>8.0</max>
-      <wrap>false</wrap>
-    </binding>
-  </action>
-</animation>
-<animation>
-  <type>pick</type>
-  <object-name>selector_1</object-name>
-  <visible>true</visible>
-  <action>
-    <button>4</button>
-    <repeatable>false</repeatable>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/switches/v-51-selector-1</property>
-      <step>-1.0</step>
-      <min>0.0</min>
-      <max>8.0</max>
-      <wrap>false</wrap>
-    </binding>
-  </action>
-</animation>
-<animation>
-  <type>pick</type>
-  <object-name>selector_2</object-name>
-  <visible>true</visible>
-  <action>
-    <button>0</button>
-    <repeatable>false</repeatable>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/switches/v-51-selector-2</property>
-      <step>1.0</step>
-      <min>0.0</min>
-      <max>6.0</max>
-      <wrap>false</wrap>
-    </binding>
-  </action>
-</animation>
-<animation>
-  <type>pick</type>
-  <object-name>selector_2</object-name>
-  <visible>true</visible>
-  <action>
-    <button>1</button>
-    <repeatable>false</repeatable>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/switches/v-51-selector-2</property>
-      <step>-1.0</step>
-      <min>0.0</min>
-      <max>8.0</max>
-      <wrap>false</wrap>
-    </binding>
-  </action>
-</animation>
-<!--Mouse wheel-->
-<animation>
-  <type>pick</type>
-  <object-name>selector_2</object-name>
-  <visible>true</visible>
-  <action>
-    <button>3</button>
-    <repeatable>false</repeatable>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/switches/v-51-selector-2</property>
-      <step>1.0</step>
-      <min>0.0</min>
-      <max>6.0</max>
-      <wrap>false</wrap>
-    </binding>
-  </action>
-</animation>
-<animation>
-  <type>pick</type>
-  <object-name>selector_2</object-name>
-  <visible>true</visible>
-  <action>
-    <button>4</button>
-    <repeatable>false</repeatable>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/switches/v-51-selector-2</property>
-      <step>-1.0</step>
-      <min>0.0</min>
-      <max>6.0</max>
-      <wrap>false</wrap>
-    </binding>
-  </action>
-</animation>
-<!--Mode selector-->
+<!--Scale selector-->
 <animation>
   <type>pick</type>
   <object-name>hs_10</object-name>
@@ -491,10 +379,24 @@
     <button>0</button>
     <repeatable>false</repeatable>
     <binding>
-      <command>property-toggle</command>
-      <property>tu154/systems/nvu/mode</property>
+      <command>property-cycle</command>
+      <property>tu154/instrumentation/v-51/scale</property>
+      <value>1</value>
+      <value>10</value>
     </binding>
   </action>
+  <hovered>
+    <binding>
+      <command>set-tooltip</command>
+      <tooltip-id>nvu-scale</tooltip-id>
+      <label>Distance scale: %s</label>
+      <property>tu154/instrumentation/v-51/scale</property>
+      <mapping>nasal</mapping>
+      <script>
+        return (arg[0] == 1 ? "1 km" : "100 m");
+      </script>
+    </binding>
+  </hovered>
 </animation>
 
 </PropertyList>

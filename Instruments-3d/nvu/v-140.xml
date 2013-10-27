@@ -4,7 +4,7 @@
     #    (C) 2007 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
     #	2d & 3d instruments, animations, systems and over.		   	#
     #    	yurik@megasignal.com					   	#
-    #############################################################################	  
+    #############################################################################
     -->
 
 <!-- V-140 NVU (navigation system) control
@@ -51,22 +51,28 @@
   <type>select</type>
   <object-name>I</object-name>
   <condition>
-    <property>tu154/instrumentation/v-140/lamp-I</property>
+    <equals>
+      <property>fdm/jsbsim/instrumentation/nvu/active</property>
+      <value>1</value>
+    </equals>
   </condition>
 </animation>
 <animation>
   <type>select</type>
   <object-name>II</object-name>
   <condition>
-    <property>tu154/instrumentation/v-140/lamp-II</property>
+    <equals>
+      <property>fdm/jsbsim/instrumentation/nvu/active</property>
+      <value>2</value>
+    </equals>
   </condition>
 </animation>
 <!-- Digits I -->
 <animation>
   <type>rotate</type>
   <object-name>dig_1_min</object-name>
-  <property>tu154/instrumentation/v-140[0]/I/min</property>
-  <factor>36</factor>
+  <property>tu154/systems/nvu/ZPU-1</property>
+  <factor>360</factor>
   <center>
     <x-m>-0.02611</x-m>
     <y-m>0</y-m>
@@ -81,30 +87,21 @@
 <animation>
   <type>rotate</type>
   <object-name>dig_1_ones</object-name>
-  <property>tu154/instrumentation/v-140[0]/I/ones</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.9</ind>	<dep>	0.1</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
-    <entry><ind>	1.9</ind>	<dep>	36.1</dep></entry>
-    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
-    <entry><ind>	2.9</ind>	<dep>	72.1</dep></entry>
-    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
-    <entry><ind>	3.9</ind>	<dep>	108.1</dep></entry>
-    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
-    <entry><ind>	4.9</ind>	<dep>	144.1</dep></entry>
-    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
-    <entry><ind>	5.9</ind>	<dep>	180.1</dep></entry>
-    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
-    <entry><ind>	6.9</ind>	<dep>	216.1</dep></entry>
-    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
-    <entry><ind>	7.9</ind>	<dep>	252.1</dep></entry>
-    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
-    <entry><ind>	8.9</ind>	<dep>	288.1</dep></entry>
-    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
-    <entry><ind>	9.9</ind>	<dep>	324.1</dep></entry>
-    <entry><ind>	9.99</ind>	<dep>	359.9</dep></entry>
-  </interpolation>
+  <expression>
+    <product>
+      <difference>
+        <mod>
+          <property>tu154/systems/nvu/ZPU-1</property>
+          <value>10</value>
+        </mod>
+        <mod>
+          <property>tu154/systems/nvu/ZPU-1</property>
+          <value>1</value>
+        </mod>
+      </difference>
+      <value>36</value>
+    </product>
+  </expression>
   <center>
     <x-m>-0.02611</x-m>
     <y-m>0</y-m>
@@ -120,30 +117,21 @@
 <animation>
   <type>rotate</type>
   <object-name>dig_1_dec</object-name>
-  <property>tu154/instrumentation/v-140[0]/I/dec</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.99</ind>	<dep>	0.1</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
-    <entry><ind>	1.99</ind>	<dep>	36.1</dep></entry>
-    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
-    <entry><ind>	2.99</ind>	<dep>	72.1</dep></entry>
-    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
-    <entry><ind>	3.99</ind>	<dep>	108.1</dep></entry>
-    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
-    <entry><ind>	4.99</ind>	<dep>	144.1</dep></entry>
-    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
-    <entry><ind>	5.99</ind>	<dep>	180.1</dep></entry>
-    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
-    <entry><ind>	6.99</ind>	<dep>	216.1</dep></entry>
-    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
-    <entry><ind>	7.99</ind>	<dep>	252.1</dep></entry>
-    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
-    <entry><ind>	8.99</ind>	<dep>	288.1</dep></entry>
-    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
-    <entry><ind>	9.99</ind>	<dep>	324.1</dep></entry>
-    <entry><ind>	9.999</ind>	<dep>	359.9</dep></entry>
-  </interpolation>
+  <expression>
+    <product>
+      <difference>
+        <mod>
+          <property>tu154/systems/nvu/ZPU-1</property>
+          <value>100</value>
+        </mod>
+        <mod>
+          <property>tu154/systems/nvu/ZPU-1</property>
+          <value>10</value>
+        </mod>
+      </difference>
+      <value>3.6</value>
+    </product>
+  </expression>
   <center>
     <x-m>-0.02611</x-m>
     <y-m>0</y-m>
@@ -159,30 +147,21 @@
 <animation>
   <type>rotate</type>
   <object-name>dig_1_hund</object-name>
-  <property>tu154/instrumentation/v-140[0]/I/hund</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.999</ind>	<dep>	0.1</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
-    <entry><ind>	1.999</ind>	<dep>	36.1</dep></entry>
-    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
-    <entry><ind>	2.999</ind>	<dep>	72.1</dep></entry>
-    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
-    <entry><ind>	3.999</ind>	<dep>	108.1</dep></entry>
-    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
-    <entry><ind>	4.999</ind>	<dep>	144.1</dep></entry>
-    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
-    <entry><ind>	5.999</ind>	<dep>	180.1</dep></entry>
-    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
-    <entry><ind>	6.999</ind>	<dep>	216.1</dep></entry>
-    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
-    <entry><ind>	7.999</ind>	<dep>	252.1</dep></entry>
-    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
-    <entry><ind>	8.999</ind>	<dep>	288.1</dep></entry>
-    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
-    <entry><ind>	9.999</ind>	<dep>	324.1</dep></entry>
-    <entry><ind>	9.9999</ind>	<dep>	359.9</dep></entry>
-  </interpolation>
+  <expression>
+    <product>
+      <difference>
+        <mod>
+          <property>tu154/systems/nvu/ZPU-1</property>
+          <value>1000</value>
+        </mod>
+        <mod>
+          <property>tu154/systems/nvu/ZPU-1</property>
+          <value>100</value>
+        </mod>
+      </difference>
+      <value>0.36</value>
+    </product>
+  </expression>
   <center>
     <x-m>-0.02611</x-m>
     <y-m>0</y-m>
@@ -198,8 +177,8 @@
 <animation>
   <type>rotate</type>
   <object-name>dig_2_min</object-name>
-  <property>tu154/instrumentation/v-140[0]/II/min</property>
-  <factor>36</factor>
+  <property>tu154/systems/nvu/ZPU-2</property>
+  <factor>360</factor>
   <center>
     <x-m>-0.02611</x-m>
     <y-m>0</y-m>
@@ -214,30 +193,21 @@
 <animation>
   <type>rotate</type>
   <object-name>dig_2_ones</object-name>
-  <property>tu154/instrumentation/v-140[0]/II/ones</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.9</ind>	<dep>	0.1</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
-    <entry><ind>	1.9</ind>	<dep>	36.1</dep></entry>
-    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
-    <entry><ind>	2.9</ind>	<dep>	72.1</dep></entry>
-    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
-    <entry><ind>	3.9</ind>	<dep>	108.1</dep></entry>
-    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
-    <entry><ind>	4.9</ind>	<dep>	144.1</dep></entry>
-    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
-    <entry><ind>	5.9</ind>	<dep>	180.1</dep></entry>
-    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
-    <entry><ind>	6.9</ind>	<dep>	216.1</dep></entry>
-    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
-    <entry><ind>	7.9</ind>	<dep>	252.1</dep></entry>
-    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
-    <entry><ind>	8.9</ind>	<dep>	288.1</dep></entry>
-    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
-    <entry><ind>	9.9</ind>	<dep>	324.1</dep></entry>
-    <entry><ind>	9.99</ind>	<dep>	359.9</dep></entry>
-  </interpolation>
+  <expression>
+    <product>
+      <difference>
+        <mod>
+          <property>tu154/systems/nvu/ZPU-2</property>
+          <value>10</value>
+        </mod>
+        <mod>
+          <property>tu154/systems/nvu/ZPU-2</property>
+          <value>1</value>
+        </mod>
+      </difference>
+      <value>36</value>
+    </product>
+  </expression>
   <center>
     <x-m>-0.02611</x-m>
     <y-m>0</y-m>
@@ -253,30 +223,21 @@
 <animation>
   <type>rotate</type>
   <object-name>dig_2_dec</object-name>
-  <property>tu154/instrumentation/v-140[0]/II/dec</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.99</ind>	<dep>	0.1</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
-    <entry><ind>	1.99</ind>	<dep>	36.1</dep></entry>
-    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
-    <entry><ind>	2.99</ind>	<dep>	72.1</dep></entry>
-    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
-    <entry><ind>	3.99</ind>	<dep>	108.1</dep></entry>
-    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
-    <entry><ind>	4.99</ind>	<dep>	144.1</dep></entry>
-    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
-    <entry><ind>	5.99</ind>	<dep>	180.1</dep></entry>
-    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
-    <entry><ind>	6.99</ind>	<dep>	216.1</dep></entry>
-    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
-    <entry><ind>	7.99</ind>	<dep>	252.1</dep></entry>
-    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
-    <entry><ind>	8.99</ind>	<dep>	288.1</dep></entry>
-    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
-    <entry><ind>	9.99</ind>	<dep>	324.1</dep></entry>
-    <entry><ind>	9.999</ind>	<dep>	359.9</dep></entry>
-  </interpolation>
+  <expression>
+    <product>
+      <difference>
+        <mod>
+          <property>tu154/systems/nvu/ZPU-2</property>
+          <value>100</value>
+        </mod>
+        <mod>
+          <property>tu154/systems/nvu/ZPU-2</property>
+          <value>10</value>
+        </mod>
+      </difference>
+      <value>3.6</value>
+    </product>
+  </expression>
   <center>
     <x-m>-0.02611</x-m>
     <y-m>0</y-m>
@@ -292,30 +253,21 @@
 <animation>
   <type>rotate</type>
   <object-name>dig_2_hund</object-name>
-  <property>tu154/instrumentation/v-140[0]/II/hund</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.999</ind>	<dep>	0.1</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
-    <entry><ind>	1.999</ind>	<dep>	36.1</dep></entry>
-    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
-    <entry><ind>	2.999</ind>	<dep>	72.1</dep></entry>
-    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
-    <entry><ind>	3.999</ind>	<dep>	108.1</dep></entry>
-    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
-    <entry><ind>	4.999</ind>	<dep>	144.1</dep></entry>
-    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
-    <entry><ind>	5.999</ind>	<dep>	180.1</dep></entry>
-    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
-    <entry><ind>	6.999</ind>	<dep>	216.1</dep></entry>
-    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
-    <entry><ind>	7.999</ind>	<dep>	252.1</dep></entry>
-    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
-    <entry><ind>	8.999</ind>	<dep>	288.1</dep></entry>
-    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
-    <entry><ind>	9.999</ind>	<dep>	324.1</dep></entry>
-    <entry><ind>	9.9999</ind>	<dep>	359.9</dep></entry>
-  </interpolation>
+  <expression>
+    <product>
+      <difference>
+        <mod>
+          <property>tu154/systems/nvu/ZPU-2</property>
+          <value>1000</value>
+        </mod>
+        <mod>
+          <property>tu154/systems/nvu/ZPU-2</property>
+          <value>100</value>
+        </mod>
+      </difference>
+      <value>0.36</value>
+    </product>
+  </expression>
   <center>
     <x-m>-0.02611</x-m>
     <y-m>0</y-m>
@@ -329,8 +281,7 @@
 </animation>
 
 
-<!--Knobs-->
-
+<!--Buttons-->
 <animation>
   <type>pick</type>
   <object-name>hs_1</object-name>
@@ -341,7 +292,7 @@
     <interval-sec>0.15</interval-sec>
     <binding>
       <command>nasal</command>
-      <script>instruments.nvu_set_zpu_1(1)</script>
+      <script>instruments.nvu_zpu_adjust(1, -1)</script>
     </binding>
   </action>
 </animation>
@@ -353,10 +304,22 @@
     <button>0</button>
     <repeatable>false</repeatable>
     <binding>
-      <command>nasal</command>
-      <script>instruments.nvu_toggle_multiplier(2)</script>
+      <command>property-cycle</command>
+      <property>tu154/instrumentation/v-140/adjust-step-1</property>
+      <value>0.1</value>
+      <value>10</value>
     </binding>
   </action>
+  <hovered>
+    <binding>
+      <command>set-tooltip</command>
+      <tooltip-id>nvu-adjust-step-1</tooltip-id>
+      <label>Adjust step: %s</label>
+      <property>tu154/instrumentation/v-140/adjust-step-1</property>
+      <mapping>nasal</mapping>
+      <script>return (arg[0] == 0.1 ? " 6'" : "10°")</script>
+    </binding>
+  </hovered>
 </animation>
 <animation>
   <type>pick</type>
@@ -368,7 +331,7 @@
     <interval-sec>0.15</interval-sec>
     <binding>
       <command>nasal</command>
-      <script>instruments.nvu_set_zpu_1(-1)</script>
+      <script>instruments.nvu_zpu_adjust(1, 1)</script>
     </binding>
   </action>
 </animation>
@@ -382,7 +345,7 @@
     <interval-sec>0.15</interval-sec>
     <binding>
       <command>nasal</command>
-      <script>instruments.nvu_set_zpu_2(1)</script>
+      <script>instruments.nvu_zpu_adjust(2, -1)</script>
     </binding>
   </action>
 </animation>
@@ -394,10 +357,22 @@
     <button>0</button>
     <repeatable>false</repeatable>
     <binding>
-      <command>nasal</command>
-      <script>instruments.nvu_toggle_multiplier(3)</script>
+      <command>property-cycle</command>
+      <property>tu154/instrumentation/v-140/adjust-step-2</property>
+      <value>0.1</value>
+      <value>10</value>
     </binding>
   </action>
+  <hovered>
+    <binding>
+      <command>set-tooltip</command>
+      <tooltip-id>nvu-adjust-step-2</tooltip-id>
+      <label>Adjust step: %s</label>
+      <property>tu154/instrumentation/v-140/adjust-step-2</property>
+      <mapping>nasal</mapping>
+      <script>return (arg[0] == 0.1 ? " 6'" : "10°")</script>
+    </binding>
+  </hovered>
 </animation>
 <animation>
   <type>pick</type>
@@ -409,7 +384,7 @@
     <interval-sec>0.15</interval-sec>
     <binding>
       <command>nasal</command>
-      <script>instruments.nvu_set_zpu_2(-1)</script>
+      <script>instruments.nvu_zpu_adjust(2, 1)</script>
     </binding>
   </action>
 </animation>

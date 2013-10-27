@@ -1511,7 +1511,17 @@
 <!--V-140 NVU (navigation system) control-->
 <model>
   <name>v-52-1</name>
-  <path>Aircraft/tu154b/Instruments-3d/nvu/v-52-1.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/nvu/v-52.xml</path>
+  <overlay>
+    <params>
+      <index>1</index>
+      <index-other>2</index-other>
+      <S>tu154/systems/nvu/S-1</S>
+      <Z>tu154/systems/nvu/Z-1</Z>
+      <Spm>tu154/systems/nvu/Spm-1</Spm>
+      <Zpm>tu154/systems/nvu/Zpm-1</Zpm>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-22.123</x-m>
     <y-m>-0.026</y-m>
@@ -1521,7 +1531,17 @@
 </model>
 <model>
   <name>v-52-2</name>
-  <path>Aircraft/tu154b/Instruments-3d/nvu/v-52-2.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/nvu/v-52.xml</path>
+  <overlay>
+    <params>
+      <index>2</index>
+      <index-other>1</index-other>
+      <S>tu154/systems/nvu/S-2</S>
+      <Z>tu154/systems/nvu/Z-2</Z>
+      <Spm>tu154/systems/nvu/Spm-2</Spm>
+      <Zpm>tu154/systems/nvu/Zpm-2</Zpm>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-22.003</x-m>
     <y-m>-0.026</y-m>

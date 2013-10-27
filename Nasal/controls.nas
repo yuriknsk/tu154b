@@ -157,6 +157,7 @@ var autostart_helper_1 = func{
 	setprop("tu154/switches/adf-power-1", 1.0 );
 	setprop("tu154/switches/adf-power-2", 1.0 );
 	setprop("tu154/switches/DISS-check", 1.0 );
+        setprop("fdm/jsbsim/instrumentation/nvu/source", 2);
 	setprop("tu154/switches/DISS-power", 1.0 );
 	setprop("tu154/switches/DISS-surface", 1.0 );
 	setprop("tu154/switches/pu-11-auto", 1.0 );

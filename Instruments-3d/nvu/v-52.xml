@@ -1,0 +1,1611 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################
+    -->
+
+<!-- V-52 NVU (navigation system) control
+3D instrument for Tu-154 -->
+<PropertyList>
+  <params>
+    <index>1</index>
+    <index-other>2</index-other>
+    <S>tu154/systems/nvu/S-1</S>
+    <Z>tu154/systems/nvu/Z-1</Z>
+    <Spm>tu154/systems/nvu/Spm-1</Spm>
+    <Zpm>tu154/systems/nvu/Zpm-1</Zpm>
+  </params>
+
+  <path>v-52.ac</path>
+<!--External panel lighting-->
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+    <emission>
+    <red-prop>tu154/light/panel/ext-red</red-prop>
+    <green-prop>tu154/light/panel/ext-green</green-prop>
+    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+  </emission>
+</animation>
+
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>text</object-name>
+  <object-name>digits</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+<!--Indicators-->
+<animation>
+  <type>material</type>
+  <object-name>aircraft</object-name>
+  <object-name>point</object-name>
+  <object-name>beacon</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/systems/electrical/checking-lamps/lamps-power</factor-prop>
+  </emission>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>aircraft</object-name>
+  <condition>
+    <equals>
+      <property>fdm/jsbsim/instrumentation/nvu/active</property>
+      <value alias="../../../../params/index"/>
+    </equals>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>point</object-name>
+  <condition>
+    <equals>
+      <property>fdm/jsbsim/instrumentation/nvu/active</property>
+      <value alias="../../../../params/index-other"/>
+    </equals>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>beacon</object-name>
+  <condition>
+    <equals>
+      <property>fdm/jsbsim/instrumentation/nvu/active</property>
+      <value alias="../../../../params/index"/>
+    </equals>
+  </condition>
+</animation>
+<!--Blankers for digits-->
+<animation>
+  <type>select</type>
+  <object-name>z_ones_1</object-name>
+  <object-name>z_dec_1</object-name>
+  <object-name>z_hund_1</object-name>
+  <object-name>z_ths_1</object-name>
+  <condition>
+    <less-than>
+      <property alias="../../../../params/Z"/>
+      <value>100</value>
+    </less-than>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>z_ones_2</object-name>
+  <object-name>z_dec_2</object-name>
+  <object-name>z_hund_2</object-name>
+  <object-name>z_ths_2</object-name>
+  <condition>
+    <greater-than>
+      <property alias="../../../../params/Z"/>
+      <value>-100</value>
+    </greater-than>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>s_ones_3</object-name>
+  <object-name>s_dec_3</object-name>
+  <object-name>s_hund_3</object-name>
+  <object-name>s_ths_3</object-name>
+  <condition>
+    <less-than>
+      <property alias="../../../../params/S"/>
+      <value>100</value>
+    </less-than>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>s_ones_4</object-name>
+  <object-name>s_dec_4</object-name>
+  <object-name>s_hund_4</object-name>
+  <object-name>s_ths_4</object-name>
+  <condition>
+    <greater-than>
+      <property alias="../../../../params/S"/>
+      <value>-100</value>
+    </greater-than>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>z_ones_5</object-name>
+  <object-name>z_dec_5</object-name>
+  <object-name>z_hund_5</object-name>
+  <object-name>z_ths_5</object-name>
+  <condition>
+    <less-than>
+      <property alias="../../../../params/Zpm"/>
+      <value>100</value>
+    </less-than>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>z_ones_6</object-name>
+  <object-name>z_dec_6</object-name>
+  <object-name>z_hund_6</object-name>
+  <object-name>z_ths_6</object-name>
+  <condition>
+    <greater-than>
+      <property alias="../../../../params/Zpm"/>
+      <value>-100</value>
+    </greater-than>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>s_ones_7</object-name>
+  <object-name>s_dec_7</object-name>
+  <object-name>s_hund_7</object-name>
+  <object-name>s_ths_7</object-name>
+  <condition>
+    <less-than>
+      <property alias="../../../../params/Spm"/>
+      <value>100</value>
+    </less-than>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>s_ones_8</object-name>
+  <object-name>s_dec_8</object-name>
+  <object-name>s_hund_8</object-name>
+  <object-name>s_ths_8</object-name>
+  <condition>
+    <greater-than>
+      <property alias="../../../../params/Spm"/>
+      <value>-100</value>
+    </greater-than>
+  </condition>
+</animation>
+
+<!-- Digits -Z -->
+<animation>
+  <type>rotate</type>
+  <object-name>z_ones_1</object-name>
+  <expression>
+    <abs>
+      <product>
+        <min>
+          <property alias="../../../../../../params/Z"/>
+          <value>0</value>
+        </min>
+        <property>tu154/instrumentation/v-51/scale</property>
+        <value>0.036</value>
+      </product>
+    </abs>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>0.02068</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>z_dec_1</object-name>
+  <expression>
+    <table>
+      <mod>
+        <abs>
+          <product>
+            <min>
+              <property alias="../../../../../../../../params/Z"/>
+              <value>0</value>
+            </min>
+            <property>tu154/instrumentation/v-51/scale</property>
+          </product>
+        </abs>
+        <value>100000</value>
+      </mod>
+      <entry><ind>	    0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 9000</ind>	<dep>	0</dep></entry>
+      <entry><ind>	10000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	19000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	20000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	29000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	30000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	39000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	40000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	49000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	50000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	59000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	60000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	69000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	70000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	79000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	80000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	89000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	90000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	99000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	99990</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>0.02068</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>z_hund_1</object-name>
+  <expression>
+    <table>
+      <mod>
+        <abs>
+          <product>
+            <min>
+              <property alias="../../../../../../../../params/Z"/>
+              <value>0</value>
+            </min>
+            <property>tu154/instrumentation/v-51/scale</property>
+          </product>
+        </abs>
+        <value>1000000</value>
+      </mod>
+      <entry><ind>	     0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 99000</ind>	<dep>	0</dep></entry>
+      <entry><ind>	100000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	199000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	200000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	299000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	300000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	399000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	400000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	499000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	500000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	599000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	600000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	699000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	700000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	799000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	800000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	899000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	900000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	999000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	999990</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>0.02068</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>z_ths_1</object-name>
+  <expression>
+    <table>
+      <mod>
+        <abs>
+          <product>
+            <min>
+              <property alias="../../../../../../../../params/Z"/>
+              <value>0</value>
+            </min>
+            <property>tu154/instrumentation/v-51/scale</property>
+          </product>
+        </abs>
+        <value>10000000</value>
+      </mod>
+      <entry><ind>	      0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 999000</ind>	<dep>	0</dep></entry>
+      <entry><ind>	1000000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	1999000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	2000000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	2999000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	3000000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	3999000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	4000000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	4999000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	5000000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	5999000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	6000000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	6999000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	7000000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	7999000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	8000000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	8999000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	9000000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	9999000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	9999990</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>0.02068</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!-- Digits +Z -->
+<animation>
+  <type>rotate</type>
+  <object-name>z_ones_2</object-name>
+  <expression>
+    <product>
+      <max>
+        <property alias="../../../../../params/Z"/>
+        <value>0</value>
+      </max>
+      <property>tu154/instrumentation/v-51/scale</property>
+      <value>0.036</value>
+    </product>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>0.02068</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>z_dec_2</object-name>
+  <expression>
+    <table>
+      <mod>
+        <product>
+          <max>
+            <property alias="../../../../../../../params/Z"/>
+            <value>0</value>
+          </max>
+          <property>tu154/instrumentation/v-51/scale</property>
+        </product>
+        <value>100000</value>
+      </mod>
+      <entry><ind>	    0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 9000</ind>	<dep>	0</dep></entry>
+      <entry><ind>	10000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	19000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	20000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	29000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	30000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	39000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	40000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	49000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	50000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	59000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	60000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	69000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	70000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	79000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	80000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	89000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	90000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	99000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	99990</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>0.02068</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>z_hund_2</object-name>
+  <expression>
+    <table>
+      <mod>
+        <product>
+          <max>
+            <property alias="../../../../../../../params/Z"/>
+            <value>0</value>
+          </max>
+          <property>tu154/instrumentation/v-51/scale</property>
+        </product>
+        <value>1000000</value>
+      </mod>
+      <entry><ind>	     0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 99000</ind>	<dep>	0</dep></entry>
+      <entry><ind>	100000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	199000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	200000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	299000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	300000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	399000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	400000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	499000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	500000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	599000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	600000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	699000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	700000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	799000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	800000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	899000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	900000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	999000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	999990</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>0.02068</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>z_ths_2</object-name>
+  <expression>
+    <table>
+      <mod>
+        <product>
+          <max>
+            <property alias="../../../../../../../params/Z"/>
+            <value>0</value>
+          </max>
+          <property>tu154/instrumentation/v-51/scale</property>
+        </product>
+        <value>10000000</value>
+      </mod>
+      <entry><ind>	      0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 999000</ind>	<dep>	0</dep></entry>
+      <entry><ind>	1000000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	1999000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	2000000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	2999000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	3000000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	3999000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	4000000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	4999000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	5000000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	5999000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	6000000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	6999000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	7000000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	7999000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	8000000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	8999000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	9000000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	9999000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	9999990</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>0.02068</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!-- Digits -S -->
+<animation>
+  <type>rotate</type>
+  <object-name>s_ones_3</object-name>
+  <expression>
+    <abs>
+      <product>
+        <min>
+          <property alias="../../../../../../params/S"/>
+          <value>0</value>
+        </min>
+        <property>tu154/instrumentation/v-51/scale</property>
+        <value>0.036</value>
+      </product>
+    </abs>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>0.02068</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>s_dec_3</object-name>
+  <expression>
+    <table>
+      <mod>
+        <abs>
+          <product>
+            <min>
+              <property alias="../../../../../../../../params/S"/>
+              <value>0</value>
+            </min>
+            <property>tu154/instrumentation/v-51/scale</property>
+          </product>
+        </abs>
+        <value>100000</value>
+      </mod>
+      <entry><ind>	    0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 9000</ind>	<dep>	0</dep></entry>
+      <entry><ind>	10000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	19000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	20000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	29000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	30000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	39000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	40000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	49000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	50000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	59000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	60000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	69000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	70000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	79000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	80000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	89000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	90000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	99000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	99990</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>0.02068</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>s_hund_3</object-name>
+  <expression>
+    <table>
+      <mod>
+        <abs>
+          <product>
+            <min>
+              <property alias="../../../../../../../../params/S"/>
+              <value>0</value>
+            </min>
+            <property>tu154/instrumentation/v-51/scale</property>
+          </product>
+        </abs>
+        <value>1000000</value>
+      </mod>
+      <entry><ind>	     0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 99000</ind>	<dep>	0</dep></entry>
+      <entry><ind>	100000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	199000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	200000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	299000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	300000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	399000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	400000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	499000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	500000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	599000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	600000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	699000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	700000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	799000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	800000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	899000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	900000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	999000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	999990</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>0.02068</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>s_ths_3</object-name>
+  <expression>
+    <table>
+      <mod>
+        <abs>
+          <product>
+            <min>
+              <property alias="../../../../../../../../params/S"/>
+              <value>0</value>
+            </min>
+            <property>tu154/instrumentation/v-51/scale</property>
+          </product>
+        </abs>
+        <value>10000000</value>
+      </mod>
+      <entry><ind>	      0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 999000</ind>	<dep>	0</dep></entry>
+      <entry><ind>	1000000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	1999000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	2000000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	2999000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	3000000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	3999000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	4000000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	4999000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	5000000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	5999000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	6000000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	6999000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	7000000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	7999000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	8000000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	8999000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	9000000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	9999000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	9999990</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>0.02068</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!-- Digits +S -->
+<animation>
+  <type>rotate</type>
+  <object-name>s_ones_4</object-name>
+  <expression>
+    <product>
+      <max>
+        <property alias="../../../../../params/S"/>
+        <value>0</value>
+      </max>
+      <property>tu154/instrumentation/v-51/scale</property>
+      <value>0.036</value>
+    </product>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>0.02068</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>s_dec_4</object-name>
+  <expression>
+    <table>
+      <mod>
+        <product>
+          <max>
+            <property alias="../../../../../../../params/S"/>
+            <value>0</value>
+          </max>
+          <property>tu154/instrumentation/v-51/scale</property>
+        </product>
+        <value>100000</value>
+      </mod>
+      <entry><ind>	    0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 9000</ind>	<dep>	0</dep></entry>
+      <entry><ind>	10000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	19000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	20000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	29000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	30000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	39000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	40000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	49000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	50000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	59000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	60000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	69000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	70000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	79000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	80000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	89000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	90000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	99000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	99990</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>0.02068</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>s_hund_4</object-name>
+  <expression>
+    <table>
+      <mod>
+        <product>
+          <max>
+            <property alias="../../../../../../../params/S"/>
+            <value>0</value>
+          </max>
+          <property>tu154/instrumentation/v-51/scale</property>
+        </product>
+        <value>1000000</value>
+      </mod>
+      <entry><ind>	     0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 99000</ind>	<dep>	0</dep></entry>
+      <entry><ind>	100000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	199000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	200000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	299000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	300000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	399000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	400000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	499000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	500000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	599000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	600000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	699000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	700000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	799000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	800000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	899000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	900000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	999000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	999990</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>0.02068</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>s_ths_4</object-name>
+  <expression>
+    <table>
+      <mod>
+        <product>
+          <max>
+            <property alias="../../../../../../../params/S"/>
+            <value>0</value>
+          </max>
+          <property>tu154/instrumentation/v-51/scale</property>
+        </product>
+        <value>10000000</value>
+      </mod>
+      <entry><ind>	      0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 999000</ind>	<dep>	0</dep></entry>
+      <entry><ind>	1000000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	1999000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	2000000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	2999000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	3000000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	3999000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	4000000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	4999000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	5000000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	5999000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	6000000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	6999000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	7000000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	7999000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	8000000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	8999000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	9000000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	9999000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	9999990</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>0.02068</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+
+<!-- Digits -Zpm -->
+<animation>
+  <type>rotate</type>
+  <object-name>z_ones_5</object-name>
+  <expression>
+    <abs>
+      <product>
+        <min>
+          <property alias="../../../../../../params/Zpm"/>
+          <value>0</value>
+        </min>
+        <property>tu154/instrumentation/v-51/scale</property>
+        <value>0.036</value>
+      </product>
+    </abs>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>-0.02047</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>z_dec_5</object-name>
+  <expression>
+    <table>
+      <mod>
+        <abs>
+          <product>
+            <min>
+              <property alias="../../../../../../../../params/Zpm"/>
+              <value>0</value>
+            </min>
+            <property>tu154/instrumentation/v-51/scale</property>
+          </product>
+        </abs>
+        <value>100000</value>
+      </mod>
+      <entry><ind>	    0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 9000</ind>	<dep>	0</dep></entry>
+      <entry><ind>	10000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	19000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	20000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	29000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	30000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	39000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	40000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	49000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	50000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	59000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	60000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	69000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	70000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	79000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	80000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	89000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	90000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	99000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	99990</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>-0.02047</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>z_hund_5</object-name>
+  <expression>
+    <table>
+      <mod>
+        <abs>
+          <product>
+            <min>
+              <property alias="../../../../../../../../params/Zpm"/>
+              <value>0</value>
+            </min>
+            <property>tu154/instrumentation/v-51/scale</property>
+          </product>
+        </abs>
+        <value>1000000</value>
+      </mod>
+      <entry><ind>	     0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 99000</ind>	<dep>	0</dep></entry>
+      <entry><ind>	100000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	199000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	200000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	299000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	300000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	399000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	400000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	499000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	500000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	599000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	600000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	699000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	700000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	799000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	800000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	899000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	900000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	999000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	999990</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>-0.02047</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>z_ths_5</object-name>
+  <expression>
+    <table>
+      <mod>
+        <abs>
+          <product>
+            <min>
+              <property alias="../../../../../../../../params/Zpm"/>
+              <value>0</value>
+            </min>
+            <property>tu154/instrumentation/v-51/scale</property>
+          </product>
+        </abs>
+        <value>10000000</value>
+      </mod>
+      <entry><ind>	      0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 999000</ind>	<dep>	0</dep></entry>
+      <entry><ind>	1000000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	1999000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	2000000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	2999000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	3000000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	3999000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	4000000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	4999000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	5000000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	5999000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	6000000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	6999000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	7000000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	7999000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	8000000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	8999000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	9000000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	9999000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	9999990</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>-0.02047</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!-- Digits +Zpm -->
+<animation>
+  <type>rotate</type>
+  <object-name>z_ones_6</object-name>
+  <expression>
+    <product>
+      <max>
+        <property alias="../../../../../params/Zpm"/>
+        <value>0</value>
+      </max>
+      <property>tu154/instrumentation/v-51/scale</property>
+      <value>0.036</value>
+    </product>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>-0.02047</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>z_dec_6</object-name>
+  <expression>
+    <table>
+      <mod>
+        <product>
+          <max>
+            <property alias="../../../../../../../params/Zpm"/>
+            <value>0</value>
+          </max>
+          <property>tu154/instrumentation/v-51/scale</property>
+        </product>
+        <value>100000</value>
+      </mod>
+      <entry><ind>	    0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 9000</ind>	<dep>	0</dep></entry>
+      <entry><ind>	10000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	19000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	20000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	29000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	30000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	39000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	40000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	49000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	50000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	59000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	60000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	69000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	70000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	79000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	80000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	89000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	90000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	99000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	99990</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>-0.02047</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>z_hund_6</object-name>
+  <expression>
+    <table>
+      <mod>
+        <product>
+          <max>
+            <property alias="../../../../../../../params/Zpm"/>
+            <value>0</value>
+          </max>
+          <property>tu154/instrumentation/v-51/scale</property>
+        </product>
+        <value>1000000</value>
+      </mod>
+      <entry><ind>	     0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 99000</ind>	<dep>	0</dep></entry>
+      <entry><ind>	100000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	199000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	200000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	299000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	300000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	399000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	400000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	499000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	500000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	599000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	600000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	699000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	700000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	799000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	800000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	899000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	900000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	999000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	999990</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>-0.02047</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>z_ths_6</object-name>
+  <expression>
+    <table>
+      <mod>
+        <product>
+          <max>
+            <property alias="../../../../../../../params/Zpm"/>
+            <value>0</value>
+          </max>
+          <property>tu154/instrumentation/v-51/scale</property>
+        </product>
+        <value>10000000</value>
+      </mod>
+      <entry><ind>	      0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 999000</ind>	<dep>	0</dep></entry>
+      <entry><ind>	1000000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	1999000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	2000000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	2999000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	3000000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	3999000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	4000000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	4999000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	5000000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	5999000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	6000000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	6999000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	7000000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	7999000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	8000000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	8999000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	9000000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	9999000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	9999990</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>-0.02047</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!-- Digits -Spm -->
+<animation>
+  <type>rotate</type>
+  <object-name>s_ones_7</object-name>
+  <expression>
+    <abs>
+      <product>
+        <min>
+          <property alias="../../../../../../params/Spm"/>
+          <value>0</value>
+        </min>
+        <property>tu154/instrumentation/v-51/scale</property>
+        <value>0.036</value>
+      </product>
+    </abs>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>-0.02047</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>s_dec_7</object-name>
+  <expression>
+    <table>
+      <mod>
+        <abs>
+          <product>
+            <min>
+              <property alias="../../../../../../../../params/Spm"/>
+              <value>0</value>
+            </min>
+            <property>tu154/instrumentation/v-51/scale</property>
+          </product>
+        </abs>
+        <value>100000</value>
+      </mod>
+      <entry><ind>	    0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 9000</ind>	<dep>	0</dep></entry>
+      <entry><ind>	10000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	19000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	20000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	29000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	30000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	39000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	40000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	49000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	50000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	59000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	60000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	69000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	70000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	79000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	80000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	89000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	90000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	99000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	99990</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>-0.02047</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>s_hund_7</object-name>
+  <expression>
+    <table>
+      <mod>
+        <abs>
+          <product>
+            <min>
+              <property alias="../../../../../../../../params/Spm"/>
+              <value>0</value>
+            </min>
+            <property>tu154/instrumentation/v-51/scale</property>
+          </product>
+        </abs>
+        <value>1000000</value>
+      </mod>
+      <entry><ind>	     0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 99000</ind>	<dep>	0</dep></entry>
+      <entry><ind>	100000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	199000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	200000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	299000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	300000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	399000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	400000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	499000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	500000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	599000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	600000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	699000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	700000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	799000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	800000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	899000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	900000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	999000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	999990</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>-0.02047</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>s_ths_7</object-name>
+  <expression>
+    <table>
+      <mod>
+        <abs>
+          <product>
+            <min>
+              <property alias="../../../../../../../../params/Spm"/>
+              <value>0</value>
+            </min>
+            <property>tu154/instrumentation/v-51/scale</property>
+          </product>
+        </abs>
+        <value>10000000</value>
+      </mod>
+      <entry><ind>	      0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 999000</ind>	<dep>	0</dep></entry>
+      <entry><ind>	1000000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	1999000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	2000000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	2999000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	3000000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	3999000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	4000000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	4999000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	5000000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	5999000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	6000000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	6999000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	7000000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	7999000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	8000000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	8999000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	9000000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	9999000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	9999990</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>-0.02047</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!-- Digits +Spm -->
+<animation>
+  <type>rotate</type>
+  <object-name>s_ones_8</object-name>
+  <expression>
+    <product>
+      <max>
+        <property alias="../../../../../params/Spm"/>
+        <value>0</value>
+      </max>
+      <property>tu154/instrumentation/v-51/scale</property>
+      <value>0.036</value>
+    </product>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>-0.02047</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>s_dec_8</object-name>
+  <expression>
+    <table>
+      <mod>
+        <product>
+          <max>
+            <property alias="../../../../../../../params/Spm"/>
+            <value>0</value>
+          </max>
+          <property>tu154/instrumentation/v-51/scale</property>
+        </product>
+        <value>100000</value>
+      </mod>
+      <entry><ind>	    0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 9000</ind>	<dep>	0</dep></entry>
+      <entry><ind>	10000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	19000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	20000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	29000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	30000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	39000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	40000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	49000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	50000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	59000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	60000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	69000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	70000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	79000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	80000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	89000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	90000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	99000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	99990</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>-0.02047</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>s_hund_8</object-name>
+  <expression>
+    <table>
+      <mod>
+        <product>
+          <max>
+            <property alias="../../../../../../../params/Spm"/>
+            <value>0</value>
+          </max>
+          <property>tu154/instrumentation/v-51/scale</property>
+        </product>
+        <value>1000000</value>
+      </mod>
+      <entry><ind>	     0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 99000</ind>	<dep>	0</dep></entry>
+      <entry><ind>	100000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	199000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	200000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	299000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	300000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	399000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	400000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	499000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	500000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	599000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	600000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	699000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	700000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	799000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	800000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	899000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	900000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	999000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	999990</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>-0.02047</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>s_ths_8</object-name>
+  <expression>
+    <table>
+      <mod>
+        <product>
+          <max>
+            <property alias="../../../../../../../params/Spm"/>
+            <value>0</value>
+          </max>
+          <property>tu154/instrumentation/v-51/scale</property>
+        </product>
+        <value>10000000</value>
+      </mod>
+      <entry><ind>	      0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 999000</ind>	<dep>	0</dep></entry>
+      <entry><ind>	1000000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	1999000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	2000000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	2999000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	3000000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	3999000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	4000000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	4999000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	5000000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	5999000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	6000000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	6999000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	7000000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	7999000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	8000000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	8999000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	9000000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	9999000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	9999990</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01422</x-m>
+    <y-m>0</y-m>
+    <z-m>-0.02047</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+</PropertyList>

@@ -313,11 +313,7 @@
   <name>s_ppm</name>
   <path>Aircraft/tu154b/Sound/voice/St_PPM.wav</path>
   <condition>
-  	<property>tu154/systems/electrical/indicators/change-waypoint</property>
-        <greater-than>
-          <property>fdm/jsbsim/instrumentation/vc-kmh</property>
-          <value>300.0</value>
-        </greater-than>
+    <property>tu154/systems/electrical/indicators/change-waypoint</property>
   </condition>
   <mode>once</mode>
   <position>

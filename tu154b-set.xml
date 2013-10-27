@@ -571,6 +571,14 @@
       <bgmk-offset-1>50</bgmk-offset-1>
       <bgmk-offset-2>250</bgmk-offset-2>
       <indicated-altitude-m>0</indicated-altitude-m>
+
+      <nvu>
+        <stopped type="int">1</stopped>
+
+        <Spm-active type="double">0</Spm-active>
+        <Zpm-active type="double">0</Zpm-active>
+      </nvu>
+
     </instrumentation>
     <ap>
 <!--      <gs-gain>8.0</gs-gain>-->
@@ -1060,7 +1068,8 @@
     <!--<roll-limit type="double" >15.0</roll-limit>-->
   </bkk>   
   <v-57>
-    <fork-deg type="double" >0.0</fork-deg>
+    <speed-adjust-step type="double">0.25</speed-adjust-step>
+    <azimuth-adjust-step type="double">0.25</azimuth-adjust-step>
   </v-57>
   <rsbn>
     <handle-1 type="double" >0.0</handle-1>
@@ -1080,7 +1089,16 @@
     <accelerate-max type="double" >-1.0</accelerate-max>
     <accelerate-min type="double" >-1.0</accelerate-min>
   </uap-12>
-  
+
+    <v-140>
+      <adjust-step-1 type="double">0.1</adjust-step-1>
+      <adjust-step-2 type="double">0.1</adjust-step-2>
+    </v-140>
+    <v-51>
+      <adjust-speed type="int">500</adjust-speed>
+      <scale type="int">1</scale>
+    </v-51>
+
   </instrumentation>
   
   
@@ -1128,16 +1146,11 @@
       <ga3-2 type="double" >6.0</ga3-2>
     </tks>
     <nvu>
-      <!--<powered type="bool" >false</powered>-->
-      <selector type="bool" >false</selector>
-      <serviceable type="bool" >false</serviceable>
-      <powered type="double" >0.0</powered>
-      <trigger type="bool" >false</trigger>
-      <mult-1 type="double" >1.0</mult-1>
-      <mult-2 type="double" >1.0</mult-2>
-      <mult-3 type="double" >1.0</mult-3>
-      <rsbn-corr type="bool" >false</rsbn-corr>
-      <mode type="bool" >true</mode>
+      <powered type="double">0</powered>
+      <leg type="int">0</leg>
+      <leg-next type="int">1</leg-next>
+      <wind-speed type="double">0</wind-speed>
+      <wind-azimuth type="double">0</wind-azimuth>
     </nvu>
     <warning>
       <deploy-flaps type="double" >0.0</deploy-flaps>
@@ -1163,8 +1176,8 @@
     <pu-46-cover-1 type="double" >0.0</pu-46-cover-1>
     <pu-46-cover-2 type="double" >0.0</pu-46-cover-2>
     <usvp-selector type="double" >0.0</usvp-selector>
-    <v-51-selector-1 type="double" >1.0</v-51-selector-1>
-    <v-51-selector-2 type="double" >1.0</v-51-selector-2>
+    <v-51-selector-1 type="double" >0</v-51-selector-1>
+    <v-51-selector-2 type="double" >0</v-51-selector-2>
     <stab-manu-selector type="double" >1.0</stab-manu-selector>
     <stab-auto-handle type="double" >1.0</stab-auto-handle>
     <busters-cover type="double" >1.0</busters-cover>
