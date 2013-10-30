@@ -541,6 +541,9 @@
 	<tyresmoke>
 	  <file>Aircraft/tu154b/Nasal/tyresmoke.nas</file>
 	 </tyresmoke>
+	<friction>
+	  <file>Aircraft/tu154b/Nasal/friction.nas</file>
+	 </friction>
 	<!--
       <debug>
   <file>Aircraft/tu154b/Nasal/debug.nas</file>
