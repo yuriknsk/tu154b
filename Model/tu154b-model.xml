@@ -5119,14 +5119,14 @@
   <object-name>aileron_left</object-name>  
   <property>surface-positions/left-aileron-pos-norm</property>
   <factor>-57.2958</factor>
-  <offset-deg>-18.0</offset-deg>
+  <offset-deg>-20</offset-deg>
   <axis>
-    <x1-m>5.5778</x1-m>
-    <y1-m>-14.0506</y1-m>
-    <z1-m>0.1622</z1-m>
-    <x2-m>7.1135</x2-m>
-    <y2-m>-16.6338</y2-m>
-    <z2-m>0.1158</z2-m>
+    <x1-m>5.7361</x1-m>
+    <y1-m>-14.2969</y1-m>
+    <z1-m>0.1873</z1-m>
+    <x2-m>6.9853</x2-m>
+    <y2-m>-16.3932</y2-m>
+    <z2-m>0.1795</z2-m>
   </axis>
 </animation>
 
@@ -5135,72 +5135,68 @@
   <object-name>aileron_right</object-name>  
   <property>surface-positions/left-aileron-pos-norm</property>
   <factor>-57.2958</factor>
-  <offset-deg>-18.0</offset-deg>
+  <offset-deg>-20</offset-deg>
   <axis>
-    <x1-m>5.5778</x1-m>
-    <y1-m>14.0506</y1-m>
-    <z1-m>0.1622</z1-m>
-    <x2-m>7.1135</x2-m>
-    <y2-m>16.6338</y2-m>
-    <z2-m>0.1158</z2-m>
+    <x1-m>5.7361</x1-m>
+    <y1-m>14.2969</y1-m>
+    <z1-m>0.1873</z1-m>
+    <x2-m>6.9853</x2-m>
+    <y2-m>16.3932</y2-m>
+    <z2-m>0.1795</z2-m>
   </axis>
 </animation>
 <!--Aileron-interceptor-->
 <animation>
   <type>rotate</type>
   <object-name>ailer_interc_left</object-name> 
-  <condition>
-    <not><property>surface-positions/speedbrake-pos-norm</property></not>
-  </condition>
   <property>surface-positions/left-aileron-pos-norm</property>
-  <factor>-57.2958</factor>
-  <min-deg>-28.75</min-deg>
-  <offset-deg>-30.0</offset-deg>
+  <interpolation>
+    <entry><ind>	 0.0</ind>	<dep>	-29.8125</dep></entry>
+    <entry><ind>	-0.35</ind>	<dep>	 15.1875</dep></entry>
+  </interpolation>
   <axis>
-    <x1-m>0.86036</x1-m>
-    <y1-m>-6.2600</y1-m>
-    <z1-m>0.3454</z1-m>
-    <x2-m>4.8767</x2-m>
-    <y2-m>-13.1372</y2-m>
-    <z2-m>0.2736</z2-m>
+    <x1-m>3.3948</x1-m>
+    <y1-m>-10.6450</y1-m>
+    <z1-m>0.3242</z1-m>
+    <x2-m>4.6832</x2-m>
+    <y2-m>-12.8552</y2-m>
+    <z2-m>0.2929</z2-m>
   </axis>
 </animation>
 
 <animation>
   <type>rotate</type>
   <object-name>ailer_interc_right</object-name>
-  <condition>
-    <not><property>surface-positions/speedbrake-pos-norm</property></not>
-  </condition>
   <property>surface-positions/left-aileron-pos-norm</property>
-  <factor>-57.2958</factor>
-  <max-deg>-1.25</max-deg>
+  <interpolation>
+    <entry><ind>	 0.0</ind>	<dep>	  0.0</dep></entry>
+    <entry><ind>	 0.35</ind>	<dep>	-45.0</dep></entry>
+  </interpolation>
   <axis>
-    <x1-m>0.86036</x1-m>
-    <y1-m>6.2600</y1-m>
-    <z1-m>0.3454</z1-m>
-    <x2-m>4.8767</x2-m>
-    <y2-m>13.1372</y2-m>
-    <z2-m>0.2736</z2-m>
+    <x1-m>3.3948</x1-m>
+    <y1-m>10.6450</y1-m>
+    <z1-m>0.3242</z1-m>
+    <x2-m>4.6832</x2-m>
+    <y2-m>12.8552</y2-m>
+    <z2-m>0.2929</z2-m>
   </axis>
 </animation>
 <!--Interceptor outer section-->
 <animation>
   <type>rotate</type>
   <object-name>l_spoiler_</object-name>
-  <object-name>ailer_interc_left</object-name>  
   <property>surface-positions/speedbrake-pos-norm</property>
   <interpolation>
     <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.4</ind>	<dep>	40.0</dep></entry>
+    <entry><ind>	0.4</ind>	<dep>	45.0</dep></entry>
   </interpolation>
   <axis>
-    <x1-m>0.86036</x1-m>
-    <y1-m>-6.2600</y1-m>
-    <z1-m>0.3454</z1-m>
-    <x2-m>4.8767</x2-m>
-    <y2-m>-13.1372</y2-m>
-    <z2-m>0.2736</z2-m>
+    <x1-m>3.3948</x1-m>
+    <y1-m>-10.6450</y1-m>
+    <z1-m>0.3242</z1-m>
+    <x2-m>4.6832</x2-m>
+    <y2-m>-12.8552</y2-m>
+    <z2-m>0.2929</z2-m>
   </axis>
 </animation>
 <animation>
@@ -5212,30 +5208,29 @@
     <entry><ind>	0.4</ind>	<dep>	45.0</dep></entry>
   </interpolation>
   <axis>
-    <x1-m>0.86036</x1-m>
-    <y1-m>-6.2600</y1-m>
-    <z1-m>0.3454</z1-m>
-    <x2-m>4.8767</x2-m>
-    <y2-m>-13.1372</y2-m>
-    <z2-m>0.2736</z2-m>
+    <x1-m>3.3948</x1-m>
+    <y1-m>-10.6450</y1-m>
+    <z1-m>0.3242</z1-m>
+    <x2-m>4.6832</x2-m>
+    <y2-m>-12.8552</y2-m>
+    <z2-m>0.2929</z2-m>
   </axis>
 </animation>
 <animation>
   <type>rotate</type>
   <object-name>r_spoiler_</object-name>
-  <object-name>ailer_interc_right</object-name>  
   <property>surface-positions/speedbrake-pos-norm</property>
   <interpolation>
     <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.4</ind>	<dep>	-40.0</dep></entry>
+    <entry><ind>	0.4</ind>	<dep>	-45.0</dep></entry>
   </interpolation>
   <axis>
-    <x1-m>0.86036</x1-m>
-    <y1-m>6.2600</y1-m>
-    <z1-m>0.3454</z1-m>
-    <x2-m>4.8767</x2-m>
-    <y2-m>13.1372</y2-m>
-    <z2-m>0.2736</z2-m>
+    <x1-m>3.3948</x1-m>
+    <y1-m>10.6450</y1-m>
+    <z1-m>0.3242</z1-m>
+    <x2-m>4.6832</x2-m>
+    <y2-m>12.8552</y2-m>
+    <z2-m>0.2929</z2-m>
   </axis>
 </animation>
 <animation>
@@ -5247,12 +5242,12 @@
     <entry><ind>	0.4</ind>	<dep>	-45.0</dep></entry>
   </interpolation>
   <axis>
-    <x1-m>0.86036</x1-m>
-    <y1-m>6.2600</y1-m>
-    <z1-m>0.3454</z1-m>
-    <x2-m>4.8767</x2-m>
-    <y2-m>13.1372</y2-m>
-    <z2-m>0.2736</z2-m>
+    <x1-m>3.3948</x1-m>
+    <y1-m>10.6450</y1-m>
+    <z1-m>0.3242</z1-m>
+    <x2-m>4.6832</x2-m>
+    <y2-m>12.8552</y2-m>
+    <z2-m>0.2929</z2-m>
   </axis>
 </animation>
 
