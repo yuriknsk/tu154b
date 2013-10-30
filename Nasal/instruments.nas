@@ -2830,11 +2830,11 @@ eup_power = func{
 	if( getprop("tu154/switches/EUP")==1 )
 {
 	     electrical.AC3x200_bus_1L.add_output( "EUP", 5.0);
-	     setprop("tu154/instrumentation/eup/powered", 1 );
+	     setprop("instrumentation/turn-indicator/serviceable", 1 );
 }
  	else {
 	     electrical.AC3x200_bus_1L.rm_output( "EUP" );
-	     setprop("tu154/instrumentation/eup/powered", 0 );
+	     setprop("instrumentation/turn-indicator/serviceable", 0 );
 }
 }
 setlistener("tu154/switches/EUP", eup_power, 0,0 );
@@ -2933,8 +2933,8 @@ if( ac200 > 150.0 )
  	else setprop("tu154/instrumentation/uap-12/powered", 0 );
 	# EUP
 	if( getprop("tu154/switches/EUP")==1 )
-	     setprop("tu154/instrumentation/eup/powered", 1 );
- 	else setprop("tu154/instrumentation/eup/powered", 0 );
+	     setprop("instrumentation/turn-indicator/serviceable", 1 );
+	else setprop("instrumentation/turn-indicator/serviceable", 0 );
 
 	
 	
@@ -2957,7 +2957,7 @@ else	{
 	setprop("tu154/instrumentation/altimeter[1]/powered", 0 );
 	setprop("instrumentation/attitude-indicator[3]/caged-flag", 1 );
 	setprop("tu154/instrumentation/uap-12/powered", 0 );
-	setprop("tu154/instrumentation/eup/powered", 0 );
+	setprop("instrumentation/turn-indicator/serviceable", 0 );
 	setprop("instrumentation/marker-beacon[0]/power-btn", 0 );
 	setprop("instrumentation/marker-beacon[0]/serviceable", 0 );		
 	

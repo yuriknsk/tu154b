@@ -146,10 +146,6 @@
       <command>nasal</command>
       <script>
         interpolate("tu154/switches/gauge-light", 1.0, 0.1 );
-	setprop("tu154/textures/capt-panel", "vc01_night.png");
-	setprop("tu154/textures/copilot-panel", "vc02_night.png");
-	setprop("tu154/textures/overhead-panel", "vc06_l.png");
-	setprop("tu154/textures/fe-panel", "vc08_l.png");
       </script>
     </binding>
   </action>
@@ -165,10 +161,6 @@
       <command>nasal</command>
       <script>
         interpolate("tu154/switches/gauge-light", 0.0, 0.1 );
-	setprop("tu154/textures/capt-panel", "vc01_t.png");
-	setprop("tu154/textures/copilot-panel", "vc02_t.png");
-	setprop("tu154/textures/overhead-panel", "vc06_t.png");
-	setprop("tu154/textures/fe-panel", "vc08_t.png");
       </script>
     </binding>
   </action>

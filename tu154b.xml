@@ -594,8 +594,8 @@
             <aerosurface_scale name="Rudder Control">
               <input>fcs/yaw-hydropower</input>
               <range>
-                <min>-0.35</min>
-                <max>0.35</max>
+                <min>-0.4363</min>
+                <max>0.4363</max>
               </range>
               <output>fcs/rudder-pos-rad</output>
             </aerosurface_scale>

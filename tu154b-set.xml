@@ -494,6 +494,10 @@
     <audio-btn type="bool" >false</audio-btn>
     <volume type="double" >0.0</volume>
   </marker-beacon>
+
+  <turn-indicator>
+    <serviceable type="bool">false</serviceable>
+  </turn-indicator>
 </instrumentation>
 
 <controls>
