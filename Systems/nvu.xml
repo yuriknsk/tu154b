@@ -8,7 +8,6 @@
 -->
 <system name="NVU">
 
-  <property>instrumentation/nvu/active</property>
   <property>instrumentation/nvu/source</property>
   <property>instrumentation/diss/sensitivity</property>
   <property>instrumentation/svs/serviceable</property>
@@ -17,7 +16,6 @@
 
   <property>instrumentation/nvu/wind-speed-svs</property>
   <property>instrumentation/nvu/wind-azimuth-svs</property>
-  <property>instrumentation/nvu/wind-fork</property>
 
   <property>instrumentation/nvu/S-base-active</property>
   <property>instrumentation/nvu/Z-base-active</property>
@@ -29,16 +27,10 @@
   <property>instrumentation/nvu/Zpm-inactive</property>
   <property>instrumentation/nvu/ZPU-active</property>
   <property>instrumentation/nvu/ZPU-inactive</property>
-  <property>instrumentation/nvu/transform-out</property>
   <property>instrumentation/nvu/LUR-2km</property>
   <property>instrumentation/nvu/LUR-vicinity-out</property>
 
 <channel name="nvu">
-
-  <summer name="instrumentation/nvu/wind-base">
-    <input>instrumentation/tks-heading</input>
-    <input>instrumentation/nvu/wind-fork</input>
-  </summer>
 
   <fcs_function name="instrumentation/nvu/wind-angle-svs">
     <description>Wind angle in radians</description>
@@ -46,7 +38,7 @@
       <toradians>
         <difference>
           <property>instrumentation/nvu/wind-azimuth-svs</property>
-          <property>instrumentation/nvu/wind-base</property>
+          <property>instrumentation/tks-heading</property>
         </difference>
       </toradians>
     </function>
@@ -166,53 +158,57 @@
   </summer>
 
   <fcs_function name="instrumentation/nvu/wind-speed-diss">
-    <description>Wind speed in km/h</description>
+    <description>Wind speed in km/h rounded to nearest 0.25</description>
     <function>
       <product>
-        <pow>
+        <integer>
           <sum>
             <product>
-              <property>instrumentation/nvu/U-wind-fps-diss</property>
-              <property>instrumentation/nvu/U-wind-fps-diss</property>
+              <pow>
+                <sum>
+                  <product>
+                    <property>instrumentation/nvu/U-wind-fps-diss</property>
+                    <property>instrumentation/nvu/U-wind-fps-diss</property>
+                  </product>
+                  <product>
+                    <property>instrumentation/nvu/V-fps</property>
+                    <property>instrumentation/nvu/V-fps</property>
+                  </product>
+                </sum>
+                <value>0.5</value>
+              </pow>
+              <value>4.38912</value>
             </product>
-            <product>
-              <property>instrumentation/nvu/V-fps</property>
-              <property>instrumentation/nvu/V-fps</property>
-            </product>
+            <value>0.5</value>
           </sum>
-          <value>0.5</value>
-        </pow>
-        <value>1.09728</value>
+        </integer>
+        <value>0.25</value>
       </product>
     </function>
   </fcs_function>
-  <fcs_function name="instrumentation/nvu/wind-azimuth-diss-raw">
-    <description>Wind angle in degrees</description>
+  <fcs_function name="instrumentation/nvu/wind-azimuth-diss">
+    <description>Wind angle in degrees rounded to nearest 0.25</description>
     <function>
-      <sum>
-        <todegrees>
-          <atan2>
-            <property>instrumentation/nvu/V-fps</property>
-            <property>instrumentation/nvu/U-wind-fps-diss</property>
-          </atan2>
-        </todegrees>
-        <property>instrumentation/nvu/wind-base</property>
-      </sum>
+      <product>
+        <integer>
+          <product>
+            <sum>
+              <todegrees>
+                <atan2>
+                  <property>instrumentation/nvu/V-fps</property>
+                  <property>instrumentation/nvu/U-wind-fps-diss</property>
+                </atan2>
+              </todegrees>
+              <property>instrumentation/tks-heading</property>
+              <value>360.125</value>
+            </sum>
+            <value>4</value>
+          </product>
+        </integer>
+        <value>0.25</value>
+      </product>
     </function>
   </fcs_function>
-  <switch name="instrumentation/nvu/wind-azimuth-diss-corr">
-    <default value="0"/>
-    <test value="360">
-      instrumentation/nvu/wind-azimuth-diss-raw lt 0
-    </test>
-    <test value="-360">
-      instrumentation/nvu/wind-azimuth-diss-raw ge 360
-    </test>
-  </switch>
-  <summer name="instrumentation/nvu/wind-azimuth-diss">
-    <input>instrumentation/nvu/wind-azimuth-diss-raw</input>
-    <input>instrumentation/nvu/wind-azimuth-diss-corr</input>
-  </summer>
   <fcs_function name="instrumentation/nvu/drift-angle">
     <description>Drift angle in degrees</description>
     <function>
@@ -370,7 +366,6 @@
   </fcs_function>
 
   <switch name="instrumentation/nvu/transform">
-    <output>instrumentation/nvu/transform-out</output>
     <default value="0"/>
     <test value="1">
       instrumentation/nvu/active != 0

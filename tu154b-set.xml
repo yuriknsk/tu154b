@@ -326,6 +326,13 @@
 		<int n="14" alias="/tu154/contrail/condensation"/>
             </generic>
   </multiplay>
+
+  <systems>
+    <property-rule>
+      <path>Aircraft/tu154b/Systems/property-rules.xml</path>
+    </property-rule>
+  </systems>
+
 </sim>
 
  <payload>
@@ -1095,7 +1102,7 @@
       <adjust-step-2 type="double">0.1</adjust-step-2>
     </v-140>
     <v-51>
-      <adjust-speed type="int">500</adjust-speed>
+      <adjust-speed type="int">1000</adjust-speed>
       <scale type="int">1</scale>
     </v-51>
 
@@ -1151,6 +1158,15 @@
       <leg-next type="int">1</leg-next>
       <wind-speed type="double">0</wind-speed>
       <wind-azimuth type="double">0</wind-azimuth>
+      <S-1-smooth type="double">0</S-1-smooth>
+      <Z-1-smooth type="double">0</Z-1-smooth>
+      <Spm-1-smooth type="double">0</Spm-1-smooth>
+      <Zpm-1-smooth type="double">0</Zpm-1-smooth>
+      <S-2-smooth type="double">0</S-2-smooth>
+      <Z-2-smooth type="double">0</Z-2-smooth>
+      <Spm-2-smooth type="double">0</Spm-2-smooth>
+      <Zpm-2-smooth type="double">0</Zpm-2-smooth>
+      <wind-fork type="double">0</wind-fork>
     </nvu>
     <warning>
       <deploy-flaps type="double" >0.0</deploy-flaps>

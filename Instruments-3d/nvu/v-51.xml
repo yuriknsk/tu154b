@@ -332,20 +332,18 @@
     <binding>
       <command>property-cycle</command>
       <property>tu154/instrumentation/v-51/adjust-speed</property>
-      <value>500</value>
-      <value>5000</value>
+      <value>1000</value>
+      <value>10000</value>
     </binding>
   </action>
   <hovered>
     <binding>
       <command>set-tooltip</command>
       <tooltip-id>nvu-adjust-speed</tooltip-id>
-      <label>Adjust speed: %d m/s</label>
+      <label>Adjust speed: %s</label>
       <property>tu154/instrumentation/v-51/adjust-speed</property>
       <mapping>nasal</mapping>
-      <script>
-        return arg[0] / getprop("tu154/instrumentation/v-51/scale");
-      </script>
+      <script> return (arg[0] == 1000 ? "slow" : "fast")</script>
     </binding>
   </hovered>
 </animation>

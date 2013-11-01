@@ -1516,10 +1516,10 @@
     <params>
       <index>1</index>
       <index-other>2</index-other>
-      <S>tu154/systems/nvu/S-1</S>
-      <Z>tu154/systems/nvu/Z-1</Z>
-      <Spm>tu154/systems/nvu/Spm-1</Spm>
-      <Zpm>tu154/systems/nvu/Zpm-1</Zpm>
+      <S>tu154/systems/nvu/S-1-smooth</S>
+      <Z>tu154/systems/nvu/Z-1-smooth</Z>
+      <Spm>tu154/systems/nvu/Spm-1-smooth</Spm>
+      <Zpm>tu154/systems/nvu/Zpm-1-smooth</Zpm>
     </params>
   </overlay>
   <offsets>
@@ -1536,10 +1536,10 @@
     <params>
       <index>2</index>
       <index-other>1</index-other>
-      <S>tu154/systems/nvu/S-2</S>
-      <Z>tu154/systems/nvu/Z-2</Z>
-      <Spm>tu154/systems/nvu/Spm-2</Spm>
-      <Zpm>tu154/systems/nvu/Zpm-2</Zpm>
+      <S>tu154/systems/nvu/S-2-smooth</S>
+      <Z>tu154/systems/nvu/Z-2-smooth</Z>
+      <Spm>tu154/systems/nvu/Spm-2-smooth</Spm>
+      <Zpm>tu154/systems/nvu/Zpm-2-smooth</Zpm>
     </params>
   </overlay>
   <offsets>

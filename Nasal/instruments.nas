@@ -790,34 +790,31 @@ setlistener("tu154/instrumentation/diss/powered", func {
 #
 # Implementation: the basic idea is simple: in Systems/nvu.xml we
 # compute S,Z-active and S,Z-inactive, and here we play with aliases
-# to swap active and inactive NVU blocks, and also to provide smooth
-# transition whenever the value changes abruptly.
+# to swap active and inactive NVU blocks.  Smooth movement of digit
+# wheels is implemented in Systems/property-filters.xml.
 #
 
-var nvu_smooth = func(name, i, active, val, delay, wrap=nil) {
-    var src = "tu154/systems/nvu/"~name~"-"~i;
-    var dst = "fdm/jsbsim/instrumentation/nvu/"~name~"-"~active;
-    realias(src, dst, delay, wrap);
-    if (val != nil)
-        setprop(dst, val);
-}
-nvu_smooth("S", 1, "active", nil, 0);
-nvu_smooth("Z", 1, "active", nil, 0);
-nvu_smooth("Spm", 1, "active", nil, 0);
-nvu_smooth("Zpm", 1, "active", nil, 0);
-nvu_smooth("ZPU", 1, "active", nil, 0);
-nvu_smooth("S", 2, "inactive", nil, 0);
-nvu_smooth("Z", 2, "inactive", nil, 0);
-nvu_smooth("Spm", 2, "inactive", nil, 0);
-nvu_smooth("Zpm", 2, "inactive", nil, 0);
-nvu_smooth("ZPU", 2, "inactive", nil, 0);
-
-setlistener("fdm/jsbsim/instrumentation/nvu/transform-out", func {
-    var active = getprop("fdm/jsbsim/instrumentation/nvu/active") or 1;
+var nvu_swap_alias = func(active, name) {
     var inactive = 3 - active;
-    nvu_smooth("S", inactive, "inactive", nil, 3);
-    nvu_smooth("Z", inactive, "inactive", nil, 3);
-}, 0, 0);
+    var src = "tu154/systems/nvu/"~name;
+    var dst = "fdm/jsbsim/instrumentation/nvu/"~name;
+    var av = getprop(dst~"-active");
+    var iv = getprop(dst~"-inactive");
+    setprop(dst~"-active", iv);
+    setprop(dst~"-inactive", av);
+    realias(src~"-"~active, dst~"-active", 0);
+    realias(src~"-"~inactive, dst~"-inactive", 0);
+    if (name == "S" or name == "Z") {
+        var I = getprop("fdm/jsbsim/instrumentation/nvu/"~name~"-integrator");
+        setprop("fdm/jsbsim/instrumentation/nvu/"~name~"-base-active", iv - I);
+    }
+}
+
+nvu_swap_alias(1, "S");
+nvu_swap_alias(1, "Z");
+nvu_swap_alias(1, "Spm");
+nvu_swap_alias(1, "Zpm");
+nvu_swap_alias(1, "ZPU");
 
 var nvu_enable = func {
     var powered = getprop("tu154/systems/nvu/powered");
@@ -829,13 +826,6 @@ var nvu_enable = func {
 }
 
 setlistener("tu154/systems/nvu/powered", nvu_enable, 0, 0);
-
-var nvu_smooth_integrator = func(name, i, val, delay) {
-    realias("tu154/systems/nvu/"~name~"-"~i,
-            "fdm/jsbsim/instrumentation/nvu/"~name~"-active", delay);
-    var I = val - getprop("fdm/jsbsim/instrumentation/nvu/"~name~"-integrator");
-    interpolate("fdm/jsbsim/instrumentation/nvu/"~name~"-base-active", I, 0);
-}
 
 var nvu_virtual_navigator_load = func(li, lin) {
     var active = getprop("fdm/jsbsim/instrumentation/nvu/active") or 1;
@@ -852,8 +842,8 @@ var nvu_virtual_navigator_load = func(li, lin) {
         var beacon = route.getChild("beacon", li);
         if (beacon != nil) {
            var b = beacon.getValues();
-           nvu_smooth("Spm", active, "active", b.S * 1000, 3);
-           nvu_smooth("Zpm", active, "active", b.Z * 1000, 3);
+           setprop("fdm/jsbsim/instrumentation/nvu/Spm-active", b.S * 1000);
+           setprop("fdm/jsbsim/instrumentation/nvu/Zpm-active", b.Z * 1000);
            var UK_outer = int(b.UK / 10) * 10;
            var UK_inner = (b.UK - UK_outer) * 10;
            realias("tu154/instrumentation/b-8m/outer", UK_outer, 3);
@@ -866,11 +856,9 @@ var nvu_virtual_navigator_load = func(li, lin) {
     if (leg2 != nil) {
         var values = leg2.getValues();
         var ZPU = int(values.ZPU * 10 + 0.5) / 10;
-        nvu_smooth("Spm", inactive, "inactive", values.S * 1000, 3);
-        nvu_smooth("Zpm", inactive, "inactive", 0, 3);
-        nvu_smooth("ZPU", inactive, "inactive", ZPU, 3, [0, 360]);
-        nvu_smooth("S", inactive, "inactive", nil, 3);
-        nvu_smooth("Z", inactive, "inactive", nil, 3);
+        setprop("fdm/jsbsim/instrumentation/nvu/Spm-inactive", values.S * 1000);
+        setprop("fdm/jsbsim/instrumentation/nvu/Zpm-inactive", 0);
+        setprop("fdm/jsbsim/instrumentation/nvu/ZPU-inactive", ZPU);
     } else {
         msg ~= " - last leg";
         if (getprop("tu154/switches/v-51-selector-2") > 0) {
@@ -881,6 +869,11 @@ var nvu_virtual_navigator_load = func(li, lin) {
 
     if (leg != nil)
        help.messenger(msg);
+}
+
+var nvu_set_integrator = func(name, i, val) {
+    var I = getprop("fdm/jsbsim/instrumentation/nvu/"~name~"-integrator");
+    setprop("fdm/jsbsim/instrumentation/nvu/"~name~"-base-active", val - I);
 }
 
 var nvu_calculator_load = func {
@@ -897,12 +890,9 @@ var nvu_calculator_load = func {
     if (getprop("fdm/jsbsim/instrumentation/nvu/stopped")) {
         var values = leg.getValues();
         var ZPU = int(values.ZPU * 10 + 0.5) / 10;
-        nvu_smooth_integrator("S", active, values.S * 1000, 3);
-        nvu_smooth_integrator("Z", active, 0, 3);
-        nvu_smooth("ZPU", active, "active", ZPU, 3, [0, 360]);
-        var inactive = 3 - active;
-        nvu_smooth("S", inactive, "inactive", nil, 3);
-        nvu_smooth("Z", inactive, "inactive", nil, 3);
+        nvu_set_integrator("S", active, values.S * 1000);
+        nvu_set_integrator("Z", active, 0);
+        setprop("fdm/jsbsim/instrumentation/nvu/ZPU-active", ZPU);
         setprop("tu154/systems/nvu/leg", lin);
         lin += 1;
         setprop("tu154/systems/nvu/leg-next", lin);
@@ -911,20 +901,26 @@ var nvu_calculator_load = func {
     nvu_virtual_navigator_load(getprop("tu154/systems/nvu/leg"), lin);
 }
 
+var nvu_zpu_adjust_sign = 0;
 var nvu_zpu_adjust = func(vi, sign) {
     var active = getprop("fdm/jsbsim/instrumentation/nvu/active");
     if (!active)
         return;
 
-    var name = (vi == active ? "active" : "inactive");
-    var ZPU = getprop("fdm/jsbsim/instrumentation/nvu/ZPU-"~name);
+    var ZPU = getprop("tu154/systems/nvu/ZPU-"~vi);
     var step = getprop("tu154/instrumentation/v-140/adjust-step-"~vi);
+    if (!sign) {
+        ZPU = getprop("tu154/systems/nvu/ZPU-"~vi~"-smooth");
+        if (nvu_zpu_adjust_sign > 0)
+            ZPU = math.ceil(ZPU * 10 + 0.025) / 10;
+        else
+            ZPU = math.floor(ZPU * 10 + 0.025) / 10;
+    }
     ZPU = range_wrap(int((ZPU + sign * step + 360) * 10 + 0.5) / 10, 0, 360);
 
-    nvu_smooth("ZPU", vi, name, ZPU, 0.2, [0, 360]);
-    var inactive = 3 - active;
-    nvu_smooth("S", inactive, "inactive", nil, 0.2);
-    nvu_smooth("Z", inactive, "inactive", nil, 0.2);
+    setprop("tu154/systems/nvu/ZPU-"~vi, ZPU);
+
+    nvu_zpu_adjust_sign = sign;
 }
 
 var nvu_distance_adjust = func(sign) {
@@ -959,45 +955,26 @@ var nvu_distance_adjust = func(sign) {
     }
 }
 
-var nvu_swap_alias = func(active, inactive, name) {
-    var src = "tu154/systems/nvu/"~name;
-    var dst = "fdm/jsbsim/instrumentation/nvu/"~name;
-    var av = getprop(dst~"-active");
-    var iv = getprop(dst~"-inactive");
-    setprop(dst~"-active", iv);
-    setprop(dst~"-inactive", av);
-    realias(src~"-"~active, dst~"-active", 0);
-    realias(src~"-"~inactive, dst~"-inactive", 0);
-    if (name == "S" or name == "Z") {
-        var I = getprop("fdm/jsbsim/instrumentation/nvu/"~name~"-integrator");
-        setprop("fdm/jsbsim/instrumentation/nvu/"~name~"-base-active", iv - I);
-    }
-}
-
 var nvu_next_leg = func {
     var active = getprop("fdm/jsbsim/instrumentation/nvu/active");
     if (!active)
         return;
 
-    var inactive = active;
     var active = 3 - active;
 
     setprop("fdm/jsbsim/instrumentation/nvu/active", active);
 
-    nvu_swap_alias(active, inactive, "S");
-    nvu_swap_alias(active, inactive, "Z");
-    nvu_swap_alias(active, inactive, "Spm");
-    nvu_swap_alias(active, inactive, "Zpm");
-    nvu_swap_alias(active, inactive, "ZPU");
+    nvu_swap_alias(active, "S");
+    nvu_swap_alias(active, "Z");
+    nvu_swap_alias(active, "Spm");
+    nvu_swap_alias(active, "Zpm");
+    nvu_swap_alias(active, "ZPU");
 
     var lin = getprop("tu154/systems/nvu/leg-next");
     setprop("tu154/systems/nvu/leg", lin);
     setprop("tu154/systems/nvu/leg-next", lin + 1);
     if (getprop("tu154/systems/nvu-calc/virtual-navigator")) {
         nvu_virtual_navigator_load(lin, lin + 1);
-    } else {
-        nvu_smooth("S", inactive, "inactive", nil, 3);
-        nvu_smooth("Z", inactive, "inactive", nil, 3);
     }
 }
 
@@ -1071,29 +1048,25 @@ setlistener("fdm/jsbsim/instrumentation/nvu/LUR-vicinity-out", func {
 
 var nvu_wind_mode_update = func {
     var target = "diss";
-    var delay = 1;
     var mode = getprop("fdm/jsbsim/instrumentation/nvu/mode-out");
     if (mode == 3 or mode == 0) {
-        var speed = getprop("tu154/systems/nvu/wind-speed");
-        speed = int(speed * 4 + 0.5) / 4;
-        setprop("fdm/jsbsim/instrumentation/nvu/wind-speed-svs", speed);
-        var azimuth = getprop("tu154/systems/nvu/wind-azimuth");
-        azimuth = int(azimuth * 4 + 0.5) / 4;
-        setprop("fdm/jsbsim/instrumentation/nvu/wind-azimuth-svs", azimuth);
+        setprop("fdm/jsbsim/instrumentation/nvu/wind-speed-svs",
+                getprop("tu154/systems/nvu/wind-speed"));
+        setprop("fdm/jsbsim/instrumentation/nvu/wind-azimuth-svs",
+                getprop("tu154/systems/nvu/wind-azimuth"));
         target = "svs";
-        delay = 0;
     }
 
     realias("tu154/systems/nvu/wind-speed",
-            "fdm/jsbsim/instrumentation/nvu/wind-speed-"~target, delay);
+            "fdm/jsbsim/instrumentation/nvu/wind-speed-"~target, 0);
     realias("tu154/systems/nvu/wind-azimuth",
-            "fdm/jsbsim/instrumentation/nvu/wind-azimuth-"~target, delay,
-            [0, 360]);
+            "fdm/jsbsim/instrumentation/nvu/wind-azimuth-"~target, 0);
 }
 
 setlistener("fdm/jsbsim/instrumentation/nvu/mode-out", nvu_wind_mode_update,
             1, 0);
 
+var nvu_wind_adjust_sign = 0;
 var nvu_wind_adjust = func(which, sign) {
     var mode = getprop("fdm/jsbsim/instrumentation/nvu/mode-out");
     if (mode != 3
@@ -1102,26 +1075,25 @@ var nvu_wind_adjust = func(which, sign) {
 
     var step = getprop("tu154/instrumentation/v-57/"~which~"-adjust-step");
 
-    var src = "tu154/systems/nvu/wind-"~which;
-    var dst = "fdm/jsbsim/instrumentation/nvu/wind-"~which~"-svs";
-    var v = getprop(dst);
-    var v2 = v + sign * step;
-    if (which == "speed") {
-        if (v2 < 0) {
-            if (v == 0)
-                return;
-            v2 = 0;
-        } else if (v2 > 999) {
-            if (v == 999)
-                return;
-            v2 = 999;
-        }
-        realias(src, dst, 0.2);
-    } else {
-        v2 = range_wrap(v2, 0, 360);
-        realias(src, dst, 0.2, [0, 360]);
+    var v = getprop("fdm/jsbsim/instrumentation/nvu/wind-"~which~"-svs");
+    if (!sign) {
+        v = getprop("tu154/systems/nvu/wind-"~which~"-smooth");
+        if (nvu_wind_adjust_sign > 0)
+            v = math.ceil(v * 4 + 0.0625) / 4;
+        else
+            v = math.floor(v * 4 + 0.0625) / 4;
     }
-    setprop(dst, v2);
+    v += sign * step;
+    if (which == "speed") {
+        if (v < 0)
+            v = 0;
+        else if (v > 999)
+            v = 999;
+    }
+
+    setprop("fdm/jsbsim/instrumentation/nvu/wind-"~which~"-svs", v);
+
+    nvu_wind_adjust_sign = sign;
 }
 
 
