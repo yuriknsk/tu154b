@@ -403,16 +403,31 @@
       <tyre-smoke type="int">0</tyre-smoke>
       <sprayspeed-ms type="double">0</sprayspeed-ms>
       <spray-density type="double">0</spray-density>
+      <zsink-in type="double">25</zsink-in>
     </gear>
     <gear n="1">
       <tyre-smoke type="int">0</tyre-smoke>
       <sprayspeed-ms type="double">0</sprayspeed-ms>
       <spray-density type="double">0</spray-density>
+      <zsink-in type="double">25</zsink-in>
     </gear>
     <gear n="2">
       <tyre-smoke type="int">0</tyre-smoke>
       <sprayspeed-ms type="double">0</sprayspeed-ms>
       <spray-density type="double">0</spray-density>
+      <zsink-in type="double">25</zsink-in>
+    </gear>
+    <gear n="3">
+      <zsink-in type="double">25</zsink-in>
+    </gear>
+    <gear n="4">
+      <zsink-in type="double">25</zsink-in>
+    </gear>
+    <gear n="5">
+      <zsink-in type="double">25</zsink-in>
+    </gear>
+    <gear n="6">
+      <zsink-in type="double">25</zsink-in>
     </gear>
  </gear>
 
@@ -554,7 +569,7 @@
 	 </tyresmoke>
 	<friction>
 	  <file>Aircraft/tu154b/Nasal/friction.nas</file>
-	 </friction>
+	</friction>
 	<!--
       <debug>
   <file>Aircraft/tu154b/Nasal/debug.nas</file>
@@ -603,7 +618,6 @@
      <pitch-selector>0</pitch-selector>-->
     </ap>
     <gear>
-      <static-friction type="double">0.6</static-friction>
       <gear-cmd-static type="double">1.0</gear-cmd-static>
     </gear>
     <fcs>

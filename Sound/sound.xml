@@ -1042,6 +1042,82 @@
   </volume>
 </gear> 
 
+<gear>
+  <name>bump sound nose</name>
+  <path>Aircraft/tu154b/Sound/misc/drb_154.wav</path>
+  <condition>
+    <property>gear/gear[0]/wow</property>
+    <property>sim/current-view/internal</property>
+    <property>gear/gear[0]/position-norm</property>
+  </condition>
+  <mode>looped</mode>
+  <position>
+    <x>0.0</x>
+    <y>0.0</y>
+    <z>-2.5</z>
+  </position>
+  <volume>
+    <property>velocities/groundspeed-kt</property>
+    <factor>0.004</factor>
+    <offset>0.0</offset>
+  </volume>
+  <volume>
+    <property>fdm/jsbsim/gear/unit[0]/friction/bumpiness</property>
+    <factor>3</factor>
+    <offset>0.0</offset>
+  </volume>
+</gear>
+<gear>
+  <name>bump sound left</name>
+  <path>Aircraft/tu154b/Sound/misc/drb_154.wav</path>
+  <condition>
+    <property>gear/gear[1]/wow</property>
+    <property>sim/current-view/internal</property>
+    <property>gear/gear[1]/position-norm</property>
+  </condition>
+  <mode>looped</mode>
+  <position>
+    <x>0.0</x>
+    <y>5.0</y>
+    <z>-2.5</z>
+  </position>
+  <volume>
+    <property>velocities/groundspeed-kt</property>
+    <factor>0.004</factor>
+    <offset>0.0</offset>
+  </volume>
+  <volume>
+    <property>fdm/jsbsim/gear/unit[1]/friction/bumpiness</property>
+    <factor>3</factor>
+    <offset>0.0</offset>
+  </volume>
+</gear>
+<gear>
+  <name>bump sound right</name>
+  <path>Aircraft/tu154b/Sound/misc/drb_154.wav</path>
+  <condition>
+    <property>gear/gear[2]/wow</property>
+    <property>sim/current-view/internal</property>
+    <property>gear/gear[2]/position-norm</property>
+  </condition>
+  <mode>looped</mode>
+  <position>
+    <x>0.0</x>
+    <y>-5.0</y>
+    <z>-2.5</z>
+  </position>
+  <volume>
+    <property>velocities/groundspeed-kt</property>
+    <factor>0.004</factor>
+    <offset>0.0</offset>
+  </volume>
+  <volume>
+    <property>fdm/jsbsim/gear/unit[2]/friction/bumpiness</property>
+    <factor>3</factor>
+    <offset>0.0</offset>
+  </volume>
+</gear>
+
 
 <electrical>
   <name>electrical</name>
