@@ -35,9 +35,9 @@
     </condition>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>1</x>
+      <y>-1</y>
+      <z>1.5</z>
     </position>
   </voice>
 <!--Generators on load-->
@@ -63,9 +63,9 @@
   </condition>
   <mode>once</mode>
   <position>
-    <x>-22.0</x>
-    <y>0.0</y>
-    <z>2.5</z>
+    <x>1</x>
+    <y>-1</y>
+    <z>1.5</z>
   </position>
 </voice>
 
@@ -75,9 +75,9 @@
     <property>engines/engine[0]/running</property>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>1</x>
+      <y>-1</y>
+      <z>1.5</z>
     </position>
   </voice>
   <voice>
@@ -86,9 +86,9 @@
     <property>engines/engine[1]/running</property>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>1</x>
+      <y>-1</y>
+      <z>1.5</z>
     </position>
   </voice>
   <voice>
@@ -97,9 +97,9 @@
     <property>engines/engine[2]/running</property>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>1</x>
+      <y>-1</y>
+      <z>1.5</z>
     </position>
   </voice>
   <voice>
@@ -111,12 +111,11 @@
         <value>30.0</value>
       </less-than>
     </condition>
-   
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>1</x>
+      <y>-1</y>
+      <z>1.5</z>
     </position>
   </voice>
 
@@ -132,8 +131,8 @@
     </condition>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
+      <x>0</x>
+      <y>0</y>
       <z>1.5</z>
     </position>
 </voice>
@@ -149,8 +148,8 @@
   </condition>
   <mode>once</mode>
   <position>
-    <x>-20.0</x>
-    <y>1.0</y>
+    <x>1</x>
+    <y>-1</y>
     <z>1.5</z>
   </position>
 </voice> 
@@ -166,8 +165,8 @@
   </condition>
   <mode>once</mode>
   <position>
-    <x>-22.0</x>
-    <y>1.0</y>
+    <x>-1</x>
+    <y>-1</y>
     <z>1.5</z>
   </position>
 </voice>
@@ -183,8 +182,8 @@
   </condition>
   <mode>once</mode>
   <position>
-    <x>-22.0</x>
-    <y>1.0</y>
+    <x>-1</x>
+    <y>-1</y>
     <z>1.5</z>
   </position>
 </voice>
@@ -200,8 +199,8 @@
   </condition>
   <mode>once</mode>
   <position>
-    <x>-22.0</x>
-    <y>1.0</y>
+    <x>-1</x>
+    <y>-1</y>
     <z>1.5</z>
   </position>
 </voice>
@@ -217,9 +216,9 @@
   </condition>
   <mode>once</mode>
   <position>
-    <x>-22.0</x>
-    <y>0.0</y>
-    <z>2.5</z>
+    <x>1</x>
+    <y>-1</y>
+    <z>1.5</z>
   </position>
 </voice>
 
@@ -234,8 +233,8 @@
   </condition>
   <mode>once</mode>
   <position>
-    <x>-22.0</x>
-    <y>1.0</y>
+    <x>-1</x>
+    <y>-1</y>
     <z>1.5</z>
   </position>
 </voice>
@@ -251,9 +250,9 @@
   </condition>
   <mode>once</mode>
   <position>
-    <x>-22.0</x>
-    <y>0.0</y>
-    <z>2.5</z>
+    <x>0</x>
+    <y>0</y>
+    <z>1.5</z>
   </position>
 </voice> 
 
@@ -268,9 +267,9 @@
   </condition>
   <mode>once</mode>
   <position>
-    <x>-22.0</x>
-    <y>0.0</y>
-    <z>2.5</z>
+    <x>0</x>
+    <y>0</y>
+    <z>1.5</z>
   </position>
 </voice> 
 
@@ -285,9 +284,9 @@
   </condition>
   <mode>once</mode>
   <position>
-    <x>-22.0</x>
-    <y>0.0</y>
-    <z>2.5</z>
+    <x>0</x>
+    <y>0</y>
+    <z>1.5</z>
   </position>
 </voice> 
 
@@ -302,9 +301,9 @@
   </condition>
   <mode>once</mode>
   <position>
-    <x>-22.0</x>
-    <y>0.0</y>
-    <z>2.5</z>
+    <x>0</x>
+    <y>0</y>
+    <z>1.5</z>
   </position>
 </voice>
 
@@ -317,9 +316,9 @@
   </condition>
   <mode>once</mode>
   <position>
-    <x>-22.0</x>
-    <y>0.0</y>
-    <z>2.5</z>
+    <x>0</x>
+    <y>0</y>
+    <z>1.5</z>
   </position>
 </voice>
 
@@ -335,9 +334,9 @@
     </condition>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>0</x>
+      <y>0</y>
+      <z>1.5</z>
     </position>
 </voice> 
   
@@ -352,9 +351,9 @@
     </condition>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>0</x>
+      <y>0</y>
+      <z>1.5</z>
     </position>
 </voice>
 
@@ -369,9 +368,9 @@
     </condition>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>0</x>
+      <y>0</y>
+      <z>1.5</z>
     </position>
 </voice>
 
@@ -392,9 +391,9 @@
     </condition>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>0</x>
+      <y>0</y>
+      <z>1.5</z>
     </position>
 </voice>
 
@@ -415,9 +414,9 @@
     </condition>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>0</x>
+      <y>0</y>
+      <z>1.5</z>
     </position>
 </voice>
 
@@ -438,9 +437,9 @@
     </condition>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>0</x>
+      <y>0</y>
+      <z>1.5</z>
     </position>
 </voice>
 
@@ -461,9 +460,9 @@
     </condition>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>0</x>
+      <y>0</y>
+      <z>1.5</z>
     </position>
 </voice>
 
@@ -484,9 +483,9 @@
     </condition>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>0</x>
+      <y>0</y>
+      <z>1.5</z>
     </position>
 </voice>
 
@@ -501,9 +500,9 @@
     </condition>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>0</x>
+      <y>0</y>
+      <z>1.5</z>
     </position>
 </voice>
 
@@ -522,9 +521,9 @@
     </condition>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>0</x>
+      <y>0</y>
+      <z>1.5</z>
     </position>
 </voice>
 
@@ -539,9 +538,9 @@
     </condition>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>0</x>
+      <y>0</y>
+      <z>1.5</z>
     </position>
 </voice>
 
@@ -556,9 +555,9 @@
     </condition>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>0</x>
+      <y>0</y>
+      <z>1.5</z>
     </position>
 </voice>
 
@@ -630,9 +629,9 @@
     </condition>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>0</x>
+      <y>0</y>
+      <z>1.5</z>
     </position>
 </voice>
 
@@ -649,9 +648,9 @@
     </condition>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>0</x>
+      <y>0</y>
+      <z>1.5</z>
     </position>
 </voice> 
 
@@ -666,9 +665,9 @@
     </condition>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>0</x>
+      <y>0</y>
+      <z>1.5</z>
     </position>
 </voice> 
 
@@ -683,9 +682,9 @@
     </condition>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>0</x>
+      <y>0</y>
+      <z>1.5</z>
     </position>
 </voice> 
 
@@ -700,9 +699,9 @@
     </condition>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>0</x>
+      <y>0</y>
+      <z>1.5</z>
     </position>
 </voice> 
  
@@ -717,9 +716,9 @@
     </condition>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>0</x>
+      <y>0</y>
+      <z>1.5</z>
     </position>
 </voice> 
 
@@ -734,9 +733,9 @@
     </condition>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>0</x>
+      <y>0</y>
+      <z>1.5</z>
     </position>
 </voice>
 
@@ -753,9 +752,9 @@
     </condition>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>0</x>
+      <y>0</y>
+      <z>1.5</z>
     </position>
 </voice> 
 
@@ -770,9 +769,9 @@
     </condition>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>0</x>
+      <y>0</y>
+      <z>1.5</z>
     </position>
 </voice> 
 
@@ -787,9 +786,9 @@
     </condition>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>0</x>
+      <y>0</y>
+      <z>1.5</z>
     </position>
 </voice> 
 
@@ -804,9 +803,9 @@
     </condition>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>0</x>
+      <y>0</y>
+      <z>1.5</z>
     </position>
 </voice> 
 
@@ -821,9 +820,9 @@
     </condition>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>0</x>
+      <y>0</y>
+      <z>1.5</z>
     </position>
 </voice> 
 
@@ -838,9 +837,9 @@
     </condition>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>0</x>
+      <y>0</y>
+      <z>1.5</z>
     </position>
 </voice> 
 
@@ -856,9 +855,9 @@
     </condition>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>0</x>
+      <y>0</y>
+      <z>1.5</z>
     </position>
 </voice> 
 
@@ -874,9 +873,9 @@
     </condition>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>0</x>
+      <y>0</y>
+      <z>1.5</z>
     </position>
 </voice> 
 
@@ -885,16 +884,16 @@
     <path>Aircraft/tu154b/Sound/voice/St_H_3.wav</path>
     <condition>
       	<equals>
-        	<property>tu154/systems/warning/voice/altitude</property>
-                <value>3.0</value>
+          <property>tu154/systems/warning/voice/altitude</property>
+          <value>3.0</value>
         </equals>
     	<property>tu154/systems/warning/voice/state</property>
     </condition>
     <mode>once</mode>
     <position>
-      <x>-22.0</x>
-      <y>0.0</y>
-      <z>2.5</z>
+      <x>0</x>
+      <y>0</y>
+      <z>1.5</z>
     </position>
 </voice> 
 <voice>
@@ -909,9 +908,9 @@
   </condition>
   <mode>once</mode>
   <position>
-    <x>-22.0</x>
-    <y>0.0</y>
-    <z>2.5</z>
+    <x>0</x>
+    <y>0</y>
+    <z>1.5</z>
   </position>
 </voice>
 <!--PNK sound-->  
@@ -921,9 +920,9 @@
   <property>tu154/instrumentation/rv-5m[0]/warn</property>
   <mode>once</mode>
   <position>
-    <x>-22.0</x>
-    <y>0.0</y>
-    <z>2.5</z>
+    <x>-1</x>
+    <y>1</y>
+    <z>1.5</z>
   </position>
 </pnk>
 <pnk>
@@ -932,9 +931,9 @@
   <property>tu154/instrumentation/rv-5m[1]/warn</property>
   <mode>once</mode>
   <position>
-    <x>-22.0</x>
-    <y>0.0</y>
-    <z>2.5</z>
+    <x>-1</x>
+    <y>-1</y>
+    <z>1.5</z>
   </position>
 </pnk>
 
@@ -951,8 +950,8 @@
   </condition>
   <mode>once</mode>
   <position>
-    <x>0.0</x>
-    <y>0.0</y>
+    <x>2</x>
+    <y>0</y>
     <z>-2.5</z>
   </position>
 </gear> 
@@ -968,8 +967,8 @@
   </condition>
   <mode>once</mode>
   <position>
-    <x>0.0</x>
-    <y>0.0</y>
+    <x>2</x>
+    <y>0</y>
     <z>-2.5</z>
   </position>
 </gear> 
@@ -978,8 +977,8 @@
   <name>wow nose</name>
   <path>Aircraft/tu154b/Sound/misc/nos_154.wav</path>
   <condition>
-    <property>gear/gear[1]/wow</property>
-    <property>gear/gear[1]/position-norm</property>
+    <property>gear/gear[0]/wow</property>
+    <property>gear/gear[0]/position-norm</property>
   </condition>
   <mode>once</mode>
   <position>
@@ -992,13 +991,13 @@
   <name>wow left</name>
   <path>Aircraft/tu154b/Sound/misc/osn_154.wav</path>
   <condition>
-    <property>gear/gear[0]/wow</property>
-    <property>gear/gear[0]/position-norm</property>
+    <property>gear/gear[1]/wow</property>
+    <property>gear/gear[1]/position-norm</property>
   </condition>
   <mode>once</mode>
   <position>
     <x>0.0</x>
-    <y>-5.0</y>
+    <y>5.75</y>
     <z>-2.5</z>
   </position>
 </gear> 
@@ -1012,7 +1011,7 @@
   <mode>once</mode>
   <position>
     <x>0.0</x>
-    <y>5.0</y>
+    <y>-5.75</y>
     <z>-2.5</z>
   </position>
 </gear> 
@@ -1031,8 +1030,8 @@
   </condition>
   <mode>looped</mode>
   <position>
-    <x>0.0</x>
-    <y>0.0</y>
+    <x>3</x>
+    <y>0</y>
     <z>-2.5</z>
   </position>
   <volume>
@@ -1052,8 +1051,8 @@
   </condition>
   <mode>looped</mode>
   <position>
-    <x>0.0</x>
-    <y>0.0</y>
+    <x>3</x>
+    <y>0</y>
     <z>-2.5</z>
   </position>
   <volume>
@@ -1077,8 +1076,8 @@
   </condition>
   <mode>looped</mode>
   <position>
-    <x>0.0</x>
-    <y>5.0</y>
+    <x>25</x>
+    <y>5.75</y>
     <z>-2.5</z>
   </position>
   <volume>
@@ -1102,8 +1101,8 @@
   </condition>
   <mode>looped</mode>
   <position>
-    <x>0.0</x>
-    <y>-5.0</y>
+    <x>25</x>
+    <y>-5.75</y>
     <z>-2.5</z>
   </position>
   <volume>
@@ -1127,8 +1126,8 @@
   </condition>
   <mode>looped</mode>
   <position>
-    <x>-22.0</x>
-    <y>0.0</y>
+    <x>0.5</x>
+    <y>-1.0</y>
     <z>-0.5</z>
   </position>
   <volume>
@@ -1150,8 +1149,8 @@
   <mode>looped</mode>
   <position>
     <x>37.0</x>
-    <y>-3.0</y>
-    <z>1.2</z>
+    <y>3.0</y>
+    <z>1.5</z>
   </position>
   <orientation>
     <x>-1.0</x>
@@ -1173,15 +1172,15 @@
   <condition>
     <property>engines/engine[2]/running</property>
     <greater-than>
-      <property>fdm/jsbsim/propulsion/engine[3]/reverser-angle-rad</property>
+      <property>fdm/jsbsim/propulsion/engine[2]/reverser-angle-rad</property>
       <value>1.57</value>
     </greater-than>
   </condition>
   <mode>looped</mode>
   <position>
     <x>37.0</x>
-    <y>3.0</y>
-    <z>1.2</z>
+    <y>-3.0</y>
+    <z>1.5</z>
   </position>
   <orientation>
     <x>-1.0</x>
@@ -1192,7 +1191,7 @@
     <outer-gain>0.0</outer-gain>
   </orientation>    
   <volume>
-    <property>engines/engine[3]/n2</property>
+    <property>engines/engine[2]/n2</property>
     <factor type="double">0.03</factor>
     <offset type="double">0.0</offset>
   </volume>
@@ -1261,8 +1260,8 @@
   <mode>once</mode>
   <position>
     <x>37.0</x>
-    <y>-3.0</y>
-    <z>1.2</z>
+    <y>3.0</y>
+    <z>1.5</z>
   </position>
   <volume>
     <offset type="double">0.05</offset>
@@ -1279,7 +1278,7 @@
   <position>
     <x>37.0</x>
     <y>0.0</y>
-    <z>1.2</z>
+    <z>3.5</z>
   </position>
   <volume>
     <offset type="double">0.05</offset>
@@ -1295,8 +1294,8 @@
   <mode>once</mode>
   <position>
     <x>37.0</x>
-    <y>3.0</y>
-    <z>1.2</z>
+    <y>-3.0</y>
+    <z>1.5</z>
   </position>
   <volume>
     <offset type="double">0.05</offset>
@@ -1312,8 +1311,8 @@
   <mode>once</mode>
   <position>
     <x>37.0</x>
-    <y>-3.0</y>
-    <z>1.2</z>
+    <y>3.0</y>
+    <z>1.5</z>
   </position>
   <volume>
     <offset type="double">0.05</offset>
@@ -1329,7 +1328,7 @@
   <position>
     <x>37.0</x>
     <y>0.0</y>
-    <z>1.2</z>
+    <z>3.5</z>
   </position>
   <volume>
     <offset type="double">0.05</offset>
@@ -1344,8 +1343,8 @@
   <mode>once</mode>
   <position>
     <x>37.0</x>
-    <y>3.0</y>
-    <z>1.2</z>
+    <y>-3.0</y>
+    <z>1.5</z>
   </position>
   <volume>
     <offset type="double">0.05</offset>
@@ -1363,7 +1362,7 @@
   <position>
     <x>37.0</x>
     <y>0.0</y>
-    <z>1.2</z>
+    <z>3</z>
   </position>
   <volume>
     <offset type="double">0.05</offset>
@@ -1379,7 +1378,7 @@
   <position>
     <x>37.0</x>
     <y>0.0</y>
-    <z>1.2</z>
+    <z>3</z>
   </position>
   <volume>
     <offset type="double">0.05</offset>
@@ -1395,7 +1394,7 @@
   <position>
     <x>37.0</x>
     <y>0.0</y>
-    <z>1.2</z>
+    <z>3</z>
   </position>
   <volume>
     <offset type="double">0.05</offset>
@@ -1414,8 +1413,8 @@
   <mode>looped</mode>
   <position>
     <x>37.0</x>
-    <y>-3.0</y>
-    <z>1.2</z>
+    <y>3.0</y>
+    <z>1.5</z>
   </position>
     <pitch>
     <property>engines/engine[0]/n2</property>
@@ -1442,8 +1441,8 @@
   <mode>looped</mode>
   <position>
     <x>37.0</x>
-    <y>-3.0</y>
-    <z>1.2</z>
+    <y>3.0</y>
+    <z>1.5</z>
   </position>
   <volume>
     <property>engines/engine[0]/n2</property>
@@ -1463,8 +1462,8 @@
   <mode>looped</mode>
   <position>
     <x>37.0</x>
-    <y>-3.0</y>
-    <z>1.2</z>
+    <y>3.0</y>
+    <z>1.5</z>
   </position>
   <pitch>
     <property>engines/engine[0]/n2</property>
@@ -1491,8 +1490,8 @@
   <mode>looped</mode>
   <position>
     <x>37.0</x>
-    <y>-3.0</y>
-    <z>1.2</z>
+    <y>3.0</y>
+    <z>1.5</z>
   </position>
   <volume>
     <property>engines/engine[0]/n2</property>
@@ -1508,13 +1507,13 @@
   <path>Aircraft/tu154b/Sound/engine/nk8_a12.wav</path>
   <condition>
     <property>sim/current-view/internal</property>
-    <property>engines/engine[0]/running</property>
+    <property>engines/engine[1]/running</property>
   </condition>
   <mode>looped</mode>
   <position>
     <x>37.0</x>
     <y>0.0</y>
-    <z>1.2</z>
+    <z>3.5</z>
   </position>
   <pitch>
     <property>engines/engine[1]/n2</property>
@@ -1542,7 +1541,7 @@
   <position>
     <x>37.0</x>
     <y>0.0</y>
-    <z>1.2</z>
+    <z>3.5</z>
   </position>
   <volume>
     <property>engines/engine[1]/n2</property>
@@ -1563,7 +1562,7 @@
   <position>
     <x>37.0</x>
     <y>0.0</y>
-    <z>1.2</z>
+    <z>3.5</z>
   </position>
   <pitch>
     <property>engines/engine[1]/n2</property>
@@ -1591,7 +1590,7 @@
   <position>
     <x>37.0</x>
     <y>0.0</y>
-    <z>1.2</z>
+    <z>3.5</z>
   </position>
   <volume>
     <property>engines/engine[1]/n2</property>
@@ -1612,8 +1611,8 @@
   <mode>looped</mode>
   <position>
     <x>37.0</x>
-    <y>3.0</y>
-    <z>1.2</z>
+    <y>-3.0</y>
+    <z>1.5</z>
   </position>
   <pitch>
     <property>engines/engine[2]/n2</property>
@@ -1640,8 +1639,8 @@
   <mode>looped</mode>
   <position>
     <x>37.0</x>
-    <y>3.0</y>
-    <z>1.2</z>
+    <y>-3.0</y>
+    <z>1.5</z>
   </position>
   <volume>
     <property>engines/engine[2]/n2</property>
@@ -1661,8 +1660,8 @@
   <mode>looped</mode>
   <position>
     <x>37.0</x>
-    <y>3.0</y>
-    <z>1.2</z>
+    <y>-3.0</y>
+    <z>1.5</z>
   </position>
   <pitch>
     <property>engines/engine[2]/n2</property>
@@ -1689,8 +1688,8 @@
   <mode>looped</mode>
   <position>
     <x>37.0</x>
-    <y>3.0</y>
-    <z>1.2</z>
+    <y>-3.0</y>
+    <z>1.5</z>
   </position>
   <volume>
     <property>engines/engine[2]/n2</property>
@@ -1712,8 +1711,8 @@
     <mode>looped</mode>
     <position>
       <x>37.0</x>
-      <y>-3.0</y>
-      <z>1.2</z>
+      <y>3.0</y>
+      <z>1.5</z>
     </position>
     <volume>
       <property>engines/engine[0]/n2</property>
@@ -1740,8 +1739,8 @@
     <mode>looped</mode>
     <position>
       <x>37.0</x>
-      <y>-3.0</y>
-      <z>1.2</z>
+      <y>3.0</y>
+      <z>1.5</z>
     </position>
     <volume>
       <property>engines/engine[0]/n2</property>
@@ -1768,8 +1767,8 @@
     <mode>looped</mode>
     <position>
       <x>37.0</x>
-      <y>-3.0</y>
-      <z>1.2</z>
+      <y>3.0</y>
+      <z>1.5</z>
     </position>
     <volume>
       <property>engines/engine[0]/n2</property>
@@ -1797,8 +1796,8 @@
     <mode>looped</mode>
     <position>
       <x>37.0</x>
-      <y>-3.0</y>
-      <z>1.2</z>
+      <y>3.0</y>
+      <z>1.5</z>
     </position>
     <volume>
       <property>engines/engine[0]/n2</property>
@@ -1824,8 +1823,8 @@
     <mode>looped</mode>
     <position>
       <x>37.0</x>
-      <y>-3.0</y>
-      <z>1.2</z>
+      <y>3.0</y>
+      <z>1.5</z>
     </position>
     <volume>
       <property>engines/engine[0]/n2</property>
@@ -1846,8 +1845,8 @@
     <mode>looped</mode>
     <position>
       <x>37.0</x>
-      <y>-3.0</y>
-      <z>1.2</z>
+      <y>3.0</y>
+      <z>1.5</z>
     </position>
     <volume>
       <property>engines/engine[0]/n2</property>
@@ -1872,8 +1871,8 @@
     <mode>looped</mode>
     <position>
       <x>37.0</x>
-      <y>-3.0</y>
-      <z>1.2</z>
+      <y>3.0</y>
+      <z>1.5</z>
     </position>
     <orientation>
       <x>1.0</x>
@@ -1896,13 +1895,13 @@
     <path>Aircraft/tu154b/Sound/engine/xtaa11.wav</path>
     <condition>
       <not><property>sim/current-view/internal</property></not>
-      <property>engines/engine[0]/running</property>
+      <property>engines/engine[1]/running</property>
     </condition>
     <mode>looped</mode>
     <position>
       <x>37.0</x>
       <y>0.0</y>
-      <z>1.2</z>
+      <z>3.5</z>
     </position>
     <volume>
       <property>engines/engine[1]/n2</property>
@@ -1930,7 +1929,7 @@
     <position>
       <x>37.0</x>
       <y>0.0</y>
-      <z>1.2</z>
+      <z>3.5</z>
     </position>
     <volume>
       <property>engines/engine[1]/n2</property>
@@ -1952,13 +1951,13 @@
     <path>Aircraft/tu154b/Sound/engine/xtaa13.wav</path>
     <condition>
       <not><property>sim/current-view/internal</property></not>
-      <property>engines/engine[0]/running</property>
+      <property>engines/engine[1]/running</property>
     </condition>
     <mode>looped</mode>
     <position>
       <x>37.0</x>
       <y>0.0</y>
-      <z>1.2</z>
+      <z>3.5</z>
     </position>
     <volume>
       <property>engines/engine[1]/n2</property>
@@ -1987,7 +1986,7 @@
     <position>
       <x>37.0</x>
       <y>0.0</y>
-      <z>1.2</z>
+      <z>3.5</z>
     </position>
     <volume>
       <property>engines/engine[1]/n2</property>
@@ -2014,7 +2013,7 @@
     <position>
       <x>37.0</x>
       <y>0.0</y>
-      <z>1.2</z>
+      <z>3.5</z>
     </position>
     <volume>
       <property>engines/engine[1]/n2</property>
@@ -2036,7 +2035,7 @@
     <position>
       <x>37.0</x>
       <y>0.0</y>
-      <z>1.2</z>
+      <z>3.5</z>
     </position>
     <volume>
       <property>engines/engine[1]/n2</property>
@@ -2062,7 +2061,7 @@
     <position>
       <x>37.0</x>
       <y>0.0</y>
-      <z>1.2</z>
+      <z>3.5</z>
     </position>
     <orientation>
       <x>1.0</x>
@@ -2089,8 +2088,8 @@
    <mode>looped</mode>
    <position>
      <x>37.0</x>
-     <y>3.0</y>
-     <z>1.2</z>
+     <y>-3.0</y>
+     <z>1.5</z>
    </position>
    <volume>
      <property>engines/engine[2]/n2</property>
@@ -2117,8 +2116,8 @@
    <mode>looped</mode>
    <position>
      <x>37.0</x>
-     <y>3.0</y>
-     <z>1.2</z>
+     <y>-3.0</y>
+     <z>1.5</z>
    </position>
    <volume>
      <property>engines/engine[2]/n2</property>
@@ -2145,8 +2144,8 @@
    <mode>looped</mode>
    <position>
      <x>37.0</x>
-     <y>3.0</y>
-     <z>1.2</z>
+     <y>-3.0</y>
+     <z>1.5</z>
    </position>
    <volume>
      <property>engines/engine[2]/n2</property>
@@ -2174,8 +2173,8 @@
    <mode>looped</mode>
    <position>
      <x>37.0</x>
-     <y>3.0</y>
-     <z>1.2</z>
+     <y>-3.0</y>
+     <z>1.5</z>
    </position>
    <volume>
      <property>engines/engine[2]/n2</property>
@@ -2201,8 +2200,8 @@
    <mode>looped</mode>
    <position>
      <x>37.0</x>
-     <y>3.0</y>
-     <z>1.2</z>
+     <y>-3.0</y>
+     <z>1.5</z>
    </position>
    <volume>
      <property>engines/engine[2]/n2</property>
@@ -2223,8 +2222,8 @@
    <mode>looped</mode>
    <position>
      <x>37.0</x>
-     <y>3.0</y>
-     <z>1.2</z>
+     <y>-3.0</y>
+     <z>1.5</z>
    </position>
    <volume>
      <property>engines/engine[2]/n2</property>
@@ -2249,8 +2248,8 @@
    <mode>looped</mode>
    <position>
      <x>37.0</x>
-     <y>3.0</y>
-     <z>1.2</z>
+     <y>-3.0</y>
+     <z>1.5</z>
    </position>
    <orientation>
      <x>1.0</x>
@@ -2281,7 +2280,7 @@
     <position>
       <x>0.0</x>
       <y>0.0</y>
-      <z>2.5</z>
+      <z>1.5</z>
     </position>
     <volume>
       <offset type="double">0.5</offset>
@@ -2299,7 +2298,7 @@
     <position>
       <x>0.0</x>
       <y>0.0</y>
-      <z>2.5</z>
+      <z>1.5</z>
     </position>
     <volume>
       <offset type="double">0.5</offset>
@@ -2317,7 +2316,7 @@
     <position>
       <x>0.0</x>
       <y>0.0</y>
-      <z>2.5</z>
+      <z>1.5</z>
     </position>
     <volume>
       <offset type="double">0.5</offset>
@@ -2336,7 +2335,7 @@
     <position>
       <x>0.0</x>
       <y>0.0</y>
-      <z>2.5</z>
+      <z>1.5</z>
     </position>
     <volume>
       <offset type="double">0.5</offset>
@@ -2355,7 +2354,7 @@
     <position>
       <x>0.0</x>
       <y>0.0</y>
-      <z>2.5</z>
+      <z>1.5</z>
     </position>
     <volume>
       <offset type="double">0.5</offset>
@@ -2373,7 +2372,7 @@
     <position>
       <x>0.0</x>
       <y>0.0</y>
-      <z>2.5</z>
+      <z>1.5</z>
     </position>
     <volume>
       <offset type="double">0.5</offset>
@@ -2390,7 +2389,7 @@
     <position>
       <x>0.0</x>
       <y>0.0</y>
-      <z>2.5</z>
+      <z>1.5</z>
     </position>
     <volume>
       <offset type="double">0.5</offset>
@@ -2408,7 +2407,7 @@
     <position>
       <x>0.0</x>
       <y>0.0</y>
-      <z>2.5</z>
+      <z>1.5</z>
     </position>
     <volume>
       <offset type="double">0.5</offset>
