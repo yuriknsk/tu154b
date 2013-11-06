@@ -156,7 +156,7 @@
             <location unit="M">
                 <x> 6.0 </x>
                 <y> 0.0 </y>
-                <z> -2.67 </z>
+                <z> -2.8 </z>
             </location>
             <static_friction> 0.6 </static_friction>
             <dynamic_friction> 0.8 </dynamic_friction>
