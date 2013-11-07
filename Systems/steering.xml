@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+<!-- 
+
+  
+-->
+<system name="NoseWheelSteering">
+
+        <channel name="Steering">
+          
+          <switch name="gear/steering-switched">
+            <default value="hs/hs2-busters-ok"/>
+            <test value="gear/steering">
+              systems/electrical-ok == 1
+            </test>
+          </switch>
+          
+          <switch name="gear/nose-wheel-steering-switched">
+            <default value="hs/hs2-busters-ok"/>
+            <test value="gear/nose-wheel-steering">
+              systems/electrical-ok == 1
+            </test>
+          </switch>
+
+  <!-- Calculation of castered section -->
+
+    <pure_gain name="fcs/steering/speed-sensitive-centering">
+      <input>velocities/vg-fps</input>
+      <gain>0.1176</gain>
+      <clipto>
+        <min>0</min>
+        <max>1</max>
+      </clipto>
+    </pure_gain>
+
+    <fcs_function name="fcs/steering/slip-error-deg">
+      <function>
+        <product>
+          <property>gear/unit[0]/slip-angle-deg</property>
+          <property>fcs/steering/speed-sensitive-centering</property>
+          <value>0.1</value>
+        </product>
+      </function>
+    </fcs_function>
+
+    <fcs_function name="fcs/steering/center-error-deg">
+      <function>
+        <product>
+          <property>fcs/steering/steer-now-pos-deg</property>
+          <property>fcs/steering/speed-sensitive-centering</property>
+          <value>-0.02</value>
+        </product>
+      </function>
+    </fcs_function>
+
+    <summer name="fcs/steering/steer-cmd-castered-deg">
+      <input>fcs/steering/steer-now-pos-deg</input> <!-- fcs/steering/steer-now-pos-deg -->
+      <input>fcs/steering/slip-error-deg</input>
+      <input>fcs/steering/center-error-deg</input>
+      <clipto>
+        <min>-63</min>
+        <max>63</max>
+      </clipto>
+      <output>fcs/steering/steer-cmd-castered-sum-deg</output>
+    </summer>
+
+    <pure_gain name="fcs/steering/steer-cmd-castered-sum-norm">
+      <input>fcs/steering/steer-cmd-castered-sum-deg</input>
+      <gain>0.015873016</gain>
+    </pure_gain>
+
+    <kinematic>
+      <input>fcs/steering/steer-cmd-castered-sum-norm</input>
+        <traverse>
+          <setting>
+            <position>-1</position>
+            <time>0</time>
+          </setting>
+          <setting>
+            <position>1</position>
+            <time>3</time>
+          </setting>
+        </traverse>
+      <output>fcs/steering/steer-cmd-castered-sum-norm-kinematic</output>
+    </kinematic>
+ 
+  <!-- Calculation of steerable section -->
+         
+          <scheduled_gain name="gear/steering-cmd-norm">
+            <input>-fcs/rudder-cmd-norm</input>
+            <table>
+              <independentVar> gear/steering-switched </independentVar>
+              <tableData>
+                10            0.158
+                63            1.0
+              </tableData>
+            </table>
+          </scheduled_gain>     
+          
+          <pure_gain name="gear/steering-cmd-norm-switched">
+            <input>gear/steering-cmd-norm</input>
+            <gain>gear/nose-wheel-steering-switched</gain>
+          </pure_gain>
+
+    <kinematic>
+      <input>gear/steering-cmd-norm-switched</input>
+        <traverse>
+          <setting>
+            <position>-1</position>
+            <time>0</time>
+          </setting>
+          <setting>
+            <position>1</position>
+            <time>3</time>
+          </setting>
+        </traverse>
+      <output>gear/steering-cmd-norm-switched-kinematic</output>
+    </kinematic>
+	  
+  <!-- Calculation of summed deflection -->
+
+    <fcs_function>
+      <function>
+        <sum>
+          <product>
+            <property>gear/steering-cmd-norm-switched-kinematic</property>
+            <property>gear/nose-wheel-steering</property>
+          </product>
+          <product>
+            <property>fcs/steering/steer-cmd-castered-sum-norm-kinematic</property>
+            <sum>
+              <product>
+                <property>gear/nose-wheel-steering</property>
+                <value>-1</value>
+              </product>
+              <value>1</value>
+            </sum>
+          </product>
+        </sum>
+      </function>
+      <output>fcs/steer-cmd-norm-final</output>
+    </fcs_function>
+
+    <pure_gain>
+      <input>fcs/steer-cmd-norm-final</input>
+      <gain>63</gain>
+      <output>fcs/steer-pos-deg</output>
+    </pure_gain>
+
+  <!-- Calculation of final position of nosegear for future calculations -->
+
+    <fcs_function name="fcs/steering/steer-now-pos-deg">
+      <function>
+        <sum>
+          <product>
+            <property>fcs/steer-pos-deg</property>
+            <property>gear/nose-wheel-steering</property>
+          </product>
+          <product>
+            <property>fcs/steering/steer-cmd-castered-sum-norm-kinematic</property>
+            <value>63</value>
+            <sum>
+              <product>
+                <property>gear/nose-wheel-steering</property>
+                <value>-1</value>
+              </product>
+              <value>1</value>
+            </sum>
+          </product>
+        </sum>
+      </function>
+    </fcs_function>
+
+        </channel>
+
+</system>

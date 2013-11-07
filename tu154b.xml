@@ -870,46 +870,6 @@
           
         </channel>
 
-        <channel name="Steering">
-          
-          <switch name="gear/steering-switched">
-            <default value="hs/hs2-busters-ok"/>
-            <test value="gear/steering">
-              systems/electrical-ok == 1
-            </test>
-          </switch>
-          
-          <switch name="gear/nose-wheel-steering-switched">
-            <default value="hs/hs2-busters-ok"/>
-            <test value="gear/nose-wheel-steering">
-              systems/electrical-ok == 1
-            </test>
-          </switch>
-          
-          <scheduled_gain name="gear/steering-cmd-norm">
-            <input>-fcs/rudder-cmd-norm</input>
-            <table>
-              <independentVar> gear/steering-switched </independentVar>
-              <tableData>
-                10            0.158
-                63            1.0
-              </tableData>
-            </table>
-          </scheduled_gain>     
-          
-          <pure_gain name="gear/steering-cmd-norm-switched">
-            <input>gear/steering-cmd-norm</input>
-            <gain>gear/nose-wheel-steering-switched</gain>
-          </pure_gain>
-	  
-          <pure_gain name="gear/steering-cmd-norm-switched-deg">
-            <input>gear/steering-cmd-norm-switched</input>
-            <gain>63.0</gain>
-            <output>fcs/steer-pos-deg</output>
-          </pure_gain>
-
-        </channel>
-
         <channel name="Landing Gear Weight Shift">
 
           <fcs_function name="aero/function/weight-shift-gears">
@@ -935,6 +895,7 @@
     <system file="instrumentation"/>
     <system file="nvu"/>
     <system file="pushback"/>
+    <system file="steering"/>
     <autopilot file="Systems/absu154"/>
 <!--    <autopilot file="absu154"/>-->
     
