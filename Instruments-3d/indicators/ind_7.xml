@@ -38,11 +38,14 @@
 <animation>
   <type>material</type>
   <object-name>text_1</object-name>
+  <condition>
+    <not><property>fdm/jsbsim/instrumentation/nvu/mode-out</property></not>
+  </condition>
   <emission>
     <red>1.0</red>
     <green>1.0</green>
     <blue>1.0</blue>
-    <factor-prop>tu154/systems/electrical/indicators/nvu-failure</factor-prop>
+    <factor-prop>tu154/systems/nvu/powered</factor-prop>
   </emission>
 </animation>
 <animation>

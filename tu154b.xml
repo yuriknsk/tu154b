@@ -156,7 +156,7 @@
             <location unit="M">
                 <x> 6.0 </x>
                 <y> 0.0 </y>
-                <z> -2.67 </z>
+                <z> -2.8 </z>
             </location>
             <static_friction> 0.6 </static_friction>
             <dynamic_friction> 0.8 </dynamic_friction>
@@ -831,29 +831,20 @@
         
         <channel name="Brake">
 <!--Left-->
-          <pure_gain name="gear/left-brake-cmd">
-            <input>gear/brake-left</input>
-  <!--You can change current static friction here, for model of ice condition etc. -->
-  	    <gain>gear/static-friction</gain> <!--default: 0.6 --> 
-          </pure_gain>
 <!--Check hydro power for brake-->
           <switch name="gear/left-brake-cmd-switched">
             <default value="0.0"/>
-            <test logic="OR" value="gear/left-brake-cmd">
+            <test logic="OR" value="gear/brake-left">
               hs/hs1-busters-ok > 0
               gear/brake-parking > 0
             </test>
             <output>fcs/left-brake-cmd-norm</output>
           </switch>
 <!--Right-->
-          <pure_gain name="gear/right-brake-cmd">
-            <input>gear/brake-right</input>
-            <gain>gear/static-friction</gain>
-          </pure_gain>
           
           <switch name="gear/right-brake-cmd-switched">
             <default value="0.0"/>
-            <test logic="OR" value="gear/right-brake-cmd">
+            <test logic="OR" value="gear/brake-right">
               hs/hs1-busters-ok > 0
               gear/brake-parking > 0
             </test>

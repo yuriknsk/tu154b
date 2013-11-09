@@ -1511,7 +1511,17 @@
 <!--V-140 NVU (navigation system) control-->
 <model>
   <name>v-52-1</name>
-  <path>Aircraft/tu154b/Instruments-3d/nvu/v-52-1.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/nvu/v-52.xml</path>
+  <overlay>
+    <params>
+      <index>1</index>
+      <index-other>2</index-other>
+      <S>tu154/systems/nvu/S-1-smooth</S>
+      <Z>tu154/systems/nvu/Z-1-smooth</Z>
+      <Spm>tu154/systems/nvu/Spm-1-smooth</Spm>
+      <Zpm>tu154/systems/nvu/Zpm-1-smooth</Zpm>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-22.123</x-m>
     <y-m>-0.026</y-m>
@@ -1521,7 +1531,17 @@
 </model>
 <model>
   <name>v-52-2</name>
-  <path>Aircraft/tu154b/Instruments-3d/nvu/v-52-2.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/nvu/v-52.xml</path>
+  <overlay>
+    <params>
+      <index>2</index>
+      <index-other>1</index-other>
+      <S>tu154/systems/nvu/S-2-smooth</S>
+      <Z>tu154/systems/nvu/Z-2-smooth</Z>
+      <Spm>tu154/systems/nvu/Spm-2-smooth</Spm>
+      <Zpm>tu154/systems/nvu/Zpm-2-smooth</Zpm>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-22.003</x-m>
     <y-m>-0.026</y-m>
@@ -5306,6 +5326,7 @@
 <!--Stabilizer-->
 <animation>
   <type>rotate</type>
+  <object-name>l_pct_tr16</object-name>
   <object-name>stabilizer</object-name>
   <object-name>elevator_left</object-name>
   <object-name>elevator_right</object-name>
@@ -5313,7 +5334,7 @@
   <factor>57.2958</factor>
   <offset-deg>-1.5</offset-deg>
   <center>
-    <x-m>16.9</x-m>
+    <x-m>16.5</x-m>
     <y-m>0.0</y-m>
     <z-m>8.355</z-m>
   </center>

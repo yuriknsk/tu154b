@@ -64,7 +64,7 @@
 <animation>
   <type>rotate</type>
   <object-name>needle_2</object-name>
-  <property>tu154/instrumentation/diss/drift-deg</property> 
+  <property>fdm/jsbsim/instrumentation/nvu/drift-angle</property>
   <axis>
     <x>-1.0</x>
     <y>0.0</y>

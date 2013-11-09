@@ -26,12 +26,9 @@
   <property>ap/roll-selector</property>
   <property>ap/input-heading-pnp</property>
   <property>ap/input-heading-zk</property>
-  <!--<property>ap/input-heading-nvu</property>-->
   <property>ap/input-at</property>
   
   <property>ap/suu-enable</property>
-  
- <!-- <property>ap/input-z</property>-->
   
 <!--  <property>ap/gs-distance</property>
   <property>ap/crosstrack-m</property> -->
@@ -720,7 +717,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
         <summer name="ap/heading-error-pnp">
           <input> -instrumentation/pnp-heading </input>
           <input> ap/input-heading-pnp </input>
-          <input> -instrumentation/drift-angle-deg </input>
+          <input> -instrumentation/nvu/drift-angle </input>
         </summer>
 <!--
         <switch name="ap/heading-error-vor">
@@ -773,7 +770,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
         </summer>
         <!--******************************* NVU Staff ***************************-->
         <pure_gain name="ap/nvu-delta-corr">
-          <input> ap/input-z </input>
+          <input> instrumentation/nvu/Z-active </input>
           <gain> 0.01 </gain>
           <clipto>
             <min> -60 </min>
@@ -783,16 +780,16 @@ There is a system for enchance pitch control. It read pitch trimmer position and
         
         <summer name="ap/heading-error-nvu">
           <input> -instrumentation/tks-heading </input>
-          <input> ap/input-heading-nvu </input>
+          <input> instrumentation/nvu/ZPU-active </input>
           <input> -ap/nvu-delta-corr </input>
-          <input> -instrumentation/drift-angle-deg </input>
+          <input> -instrumentation/nvu/drift-angle </input>
         </summer>
 
 <!--******************************* ILS Staff ***************************-->
         <summer name="ap/heading-error-ils">
           <input> -instrumentation/pnp-heading </input>
           <input> ap/input-heading-pnp </input>
-	  <input> -instrumentation/drift-angle-deg </input>
+	  <input> -instrumentation/nvu/drift-angle </input>
         </summer>
 
         <switch name="ap/ils-error-bias-switch">
@@ -895,7 +892,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
         </pure_gain>
 	
         <pure_gain name="ap/heading-needle-deflection-nvu">
-          <input> -ap/input-z </input>
+          <input> -instrumentation/nvu/Z-active </input>
           <gain>0.0002</gain>
           <clipto>
             <min> -1 </min>
