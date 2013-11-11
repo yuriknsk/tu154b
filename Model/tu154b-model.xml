@@ -978,10 +978,12 @@
   <name>skawk</name>
   <path>Aircraft/tu154b/Instruments-3d/skawk/skawk.xml</path>
   <offsets>
-    <x-m>-22.086</x-m>
-    <y-m>0.016</y-m>
-    <z-m>2.422</z-m>
-    <pitch-deg>69.0</pitch-deg>
+    <x-m>-22.22</x-m>
+    <y-m>-0.949</y-m>
+    <z-m>1.53</z-m>
+    <heading-deg>72</heading-deg>
+    <roll-deg>-1</roll-deg>
+    <pitch-deg>-77</pitch-deg>
   </offsets>
 </model>
 <!--RSBN-->
