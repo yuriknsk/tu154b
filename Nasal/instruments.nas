@@ -1160,44 +1160,6 @@ setlistener("tu154/instrumentation/skawk/handle-5", skawk_handler,0,0 );
 if( getprop( "instrumentation/transponder/inputs/digit" ) != nil ) skawk_init();
 
 
-# COM radio support
-var com_1_handler = func {
-var hi_digit = getprop( "tu154/instrumentation/com-1/digit-f-hi" );
-if ( hi_digit == nil ) hi_digit = 108.0;
-var low_digit = getprop( "tu154/instrumentation/com-1/digit-f-low" );
-if ( low_digit == nil ) low_digit = 0;
-setprop("instrumentation/comm[0]/frequencies/selected-mhz", hi_digit + low_digit/100 );
-}
-
-var com_2_handler = func {
-var hi_digit = getprop( "tu154/instrumentation/com-2/digit-f-hi" );
-if ( hi_digit == nil ) hi_digit = 108.0;
-var low_digit = getprop( "tu154/instrumentation/com-2/digit-f-low" );
-if ( low_digit == nil ) low_digit = 0;
-setprop("instrumentation/comm[1]/frequencies/selected-mhz", hi_digit + low_digit/100 );
-}
-
-var com_radio_init = func {
-
-var freq = getprop( "instrumentation/comm[0]/frequencies/selected-mhz" );
-    if ( freq == nil ) freq = 108.00;
-    setprop( "tu154/instrumentation/com-1/digit-f-hi", int(freq) );
-    setprop( "tu154/instrumentation/com-1/digit-f-low", (freq - int(freq)) * 100 );
-    freq = getprop( "instrumentation/comm[1]/frequencies/selected-mhz" );
-    if ( freq == nil ) freq = 108.00;
-    setprop( "tu154/instrumentation/com-2/digit-f-hi", int(freq) );
-    setprop( "tu154/instrumentation/com-2/digit-f-low", (freq - int(freq)) * 100 );
-    setprop("instrumentation/comm[0]/serviceable", 0 );
-    setprop("instrumentation/comm[1]/serviceable", 0 );
-}
-
-com_radio_init();
-
-setlistener("tu154/instrumentation/com-1/digit-f-hi", com_1_handler,0,0);
-setlistener("tu154/instrumentation/com-1/digit-f-low", com_1_handler,0,0);
-setlistener("tu154/instrumentation/com-2/digit-f-hi", com_2_handler,0,0);
-setlistener("tu154/instrumentation/com-2/digit-f-low", com_2_handler,0,0);
-
 # BKK support
 
 bkk_handler = func{

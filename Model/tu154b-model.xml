@@ -943,21 +943,33 @@
 <!--Comm radio-->
 <model>
   <name>comm-1</name>
-  <path>Aircraft/tu154b/Instruments-3d/com/com-1.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/com/com.xml</path>
+  <overlay>
+    <params>
+      <freq>instrumentation/comm[0]/frequencies/selected-mhz</freq>
+      <volume>instrumentation/comm[0]/volume</volume>
+    </params>
+  </overlay>
   <offsets>
-    <x-m>-22.257</x-m>
+    <x-m>-22.172</x-m>
     <y-m>0.017</y-m>
-    <z-m>2.361</z-m>
+    <z-m>2.396</z-m>
     <pitch-deg>69.0</pitch-deg>
   </offsets>
 </model>
 <model>
   <name>comm-2</name>
-  <path>Aircraft/tu154b/Instruments-3d/com/com-2.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/com/com.xml</path>
+  <overlay>
+    <params>
+      <freq>instrumentation/comm[1]/frequencies/selected-mhz</freq>
+      <volume>instrumentation/comm[1]/volume</volume>
+    </params>
+  </overlay>
   <offsets>
-    <x-m>-22.172</x-m>
+    <x-m>-22.257</x-m>
     <y-m>0.017</y-m>
-    <z-m>2.396</z-m>
+    <z-m>2.361</z-m>
     <pitch-deg>69.0</pitch-deg>
   </offsets>
 </model>
