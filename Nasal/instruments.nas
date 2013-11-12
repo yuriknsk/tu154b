@@ -159,9 +159,7 @@ var range_wrap = func(val, min, max) {
 # channels.
 #
 # When /tu154/instrumentation/distance-to-pnp is set to true distance
-# digit wheels show active abs(S) in NVU mode, DME value in VOR modes,
-# ILS-DME value in SP mode, or blanked zeroes in normal mode or when
-# there's no DME in range.
+# digit wheels show abs(S) from active NVU block.
 #
 #
 # Implementation:
@@ -175,25 +173,6 @@ var range_wrap = func(val, min, max) {
 # not have to recompute needle values every frame.
 #
 
-# Smooth DME updates.
-var dme_distance = func(i) {
-    var distance = getprop("instrumentation/dme["~i~"]/indicated-distance-nm");
-    # We ignore exact zero distance because it signifies out of range
-    # condition, and we want to keep last value in this case.  Within DME
-    # proximity exact zero distance is highly unlikely, and close to zero
-    # update will be enough.
-    if (distance) {
-        distance = int(distance * 18.52) * 100;
-        interpolate("tu154/instrumentation/dme["~i~"]/distance", distance, 0.2);
-    }
-}
-setlistener("instrumentation/dme[0]/indicated-distance-nm",
-            func { dme_distance(0) }, 0, 0);
-setlistener("instrumentation/dme[1]/indicated-distance-nm",
-            func { dme_distance(1) }, 0, 0);
-setlistener("instrumentation/dme[2]/indicated-distance-nm",
-            func { dme_distance(2) }, 0, 0);
-
 var pnp_mode_update = func(i, mode) {
     var plane = "/tu154/instrumentation/pnp["~i~"]/plane-dialed";
     var defl_course = 0;
@@ -206,31 +185,17 @@ var pnp_mode_update = func(i, mode) {
         plane = "fdm/jsbsim/instrumentation/nvu/ZPU-active";
         defl_course = "fdm/jsbsim/instrumentation/nvu/Z-deflection";
         blank_course = 0;
-        if (getprop("tu154/instrumentation/distance-to-pnp")) {
-            distance = "fdm/jsbsim/instrumentation/nvu/S-active";
-            blank_dist = 0;
-        }
     } else if (mode == 2 and !getprop("instrumentation/nav[0]/nav-loc")) { #VOR1
         if (getprop("instrumentation/nav[0]/in-range")) {
             defl_course =
                 "instrumentation/nav[0]/heading-needle-deflection-norm";
             blank_course = 0;
         }
-        if (getprop("tu154/instrumentation/distance-to-pnp")
-            and getprop("instrumentation/dme[0]/in-range")) {
-            distance = "tu154/instrumentation/dme[0]/distance";
-            blank_dist = 0;
-        }
     } else if (mode == 3 and !getprop("instrumentation/nav[1]/nav-loc")) { #VOR2
         if (getprop("instrumentation/nav[1]/in-range")) {
             defl_course =
                 "instrumentation/nav[1]/heading-needle-deflection-norm";
             blank_course = 0;
-        }
-        if (getprop("tu154/instrumentation/distance-to-pnp")
-            and getprop("instrumentation/dme[1]/in-range")) {
-            distance = "tu154/instrumentation/dme[1]/distance";
-            blank_dist = 0;
         }
     } else if (mode == 4 and getprop("instrumentation/nav[0]/nav-loc")) { # SP
         if (getprop("instrumentation/nav[0]/in-range")) {
@@ -242,11 +207,11 @@ var pnp_mode_update = func(i, mode) {
             defl_gs = "instrumentation/nav[0]/gs-needle-deflection-norm";
             blank_gs = 0;
         }
-        if (getprop("tu154/instrumentation/distance-to-pnp")
-            and getprop("instrumentation/dme[0]/in-range")) {
-            distance = "tu154/instrumentation/dme[0]/distance";
-            blank_dist = 0;
-        }
+    }
+    if (getprop("tu154/instrumentation/distance-to-pnp")
+        and getprop("fdm/jsbsim/instrumentation/nvu/active")) {
+        distance = "fdm/jsbsim/instrumentation/nvu/S-active";
+        blank_dist = 0;
     }
     setprop("tu154/instrumentation/pnp["~i~"]/mode", mode);
     realias("/tu154/instrumentation/pnp["~i~"]/plane-deg", plane, 0.5,
@@ -312,13 +277,36 @@ setlistener("instrumentation/heading-indicator[1]/serviceable",
 
 setlistener("fdm/jsbsim/instrumentation/nvu/active", pnp_both_mode_update, 0, 0);
 setlistener("tu154/instrumentation/distance-to-pnp", pnp_both_mode_update);
-setlistener("instrumentation/dme[0]/in-range", pnp_both_mode_update, 0, 0);
-setlistener("instrumentation/dme[1]/in-range", pnp_both_mode_update, 0, 0);
 setlistener("instrumentation/nav[0]/nav-loc", pnp_both_mode_update, 0, 0);
 setlistener("instrumentation/nav[1]/nav-loc", pnp_both_mode_update, 0, 0);
 setlistener("instrumentation/nav[0]/in-range", pnp_both_mode_update, 0, 0);
 setlistener("instrumentation/nav[1]/in-range", pnp_both_mode_update, 0, 0);
 setlistener("instrumentation/nav[0]/gs-in-range", pnp_both_mode_update, 0, 0);
+
+
+######################################################################
+#
+# DME
+#
+
+# Smooth DME updates.
+var dme_distance = func(i) {
+    var distance = getprop("instrumentation/dme["~i~"]/indicated-distance-nm");
+    # We ignore exact zero distance because it signifies out of range
+    # condition, and we want to keep last value in this case.  Within DME
+    # proximity exact zero distance is highly unlikely, and close to zero
+    # update will be enough.
+    if (distance) {
+        distance = int(distance * 18.52) * 100;
+        interpolate("tu154/instrumentation/dme["~i~"]/distance", distance, 0.2);
+    }
+}
+setlistener("instrumentation/dme[0]/indicated-distance-nm",
+            func { dme_distance(0) }, 0, 0);
+setlistener("instrumentation/dme[1]/indicated-distance-nm",
+            func { dme_distance(1) }, 0, 0);
+setlistener("instrumentation/dme[2]/indicated-distance-nm",
+            func { dme_distance(2) }, 0, 0);
 
 
 ######################################################################
@@ -2026,6 +2014,8 @@ if( ac200 == nil ) return; # system not ready yet
 if( ac200 > 150.0 )
 	{ # 200 V 400 Hz Line 1 Power OK
 	setprop("tu154/instrumentation/ark-15[0]/powered", 1 ); 
+        setprop("instrumentation/dme[0]/serviceable",
+                (getprop("tu154/switches/dme-1-power") == 1));
 	setprop("instrumentation/nav[2]/powered", 1 ); 
 	setprop("instrumentation/dme[2]/serviceable", 1 );
         setprop("tu154/systems/nvu/powered",
@@ -2035,14 +2025,12 @@ if( ac200 > 150.0 )
 		{
 		setprop("instrumentation/nav[0]/power-btn", 1 );
 		setprop("instrumentation/nav[0]/serviceable", 1 );
-		setprop("instrumentation/dme[0]/serviceable", 1 );
 		setprop("instrumentation/marker-beacon[0]/power-btn", 1 );
 		setprop("instrumentation/marker-beacon[0]/serviceable", 1 );		
 		}
 	else	{
 		setprop("instrumentation/nav[0]/power-btn", 0 );
 		setprop("instrumentation/nav[0]/serviceable", 0 );
-		setprop("instrumentation/dme[0]/serviceable", 0 );
 		setprop("instrumentation/marker-beacon[0]/power-btn", 0 );
 		setprop("instrumentation/marker-beacon[0]/serviceable", 0 );
 		}
@@ -2107,6 +2095,7 @@ if( ac200 > 150.0 )
 # turn off all consumers if bus has gone
 else	{
 	setprop("tu154/instrumentation/ark-15[0]/powered", 0 ); 
+	setprop("instrumentation/dme[0]/serviceable", 0 );
 	setprop("instrumentation/nav[2]/powered", 0 ); 
 	setprop("instrumentation/dme[2]/serviceable", 0 );
 	setprop("tu154/systems/nvu/powered", 0.0 );
@@ -2133,17 +2122,17 @@ if( ac200 == nil ) return; # system not ready yet
 if( ac200 > 150.0 )
 	{ # 200 V 400 Hz Line 3 Power OK
 	setprop("tu154/instrumentation/ark-15[1]/powered", 1 );
+        setprop("instrumentation/dme[1]/serviceable",
+                (getprop("tu154/switches/dme-2-power") == 1));
 	# KURS-MP right
 	if( getprop( "tu154/switches/KURS-MP-2" ) == 1.0 )
 		{
 		setprop("instrumentation/nav[1]/power-btn", 1 );
 		setprop("instrumentation/nav[1]/serviceable", 1 );
-		setprop("instrumentation/dme[1]/serviceable", 1 );
 		}
 	else	{
 		setprop("instrumentation/nav[1]/power-btn", 0 );
 		setprop("instrumentation/nav[1]/serviceable", 0 );
-		setprop("instrumentation/dme[1]/serviceable", 0 );
 		}
 	# GA3-2
 	if( getprop( "tu154/switches/TKC-power-2" ) == 1.0 )
@@ -2179,6 +2168,7 @@ if( ac200 > 150.0 )
 
 else	{
 	setprop("tu154/instrumentation/ark-15[1]/powered", 0 ); 
+        setprop("instrumentation/dme[1]/serviceable", 0 );
 	setprop("instrumentation/nav[1]/power-btn", 0 );
 	setprop("instrumentation/nav[1]/serviceable", 0 );
 	setprop("instrumentation/heading-indicator[1]/serviceable", 0 );

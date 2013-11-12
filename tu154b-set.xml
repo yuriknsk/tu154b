@@ -494,13 +494,15 @@
   <dme n="0">
     <serviceable type="bool">false</serviceable>
     <frequencies>
-      <source>/instrumentation/nav[0]/frequencies/selected-mhz</source>
+      <selected-mhz type="double">115.8</selected-mhz>
+      <source>/instrumentation/dme[0]/frequencies/selected-mhz</source>
     </frequencies>
   </dme>
   <dme n="1">
     <serviceable type="bool">false</serviceable>
     <frequencies>
-      <source>/instrumentation/nav[1]/frequencies/selected-mhz</source>
+      <selected-mhz type="double">116.8</selected-mhz>
+      <source>/instrumentation/dme[1]/frequencies/selected-mhz</source>
     </frequencies>
   </dme>
   <dme n="2">
