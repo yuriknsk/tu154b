@@ -182,7 +182,8 @@ var autostart_helper_1 = func{
 # continue autostart procedure...
 var autostart_helper_2 = func{
 	# Drop gyros failure control system
-	instruments.bkk_reset();
+	instruments.bkk_reset(1);
+	instruments.bkk_reset(2);
 	# hydrosystem
 	setprop("tu154/switches/ra-56-pitch-1-hydropower", 1.0 );
 	setprop("tu154/switches/ra-56-pitch-2-hydropower", 1.0 );

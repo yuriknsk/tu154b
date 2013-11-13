@@ -1307,9 +1307,8 @@ if ( arg[0] == 3 )
 
 }
 
-bkk_reset = func{
-setprop("tu154/instrumentation/bkk/mgv-1-failure", 0);
-setprop("tu154/instrumentation/bkk/mgv-2-failure", 0);
+bkk_reset = func(i) {
+setprop("tu154/instrumentation/bkk/mgv-"~i~"-failure", 0);
 setprop("tu154/instrumentation/bkk/mgv-contr-failure", 0);
 setprop("tu154/systems/electrical/indicators/contr-gyro", 0);
 setprop("tu154/systems/electrical/indicators/mgvk-failure", 0);
