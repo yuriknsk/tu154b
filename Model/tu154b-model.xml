@@ -138,6 +138,8 @@
   <path>Aircraft/tu154b/Instruments-3d/pkp/pkp.xml</path>
   <overlay>
     <params>
+      <pitch>instrumentation/attitude-indicator[0]/indicated-pitch-deg</pitch>
+      <roll>instrumentation/attitude-indicator[0]/indicated-roll-deg</roll>
       <defl-course>tu154/instrumentation/pnp[0]/defl-course</defl-course>
       <defl-gs>tu154/instrumentation/pnp[0]/defl-gs</defl-gs>
       <failed>tu154/instrumentation/bkk/mgv-1-failure</failed>
@@ -468,6 +470,8 @@
   <path>Aircraft/tu154b/Instruments-3d/pkp/pkp.xml</path>
   <overlay>
     <params>
+      <pitch>instrumentation/attitude-indicator[1]/indicated-pitch-deg</pitch>
+      <roll>instrumentation/attitude-indicator[1]/indicated-roll-deg</roll>
       <defl-course>tu154/instrumentation/pnp[1]/defl-course</defl-course>
       <defl-gs>tu154/instrumentation/pnp[1]/defl-gs</defl-gs>
       <failed>tu154/instrumentation/bkk/mgv-2-failure</failed>

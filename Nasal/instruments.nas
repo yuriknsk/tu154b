@@ -11,6 +11,10 @@
 # Utility classes and functions.
 #
 
+# Before anything else change random seed.
+srand();
+
+
 # Chase() works like interpolate(), but tracks value changes, supports
 # wraparound, and allows cancellation.
 var Chase = {
@@ -2215,6 +2219,19 @@ gear_handler();
 # Set random gyro deviation
 setprop("instrumentation/heading-indicator[0]/offset-deg", 359.0 * rand() );
 setprop("instrumentation/heading-indicator[1]/offset-deg", 359.0 * rand() );
+
+setprop("instrumentation/attitude-indicator[0]/internal-pitch-deg",
+        -70 + 140 * rand());
+setprop("instrumentation/attitude-indicator[0]/internal-roll-deg",
+        -70 + 140 * rand());
+setprop("instrumentation/attitude-indicator[1]/internal-pitch-deg",
+        -70 + 140 * rand());
+setprop("instrumentation/attitude-indicator[1]/internal-roll-deg",
+        -70 + 140 * rand());
+setprop("instrumentation/attitude-indicator[2]/internal-pitch-deg",
+        -70 + 140 * rand());
+setprop("instrumentation/attitude-indicator[2]/internal-roll-deg",
+        -70 + 140 * rand());
 
 #save sound volume and deny sound for startup
 
