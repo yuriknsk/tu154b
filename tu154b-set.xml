@@ -333,6 +333,12 @@
     </property-rule>
   </systems>
 
+  <airport>
+    <runways>
+      <start-offset-m type="double">10</start-offset-m>
+    </runways>
+  </airport>
+
 </sim>
 
  <payload>
