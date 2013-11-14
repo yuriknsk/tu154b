@@ -661,7 +661,11 @@
       <script>
         if( getprop("tu154/switches/pu-46-cover-1") == 0.0 ){
         interpolate("tu154/switches/pu-46-cover-1", 1.0, 0.1 );}
-        else {interpolate("tu154/switches/pu-46-cover-1", 0.0, 0.1 );}
+        else {
+            interpolate("tu154/switches/pu-46-cover-1", 0.0, 0.1 );
+            interpolate("tu154/switches/pu-46-boltanka", 0.0, 0.1 );
+            setprop("fdm/jsbsim/ap/turbulence", 0.0 );
+        }
       </script>
     </binding>
   </action>

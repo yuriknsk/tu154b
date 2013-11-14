@@ -1458,10 +1458,11 @@
   <name>sw-81</name>
   <path>Aircraft/tu154b/Instruments-3d/switches/azs3-17.xml</path>
   <offsets>
-    <x-m>-22.465</x-m>
+    <x-m>-22.463</x-m>
     <y-m>-0.271</y-m>
-    <z-m>2.307</z-m>
-    <pitch-deg>26.5</pitch-deg>
+    <z-m>2.31</z-m>
+    <pitch-deg>-26.5</pitch-deg>
+    <roll-deg>180</roll-deg>
   </offsets>
 </model>
 <model>
@@ -3302,7 +3303,8 @@
     <x-m>-20.814</x-m>
     <y-m>0.879</y-m>
     <z-m>2.364</z-m>
-    <pitch-deg>47.0</pitch-deg>
+    <pitch-deg>-47.0</pitch-deg>
+    <roll-deg>180</roll-deg>
     <heading-deg>-90.0</heading-deg>
   </offsets>
 </model>
