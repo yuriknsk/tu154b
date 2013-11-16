@@ -911,7 +911,7 @@
     <system file="nvu"/>
     <system file="pushback"/>
     <autopilot file="Systems/absu154"/>
-<!--    <autopilot file="absu154"/>-->
+
     
     <aerodynamics>
 <!--    
@@ -1459,7 +1459,7 @@
 	</direction>
       </force>
    </external_reactions>
-<!--    
+    
     <output name="tu-fldata.csv" type="CSV" rate="1">
         <simulation> OFF </simulation>
         <atmosphere> OFF </atmosphere>
@@ -1474,16 +1474,14 @@
         <ground_reactions> OFF </ground_reactions>
         <fcs> OFF </fcs>
         <propulsion> ON </propulsion>
-	<property>velocities/v-down-fps</property>
+	<property>velocities/vc-kts</property>
 	<property>velocities/vc-fps</property>
 	<property>fcs/flap-pos-deg</property>
 	<property>ap/speed-pid</property>
 	<property>ap/speed-error-switched</property>
 	<property>instrumentation/pnp-heading</property>
-	<property>ap/gs-trigger</property>
-	<property>ap/gs-pid</property>
-	<property>ap/gs-error-switched</property>
-	<property>ap/gs-error</property>
+	<property>debug/wp-hdg-corrected</property>
+	<property>debug/wp-distance</property>
     </output>
-    -->
+
   </fdm_config>
