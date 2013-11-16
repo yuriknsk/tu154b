@@ -247,7 +247,7 @@
   <animation>
     <type>rotate</type>
     <object-name>drift</object-name>
-    <property>tu154/instrumentation/diss/drift-deg</property>
+    <property>fdm/jsbsim/instrumentation/nvu/drift-angle</property>
     <max-deg>20.0</max-deg>
     <min-deg>-20.0</min-deg>
     <axis>

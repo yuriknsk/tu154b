@@ -4,7 +4,7 @@
     #    (C) 2007 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
     #	2d & 3d instruments, animations, systems and over.		   	#
     #    	yurik@megasignal.com					   	#
-    #############################################################################	  
+    #############################################################################
     -->
 
 <!-- IAS/groundspeed indicator USVP
@@ -16,8 +16,7 @@
   <type>material</type>
   <object-name>base</object-name>
   <object-name>text</object-name>
-  <object-name>needle_1</object-name>
-  <object-name>needle_2</object-name>
+  <object-name>needle</object-name>
   <object-name>vozd</object-name>
   <object-name>put</object-name>
   <object-name>top</object-name>
@@ -28,51 +27,24 @@
   </emission>
 </animation>
 
-  
-<!--Source selector-->
-<animation>
-  <type>select</type>
-  <object-name>needle_1</object-name>
-  <condition>
-    <not><property>tu154/switches/usvp-selector</property></not>
-  </condition>
-</animation>
-<animation>
-  <type>select</type>
-  <object-name>needle_2</object-name>
-  <condition>
-    <property>tu154/switches/usvp-selector</property>
-  </condition>
-</animation>
 
 <!--Needles-->
 <animation>
     <type>rotate</type>
-    <object-name>needle_1</object-name>
-    <property>fdm/jsbsim/velocities/vt-fps</property>
-    <factor>0.396</factor>
+    <object-name>needle</object-name>
+    <property>tu154/instrumentation/usvp/speed-fps</property>
+    <factor>0.3950208</factor>
     <axis>
       <x>-1.0</x>
       <y>0.0</y>
       <z>0.0</z>
     </axis>
 </animation>
-<animation>
-  <type>rotate</type>
-  <object-name>needle_2</object-name>
-  <property>tu154/instrumentation/diss/groundspeed-kmh</property>
-  <factor>0.36</factor>
-  <axis>
-    <x>-1.0</x>
-    <y>0.0</y>
-    <z>0.0</z>
-  </axis>
-</animation>
 
 <animation>
   <type>rotate</type>
   <object-name>handle</object-name>
-  <property>tu154/switches/usvp-selector</property>
+  <property>tu154/switches/usvp-selector-trans</property>
   <factor>30.0</factor>
   <center>
     <x-m>0.0</x-m>
@@ -95,13 +67,12 @@
     <repeatable>false</repeatable>
     <binding>
       <command>nasal</command>
-        <script>
-          var selector = getprop("tu154/switches/usvp-selector");
-          if( selector == nil ) selector = 0.0;
-          selector = selector + 1;
-          if( selector > 1.0 ) selector = 0.0;
-          interpolate("tu154/switches/usvp-selector", selector, 0.15);
-        </script>
+      <script>
+        var sel = getprop("tu154/switches/usvp-selector") or 0;
+        sel = 1 - sel;
+        setprop("tu154/switches/usvp-selector", sel);
+        interpolate("tu154/switches/usvp-selector-trans", sel, 0.15);
+      </script>
     </binding>
   </action>
 </animation>

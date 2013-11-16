@@ -32,37 +32,6 @@
   <property>instrumentation/az-err</property>
 
   <channel name="Externals">
-    <!-- *********************** DISS staff *********************** -->
-    <fcs_function name="instrumentation/drift-angle-raw">
-	    <description>Ground true heading</description>
-	    <function>
-	      <product>
-		<difference>
-		    <atan2>
-			    <property>velocities/v-east-fps</property>
-			    <property>velocities/v-north-fps</property>
-
-		    </atan2>
-		    <property>attitude/heading-true-rad</property>
-	        </difference>
-		<value>57.29578</value>
-	      </product>
-	    </function>
-    </fcs_function>
-    <switch name="instrumentation/drift-angle-bias">
-	    <default value="0.0"/>
-	    <test value="360.0">
-		    instrumentation/drift-angle-raw lt -180
-	    </test>
-	    <test value="-360.0">
-		    instrumentation/drift-angle-raw gt 180
-	    </test>
-    </switch>
-    <summer name="instrumentation/drift-angle-deg">
-	    <input>instrumentation/drift-angle-raw</input>
-	    <input>instrumentation/drift-angle-bias</input>
-    </summer>
-    
     
     <!-- ******************* voice warning staff ****************** -->
     <pure_gain name="instrumentation/mass-kg">

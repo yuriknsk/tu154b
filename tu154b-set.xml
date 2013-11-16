@@ -326,6 +326,13 @@
 		<int n="14" alias="/tu154/contrail/condensation"/>
             </generic>
   </multiplay>
+
+  <systems>
+    <property-rule>
+      <path>Aircraft/tu154b/Systems/property-rules.xml</path>
+    </property-rule>
+  </systems>
+
 </sim>
 
  <payload>
@@ -396,16 +403,31 @@
       <tyre-smoke type="int">0</tyre-smoke>
       <sprayspeed-ms type="double">0</sprayspeed-ms>
       <spray-density type="double">0</spray-density>
+      <zsink-in type="double">25</zsink-in>
     </gear>
     <gear n="1">
       <tyre-smoke type="int">0</tyre-smoke>
       <sprayspeed-ms type="double">0</sprayspeed-ms>
       <spray-density type="double">0</spray-density>
+      <zsink-in type="double">25</zsink-in>
     </gear>
     <gear n="2">
       <tyre-smoke type="int">0</tyre-smoke>
       <sprayspeed-ms type="double">0</sprayspeed-ms>
       <spray-density type="double">0</spray-density>
+      <zsink-in type="double">25</zsink-in>
+    </gear>
+    <gear n="3">
+      <zsink-in type="double">25</zsink-in>
+    </gear>
+    <gear n="4">
+      <zsink-in type="double">25</zsink-in>
+    </gear>
+    <gear n="5">
+      <zsink-in type="double">25</zsink-in>
+    </gear>
+    <gear n="6">
+      <zsink-in type="double">25</zsink-in>
     </gear>
  </gear>
 
@@ -547,7 +569,7 @@
 	 </tyresmoke>
 	<friction>
 	  <file>Aircraft/tu154b/Nasal/friction.nas</file>
-	 </friction>
+	</friction>
 	<!--
       <debug>
   <file>Aircraft/tu154b/Nasal/debug.nas</file>
@@ -571,6 +593,14 @@
       <bgmk-offset-1>50</bgmk-offset-1>
       <bgmk-offset-2>250</bgmk-offset-2>
       <indicated-altitude-m>0</indicated-altitude-m>
+
+      <nvu>
+        <stopped type="int">1</stopped>
+
+        <Spm-active type="double">0</Spm-active>
+        <Zpm-active type="double">0</Zpm-active>
+      </nvu>
+
     </instrumentation>
     <ap>
 <!--      <gs-gain>8.0</gs-gain>-->
@@ -588,7 +618,6 @@
      <pitch-selector>0</pitch-selector>-->
     </ap>
     <gear>
-      <static-friction type="double">0.6</static-friction>
       <gear-cmd-static type="double">1.0</gear-cmd-static>
     </gear>
     <fcs>
@@ -1060,7 +1089,8 @@
     <!--<roll-limit type="double" >15.0</roll-limit>-->
   </bkk>   
   <v-57>
-    <fork-deg type="double" >0.0</fork-deg>
+    <speed-adjust-step type="double">0.25</speed-adjust-step>
+    <azimuth-adjust-step type="double">0.25</azimuth-adjust-step>
   </v-57>
   <rsbn>
     <handle-1 type="double" >0.0</handle-1>
@@ -1080,7 +1110,16 @@
     <accelerate-max type="double" >-1.0</accelerate-max>
     <accelerate-min type="double" >-1.0</accelerate-min>
   </uap-12>
-  
+
+    <v-140>
+      <adjust-step-1 type="double">0.1</adjust-step-1>
+      <adjust-step-2 type="double">0.1</adjust-step-2>
+    </v-140>
+    <v-51>
+      <adjust-speed type="int">1000</adjust-speed>
+      <scale type="int">1</scale>
+    </v-51>
+
   </instrumentation>
   
   
@@ -1128,16 +1167,20 @@
       <ga3-2 type="double" >6.0</ga3-2>
     </tks>
     <nvu>
-      <!--<powered type="bool" >false</powered>-->
-      <selector type="bool" >false</selector>
-      <serviceable type="bool" >false</serviceable>
-      <powered type="double" >0.0</powered>
-      <trigger type="bool" >false</trigger>
-      <mult-1 type="double" >1.0</mult-1>
-      <mult-2 type="double" >1.0</mult-2>
-      <mult-3 type="double" >1.0</mult-3>
-      <rsbn-corr type="bool" >false</rsbn-corr>
-      <mode type="bool" >true</mode>
+      <powered type="double">0</powered>
+      <leg type="int">0</leg>
+      <leg-next type="int">1</leg-next>
+      <wind-speed type="double">0</wind-speed>
+      <wind-azimuth type="double">0</wind-azimuth>
+      <S-1-smooth type="double">0</S-1-smooth>
+      <Z-1-smooth type="double">0</Z-1-smooth>
+      <Spm-1-smooth type="double">0</Spm-1-smooth>
+      <Zpm-1-smooth type="double">0</Zpm-1-smooth>
+      <S-2-smooth type="double">0</S-2-smooth>
+      <Z-2-smooth type="double">0</Z-2-smooth>
+      <Spm-2-smooth type="double">0</Spm-2-smooth>
+      <Zpm-2-smooth type="double">0</Zpm-2-smooth>
+      <wind-fork type="double">0</wind-fork>
     </nvu>
     <warning>
       <deploy-flaps type="double" >0.0</deploy-flaps>
@@ -1163,8 +1206,8 @@
     <pu-46-cover-1 type="double" >0.0</pu-46-cover-1>
     <pu-46-cover-2 type="double" >0.0</pu-46-cover-2>
     <usvp-selector type="double" >0.0</usvp-selector>
-    <v-51-selector-1 type="double" >1.0</v-51-selector-1>
-    <v-51-selector-2 type="double" >1.0</v-51-selector-2>
+    <v-51-selector-1 type="double" >0</v-51-selector-1>
+    <v-51-selector-2 type="double" >0</v-51-selector-2>
     <stab-manu-selector type="double" >1.0</stab-manu-selector>
     <stab-auto-handle type="double" >1.0</stab-auto-handle>
     <busters-cover type="double" >1.0</busters-cover>

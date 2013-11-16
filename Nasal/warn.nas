@@ -71,7 +71,6 @@ setprop("tu154/systems/electrical/indicators/nvu-failure", 0 );
 setprop("tu154/systems/electrical/indicators/nvu-vor-avton", 0 );
 
 setprop("tu154/instrumentation/uap-12/warn", 0 );
-setprop("tu154/systems/electrical/indicators/memory-diss", 0 );
 setprop("tu154/systems/electrical/indicators/rudder-trim-neutral", 0 );
 setprop("tu154/systems/electrical/indicators/aileron-trim-neutral", 0 );
 setprop("tu154/systems/electrical/indicators/elevator-trim-neutral", 0 );
@@ -469,7 +468,6 @@ var check_lamps_capt = func{
         setprop("tu154/systems/electrical/indicators/nvu-failure", param );
 	setprop("tu154/systems/electrical/indicators/nvu-vor-avton", param );
 	
-	setprop("tu154/systems/electrical/indicators/memory-diss", param );
         setprop("tu154/systems/electrical/indicators/rudder-trim-neutral", param );
         setprop("tu154/systems/electrical/indicators/aileron-trim-neutral", param );
         setprop("tu154/systems/electrical/indicators/elevator-trim-neutral", param );
@@ -807,12 +805,6 @@ if(  getprop( "tu154/instrumentation/uap-12/powered" ) > 0.0 )
  else setprop("tu154/instrumentation/uap-12/warn", 0 );
 
  }
-
-# DISS
-
-if( getprop("tu154/instrumentation/diss/serviceable") == 0.0 )
-		setprop("tu154/systems/electrical/indicators/memory-diss", 1 );
-else setprop("tu154/systems/electrical/indicators/memory-diss", 0 );
 
 # Loaders RV-RN
 param = getprop("tu154/systems/warning/rvrn/timeout");

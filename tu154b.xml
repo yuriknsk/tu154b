@@ -46,7 +46,7 @@
         <ixz unit="KG*M2">0</ixz>
         <iyz unit="KG*M2">0</iyz>
         <ixy unit="KG*M2">0</ixy>
-        <emptywt unit="KG">54000</emptywt>
+        <emptywt unit="KG">53000</emptywt>
         <location name="CG" unit="M">
             <x>26.68</x>
             <y>0</y>
@@ -148,7 +148,15 @@
                 <y>0</y>
                 <z>0</z>
             </location>
-        </pointmass>       
+        </pointmass>
+        <pointmass name="Gear shift">
+            <weight unit="KG">1000</weight>
+            <location unit="M">
+                <x>26.68</x>
+                <y>0</y>
+                <z>1.8</z>
+            </location>
+        </pointmass>      
     </mass_balance>
 
     <ground_reactions>
@@ -156,7 +164,7 @@
             <location unit="M">
                 <x> 6.0 </x>
                 <y> 0.0 </y>
-                <z> -2.67 </z>
+                <z> -2.8 </z>
             </location>
             <static_friction> 0.6 </static_friction>
             <dynamic_friction> 0.8 </dynamic_friction>
@@ -831,29 +839,20 @@
         
         <channel name="Brake">
 <!--Left-->
-          <pure_gain name="gear/left-brake-cmd">
-            <input>gear/brake-left</input>
-  <!--You can change current static friction here, for model of ice condition etc. -->
-  	    <gain>gear/static-friction</gain> <!--default: 0.6 --> 
-          </pure_gain>
 <!--Check hydro power for brake-->
           <switch name="gear/left-brake-cmd-switched">
             <default value="0.0"/>
-            <test logic="OR" value="gear/left-brake-cmd">
+            <test logic="OR" value="gear/brake-left">
               hs/hs1-busters-ok > 0
               gear/brake-parking > 0
             </test>
             <output>fcs/left-brake-cmd-norm</output>
           </switch>
 <!--Right-->
-          <pure_gain name="gear/right-brake-cmd">
-            <input>gear/brake-right</input>
-            <gain>gear/static-friction</gain>
-          </pure_gain>
           
           <switch name="gear/right-brake-cmd-switched">
             <default value="0.0"/>
-            <test logic="OR" value="gear/right-brake-cmd">
+            <test logic="OR" value="gear/brake-right">
               hs/hs1-busters-ok > 0
               gear/brake-parking > 0
             </test>
@@ -862,43 +861,20 @@
           
         </channel>
 
-        <channel name="Steering">
-          
-          <switch name="gear/steering-switched">
-            <default value="hs/hs2-busters-ok"/>
-            <test value="gear/steering">
-              systems/electrical-ok == 1
-            </test>
-          </switch>
-          
-          <switch name="gear/nose-wheel-steering-switched">
-            <default value="hs/hs2-busters-ok"/>
-            <test value="gear/nose-wheel-steering">
-              systems/electrical-ok == 1
-            </test>
-          </switch>
-          
-          <scheduled_gain name="gear/steering-cmd-norm">
-            <input>-fcs/rudder-cmd-norm</input>
-            <table>
-              <independentVar> gear/steering-switched </independentVar>
-              <tableData>
-                10            0.158
-                63            1.0
-              </tableData>
-            </table>
-          </scheduled_gain>     
-          
-          <pure_gain name="gear/steering-cmd-norm-switched">
-            <input>gear/steering-cmd-norm</input>
-            <gain>gear/nose-wheel-steering-switched</gain>
-          </pure_gain>
-	  
-          <pure_gain name="gear/steering-cmd-norm-switched-deg">
-            <input>gear/steering-cmd-norm-switched</input>
-            <gain>63.0</gain>
-            <output>fcs/steer-pos-deg</output>
-          </pure_gain>
+        <channel name="Landing Gear Weight Shift">
+
+          <fcs_function name="aero/function/weight-shift-gears">
+                <function>
+                  <sum>
+                    <product>
+                        <property>gear/gear-pos-norm</property>
+                        <value>-192.91</value>
+                    </product>
+                    <value>1243.30</value>
+                  </sum>
+                </function>
+                <output> inertia/pointmass-location-X-inches[11] </output>
+            </fcs_function>
 
         </channel>
 
@@ -910,6 +886,7 @@
     <system file="instrumentation"/>
     <system file="nvu"/>
     <system file="pushback"/>
+    <system file="steering"/>
     <autopilot file="Systems/absu154"/>
 
     
@@ -1112,7 +1089,19 @@
                     <property>aero/qbar-psf</property>
                     <property>metrics/Sw-sqft</property>
                     <property>gear/gear-pos-norm</property>
-                    <value>0.0155</value>
+                    <table name="Gear drag due to mach">
+                        <independentVar>velocities/mach</independentVar>
+                        <tableData>
+                          0.2    0.0155
+                          0.3    0.0157
+                          0.4    0.0164
+                          0.5    0.0176
+                          0.6    0.0197
+                          0.7    0.0233
+                          0.8    0.0301
+                          0.9    0.0468
+                        </tableData>
+                    </table>
                 </product>
             </function>
             <function name="aero/coefficient/CDsb">
