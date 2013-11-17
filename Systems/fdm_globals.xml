@@ -34,6 +34,7 @@
         <!--Steering support-->
         <property>gear/steering</property>
         <property>gear/nose-wheel-steering</property>
+	<!--<property>fcs/steering/steer-cmd-norm-final</property>-->
 
         <!--Electrical support-->
         <property>systems/electrical-ok</property>
@@ -78,7 +79,9 @@
       
       <property>instrumentation/pnp-left-selector</property>
       <property>instrumentation/indicated-altitude-m</property>
-      
+
+      <property>instrumentation/nvu/active</property>
+      <property>instrumentation/nvu/stopped</property>
       
       <property>ap/navigac</property>
       <property>ap/posadk</property>
