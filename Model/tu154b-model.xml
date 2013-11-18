@@ -3626,12 +3626,7 @@
   <type>rotate</type>
   <object-name>c_wheel_Ob</object-name>
   <object-name>c_wheel_ME</object-name>
-  <property>gear/gear[0]/steering-norm</property>
-  <interpolation>
-    <entry><ind>	-1.0</ind>	<dep>	-63.0</dep></entry>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	63.0</dep></entry>
-  </interpolation>
+  <property>fdm/jsbsim/gear/steer-pos-deg</property>
   <axis>
     <x1-m>-16.91626</x1-m>
     <y1-m>0.0</y1-m>

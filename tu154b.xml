@@ -861,6 +861,79 @@
           
         </channel>
 
+        <channel name="Steering">
+
+          <fcs_function name="gear/steering-free-cmd-norm">
+            <function>
+              <sum>
+                <property>gear/steering-cmd-norm</property>
+                <product>
+                  <property>gear/unit[0]/wheel-speed-fps</property>
+                  <sum>
+                    <property>gear/unit[0]/side_friction_coeff</property>
+                    <property>gear/unit[0]/rolling_friction_coeff</property>
+                  </sum>
+                  <property>gear/unit[0]/compression-ft</property>
+                  <value>0.01</value>
+                </product>
+              </sum>
+            </function>
+            <clipto>
+              <min>-1</min>
+              <max>1</max>
+            </clipto>
+          </fcs_function>
+
+          <fcs_function name="gear/rudder-cmd-scaled">
+            <function>
+              <product>
+                <property>fcs/rudder-cmd-norm</property>
+                <value>0.015873</value>
+                <property>gear/steering</property>
+              </product>
+            </function>
+          </fcs_function>
+
+          <switch name="gear/steering-cmd-norm">
+            <test value="0">
+              gear/unit[0]/WOW == 0
+              gear/steering-cmd-norm lt 0.25
+              gear/steering-cmd-norm gt -0.25
+            </test>
+            <test value="gear/steering-cmd-norm">
+              gear/unit[0]/WOW == 0
+            </test>
+            <test value="-gear/rudder-cmd-scaled">
+              gear/nose-wheel-steering == 1
+              systems/electrical-ok == 1
+              hs/hs2-busters-ok == 1
+            </test>
+            <default value="gear/steering-free-cmd-norm"/>
+          </switch>
+
+          <kinematic name="gear/steer-pos-deg">
+            <input>gear/steering-cmd-norm</input>
+            <traverse>
+              <setting>
+                <position>-63</position>
+                <time>0</time>
+              </setting>
+              <setting>
+                <position>63</position>
+                <time>3</time>
+              </setting>
+            </traverse>
+          </kinematic>
+
+          <!-- <output> in <kinematic> doesn't seem to work here. -->
+          <pure_gain name="gear/steer-pos-deg-workaround">
+            <input>gear/steer-pos-deg</input>
+            <gain>1</gain>
+            <output>fcs/steer-pos-deg</output>
+          </pure_gain>
+
+        </channel>
+
         <channel name="Landing Gear Weight Shift">
 
           <fcs_function name="aero/function/weight-shift-gears">
@@ -886,7 +959,6 @@
     <system file="instrumentation"/>
     <system file="nvu"/>
     <system file="pushback"/>
-    <system file="steering"/>
     <autopilot file="Systems/absu154"/>
 
     
