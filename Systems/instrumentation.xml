@@ -32,37 +32,6 @@
   <property>instrumentation/az-err</property>
 
   <channel name="Externals">
-    <!-- *********************** DISS staff *********************** -->
-    <fcs_function name="instrumentation/drift-angle-raw">
-	    <description>Ground true heading</description>
-	    <function>
-	      <product>
-		<difference>
-		    <atan2>
-			    <property>velocities/v-east-fps</property>
-			    <property>velocities/v-north-fps</property>
-
-		    </atan2>
-		    <property>attitude/heading-true-rad</property>
-	        </difference>
-		<value>57.29578</value>
-	      </product>
-	    </function>
-    </fcs_function>
-    <switch name="instrumentation/drift-angle-bias">
-	    <default value="0.0"/>
-	    <test value="360.0">
-		    instrumentation/drift-angle-raw lt -180
-	    </test>
-	    <test value="-360.0">
-		    instrumentation/drift-angle-raw gt 180
-	    </test>
-    </switch>
-    <summer name="instrumentation/drift-angle-deg">
-	    <input>instrumentation/drift-angle-raw</input>
-	    <input>instrumentation/drift-angle-bias</input>
-    </summer>
-    
     
     <!-- ******************* voice warning staff ****************** -->
     <pure_gain name="instrumentation/mass-kg">
@@ -175,61 +144,6 @@
       <bias>-30.0</bias>
     </summer>
     
-    
-    <!-- ******************* RV-5M staff ****************** -->   
-    <pure_gain name="instrumentation/pitch-clipped-cone">
-      <input>attitude/pitch-rad</input>
-      <gain>1.0</gain>
-      <clipto>
-        <min>-0.26</min>
-        <max>0.26</max>
-      </clipto>
-    </pure_gain>
-    
-    <summer name="instrumentation/pitch-clipped">
-      <input>attitude/pitch-rad</input>
-      <input>-instrumentation/pitch-clipped-cone</input>
-    </summer>
-    
-    <pure_gain name="instrumentation/roll-clipped-cone">
-      <input>attitude/roll-rad</input>
-      <gain>1.0</gain>
-      <clipto>
-        <min>-0.26</min>
-        <max>0.26</max>
-      </clipto>
-    </pure_gain>
-    
-    <summer name="instrumentation/roll-clipped">
-       <input>attitude/roll-rad</input>
-       <input>-instrumentation/roll-clipped-cone</input>
-    </summer>
- 
-    <fcs_function name="instrumentation/h-angle-corr">
-      <description>cos from pitch and roll</description>
-      <function>
-        <quotient>
-          <value>0.3048</value> <!--From feet to meters-->
-          <product>
-            <cos>
-              <property>instrumentation/pitch-clipped</property>
-            </cos>
-            <cos>
-              <property>instrumentation/roll-clipped</property>
-            </cos>          
-          </product>
-        </quotient>
-      </function>
-    </fcs_function>
-    
-    <pure_gain name="instrumentation/indicated-altitude-m">
-      <input>position/h-agl-ft</input>
-      <gain>instrumentation/h-angle-corr</gain>
-      <clipto>
-        <min>0.0</min>
-        <max>850.0</max>
-      </clipto>
-    </pure_gain>
     
     <!-- ******************* AUASP ****************** -->   
             <lag_filter name="instrumentation/n-norm">
