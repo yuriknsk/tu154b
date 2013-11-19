@@ -147,6 +147,9 @@ var autostart_helper_1 = func{
 	setprop("tu154/switches/KURS-MP-1", 1.0 );
 	setprop("tu154/switches/KURS-MP-2", 1.0 );
 
+        setprop("tu154/switches/dme-1-power", 1);
+        setprop("tu154/switches/dme-2-power", 1);
+
 	setprop("tu154/switches/KURS-PNP-left", 1.0 );
 	setprop("/fdm/jsbsim/instrumentation/pnp-left-selector", 1.0 );
 	setprop("tu154/switches/KURS-PNP-right", 1.0 );
@@ -179,7 +182,8 @@ var autostart_helper_1 = func{
 # continue autostart procedure...
 var autostart_helper_2 = func{
 	# Drop gyros failure control system
-	instruments.bkk_reset();
+	instruments.bkk_reset(1);
+	instruments.bkk_reset(2);
 	# hydrosystem
 	setprop("tu154/switches/ra-56-pitch-1-hydropower", 1.0 );
 	setprop("tu154/switches/ra-56-pitch-2-hydropower", 1.0 );

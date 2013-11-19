@@ -29,11 +29,7 @@
   <type>rotate</type>
   <object-name>handle</object-name>
   <property>tu154/switches/BKK-test</property>  
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	-60.0</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	2.0</ind>	<dep>	60.0</dep></entry>
-  </interpolation>
+  <factor>60</factor>
   <axis>
     <x>0.0</x>
     <y>-1.0</y>
@@ -45,10 +41,8 @@
   <type>rotate</type>
   <object-name>cover</object-name>
   <property>tu154/switches/BKK-test-cover</property>  
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	10.0</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	110.0</dep></entry>
-  </interpolation>
+  <factor>100</factor>
+  <offset-deg>10</offset-deg>
   <center>
     <x-m>0.00378</x-m>
     <y-m>0.0</y-m>
@@ -73,15 +67,15 @@
     <binding>
       <command>nasal</command>
       <script>
-        interpolate("tu154/switches/BKK-test", 2.0, 0.1 );
-        instruments.bkk_reset();
+        interpolate("tu154/switches/BKK-test", 1, 0.1 );
+        instruments.bkk_reset(2);
       </script>
     </binding>
   <mod-up>
     <binding>
       <command>nasal</command>
       <script>
-        interpolate("tu154/switches/BKK-test", 1.0, 0.1 );
+        interpolate("tu154/switches/BKK-test", 0, 0.1 );
       </script>
     </binding>
   </mod-up>
@@ -97,15 +91,15 @@
     <binding>
       <command>nasal</command>
       <script>
-        interpolate("tu154/switches/BKK-test", 0.0, 0.1 );
-        instruments.bkk_reset();
+        interpolate("tu154/switches/BKK-test", -1, 0.1 );
+        instruments.bkk_reset(1);
       </script>
     </binding>
     <mod-up>
       <binding>
         <command>nasal</command>
         <script>
-          interpolate("tu154/switches/BKK-test", 1.0, 0.1 );
+          interpolate("tu154/switches/BKK-test", 0, 0.1 );
         </script>
       </binding>
     </mod-up>

@@ -1181,24 +1181,24 @@
 	</action>
 </animation>
 
-<!--Added by Yurik nov 2013-->
 <animation>
 	<type>rotate</type>
 	<object-name>fan3</object-name>
-	<object-name>fan3.001</object-name>
-	<offset-deg>-15</offset-deg>
+	<object-name>fan3.002</object-name>
+	<property>tu154/fan/rpm3</property>
+        <factor>0.1171875</factor>
+	<offset-deg>-30</offset-deg>
 	<center>
-	  <x-m>0.83</x-m>
-	  <y-m>-0.35</y-m>
-	  <z-m>0.0</z-m>
+	  <x-m>0.8321</x-m>
+	  <y-m>-0.37</y-m>
+	  <z-m>1.33892</z-m>
 	</center>
 	<axis>
-	  <x>0.0</x>
-	  <y>0.0</y>
-	  <z>1.0</z>
+	  <x>0</x>
+	  <y>1</y>
+	  <z>0.5</z>
 	</axis>
 </animation>
-
 
 <animation>
 	<type>spin</type>
@@ -1220,6 +1220,7 @@
 <animation>
 	<type>pick</type>
 	<object-name>fan3.001</object-name>
+	<object-name>fan3.002</object-name>
 	<visible>true</visible>
 	<action>
 		<button>0</button>

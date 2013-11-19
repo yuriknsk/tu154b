@@ -11,6 +11,10 @@
 # Utility classes and functions.
 #
 
+# Before anything else change random seed.
+srand();
+
+
 # Chase() works like interpolate(), but tracks value changes, supports
 # wraparound, and allows cancellation.
 var Chase = {
@@ -159,9 +163,7 @@ var range_wrap = func(val, min, max) {
 # channels.
 #
 # When /tu154/instrumentation/distance-to-pnp is set to true distance
-# digit wheels show active abs(S) in NVU mode, DME value in VOR modes,
-# ILS-DME value in SP mode, or blanked zeroes in normal mode or when
-# there's no DME in range.
+# digit wheels show abs(S) from active NVU block.
 #
 #
 # Implementation:
@@ -175,25 +177,6 @@ var range_wrap = func(val, min, max) {
 # not have to recompute needle values every frame.
 #
 
-# Smooth DME updates.
-var dme_distance = func(i) {
-    var distance = getprop("instrumentation/dme["~i~"]/indicated-distance-nm");
-    # We ignore exact zero distance because it signifies out of range
-    # condition, and we want to keep last value in this case.  Within DME
-    # proximity exact zero distance is highly unlikely, and close to zero
-    # update will be enough.
-    if (distance) {
-        distance = int(distance * 18.52) * 100;
-        interpolate("tu154/instrumentation/dme["~i~"]/distance", distance, 0.2);
-    }
-}
-setlistener("instrumentation/dme[0]/indicated-distance-nm",
-            func { dme_distance(0) }, 0, 0);
-setlistener("instrumentation/dme[1]/indicated-distance-nm",
-            func { dme_distance(1) }, 0, 0);
-setlistener("instrumentation/dme[2]/indicated-distance-nm",
-            func { dme_distance(2) }, 0, 0);
-
 var pnp_mode_update = func(i, mode) {
     var plane = "/tu154/instrumentation/pnp["~i~"]/plane-dialed";
     var defl_course = 0;
@@ -206,31 +189,17 @@ var pnp_mode_update = func(i, mode) {
         plane = "fdm/jsbsim/instrumentation/nvu/ZPU-active";
         defl_course = "fdm/jsbsim/instrumentation/nvu/Z-deflection";
         blank_course = 0;
-        if (getprop("tu154/instrumentation/distance-to-pnp")) {
-            distance = "fdm/jsbsim/instrumentation/nvu/S-active";
-            blank_dist = 0;
-        }
     } else if (mode == 2 and !getprop("instrumentation/nav[0]/nav-loc")) { #VOR1
         if (getprop("instrumentation/nav[0]/in-range")) {
             defl_course =
                 "instrumentation/nav[0]/heading-needle-deflection-norm";
             blank_course = 0;
         }
-        if (getprop("tu154/instrumentation/distance-to-pnp")
-            and getprop("instrumentation/dme[0]/in-range")) {
-            distance = "tu154/instrumentation/dme[0]/distance";
-            blank_dist = 0;
-        }
     } else if (mode == 3 and !getprop("instrumentation/nav[1]/nav-loc")) { #VOR2
         if (getprop("instrumentation/nav[1]/in-range")) {
             defl_course =
                 "instrumentation/nav[1]/heading-needle-deflection-norm";
             blank_course = 0;
-        }
-        if (getprop("tu154/instrumentation/distance-to-pnp")
-            and getprop("instrumentation/dme[1]/in-range")) {
-            distance = "tu154/instrumentation/dme[1]/distance";
-            blank_dist = 0;
         }
     } else if (mode == 4 and getprop("instrumentation/nav[0]/nav-loc")) { # SP
         if (getprop("instrumentation/nav[0]/in-range")) {
@@ -242,11 +211,11 @@ var pnp_mode_update = func(i, mode) {
             defl_gs = "instrumentation/nav[0]/gs-needle-deflection-norm";
             blank_gs = 0;
         }
-        if (getprop("tu154/instrumentation/distance-to-pnp")
-            and getprop("instrumentation/dme[0]/in-range")) {
-            distance = "tu154/instrumentation/dme[0]/distance";
-            blank_dist = 0;
-        }
+    }
+    if (getprop("tu154/instrumentation/distance-to-pnp")
+        and getprop("fdm/jsbsim/instrumentation/nvu/active")) {
+        distance = "fdm/jsbsim/instrumentation/nvu/S-active";
+        blank_dist = 0;
     }
     setprop("tu154/instrumentation/pnp["~i~"]/mode", mode);
     realias("/tu154/instrumentation/pnp["~i~"]/plane-deg", plane, 0.5,
@@ -312,13 +281,36 @@ setlistener("instrumentation/heading-indicator[1]/serviceable",
 
 setlistener("fdm/jsbsim/instrumentation/nvu/active", pnp_both_mode_update, 0, 0);
 setlistener("tu154/instrumentation/distance-to-pnp", pnp_both_mode_update);
-setlistener("instrumentation/dme[0]/in-range", pnp_both_mode_update, 0, 0);
-setlistener("instrumentation/dme[1]/in-range", pnp_both_mode_update, 0, 0);
 setlistener("instrumentation/nav[0]/nav-loc", pnp_both_mode_update, 0, 0);
 setlistener("instrumentation/nav[1]/nav-loc", pnp_both_mode_update, 0, 0);
 setlistener("instrumentation/nav[0]/in-range", pnp_both_mode_update, 0, 0);
 setlistener("instrumentation/nav[1]/in-range", pnp_both_mode_update, 0, 0);
 setlistener("instrumentation/nav[0]/gs-in-range", pnp_both_mode_update, 0, 0);
+
+
+######################################################################
+#
+# DME
+#
+
+# Smooth DME updates.
+var dme_distance = func(i) {
+    var distance = getprop("instrumentation/dme["~i~"]/indicated-distance-nm");
+    # We ignore exact zero distance because it signifies out of range
+    # condition, and we want to keep last value in this case.  Within DME
+    # proximity exact zero distance is highly unlikely, and close to zero
+    # update will be enough.
+    if (distance) {
+        distance = int(distance * 18.52) * 100;
+        interpolate("tu154/instrumentation/dme["~i~"]/distance", distance, 0.2);
+    }
+}
+setlistener("instrumentation/dme[0]/indicated-distance-nm",
+            func { dme_distance(0) }, 0, 0);
+setlistener("instrumentation/dme[1]/indicated-distance-nm",
+            func { dme_distance(1) }, 0, 0);
+setlistener("instrumentation/dme[2]/indicated-distance-nm",
+            func { dme_distance(2) }, 0, 0);
 
 
 ######################################################################
@@ -1160,44 +1152,6 @@ setlistener("tu154/instrumentation/skawk/handle-5", skawk_handler,0,0 );
 if( getprop( "instrumentation/transponder/inputs/digit" ) != nil ) skawk_init();
 
 
-# COM radio support
-var com_1_handler = func {
-var hi_digit = getprop( "tu154/instrumentation/com-1/digit-f-hi" );
-if ( hi_digit == nil ) hi_digit = 108.0;
-var low_digit = getprop( "tu154/instrumentation/com-1/digit-f-low" );
-if ( low_digit == nil ) low_digit = 0;
-setprop("instrumentation/comm[0]/frequencies/selected-mhz", hi_digit + low_digit/100 );
-}
-
-var com_2_handler = func {
-var hi_digit = getprop( "tu154/instrumentation/com-2/digit-f-hi" );
-if ( hi_digit == nil ) hi_digit = 108.0;
-var low_digit = getprop( "tu154/instrumentation/com-2/digit-f-low" );
-if ( low_digit == nil ) low_digit = 0;
-setprop("instrumentation/comm[1]/frequencies/selected-mhz", hi_digit + low_digit/100 );
-}
-
-var com_radio_init = func {
-
-var freq = getprop( "instrumentation/comm[0]/frequencies/selected-mhz" );
-    if ( freq == nil ) freq = 108.00;
-    setprop( "tu154/instrumentation/com-1/digit-f-hi", int(freq) );
-    setprop( "tu154/instrumentation/com-1/digit-f-low", (freq - int(freq)) * 100 );
-    freq = getprop( "instrumentation/comm[1]/frequencies/selected-mhz" );
-    if ( freq == nil ) freq = 108.00;
-    setprop( "tu154/instrumentation/com-2/digit-f-hi", int(freq) );
-    setprop( "tu154/instrumentation/com-2/digit-f-low", (freq - int(freq)) * 100 );
-    setprop("instrumentation/comm[0]/serviceable", 0 );
-    setprop("instrumentation/comm[1]/serviceable", 0 );
-}
-
-com_radio_init();
-
-setlistener("tu154/instrumentation/com-1/digit-f-hi", com_1_handler,0,0);
-setlistener("tu154/instrumentation/com-1/digit-f-low", com_1_handler,0,0);
-setlistener("tu154/instrumentation/com-2/digit-f-hi", com_2_handler,0,0);
-setlistener("tu154/instrumentation/com-2/digit-f-low", com_2_handler,0,0);
-
 # BKK support
 
 bkk_handler = func{
@@ -1357,9 +1311,8 @@ if ( arg[0] == 3 )
 
 }
 
-bkk_reset = func{
-setprop("tu154/instrumentation/bkk/mgv-1-failure", 0);
-setprop("tu154/instrumentation/bkk/mgv-2-failure", 0);
+bkk_reset = func(i) {
+setprop("tu154/instrumentation/bkk/mgv-"~i~"-failure", 0);
 setprop("tu154/instrumentation/bkk/mgv-contr-failure", 0);
 setprop("tu154/systems/electrical/indicators/contr-gyro", 0);
 setprop("tu154/systems/electrical/indicators/mgvk-failure", 0);
@@ -2064,6 +2017,8 @@ if( ac200 == nil ) return; # system not ready yet
 if( ac200 > 150.0 )
 	{ # 200 V 400 Hz Line 1 Power OK
 	setprop("tu154/instrumentation/ark-15[0]/powered", 1 ); 
+        setprop("instrumentation/dme[0]/serviceable",
+                (getprop("tu154/switches/dme-1-power") == 1));
 	setprop("instrumentation/nav[2]/powered", 1 ); 
 	setprop("instrumentation/dme[2]/serviceable", 1 );
         setprop("tu154/systems/nvu/powered",
@@ -2073,14 +2028,12 @@ if( ac200 > 150.0 )
 		{
 		setprop("instrumentation/nav[0]/power-btn", 1 );
 		setprop("instrumentation/nav[0]/serviceable", 1 );
-		setprop("instrumentation/dme[0]/serviceable", 1 );
 		setprop("instrumentation/marker-beacon[0]/power-btn", 1 );
 		setprop("instrumentation/marker-beacon[0]/serviceable", 1 );		
 		}
 	else	{
 		setprop("instrumentation/nav[0]/power-btn", 0 );
 		setprop("instrumentation/nav[0]/serviceable", 0 );
-		setprop("instrumentation/dme[0]/serviceable", 0 );
 		setprop("instrumentation/marker-beacon[0]/power-btn", 0 );
 		setprop("instrumentation/marker-beacon[0]/serviceable", 0 );
 		}
@@ -2145,6 +2098,7 @@ if( ac200 > 150.0 )
 # turn off all consumers if bus has gone
 else	{
 	setprop("tu154/instrumentation/ark-15[0]/powered", 0 ); 
+	setprop("instrumentation/dme[0]/serviceable", 0 );
 	setprop("instrumentation/nav[2]/powered", 0 ); 
 	setprop("instrumentation/dme[2]/serviceable", 0 );
 	setprop("tu154/systems/nvu/powered", 0.0 );
@@ -2171,17 +2125,17 @@ if( ac200 == nil ) return; # system not ready yet
 if( ac200 > 150.0 )
 	{ # 200 V 400 Hz Line 3 Power OK
 	setprop("tu154/instrumentation/ark-15[1]/powered", 1 );
+        setprop("instrumentation/dme[1]/serviceable",
+                (getprop("tu154/switches/dme-2-power") == 1));
 	# KURS-MP right
 	if( getprop( "tu154/switches/KURS-MP-2" ) == 1.0 )
 		{
 		setprop("instrumentation/nav[1]/power-btn", 1 );
 		setprop("instrumentation/nav[1]/serviceable", 1 );
-		setprop("instrumentation/dme[1]/serviceable", 1 );
 		}
 	else	{
 		setprop("instrumentation/nav[1]/power-btn", 0 );
 		setprop("instrumentation/nav[1]/serviceable", 0 );
-		setprop("instrumentation/dme[1]/serviceable", 0 );
 		}
 	# GA3-2
 	if( getprop( "tu154/switches/TKC-power-2" ) == 1.0 )
@@ -2217,6 +2171,7 @@ if( ac200 > 150.0 )
 
 else	{
 	setprop("tu154/instrumentation/ark-15[1]/powered", 0 ); 
+        setprop("instrumentation/dme[1]/serviceable", 0 );
 	setprop("instrumentation/nav[1]/power-btn", 0 );
 	setprop("instrumentation/nav[1]/serviceable", 0 );
 	setprop("instrumentation/heading-indicator[1]/serviceable", 0 );
@@ -2264,6 +2219,19 @@ gear_handler();
 # Set random gyro deviation
 setprop("instrumentation/heading-indicator[0]/offset-deg", 359.0 * rand() );
 setprop("instrumentation/heading-indicator[1]/offset-deg", 359.0 * rand() );
+
+setprop("instrumentation/attitude-indicator[0]/internal-pitch-deg",
+        -70 + 140 * rand());
+setprop("instrumentation/attitude-indicator[0]/internal-roll-deg",
+        -70 + 140 * rand());
+setprop("instrumentation/attitude-indicator[1]/internal-pitch-deg",
+        -70 + 140 * rand());
+setprop("instrumentation/attitude-indicator[1]/internal-roll-deg",
+        -70 + 140 * rand());
+setprop("instrumentation/attitude-indicator[2]/internal-pitch-deg",
+        -70 + 140 * rand());
+setprop("instrumentation/attitude-indicator[2]/internal-roll-deg",
+        -70 + 140 * rand());
 
 #save sound volume and deny sound for startup
 

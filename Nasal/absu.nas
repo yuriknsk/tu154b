@@ -668,10 +668,9 @@ setlistener("/controls/flight/aileron", check_yoke_bank, 0, 0 );
 # ================== AT-6 autothrottle subsystem =====================
 
 
-var absu_at_handler = func{
-var param = getprop ( "tu154/instrumentation/pn-6/serviceable" );
-if( param == nil ) return;
-if( param == 0 ) {	# drop to power off state
+var absu_at_handler = func(param) {
+if( param == 0.0 )
+	{	# drop to power off state
 	absu_at_stop();
 	setprop("tu154/instrumentation/pn-6/g1", 0 );
 	setprop("tu154/instrumentation/pn-6/g2", 0 );
@@ -687,26 +686,6 @@ if( param == 0 ) {	# drop to power off state
 	setprop("fdm/jsbsim/ap/at-podg", 0.0 );
 	return;
 	}
-param = arg[0];
-# work mode
-if( param == 0.0 ) # power off
-	{
-	absu_at_stop();
-	setprop("tu154/instrumentation/pn-6/g1", 0 );
-	setprop("tu154/instrumentation/pn-6/g2", 0 );
-	setprop("tu154/instrumentation/pn-6/g3", 0 );
-# 	setprop("tu154/instrumentation/pn-6/lamp-1", 0.0 );
-# 	setprop("tu154/instrumentation/pn-6/lamp-2", 0.0 );
-# 	setprop("tu154/instrumentation/pn-6/lamp-3", 0.0 );
- 	setprop("tu154/instrumentation/pn-6/lamp-4", 0.0 );
- 	setprop("tu154/instrumentation/pn-6/lamp-5", 0.0 );
-	setprop("tu154/instrumentation/pn-6/stab", 0 );
-	setprop("tu154/instrumentation/pn-6/mode", 0.0 );
-	setprop("tu154/systems/electrical/indicators/autothrottle", 0.0 );
-	setprop("fdm/jsbsim/ap/at-podg", 0.0 );
-	return;	
-	}
-	
 if( param == 1.0 ) # power on ( mode "soglasovanie" )
 	{
 	setprop("tu154/instrumentation/pn-6/mode", 1.0 );
@@ -736,8 +715,10 @@ if( param == 3.0 ) # mode "podgotovka" on
 	}}
 }
 
+setlistener("tu154/instrumentation/pn-6/serviceable", func {
+    absu_at_handler(getprop("tu154/instrumentation/pn-6/serviceable"));
+}, 0, 0 );
 
-setlistener("tu154/instrumentation/pn-6/serviceable", absu_at_handler, 0, 0 );
 
 # ABSU AT timer procedure
 var absu_at_sogl = func{

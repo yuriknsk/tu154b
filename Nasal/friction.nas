@@ -69,8 +69,8 @@ var update_reactions = func {
     if (getprop("fdm/jsbsim/position/h-agl-ft") > 100)
         return;
 
-    var lat = getprop("position/latitude-deg");
-    var lon = getprop("position/longitude-deg");
+    var lat = getprop("fdm/jsbsim/position/lat-geod-deg");
+    var lon = getprop("fdm/jsbsim/position/long-gc-deg");
     var rot = -getprop("fdm/jsbsim/attitude/heading-true-rad");
     var h_cos = math.cos(rot);
     var h_sin = math.sin(rot);

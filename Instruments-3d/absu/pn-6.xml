@@ -432,12 +432,6 @@
         interpolate("tu154/switches/pn-6-otkl", 1.0, 0.1 );
       </script>
     </binding>
-    <binding>
-      <command>nasal</command>
-      <script>
-        absu.absu_at_handler(1);
-      </script>
-    </binding>
   </action>
 </animation>
 <animation>
@@ -451,12 +445,6 @@
       <command>nasal</command>
       <script>
         interpolate("tu154/switches/pn-6-otkl", 0.0, 0.1 );
-      </script>
-    </binding>
-    <binding>
-      <command>nasal</command>
-      <script>
-        absu.absu_at_handler(0);
       </script>
     </binding>
   </action>

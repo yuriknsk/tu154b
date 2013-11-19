@@ -138,6 +138,8 @@
   <path>Aircraft/tu154b/Instruments-3d/pkp/pkp.xml</path>
   <overlay>
     <params>
+      <pitch>instrumentation/attitude-indicator[0]/indicated-pitch-deg</pitch>
+      <roll>instrumentation/attitude-indicator[0]/indicated-roll-deg</roll>
       <defl-course>tu154/instrumentation/pnp[0]/defl-course</defl-course>
       <defl-gs>tu154/instrumentation/pnp[0]/defl-gs</defl-gs>
       <failed>tu154/instrumentation/bkk/mgv-1-failure</failed>
@@ -468,6 +470,8 @@
   <path>Aircraft/tu154b/Instruments-3d/pkp/pkp.xml</path>
   <overlay>
     <params>
+      <pitch>instrumentation/attitude-indicator[1]/indicated-pitch-deg</pitch>
+      <roll>instrumentation/attitude-indicator[1]/indicated-roll-deg</roll>
       <defl-course>tu154/instrumentation/pnp[1]/defl-course</defl-course>
       <defl-gs>tu154/instrumentation/pnp[1]/defl-gs</defl-gs>
       <failed>tu154/instrumentation/bkk/mgv-2-failure</failed>
@@ -943,7 +947,29 @@
 <!--Comm radio-->
 <model>
   <name>comm-1</name>
-  <path>Aircraft/tu154b/Instruments-3d/com/com-1.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/com/com.xml</path>
+  <overlay>
+    <params>
+      <freq>instrumentation/comm[0]/frequencies/selected-mhz</freq>
+      <volume>instrumentation/comm[0]/volume</volume>
+    </params>
+  </overlay>
+  <offsets>
+    <x-m>-22.172</x-m>
+    <y-m>0.017</y-m>
+    <z-m>2.396</z-m>
+    <pitch-deg>69.0</pitch-deg>
+  </offsets>
+</model>
+<model>
+  <name>comm-2</name>
+  <path>Aircraft/tu154b/Instruments-3d/com/com.xml</path>
+  <overlay>
+    <params>
+      <freq>instrumentation/comm[1]/frequencies/selected-mhz</freq>
+      <volume>instrumentation/comm[1]/volume</volume>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-22.257</x-m>
     <y-m>0.017</y-m>
@@ -951,13 +977,38 @@
     <pitch-deg>69.0</pitch-deg>
   </offsets>
 </model>
+<!--DME radio-->
 <model>
-  <name>comm-2</name>
-  <path>Aircraft/tu154b/Instruments-3d/com/com-2.xml</path>
+  <name>dme-1</name>
+  <path>Aircraft/tu154b/Instruments-3d/dme/dme.xml</path>
+  <overlay>
+    <params>
+      <freq>instrumentation/dme[0]/frequencies/selected-mhz</freq>
+      <power>tu154/switches/dme-1-power</power>
+      <reserve>tu154/switches/dme-1-reserve</reserve>
+    </params>
+  </overlay>
   <offsets>
-    <x-m>-22.172</x-m>
+    <x-m>-22.001</x-m>
     <y-m>0.017</y-m>
-    <z-m>2.396</z-m>
+    <z-m>2.457</z-m>
+    <pitch-deg>69.0</pitch-deg>
+  </offsets>
+</model>
+<model>
+  <name>dme-2</name>
+  <path>Aircraft/tu154b/Instruments-3d/dme/dme.xml</path>
+  <overlay>
+    <params>
+      <freq>instrumentation/dme[1]/frequencies/selected-mhz</freq>
+      <power>tu154/switches/dme-2-power</power>
+      <reserve>tu154/switches/dme-2-reserve</reserve>
+    </params>
+  </overlay>
+  <offsets>
+    <x-m>-22.087</x-m>
+    <y-m>0.017</y-m>
+    <z-m>2.424</z-m>
     <pitch-deg>69.0</pitch-deg>
   </offsets>
 </model>
@@ -966,10 +1017,12 @@
   <name>skawk</name>
   <path>Aircraft/tu154b/Instruments-3d/skawk/skawk.xml</path>
   <offsets>
-    <x-m>-22.086</x-m>
-    <y-m>0.016</y-m>
-    <z-m>2.422</z-m>
-    <pitch-deg>69.0</pitch-deg>
+    <x-m>-22.22</x-m>
+    <y-m>-0.949</y-m>
+    <z-m>1.53</z-m>
+    <heading-deg>72</heading-deg>
+    <roll-deg>-1</roll-deg>
+    <pitch-deg>-77</pitch-deg>
   </offsets>
 </model>
 <!--RSBN-->
@@ -1333,6 +1386,7 @@
     <y-m>-0.157</y-m>
     <z-m>2.523</z-m>
     <pitch-deg>90.0</pitch-deg>
+    <heading-deg>180</heading-deg>
   </offsets>
 </model>
 <model>
@@ -1343,6 +1397,7 @@
     <y-m>-0.107</y-m>
     <z-m>2.523</z-m>
     <pitch-deg>90.0</pitch-deg>
+    <heading-deg>180</heading-deg>
   </offsets>
 </model>
 <model>
@@ -1353,6 +1408,7 @@
     <y-m>-0.045</y-m>
     <z-m>2.523</z-m>
     <pitch-deg>90.0</pitch-deg>
+    <heading-deg>180</heading-deg>
   </offsets>
 </model>
 <model>
@@ -1363,6 +1419,7 @@
     <y-m>0.011</y-m>
     <z-m>2.523</z-m>
     <pitch-deg>90.0</pitch-deg>
+    <heading-deg>180</heading-deg>
   </offsets>
 </model>
 <model>
@@ -1373,6 +1430,7 @@
     <y-m>0.04</y-m>
     <z-m>2.523</z-m>
     <pitch-deg>90.0</pitch-deg>
+    <heading-deg>180</heading-deg>
   </offsets>
 </model>
 <model>
@@ -1383,6 +1441,7 @@
     <y-m>0.076</y-m>
     <z-m>2.523</z-m>
     <pitch-deg>90.0</pitch-deg>
+    <heading-deg>180</heading-deg>
   </offsets>
 </model>
 <model>
@@ -1399,10 +1458,11 @@
   <name>sw-81</name>
   <path>Aircraft/tu154b/Instruments-3d/switches/azs3-17.xml</path>
   <offsets>
-    <x-m>-22.465</x-m>
+    <x-m>-22.463</x-m>
     <y-m>-0.271</y-m>
-    <z-m>2.307</z-m>
-    <pitch-deg>26.5</pitch-deg>
+    <z-m>2.31</z-m>
+    <pitch-deg>-26.5</pitch-deg>
+    <roll-deg>180</roll-deg>
   </offsets>
 </model>
 <model>
@@ -3243,7 +3303,8 @@
     <x-m>-20.814</x-m>
     <y-m>0.879</y-m>
     <z-m>2.364</z-m>
-    <pitch-deg>47.0</pitch-deg>
+    <pitch-deg>-47.0</pitch-deg>
+    <roll-deg>180</roll-deg>
     <heading-deg>-90.0</heading-deg>
   </offsets>
 </model>
@@ -3626,12 +3687,7 @@
   <type>rotate</type>
   <object-name>c_wheel_Ob</object-name>
   <object-name>c_wheel_ME</object-name>
-  <property>gear/gear[0]/steering-norm</property>
-  <interpolation>
-    <entry><ind>	-1.0</ind>	<dep>	-63.0</dep></entry>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	63.0</dep></entry>
-  </interpolation>
+  <property>fdm/jsbsim/gear/steer-pos-deg</property>
   <axis>
     <x1-m>-16.91626</x1-m>
     <y1-m>0.0</y1-m>

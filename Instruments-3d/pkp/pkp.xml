@@ -9,6 +9,8 @@
      3D instrument for Tu-154 -->
 <PropertyList>
   <params>
+    <pitch>instrumentation/attitude-indicator[0]/indicated-pitch-deg</pitch>
+    <roll>instrumentation/attitude-indicator[0]/indicated-roll-deg</roll>
     <defl-course>tu154/instrumentation/pnp[0]/defl-course</defl-course>
     <defl-gs>tu154/instrumentation/pnp[0]/defl-gs</defl-gs>
     <failed>tu154/instrumentation/bkk/mgv-1-failure</failed>
@@ -63,7 +65,7 @@
     <type>rotate</type>
     <object-name>sphere</object-name>
     <object-name>roll_marker</object-name>
-    <property>instrumentation/attitude-indicator/indicated-roll-deg</property>
+    <property alias="../../params/roll"/>
     <center>
       <x-m>-0.07892</x-m>
       <y-m>0.0</y-m>
@@ -79,7 +81,7 @@
 <animation>
   <type>rotate</type>
   <object-name>sphere</object-name>
-  <property>instrumentation/attitude-indicator/indicated-pitch-deg</property>  
+  <property alias="../../params/pitch"/>
   <center>
     <x-m>-0.07892</x-m>
     <y-m>0.0</y-m>
