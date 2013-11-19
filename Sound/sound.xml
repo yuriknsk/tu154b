@@ -1162,8 +1162,11 @@
   </orientation>    
   <volume>
     <property>engines/engine[0]/n2</property>
-    <factor type="double">0.03</factor>
-    <offset type="double">0.0</offset>
+  </volume>
+  <volume>
+    <property>sim/current-view/internal</property>
+    <factor>-0.7</factor>
+    <offset>1</offset>
   </volume>
 </revers> 
 <revers>
@@ -1192,69 +1195,19 @@
   </orientation>    
   <volume>
     <property>engines/engine[2]/n2</property>
-    <factor type="double">0.03</factor>
-    <offset type="double">0.0</offset>
+  </volume>
+  <volume>
+    <property>sim/current-view/internal</property>
+    <factor>-0.7</factor>
+    <offset>1</offset>
   </volume>
 </revers> 
 
-<!--STOP ENGINES-->
-<!--<engine>
-  <name>ext_stop_engine_1</name>
-  <path>Aircraft/tu154b/Sound/engine/xnk8_shut.wav</path>
-  <condition>
-    <not><property>sim/current-view/internal</property></not>
-    <not><property>engines/engine[0]/running</property></not>
-  </condition>
-  <mode>once</mode>
-  <position>
-    <x>37.0</x>
-    <y>-3.0</y>
-    <z>1.2</z>
-  </position>
-  <volume>
-    <offset type="double">0.05</offset>
-  </volume>
-</engine>
-<engine>
-  <name>ext_stop_engine_2</name>
-  <path>Aircraft/tu154b/Sound/engine/xnk8_shut.wav</path>
-  <condition>
-    <not><property>sim/current-view/internal</property></not>
-    <not><property>engines/engine[1]/running</property></not>
-  </condition>
-  <mode>once</mode>
-  <position>
-    <x>37.0</x>
-    <y>0.0</y>
-    <z>1.2</z>
-  </position>
-  <volume>
-    <offset type="double">0.05</offset>
-  </volume>
-</engine>
-<engine>
-  <name>ext_stop_engine_3</name>
-  <path>Aircraft/tu154b/Sound/engine/xnk8_shut.wav</path>
-  <condition>
-    <not><property>sim/current-view/internal</property></not>
-    <not><property>engines/engine[2]/running</property></not>
-  </condition>
-  <mode>once</mode>
-  <position>
-    <x>37.0</x>
-    <y>3.0</y>
-    <z>1.2</z>
-  </position>
-  <volume>
-    <offset type="double">0.05</offset>
-  </volume>
-</engine>-->
-
+<!--STOP ENGINES internal-->
 <engine>
   <name>int_stop_engine_1</name>
   <path>Aircraft/tu154b/Sound/engine/nk8_shut.wav</path>
   <condition>
-<!--    <property>sim/current-view/internal</property>-->
     <not><property>engines/engine[0]/running</property></not>
   </condition>
   <mode>once</mode>
@@ -1264,14 +1217,14 @@
     <z>1.5</z>
   </position>
   <volume>
-    <offset type="double">0.05</offset>
+    <property>sim/current-view/internal</property>
+    <factor>0.4</factor>
   </volume>
 </engine>
 <engine>
   <name>int_stop_engine_2</name>
   <path>Aircraft/tu154b/Sound/engine/nk8_shut.wav</path>
   <condition>
-<!--    <property>sim/current-view/internal</property>-->
     <not><property>engines/engine[1]/running</property></not>
   </condition>
   <mode>once</mode>
@@ -1281,14 +1234,14 @@
     <z>3.5</z>
   </position>
   <volume>
-    <offset type="double">0.05</offset>
+    <property>sim/current-view/internal</property>
+    <factor>0.4</factor>
   </volume>
 </engine>
 <engine>
   <name>int_stop_engine_3</name>
   <path>Aircraft/tu154b/Sound/engine/nk8_shut.wav</path>
   <condition>
-<!--    <property>sim/current-view/internal</property>-->
     <not><property>engines/engine[2]/running</property></not>
   </condition>
   <mode>once</mode>
@@ -1298,10 +1251,66 @@
     <z>1.5</z>
   </position>
   <volume>
-    <offset type="double">0.05</offset>
+    <property>sim/current-view/internal</property>
+    <factor>0.4</factor>
   </volume>
 </engine>
-<!--START ENGINES-->
+<!--STOP ENGINES external-->
+<engine>
+  <name>ext_stop_engine_1</name>
+  <path>Aircraft/tu154b/Sound/engine/xnk8_shut.wav</path>
+  <condition>
+    <not><property>engines/engine[0]/running</property></not>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>3.0</y>
+    <z>1.5</z>
+  </position>
+  <volume>
+    <property>sim/current-view/internal</property>
+    <factor>-0.8</factor>
+    <offset>0.8</offset>
+  </volume>
+</engine>
+<engine>
+  <name>ext_stop_engine_2</name>
+  <path>Aircraft/tu154b/Sound/engine/xnk8_shut.wav</path>
+  <condition>
+    <not><property>engines/engine[1]/running</property></not>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>0.0</y>
+    <z>3.5</z>
+  </position>
+  <volume>
+    <property>sim/current-view/internal</property>
+    <factor>-0.8</factor>
+    <offset>0.8</offset>
+  </volume>
+</engine>
+<engine>
+  <name>ext_stop_engine_3</name>
+  <path>Aircraft/tu154b/Sound/engine/xnk8_shut.wav</path>
+  <condition>
+    <not><property>engines/engine[2]/running</property></not>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>-3.0</y>
+    <z>1.5</z>
+  </position>
+  <volume>
+    <property>sim/current-view/internal</property>
+    <factor>-0.8</factor>
+    <offset>0.8</offset>
+  </volume>
+</engine>
+<!--START ENGINES internal-->
 <engine>
   <name>int_start_engine_1</name>
   <path>Aircraft/tu154b/Sound/engine/nk8_1strt.wav</path>
@@ -1315,7 +1324,8 @@
     <z>1.5</z>
   </position>
   <volume>
-    <offset type="double">0.05</offset>
+    <property>sim/current-view/internal</property>
+    <factor>0.3</factor>
   </volume>
 </engine>
 <engine>
@@ -1331,7 +1341,8 @@
     <z>3.5</z>
   </position>
   <volume>
-    <offset type="double">0.05</offset>
+    <property>sim/current-view/internal</property>
+    <factor>0.3</factor>
   </volume>
 </engine>
 <engine>
@@ -1347,7 +1358,63 @@
     <z>1.5</z>
   </position>
   <volume>
-    <offset type="double">0.05</offset>
+    <property>sim/current-view/internal</property>
+    <factor>0.3</factor>
+  </volume>
+</engine>
+<!--START ENGINES external-->
+<engine>
+  <name>ext_start_engine_1</name>
+  <path>Aircraft/tu154b/Sound/engine/xnk8_1strt.wav</path>
+  <condition>
+    <property>controls/engines/engine[0]/starter</property>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>3.0</y>
+    <z>1.5</z>
+  </position>
+  <volume>
+    <property>sim/current-view/internal</property>
+    <factor>-0.8</factor>
+    <offset>0.8</offset>
+  </volume>
+</engine>
+<engine>
+  <name>ext_start_engine_2</name>
+  <path>Aircraft/tu154b/Sound/engine/xnk8_1strt.wav</path>
+  <condition>
+    <property>controls/engines/engine[1]/starter</property>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>0.0</y>
+    <z>3.5</z>
+  </position>
+  <volume>
+    <property>sim/current-view/internal</property>
+    <factor>-0.8</factor>
+    <offset>0.8</offset>
+  </volume>
+</engine>
+<engine>
+  <name>ext_start_engine_3</name>
+  <path>Aircraft/tu154b/Sound/engine/xnk8_1strt.wav</path>
+  <condition>
+    <property>controls/engines/engine[2]/starter</property>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>-3.0</y>
+    <z>1.5</z>
+  </position>
+  <volume>
+    <property>sim/current-view/internal</property>
+    <factor>-0.8</factor>
+    <offset>0.8</offset>
   </volume>
 </engine>
 
@@ -1365,7 +1432,9 @@
     <z>3</z>
   </position>
   <volume>
-    <offset type="double">0.05</offset>
+    <property>sim/current-view/internal</property>
+    <factor>-0.5</factor>
+    <offset>1</offset>
   </volume>
 </engine>
 <engine>
@@ -1381,7 +1450,9 @@
     <z>3</z>
   </position>
   <volume>
-    <offset type="double">0.05</offset>
+    <property>sim/current-view/internal</property>
+    <factor>-0.5</factor>
+    <offset>1</offset>
   </volume>
 </engine>
 <engine>
@@ -1397,7 +1468,9 @@
     <z>3</z>
   </position>
   <volume>
-    <offset type="double">0.05</offset>
+    <property>sim/current-view/internal</property>
+    <factor>-0.5</factor>
+    <offset>1</offset>
   </volume>
 </engine>
 
