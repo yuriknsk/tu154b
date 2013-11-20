@@ -6599,43 +6599,165 @@
     <texture>wingr_t.png</texture>
 </animation>
 
-
 <animation>
-	<type>rotate</type>
-	<object-name>Door_Carg1</object-name>
-	<object-name>Door_Carg0</object-name>
-	<property>tu154/door/passe</property>
-	<factor>-1</factor>
-	<axis>
-		<x1-m>3.13</x1-m>
-		<y1-m>1.842</y1-m>
-		<z1-m>0.5</z1-m>
-		<x2-m>3.13</x2-m>
-		<y2-m>1.84</y2-m>
-		<z2-m>0.21</z2-m>
-	</axis>
+  <type>translate</type>
+  <object-name>Door_Passe</object-name>
+  <property>tu154/door/passe</property>
+  <factor>0.95</factor>
+  <axis>
+    <x>-1</x>
+    <y>0</y>
+    <z>0</z>
+  </axis>
+</animation>
+<animation>
+  <type>translate</type>
+  <object-name>Door_Passe</object-name>
+  <property>tu154/door/passe</property>
+  <condition>
+    <less-than>
+      <property>tu154/door/passe</property>
+      <value>0.1</value>
+    </less-than>
+  </condition>
+  <factor>1.6</factor>
+  <axis>
+    <x>0</x>
+    <y>-1</y>
+    <z>0</z>
+  </axis>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>Door_Passe</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        if (getprop("tu154/door/passe")) {
+            interpolate("tu154/door/passe", 0, 1);
+        } else {
+            setprop("tu154/door/passe", 0);
+            interpolate("tu154/door/passe", 1, 1);
+        }
+      </script>
+    </binding>
+  </action>
 </animation>
 
 <animation>
-	<type>pick</type>
-	<object-name>Door_Carg1</object-name>
-	<object-name>Door_Carg0</object-name>
-	<visible>true</visible>
-	<action>
-		<button>0</button>
-		<repeatable>false</repeatable>
-		<binding>
-			<command>nasal</command>
-			<script>
-				if( getprop("tu154/door/passe") == nil )
-				setprop("tu154/door/passe", 0.0 );
-				if( getprop("tu154/door/passe") == 0.0 )
-				interpolate( "tu154/door/passe", 100, 1 );
-				else    interpolate( "tu154/door/passe", 0, 1 );
-			</script>
-		</binding>
-	</action>
+  <type>translate</type>
+  <object-name>Door_Cargo</object-name>
+  <property>tu154/door/cargo0</property>
+  <factor>1.3</factor>
+  <axis>
+    <x>-1</x>
+    <y>0</y>
+    <z>0</z>
+  </axis>
 </animation>
+<animation>
+  <type>translate</type>
+  <object-name>Door_Cargo</object-name>
+  <property>tu154/door/cargo0</property>
+  <condition>
+    <less-than>
+      <property>tu154/door/cargo0</property>
+      <value>0.1</value>
+    </less-than>
+  </condition>
+  <axis>
+    <x>0</x>
+    <y>-1</y>
+    <z>0.5</z>
+  </axis>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>Door_Cargo</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        if (getprop("tu154/door/cargo0")) {
+            interpolate("tu154/door/cargo0", 0, 1);
+        } else {
+            setprop("tu154/door/cargo0", 0);
+            interpolate("tu154/door/cargo0", 1, 1);
+        }
+      </script>
+    </binding>
+  </action>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>Door_Carg0</object-name>
+  <property>tu154/door/cargo1</property>
+  <factor>100</factor>
+  <center>
+    <x-m>3.16</x-m>
+    <y-m>1.81</y-m>
+  </center>
+  <axis>
+    <z>1</z>
+  </axis>
+</animation>
+<animation>
+  <type>translate</type>
+  <object-name>Door_Carg1</object-name>
+  <property>tu154/door/cargo1</property>
+  <factor>1.3</factor>
+  <axis>
+    <x>-1</x>
+    <y>0</y>
+    <z>0</z>
+  </axis>
+</animation>
+<animation>
+  <type>translate</type>
+  <object-name>Door_Carg1</object-name>
+  <property>tu154/door/cargo1</property>
+  <condition>
+    <less-than>
+      <property>tu154/door/cargo1</property>
+      <value>0.1</value>
+    </less-than>
+  </condition>
+  <axis>
+    <x>0</x>
+    <y>-1</y>
+    <z>0.5</z>
+  </axis>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>Door_Carg1</object-name>
+  <object-name>Door_Carg0</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        if (getprop("tu154/door/cargo1")) {
+            interpolate("tu154/door/cargo1", 0, 1);
+        } else {
+            setprop("tu154/door/cargo1", 0);
+            interpolate("tu154/door/cargo1", 1, 1);
+        }
+      </script>
+    </binding>
+  </action>
+</animation>
+
 
 <!-- CONTRAIL -->
  
