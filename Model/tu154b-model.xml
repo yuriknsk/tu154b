@@ -6759,6 +6759,36 @@
 </animation>
 
 
+<animation>
+  <type>rotate</type>
+  <object-name>lever_cowl</object-name>
+  <property>tu154/systems/APU/APU-damper</property>
+  <factor>-15</factor>
+  <axis>
+    <x1-m>14.3899</x1-m>
+    <y1-m>-0.2988</y1-m>
+    <z1-m>3.89741</z1-m>
+    <x2-m>14.3899</x2-m>
+    <y2-m>-0.43475</y2-m>
+    <z2-m>3.5374</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_cow0</object-name>
+  <property>tu154/systems/APU/APU-damper</property>
+  <factor>15</factor>
+  <axis>
+    <x1-m>14.3899</x1-m>
+    <y1-m>0.29897</y1-m>
+    <z1-m>3.89741</z1-m>
+    <x2-m>14.3899</x2-m>
+    <y2-m>0.43492</y2-m>
+    <z2-m>3.5374</z2-m>
+  </axis>
+</animation>
+
+
 <!-- CONTRAIL -->
  
   <!-- Particules OSG -->

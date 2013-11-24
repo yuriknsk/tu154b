@@ -623,7 +623,7 @@
             <property>fdm/jsbsim/instrumentation/vc-kmh</property>
             <value>525</value>
           </greater-than>
-          <property>engines/engine[3]/running</property>
+          <property>tu154/systems/APU/APU-damper</property>
         </and>
       </or>
     </condition>
