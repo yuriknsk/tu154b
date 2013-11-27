@@ -1041,9 +1041,9 @@
   <name>ushdb-selector</name>
   <path>Aircraft/tu154b/Instruments-3d/ushdb/ushdb_selector.xml</path>
   <offsets>
-    <x-m>-22.106</x-m>
-    <y-m>0.372</y-m>
-    <z-m>2.427</z-m>
+    <x-m>-22.11</x-m>
+    <y-m>0.368</y-m>
+    <z-m>2.426</z-m>
     <pitch-deg>69.0</pitch-deg>
   </offsets>
 </model>
