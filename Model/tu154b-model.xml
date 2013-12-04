@@ -3449,9 +3449,9 @@
   <name>startpanel</name>
   <path>Aircraft/tu154b/Instruments-3d/buttons/startpanel.xml</path>
   <offsets>
-    <x-m>-19.882</x-m>
+    <x-m>-19.881</x-m>
     <y-m>0.924</y-m>
-    <z-m>2.017</z-m>
+    <z-m>2.018</z-m>
     <heading-deg>-90.0</heading-deg>
   </offsets>
 </model>
