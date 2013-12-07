@@ -19,6 +19,8 @@
 <!--        <property>fcs/stab-manu-cmd</property>-->
         <property>fcs/stab-manu-switch</property>
         
+	<property value="0.0">fcs/met-cmd</property>	<!--New MET system-->
+	
         <!--Hydro power support-->
         <property>fcs/elevator-pos-static</property>
         <property>fcs/aileron-pos-static</property>
@@ -83,6 +85,8 @@
       <property>instrumentation/nvu/active</property>
       <property>instrumentation/nvu/stopped</property>
       
+      <property>instr/indicated-altitude-ft</property>
+      
       <property>ap/navigac</property>
       <property>ap/posadk</property>
       
@@ -91,6 +95,8 @@
       <property>gear/gear-cmd-static</property>
       
       <property value="7.2">debug/wp-lat-deg</property>
-      <property value="150.2">debug/wp-lon-deg</property>-->
-      
+      <property value="150.2">debug/wp-lon-deg</property>
+      <property>ap/heading-epsilon</property>
+      <property>ap/gs-epsilon</property>
+      -->
 </system>

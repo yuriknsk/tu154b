@@ -293,7 +293,7 @@
                 <orient unit="DEG">
                     <roll> 0 </roll>
                     <pitch> -2 </pitch>
-                    <yaw> 0 </yaw>
+                    <yaw> -6.5 </yaw>
                 </orient>
             </thruster>
         </engine>
@@ -317,7 +317,7 @@
                 </location>
                 <orient unit="DEG">
                     <roll> 0 </roll>
-                    <pitch> -2 </pitch>
+                    <pitch> -2.5 </pitch>
                     <yaw> 0 </yaw>
                 </orient>
             </thruster>
@@ -343,7 +343,7 @@
                 <orient unit="DEG">
                     <roll> 0 </roll>
                     <pitch> -2 </pitch>
-                    <yaw> 0 </yaw>
+                    <yaw> 6.5 </yaw>
                 </orient>
             </thruster>
         </engine>
@@ -434,9 +434,10 @@
 	<property>fcs/stab-auto-cmd</property>
 	<property>fcs/stabilizer-cmd-norm</property>
 	-->
-	<property>fcs/met</property>
+	<!--<property>fcs/met</property>-->
         <channel name="Pitch">
-		
+<!--Modified by yurik nov 2013-->
+<!--		
 	    <aerosurface_scale name="fcs/met-trimmer">
 		<input>fcs/pitch-trim-cmd-norm</input>
 		<domain>
@@ -449,10 +450,11 @@
 		</range>
 	    	<output>fcs/met</output>
 	    </aerosurface_scale>
-
+-->
             <summer name="Pitch Trim Sum">
               <input>fcs/elevator-cmd-norm</input>
-	      <input>fcs/met</input>
+	      <!--<input>fcs/met</input>--> <!--By Yurik-->
+	      <input>ap/pitch/met</input>
               <clipto>
                 <min>-1</min>
                 <max>1</max>
@@ -1520,7 +1522,7 @@
 	</direction>
       </force>
    </external_reactions>
-<!--    
+<!--   
     <output name="tu-fldata.csv" type="CSV" rate="1">
         <simulation> OFF </simulation>
         <atmosphere> OFF </atmosphere>
@@ -1537,10 +1539,14 @@
         <propulsion> ON </propulsion>
 	<property>velocities/vc-kts</property>
 	<property>velocities/vc-fps</property>
-	<property>fcs/flap-pos-deg</property>
-	<property>ap/speed-pid</property>
-	<property>ap/speed-error-switched</property>
-	<property>instrumentation/pnp-heading</property>
+	<property>velocities/mach</property>
+	<property>ap/pitch/met-input</property>
+	<property>ap/pitch/met</property>
+	<property>ap/pitch/gs-k5</property>
+	<property>ap/pitch/main_stab</property>
+	<property>ap/pitch/go-around-sum-1</property>
+	<property>debug/gs-epsilon</property>
+	<property>debug/h-m</property>
 	<property>debug/wp-hdg-corrected</property>
 	<property>debug/wp-distance</property>
     </output>-->

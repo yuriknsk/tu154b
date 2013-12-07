@@ -1,12 +1,12 @@
 #
 #
-# Some function overload function from Nasal/controls.nas
+# Some functions overload  Nasal/controls.nas member
 #
 # Project Tupolev for FlightGear
 #
 # Yurik V. Nikiforoff, yurik.nsk@gmail.com
 # Novosibirsk, Russia
-# jan 2008
+# jan 2008, nov 2013
 #
 
 # turn off autopilot & autothrottle
@@ -19,11 +19,18 @@ absu.absu_at_stop();
 var TRIM_RATE = 0.08;
 
 var elevatorTrim = func {
-    controls.slewProp("/controls/flight/elevator-trim", arg[0] * TRIM_RATE); 
+    #controls.slewProp("/controls/flight/elevator-trim", arg[0] * TRIM_RATE); 
+    setprop("fdm/jsbsim/fcs/met-cmd", arg[0]);
     setprop("tu154/systems/warning/elevator-trim-pressed", 1.0 );
+    settimer( elev_trim_stop, 0.2 );
 	}
 
-
+# we need clear trim variables when trim button is released
+var elev_trim_stop = func {
+  setprop("fdm/jsbsim/fcs/met-cmd", 0.0);
+}
+	
+	
 #
 # Brakes
 #

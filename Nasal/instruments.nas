@@ -2,7 +2,7 @@
 # NASAL instruments for TU-154B
 # Yurik V. Nikiforoff, yurik.nsk@gmail.com
 # Novosibirsk, Russia
-# jun 2007, 2013
+# jun 2007, dec 2013
 #
 
 
@@ -312,6 +312,13 @@ setlistener("instrumentation/dme[1]/indicated-distance-nm",
 setlistener("instrumentation/dme[2]/indicated-distance-nm",
             func { dme_distance(2) }, 0, 0);
 
+
+# Added by Yurik dec 2013
+setprop("instrumentation/dme[0]/frequencies/selected-mhz", 
+  getprop("instrumentation/nav[0]/frequencies/selected-mhz") );
+
+setprop("instrumentation/dme[1]/frequencies/selected-mhz", 
+  getprop("instrumentation/nav[1]/frequencies/selected-mhz") );
 
 ######################################################################
 #
