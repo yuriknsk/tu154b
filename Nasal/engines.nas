@@ -211,7 +211,7 @@ if(  (pwr < 13.0) or (getprop( "tu154/switches/APU-starter-switch" ) != 1 ) )
 	setprop("tu154/systems/electrical/indicators/apu-start", 0.0 );	
 	setprop("tu154/systems/electrical/indicators/apu-levers-open", 0.0 );	
 	setprop("tu154/systems/electrical/indicators/apu-ready-to-start", 0.0 );
-	setprop( "controls/engines/engine[3]/cutoff",1 );
+        stop_apu();
 	return;
 	}
 
