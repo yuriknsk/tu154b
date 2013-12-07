@@ -827,7 +827,7 @@ if( abs( getprop("controls/flight/aileron-trim") ) < 0.004 )
 else setprop("tu154/systems/electrical/indicators/aileron-trim-neutral", 0 );
 
 # Elevator trim
-if( abs( getprop("controls/flight/elevator-trim") ) < 0.004 )
+if( abs( getprop("fdm/jsbsim/ap/pitch/met-integrator") ) < 0.04 )
 		setprop("tu154/systems/electrical/indicators/elevator-trim-neutral", 1 );
 else setprop("tu154/systems/electrical/indicators/elevator-trim-neutral", 0 );
 

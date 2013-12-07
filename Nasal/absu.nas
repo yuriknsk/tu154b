@@ -141,7 +141,7 @@ if( needles != 0.0 )
 	{ 
 	# Directors
 	#param = getprop("fdm/jsbsim/ap/pitch-error");
-	param = getprop("fdm/jsbsim/ap/pitch/gs-k5");	# Modified by Yurik nov 2103 for new ABSU version
+	param = getprop("fdm/jsbsim/ap/pitch/gs-needle");	# Modified by Yurik nov 2103 for new ABSU version
 
 	if( param == nil )  param = 0.0;
 	if( getprop("fdm/jsbsim/ap/pitch-selector") != 5.0 ) param = 0.0;

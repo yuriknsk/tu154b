@@ -11,6 +11,14 @@
      3D instrument for Tu-154 -->
 <PropertyList>
  <path>uvo.ac</path>
+ 
+  <effect>
+    <inherits-from>Effects/model-transparent</inherits-from>
+  <object-name>long_needle</object-name>
+  <object-name>short_needle</object-name>
+ </effect>
+
+ 
 <!-- Internal instruments lighting -->
 <animation>
   <type>material</type>
@@ -26,6 +34,7 @@
     <blue-prop>tu154/light/instruments/int-blue</blue-prop>
   </emission>
 </animation>
+
 <!--Needles-->
 <animation>
   <type>rotate</type>

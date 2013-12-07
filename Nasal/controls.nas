@@ -72,9 +72,12 @@ var autostart = func{
 	setprop("tu154/switches/generator-1", 1.0 );
 	setprop("tu154/switches/generator-2", 1.0 );
 	setprop("tu154/switches/generator-3", 1.0 );
-#	setprop("tu154/switches/ut7-1-serviceable", 1.0 );
-#	setprop("tu154/switches/ut7-2-serviceable", 1.0 );
-#	setprop("tu154/switches/ut7-3-serviceable", 1.0 );
+	setprop("tu154/switches/bano", 1.0 );
+	setprop("tu154/switches/omi", 1.0 );
+	
+	setprop("tu154/switches/ut7-1-serviceable", 1.0 );
+	setprop("tu154/switches/ut7-2-serviceable", 1.0 );
+	setprop("tu154/switches/ut7-3-serviceable", 1.0 );
 	# fuei
 	setprop("tu154/switches/tank-2-left-serviceable", 1.0 );
 	setprop("tu154/switches/tank-2-right-serviceable", 1.0 );

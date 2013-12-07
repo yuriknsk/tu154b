@@ -286,6 +286,16 @@ modified by Yurik nov 2013
     </clipto>
   </pure_gain>
   
+  <pure_gain name="ap/pitch/gs-needle">
+    <input>ap/pitch/gs-sum-out-switched</input>
+    <gain>-1.0</gain>
+    <clipto>
+      <min>-1.0</min>
+      <max>1.0</max>
+    </clipto>
+  </pure_gain>
+  
+  
 <!--M stab-->
   <summer name="ap/pitch/mach-error">
     <input>ap/input-mach</input>
@@ -563,41 +573,41 @@ modified by Yurik nov 2013
   </pure_gain>
 
   <!--AP mode selector-->
-  <switch name="ap/pitch/ap-selector">
+  <switch name="ap/pitch/ap-sw">
     <default value="0.0"/>
     <test value="ap/pitch/main_stab">
       ap/pitch-selector == 1			<!--Stab-->
-      ap/pitch-hold == 1
     </test>
     <test value="ap/pitch/main_stab">		<!--H-->
       ap/pitch-selector == 2
-      ap/pitch-hold == 1
     </test>
     <test value="ap/pitch/main_stab">		<!--V-->
       ap/pitch-selector == 3
-      ap/pitch-hold == 1
     </test>
     <test value="ap/pitch/main_stab">		<!--M-->
       ap/pitch-selector == 4
-      ap/pitch-hold == 1
     </test>
     <test value="ap/pitch/gs-k5">		<!--Glideslope-->
       ap/pitch-selector == 5
-      ap/pitch-hold == 1
     </test>
     <test value="ap/pitch/go-around-f">		<!--Go around-->
       ap/pitch-selector == 6
-      ap/pitch-hold == 1
-    </test>
-    
+    </test>    
   </switch>
 
+  <switch name="ap/pitch/ap-selector">
+    <default value="0.0"/>
+    <test value="ap/pitch/ap-sw">
+      ap/pitch-hold == 1			<!--Main hold switch-->
+    </test>
+  </switch>
 <!-- ********************** MET section ************************** -->
 	    <!--MET selector-->
 	    <switch name="ap/pitch/met-selector">
 	      <default value="ap/pitch/ap-selector"/>
-	      <test value="fcs/met-cmd">
-		ap/pitch-selector == 0	<!--We use buttons for MET moving if yoke control mode (0) selected-->
+	      <test logic="OR" value="fcs/met-cmd">
+		ap/pitch-selector == 0
+		ap/pitch-hold == 0	<!--We use buttons for MET moving if yoke control mode (0) selected-->
 	      </test>
 	    </switch>
 
@@ -712,7 +722,11 @@ There is a system for enchance pitch control. It read pitch trimmer position and
   <switch name="ap/pitch/kwz-gs-switched">
     <default value="0.0"/>
     <test value="ap/pitch/kwz-gs">
-      ap/pitch-selector == 5
+      ap/pitch-selector == 5		<!--Glideslope-->
+      ap/pitch-hold == 1
+    </test>
+    <test value="ap/pitch/kwz-gs">
+      ap/pitch-selector == 6		<!--Go around-->
       ap/pitch-hold == 1
     </test>
   </switch>
