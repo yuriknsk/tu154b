@@ -12,7 +12,9 @@ var PITCH_YOKE_LIMIT = 0.5;
 var BANK_YOKE_LIMIT = 0.5;
 
 var absu_property_update = func {	# <-   handler begin here
-  
+
+var param=0.0;
+
 settimer( absu_property_update, 0 );
 
 # pn-5 selected mode
@@ -23,15 +25,15 @@ if( az2 == nil ) az2 = 0.0;
 
 
 
-#Commented by Yurik dec 2013 due new AP JSBSim system
+#Modified by Yurik dec 2013 due new AP JSBSim system
 
 # Heading ILS ABSU support
 #var LOCALIZER_CONST = 0.7;
 #var GLIDESLOPE_CONST = 0.7;
 
-#var param = num( getprop("instrumentation/nav[0]/heading-needle-deflection") );
+#param = num( getprop("instrumentation/altimeter[0]/pressure-alt-ft") );
 #if( param == nil ) param = 0.0;
-#setprop("fdm/jsbsim/ap/ils-epsilon", param * LOCALIZER_CONST );
+#setprop("fdm/jsbsim/ap/indicated-altitude-ft", param );
 
 # Glideslope ILS ABSU support
 #  param = num( getprop("instrumentation/nav[0]/gs-rate-of-climb") );
@@ -159,21 +161,21 @@ else{
 	interpolate("tu154/instrumentation/pkp[0]/roll-director", 0.3, 1.0 );
 	}	
 
-
+# Commented by Yurik dec 2103 for new ABSU version
 # Pitch auto trim
-var K_AUTOTRIM = -0.001;#-0.01
-var THRESHOLD_AUTOTRIM = 0.05;
+#var K_AUTOTRIM = -0.001;#-0.01
+#var THRESHOLD_AUTOTRIM = 0.05;
 
-if( getprop("fdm/jsbsim/ap/pitch-hold") == 1.0 )
-    if( getprop("tu154/switches/long-control") == 1.0 )
-	{
-	var pitch_error = getprop("fdm/jsbsim/ap/pitch-hold-pid");
-	if( pitch_error == nil ) pitch_error = 0.0;
-	var pitch_trim = getprop("controls/flight/elevator-trim");
-	if( pitch_trim == nil ) pitch_trim = 0.0;
-	if( abs( pitch_error ) > THRESHOLD_AUTOTRIM )
-	setprop("controls/flight/elevator-trim", pitch_trim + K_AUTOTRIM * pitch_error );
-	}
+#if( getprop("fdm/jsbsim/ap/pitch-hold") == 1.0 )
+#    if( getprop("tu154/switches/long-control") == 1.0 )
+#	{
+#	var pitch_error = getprop("fdm/jsbsim/ap/pitch-hold-pid");
+#	if( pitch_error == nil ) pitch_error = 0.0;
+#	var pitch_trim = getprop("controls/flight/elevator-trim");
+#	if( pitch_trim == nil ) pitch_trim = 0.0;
+#	if( abs( pitch_error ) > THRESHOLD_AUTOTRIM )
+#	setprop("controls/flight/elevator-trim", pitch_trim + K_AUTOTRIM * pitch_error );
+#	}
 	
 # Glideslope auto switch
 if( getprop("fdm/jsbsim/fcs/flap-pos-deg") > 40.0 )
@@ -330,10 +332,21 @@ if( getprop("tu154/systems/absu/serviceable" ) == 1 ) return 1;
 else return 0;
 }
 
+var absu_clear_pitch_wheel = func {
+  var offset = getprop("fdm/jsbsim/ap/offset-pitch-rad");
+  offset += getprop("fdm/jsbsim/ap/stab-input-pitch-rad");
+  setprop("fdm/jsbsim/ap/offset-pitch-rad", offset );
+  setprop("fdm/jsbsim/ap/stab-input-pitch-rad", 0.0 );
+  setprop("tu154/switches/pu-46-pitch-wheel", 0.0 );
+}
+
 var absu_stab_current_pitch = func{	
 	var current_pitch = getprop("fdm/jsbsim/attitude/pitch-rad");
-	if( current_pitch == nil ) current_pitch = 0.0; 
-	setprop("fdm/jsbsim/ap/stab-input-pitch-rad", current_pitch );	
+	if( current_pitch == nil ) current_pitch = 0.0;
+	var offset = getprop("fdm/jsbsim/ap/offset-pitch-rad");
+	setprop("fdm/jsbsim/ap/stab-input-pitch-rad", 0.0 );
+	setprop("fdm/jsbsim/ap/offset-pitch-rad", current_pitch + offset );
+	setprop("tu154/switches/pu-46-pitch-wheel", 0.0 );
 	setprop("fdm/jsbsim/ap/pitch-selector", 1.0 ); # 1 - stabilize pitch
 	setprop( "tu154/instrumentation/pn-5/pitch-state", 2 );
 	setprop("tu154/systems/electrical/indicators/stab-pitch", 1.0 );
@@ -430,7 +443,8 @@ if( absu_powered() == 0 ) return;
 clr_pitch_lamp();
 #var alt = getprop("instrumentation/altimeter/indicated-altitude-ft");	
 var alt = getprop("fdm/jsbsim/position/h-sl-ft");	# Modified by Yurik nov 2013
-if ( alt == nil ) return;
+#if ( alt == nil ) return;
+absu_clear_pitch_wheel();
 setprop("fdm/jsbsim/ap/input-altitude", alt );
 setprop("fdm/jsbsim/ap/pitch-selector", 2 ); # H stab code
 setprop("tu154/instrumentation/pu-46/h", 1.0 );
@@ -445,8 +459,9 @@ if( absu_powered() == 0 ) return;
 #if( getprop("tu154/switches/pu-46-tang" ) != 1.0 ) return;
 #if( getprop("tu154/instrumentation/pu-46/stab" ) != 1.0 ) return;
 var ias = getprop("fdm/jsbsim/velocities/vc-fps");
-if ( ias == nil ) return;
+#if ( ias == nil ) return;
 clr_pitch_lamp();
+absu_clear_pitch_wheel();
 setprop("fdm/jsbsim/ap/input-speed", ias );
 setprop("fdm/jsbsim/ap/pitch-selector", 3 ); # V stab code
 setprop("tu154/instrumentation/pu-46/v", 1.0 );
@@ -461,8 +476,9 @@ if( absu_powered() == 0 ) return;
 #if( getprop("tu154/switches/pu-46-tang" ) != 1.0 ) return;
 #if( getprop("tu154/instrumentation/pu-46/stab" ) != 1.0 ) return;
 var mach = getprop("fdm/jsbsim/velocities/mach");
-if ( mach == nil ) return;
+#if ( mach == nil ) return;
 clr_pitch_lamp();
+absu_clear_pitch_wheel();
 setprop("fdm/jsbsim/ap/input-mach", mach );
 setprop("fdm/jsbsim/ap/pitch-selector", 4 ); # M stab code
 setprop("tu154/instrumentation/pu-46/m", 1.0 );
@@ -482,6 +498,7 @@ if( getprop("tu154/switches/pn-5-navigac" ) != 0.0 ) return; # wrong control!
 #if(  abs( getprop("instrumentation/nav[0]/gs-needle-deflection") ) > GLIDESLOPE_DEVIATION_LIMIT ) return;
 
 clr_pitch_lamp();
+absu_clear_pitch_wheel();
 setprop("tu154/instrumentation/pn-5/sbros", 0.0 );
 setprop("fdm/jsbsim/ap/pitch-selector", 5.0 ); # Glideslope code
 setprop("tu154/instrumentation/pn-5/gliss", 1.0 );
@@ -651,18 +668,18 @@ var absu_start_go_around = func{
         
        	setprop("tu154/systems/electrical/indicators/reject", 1.0 );
 	setprop("tu154/systems/electrical/indicators/stab-heading", 1.0 );
-	absu_go_around_handler();
+#	absu_go_around_handler();
 }
 
-var absu_go_around_handler = func{
-if( getprop("fdm/jsbsim/ap/go-around") ) # if not, stop handler
- {
+#var absu_go_around_handler = func{
+#if( getprop("fdm/jsbsim/ap/go-around") ) # if not, stop handler
+# {
 # wait until speed will be increase
- if( getprop("fdm/jsbsim/velocities/vc-fps") > getprop("fdm/jsbsim/ap/go-around-speed") )
-  settimer( absu_go_around_handler, 0.5 ); # repeat 
- else setprop("fdm/jsbsim/ap/pitch-selector", 3.0); # speed OK, let's stabilise V
- } 
-}
+# if( getprop("fdm/jsbsim/velocities/vc-fps") > getprop("fdm/jsbsim/ap/go-around-speed") )
+#  settimer( absu_go_around_handler, 0.5 ); # repeat 
+# else setprop("fdm/jsbsim/ap/pitch-selector", 3.0); # speed OK, let's stabilise V
+# } 
+#}
 
 # ========================== yoke ap off =============================
 var check_yoke_pitch = func{

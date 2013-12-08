@@ -74,10 +74,12 @@
   
 
   <property>ap/stab-input-pitch-rad</property>
+  <property>ap/offset-pitch-rad</property>
+ 
  
   <property>ap/pitch-hold</property>
   
-  <!--<property>ap/go-around</property>-->
+  
 
   <property>ap/windup-trigger</property>
 
@@ -100,9 +102,9 @@
     </function>
 </fcs_function>
 
-<fcs_function name="instr/indicated-altitude-ft" >
+<fcs_function name="ap/indicated-altitude-ft" >
      <function>
-        <property>/instrumentation/altimeter/indicated-altitude-ft</property>
+        <property>/instrumentation/altimeter[0]/pressure-alt-ft</property>
      </function>
 </fcs_function>
 
@@ -193,7 +195,8 @@ modified by Yurik nov 2013
  -->
 
 <channel name="Pitch stab">
-<!--Glideslope channel-->
+  
+<!-- Glideslope path system -->
   <switch name="ap/pitch/gs-epsilon-gain">
     <default value="-3.0"/>
     <test value="-2.0">
@@ -288,7 +291,7 @@ modified by Yurik nov 2013
   
   <pure_gain name="ap/pitch/gs-needle">
     <input>ap/pitch/gs-sum-out-switched</input>
-    <gain>-1.0</gain>
+    <gain>-0.5</gain>
     <clipto>
       <min>-1.0</min>
       <max>1.0</max>
@@ -360,14 +363,31 @@ modified by Yurik nov 2013
 
 <!--End V stab-->
 <!--H stab-->
+  <summer name="ap/pitch/pressure-delta-ft">
+    <input>position/h-sl-ft</input>
+    <input>-ap/indicated-altitude-ft</input>
+  </summer>
+  
+  <switch name="ap/pitch/pressure-delta-ft-switched">
+    <default value="0.0"/>
+    <test value="ap/pitch/pressure-delta-ft">
+      ap/pitch-selector == 2
+    </test>
+  </switch>  
+  
+  <lag_filter name="ap/pitch/pressure-delta-ft-filtered">
+    <input>ap/pitch/pressure-delta-ft-switched</input>
+    <c1>0.017</c1>	<!--1 min tau-->
+  </lag_filter> 
+
   <summer name="ap/pitch/altitude-error">
     <input>ap/input-altitude</input>
+    <input>ap/pitch/pressure-delta-ft-filtered</input>
     <input>-position/h-sl-ft</input>
     <clipto>
       <min>-100</min>
       <max>100</max>
     </clipto>
-
   </summer>
   
   <switch name="ap/pitch/h-err-switched">
@@ -523,13 +543,13 @@ modified by Yurik nov 2013
   </switch>
   
   <summer name="ap/pitch/theta-sum-rad">
-    <input>-ap/pitch/theta-latched-rad</input>
+    <!--<input>-ap/pitch/theta-latched-rad</input>--> <!--This method of latching of current pitch not work with old nasal code-->
+    <input>-ap/offset-pitch-rad</input>
     <input>attitude/theta-rad</input>
   </summer>
 
   <pure_gain name="ap/pitch/theta">
-    <!--<input>ap/pitch/theta-sum-rad</input>-->	<!--This method of latching of current pitch not work with old nasal code-->
-    <input>attitude/theta-rad</input>
+    <input>ap/pitch/theta-sum-rad</input>
     <gain>1.0</gain>
   </pure_gain>
 

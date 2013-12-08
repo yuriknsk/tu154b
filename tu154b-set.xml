@@ -517,7 +517,7 @@
       <source>/instrumentation/nav[2]/frequencies/selected-mhz</source>
     </frequencies>
   </dme>
-  
+
   <marker-beacon>
     <serviceable type="bool" >false</serviceable>
     <power-btn type="bool" >false</power-btn>

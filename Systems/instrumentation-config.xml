@@ -44,7 +44,7 @@ TU154B project
     <quantum>0</quantum>
     <tau>0</tau>
   </altimeter>
-
+    
   <!-- For MGV-1SK-1 -->
   <attitude-indicator>
     <name>attitude-indicator</name>
