@@ -78,7 +78,7 @@
  
  
   <property>ap/pitch-hold</property>
-  
+  <property>ap/pitch/latch-out-rad</property>
   
 
   <property>ap/windup-trigger</property>
@@ -88,6 +88,8 @@
   <property>ap/ena-needles</property>
 
 							<!--RESTORE IT FOR RELEASE!!!-->
+							
+							
 <channel name="Glue">
   
 <fcs_function name="ap/navigac" >
@@ -382,30 +384,40 @@ modified by Yurik nov 2013
 
   <summer name="ap/pitch/altitude-error">
     <input>ap/input-altitude</input>
-    <input>ap/pitch/pressure-delta-ft-filtered</input>
+    <input>ap/pitch/pressure-delta-ft-filtered</input>	<!--RESTORE IT FOR RELEASE!!!-->
     <input>-position/h-sl-ft</input>
     <clipto>
       <min>-100</min>
       <max>100</max>
     </clipto>
   </summer>
-  
+<!--  
   <switch name="ap/pitch/h-err-switched">
     <default value="0.0"/>
     <test value="-ap/pitch/altitude-error">
       ap/pitch-selector == 2
+      ap/pitch-hold == 1
+    </test>
+  </switch>
+  -->
+  <switch name="ap/pitch/h-windup">
+    <default value="-1.0"/>
+    <test value="0.0">
+      ap/pitch-selector == 2
+      ap/pitch-hold == 1
     </test>
   </switch>
   
   <pid name="ap/pitch/h-pid-pi">
-    <input>ap/pitch/h-err-switched</input>
+    <input>-ap/pitch/altitude-error</input>
     <kp> 0.0005 </kp>
     <ki> 0.00005 </ki>
     <kd> 0.0 </kd>
+    <trigger>ap/pitch/h-windup</trigger>
   </pid>
   
   <pid name="ap/pitch/h-pid-d">
-    <input>ap/pitch/h-err-switched</input>
+    <input>-ap/pitch/altitude-error</input>
     <kp> 0.0 </kp>
     <ki> 0.0 </ki>
     <kd> 0.0005 </kd>
@@ -536,15 +548,15 @@ modified by Yurik nov 2013
 
 <!--Theta stabilizer-->
   <switch name="ap/pitch/theta-latched-rad">
-    <default value="attitude/theta-rad"/>
+    <default value="ap/pitch/latch-out-rad"/>
     <test value="ap/pitch/theta-latched-rad">
       ap/pitch-selector ne 0
     </test>
   </switch>
   
   <summer name="ap/pitch/theta-sum-rad">
-    <!--<input>-ap/pitch/theta-latched-rad</input>--> <!--This method of latching of current pitch not work with old nasal code-->
-    <input>-ap/offset-pitch-rad</input>
+    <input>-ap/pitch/theta-latched-rad</input> <!--This method of latching of current pitch not work with old nasal code-->
+    <!--<input>-ap/offset-pitch-rad</input>-->
     <input>attitude/theta-rad</input>
   </summer>
 
@@ -586,6 +598,16 @@ modified by Yurik nov 2013
       <max>1.0</max>
     </clipto>	      -->
   </summer>
+
+
+  <summer name="ap/pitch/latch_stab_summer">
+    <input>attitude/theta-rad</input>
+    <input>ap/pitch/bank-compensation</input>
+    <input>ap/pitch/manu</input>
+    <input>ap/pitch/stab-selector</input>
+    <output>ap/pitch/latch-out-rad</output>
+  </summer>
+  
   
   <pure_gain name="ap/pitch/main_stab">
     <input>ap/pitch/main_stab_summer</input>
@@ -862,8 +884,8 @@ There is a system for enchance pitch control. It read pitch trimmer position and
 
 <!--******************************* ILS Staff ***************************-->
         <summer name="ap/heading-error-ils">
-<!--<input> -attitude/psi-deg </input>-->					<!--COMMENT IT FOR RELEASE!!!-->
-<input> -instrumentation/pnp-heading </input>		<!--RESTORE IT FOR RELEASE!!!-->
+<input> -attitude/psi-deg </input>					<!--COMMENT IT FOR RELEASE!!!-->
+<!--<input> -instrumentation/pnp-heading </input>-->		<!--RESTORE IT FOR RELEASE!!!-->
           <input> ap/input-heading-pnp </input>
         </summer>
 

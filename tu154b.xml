@@ -292,7 +292,7 @@
                 </location>
                 <orient unit="DEG">
                     <roll> 0 </roll>
-                    <pitch> -2 </pitch>
+                    <pitch> 2 </pitch>
                     <yaw> -6.5 </yaw>
                 </orient>
             </thruster>
@@ -342,7 +342,7 @@
                 </location>
                 <orient unit="DEG">
                     <roll> 0 </roll>
-                    <pitch> -2 </pitch>
+                    <pitch> 2 </pitch>
                     <yaw> 6.5 </yaw>
                 </orient>
             </thruster>
@@ -1543,12 +1543,12 @@
 	<property>ap/pitch/met-input</property>
 	<property>ap/pitch/met</property>
 	<property>ap/pitch/gs-k5</property>
-	<property>ap/pitch/main_stab</property>
-	<property>ap/pitch/go-around-sum-1</property>
+	<property>ap/pitch/main-stab-summer</property>
+	<property>ap/pitch/latch-out-rad</property>
 	<property>debug/gs-epsilon</property>
 	<property>debug/h-m</property>
 	<property>debug/wp-hdg-corrected</property>
 	<property>debug/wp-distance</property>
-    </output>-->
-
+    </output>
+-->
   </fdm_config>

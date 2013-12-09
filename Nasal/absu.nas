@@ -332,21 +332,21 @@ if( getprop("tu154/systems/absu/serviceable" ) == 1 ) return 1;
 else return 0;
 }
 
-var absu_clear_pitch_wheel = func {
-  var offset = getprop("fdm/jsbsim/ap/offset-pitch-rad");
-  offset += getprop("fdm/jsbsim/ap/stab-input-pitch-rad");
-  setprop("fdm/jsbsim/ap/offset-pitch-rad", offset );
-  setprop("fdm/jsbsim/ap/stab-input-pitch-rad", 0.0 );
-  setprop("tu154/switches/pu-46-pitch-wheel", 0.0 );
-}
+#var absu_clear_pitch_wheel = func {
+#  var offset = getprop("fdm/jsbsim/ap/offset-pitch-rad");
+#  offset += getprop("fdm/jsbsim/ap/stab-input-pitch-rad");
+#  setprop("fdm/jsbsim/ap/offset-pitch-rad", offset );
+#  setprop("fdm/jsbsim/ap/stab-input-pitch-rad", 0.0 );
+#  setprop("tu154/switches/pu-46-pitch-wheel", 0.0 );
+#}
 
 var absu_stab_current_pitch = func{	
-	var current_pitch = getprop("fdm/jsbsim/attitude/pitch-rad");
-	if( current_pitch == nil ) current_pitch = 0.0;
-	var offset = getprop("fdm/jsbsim/ap/offset-pitch-rad");
-	setprop("fdm/jsbsim/ap/stab-input-pitch-rad", 0.0 );
-	setprop("fdm/jsbsim/ap/offset-pitch-rad", current_pitch + offset );
-	setprop("tu154/switches/pu-46-pitch-wheel", 0.0 );
+#	var current_pitch = getprop("fdm/jsbsim/attitude/pitch-rad");
+#	if( current_pitch == nil ) current_pitch = 0.0;
+#	var offset = getprop("fdm/jsbsim/ap/offset-pitch-rad");
+#	setprop("fdm/jsbsim/ap/stab-input-pitch-rad", 0.0 );
+#	setprop("fdm/jsbsim/ap/offset-pitch-rad", current_pitch + offset );
+#	setprop("tu154/switches/pu-46-pitch-wheel", 0.0 );
 	setprop("fdm/jsbsim/ap/pitch-selector", 1.0 ); # 1 - stabilize pitch
 	setprop( "tu154/instrumentation/pn-5/pitch-state", 2 );
 	setprop("tu154/systems/electrical/indicators/stab-pitch", 1.0 );
@@ -444,7 +444,7 @@ clr_pitch_lamp();
 #var alt = getprop("instrumentation/altimeter/indicated-altitude-ft");	
 var alt = getprop("fdm/jsbsim/position/h-sl-ft");	# Modified by Yurik nov 2013
 #if ( alt == nil ) return;
-absu_clear_pitch_wheel();
+#absu_clear_pitch_wheel();
 setprop("fdm/jsbsim/ap/input-altitude", alt );
 setprop("fdm/jsbsim/ap/pitch-selector", 2 ); # H stab code
 setprop("tu154/instrumentation/pu-46/h", 1.0 );
@@ -461,7 +461,7 @@ if( absu_powered() == 0 ) return;
 var ias = getprop("fdm/jsbsim/velocities/vc-fps");
 #if ( ias == nil ) return;
 clr_pitch_lamp();
-absu_clear_pitch_wheel();
+#absu_clear_pitch_wheel();
 setprop("fdm/jsbsim/ap/input-speed", ias );
 setprop("fdm/jsbsim/ap/pitch-selector", 3 ); # V stab code
 setprop("tu154/instrumentation/pu-46/v", 1.0 );
@@ -478,7 +478,7 @@ if( absu_powered() == 0 ) return;
 var mach = getprop("fdm/jsbsim/velocities/mach");
 #if ( mach == nil ) return;
 clr_pitch_lamp();
-absu_clear_pitch_wheel();
+#absu_clear_pitch_wheel();
 setprop("fdm/jsbsim/ap/input-mach", mach );
 setprop("fdm/jsbsim/ap/pitch-selector", 4 ); # M stab code
 setprop("tu154/instrumentation/pu-46/m", 1.0 );
@@ -498,7 +498,7 @@ if( getprop("tu154/switches/pn-5-navigac" ) != 0.0 ) return; # wrong control!
 #if(  abs( getprop("instrumentation/nav[0]/gs-needle-deflection") ) > GLIDESLOPE_DEVIATION_LIMIT ) return;
 
 clr_pitch_lamp();
-absu_clear_pitch_wheel();
+#absu_clear_pitch_wheel();
 setprop("tu154/instrumentation/pn-5/sbros", 0.0 );
 setprop("fdm/jsbsim/ap/pitch-selector", 5.0 ); # Glideslope code
 setprop("tu154/instrumentation/pn-5/gliss", 1.0 );
