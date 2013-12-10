@@ -301,6 +301,10 @@
       <command>property-assign</command>
       <property>tu154/switches/pu-46-pitch-wheel</property>
       <value>0.0</value>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>absu.absu_drop_mvh()</script>
     </binding>    
   </action>
 </animation>
@@ -319,12 +323,12 @@
       <command>property-adjust</command>
       <property>tu154/switches/pu-46-pitch-wheel</property>
       <step>5.0</step>
-      <max>85</max>
+      <max>170</max>
     </binding>
     <binding>
       <command>property-adjust</command>
       <property>fdm/jsbsim/ap/stab-input-pitch-rad</property>
-      <step>-0.017</step>
+      <step>-0.0085</step>
       <min>-0.3</min>
     </binding>
     <binding>
@@ -346,12 +350,12 @@
       <command>property-adjust</command>
       <property>tu154/switches/pu-46-pitch-wheel</property>
       <step>-5.0</step>
-      <min>-85.0</min>
+      <min>-170.0</min>
     </binding>
     <binding>
       <command>property-adjust</command>
       <property>fdm/jsbsim/ap/stab-input-pitch-rad</property>
-      <step>0.017</step>
+      <step>0.0085</step>
       <max>0.3</max>
     </binding>
     <binding>

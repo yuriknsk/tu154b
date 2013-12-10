@@ -104,7 +104,7 @@
     </function>
 </fcs_function>
 
-<fcs_function name="ap/indicated-altitude-ft" >
+<fcs_function name="ap/pressure-altitude-ft" >
      <function>
         <property>/instrumentation/altimeter[0]/pressure-alt-ft</property>
      </function>
@@ -365,41 +365,15 @@ modified by Yurik nov 2013
 
 <!--End V stab-->
 <!--H stab-->
-  <summer name="ap/pitch/pressure-delta-ft">
-    <input>position/h-sl-ft</input>
-    <input>-ap/indicated-altitude-ft</input>
-  </summer>
-  
-  <switch name="ap/pitch/pressure-delta-ft-switched">
-    <default value="0.0"/>
-    <test value="ap/pitch/pressure-delta-ft">
-      ap/pitch-selector == 2
-    </test>
-  </switch>  
-  
-  <lag_filter name="ap/pitch/pressure-delta-ft-filtered">
-    <input>ap/pitch/pressure-delta-ft-switched</input>
-    <c1>0.017</c1>	<!--1 min tau-->
-  </lag_filter> 
-
   <summer name="ap/pitch/altitude-error">
     <input>ap/input-altitude</input>
-    <input>ap/pitch/pressure-delta-ft-filtered</input>	<!--RESTORE IT FOR RELEASE!!!-->
-    <input>-position/h-sl-ft</input>
+    <input>-ap/pressure-altitude-ft</input>
     <clipto>
       <min>-100</min>
       <max>100</max>
     </clipto>
   </summer>
-<!--  
-  <switch name="ap/pitch/h-err-switched">
-    <default value="0.0"/>
-    <test value="-ap/pitch/altitude-error">
-      ap/pitch-selector == 2
-      ap/pitch-hold == 1
-    </test>
-  </switch>
-  -->
+
   <switch name="ap/pitch/h-windup">
     <default value="-1.0"/>
     <test value="0.0">

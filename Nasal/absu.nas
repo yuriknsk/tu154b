@@ -441,10 +441,8 @@ if( absu_powered() == 0 ) return;
 #if( getprop("tu154/switches/pu-46-tang" ) != 1.0 ) return;
 #if( getprop("tu154/instrumentation/pu-46/stab" ) != 1.0 ) return;
 clr_pitch_lamp();
-#var alt = getprop("instrumentation/altimeter/indicated-altitude-ft");	
-var alt = getprop("fdm/jsbsim/position/h-sl-ft");	# Modified by Yurik nov 2013
-#if ( alt == nil ) return;
-#absu_clear_pitch_wheel();
+var alt = getprop("instrumentation/altimeter[0]/pressure-alt-ft");		# Modified by Yurik dec 2013
+
 setprop("fdm/jsbsim/ap/input-altitude", alt );
 setprop("fdm/jsbsim/ap/pitch-selector", 2 ); # H stab code
 setprop("tu154/instrumentation/pu-46/h", 1.0 );

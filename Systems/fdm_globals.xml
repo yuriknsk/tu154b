@@ -45,6 +45,7 @@
       <property>tu154/systems/flight/fl</property>
       <property>tu154/systems/flight/dist</property>
 
+      
       <!--******************************************** For script controlled flight ************************************-->
 <!--
       <property>/gear/gear/wow</property>
@@ -85,7 +86,7 @@
       <property>instrumentation/nvu/active</property>
       <property>instrumentation/nvu/stopped</property>
       
-      <property>ap/indicated-altitude-ft</property>
+      
       
       <property>ap/navigac</property>
       <property>ap/posadk</property>
