@@ -132,10 +132,9 @@
     <button>0</button>
     <repeatable>false</repeatable>
     <binding>
-      <command>property-assign</command>
-      <property>controls/flight/elevator-trim</property>
-      <value>0.0</value>
-    </binding>
+      <command>nasal</command>
+      <script>absu.absu_met_neutral()</script>
+    </binding>    
   </action>
 </animation>
 

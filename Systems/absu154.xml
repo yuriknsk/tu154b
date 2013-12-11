@@ -17,6 +17,7 @@
 <!--<property> fcs/revers-by-joy </property>-->
 <property value="0.0"> fcs/revers-by-key </property>
 <property value="0.0"> ap/turbulence </property>
+<property value="0.0"> ap/met-neutral </property>
 <!--<property value="0.1"> fcs/revers-1-limit </property>
 <property value="0.03"> fcs/revers-2-limit </property>-->
 
@@ -529,8 +530,7 @@ modified by Yurik nov 2013
   </switch>
   
   <summer name="ap/pitch/theta-sum-rad">
-    <input>-ap/pitch/theta-latched-rad</input> <!--This method of latching of current pitch not work with old nasal code-->
-    <!--<input>-ap/offset-pitch-rad</input>-->
+    <input>-ap/pitch/theta-latched-rad</input>
     <input>attitude/theta-rad</input>
   </summer>
 
@@ -626,7 +626,14 @@ modified by Yurik nov 2013
 		ap/pitch-hold == 0	<!--We use buttons for MET moving if yoke control mode (0) selected-->
 	      </test>
 	    </switch>
-
+	    <!--Set met to neutral-->
+	    <switch name="ap/pitch/met-trigger">
+	      <default value="0.0"/>
+	      <test value="-1.0">
+		ap/met-neutral == 1	<!-- Set it to 1 if you want move MET to neutral -->
+	      </test>
+	    </switch>
+	    
 	    <!--Input MET threshold (deadband zone)-->
 	    <deadband name="ap/pitch/met-input-deadband">
 	      <input>ap/pitch/met-selector</input>
@@ -665,12 +672,14 @@ modified by Yurik nov 2013
               </test>	      
             </switch>
 	    
-	    <integrator name="ap/pitch/met-integrator">
+	    <pid name="ap/pitch/met-integrator">
               <input>ap/pitch/met-input</input>
-	      <c1>1.0</c1>
-	      <!--<trigger>instrumentation/nvu/stopped</trigger>-->
-		<output>ap/pitch/met-integr-out</output>
-            </integrator>
+	      <kp>0.0</kp>
+	      <ki>1.0</ki>
+	      <kd>0.0</kd>
+	      <trigger>ap/pitch/met-trigger</trigger>
+	      <output>ap/pitch/met-integr-out</output>
+            </pid>
 	    
 	    <pure_gain name="ap/pitch/met">
 	      <input>ap/pitch/met-integrator</input>

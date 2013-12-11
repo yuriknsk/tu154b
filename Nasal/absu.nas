@@ -425,7 +425,8 @@ if( getprop("tu154/instrumentation/pu-46/stab" ) == 1.0 )
 if( getprop("fdm/jsbsim/ap/pitch-selector" ) != 1.0 )
 	{
         clr_pitch_lamp();
-        setprop("fdm/jsbsim/ap/pitch-selector",1);
+        setprop("fdm/jsbsim/ap/pitch-selector",0);
+	settimer( set_pitch_stab, 0.1 );
         setprop("fdm/jsbsim/ap/pitch-hold",1);
         if( getprop("tu154/switches/pu-46-tang" ) == 1.0 )
 		{
@@ -434,6 +435,24 @@ if( getprop("fdm/jsbsim/ap/pitch-selector" ) != 1.0 )
 		}
 	}
 }
+
+var set_pitch_stab = func{
+  setprop("fdm/jsbsim/ap/pitch-selector",1 );
+}
+
+
+# Clear MET to neutral
+
+var absu_met_neutral = func{
+  setprop("fdm/jsbsim/ap/met-neutral", 1 );
+  settimer( enable_met, 0.1 );
+}
+
+var enable_met = func{
+  setprop("fdm/jsbsim/ap/met-neutral", 0 );
+}
+
+
 
 # Altitude stabilizer
 var absu_h = func{
