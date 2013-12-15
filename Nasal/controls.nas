@@ -29,8 +29,22 @@ var elevatorTrim = func {
 var elev_trim_stop = func {
   setprop("fdm/jsbsim/fcs/met-cmd", 0.0);
 }
-	
-	
+
+# It's func intend for support direct trim changing (from home\end keyboard and mouse wheel bindings)
+# Joysticks drivers use elevatorTrim()
+var trim_handler = func{
+  var old_trim = num( getprop("tu154/systems/absu/trim") );
+  if ( old_trim == nil ) old_trim = 0.0;
+  var new_trim = num( getprop("/controls/flight/elevator-trim") );
+  if ( new_trim == nil ) new_trim = 0.0;
+  var delta = new_trim - old_trim;
+  setprop( "tu154/systems/absu/trim", new_trim );
+  if( delta > 0.0 ) elevatorTrim(1);
+  if( delta < 0.0 ) elevatorTrim(-1);
+}
+
+setlistener( "/controls/flight/elevator-trim", trim_handler );
+
 #
 # Brakes
 #

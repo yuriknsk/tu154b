@@ -5,9 +5,8 @@
 # 2007 - 2008,2010,2013
 #
 
-var HEADING_DEVIATION_LIMIT = 20.0;
-var GLIDESLOPE_DEVIATION_LIMIT = 10.0;
-#var GO_AROUND_PITCH_RAD = 0.2;
+#var HEADING_DEVIATION_LIMIT = 20.0;
+#var GLIDESLOPE_DEVIATION_LIMIT = 10.0;
 var PITCH_YOKE_LIMIT = 0.5;
 var BANK_YOKE_LIMIT = 0.5;
 
@@ -25,27 +24,6 @@ if( az2 == nil ) az2 = 0.0;
 
 
 
-#Modified by Yurik dec 2013 due new AP JSBSim system
-
-# Heading ILS ABSU support
-#var LOCALIZER_CONST = 0.7;
-#var GLIDESLOPE_CONST = 0.7;
-
-#param = num( getprop("instrumentation/altimeter[0]/pressure-alt-ft") );
-#if( param == nil ) param = 0.0;
-#setprop("fdm/jsbsim/ap/indicated-altitude-ft", param );
-
-# Glideslope ILS ABSU support
-#  param = num( getprop("instrumentation/nav[0]/gs-rate-of-climb") );
-#  if( param == nil ) param = 0.0;
-
-  # with sanity check
-#  if( abs( param ) < 100 ) setprop("fdm/jsbsim/ap/input-glideslope-speed", param *
-#  GLIDESLOPE_CONST);
-
-#  param = num(getprop("instrumentation/nav[0]/gs-needle-deflection") );
-#  if( param == nil ) param = 0.0;
-#  if( abs( param ) < 100 ) setprop("fdm/jsbsim/ap/input-glideslope-delta", param *  GLIDESLOPE_CONST );
 
 
 # VOR support
@@ -142,14 +120,12 @@ if( needles == nil )  needles = 0.0;
 if( needles != 0.0 )
 	{ 
 	# Directors
-	#param = getprop("fdm/jsbsim/ap/pitch-error");
 	param = getprop("fdm/jsbsim/ap/pitch/gs-needle");	# Modified by Yurik nov 2103 for new ABSU version
 
 	if( param == nil )  param = 0.0;
 	if( getprop("fdm/jsbsim/ap/pitch-selector") != 5.0 ) param = 0.0;
 	setprop("tu154/instrumentation/pkp[0]/pitch-director", param );
 
-	#param = getprop("fdm/jsbsim/ap/roll-error");
 	param = getprop("fdm/jsbsim/ap/ils-out");	# Modified by Yurik nov 2103 for new ABSU version
 
 	if( param == nil )  param = 0.0; 
@@ -161,22 +137,7 @@ else{
 	interpolate("tu154/instrumentation/pkp[0]/roll-director", 0.3, 1.0 );
 	}	
 
-# Commented by Yurik dec 2103 for new ABSU version
-# Pitch auto trim
-#var K_AUTOTRIM = -0.001;#-0.01
-#var THRESHOLD_AUTOTRIM = 0.05;
-
-#if( getprop("fdm/jsbsim/ap/pitch-hold") == 1.0 )
-#    if( getprop("tu154/switches/long-control") == 1.0 )
-#	{
-#	var pitch_error = getprop("fdm/jsbsim/ap/pitch-hold-pid");
-#	if( pitch_error == nil ) pitch_error = 0.0;
-#	var pitch_trim = getprop("controls/flight/elevator-trim");
-#	if( pitch_trim == nil ) pitch_trim = 0.0;
-#	if( abs( pitch_error ) > THRESHOLD_AUTOTRIM )
-#	setprop("controls/flight/elevator-trim", pitch_trim + K_AUTOTRIM * pitch_error );
-#	}
-	
+# Modified by Yurik dec 2103 for new ABSU version
 # Glideslope auto switch
 if( getprop("fdm/jsbsim/fcs/flap-pos-deg") > 40.0 )
    if( getprop("fdm/jsbsim/ap/roll-selector") == 5.0 )
@@ -222,10 +183,11 @@ if( tang == nil ) tang = 0.0;
 
 }
 
+# Modified by Yurik dec 2013
 # Go to manual control
 var absu_stab_off = func {
 # Autopilot state
-# Clear audio warning if stale interpolation
+# Clear audio warning if interpolation of is stale
 	setprop("tu154/systems/warning/alarm/absu_warn", 0.0 );
 	var state = 0;
 	if( getprop("fdm/jsbsim/ap/pitch-hold") ) state = 1;
@@ -263,7 +225,7 @@ var absu_stab_off = func {
 var absu_stab_kren = func {
 
 var state = getprop("tu154/instrumentation/pu-46/stab");
-if ( state == nil ) return;
+if ( state == nil ) state = 0;
 if ( arg[0] != 0 )	# start roll stabilizer
 	{
 	if( state != 0 ) 
@@ -294,7 +256,7 @@ else	# stop roll stabilizer
 
 var absu_stab_tang = func {
 var state = getprop("tu154/instrumentation/pu-46/stab");
-if ( state == nil ) return;
+if ( state == nil ) state = 0;
 if ( arg[0] != 0 )	# start pitch stabilizer
 	{
 	if( state != 0 ){ 
@@ -305,13 +267,6 @@ if ( arg[0] != 0 )	# start pitch stabilizer
 
 else	# stop pitch stabilizer
 	{
-#	interpolate("tu154/switches/pu-46-tang", 0.0, 0.1 );
-#	interpolate("tu154/systems/electrical/indicators/stab-pitch", 0.0, 0.1 );
-#        setprop("tu154/systems/electrical/indicators/glideslope", 0.0 );
-#        setprop("tu154/systems/electrical/indicators/stab-pitch", 0.0 );
-#        setprop("tu154/systems/electrical/indicators/stab-h", 0.0 );
-#        setprop("tu154/systems/electrical/indicators/stab-v", 0.0 );
-#        setprop("tu154/systems/electrical/indicators/stab-m", 0.0 );
 	clr_pitch_lamp();
 	setprop("fdm/jsbsim/ap/pitch-hold", 0.0 );
 	if( absu_powered() == 1 )
@@ -332,21 +287,7 @@ if( getprop("tu154/systems/absu/serviceable" ) == 1 ) return 1;
 else return 0;
 }
 
-#var absu_clear_pitch_wheel = func {
-#  var offset = getprop("fdm/jsbsim/ap/offset-pitch-rad");
-#  offset += getprop("fdm/jsbsim/ap/stab-input-pitch-rad");
-#  setprop("fdm/jsbsim/ap/offset-pitch-rad", offset );
-#  setprop("fdm/jsbsim/ap/stab-input-pitch-rad", 0.0 );
-#  setprop("tu154/switches/pu-46-pitch-wheel", 0.0 );
-#}
-
 var absu_stab_current_pitch = func{	
-#	var current_pitch = getprop("fdm/jsbsim/attitude/pitch-rad");
-#	if( current_pitch == nil ) current_pitch = 0.0;
-#	var offset = getprop("fdm/jsbsim/ap/offset-pitch-rad");
-#	setprop("fdm/jsbsim/ap/stab-input-pitch-rad", 0.0 );
-#	setprop("fdm/jsbsim/ap/offset-pitch-rad", current_pitch + offset );
-#	setprop("tu154/switches/pu-46-pitch-wheel", 0.0 );
 	setprop("fdm/jsbsim/ap/pitch-selector", 1.0 ); # 1 - stabilize pitch
 	setprop( "tu154/instrumentation/pn-5/pitch-state", 2 );
 	setprop("tu154/systems/electrical/indicators/stab-pitch", 1.0 );
@@ -404,7 +345,6 @@ if( getprop("fdm/jsbsim/ap/pitch-selector" ) == 5 )
 setprop("tu154/instrumentation/pn-5/gliss", 0.0  );
 setprop("tu154/systems/electrical/indicators/glideslope", 0.0 );
 
-#setprop("fdm/jsbsim/ap/go-around", 0.0);
 setprop("tu154/systems/electrical/indicators/reject", 0.0 );
 
 if( getprop("tu154/instrumentation/pu-46/stab" ) == 1.0 
@@ -412,7 +352,6 @@ if( getprop("tu154/instrumentation/pu-46/stab" ) == 1.0
     {
     absu_stab_roll();
     setprop("fdm/jsbsim/ap/roll-hold", 1.0 );
-#    setprop("tu154/systems/electrical/indicators/stab-heading", 1.0 );# lamps on
     }
 }
 
@@ -457,8 +396,6 @@ var enable_met = func{
 # Altitude stabilizer
 var absu_h = func{
 if( absu_powered() == 0 ) return;
-#if( getprop("tu154/switches/pu-46-tang" ) != 1.0 ) return;
-#if( getprop("tu154/instrumentation/pu-46/stab" ) != 1.0 ) return;
 clr_pitch_lamp();
 var alt = getprop("instrumentation/altimeter[0]/pressure-alt-ft");		# Modified by Yurik dec 2013
 
@@ -473,12 +410,8 @@ if( getprop("tu154/switches/pu-46-tang" ) == 1.0 )
 # Air speed stabilizer
 var absu_v = func{
 if( absu_powered() == 0 ) return;
-#if( getprop("tu154/switches/pu-46-tang" ) != 1.0 ) return;
-#if( getprop("tu154/instrumentation/pu-46/stab" ) != 1.0 ) return;
 var ias = getprop("fdm/jsbsim/velocities/vc-fps");
-#if ( ias == nil ) return;
 clr_pitch_lamp();
-#absu_clear_pitch_wheel();
 setprop("fdm/jsbsim/ap/input-speed", ias );
 setprop("fdm/jsbsim/ap/pitch-selector", 3 ); # V stab code
 setprop("tu154/instrumentation/pu-46/v", 1.0 );
@@ -490,12 +423,9 @@ if( getprop("tu154/switches/pu-46-tang" ) == 1.0 )
 # Mach stabilizer
 var absu_m = func{
 if( absu_powered() == 0 ) return;
-#if( getprop("tu154/switches/pu-46-tang" ) != 1.0 ) return;
-#if( getprop("tu154/instrumentation/pu-46/stab" ) != 1.0 ) return;
 var mach = getprop("fdm/jsbsim/velocities/mach");
 #if ( mach == nil ) return;
 clr_pitch_lamp();
-#absu_clear_pitch_wheel();
 setprop("fdm/jsbsim/ap/input-mach", mach );
 setprop("fdm/jsbsim/ap/pitch-selector", 4 ); # M stab code
 setprop("tu154/instrumentation/pu-46/m", 1.0 );
@@ -509,13 +439,8 @@ var absu_glideslope = func{
 if( absu_powered() == 0 ) return;
 if( getprop("tu154/switches/pn-5-posadk") != 1.0)return;# "podgotovka posadki" not engaged
 if( getprop("tu154/switches/pn-5-navigac" ) != 0.0 ) return; # wrong control!
-#if( getprop("instrumentation/nav[0]/data-is-valid" ) != 1 ) return; # Silence in air!
-#if( getprop("instrumentation/nav[0]/has-gs" ) != 1 ) return; # has not glideslope from nav radio!
-#deviation too big:
-#if(  abs( getprop("instrumentation/nav[0]/gs-needle-deflection") ) > GLIDESLOPE_DEVIATION_LIMIT ) return;
 
 clr_pitch_lamp();
-#absu_clear_pitch_wheel();
 setprop("tu154/instrumentation/pn-5/sbros", 0.0 );
 setprop("fdm/jsbsim/ap/pitch-selector", 5.0 ); # Glideslope code
 setprop("tu154/instrumentation/pn-5/gliss", 1.0 );
@@ -529,8 +454,7 @@ if( getprop("tu154/switches/pu-46-tang" ) == 1.0 )
 # ZK
 var absu_zk = func{
 if( absu_powered() == 0 ) return;
-#if( getprop("tu154/switches/pu-46-kren" ) != 1.0 ) return;
-#if( getprop("tu154/instrumentation/pu-46/stab" ) != 1.0 ) return;
+
 clr_heading_lamp();
 setprop("fdm/jsbsim/ap/roll-selector", 2 ); # ZK code
 setprop("tu154/instrumentation/pn-5/zk", 1.0 );
@@ -541,8 +465,6 @@ if( getprop("tu154/switches/pu-46-kren" ) == 1.0 )
 # VOR 1
 var absu_az1 = func{
 if( absu_powered() == 0 ) return;
-#if( getprop("instrumentation/nav[0]/data-is-valid" ) != 1 ) return; # Silence in air!
-#if( getprop("instrumentation/nav[0]/nav-loc" ) != 0 ) return; # Is it ILS?
 
 clr_heading_lamp();
 
@@ -561,8 +483,6 @@ if( getprop("tu154/switches/pu-46-kren" ) == 1.0 )
 # VOR 2
 var absu_az2 = func{
 if( absu_powered() == 0 ) return;
-#if( getprop("instrumentation/nav[1]/data-is-valid" ) != 1 ) return; # Silence in air!
-#if( getprop("instrumentation/nav[1]/nav-loc" ) != 0 ) return; # Is it ILS?
 
 clr_heading_lamp();
 
@@ -597,10 +517,6 @@ if( getprop("tu154/switches/pu-46-kren" ) == 1.0 )
 # Approach
 var absu_approach = func{
 if( absu_powered() == 0 ) return;
-#if( getprop("instrumentation/nav[0]/data-is-valid" ) != 1 ) return; # Silence in air!
-#if( getprop("instrumentation/nav[0]/nav-loc" ) != 1 ) return; # has not localizer signal from nav radio!
-# deviation too big:
-#if(  getprop("fdm/jsbsim/ap/ils-angle-deviation-abs") > HEADING_DEVIATION_LIMIT ) return;
 
 clr_heading_lamp();
 setprop("fdm/jsbsim/ap/roll-selector", 5 ); # ILS approach code
@@ -621,8 +537,6 @@ var absu_shutdown = func {
 # Drop ABSU to idle state
 absu_reset();
 absu_stab_off();
-#setprop( "tu154/instrumentation/pn-5/heading-state", 0 );
-#setprop( "tu154/instrumentation/pn-5/pitch-state", 0 );
 
 setprop("tu154/systems/electrical/indicators/stab-heading", 0.0 );
 setprop("tu154/systems/electrical/indicators/stab-pitch", 0.0 );
@@ -662,11 +576,6 @@ var absu_start_go_around = func{
 	# Modified by Yurik dec 2013
 	# for new AP JSBSim system
 	
-#	setprop("fdm/jsbsim/ap/stab-input-pitch-rad", GO_AROUND_PITCH_RAD );
-#	setprop("fdm/jsbsim/ap/go-around", 1.0);
-#	setprop("fdm/jsbsim/ap/input-speed", getprop("fdm/jsbsim/velocities/vc-fps") );
-#	interpolate("fdm/jsbsim/ap/input-speed", 260.0, 35.0 );
-#	setprop("fdm/jsbsim/ap/pitch-selector", 3.0);
 	setprop("fdm/jsbsim/ap/pitch-selector", 6.0);
 	setprop("fdm/jsbsim/ap/roll-selector", 1.0);
 	
@@ -685,18 +594,7 @@ var absu_start_go_around = func{
         
        	setprop("tu154/systems/electrical/indicators/reject", 1.0 );
 	setprop("tu154/systems/electrical/indicators/stab-heading", 1.0 );
-#	absu_go_around_handler();
 }
-
-#var absu_go_around_handler = func{
-#if( getprop("fdm/jsbsim/ap/go-around") ) # if not, stop handler
-# {
-# wait until speed will be increase
-# if( getprop("fdm/jsbsim/velocities/vc-fps") > getprop("fdm/jsbsim/ap/go-around-speed") )
-#  settimer( absu_go_around_handler, 0.5 ); # repeat 
-# else setprop("fdm/jsbsim/ap/pitch-selector", 3.0); # speed OK, let's stabilise V
-# } 
-#}
 
 # ========================== yoke ap off =============================
 var check_yoke_pitch = func{
