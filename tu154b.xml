@@ -63,7 +63,7 @@
         </pointmass>
 
 	<pointmass name="Pax1">
-            <weight unit="KG">3000</weight>
+            <weight unit="KG">4000</weight>
             <location unit="M">
                 <x>12.0</x>
                 <y>0</y>
@@ -72,7 +72,7 @@
         </pointmass>       
 	
         <pointmass name="Pax2">
-            <weight unit="KG">3000</weight>
+            <weight unit="KG">4000</weight>
             <location unit="M">
                 <x>20.0</x>
 <!--<x>5.84</x>-->
@@ -83,7 +83,7 @@
         </pointmass>
 
         <pointmass name="Pax3">
-            <weight unit="KG">3000</weight>
+            <weight unit="KG">4000</weight>
             <location unit="M">
                 <x>30.0</x>
                 <y>0</y>
@@ -965,60 +965,7 @@
 
     
     <aerodynamics>
-<!--    
-        <function name="aero/function/fly_fuel">
-	  <product>
-	  <sum>
-            <table name="fly_fuel_t">
-                <independentVar lookup="column">tu154/systems/flight/fl</independentVar>
-                <independentVar lookup="row">tu154/systems/flight/dist</independentVar>
-                <tableData>
-		          9600    10200   10800   11400   12100
-		  500     5.5     5.45    5.35    5.35    5.45
-		  1000    8.95    8.5     8.4     8.25    8.3
-		  1500    12.2    11.6    11.5    11.25   11.15
-		  1600    12.8    12.3    12.1    11.85   11.7
-		  1700    13.5    13      12.75   12.5    12.3
-		  1800    14.1    13.65   13.35   13.1    12.85
-		  1900    14.8    14.3    14      13.75   13.45
-		  2000    15.4    15      14.6    14.35   14.05
-		  2100    16.15   15.65   15.25   15      14.75
-		  2200    16.9    16.2    15.85   15.55   15.35
-		  2300    17.5    17      16.5    16.2    15.9
-		  2400    18      17.7    17.1    16.85   16.5
-		  2500    18.8    18.15   17.8    17.55   17.2
-		  2600    19.6    19      18.5    18.2    17.8
-		  2700    20.2    19.6    19.2    18.85   18.4
-		  2800    20.6    20.25   19.65   19.5    19.1
-		  2900    21.15   21      20.45   10.1    19.75
-		  3000    21.7    21.15   20.8    20.75   20.45
-		  3100    21.5    21.8    21.5    21.1    21
-		  3200    22.05   22.35   21.5    21.7    21.3
-		  3300    22.6    23      22.55   22.25   21.85
-		  3400    23.1    23.5    23      22.8    22.35
-		  3500    23.75   24.15   23.6    23.3    22.95
-		  3600    24.25   24.7    24.1    23.85   23.55
-		  3700    24.8    25.36   24.7    24.35   24.05
-		  3800    25.4    25.9    25.3    23.95   24.6
-		  3900    25.9    26.5    25.8    25.45   25.1
-		  4000    26.4    27      26.3    25.95   25.6
-		  4100    27      27.6    26.9    26.55   26.1
-		  4200    27.55   28.2    27.35   27.1    26.6
-		  4300    28.1    28.8    28      27.6    27.05
-		  4400    28.6    29.3    28.5    28.2    27.55
-		  4500    29.2    29.9    29.2    28.7    28.1
-		  4600    29.75   30.45   29.9    29.15   28.6
-		  4700    30.3    31      30.4    29.65   29.15
-		  4800    30.8    31.35   31      30.2    29.65
-		  4900    31.35   32.2    31.5    30.65   30.15
-		  5000    31.85   32.7    31.9    31.15   30.55
-                </tableData>
-            </table>
-	    <value>7</value>
-	  </sum>
-	  <value>1</value>
-	  </product>
-        </function>-->
+      
       <function name="aero/function/CAX">
 	<product>
           <difference>
@@ -1063,7 +1010,7 @@
                 <independentVar lookup="row">aero/alpha-wing-rad</independentVar>
                 <independentVar lookup="column">aero/function/cmf</independentVar>
                 <tableData>
-                               -0.95         -0.8          -0.5          0.2           28            45            
+                               -0.95         -0.8          -0.5          -0.2           28            45            
                   -0.06981      -0.65         -0.65         -0.65         -0.65         0             0.25          
                   0             -0.22         -0.2          -0.25         -0.25         0.4           0.65          
                   0.04887       0.05          0.1           0.05          0             0.65          0.93          
@@ -1079,6 +1026,7 @@
                 </tableData>
             </table>
         </function>
+	
         <axis name="LIFT" unit="LBS">
             <function name="aero/coefficient/CLalpha">
                 <description>Lift_due_to_alpha</description>
@@ -1133,6 +1081,7 @@
             
         </axis>
         <axis name="DRAG" unit="LBS">
+<!--	  
             <function name="aero/coefficient/CDx">
                 <description>Drag_due_to_Cy</description>
                 <product>
@@ -1142,7 +1091,7 @@
                         <independentVar lookup="row">aero/function/cy</independentVar>
                         <independentVar lookup="column">aero/function/cmf</independentVar>
                         <tableData>
-                                       -0.95         -0.9          -0.6          0.2           28            45            
+                                       -0.95         -0.9          -0.6          -0.2           28            45            
                           -0.25         0.032         0.028         0.025         0.025         0.11          0.2           
                           0             0.04          0.028         0.025         0.022         0.11          0.2           
                           0.25          0.05          0.037         0.027         0.025         0.11          0.2           
@@ -1156,7 +1105,67 @@
                         </tableData>
                     </table>
                 </product>
+            </function>-->
+
+ <!--           <function name="aero/coefficient/CDx">
+                <description>Drag_due_to_alpha</description>
+                <product>
+                    <property>aero/qbar-psf</property>
+                    <property>metrics/Sw-sqft</property>
+                    <table name="Cx">
+                        <independentVar lookup="row">aero/alpha-wing-rad</independentVar>
+                        <independentVar lookup="column">aero/function/cmf</independentVar>
+                        <tableData>
+                          -1             -0.95         -0.85       -0.7          -0.2           28            45
+		-4.0	 -0.06981	0.08		0.048	  0.045		0.04		0.122		0.203
+		0.0	  0		0.05		0.03	  0.028		0.025		0.114		0.2
+		2.8	  0.04887	0.044		0.026	  0.025		0.022		0.118		0.207
+		5.0	  0.08727	0.05		0.03	  0.03		0.025		0.133		0.225
+		9.0	  0.1658	0.08		0.048	  0.045		0.04		0.172		0.266
+		15.0	  0.2618	0.2		0.1	  0.097		0.091		0.25		0.35
+		16.0	  0.2792	0.222		0.12	  0.111		0.106		0.26		0.36
+		17.0	  0.2967	0.24		0.14	  0.120		0.115		0.27		0.37
+		19.0	  0.3316	0.29		0.17	  0.145		0.14		0.29		0.39
+		21.0	  0.3665	0.36		0.21	  0.18		0.174		0.31		0.41
+		22.0	  0.384		0.4		0.24	  0.197		0.19		0.32		0.42
+		25.0	  0.4363	0.5		0.3	  0.25		0.24   		0.38		0.48
+                        </tableData>
+                    </table>
+                </product>
             </function>
+ -->
+ 
+ 
+            <function name="aero/coefficient/CDx">
+                <description>Drag_due_to_alpha</description>
+                <product>
+                    <property>aero/qbar-psf</property>
+                    <property>metrics/Sw-sqft</property>
+                    <table name="Cx">
+                        <independentVar lookup="row">aero/alpha-wing-rad</independentVar>
+                        <independentVar lookup="column">aero/function/cmf</independentVar>
+                        <tableData>
+                                       -0.95         -0.85       -0.7          -0.2           28            45
+			 -0.06981	0.08		0.048	  0.045		0.04		0.122		0.203
+			  0		0.05		0.03	  0.028		0.025		0.114		0.2
+			  0.04887	0.044		0.026	  0.025		0.022		0.118		0.207
+			  0.08727	0.05		0.03	  0.03		0.025		0.133		0.225
+			  0.1658	0.08		0.048	  0.045		0.04		0.172		0.266
+			  0.2618	0.2		0.1	  0.097		0.091		0.25		0.35
+			  0.2792	0.222		0.12	  0.111		0.106		0.26		0.36
+			  0.2967	0.24		0.14	  0.120		0.115		0.27		0.37
+			  0.3316	0.29		0.17	  0.145		0.14		0.29		0.39
+			  0.3665	0.36		0.21	  0.18		0.174		0.31		0.41
+			  0.384		0.4		0.24	  0.197		0.19		0.32		0.42
+			  0.4363	0.5		0.3	  0.25		0.24   		0.38		0.48
+                        </tableData>
+                    </table>
+		    <value>0.92</value>
+                </product>
+            </function>
+ 
+ 
+ 
             <function name="aero/coefficient/CDgear">
                 <description>Drag_due_to_gear</description>
                 <product>
@@ -1549,6 +1558,6 @@
 	<property>debug/h-m</property>
 	<property>debug/wp-hdg-corrected</property>
 	<property>debug/wp-distance</property>
-    </output>
--->
+    </output>-->
+
   </fdm_config>

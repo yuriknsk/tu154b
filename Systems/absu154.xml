@@ -186,8 +186,8 @@
    </clipto>   
  </pure_gain>
  
-</channel>
--->
+</channel>-->
+
 
 <!--
 ==================================== NEW PITCH CHANNEL ====================================
@@ -368,7 +368,8 @@ modified by Yurik nov 2013
 <!--H stab-->
   <summer name="ap/pitch/altitude-error">
     <input>ap/input-altitude</input>
-    <input>-ap/pressure-altitude-ft</input>
+    <input>-ap/pressure-altitude-ft</input> <!--RESTORE IT FOR RELEASE!!!-->
+    <!--<input>-position/h-agl-ft</input>--> <!--COMMENT IT FOR RELEASE!!!-->
     <clipto>
       <min>-100</min>
       <max>100</max>
@@ -719,15 +720,6 @@ There is a system for enchance pitch control. It read pitch trimmer position and
 	      <input>ap/suu-switched</input>
 	      <gain>-0.5</gain>
 	    </pure_gain>
-<!--
-            <summer name="ap/pitch-suu">
-	     <input>ap/pitch-inverted</input>
-             <input>ap/suu-switched</input>
-              <clipto>
-                <min>-1</min>
-                <max>1</max>
-              </clipto>
-            </summer>-->
 
 <!-- +++++++++++++++++++ END SUU subsystem  ++++++++++++++++++ -->
 
@@ -782,16 +774,6 @@ There is a system for enchance pitch control. It read pitch trimmer position and
 <!-- *********************** Heading channels ************************ -->
 
       <channel name="Heading stab">
-<!--
-        <pure_gain name="ap/heading-true-deg">
-         <input>attitude/heading-true-rad</input>
-         <gain>57.3</gain> 
-        </pure_gain>
-        
-        <summer name="ap/heading-fork">
-          <input> ap/heading-true-deg </input>
-          <input> -instrumentation/tks-heading </input>
-        </summer>-->
         
 <!--******************************* VOR Staff ***************************-->
         <summer name="ap/heading-error-pnp">
@@ -799,23 +781,9 @@ There is a system for enchance pitch control. It read pitch trimmer position and
           <input> ap/input-heading-pnp </input>
           <input> -instrumentation/nvu/drift-angle </input>
         </summer>
-<!--
-        <switch name="ap/heading-error-vor">
-          <default value="ap/heading-error-auto"/>
-          <test value="ap/heading-error-pnp">
-            ap/delta-deadband ne 0
-          </test>
-        </switch>
-        -->
-<!--
-        <pure_gain name="ap/vor-hdg">
-          <input> ap/hdg-out </input>
-          <gain> 0.05 </gain>
-        </pure_gain>-->
         
 <!--VOR angle stabilizer (epsilon) -->        
         <pure_gain name="ap/vor-beam-error">
-<!--<input> debug/deviation-deg</input>-->
          <input> -ap/input-heading-delta </input>
          <gain> 2.0 </gain><!--1-->
          <clipto>
@@ -867,8 +835,8 @@ There is a system for enchance pitch control. It read pitch trimmer position and
 
 <!--******************************* ILS Staff ***************************-->
         <summer name="ap/heading-error-ils">
-<input> -attitude/psi-deg </input>					<!--COMMENT IT FOR RELEASE!!!-->
-<!--<input> -instrumentation/pnp-heading </input>-->		<!--RESTORE IT FOR RELEASE!!!-->
+<!--<input> -attitude/psi-deg </input>-->					<!--COMMENT IT FOR RELEASE!!!-->
+<input> -instrumentation/pnp-heading </input>		<!--RESTORE IT FOR RELEASE!!!-->
           <input> ap/input-heading-pnp </input>
         </summer>
 

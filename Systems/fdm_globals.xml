@@ -98,6 +98,7 @@
       <property value="7.2">debug/wp-lat-deg</property>
       <property value="150.2">debug/wp-lon-deg</property>
       <property>ap/heading-epsilon</property>
-      <property>ap/gs-epsilon</property>-->
+      <property>ap/gs-epsilon</property>
+      <property>ap/pressure-altitude-ft</property>-->
 
 </system>
