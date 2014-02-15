@@ -3,32 +3,40 @@
     <title>Before Starting Engine</title>
     <item>
       <name>Doors, hatches</name>
-      <value>CLOSED</value>
+      <value>closed</value>
     </item>
     <item>
       <name>Fuel pumps</name>
-      <value>Primary pumps ON</value>
-      <value>Transfer pumps ON</value>	  
+      <value>primary pumps on</value>
+      <value>transfer pumps on</value>	  
     </item>
     <item>
       <name>Ballast fuel tank</name>
       <value>... t</value>
     </item>
     <item>
-      <name>hydraulic pressure, hydraulic accumulator</name>
+      <name>Hydraulic systems pressure</name>
+      <value>... kp/cm^2</value>
+    </item>
+    <item>
+      <name>Hydraulic accumulator pressure</name>
       <value>... kp/cm^2</value>
     </item>
     <item>
       <name>Trimmers</name>
-      <value>NEUTRAL</value>
+      <value>neutral</value>
     </item>
     <item>
       <name>Take-off data</name>
-      <value>COG ... %, TOW ... t</value>
+      <value>COG ... %</value>
+      <value>take-off weight ... t</value>
+      <value>V1 ... km/h</value>
+      <value>VR ... km/h</value>
+      <value>V2 ... km/h</value>
     </item>
     <item>
       <name>Stabilizer setting</name>
-      <value>front position or central position</value>
+      <value>front position, central position, or rear position, according to COG</value>
     </item>
   </checklist>
   
@@ -37,126 +45,161 @@
     <title>Before taxiing</title>
     <item>
       <name>Electric system, load</name>
-      <value>ON</value>
+      <value>on</value>
     </item>
     <item>
       <name>NVU navigation system</name>
-      <value>ON, SET</value>
+      <value>on, set</value>
     </item>
     <item>
-      <name>VOR, ADF</name>
-      <value>ON, frequencies set</value>
+      <name>Kurs-MP NAV1 and NAV2; ADF</name>
+      <value>on, frequencies set</value>
+    </item>
+    <item>
+      <name>Transponder</name>
+      <value>on</value>
     </item>    
     <item>
       <name>Boosters</name>
-      <value>ON, cover closed</value>
+      <value>on, cover closed</value>
     </item>
     <item>
       <name>Attitude indicators</name>
-      <value>ALIGNED</value>
+      <value>aligned</value>
     </item>
     <item>
       <name>TKS gyro-heading system</name>
-      <value>ON, aligned, gyro-heading mode</value>
+      <value>on, aligned, gyro-heading mode</value>
     </item>
     <item>
       <name>ABSU automatic control system</name>
-      <value>ON, manual-control mode</value>
+      <value>on, manual-control mode</value>
     </item>
     <item>
-      <name>Brakes</name>
-      <value>CHECK</value>
+      <name>Wind director</name>
+      <value>set</value>
     </item>
     <item>
       <name>Taxi lights</name>
-      <value>Extended, ON</value>
+      <value>extended, on</value>
+    </item>
+  </checklist>
+
+  <checklist>
+    <title>During taxiing</title>
+     <item>
+      <name>Brakes</name>
+      <value>checked</value>
+    </item>
+    <item>
+      <name>Turn indicator</name>
+      <value>on</value>
     </item>
   </checklist>
   
   <checklist>
-    <title>During taxiing</title>
-			<item>
-				<name>Altimeters</name>
-				<value>QNH/QFE set, radio altimeter on, height 0 m</value>
-			</item>
-			<item>
-				<name>Flaps</name>
-				<value>extended, 15 deg or extended, 28 deg</value>
-			</item>
-			<item>
-				<name>Stabilizer</name>
-<value>-1,5 deg or -3 deg</value>
-			</item>
-			<item>
-				<name>Loader</name>
-				<value>off, indicator on</value>
-			</item>
-			<item>
-				<name>Speedbrakes</name>
-				<value>retracted, indicator off</value>
-			</item>
-			<item>
-				<name>Attitude indicators</name>
-				<value>ALIGNED</value>
-			</item>
-			<item>
-				<name>Elevators, ailerons</name>
-				<value>check</value>
-			</item>
-			<item>
-				<name>APU</name>
-				<value>OFF</value>
-			</item>
-			<item>
-				<name>Fuel system</name>
-				<value>automatic mode</value>
-			</item>
-			<item>
-				<name>Turn indicator</name>
-				<value>ON</value>
-    </item>
+    <title>Before line-up</title>
+      <item>
+	<name>Altimeters</name>
+	<value>QNH/QFE set</value>
+	<value>radio altimeter on</value>
+	<value>height 0 m</value>
+      </item>
+      <item>
+        <name>Flaps</name>
+        <value>extended, ... deg</value>
+      </item>
+      <item>
+        <name>Stabilizer</name>
+        <value>... deg</value>
+      </item>
+      <item>
+        <name>Spring loaders</name>
+        <value>off, indicator on</value>
+      </item>
+      <item>
+        <name>Speedbrakes</name>
+        <value>retracted, indicator off</value>
+      </item>
+      <item>
+        <name>Attitude indicators</name>
+        <value>aligned</value>
+      </item>
+      <item>
+        <name>Elevators, ailerons</name>
+        <value>checked</value>
+      </item>
+      <item>
+        <name>APU</name>
+        <value>off</value>
+      </item>
+      <item>
+        <name>Fuel system</name>
+        <value>automatic mode</value>
+      </item>
   </checklist>
   
   <checklist>
     <title>After line-up</title>  
     <item>
+      <name>Transponder</name>
+      <value>on, Charlie mode</value>
+    </item>
+    <item>
+      <name>TKS gyro-heading system</name>
+      <value>aligned, runway heading ... deg</value>
+    </item>
+    <item>
       <name>Pitot tube heating</name>
-      <value>ON</value>
+      <value>on</value>
     </item>
     <item>
       <name>Nose-wheel steering</name>
       <value>10 deg</value>
     </item>
     <item>
-      <name>'not ready for take-off' indicator</name>
-      <value>not blink</value>
+      <name>'not ready for take-off' flashing indicator</name>
+      <value>off</value>
     </item>
     <item>
-      <name>NVU navigation system reckoning</name>
-      <value>ON</value>
-    </item>
-    <item>
-      <name>Landing lights</name>
-      <value>extended, ON</value>
+      <name>Take-off and landing lights</name>
+      <value>extended, on</value>
     </item>
   </checklist>
+
+  <checklist>
+    <title>After transition altitude</title>  
+    <item>
+      <name>Flaps</name>
+      <value>retracted</value>
+    </item>
+    <item>
+      <name>Landing gear</name>
+      <value>retracted</value>
+    </item>
+    <item>
+      <name>Altimeters</name>
+      <value>760 mm set</value>
+    </item>
+</checklist>
 
   <checklist>
     <title>Before descent</title>  
     <item>
       <name>Approach route</name>
-      <value>check</value>
+      <value>read and understood</value>
     </item>
     <item>
       <name>Landing data</name>
-      <value>LW ... t, COG ... %</value>
+      <value>landing weight ... t</value>
+      <value>COG ... %</value>
     </item>
     <item>
       <name>TKS gyro-heading system</name>
       <value>aligned to magnetic destination heading, gyro-heading mode</value>
     </item>
     <item>
-      <name>fuel quantity</name>
+      <name>Fuel quantity</name>
       <value>... t</value>
     </item>
 </checklist>
@@ -168,12 +211,21 @@
       <value>QNH/QFE set</value>
     </item>
     <item>
-      <name>VOR, ADF</name>
-      <value>ON, frequencies set</value>
+      <name>Kurs-MP NAV1 and NAV2</name>
+      <value>on, frequencies set</value>
     </item>
     <item>
-      <name>Runway heading</name>
-      <value>set, ...  deg</value>
+      <name>Runway heading on the HSI</name>
+      <value>set, heading ... deg</value>
+    </item>
+    <item>
+      <name>ADF</name>
+      <value>No. 1: ...</value>
+      <value>No. 2: ...</value>
+    </item>
+    <item>
+      <name>PN 5 and PN 6 automatic flight control panels</name>
+      <value>prepared</value>
     </item>
   </checklist>
 
@@ -185,34 +237,38 @@
     </item>
     <item>
       <name>Stabilizer setting</name>
-      <value>front position or central position</value>
+      <value>front position, central position, or rear position, according to COG</value>
     </item>
     <item>
-      <name>MDH setting</name>
+      <name>Landing gear</name>
+      <value>extended, all green</value>
+    </item>
+    <item>
+      <name>MDH setting on the radio altimeter</name>
       <value>... m</value>
     </item>
   </checklist>
 
   <checklist>
-    <title>On final</title>  
+    <title>Before final</title>  
     <item>
       <name>Flaps</name>
-      <value>extended, 28 deg or extended, 45 deg</value>
+      <value>extended, ... deg</value>
     </item>
     <item>
       <name>Stabilizer</name>
-      <value>-3 deg or -5,5 deg</value>
+      <value>... deg</value>
     </item>
     <item>
       <name>Landing gear</name>
-      <value>extended, three green indicators on</value>
+      <value>extended, all green</value>
     </item>
     <item>
-      <name>Loaders</name>
+      <name>Spring loaders</name>
       <value>off, indicator on</value>
     </item>
 	<item>
-      <name>Landing lights</name>
+      <name>Take-off and landing lights</name>
       <value>extended, on</value>
     </item>
   </checklist>
