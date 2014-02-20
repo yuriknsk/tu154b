@@ -30,6 +30,9 @@
 #   /fdm/jsbsim/contact/unit[*]/friction/
 #
 
+
+setprop("sim/fdm/surface/override-level", 1);
+
 var rain_factor = 0.3;
 var snow_factor = 0.45;
 var meters_in_degree = 1852 * 60;
