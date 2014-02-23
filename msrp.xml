@@ -59,7 +59,7 @@
 			<chunk>
 				<name>alt_r (m)</name>
 				<format></format>
-				<node>/tu154/instrumentation/rv-5m/indicated-altitude-m</node>
+				<node>/tu154/instrumentation/rv-5m[0]/altitude</node>
 			</chunk>
 			
 			<chunk>

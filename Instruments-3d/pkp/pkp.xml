@@ -1,13 +1,21 @@
 <!--
     #############################################################################
     #    (C) 2007 by Yurik V. Nikiforoff			 	  	#
-    #    	yurik@megasignal.com					   	#
-    #    	Jul 2007						   	#
+    #    	yurik.nsk@gmail.com					   	#
+    #    	Jul 2007, nov 2013					   	#
     #############################################################################	  
     -->
 <!-- Attitude indicator
      3D instrument for Tu-154 -->
 <PropertyList>
+  <params>
+    <pitch>instrumentation/attitude-indicator[0]/indicated-pitch-deg</pitch>
+    <roll>instrumentation/attitude-indicator[0]/indicated-roll-deg</roll>
+    <defl-course>tu154/instrumentation/pnp[0]/defl-course</defl-course>
+    <defl-gs>tu154/instrumentation/pnp[0]/defl-gs</defl-gs>
+    <failed>tu154/instrumentation/bkk/mgv-1-failure</failed>
+  </params>
+
   <path>pkp.ac</path>
   <!--External panel lighting-->
   <animation>
@@ -57,7 +65,7 @@
     <type>rotate</type>
     <object-name>sphere</object-name>
     <object-name>roll_marker</object-name>
-    <property>instrumentation/attitude-indicator/indicated-roll-deg</property>
+    <property alias="../../params/roll"/>
     <center>
       <x-m>-0.07892</x-m>
       <y-m>0.0</y-m>
@@ -73,7 +81,7 @@
 <animation>
   <type>rotate</type>
   <object-name>sphere</object-name>
-  <property>instrumentation/attitude-indicator/indicated-pitch-deg</property>  
+  <property alias="../../params/pitch"/>
   <center>
     <x-m>-0.07892</x-m>
     <y-m>0.0</y-m>
@@ -91,10 +99,8 @@
 <animation>
   <type>rotate</type>
   <object-name>gliss_marker</object-name>
-  <property>fdm/jsbsim/ap/gs-needle-deflection</property>
-  <factor>30.0</factor>
-  <max-deg>30.0</max-deg>
-  <min-deg>-30.0</min-deg>
+  <property alias="../../params/defl-gs"/>
+  <factor>25.0</factor>
   <center>
     <x-m>-0.06405</x-m>
     <y-m>0.0</y-m>
@@ -129,10 +135,8 @@
 <animation>
   <type>rotate</type>
   <object-name>kurs_marker</object-name>
-  <property>fdm/jsbsim/ap/heading-needle-deflection</property>
+  <property alias="../../params/defl-course"/>
   <factor>25.0</factor>
-  <max-deg>30.0</max-deg>
-  <min-deg>-30.0</min-deg>
   <center>
     <x-m>-0.05872</x-m>
     <y-m>0.0</y-m>
@@ -211,9 +215,17 @@
 <animation>
   <type>rotate</type>
   <object-name>kurs_flag</object-name>
-  <property>tu154/instrumentation/pkp[0]/gliss-blanker</property>
-  <factor>180.0</factor>
-  <offset-deg>180.0</offset-deg>
+  <expression>
+    <table>
+      <sum>
+        <property>tu154/instrumentation/pnp[0]/blank-gs</property>
+        <property>tu154/instrumentation/pkp/gliss-failure</property>
+      </sum>
+      <entry><ind>0</ind><dep>180</dep></entry>
+      <entry><ind>1</ind><dep>360</dep></entry>
+      <entry><ind>2</ind><dep>360</dep></entry>
+    </table>
+  </expression>
   <center>
     <x-m>0.0</x-m>
     <y-m>0.024</y-m>
@@ -229,9 +241,17 @@
 <animation>
   <type>rotate</type>
   <object-name>gliss_flag</object-name>
-  <property>tu154/instrumentation/pkp[0]/kurs-blanker</property>
-  <factor>180.0</factor>
-  <offset-deg>180.0</offset-deg>
+  <expression>
+    <table>
+      <sum>
+        <property>tu154/instrumentation/pnp[0]/blank-course</property>
+        <property>tu154/instrumentation/pkp/kurs-failure</property>
+      </sum>
+      <entry><ind>0</ind><dep>180</dep></entry>
+      <entry><ind>1</ind><dep>360</dep></entry>
+      <entry><ind>2</ind><dep>360</dep></entry>
+    </table>
+  </expression>
   <center>
     <x-m>0.0</x-m>
     <y-m>-0.055</y-m>
@@ -247,7 +267,7 @@
 <animation>
   <type>rotate</type>
   <object-name>ag_flag</object-name>
-  <property>tu154/instrumentation/bkk/mgv-1-failure</property>  
+  <property alias="../../params/failed"/>
   <factor>180.0</factor>
   <offset-deg>180.0</offset-deg>
   <center>
@@ -263,63 +283,38 @@
 </animation>
 
 <!--+++++++++++++++++ pitch ++++++++++++++++++-->
+
+<!--Modified by Yurik dec 2013 for new AP code-->
 <animation>
   <type>pick</type>
   <object-name>hs2</object-name>
-  <visible>false</visible>
-  <action>
-    <button>0</button>
-    <repeatable>true</repeatable>
-    <interval-sec>0.15</interval-sec>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/switches/pu-46-pitch-wheel</property>
-      <step>3.0</step>
-    </binding>
-    <binding>
-      <command>property-adjust</command>
-      <property>fdm/jsbsim/ap/stab-input-pitch-rad</property>
-      <step>0.002</step>
-      <max>0.8</max>
-    </binding>
-    <binding>
-      <command>nasal</command>
-      <script>absu.absu_drop_mvh()</script>
-    </binding>
-  </action>
-</animation>
-<animation>
-  <type>pick</type>
   <object-name>hs4</object-name>
   <visible>false</visible>
   <action>
     <button>0</button>
-    <repeatable>true</repeatable>
-    <interval-sec>0.15</interval-sec>
     <binding>
-      <command>property-adjust</command>
-      <property>tu154/switches/pu-46-pitch-wheel</property>
-      <step>-3.0</step>
+      <command>property-assign</command>
+      <property>fdm/jsbsim/ap/stab-input-pitch-rad</property>
+      <value>0.0</value>
     </binding>
     <binding>
-      <command>property-adjust</command>
-      <property>fdm/jsbsim/ap/stab-input-pitch-rad</property>
-      <step>-0.002</step>
-      <min>-0.2</min>
+      <command>property-assign</command>
+      <property>tu154/switches/pu-46-pitch-wheel</property>
+      <value>0.0</value>
     </binding>
     <binding>
       <command>nasal</command>
       <script>absu.absu_drop_mvh()</script>
-    </binding>
+    </binding>    
   </action>
 </animation>
-
 
 <!--Mouse wheel-->
 
 <animation>
   <type>pick</type>
   <object-name>hs2</object-name>
+  <object-name>hs4</object-name>
   <visible>false</visible>
   <action>
     <button>3</button>
@@ -328,31 +323,13 @@
       <command>property-adjust</command>
       <property>tu154/switches/pu-46-pitch-wheel</property>
       <step>5.0</step>
+      <max>170</max>
     </binding>
     <binding>
       <command>property-adjust</command>
       <property>fdm/jsbsim/ap/stab-input-pitch-rad</property>
-      <step>-0.002</step>
-      <min>-0.2</min>
-    </binding>
-    <binding>
-      <command>nasal</command>
-      <script>absu.absu_drop_mvh()</script>
-    </binding>
-  </action>
-    <action>
-    <button>4</button>
-    <repeatable>false</repeatable>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/switches/pu-46-pitch-wheel</property>
-      <step>-5.0</step>
-    </binding>
-    <binding>
-      <command>property-adjust</command>
-      <property>fdm/jsbsim/ap/stab-input-pitch-rad</property>
-      <step>0.002</step>
-      <max>0.8</max>
+      <step>-0.0085</step>
+      <min>-0.3</min>
     </binding>
     <binding>
       <command>nasal</command>
@@ -363,46 +340,29 @@
 
 <animation>
   <type>pick</type>
+  <object-name>hs2</object-name>
   <object-name>hs4</object-name>
   <visible>false</visible>
   <action>
-    <button>3</button>
-    <repeatable>false</repeatable>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/switches/pu-46-pitch-wheel</property>
-      <step>5.0</step>
-    </binding>
-    <binding>
-      <command>property-adjust</command>
-      <property>fdm/jsbsim/ap/stab-input-pitch-rad</property>
-      <step>-0.002</step>
-      <min>-0.2</min>
-    </binding>
-    <binding>
-      <command>nasal</command>
-      <script>absu.absu_drop_mvh()</script>
-    </binding>
-  </action>
-    <action>
     <button>4</button>
     <repeatable>false</repeatable>
     <binding>
       <command>property-adjust</command>
       <property>tu154/switches/pu-46-pitch-wheel</property>
       <step>-5.0</step>
+      <min>-170.0</min>
     </binding>
     <binding>
       <command>property-adjust</command>
       <property>fdm/jsbsim/ap/stab-input-pitch-rad</property>
-      <step>0.002</step>
-      <max>0.8</max>
+      <step>0.0085</step>
+      <max>0.3</max>
     </binding>
     <binding>
       <command>nasal</command>
       <script>absu.absu_drop_mvh()</script>
     </binding>
-  </action>  
+  </action>
 </animation>
 
 <!--+++++++++++++++++heading++++++++++++++++++-->

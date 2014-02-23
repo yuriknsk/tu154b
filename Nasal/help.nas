@@ -29,12 +29,6 @@ var at = func {
 help_win.write(sprintf("Autothrottle speed: %.2f kmh", at_speed*1.852) );
 }
 
-var uk = func {
-   var uk_deg = getprop("fdm/jsbsim/instrumentation/rsbn-uk-deg");
-   if(  uk_deg == nil ) uk_deg = 0.0;
-help_win.write(sprintf("Angle map: %.2f deg", uk_deg) );
-}
-
 var km = func {
    var km_deg_1 = getprop("fdm/jsbsim/instrumentation/km-5-magvar-1");
    if(  km_deg_1 == nil ) km_deg_1 = 0.0;
@@ -94,22 +88,11 @@ var adf_1_vol = func{
   help_win.write( sprintf( "ADF ARK-15 #2 sound: %d%%", getprop("instrumentation/adf[1]/volume")*100 ) );
 }
 
-var comm_0_vol = func{
-  help_win.write( sprintf( "Comm radio #1 sound: %d%%", getprop("instrumentation/comm[0]/volume")*100 ) );
-}
-
-var comm_1_vol = func{
-  help_win.write( sprintf( "Comm radio #2 sound: %d%%", getprop("instrumentation/comm[1]/volume")*100 ) );
-}
-
-
 setlistener( "instrumentation/nav[0]/volume", nav_0_vol, 0, 0 );
 setlistener( "instrumentation/nav[1]/volume", nav_1_vol, 0, 0 );
 setlistener( "instrumentation/nav[2]/volume", rsbn_vol, 0, 0 );
 setlistener( "instrumentation/adf[0]/volume", adf_0_vol, 0, 0 );
 setlistener( "instrumentation/adf[1]/volume", adf_1_vol, 0, 0 );
-setlistener( "instrumentation/comm[0]/volume", comm_0_vol, 0, 0 );
-setlistener( "instrumentation/comm[1]/volume", comm_1_vol, 0, 0 );
 
 
 print("Help subsystem started");

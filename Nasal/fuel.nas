@@ -203,12 +203,12 @@ if( autolevel == 1 )
 	{
 	if( abs( tank_2_l - tank_2_r ) > AUTO_LEVEL_3 )
 		{
-		if( tank_2_l > tank_2_r ) autolevel_1 = 1;
+		if( tank_2_l < tank_2_r ) autolevel_1 = 1;
 		else autolevel_2 = 1;
 		}
 	if( abs( tank_3_l - tank_3_r ) > AUTO_LEVEL_3 )
 		{
-		if( tank_3_l > tank_3_r ) autolevel_3 = 1;
+		if( tank_3_l < tank_3_r ) autolevel_3 = 1;
 		else autolevel_4 = 1;
 		}
  	if( abs( tank_2_l - tank_2_r ) > AUTO_LEVEL_2 ) autolevel_failure = 1;

@@ -12,23 +12,30 @@
 <PropertyList>
  <path>startpanel.ac</path>
 <!-- Internal instruments lighting -->
-<!--
 <animation>
   <type>material</type>
   <object-name>base</object-name>
-  <object-name>c_1</object-name>
+  <object-name>cover</object-name>
+  <emission>
+    <red-prop>tu154/light/panel/amb-red</red-prop>
+    <green-prop>tu154/light/panel/amb-green</green-prop>
+    <blue-prop>tu154/light/panel/amb-blue</blue-prop>
+  </emission>
+</animation>-->
+<animation>
+  <type>material</type>
   <object-name>_c_1</object-name>
   <object-name>_c_2</object-name>
-  <object-name>button_1</object-name>
-  <object-name>button_2</object-name>
   <object-name>handle_1</object-name>
   <object-name>handle_2</object-name>
   <object-name>handle_3</object-name>
   <object-name>handle_4</object-name>
+  <object-name>button_1</object-name>
+  <object-name>button_2</object-name>
   <emission>
-    <red-prop>tu154/light/instruments/int-red</red-prop>
-    <green-prop>tu154/light/instruments/int-green</green-prop>
-    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+    <red-prop>tu154/light/panel/ext-red</red-prop>
+    <green-prop>tu154/light/panel/ext-green</green-prop>
+    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
   </emission>
 </animation>-->
 
@@ -69,7 +76,7 @@
     <factor>90.0</factor>
     <center>
       <x-m>0.0</x-m>
-      <y-m>0.05</y-m>
+      <y-m>0.052</y-m>
       <z-m>0.0</z-m>
     </center>
     <axis>
@@ -89,9 +96,9 @@
     <entry><ind>	1.0</ind>	<dep>	60.0</dep></entry>
   </interpolation>
   <center>
-    <x-m>0.0</x-m>
+    <x-m>0.00035</x-m>
     <y-m>0.0</y-m>
-    <z-m>0.0633</z-m>
+    <z-m>0.05775</z-m>
   </center>
   <axis>
     <x>0.0</x>
@@ -109,9 +116,9 @@
     <entry><ind>	1.0</ind>	<dep>	60.0</dep></entry>
   </interpolation>
   <center>
-    <x-m>0.0</x-m>
+    <x-m>0.00035</x-m>
     <y-m>0.0</y-m>
-    <z-m>0.0294</z-m>
+    <z-m>0.02685</z-m>
   </center>
   <axis>
     <x>0.0</x>
@@ -130,9 +137,9 @@
     <entry><ind>	1.0</ind>	<dep>	60.0</dep></entry>
   </interpolation>
   <center>
-    <x-m>0.0</x-m>
+    <x-m>0.00035</x-m>
     <y-m>0.0</y-m>
-    <z-m>0.0294</z-m>
+    <z-m>0.02685</z-m>
   </center>
   <axis>
     <x>0.0</x>
@@ -151,9 +158,9 @@
     <entry><ind>	1.0</ind>	<dep>	60.0</dep></entry>
   </interpolation>
   <center>
-    <x-m>0.0</x-m>
-    <y-m>0.0</y-m>
-    <z-m>-0.0128</z-m>
+    <x-m>0.00035</x-m>
+    <y-m>0.00113</y-m>
+    <z-m>-0.01164</z-m>
   </center>
   <axis>
     <x>0.0</x>
@@ -170,14 +177,14 @@
     <entry><ind>	1.0</ind>	<dep>	60.0</dep></entry>
   </interpolation>
   <center>
-    <x-m>0.0</x-m>
-    <y-m>0.001</y-m>
-    <z-m>-0.0128</z-m>
+    <x-m>0.00035</x-m>
+    <y-m>0.00113</y-m>
+    <z-m>-0.01276</z-m>
   </center>
   <axis>
     <x>0.0</x>
-    <y>0.866</y>
-    <z>0.5</z>
+    <y>0.5</y>
+    <z>0.866</z>
   </axis>
 </animation>
 <animation>
@@ -189,14 +196,14 @@
     <entry><ind>	1.0</ind>	<dep>	60.0</dep></entry>
   </interpolation>
   <center>
-    <x-m>0.0</x-m>
-    <y-m>0.001</y-m>
-    <z-m>-0.0128</z-m>
+    <x-m>0.00035</x-m>
+    <y-m>0.00113</y-m>
+    <z-m>-0.01276</z-m>
   </center>
   <axis>
     <x>0.0</x>
-    <y>0.866</y>
-    <z>-0.5</z>
+    <y>0.5</y>
+    <z>-0.866</z>
   </axis>
 </animation>
 

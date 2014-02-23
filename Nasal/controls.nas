@@ -1,12 +1,12 @@
 #
 #
-# Some function overload function from Nasal/controls.nas
+# Some functions overload  Nasal/controls.nas member
 #
 # Project Tupolev for FlightGear
 #
 # Yurik V. Nikiforoff, yurik.nsk@gmail.com
 # Novosibirsk, Russia
-# jan 2008
+# jan 2008, nov 2013
 #
 
 # turn off autopilot & autothrottle
@@ -19,10 +19,54 @@ absu.absu_at_stop();
 var TRIM_RATE = 0.08;
 
 var elevatorTrim = func {
-    controls.slewProp("/controls/flight/elevator-trim", arg[0] * TRIM_RATE); 
+    #controls.slewProp("/controls/flight/elevator-trim", arg[0] * TRIM_RATE); 
+    setprop("fdm/jsbsim/fcs/met-cmd", arg[0]);
     setprop("tu154/systems/warning/elevator-trim-pressed", 1.0 );
+    settimer( elev_trim_stop, 0.2 );
 	}
 
+# we need clear trim variables when trim button is released
+var elev_trim_stop = func {
+  setprop("fdm/jsbsim/fcs/met-cmd", 0.0);
+}
+
+# It's func intend for support direct trim changing (from home\end keyboard and mouse wheel bindings)
+# Joysticks drivers use elevatorTrim()
+var trim_handler = func{
+  var old_trim = num( getprop("tu154/systems/absu/trim") );
+  if ( old_trim == nil ) old_trim = 0.0;
+  var new_trim = num( getprop("/controls/flight/elevator-trim") );
+  if ( new_trim == nil ) new_trim = 0.0;
+  var delta = new_trim - old_trim;
+  setprop( "tu154/systems/absu/trim", new_trim );
+  if( delta > 0.0 ) elevatorTrim(1);
+  if( delta < 0.0 ) elevatorTrim(-1);
+}
+
+setlistener( "/controls/flight/elevator-trim", trim_handler );
+
+#
+# Brakes
+#
+
+var origApplyBrakes = applyBrakes;
+var applyBrakes = func(v, which = 0) {
+    if (v and getprop("controls/gear/brake-parking")) {
+       setprop("controls/gear/brake-parking", 0);
+       origApplyBrakes(0);
+    }
+    origApplyBrakes(v, which);
+}
+
+var origApplyParkingBrake = applyParkingBrake;
+var applyParkingBrake = func(v) {
+    if (v) {
+        v = origApplyParkingBrake(1);
+        origApplyBrakes(v, 0);
+    }
+    return v;
+}
+applyParkingBrake(1);
 
 
 # Autostart
@@ -42,9 +86,12 @@ var autostart = func{
 	setprop("tu154/switches/generator-1", 1.0 );
 	setprop("tu154/switches/generator-2", 1.0 );
 	setprop("tu154/switches/generator-3", 1.0 );
-#	setprop("tu154/switches/ut7-1-serviceable", 1.0 );
-#	setprop("tu154/switches/ut7-2-serviceable", 1.0 );
-#	setprop("tu154/switches/ut7-3-serviceable", 1.0 );
+	setprop("tu154/switches/bano", 1.0 );
+	setprop("tu154/switches/omi", 1.0 );
+	
+	setprop("tu154/switches/ut7-1-serviceable", 1.0 );
+	setprop("tu154/switches/ut7-2-serviceable", 1.0 );
+	setprop("tu154/switches/ut7-3-serviceable", 1.0 );
 	# fuei
 	setprop("tu154/switches/tank-2-left-serviceable", 1.0 );
 	setprop("tu154/switches/tank-2-right-serviceable", 1.0 );
@@ -124,6 +171,9 @@ var autostart_helper_1 = func{
 	setprop("tu154/switches/KURS-MP-1", 1.0 );
 	setprop("tu154/switches/KURS-MP-2", 1.0 );
 
+        setprop("tu154/switches/dme-1-power", 1);
+        setprop("tu154/switches/dme-2-power", 1);
+
 	setprop("tu154/switches/KURS-PNP-left", 1.0 );
 	setprop("/fdm/jsbsim/instrumentation/pnp-left-selector", 1.0 );
 	setprop("tu154/switches/KURS-PNP-right", 1.0 );
@@ -134,6 +184,7 @@ var autostart_helper_1 = func{
 	setprop("tu154/switches/adf-power-1", 1.0 );
 	setprop("tu154/switches/adf-power-2", 1.0 );
 	setprop("tu154/switches/DISS-check", 1.0 );
+        setprop("fdm/jsbsim/instrumentation/nvu/source", 2);
 	setprop("tu154/switches/DISS-power", 1.0 );
 	setprop("tu154/switches/DISS-surface", 1.0 );
 	setprop("tu154/switches/pu-11-auto", 1.0 );
@@ -155,7 +206,8 @@ var autostart_helper_1 = func{
 # continue autostart procedure...
 var autostart_helper_2 = func{
 	# Drop gyros failure control system
-	instruments.bkk_reset();
+	instruments.bkk_reset(1);
+	instruments.bkk_reset(2);
 	# hydrosystem
 	setprop("tu154/switches/ra-56-pitch-1-hydropower", 1.0 );
 	setprop("tu154/switches/ra-56-pitch-2-hydropower", 1.0 );
@@ -197,10 +249,9 @@ var autostart_helper_2 = func{
 	setprop("instrumentation/heading-indicator[1]/offset-deg", 
 		-getprop("environment/magnetic-variation-deg") );
 	# Altimeters
-	setprop("instrumentation/altimeter[0]/setting-inhg", 
-		getprop("environment/pressure-inhg") );
-	setprop("instrumentation/altimeter[1]/setting-inhg", 
-		getprop("environment/pressure-inhg") );
+        var inhgX100 = int(getprop("environment/pressure-inhg") * 100 + 0.5);
+	setprop("tu154/instrumentation/altimeter[0]/inhgX100", inhgX100);
+	setprop("tu154/instrumentation/altimeter[1]/inhgX100", inhgX100);
 	# Steering
 	setprop("tu154/switches/steering-limit", 1.0 );
 	setprop("tu154/switches/steering", 1.0 );

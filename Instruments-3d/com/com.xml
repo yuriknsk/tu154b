@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################
+    -->
+
+<!-- Comm radio control
+3D instrument for Tu-154 -->
+<PropertyList>
+  <params>
+    <freq>instrumentation/comm[0]/frequencies/selected-mhz</freq>
+    <volume>instrumentation/comm[0]/volume</volume>
+  </params>
+
+ <path>com.ac</path>
+
+ <effect>
+    <inherits-from>Effects/model-transparent</inherits-from>
+    <object-name>base</object-name>
+ </effect>
+
+<animation>
+  <type>select</type>
+  <object-name>d1_night</object-name>
+  <object-name>d2_night</object-name>
+  <object-name>digits_night</object-name>
+  <condition>
+    <greater-than>
+      <property>tu154/light/instruments/int-red</property>
+      <value>0.1</value>
+    </greater-than>
+  </condition>
+</animation>
+
+<animation>
+  <type>select</type>
+  <object-name>d1</object-name>
+  <object-name>d2</object-name>
+  <object-name>digits</object-name>
+  <condition>
+    <less-than>
+      <property>tu154/light/instruments/int-red</property>
+      <value>0.1</value>
+    </less-than>
+  </condition>
+</animation>
+
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>d1_night</object-name>
+  <object-name>d2_night</object-name>
+  <object-name>digits_night</object-name>
+  <emission>
+    <red>0.6</red>
+  </emission>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>dig_f_hi</object-name>
+  <object-name>dig_f_hi_night</object-name>
+  <expression>
+    <table>
+      <difference>
+        <property alias="../../../../../params/freq"/>
+        <mod>
+          <property alias="../../../../../../params/freq"/>
+          <value>1</value>
+        </mod>
+      </difference>
+      <entry><ind>	108</ind>	<dep>	0</dep></entry>
+      <entry><ind>	137</ind>	<dep>	360</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.0480</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.0059</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>dig_f_low</object-name>
+  <object-name>dig_f_low_night</object-name>
+  <property alias="../../params/freq"/>
+  <factor>360</factor>
+  <center>
+    <x-m>-0.0636</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.0023</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!--Frequency-->
+<animation>
+  <type>knob</type>
+  <object-name>c1</object-name>
+  <visible>true</visible>
+  <action>
+    <binding>
+      <command>property-adjust</command>
+      <property alias="../../../../params/freq"/>
+      <mask>integer</mask>
+      <min>108</min>
+      <max>137</max>
+      <wrap>true</wrap>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>knob</type>
+  <object-name>c2</object-name>
+  <visible>true</visible>
+  <action>
+    <binding>
+      <command>property-adjust</command>
+      <property alias="../../../../params/freq"/>
+      <mask>decimal</mask>
+      <factor>0.025</factor>
+      <min>0</min>
+      <max>1</max>
+      <wrap>true</wrap>
+    </binding>
+  </action>
+</animation>
+
+<!--Volume-->
+<animation>
+  <type>knob</type>
+  <object-name>c3</object-name>
+  <visible>true</visible>
+  <action>
+    <binding>
+      <command>property-adjust</command>
+      <property alias="../../../../params/volume"/>
+      <factor>0.1</factor>
+      <min>0</min>
+      <max>1</max>
+    </binding>
+  </action>
+  <hovered>
+    <binding>
+      <command>set-tooltip</command>
+      <tooltip-id>comm-volume</tooltip-id>
+      <label>Volume: %d%%</label>
+      <property alias="../../../../params/volume"/>
+      <mapping>nasal</mapping>
+      <script>return int(arg[0] * 100)</script>
+    </binding>
+  </hovered>
+</animation>
+
+
+</PropertyList>

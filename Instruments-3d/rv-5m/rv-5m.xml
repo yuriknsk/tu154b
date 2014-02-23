@@ -10,6 +10,13 @@
 <!-- Radio altimeter
 3D instrument for Tu-154 -->
 <PropertyList>
+  <params>
+    <altitude>tu154/instrumentation/rv-5m[0]/altitude</altitude>
+    <blank>tu154/instrumentation/rv-5m[0]/blank</blank>
+    <warn>tu154/instrumentation/rv-5m[0]/warn</warn>
+    <dialed>tu154/instrumentation/rv-5m[0]/dialed</dialed>
+  </params>
+
  <path>rv-5m.ac</path>
 <!-- Internal instruments lighting -->
 <animation>
@@ -37,12 +44,12 @@
 </animation>
 
 
-<!--Cage-->
+<!--Blank-->
 <animation>
   <type>select</type>
   <object-name>flag</object-name>
   <condition>
-  	<property>tu154/instrumentation/rv-5m/caged-flag</property>
+    <property alias="../../../params/blank"/>
   </condition>
 </animation>
 
@@ -63,8 +70,8 @@
   <object-name>lamp</object-name>
   <condition>
     <or>
-  	<property>tu154/instrumentation/rv-5m/warn</property>
-        <property>tu154/systems/electrical/checking-lamps/main-panel</property>
+      <property alias="../../../../params/warn"/>
+      <property>tu154/systems/electrical/checking-lamps/main-panel</property>
     </or>
   </condition>
 </animation>
@@ -74,13 +81,9 @@
 <animation>
     <type>rotate</type>
     <object-name>needle</object-name>
-    <property>tu154/instrumentation/rv-5m/indicated-altitude-m</property>
+    <property alias="../../params/altitude"/>
     <interpolation>
       <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-      <entry><ind>	10.0</ind>	<dep>	15.0</dep></entry>
-      <entry><ind>	20.0</ind>	<dep>	30.0</dep></entry>
-      <entry><ind>	30.0</ind>	<dep>	45.0</dep></entry>
-      <entry><ind>	40.0</ind>	<dep>	60.0</dep></entry>
       <entry><ind>	50.0</ind>	<dep>	75.0</dep></entry>
       <entry><ind>	60.0</ind>	<dep>	91.5</dep></entry>
       <entry><ind>	80.0</ind>	<dep>	123.0</dep></entry>
@@ -102,13 +105,9 @@
 <animation>
   <type>rotate</type>
   <object-name>index</object-name>
-  <property>tu154/instrumentation/rv-5m/index-m</property>
+  <property alias="../../params/dialed"/>
   <interpolation>
     <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	10.0</ind>	<dep>	15.0</dep></entry>
-    <entry><ind>	20.0</ind>	<dep>	30.0</dep></entry>
-    <entry><ind>	30.0</ind>	<dep>	45.0</dep></entry>
-    <entry><ind>	40.0</ind>	<dep>	60.0</dep></entry>
     <entry><ind>	50.0</ind>	<dep>	75.0</dep></entry>
     <entry><ind>	60.0</ind>	<dep>	91.5</dep></entry>
     <entry><ind>	80.0</ind>	<dep>	123.0</dep></entry>
@@ -130,37 +129,19 @@
 <!--Controls-->
 
 <animation>
-  <type>pick</type>
+  <type>knob</type>
   <object-name>hs</object-name>
   <visible>false</visible>
   <action>
-    <button>4</button>
-    <repeatable>false</repeatable>
     <binding>
       <command>property-adjust</command>
-      <property>tu154/instrumentation/rv-5m/index-m</property>
-      <step>-5.0</step>
-      <min>0.0</min>
+      <property alias="../../../../params/dialed"/>
+      <factor>5</factor>
+      <min>0</min>
+      <max>750</max>
     </binding>
   </action>
 </animation>
-<animation>
-  <type>pick</type>
-  <object-name>hs</object-name>
-  <visible>false</visible>
-  <action>
-    <button>3</button>
-    <repeatable>false</repeatable>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/instrumentation/rv-5m/index-m</property>
-      <step>5.0</step>
-      <max>700.0</max>
-    </binding>
-    
-  </action>
-</animation>
-
 
 
 </PropertyList>

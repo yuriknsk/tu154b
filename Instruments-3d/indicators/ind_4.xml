@@ -62,7 +62,7 @@
     <red>1.0</red>
     <green>1.0</green>
     <blue>1.0</blue>
-    <factor-prop>tu154/instrumentation/rv-5m/warn</factor-prop>
+    <factor-prop>tu154/instrumentation/rv-5m[0]/warn</factor-prop>
   </emission>
 </animation>
 <animation>

@@ -4,7 +4,7 @@
     #    (C) 2007 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
     #	2d & 3d instruments, animations, systems and over.		   	#
     #    	yurik@megasignal.com					   	#
-    #############################################################################	  
+    #############################################################################
     -->
 
 <!-- V-57 NVU (navigation system) control
@@ -34,18 +34,25 @@
   </emission>
 </animation>
 
-<!--Knobs-->
+<!-- Buttons -->
 <animation>
   <type>pick</type>
   <object-name>hs_1</object-name>
   <visible>false</visible>
   <action>
     <button>0</button>
-    <repeatable>false</repeatable>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
     <binding>
-      <command>property-toggle</command>
-      <property>tu154/instrumentation/v-57/button-1</property>
+      <command>nasal</command>
+      <script>instruments.nvu_wind_adjust("azimuth", -1)</script>
     </binding>
+    <mod-up>
+      <binding>
+        <command>nasal</command>
+        <script>instruments.nvu_wind_adjust("azimuth", 0)</script>
+      </binding>
+    </mod-up>
   </action>
 </animation>
 <animation>
@@ -56,10 +63,22 @@
     <button>0</button>
     <repeatable>false</repeatable>
     <binding>
-      <command>property-toggle</command>
-      <property>tu154/instrumentation/v-57/button-2</property>
+      <command>property-cycle</command>
+      <property>tu154/instrumentation/v-57/azimuth-adjust-step</property>
+      <value>0.25</value>
+      <value>10</value>
     </binding>
   </action>
+  <hovered>
+    <binding>
+      <command>set-tooltip</command>
+      <tooltip-id>nvu-azimuth-adjust-step</tooltip-id>
+      <label>Adjust speed: %s</label>
+      <property>tu154/instrumentation/v-57/azimuth-adjust-step</property>
+      <mapping>nasal</mapping>
+      <script>return (arg[0] == 0.25 ? "slow" : "fast")</script>
+    </binding>
+  </hovered>
 </animation>
 <animation>
   <type>pick</type>
@@ -67,11 +86,18 @@
   <visible>false</visible>
   <action>
     <button>0</button>
-    <repeatable>false</repeatable>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
     <binding>
-      <command>property-toggle</command>
-      <property>tu154/instrumentation/v-57/button-3</property>
+      <command>nasal</command>
+      <script>instruments.nvu_wind_adjust("azimuth", 1)</script>
     </binding>
+    <mod-up>
+      <binding>
+        <command>nasal</command>
+        <script>instruments.nvu_wind_adjust("azimuth", 0)</script>
+      </binding>
+    </mod-up>
   </action>
 </animation>
 <animation>
@@ -80,11 +106,18 @@
   <visible>false</visible>
   <action>
     <button>0</button>
-    <repeatable>false</repeatable>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
     <binding>
-      <command>property-toggle</command>
-      <property>tu154/instrumentation/v-57/button-4</property>
+      <command>nasal</command>
+      <script>instruments.nvu_wind_adjust("speed", -1)</script>
     </binding>
+    <mod-up>
+      <binding>
+        <command>nasal</command>
+        <script>instruments.nvu_wind_adjust("speed", 0)</script>
+      </binding>
+    </mod-up>
   </action>
 </animation>
 <animation>
@@ -95,10 +128,22 @@
     <button>0</button>
     <repeatable>false</repeatable>
     <binding>
-      <command>property-toggle</command>
-      <property>tu154/instrumentation/v-57/button-5</property>
+      <command>property-cycle</command>
+      <property>tu154/instrumentation/v-57/speed-adjust-step</property>
+      <value>0.25</value>
+      <value>10</value>
     </binding>
   </action>
+  <hovered>
+    <binding>
+      <command>set-tooltip</command>
+      <tooltip-id>nvu-speed-adjust-step</tooltip-id>
+      <label>Adjust speed: %s</label>
+      <property>tu154/instrumentation/v-57/speed-adjust-step</property>
+      <mapping>nasal</mapping>
+      <script>return (arg[0] == 0.25 ? "slow" : "fast")</script>
+    </binding>
+  </hovered>
 </animation>
 <animation>
   <type>pick</type>
@@ -106,19 +151,26 @@
   <visible>false</visible>
   <action>
     <button>0</button>
-    <repeatable>false</repeatable>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
     <binding>
-      <command>property-toggle</command>
-      <property>tu154/instrumentation/v-57/button-6</property>
+      <command>nasal</command>
+      <script>instruments.nvu_wind_adjust("speed", 1)</script>
     </binding>
+    <mod-up>
+      <binding>
+        <command>nasal</command>
+        <script>instruments.nvu_wind_adjust("speed", 0)</script>
+      </binding>
+    </mod-up>
   </action>
 </animation>
-<!-- Digits I -->
-<!--*******************************************************************-->
+
+<!-- Wind azimuth -->
 <animation>
   <type>rotate</type>
   <object-name>ones_1</object-name>
-  <property>tu154/instrumentation/v-57[0]/direction/indicated-wheels_ones</property>
+  <property>tu154/systems/nvu/wind-azimuth-smooth</property>
   <factor>36</factor>
   <center>
     <x-m>-0.03059</x-m>
@@ -134,30 +186,90 @@
 <animation>
   <type>rotate</type>
   <object-name>dec_1</object-name>
-  <property>tu154/instrumentation/v-57[0]/direction/indicated-wheels_dec</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.9</ind>	<dep>	0.1</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
-    <entry><ind>	1.9</ind>	<dep>	36.1</dep></entry>
-    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
-    <entry><ind>	2.9</ind>	<dep>	72.1</dep></entry>
-    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
-    <entry><ind>	3.9</ind>	<dep>	108.1</dep></entry>
-    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
-    <entry><ind>	4.9</ind>	<dep>	144.1</dep></entry>
-    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
-    <entry><ind>	5.9</ind>	<dep>	180.1</dep></entry>
-    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
-    <entry><ind>	6.9</ind>	<dep>	216.1</dep></entry>
-    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
-    <entry><ind>	7.9</ind>	<dep>	252.1</dep></entry>
-    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
-    <entry><ind>	8.9</ind>	<dep>	288.1</dep></entry>
-    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
-    <entry><ind>	9.9</ind>	<dep>	324.1</dep></entry>
-    <entry><ind>	9.99</ind>	<dep>	359.9</dep></entry>
-  </interpolation>
+  <expression>
+    <table>
+      <mod>
+        <property>tu154/systems/nvu/wind-azimuth-smooth</property>
+        <value>360</value>
+      </mod>
+      <entry><ind>	  0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	  9</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 10</ind>	<dep>	36</dep></entry>
+      <entry><ind>	 19</ind>	<dep>	36</dep></entry>
+      <entry><ind>	 20</ind>	<dep>	72</dep></entry>
+      <entry><ind>	 29</ind>	<dep>	72</dep></entry>
+      <entry><ind>	 30</ind>	<dep>	108</dep></entry>
+      <entry><ind>	 39</ind>	<dep>	108</dep></entry>
+      <entry><ind>	 40</ind>	<dep>	144</dep></entry>
+      <entry><ind>	 49</ind>	<dep>	144</dep></entry>
+      <entry><ind>	 50</ind>	<dep>	180</dep></entry>
+      <entry><ind>	 59</ind>	<dep>	180</dep></entry>
+      <entry><ind>	 60</ind>	<dep>	216</dep></entry>
+      <entry><ind>	 69</ind>	<dep>	216</dep></entry>
+      <entry><ind>	 70</ind>	<dep>	252</dep></entry>
+      <entry><ind>	 79</ind>	<dep>	252</dep></entry>
+      <entry><ind>	 80</ind>	<dep>	288</dep></entry>
+      <entry><ind>	 89</ind>	<dep>	288</dep></entry>
+      <entry><ind>	 90</ind>	<dep>	324</dep></entry>
+      <entry><ind>	 99</ind>	<dep>	324</dep></entry>
+      <entry><ind>	 99.9</ind>	<dep>	359.9</dep></entry>
+      <entry><ind>	100</ind>	<dep>	0</dep></entry>
+      <entry><ind>	109</ind>	<dep>	0</dep></entry>
+      <entry><ind>	110</ind>	<dep>	36</dep></entry>
+      <entry><ind>	119</ind>	<dep>	36</dep></entry>
+      <entry><ind>	120</ind>	<dep>	72</dep></entry>
+      <entry><ind>	129</ind>	<dep>	72</dep></entry>
+      <entry><ind>	130</ind>	<dep>	108</dep></entry>
+      <entry><ind>	139</ind>	<dep>	108</dep></entry>
+      <entry><ind>	140</ind>	<dep>	144</dep></entry>
+      <entry><ind>	149</ind>	<dep>	144</dep></entry>
+      <entry><ind>	150</ind>	<dep>	180</dep></entry>
+      <entry><ind>	159</ind>	<dep>	180</dep></entry>
+      <entry><ind>	160</ind>	<dep>	216</dep></entry>
+      <entry><ind>	169</ind>	<dep>	216</dep></entry>
+      <entry><ind>	170</ind>	<dep>	252</dep></entry>
+      <entry><ind>	179</ind>	<dep>	252</dep></entry>
+      <entry><ind>	180</ind>	<dep>	288</dep></entry>
+      <entry><ind>	189</ind>	<dep>	288</dep></entry>
+      <entry><ind>	190</ind>	<dep>	324</dep></entry>
+      <entry><ind>	199</ind>	<dep>	324</dep></entry>
+      <entry><ind>	199.9</ind>	<dep>	359.9</dep></entry>
+      <entry><ind>	200</ind>	<dep>	0</dep></entry>
+      <entry><ind>	209</ind>	<dep>	0</dep></entry>
+      <entry><ind>	210</ind>	<dep>	36</dep></entry>
+      <entry><ind>	219</ind>	<dep>	36</dep></entry>
+      <entry><ind>	220</ind>	<dep>	72</dep></entry>
+      <entry><ind>	229</ind>	<dep>	72</dep></entry>
+      <entry><ind>	230</ind>	<dep>	108</dep></entry>
+      <entry><ind>	239</ind>	<dep>	108</dep></entry>
+      <entry><ind>	240</ind>	<dep>	144</dep></entry>
+      <entry><ind>	249</ind>	<dep>	144</dep></entry>
+      <entry><ind>	250</ind>	<dep>	180</dep></entry>
+      <entry><ind>	259</ind>	<dep>	180</dep></entry>
+      <entry><ind>	260</ind>	<dep>	216</dep></entry>
+      <entry><ind>	269</ind>	<dep>	216</dep></entry>
+      <entry><ind>	270</ind>	<dep>	252</dep></entry>
+      <entry><ind>	279</ind>	<dep>	252</dep></entry>
+      <entry><ind>	280</ind>	<dep>	288</dep></entry>
+      <entry><ind>	289</ind>	<dep>	288</dep></entry>
+      <entry><ind>	290</ind>	<dep>	324</dep></entry>
+      <entry><ind>	299</ind>	<dep>	324</dep></entry>
+      <entry><ind>	299.9</ind>	<dep>	359.9</dep></entry>
+      <entry><ind>	300</ind>	<dep>	0</dep></entry>
+      <entry><ind>	309</ind>	<dep>	0</dep></entry>
+      <entry><ind>	310</ind>	<dep>	36</dep></entry>
+      <entry><ind>	319</ind>	<dep>	36</dep></entry>
+      <entry><ind>	320</ind>	<dep>	72</dep></entry>
+      <entry><ind>	329</ind>	<dep>	72</dep></entry>
+      <entry><ind>	330</ind>	<dep>	108</dep></entry>
+      <entry><ind>	339</ind>	<dep>	108</dep></entry>
+      <entry><ind>	340</ind>	<dep>	144</dep></entry>
+      <entry><ind>	349</ind>	<dep>	144</dep></entry>
+      <entry><ind>	350</ind>	<dep>	180</dep></entry>
+      <entry><ind>	359.5</ind>	<dep>	180</dep></entry>
+      <entry><ind>	359.75</ind>	<dep>	359.75</dep></entry>
+    </table>
+  </expression>
   <center>
     <x-m>-0.03059</x-m>
     <y-m>0</y-m>
@@ -169,34 +281,26 @@
     <z>0.0</z>
   </axis>
 </animation>
-
 <animation>
   <type>rotate</type>
   <object-name>hund_1</object-name>
-  <property>tu154/instrumentation/v-57[0]/direction/indicated-wheels_hund</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.99</ind>	<dep>	0.1</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
-    <entry><ind>	1.99</ind>	<dep>	36.1</dep></entry>
-    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
-    <entry><ind>	2.99</ind>	<dep>	72.1</dep></entry>
-    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
-    <entry><ind>	3.99</ind>	<dep>	108.1</dep></entry>
-    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
-    <entry><ind>	4.99</ind>	<dep>	144.1</dep></entry>
-    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
-    <entry><ind>	5.99</ind>	<dep>	180.1</dep></entry>
-    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
-    <entry><ind>	6.99</ind>	<dep>	216.1</dep></entry>
-    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
-    <entry><ind>	7.99</ind>	<dep>	252.1</dep></entry>
-    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
-    <entry><ind>	8.99</ind>	<dep>	288.1</dep></entry>
-    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
-    <entry><ind>	9.99</ind>	<dep>	324.1</dep></entry>
-    <entry><ind>	9.999</ind>	<dep>	359.9</dep></entry>
-  </interpolation>
+  <expression>
+    <table>
+      <mod>
+        <property>tu154/systems/nvu/wind-azimuth-smooth</property>
+        <value>360</value>
+      </mod>
+      <entry><ind>	  0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 99</ind>	<dep>	0</dep></entry>
+      <entry><ind>	100</ind>	<dep>	36</dep></entry>
+      <entry><ind>	199</ind>	<dep>	36</dep></entry>
+      <entry><ind>	200</ind>	<dep>	72</dep></entry>
+      <entry><ind>	299</ind>	<dep>	72</dep></entry>
+      <entry><ind>	300</ind>	<dep>	108</dep></entry>
+      <entry><ind>	359.5</ind>	<dep>	108</dep></entry>
+      <entry><ind>	359.75</ind>	<dep>	359.75</dep></entry>
+    </table>
+  </expression>
   <center>
     <x-m>-0.03059</x-m>
     <y-m>0</y-m>
@@ -208,14 +312,20 @@
     <z>0.0</z>
   </axis>
 </animation>
-<!--Digits II-->
-<!--*******************************************************************-->
 
+<!-- Wind fork -->
 <animation>
   <type>rotate</type>
   <object-name>ones_2</object-name>
-  <property>tu154/instrumentation/v-57[0]/fork/indicated-wheels_ones</property>
-  <factor>36</factor>
+  <expression>
+    <product>
+      <max>
+        <property>tu154/systems/nvu/wind-fork</property>
+        <value>0</value>
+      </max>
+      <value>36</value>
+    </product>
+  </expression>
   <center>
     <x-m>-0.03059</x-m>
     <y-m>0</y-m>
@@ -230,30 +340,36 @@
 <animation>
   <type>rotate</type>
   <object-name>dec_2</object-name>
-  <property>tu154/instrumentation/v-57[0]/fork/indicated-wheels_dec</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.9</ind>	<dep>	0.1</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
-    <entry><ind>	1.9</ind>	<dep>	36.1</dep></entry>
-    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
-    <entry><ind>	2.9</ind>	<dep>	72.1</dep></entry>
-    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
-    <entry><ind>	3.9</ind>	<dep>	108.1</dep></entry>
-    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
-    <entry><ind>	4.9</ind>	<dep>	144.1</dep></entry>
-    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
-    <entry><ind>	5.9</ind>	<dep>	180.1</dep></entry>
-    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
-    <entry><ind>	6.9</ind>	<dep>	216.1</dep></entry>
-    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
-    <entry><ind>	7.9</ind>	<dep>	252.1</dep></entry>
-    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
-    <entry><ind>	8.9</ind>	<dep>	288.1</dep></entry>
-    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
-    <entry><ind>	9.9</ind>	<dep>	324.1</dep></entry>
-    <entry><ind>	9.99</ind>	<dep>	359.9</dep></entry>
-  </interpolation>
+  <expression>
+    <table>
+      <max>
+        <mod>
+          <property>tu154/systems/nvu/wind-fork</property>
+          <value>100</value>
+        </mod>
+        <value>0</value>
+      </max>
+      <entry><ind>	 0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 9</ind>	<dep>	0</dep></entry>
+      <entry><ind>	10</ind>	<dep>	36</dep></entry>
+      <entry><ind>	19</ind>	<dep>	36</dep></entry>
+      <entry><ind>	20</ind>	<dep>	72</dep></entry>
+      <entry><ind>	29</ind>	<dep>	72</dep></entry>
+      <entry><ind>	30</ind>	<dep>	108</dep></entry>
+      <entry><ind>	39</ind>	<dep>	108</dep></entry>
+      <entry><ind>	40</ind>	<dep>	144</dep></entry>
+      <entry><ind>	49</ind>	<dep>	144</dep></entry>
+      <entry><ind>	50</ind>	<dep>	180</dep></entry>
+      <entry><ind>	59</ind>	<dep>	180</dep></entry>
+      <entry><ind>	60</ind>	<dep>	216</dep></entry>
+      <entry><ind>	69</ind>	<dep>	216</dep></entry>
+      <entry><ind>	70</ind>	<dep>	252</dep></entry>
+      <entry><ind>	79</ind>	<dep>	252</dep></entry>
+      <entry><ind>	80</ind>	<dep>	288</dep></entry>
+      <entry><ind>	89</ind>	<dep>	288</dep></entry>
+      <entry><ind>	90</ind>	<dep>	324</dep></entry>
+    </table>
+  </expression>
   <center>
     <x-m>-0.03059</x-m>
     <y-m>0</y-m>
@@ -268,8 +384,15 @@
 <animation>
   <type>rotate</type>
   <object-name>hund_2</object-name>
-  <property>tu154/instrumentation/v-57[0]/fork/minus-indicated-wheels_ones</property>
-  <factor>36</factor>
+  <expression>
+    <product>
+      <min>
+        <property>tu154/systems/nvu/wind-fork</property>
+        <value>0</value>
+      </min>
+      <value>-36</value>
+    </product>
+  </expression>
   <center>
     <x-m>-0.03059</x-m>
     <y-m>0</y-m>
@@ -284,30 +407,36 @@
 <animation>
   <type>rotate</type>
   <object-name>ths_2</object-name>
-  <property>tu154/instrumentation/v-57[0]/fork/minus-indicated-wheels_dec</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.9</ind>	<dep>	0.1</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
-    <entry><ind>	1.9</ind>	<dep>	36.1</dep></entry>
-    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
-    <entry><ind>	2.9</ind>	<dep>	72.1</dep></entry>
-    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
-    <entry><ind>	3.9</ind>	<dep>	108.1</dep></entry>
-    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
-    <entry><ind>	4.9</ind>	<dep>	144.1</dep></entry>
-    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
-    <entry><ind>	5.9</ind>	<dep>	180.1</dep></entry>
-    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
-    <entry><ind>	6.9</ind>	<dep>	216.1</dep></entry>
-    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
-    <entry><ind>	7.9</ind>	<dep>	252.1</dep></entry>
-    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
-    <entry><ind>	8.9</ind>	<dep>	288.1</dep></entry>
-    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
-    <entry><ind>	9.9</ind>	<dep>	324.1</dep></entry>
-    <entry><ind>	9.99</ind>	<dep>	359.9</dep></entry>
-  </interpolation>
+  <expression>
+    <table>
+      <min>
+        <mod>
+          <property>tu154/systems/nvu/wind-fork</property>
+          <value>100</value>
+        </mod>
+        <value>0</value>
+      </min>
+      <entry><ind>	  0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 -9</ind>	<dep>	0</dep></entry>
+      <entry><ind>	-10</ind>	<dep>	36</dep></entry>
+      <entry><ind>	-19</ind>	<dep>	36</dep></entry>
+      <entry><ind>	-20</ind>	<dep>	72</dep></entry>
+      <entry><ind>	-29</ind>	<dep>	72</dep></entry>
+      <entry><ind>	-30</ind>	<dep>	108</dep></entry>
+      <entry><ind>	-39</ind>	<dep>	108</dep></entry>
+      <entry><ind>	-40</ind>	<dep>	144</dep></entry>
+      <entry><ind>	-49</ind>	<dep>	144</dep></entry>
+      <entry><ind>	-50</ind>	<dep>	180</dep></entry>
+      <entry><ind>	-59</ind>	<dep>	180</dep></entry>
+      <entry><ind>	-60</ind>	<dep>	216</dep></entry>
+      <entry><ind>	-69</ind>	<dep>	216</dep></entry>
+      <entry><ind>	-70</ind>	<dep>	252</dep></entry>
+      <entry><ind>	-79</ind>	<dep>	252</dep></entry>
+      <entry><ind>	-80</ind>	<dep>	288</dep></entry>
+      <entry><ind>	-89</ind>	<dep>	288</dep></entry>
+      <entry><ind>	-90</ind>	<dep>	324</dep></entry>
+    </table>
+  </expression>
   <center>
     <x-m>-0.03059</x-m>
     <y-m>0</y-m>
@@ -327,8 +456,8 @@
   <object-name>dec_2</object-name>
   <condition>
     <greater-than>
-      <property>tu154/instrumentation/v-57/fork-deg</property>
-      <value>-1.0</value>
+      <property>tu154/systems/nvu/wind-fork</property>
+      <value>-0.1</value>
     </greater-than>
   </condition>
 </animation>
@@ -339,18 +468,17 @@
   <object-name>ths_2</object-name>
   <condition>
     <less-than>
-      <property>tu154/instrumentation/v-57/fork-deg</property>
-      <value>1.0</value>
+      <property>tu154/systems/nvu/wind-fork</property>
+      <value>0.1</value>
     </less-than>
   </condition>
 </animation>
 
-<!-- Digits III -->
-<!--*******************************************************************-->
+<!-- Wind speed -->
 <animation>
   <type>rotate</type>
   <object-name>ones_3</object-name>
-  <property>tu154/instrumentation/v-57[0]/speed/indicated-wheels_ones</property>
+  <property>tu154/systems/nvu/wind-speed-smooth</property>
   <factor>36</factor>
   <center>
     <x-m>-0.03059</x-m>
@@ -366,30 +494,35 @@
 <animation>
   <type>rotate</type>
   <object-name>dec_3</object-name>
-  <property>tu154/instrumentation/v-57[0]/speed/indicated-wheels_dec</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.9</ind>	<dep>	0.1</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
-    <entry><ind>	1.9</ind>	<dep>	36.1</dep></entry>
-    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
-    <entry><ind>	2.9</ind>	<dep>	72.1</dep></entry>
-    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
-    <entry><ind>	3.9</ind>	<dep>	108.1</dep></entry>
-    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
-    <entry><ind>	4.9</ind>	<dep>	144.1</dep></entry>
-    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
-    <entry><ind>	5.9</ind>	<dep>	180.1</dep></entry>
-    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
-    <entry><ind>	6.9</ind>	<dep>	216.1</dep></entry>
-    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
-    <entry><ind>	7.9</ind>	<dep>	252.1</dep></entry>
-    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
-    <entry><ind>	8.9</ind>	<dep>	288.1</dep></entry>
-    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
-    <entry><ind>	9.9</ind>	<dep>	324.1</dep></entry>
-    <entry><ind>	9.99</ind>	<dep>	359.9</dep></entry>
-  </interpolation>
+  <expression>
+    <table>
+      <mod>
+        <property>tu154/systems/nvu/wind-speed-smooth</property>
+        <value>100</value>
+      </mod>
+      <entry><ind>	 0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 9</ind>	<dep>	0</dep></entry>
+      <entry><ind>	10</ind>	<dep>	36</dep></entry>
+      <entry><ind>	19</ind>	<dep>	36</dep></entry>
+      <entry><ind>	20</ind>	<dep>	72</dep></entry>
+      <entry><ind>	29</ind>	<dep>	72</dep></entry>
+      <entry><ind>	30</ind>	<dep>	108</dep></entry>
+      <entry><ind>	39</ind>	<dep>	108</dep></entry>
+      <entry><ind>	40</ind>	<dep>	144</dep></entry>
+      <entry><ind>	49</ind>	<dep>	144</dep></entry>
+      <entry><ind>	50</ind>	<dep>	180</dep></entry>
+      <entry><ind>	59</ind>	<dep>	180</dep></entry>
+      <entry><ind>	60</ind>	<dep>	216</dep></entry>
+      <entry><ind>	69</ind>	<dep>	216</dep></entry>
+      <entry><ind>	70</ind>	<dep>	252</dep></entry>
+      <entry><ind>	79</ind>	<dep>	252</dep></entry>
+      <entry><ind>	80</ind>	<dep>	288</dep></entry>
+      <entry><ind>	89</ind>	<dep>	288</dep></entry>
+      <entry><ind>	90</ind>	<dep>	324</dep></entry>
+      <entry><ind>	99</ind>	<dep>	324</dep></entry>
+      <entry><ind>	99.9</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
   <center>
     <x-m>-0.03059</x-m>
     <y-m>0</y-m>
@@ -405,30 +538,35 @@
 <animation>
   <type>rotate</type>
   <object-name>hund_3</object-name>
-  <property>tu154/instrumentation/v-57[0]/speed/indicated-wheels_hund</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.99</ind>	<dep>	0.1</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
-    <entry><ind>	1.99</ind>	<dep>	36.1</dep></entry>
-    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
-    <entry><ind>	2.99</ind>	<dep>	72.1</dep></entry>
-    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
-    <entry><ind>	3.99</ind>	<dep>	108.1</dep></entry>
-    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
-    <entry><ind>	4.99</ind>	<dep>	144.1</dep></entry>
-    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
-    <entry><ind>	5.99</ind>	<dep>	180.1</dep></entry>
-    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
-    <entry><ind>	6.99</ind>	<dep>	216.1</dep></entry>
-    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
-    <entry><ind>	7.99</ind>	<dep>	252.1</dep></entry>
-    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
-    <entry><ind>	8.99</ind>	<dep>	288.1</dep></entry>
-    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
-    <entry><ind>	9.99</ind>	<dep>	324.1</dep></entry>
-    <entry><ind>	9.999</ind>	<dep>	359.9</dep></entry>
-  </interpolation>
+  <expression>
+    <table>
+      <mod>
+        <property>tu154/systems/nvu/wind-speed-smooth</property>
+        <value>1000</value>
+      </mod>
+      <entry><ind>	  0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 99</ind>	<dep>	0</dep></entry>
+      <entry><ind>	100</ind>	<dep>	36</dep></entry>
+      <entry><ind>	199</ind>	<dep>	36</dep></entry>
+      <entry><ind>	200</ind>	<dep>	72</dep></entry>
+      <entry><ind>	299</ind>	<dep>	72</dep></entry>
+      <entry><ind>	300</ind>	<dep>	108</dep></entry>
+      <entry><ind>	399</ind>	<dep>	108</dep></entry>
+      <entry><ind>	400</ind>	<dep>	144</dep></entry>
+      <entry><ind>	499</ind>	<dep>	144</dep></entry>
+      <entry><ind>	500</ind>	<dep>	180</dep></entry>
+      <entry><ind>	599</ind>	<dep>	180</dep></entry>
+      <entry><ind>	600</ind>	<dep>	216</dep></entry>
+      <entry><ind>	699</ind>	<dep>	216</dep></entry>
+      <entry><ind>	700</ind>	<dep>	252</dep></entry>
+      <entry><ind>	799</ind>	<dep>	252</dep></entry>
+      <entry><ind>	800</ind>	<dep>	288</dep></entry>
+      <entry><ind>	899</ind>	<dep>	288</dep></entry>
+      <entry><ind>	900</ind>	<dep>	324</dep></entry>
+      <entry><ind>	999</ind>	<dep>	324</dep></entry>
+      <entry><ind>	999.9</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
   <center>
     <x-m>-0.03059</x-m>
     <y-m>0</y-m>
@@ -441,76 +579,20 @@
   </axis>
 </animation>
 
-
 <!--Controls-->
-<!--Manually control of wind speed and direction not implemented yet - only DISS mode now -->
 <animation>
-  <type>pick</type>
+  <type>knob</type>
   <object-name>hs_7</object-name>
   <visible>false</visible>
   <action>
-    <button>0</button>
-    <repeatable>true</repeatable>
-    <interval-sec>0.15</interval-sec>
     <binding>
       <command>property-adjust</command>
-      <property>tu154/instrumentation/v-57[0]/fork-deg</property>
-      <step>1.0</step>
-      <min>-90.0</min>
-      <max>90.0</max>
+      <property>tu154/systems/nvu/wind-fork</property>
+      <factor>0.25</factor>
+      <min>-90</min>
+      <max>90</max>
     </binding>
   </action>
 </animation>
-<animation>
-  <type>pick</type>
-  <object-name>hs_7</object-name>
-  <visible>false</visible>
-  <action>
-    <button>1</button>
-    <repeatable>true</repeatable>
-    <interval-sec>0.15</interval-sec>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/instrumentation/v-57[0]/fork-deg</property>
-      <step>-1.0</step>
-      <min>-90.0</min>
-      <max>90.0</max>
-    </binding>
-  </action>
-</animation>
-<!--Mouse wheel-->
-<animation>
-  <type>pick</type>
-  <object-name>hs_7</object-name>
-  <visible>false</visible>
-  <action>
-    <button>3</button>
-    <repeatable>false</repeatable>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/instrumentation/v-57[0]/fork-deg</property>
-      <step>1.0</step>
-      <min>-90.0</min>
-      <max>90.0</max>
-    </binding>
-  </action>
-</animation>
-<animation>
-  <type>pick</type>
-  <object-name>hs_7</object-name>
-  <visible>false</visible>
-  <action>
-    <button>4</button>
-    <repeatable>false</repeatable>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/instrumentation/v-57[0]/fork-deg</property>
-      <step>-1.0</step>
-      <min>-90.0</min>
-      <max>90.0</max>
-    </binding>
-  </action>
-</animation>
-
 
 </PropertyList>

@@ -661,7 +661,11 @@
       <script>
         if( getprop("tu154/switches/pu-46-cover-1") == 0.0 ){
         interpolate("tu154/switches/pu-46-cover-1", 1.0, 0.1 );}
-        else {interpolate("tu154/switches/pu-46-cover-1", 0.0, 0.1 );}
+        else {
+            interpolate("tu154/switches/pu-46-cover-1", 0.0, 0.1 );
+            interpolate("tu154/switches/pu-46-boltanka", 0.0, 0.1 );
+            setprop("fdm/jsbsim/ap/turbulence", 0.0 );
+        }
       </script>
     </binding>
   </action>
@@ -913,57 +917,30 @@
 
 <!--Wheels-->
 <!--+++++++++++++++++ pitch ++++++++++++++++++-->
+
+<!--Modified by Yurik dec 2013 for new AP code-->
 <animation>
   <type>pick</type>
   <object-name>pitch_wheel</object-name>
   <visible>true</visible>
   <action>
     <button>0</button>
-    <repeatable>true</repeatable>
-    <interval-sec>0.15</interval-sec>
     <binding>
-      <command>property-adjust</command>
-      <property>tu154/switches/pu-46-pitch-wheel</property>
-      <step>3.0</step>
-    </binding>
-    <binding>
-      <command>property-adjust</command>
+      <command>property-assign</command>
       <property>fdm/jsbsim/ap/stab-input-pitch-rad</property>
-      <step>0.002</step>
-      <max>0.8</max>
+      <value>0.0</value>
     </binding>
+    <binding>
+      <command>property-assign</command>
+      <property>tu154/switches/pu-46-pitch-wheel</property>
+      <value>0.0</value>
+    </binding>    
     <binding>
       <command>nasal</command>
       <script>absu.absu_drop_mvh()</script>
     </binding>
   </action>
 </animation>
-<animation>
-  <type>pick</type>
-  <object-name>pitch_wheel</object-name>
-  <visible>true</visible>
-  <action>
-    <button>1</button>
-    <repeatable>true</repeatable>
-    <interval-sec>0.15</interval-sec>
-    <binding>
-      <command>property-adjust</command>
-      <property>tu154/switches/pu-46-pitch-wheel</property>
-      <step>-3.0</step>
-    </binding>
-    <binding>
-      <command>property-adjust</command>
-      <property>fdm/jsbsim/ap/stab-input-pitch-rad</property>
-      <step>-0.002</step>
-      <min>-0.2</min>
-    </binding>
-    <binding>
-      <command>nasal</command>
-      <script>absu.absu_drop_mvh()</script>
-    </binding>
-  </action>
-</animation>
-
 
 <!--Mouse wheel-->
 
@@ -978,12 +955,13 @@
       <command>property-adjust</command>
       <property>tu154/switches/pu-46-pitch-wheel</property>
       <step>5.0</step>
+      <max>170</max>
     </binding>
     <binding>
       <command>property-adjust</command>
       <property>fdm/jsbsim/ap/stab-input-pitch-rad</property>
-      <step>-0.002</step>
-      <min>-0.2</min>
+      <step>-0.0085</step>
+      <min>-0.3</min>
     </binding>
     <binding>
       <command>nasal</command>
@@ -1002,12 +980,13 @@
       <command>property-adjust</command>
       <property>tu154/switches/pu-46-pitch-wheel</property>
       <step>-5.0</step>
+      <min>-170.0</min>
     </binding>
     <binding>
       <command>property-adjust</command>
       <property>fdm/jsbsim/ap/stab-input-pitch-rad</property>
-      <step>0.002</step>
-      <max>0.8</max>
+      <step>0.0085</step>
+      <max>0.3</max>
     </binding>
     <binding>
       <command>nasal</command>

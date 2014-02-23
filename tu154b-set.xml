@@ -45,6 +45,10 @@
 	    <name>F2</name>
 	    <desc>Thrust reverser On</desc>
 	   </key>
+	   <key>
+	    <name>Delete</name>
+	    <desc>Center aileron, elevator, and rudder</desc>
+	   </key>
 	 </help>
 
 <menubar>
@@ -322,25 +326,127 @@
 		<int n="14" alias="/tu154/contrail/condensation"/>
             </generic>
   </multiplay>
+
+  <systems>
+    <property-rule>
+      <path>Aircraft/tu154b/Systems/property-rules.xml</path>
+    </property-rule>
+  </systems>
+
+  <airport>
+    <runways>
+      <start-offset-m type="double">10</start-offset-m>
+    </runways>
+  </airport>
+
 </sim>
+
+ <payload>
+  <weight>
+   <name type="string">Front passenger cabin (Rows 1-15)</name>
+   <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[1]"/>
+   <min-lb type="double">0.0</min-lb>
+   <max-lb type="double">13750.0</max-lb>
+  </weight>
+  <weight>
+   <name type="string">Middle passenger cabin (Rows 16-25)</name>
+   <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[2]"/>
+   <min-lb type="double">0.0</min-lb>
+   <max-lb type="double">10000.0</max-lb>
+  </weight>
+  <weight>
+   <name type="string">Rear passenger cabin (Rows 26-33)</name>
+   <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[3]"/>
+   <min-lb type="double">0.0</min-lb>
+   <max-lb type="double">7580.0</max-lb>
+  </weight>
+  <weight>
+   <name type="string">Front luggage (compartment 1)</name>
+   <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[4]"/>
+   <min-lb type="double">0.0</min-lb>
+   <max-lb type="double">4890.0</max-lb>
+  </weight>
+  <weight>
+   <name type="string">Front luggage (compartment 2)</name>
+   <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[5]"/>
+   <min-lb type="double">0.0</min-lb>
+   <max-lb type="double">3700.0</max-lb>
+  </weight>
+  <weight>
+   <name type="string">Front luggage (compartment 3)</name>
+   <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[6]"/>
+   <min-lb type="double">0.0</min-lb>
+   <max-lb type="double">9910.0</max-lb>
+  </weight>
+  <weight>
+   <name type="string">Front luggage (compartment 4)</name>
+   <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[7]"/>
+   <min-lb type="double">0.0</min-lb>
+   <max-lb type="double">9910.0</max-lb>
+  </weight>
+  <weight>
+   <name type="string">Rear luggage (compartment 1)</name>
+   <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[8]"/>
+   <min-lb type="double">0.0</min-lb>
+   <max-lb type="double">11500.0</max-lb>
+  </weight>
+  <weight>
+   <name type="string">Rear luggage (compartment 2)</name>
+   <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[9]"/>
+   <min-lb type="double">0.0</min-lb>
+   <max-lb type="double">3700.0</max-lb>
+  </weight>
+  <weight>
+   <name type="string">Rear luggage (compartment 3)</name>
+   <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[10]"/>
+   <min-lb type="double">0.0</min-lb>
+   <max-lb type="double">7660.0</max-lb>
+  </weight>
+ </payload>
 
  <gear>
     <gear n="0">
       <tyre-smoke type="int">0</tyre-smoke>
       <sprayspeed-ms type="double">0</sprayspeed-ms>
       <spray-density type="double">0</spray-density>
+      <zsink-in type="double">25</zsink-in>
     </gear>
     <gear n="1">
       <tyre-smoke type="int">0</tyre-smoke>
       <sprayspeed-ms type="double">0</sprayspeed-ms>
       <spray-density type="double">0</spray-density>
+      <zsink-in type="double">25</zsink-in>
     </gear>
     <gear n="2">
       <tyre-smoke type="int">0</tyre-smoke>
       <sprayspeed-ms type="double">0</sprayspeed-ms>
       <spray-density type="double">0</spray-density>
+      <zsink-in type="double">25</zsink-in>
+    </gear>
+    <gear n="3">
+      <zsink-in type="double">25</zsink-in>
+    </gear>
+    <gear n="4">
+      <zsink-in type="double">25</zsink-in>
+    </gear>
+    <gear n="5">
+      <zsink-in type="double">25</zsink-in>
+    </gear>
+    <gear n="6">
+      <zsink-in type="double">25</zsink-in>
     </gear>
  </gear>
+
+<consumables>
+ <fuel>
+  <tank n="0"><name>Feed tank (1)</name></tank>
+  <tank n="1"><name>Left wing inner tank (2 LEFT)</name></tank>
+  <tank n="2"><name>Left wing outer tank (3 LEFT)</name></tank>
+  <tank n="3"><name>Right wing inner tank (2 RIGHT)</name></tank>
+  <tank n="4"><name>Right wing outer tank (3 RIGHT)</name></tank>
+  <tank n="5"><name>Ballast tank (4)</name></tank>
+ </fuel>
+</consumables>
 
 <instrumentation>
   <adf n="0">
@@ -348,12 +454,17 @@
     <error-deg type="double" >0.0</error-deg>
     <mode type="string" >adf</mode>
     <volume-norm type="double" >0.2</volume-norm>
+    <serviceable type="bool">false</serviceable>
   </adf>
   <adf n="1">
     <error-deg type="double" >0.0</error-deg>
     <mode type="string" >adf</mode>
     <volume-norm type="double" >0.2</volume-norm>
+    <serviceable type="bool">false</serviceable>
   </adf>
+  <altimeter n="0">
+    <serviceable type="bool" >true</serviceable>
+  </altimeter>
   <altimeter n="1">
     <serviceable type="bool" >true</serviceable>
   </altimeter>
@@ -385,13 +496,38 @@
    <powered type="bool" >false</powered>
    <volume type="double" >0.2</volume>
   </nav>
-  
+
+  <dme n="0">
+    <serviceable type="bool">false</serviceable>
+    <frequencies>
+      <selected-mhz type="double">115.8</selected-mhz>
+      <source>/instrumentation/dme[0]/frequencies/selected-mhz</source>
+    </frequencies>
+  </dme>
+  <dme n="1">
+    <serviceable type="bool">false</serviceable>
+    <frequencies>
+      <selected-mhz type="double">116.8</selected-mhz>
+      <source>/instrumentation/dme[1]/frequencies/selected-mhz</source>
+    </frequencies>
+  </dme>
+  <dme n="2">
+    <serviceable type="bool">false</serviceable>
+    <frequencies>
+      <source>/instrumentation/nav[2]/frequencies/selected-mhz</source>
+    </frequencies>
+  </dme>
+
   <marker-beacon>
     <serviceable type="bool" >false</serviceable>
     <power-btn type="bool" >false</power-btn>
     <audio-btn type="bool" >false</audio-btn>
     <volume type="double" >0.0</volume>
   </marker-beacon>
+
+  <turn-indicator>
+    <serviceable type="bool">false</serviceable>
+  </turn-indicator>
 </instrumentation>
 
 <controls>
@@ -406,6 +542,9 @@
 	<instruments>
           <file>Aircraft/tu154b/Nasal/instruments.nas</file>
 	</instruments>
+	<mapcase>
+          <file>Aircraft/tu154b/Nasal/mapcase.nas</file>
+	</mapcase>
         <electrical>
           <file>Aircraft/tu154b/Nasal/electrical.nas</file>
         </electrical>
@@ -436,6 +575,9 @@
 	<tyresmoke>
 	  <file>Aircraft/tu154b/Nasal/tyresmoke.nas</file>
 	 </tyresmoke>
+	<friction>
+	  <file>Aircraft/tu154b/Nasal/friction.nas</file>
+	</friction>
 	<!--
       <debug>
   <file>Aircraft/tu154b/Nasal/debug.nas</file>
@@ -458,6 +600,15 @@
       <pnp-left-selector>0</pnp-left-selector>
       <bgmk-offset-1>50</bgmk-offset-1>
       <bgmk-offset-2>250</bgmk-offset-2>
+      <indicated-altitude-m>0</indicated-altitude-m>
+
+      <nvu>
+        <stopped type="int">1</stopped>
+
+        <Spm-active type="double">0</Spm-active>
+        <Zpm-active type="double">0</Zpm-active>
+      </nvu>
+
     </instrumentation>
     <ap>
 <!--      <gs-gain>8.0</gs-gain>-->
@@ -475,7 +626,6 @@
      <pitch-selector>0</pitch-selector>-->
     </ap>
     <gear>
-      <static-friction type="double">0.6</static-friction>
       <gear-cmd-static type="double">1.0</gear-cmd-static>
     </gear>
     <fcs>
@@ -765,6 +915,14 @@
         <script>view.forceView(5);</script>
       </binding>
     </key>
+    <key n="127">
+      <name>Delete</name>
+      <desc>Center aileron, elevator, and rudder</desc>
+      <binding>
+        <command>nasal</command>
+        <script>controls.centerFlightControls()</script>
+      </binding>
+    </key>
     
 <!-- Reverser -->
  <key n="258">
@@ -843,12 +1001,28 @@
   
   <instrumentation>
     <distance-to-pnp type="bool">true</distance-to-pnp>
+    <altimeters-sync-inhg type="bool">true</altimeters-sync-inhg>
+    <altimeter n="0">
+      <inhgX100 type="int">2992</inhgX100>
+    </altimeter>
+    <altimeter n="1">
+      <inhgX100 type="int">2992</inhgX100>
+    </altimeter>
     <ark-15 n="0">
       <powered type="bool">false</powered>
     </ark-15>
     <ark-15 n="1">
       <powered type="bool" >false</powered>
     </ark-15>
+    <dme>
+      <distance type="double">0</distance>
+    </dme>
+    <dme>
+      <distance type="double">0</distance>
+    </dme>
+    <dme>
+      <distance type="double">0</distance>
+    </dme>
     <pn-5>
       <heading-state type="double" >0.0</heading-state>
       <pitch-state type="double" >0.0</pitch-state>
@@ -859,14 +1033,19 @@
       <stab type="double" >false</stab>
       <mode type="double" >0.0</mode>
     </pn-6>
-    <rv-5m>
-      <warn type="bool" >false</warn>
-      <caged-flag type="bool" >false</caged-flag>
-      <serviceable type="bool" >true</serviceable>
-      <index-m type="double" >200.0</index-m>
+    <rv-5m n="0">
+      <altitude type="double">0.0</altitude>
+      <dialed type="double">200.0</dialed>
+    </rv-5m>
+    <rv-5m n="1">
+      <altitude type="double">0.0</altitude>
+      <dialed type="double">0.0</dialed>
     </rv-5m>
     <idr-1>
-      <caged-flag type="bool" >true</caged-flag>
+      <distance type="double">0</distance>
+    </idr-1>
+    <idr-1>
+      <distance type="double">0</distance>
     </idr-1>
     <uap-12>
       <warn type="bool" >false</warn>
@@ -875,16 +1054,14 @@
       <alpha-limit-deg type="double" >11.5</alpha-limit-deg>
     </uap-12>   
     <pnp>
-      <plane-deg>252.0</plane-deg>
-      <plane-deg-local>252.0</plane-deg-local>
-      <plane-deg-delayed>252.0</plane-deg-delayed>
+      <plane-dialed>252.0</plane-dialed>
+      <distance type="double">0</distance>
 <!--      <heading-deg>161.0</heading-deg>
       <heading-deg-delayed>161.0</heading-deg-delayed>-->
     </pnp>
     <pnp>
-      <plane-deg>252.0</plane-deg>
-      <plane-deg-local>252.0</plane-deg-local>
-      <plane-deg-delayed>252.0</plane-deg-delayed>
+      <plane-dialed>252.0</plane-dialed>
+      <distance type="double">0</distance>
 <!--      <heading-deg>161.0</heading-deg>
       <heading-deg-delayed>161.0</heading-deg-delayed>-->
     </pnp>
@@ -892,12 +1069,20 @@
       <stab type="double" >0.0</stab>
     </pu-46>
     <iku-1>
-      <l-mode type="double" >0.0</l-mode>
-      <r-mode type="double" >0.0</r-mode>
+      <heading-1 type="double">270</heading-1>
+      <heading-2 type="double">270</heading-2>
+      <mode-1 type="int">0</mode-1>
+      <mode-2 type="int">0</mode-2>
+      <trans-1 type="double">0</trans-1>
+      <trans-2 type="double">0</trans-2>
     </iku-1>
     <iku-1>
-      <l-mode type="double" >0.0</l-mode>
-      <r-mode type="double" >0.0</r-mode>
+      <heading-1 type="double">270</heading-1>
+      <heading-2 type="double">270</heading-2>
+      <mode-1 type="int">0</mode-1>
+      <mode-2 type="int">0</mode-2>
+      <trans-1 type="double">0</trans-1>
+      <trans-2 type="double">0</trans-2>
     </iku-1>
   <diss>
     <powered type="bool" >false</powered>
@@ -912,22 +1097,37 @@
     <!--<roll-limit type="double" >15.0</roll-limit>-->
   </bkk>   
   <v-57>
-    <fork-deg type="double" >0.0</fork-deg>
+    <speed-adjust-step type="double">0.25</speed-adjust-step>
+    <azimuth-adjust-step type="double">0.25</azimuth-adjust-step>
   </v-57>
   <rsbn>
     <handle-1 type="double" >0.0</handle-1>
     <handle-2 type="double" >0.0</handle-2>
     <mode type="bool" >false</mode>
     <serviceable type="bool" >false</serviceable>
-    <distance-m type="double" >0.0</distance-m>
-    <heading-deg type="double" >0.0</heading-deg>
+    <distance type="double" >0</distance>
+    <radial type="double" >0</radial>
+    <twist type="double" >0</twist>
   </rsbn>
+    <b-8m>
+      <outer type="int">0</outer>
+      <inner type="int">0</inner>
+    </b-8m>
   
   <uap-12>
     <accelerate-max type="double" >-1.0</accelerate-max>
     <accelerate-min type="double" >-1.0</accelerate-min>
   </uap-12>
-  
+
+    <v-140>
+      <adjust-step-1 type="double">0.1</adjust-step-1>
+      <adjust-step-2 type="double">0.1</adjust-step-2>
+    </v-140>
+    <v-51>
+      <adjust-speed type="int">1000</adjust-speed>
+      <scale type="int">1</scale>
+    </v-51>
+
   </instrumentation>
   
   
@@ -975,16 +1175,20 @@
       <ga3-2 type="double" >6.0</ga3-2>
     </tks>
     <nvu>
-      <!--<powered type="bool" >false</powered>-->
-      <selector type="bool" >false</selector>
-      <serviceable type="bool" >false</serviceable>
-      <powered type="double" >0.0</powered>
-      <trigger type="bool" >false</trigger>
-      <mult-1 type="double" >1.0</mult-1>
-      <mult-2 type="double" >1.0</mult-2>
-      <mult-3 type="double" >1.0</mult-3>
-      <rsbn-corr type="bool" >false</rsbn-corr>
-      <mode type="bool" >true</mode>
+      <powered type="double">0</powered>
+      <leg type="int">0</leg>
+      <leg-next type="int">1</leg-next>
+      <wind-speed type="double">0</wind-speed>
+      <wind-azimuth type="double">0</wind-azimuth>
+      <S-1-smooth type="double">0</S-1-smooth>
+      <Z-1-smooth type="double">0</Z-1-smooth>
+      <Spm-1-smooth type="double">0</Spm-1-smooth>
+      <Zpm-1-smooth type="double">0</Zpm-1-smooth>
+      <S-2-smooth type="double">0</S-2-smooth>
+      <Z-2-smooth type="double">0</Z-2-smooth>
+      <Spm-2-smooth type="double">0</Spm-2-smooth>
+      <Zpm-2-smooth type="double">0</Zpm-2-smooth>
+      <wind-fork type="double">0</wind-fork>
     </nvu>
     <warning>
       <deploy-flaps type="double" >0.0</deploy-flaps>
@@ -1010,8 +1214,8 @@
     <pu-46-cover-1 type="double" >0.0</pu-46-cover-1>
     <pu-46-cover-2 type="double" >0.0</pu-46-cover-2>
     <usvp-selector type="double" >0.0</usvp-selector>
-    <v-51-selector-1 type="double" >1.0</v-51-selector-1>
-    <v-51-selector-2 type="double" >1.0</v-51-selector-2>
+    <v-51-selector-1 type="double" >0</v-51-selector-1>
+    <v-51-selector-2 type="double" >0</v-51-selector-2>
     <stab-manu-selector type="double" >1.0</stab-manu-selector>
     <stab-auto-handle type="double" >1.0</stab-auto-handle>
     <busters-cover type="double" >1.0</busters-cover>

@@ -29,10 +29,8 @@
   <type>rotate</type>
   <object-name>handle</object-name>
   <property>tu154/switches/PKP-left</property>  
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	-60.0</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	60.0</dep></entry>
-  </interpolation>
+  <factor>-120</factor>
+  <offset-deg>60</offset-deg>
   <axis>
     <x>0.0</x>
     <y>-1.0</y>
@@ -44,10 +42,8 @@
   <type>rotate</type>
   <object-name>cover</object-name>
   <property>tu154/switches/PKP-left-cover</property>  
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	10.0</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	110.0</dep></entry>
-  </interpolation>
+  <factor>100</factor>
+  <offset-deg>10</offset-deg>
   <center>
     <x-m>0.00378</x-m>
     <y-m>0.0</y-m>
@@ -72,7 +68,7 @@
     <binding>
       <command>nasal</command>
       <script>
-        interpolate("tu154/switches/PKP-left", 1.0, 0.1 );
+        interpolate("tu154/switches/PKP-left", 0, 0.1 );
       </script>
     </binding>
   </action>
@@ -87,7 +83,7 @@
     <binding>
       <command>nasal</command>
       <script>
-        interpolate("tu154/switches/PKP-left", 0.0, 0.1 );
+        interpolate("tu154/switches/PKP-left", 1, 0.1 );
       </script>
     </binding>
   </action>

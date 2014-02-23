@@ -46,7 +46,7 @@
         <ixz unit="KG*M2">0</ixz>
         <iyz unit="KG*M2">0</iyz>
         <ixy unit="KG*M2">0</ixy>
-        <emptywt unit="KG">54000</emptywt>
+        <emptywt unit="KG">53000</emptywt>
         <location name="CG" unit="M">
             <x>26.68</x>
             <y>0</y>
@@ -63,7 +63,7 @@
         </pointmass>
 
 	<pointmass name="Pax1">
-            <weight unit="KG">3000</weight>
+            <weight unit="KG">4000</weight>
             <location unit="M">
                 <x>12.0</x>
                 <y>0</y>
@@ -72,7 +72,7 @@
         </pointmass>       
 	
         <pointmass name="Pax2">
-            <weight unit="KG">3000</weight>
+            <weight unit="KG">4000</weight>
             <location unit="M">
                 <x>20.0</x>
 <!--<x>5.84</x>-->
@@ -83,7 +83,7 @@
         </pointmass>
 
         <pointmass name="Pax3">
-            <weight unit="KG">3000</weight>
+            <weight unit="KG">4000</weight>
             <location unit="M">
                 <x>30.0</x>
                 <y>0</y>
@@ -148,7 +148,15 @@
                 <y>0</y>
                 <z>0</z>
             </location>
-        </pointmass>       
+        </pointmass>
+        <pointmass name="Gear shift">
+            <weight unit="KG">1000</weight>
+            <location unit="M">
+                <x>26.68</x>
+                <y>0</y>
+                <z>1.8</z>
+            </location>
+        </pointmass>      
     </mass_balance>
 
     <ground_reactions>
@@ -156,9 +164,9 @@
             <location unit="M">
                 <x> 6.0 </x>
                 <y> 0.0 </y>
-                <z> -2.67 </z>
+                <z> -2.7 </z>
             </location>
-            <static_friction> 0.9 </static_friction>
+            <static_friction> 0.6 </static_friction>
             <dynamic_friction> 0.8 </dynamic_friction>
             <rolling_friction> 0.02 </rolling_friction>
             <spring_coeff unit="N/M"> 800000 </spring_coeff><!--800000-->
@@ -173,7 +181,7 @@
                 <y> -5.75 </y>
                 <z> -2.5 </z>
             </location>
-            <static_friction> 1.0 </static_friction>
+            <static_friction> 0.6 </static_friction>
             <dynamic_friction> 0.5 </dynamic_friction>
             <rolling_friction> 0.02 </rolling_friction><!--0.02-->
             <spring_coeff unit="N/M"> 1.7e+06 </spring_coeff><!--1.7e+06 -->
@@ -188,7 +196,7 @@
                 <y> 5.75 </y>
                 <z> -2.5 </z>
             </location>
-            <static_friction> 1.0 </static_friction>
+            <static_friction> 0.6 </static_friction>
             <dynamic_friction> 0.5 </dynamic_friction>
             <rolling_friction> 0.02 </rolling_friction>
             <spring_coeff unit="N/M"> 1.7e+06 </spring_coeff>
@@ -284,8 +292,8 @@
                 </location>
                 <orient unit="DEG">
                     <roll> 0 </roll>
-                    <pitch> -2 </pitch>
-                    <yaw> 0 </yaw>
+                    <pitch> 2 </pitch>
+                    <yaw> -6.5 </yaw>
                 </orient>
             </thruster>
         </engine>
@@ -309,7 +317,7 @@
                 </location>
                 <orient unit="DEG">
                     <roll> 0 </roll>
-                    <pitch> -2 </pitch>
+                    <pitch> -2.5 </pitch>
                     <yaw> 0 </yaw>
                 </orient>
             </thruster>
@@ -334,8 +342,8 @@
                 </location>
                 <orient unit="DEG">
                     <roll> 0 </roll>
-                    <pitch> -2 </pitch>
-                    <yaw> 0 </yaw>
+                    <pitch> 2 </pitch>
+                    <yaw> 6.5 </yaw>
                 </orient>
             </thruster>
         </engine>
@@ -426,9 +434,10 @@
 	<property>fcs/stab-auto-cmd</property>
 	<property>fcs/stabilizer-cmd-norm</property>
 	-->
-	<property>fcs/met</property>
+	<!--<property>fcs/met</property>-->
         <channel name="Pitch">
-		
+<!--Modified by yurik nov 2013-->
+<!--		
 	    <aerosurface_scale name="fcs/met-trimmer">
 		<input>fcs/pitch-trim-cmd-norm</input>
 		<domain>
@@ -441,10 +450,11 @@
 		</range>
 	    	<output>fcs/met</output>
 	    </aerosurface_scale>
-
+-->
             <summer name="Pitch Trim Sum">
               <input>fcs/elevator-cmd-norm</input>
-	      <input>fcs/met</input>
+	      <!--<input>fcs/met</input>--> <!--By Yurik-->
+	      <input>ap/pitch/met</input>
               <clipto>
                 <min>-1</min>
                 <max>1</max>
@@ -594,8 +604,8 @@
             <aerosurface_scale name="Rudder Control">
               <input>fcs/yaw-hydropower</input>
               <range>
-                <min>-0.35</min>
-                <max>0.35</max>
+                <min>-0.4363</min>
+                <max>0.4363</max>
               </range>
               <output>fcs/rudder-pos-rad</output>
             </aerosurface_scale>
@@ -831,47 +841,22 @@
         
         <channel name="Brake">
 <!--Left-->
-          <summer name="gear/left-brake-cmd-norm">
-            <input>gear/brake-left</input>
-            <input>gear/brake-parking</input>
-            <clipto>
-              <min>0.0</min>
-              <max>1.0</max>
-            </clipto>
-          </summer>
-          
-          <pure_gain name="gear/left-brake-cmd">
-            <input>gear/left-brake-cmd-norm</input>
-  <!--You can change current static friction here, for model of ice condition etc. -->
-  	    <gain>gear/static-friction</gain> <!--default: 0.6 --> 
-          </pure_gain>
 <!--Check hydro power for brake-->
           <switch name="gear/left-brake-cmd-switched">
             <default value="0.0"/>
-            <test value="gear/left-brake-cmd">
+            <test logic="OR" value="gear/brake-left">
               hs/hs1-busters-ok > 0
+              gear/brake-parking > 0
             </test>
             <output>fcs/left-brake-cmd-norm</output>
           </switch>
 <!--Right-->
-          <summer name="gear/right-brake-cmd-norm">
-            <input>gear/brake-right</input>
-            <input>gear/brake-parking</input>
-            <clipto>
-              <min>0.0</min>
-              <max>1.0</max>
-            </clipto>
-          </summer>
-          
-          <pure_gain name="gear/right-brake-cmd">
-            <input>gear/right-brake-cmd-norm</input>
-            <gain>gear/static-friction</gain>
-          </pure_gain>
           
           <switch name="gear/right-brake-cmd-switched">
             <default value="0.0"/>
-            <test value="gear/right-brake-cmd">
+            <test logic="OR" value="gear/brake-right">
               hs/hs1-busters-ok > 0
+              gear/brake-parking > 0
             </test>
             <output>fcs/right-brake-cmd-norm</output>
           </switch>
@@ -879,42 +864,92 @@
         </channel>
 
         <channel name="Steering">
-          
-          <switch name="gear/steering-switched">
-            <default value="hs/hs2-busters-ok"/>
-            <test value="gear/steering">
-              systems/electrical-ok == 1
+
+          <fcs_function name="gear/steering-free-cmd-norm">
+            <function>
+              <sum>
+                <property>gear/steering-cmd-norm</property>
+                <product>
+                  <property>gear/unit[0]/wheel-speed-fps</property>
+                  <sum>
+                    <property>gear/unit[0]/side_friction_coeff</property>
+                    <property>gear/unit[0]/rolling_friction_coeff</property>
+                  </sum>
+                  <property>gear/unit[0]/compression-ft</property>
+                  <value>0.01</value>
+                </product>
+              </sum>
+            </function>
+            <clipto>
+              <min>-1</min>
+              <max>1</max>
+            </clipto>
+          </fcs_function>
+
+          <fcs_function name="gear/rudder-cmd-scaled">
+            <function>
+              <product>
+                <property>fcs/rudder-cmd-norm</property>
+                <value>0.015873</value>
+                <property>gear/steering</property>
+              </product>
+            </function>
+          </fcs_function>
+
+          <switch name="gear/steering-cmd-norm">
+            <test value="0">
+              gear/unit[0]/WOW == 0
+              gear/steering-cmd-norm lt 0.25
+              gear/steering-cmd-norm gt -0.25
             </test>
-          </switch>
-          
-          <switch name="gear/nose-wheel-steering-switched">
-            <default value="hs/hs2-busters-ok"/>
-            <test value="gear/nose-wheel-steering">
-              systems/electrical-ok == 1
+            <test value="gear/steering-cmd-norm">
+              gear/unit[0]/WOW == 0
             </test>
+            <test value="-gear/rudder-cmd-scaled">
+              gear/nose-wheel-steering == 1
+              systems/electrical-ok == 1
+              hs/hs2-busters-ok == 1
+            </test>
+            <default value="gear/steering-free-cmd-norm"/>
           </switch>
-          
-          <scheduled_gain name="gear/steering-cmd-norm">
-            <input>-fcs/rudder-cmd-norm</input>
-            <table>
-              <independentVar> gear/steering-switched </independentVar>
-              <tableData>
-                10            0.158
-                63            1.0
-              </tableData>
-            </table>
-          </scheduled_gain>     
-          
-          <pure_gain name="gear/steering-cmd-norm-switched">
+
+          <kinematic name="gear/steer-pos-deg">
             <input>gear/steering-cmd-norm</input>
-            <gain>gear/nose-wheel-steering-switched</gain>
-          </pure_gain>
-	  
-          <pure_gain name="gear/steering-cmd-norm-switched-deg">
-            <input>gear/steering-cmd-norm-switched</input>
-            <gain>63.0</gain>
+            <traverse>
+              <setting>
+                <position>-63</position>
+                <time>0</time>
+              </setting>
+              <setting>
+                <position>63</position>
+                <time>3</time>
+              </setting>
+            </traverse>
+          </kinematic>
+
+          <!-- <output> in <kinematic> doesn't seem to work here. -->
+          <pure_gain name="gear/steer-pos-deg-workaround">
+            <input>gear/steer-pos-deg</input>
+            <gain>1</gain>
             <output>fcs/steer-pos-deg</output>
           </pure_gain>
+
+        </channel>
+
+        <channel name="Landing Gear Weight Shift">
+
+          <fcs_function name="aero/function/weight-shift-gears">
+                <function>
+                  <sum>
+                    <product>
+                        <property>gear/gear-pos-norm</property>
+                        <value>-192.91</value>
+                    </product>
+                    <value>1243.30</value>
+                  </sum>
+                </function>
+                <output> inertia/pointmass-location-X-inches[11] </output>
+            </fcs_function>
 
         </channel>
 
@@ -927,63 +962,10 @@
     <system file="nvu"/>
     <system file="pushback"/>
     <autopilot file="Systems/absu154"/>
-<!--    <autopilot file="absu154"/>-->
+
     
     <aerodynamics>
-<!--    
-        <function name="aero/function/fly_fuel">
-	  <product>
-	  <sum>
-            <table name="fly_fuel_t">
-                <independentVar lookup="column">tu154/systems/flight/fl</independentVar>
-                <independentVar lookup="row">tu154/systems/flight/dist</independentVar>
-                <tableData>
-		          9600    10200   10800   11400   12100
-		  500     5.5     5.45    5.35    5.35    5.45
-		  1000    8.95    8.5     8.4     8.25    8.3
-		  1500    12.2    11.6    11.5    11.25   11.15
-		  1600    12.8    12.3    12.1    11.85   11.7
-		  1700    13.5    13      12.75   12.5    12.3
-		  1800    14.1    13.65   13.35   13.1    12.85
-		  1900    14.8    14.3    14      13.75   13.45
-		  2000    15.4    15      14.6    14.35   14.05
-		  2100    16.15   15.65   15.25   15      14.75
-		  2200    16.9    16.2    15.85   15.55   15.35
-		  2300    17.5    17      16.5    16.2    15.9
-		  2400    18      17.7    17.1    16.85   16.5
-		  2500    18.8    18.15   17.8    17.55   17.2
-		  2600    19.6    19      18.5    18.2    17.8
-		  2700    20.2    19.6    19.2    18.85   18.4
-		  2800    20.6    20.25   19.65   19.5    19.1
-		  2900    21.15   21      20.45   10.1    19.75
-		  3000    21.7    21.15   20.8    20.75   20.45
-		  3100    21.5    21.8    21.5    21.1    21
-		  3200    22.05   22.35   21.5    21.7    21.3
-		  3300    22.6    23      22.55   22.25   21.85
-		  3400    23.1    23.5    23      22.8    22.35
-		  3500    23.75   24.15   23.6    23.3    22.95
-		  3600    24.25   24.7    24.1    23.85   23.55
-		  3700    24.8    25.36   24.7    24.35   24.05
-		  3800    25.4    25.9    25.3    23.95   24.6
-		  3900    25.9    26.5    25.8    25.45   25.1
-		  4000    26.4    27      26.3    25.95   25.6
-		  4100    27      27.6    26.9    26.55   26.1
-		  4200    27.55   28.2    27.35   27.1    26.6
-		  4300    28.1    28.8    28      27.6    27.05
-		  4400    28.6    29.3    28.5    28.2    27.55
-		  4500    29.2    29.9    29.2    28.7    28.1
-		  4600    29.75   30.45   29.9    29.15   28.6
-		  4700    30.3    31      30.4    29.65   29.15
-		  4800    30.8    31.35   31      30.2    29.65
-		  4900    31.35   32.2    31.5    30.65   30.15
-		  5000    31.85   32.7    31.9    31.15   30.55
-                </tableData>
-            </table>
-	    <value>7</value>
-	  </sum>
-	  <value>1</value>
-	  </product>
-        </function>-->
+      
       <function name="aero/function/CAX">
 	<product>
           <difference>
@@ -1028,7 +1010,7 @@
                 <independentVar lookup="row">aero/alpha-wing-rad</independentVar>
                 <independentVar lookup="column">aero/function/cmf</independentVar>
                 <tableData>
-                               -0.95         -0.8          -0.5          0.2           28            45            
+                               -0.95         -0.8          -0.5          -0.2           28            45            
                   -0.06981      -0.65         -0.65         -0.65         -0.65         0             0.25          
                   0             -0.22         -0.2          -0.25         -0.25         0.4           0.65          
                   0.04887       0.05          0.1           0.05          0             0.65          0.93          
@@ -1044,6 +1026,7 @@
                 </tableData>
             </table>
         </function>
+	
         <axis name="LIFT" unit="LBS">
             <function name="aero/coefficient/CLalpha">
                 <description>Lift_due_to_alpha</description>
@@ -1098,6 +1081,7 @@
             
         </axis>
         <axis name="DRAG" unit="LBS">
+<!--	  
             <function name="aero/coefficient/CDx">
                 <description>Drag_due_to_Cy</description>
                 <product>
@@ -1107,7 +1091,7 @@
                         <independentVar lookup="row">aero/function/cy</independentVar>
                         <independentVar lookup="column">aero/function/cmf</independentVar>
                         <tableData>
-                                       -0.95         -0.9          -0.6          0.2           28            45            
+                                       -0.95         -0.9          -0.6          -0.2           28            45            
                           -0.25         0.032         0.028         0.025         0.025         0.11          0.2           
                           0             0.04          0.028         0.025         0.022         0.11          0.2           
                           0.25          0.05          0.037         0.027         0.025         0.11          0.2           
@@ -1121,14 +1105,86 @@
                         </tableData>
                     </table>
                 </product>
+            </function>-->
+
+ <!--           <function name="aero/coefficient/CDx">
+                <description>Drag_due_to_alpha</description>
+                <product>
+                    <property>aero/qbar-psf</property>
+                    <property>metrics/Sw-sqft</property>
+                    <table name="Cx">
+                        <independentVar lookup="row">aero/alpha-wing-rad</independentVar>
+                        <independentVar lookup="column">aero/function/cmf</independentVar>
+                        <tableData>
+                          -1             -0.95         -0.85       -0.7          -0.2           28            45
+		-4.0	 -0.06981	0.08		0.048	  0.045		0.04		0.122		0.203
+		0.0	  0		0.05		0.03	  0.028		0.025		0.114		0.2
+		2.8	  0.04887	0.044		0.026	  0.025		0.022		0.118		0.207
+		5.0	  0.08727	0.05		0.03	  0.03		0.025		0.133		0.225
+		9.0	  0.1658	0.08		0.048	  0.045		0.04		0.172		0.266
+		15.0	  0.2618	0.2		0.1	  0.097		0.091		0.25		0.35
+		16.0	  0.2792	0.222		0.12	  0.111		0.106		0.26		0.36
+		17.0	  0.2967	0.24		0.14	  0.120		0.115		0.27		0.37
+		19.0	  0.3316	0.29		0.17	  0.145		0.14		0.29		0.39
+		21.0	  0.3665	0.36		0.21	  0.18		0.174		0.31		0.41
+		22.0	  0.384		0.4		0.24	  0.197		0.19		0.32		0.42
+		25.0	  0.4363	0.5		0.3	  0.25		0.24   		0.38		0.48
+                        </tableData>
+                    </table>
+                </product>
             </function>
+ -->
+ 
+ 
+            <function name="aero/coefficient/CDx">
+                <description>Drag_due_to_alpha</description>
+                <product>
+                    <property>aero/qbar-psf</property>
+                    <property>metrics/Sw-sqft</property>
+                    <table name="Cx">
+                        <independentVar lookup="row">aero/alpha-wing-rad</independentVar>
+                        <independentVar lookup="column">aero/function/cmf</independentVar>
+                        <tableData>
+                                       -0.95         -0.85       -0.7          -0.2           28            45
+			 -0.06981	0.08		0.048	  0.045		0.04		0.122		0.203
+			  0		0.05		0.03	  0.028		0.025		0.114		0.2
+			  0.04887	0.044		0.026	  0.025		0.022		0.118		0.207
+			  0.08727	0.05		0.03	  0.03		0.025		0.133		0.225
+			  0.1658	0.08		0.048	  0.045		0.04		0.172		0.266
+			  0.2618	0.2		0.1	  0.097		0.091		0.25		0.35
+			  0.2792	0.222		0.12	  0.111		0.106		0.26		0.36
+			  0.2967	0.24		0.14	  0.120		0.115		0.27		0.37
+			  0.3316	0.29		0.17	  0.145		0.14		0.29		0.39
+			  0.3665	0.36		0.21	  0.18		0.174		0.31		0.41
+			  0.384		0.4		0.24	  0.197		0.19		0.32		0.42
+			  0.4363	0.5		0.3	  0.25		0.24   		0.38		0.48
+                        </tableData>
+                    </table>
+		    <value>0.92</value>
+                </product>
+            </function>
+ 
+ 
+ 
             <function name="aero/coefficient/CDgear">
                 <description>Drag_due_to_gear</description>
                 <product>
                     <property>aero/qbar-psf</property>
                     <property>metrics/Sw-sqft</property>
                     <property>gear/gear-pos-norm</property>
-                    <value>0.0155</value>
+                    <table name="Gear drag due to mach">
+                        <independentVar>velocities/mach</independentVar>
+                        <tableData>
+                          0.2    0.0155
+                          0.3    0.0157
+                          0.4    0.0164
+                          0.5    0.0176
+                          0.6    0.0197
+                          0.7    0.0233
+                          0.8    0.0301
+                          0.9    0.0468
+                        </tableData>
+                    </table>
                 </product>
             </function>
             <function name="aero/coefficient/CDsb">
@@ -1475,7 +1531,7 @@
 	</direction>
       </force>
    </external_reactions>
-<!--    
+<!--   
     <output name="tu-fldata.csv" type="CSV" rate="1">
         <simulation> OFF </simulation>
         <atmosphere> OFF </atmosphere>
@@ -1490,16 +1546,18 @@
         <ground_reactions> OFF </ground_reactions>
         <fcs> OFF </fcs>
         <propulsion> ON </propulsion>
-	<property>velocities/v-down-fps</property>
+	<property>velocities/vc-kts</property>
 	<property>velocities/vc-fps</property>
-	<property>fcs/flap-pos-deg</property>
-	<property>ap/speed-pid</property>
-	<property>ap/speed-error-switched</property>
-	<property>instrumentation/pnp-heading</property>
-	<property>ap/gs-trigger</property>
-	<property>ap/gs-pid</property>
-	<property>ap/gs-error-switched</property>
-	<property>ap/gs-error</property>
-    </output>
-    -->
+	<property>velocities/mach</property>
+	<property>ap/pitch/met-input</property>
+	<property>ap/pitch/met</property>
+	<property>ap/pitch/gs-k5</property>
+	<property>ap/pitch/main-stab-summer</property>
+	<property>ap/pitch/latch-out-rad</property>
+	<property>debug/gs-epsilon</property>
+	<property>debug/h-m</property>
+	<property>debug/wp-hdg-corrected</property>
+	<property>debug/wp-distance</property>
+    </output>-->
+
   </fdm_config>

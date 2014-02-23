@@ -10,6 +10,11 @@
 <!-- IDR-1 range indicator
 3D instrument for Tu-154 -->
 <PropertyList>
+  <params>
+    <distance>tu154/instrumentation/idr-1[0]/distance</distance>
+    <blank>tu154/instrumentation/idr-1[0]/blank</blank>
+  </params>
+
  <path>idr-1.ac</path>
 <!-- Internal instruments lighting -->
 <animation>
@@ -37,8 +42,8 @@
 <animation>
   <type>rotate</type>
   <object-name>dig_hm</object-name>
-  <property>tu154/instrumentation/idr-1[0]/indicated-wheels_dec_m</property>
-  <factor>36.0</factor>
+  <property alias="../../params/distance"/>
+  <factor>0.36</factor>
   <center>
     <x-m>-0.02264</x-m>
     <y-m>0.0</y-m>
@@ -54,30 +59,35 @@
 <animation>
   <type>rotate</type>
   <object-name>dig_ones</object-name>
-  <property>tu154/instrumentation/idr-1[0]/indicated-wheels_hund_m</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.9</ind>	<dep>	0.1</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
-    <entry><ind>	1.9</ind>	<dep>	36.1</dep></entry>
-    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
-    <entry><ind>	2.9</ind>	<dep>	72.1</dep></entry>
-    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
-    <entry><ind>	3.9</ind>	<dep>	108.1</dep></entry>
-    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
-    <entry><ind>	4.9</ind>	<dep>	144.1</dep></entry>
-    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
-    <entry><ind>	5.9</ind>	<dep>	180.1</dep></entry>
-    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
-    <entry><ind>	6.9</ind>	<dep>	216.1</dep></entry>
-    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
-    <entry><ind>	7.9</ind>	<dep>	252.1</dep></entry>
-    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
-    <entry><ind>	8.9</ind>	<dep>	288.1</dep></entry>
-    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
-    <entry><ind>	9.9</ind>	<dep>	324.1</dep></entry>
-    <entry><ind>	9.99</ind>	<dep>	359.9</dep></entry>
-  </interpolation>
+  <expression>
+    <table>
+      <mod>
+        <abs><property alias="../../../../../../params/distance"/></abs>
+        <value>10000</value>
+      </mod>
+      <entry><ind>	   0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 900</ind>	<dep>	0</dep></entry>
+      <entry><ind>	1000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	1900</ind>	<dep>	36</dep></entry>
+      <entry><ind>	2000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	2900</ind>	<dep>	72</dep></entry>
+      <entry><ind>	3000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	3900</ind>	<dep>	108</dep></entry>
+      <entry><ind>	4000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	4900</ind>	<dep>	144</dep></entry>
+      <entry><ind>	5000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	5900</ind>	<dep>	180</dep></entry>
+      <entry><ind>	6000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	6900</ind>	<dep>	216</dep></entry>
+      <entry><ind>	7000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	7900</ind>	<dep>	252</dep></entry>
+      <entry><ind>	8000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	8900</ind>	<dep>	288</dep></entry>
+      <entry><ind>	9000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	9900</ind>	<dep>	324</dep></entry>
+      <entry><ind>	9990</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
   <center>
     <x-m>-0.02264</x-m>
     <y-m>0.0</y-m>
@@ -93,30 +103,35 @@
 <animation>
   <type>rotate</type>
   <object-name>dig_dec</object-name>
-  <property>tu154/instrumentation/idr-1[0]/indicated-wheels_ths_m</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.99</ind>	<dep>	0.1</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
-    <entry><ind>	1.99</ind>	<dep>	36.1</dep></entry>
-    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
-    <entry><ind>	2.99</ind>	<dep>	72.1</dep></entry>
-    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
-    <entry><ind>	3.99</ind>	<dep>	108.1</dep></entry>
-    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
-    <entry><ind>	4.99</ind>	<dep>	144.1</dep></entry>
-    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
-    <entry><ind>	5.99</ind>	<dep>	180.1</dep></entry>
-    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
-    <entry><ind>	6.99</ind>	<dep>	216.1</dep></entry>
-    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
-    <entry><ind>	7.99</ind>	<dep>	252.1</dep></entry>
-    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
-    <entry><ind>	8.99</ind>	<dep>	288.1</dep></entry>
-    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
-    <entry><ind>	9.99</ind>	<dep>	324.1</dep></entry>
-    <entry><ind>	9.999</ind>	<dep>	359.9</dep></entry>
-  </interpolation>
+  <expression>
+    <table>
+      <mod>
+        <abs><property alias="../../../../../../params/distance"/></abs>
+        <value>100000</value>
+      </mod>
+      <entry><ind>	    0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 9900</ind>	<dep>	0</dep></entry>
+      <entry><ind>	10000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	19900</ind>	<dep>	36</dep></entry>
+      <entry><ind>	20000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	29900</ind>	<dep>	72</dep></entry>
+      <entry><ind>	30000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	39900</ind>	<dep>	108</dep></entry>
+      <entry><ind>	40000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	49900</ind>	<dep>	144</dep></entry>
+      <entry><ind>	50000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	59900</ind>	<dep>	180</dep></entry>
+      <entry><ind>	60000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	69900</ind>	<dep>	216</dep></entry>
+      <entry><ind>	70000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	79900</ind>	<dep>	252</dep></entry>
+      <entry><ind>	80000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	89900</ind>	<dep>	288</dep></entry>
+      <entry><ind>	90000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	99900</ind>	<dep>	324</dep></entry>
+      <entry><ind>	99990</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
   <center>
     <x-m>-0.02264</x-m>
     <y-m>0.0</y-m>
@@ -132,30 +147,35 @@
 <animation>
   <type>rotate</type>
   <object-name>dig_hund</object-name>
-  <property>tu154/instrumentation/idr-1[0]/indicated-wheels_decths_m</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.999</ind>	<dep>	0.1</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	36.0</dep></entry>
-    <entry><ind>	1.999</ind>	<dep>	36.1</dep></entry>
-    <entry><ind>	2.0</ind>	<dep>	72.0</dep></entry>
-    <entry><ind>	2.999</ind>	<dep>	72.1</dep></entry>
-    <entry><ind>	3.0</ind>	<dep>	108.0</dep></entry>
-    <entry><ind>	3.999</ind>	<dep>	108.1</dep></entry>
-    <entry><ind>	4.0</ind>	<dep>	144.0</dep></entry>
-    <entry><ind>	4.999</ind>	<dep>	144.1</dep></entry>
-    <entry><ind>	5.0</ind>	<dep>	180.0</dep></entry>
-    <entry><ind>	5.999</ind>	<dep>	180.1</dep></entry>
-    <entry><ind>	6.0</ind>	<dep>	216.0</dep></entry>
-    <entry><ind>	6.999</ind>	<dep>	216.1</dep></entry>
-    <entry><ind>	7.0</ind>	<dep>	252.0</dep></entry>
-    <entry><ind>	7.999</ind>	<dep>	252.1</dep></entry>
-    <entry><ind>	8.0</ind>	<dep>	288.0</dep></entry>
-    <entry><ind>	8.999</ind>	<dep>	288.1</dep></entry>
-    <entry><ind>	9.0</ind>	<dep>	324.0</dep></entry>
-    <entry><ind>	9.999</ind>	<dep>	324.1</dep></entry>
-    <entry><ind>	9.9999</ind>	<dep>	359.9</dep></entry>
-  </interpolation>
+  <expression>
+    <table>
+      <mod>
+        <abs><property alias="../../../../../../params/distance"/></abs>
+        <value>1000000</value>
+      </mod>
+      <entry><ind>	     0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 99900</ind>	<dep>	0</dep></entry>
+      <entry><ind>	100000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	199900</ind>	<dep>	36</dep></entry>
+      <entry><ind>	200000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	299900</ind>	<dep>	72</dep></entry>
+      <entry><ind>	300000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	399900</ind>	<dep>	108</dep></entry>
+      <entry><ind>	400000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	499900</ind>	<dep>	144</dep></entry>
+      <entry><ind>	500000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	599900</ind>	<dep>	180</dep></entry>
+      <entry><ind>	600000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	699900</ind>	<dep>	216</dep></entry>
+      <entry><ind>	700000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	799900</ind>	<dep>	252</dep></entry>
+      <entry><ind>	800000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	899900</ind>	<dep>	288</dep></entry>
+      <entry><ind>	900000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	999900</ind>	<dep>	324</dep></entry>
+      <entry><ind>	999990</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
   <center>
     <x-m>-0.02264</x-m>
     <y-m>0.0</y-m>
@@ -172,7 +192,7 @@
 <animation>
   <type>rotate</type>
   <object-name>blanker</object-name>
-  <property>tu154/instrumentation/idr-1[0]/caged-flag</property>
+  <property alias="../../params/blank"/>
   <offset-deg>-90.0</offset-deg>
   <factor>90.0</factor>
   <center>

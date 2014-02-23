@@ -1,0 +1,226 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################
+    -->
+
+<!-- DME radio control
+3D instrument for Tu-154 -->
+<PropertyList>
+  <params>
+    <freq>instrumentation/dme[0]/frequencies/selected-mhz</freq>
+    <power>tu154/switches/dme-1-power</power>
+    <reserve>tu154/switches/dme-1-reserve</reserve>
+  </params>
+
+ <path>dme.ac</path>
+
+ <effect>
+    <inherits-from>Effects/model-transparent</inherits-from>
+    <object-name>base</object-name>
+ </effect>
+
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+  <emission>
+    <red-prop>tu154/light/panel/ext-red</red-prop>
+    <green-prop>tu154/light/panel/ext-green</green-prop>
+    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+  </emission>
+</animation>
+
+<animation>
+  <type>material</type>
+  <object-name>digits</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>dig_f_hi</object-name>
+  <expression>
+    <table>
+      <difference>
+        <property alias="../../../../../params/freq"/>
+        <mod>
+          <property alias="../../../../../../params/freq"/>
+          <value>1</value>
+        </mod>
+      </difference>
+      <entry><ind>	108</ind>	<dep>	0</dep></entry>
+      <entry><ind>	118</ind>	<dep>	360</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01754</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.00904</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>dig_f_low</object-name>
+  <property alias="../../params/freq"/>
+  <factor>360</factor>
+  <center>
+    <x-m>-0.03178</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.00616</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!--Frequency-->
+<animation>
+  <type>knob</type>
+  <object-name>c1</object-name>
+  <visible>true</visible>
+  <action>
+    <binding>
+      <command>property-adjust</command>
+      <property alias="../../../../params/freq"/>
+      <mask>integer</mask>
+      <min>108</min>
+      <max>118</max>
+      <wrap>true</wrap>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>knob</type>
+  <object-name>c2</object-name>
+  <visible>true</visible>
+  <action>
+    <binding>
+      <command>property-adjust</command>
+      <property alias="../../../../params/freq"/>
+      <mask>decimal</mask>
+      <factor>0.05</factor>
+      <min>0</min>
+      <max>1</max>
+      <wrap>true</wrap>
+    </binding>
+  </action>
+</animation>
+
+<!--Power-->
+<animation>
+  <type>rotate</type>
+  <object-name>power</object-name>
+  <property alias="../../params/power"/>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	45.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	-45.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>0.0023</x-m>
+    <y-m>0</y-m>
+    <z-m>0.00868</z-m>
+  </center>
+  <axis>
+    <x>0</x>
+    <y>1</y>
+    <z>0</z>
+  </axis>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_1</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-interpolate</command>
+      <property alias="../../../../params/power"/>
+      <value type="double">1</value>
+      <time>0.1</time>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_2</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-interpolate</command>
+      <property alias="../../../../params/power"/>
+      <value type="double">0</value>
+      <time>0.1</time>
+    </binding>
+  </action>
+</animation>
+
+<!--Reserve-->
+<animation>
+  <type>rotate</type>
+  <object-name>reserve</object-name>
+  <property alias="../../params/reserve"/>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	45.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	-45.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>0.0023</x-m>
+    <y-m>0</y-m>
+    <z-m>0.00868</z-m>
+  </center>
+  <axis>
+    <x>0</x>
+    <y>-1</y>
+    <z>0</z>
+  </axis>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_3</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-interpolate</command>
+      <property alias="../../../../params/reserve"/>
+      <value type="double">0</value>
+      <time>0.1</time>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_4</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-interpolate</command>
+      <property alias="../../../../params/reserve"/>
+      <value type="double">1</value>
+      <time>0.1</time>
+    </binding>
+  </action>
+</animation>
+
+
+</PropertyList>

@@ -18,6 +18,10 @@ var iso = aircraft.light.new("tu154/systems/warning/iso", [0.5, 0.5] );
 var ground = aircraft.light.new("tu154/systems/warning/ground", [0.3, 0.3] );
 var rvrn = aircraft.light.new("tu154/systems/warning/rvrn", [0.5, 0.6] );
 var slats = aircraft.light.new("tu154/systems/warning/slats", [0.4, 0.4] );
+var stab_on = aircraft.light.new("tu154/systems/electrical/indicators/stab-on",
+                                 [0.3, 0.3]);
+var fuel_2500 = aircraft.light.new("tu154/systems/electrical/indicators/fuel-2500",
+                                   [0.3, 0.3]);
 var gear = aircraft.light.new("tu154/systems/warning/gear", [0.5, 0.5] );
 var voice_h = aircraft.light.new("tu154/systems/warning/voice", [3.5, 1.0] );
 
@@ -41,7 +45,6 @@ setprop("tu154/systems/electrical/indicators/autothrottle", 0 );
 setprop("tu154/systems/electrical/indicators/wrong-approach-h", 0 );
 setprop("tu154/systems/electrical/indicators/wrong-approach-v", 0 );
 setprop("tu154/systems/electrical/indicators/fire", 0 );
-setprop("tu154/systems/electrical/indicators/fuel-2500", 0 );
 setprop("tu154/systems/electrical/indicators/speed-limit", 0 );
 setprop("tu154/systems/electrical/indicators/acceleration", 0 );
 setprop("tu154/systems/electrical/indicators/alpha", 0 );
@@ -68,11 +71,11 @@ setprop("tu154/systems/electrical/indicators/nvu-failure", 0 );
 setprop("tu154/systems/electrical/indicators/nvu-vor-avton", 0 );
 
 setprop("tu154/instrumentation/uap-12/warn", 0 );
-setprop("tu154/systems/electrical/indicators/memory-diss", 0 );
 setprop("tu154/systems/electrical/indicators/rudder-trim-neutral", 0 );
 setprop("tu154/systems/electrical/indicators/aileron-trim-neutral", 0 );
 setprop("tu154/systems/electrical/indicators/elevator-trim-neutral", 0 );
-setprop("tu154/systems/electrical/indicators/stab-on", 0.0);	
+setprop("tu154/systems/electrical/indicators/stab-on/state", 0.0);
+setprop("tu154/systems/electrical/indicators/fuel-2500/state", 0.0);
 setprop("tu154/systems/warning/run-stabilizer/state", 0.0 );		
 setprop("tu154/systems/electrical/indicators/flaps-1", 0.0 );
 setprop("tu154/systems/electrical/indicators/flaps-2", 0.0 );
@@ -86,6 +89,7 @@ setprop("tu154/systems/electrical/indicators/gear-red-3", 0.0 );
 setprop("tu154/systems/electrical/indicators/gear-green-1", 0.0 );
 setprop("tu154/systems/electrical/indicators/gear-green-2", 0.0 );
 setprop("tu154/systems/electrical/indicators/gear-green-3", 0.0 );
+setprop("tu154/systems/warning/voice/gear-hs-state", 1.0 );
 setprop("tu154/systems/electrical/indicators/engine-1/revers-lock",0.0);
 setprop("tu154/systems/electrical/indicators/engine-3/revers-lock",0.0);
 setprop("tu154/systems/electrical/indicators/engine-1/revers-dampers",0.0);
@@ -130,14 +134,16 @@ alarm.switch(0);
 ground.switch(0);
 rvrn.switch(0);
 slats.switch(0);
+stab_on.switch(0);
+fuel_2500.switch(0);
 gear.switch(0);
 not_ready.switch(0);
 strobe.switch(0);
 #strobe_2.switch(0);
 
 # PKP blankers
-setprop("tu154/instrumentation/pkp/kurs-blanker", 1 );
-setprop("tu154/instrumentation/pkp/gliss-blanker", 1 );
+setprop("tu154/instrumentation/pkp/kurs-failure", 0 );
+setprop("tu154/instrumentation/pkp/gliss-failure", 0 );
 }
 
 var nav_lighting = func{
@@ -191,10 +197,6 @@ if( arg[0] ) {
 	setprop("tu154/light/panel/amb-red",
 		getprop("tu154/light/panel/amb-red-def") );
 	# night VC textures
-	setprop("tu154/textures/capt-panel","vc01_night.rgb" );
-	setprop("tu154/textures/copilot-panel","vc02_night.rgb" );
-	setprop("tu154/textures/overhead-panel","vc06_l.rgb" );
-        setprop("tu154/textures/fe-panel","vc08_l.rgb" );
 	setprop("tu154/textures/tablo","tablo_1_n.rgb" );
 	setprop("tu154/textures/tablo_1","tablo_2_n.rgb" );
 	setprop("tu154/textures/tablo_2","tablo_3_n.rgb" );
@@ -226,10 +228,6 @@ else {
         setprop("tu154/light/panel/amb-green",0.0);
         setprop("tu154/light/panel/amb-red",0.0);
 	# Daily VC textures
-        setprop("tu154/textures/capt-panel","vc01_t.rgb" );
-        setprop("tu154/textures/copilot-panel","vc02_t.rgb" );
-        setprop("tu154/textures/overhead-panel","vc06_t.rgb" );
-        setprop("tu154/textures/fe-panel","vc08_t.rgb" );
         setprop("tu154/textures/tablo","tablo_1.rgb" );
         setprop("tu154/textures/tablo_1","tablo_2.rgb" );
 	setprop("tu154/textures/tablo_2","tablo_3.rgb" );
@@ -323,7 +321,7 @@ if( getprop( "tu154/systems/electrical/indicators/speed-limit" ) > 0.0 )
 		alarm_pulse_src = alarm_pulse_src + 1.0;
 
 # Fuel
-if( getprop( "tu154/systems/electrical/indicators/fuel-2500" ) > 0.0 )
+if( getprop("tu154/systems/electrical/indicators/fuel-2500/alarm") )
 		alarm_pulse_src = alarm_pulse_src + 1.0;
 # Checking lamps
 if( getprop( "tu154/systems/electrical/checking-lamps/main-panel" ) > 0.0 )
@@ -337,10 +335,14 @@ else alarm.switch(0);
 
 }
 
-var RV_OFFSET = 3.5;
+var RV_OFFSET = 4;
 var voice_handler = func{
 settimer( voice_handler, 0.0 ); # no need delay for voise
-if( getprop("tu154/instrumentation/rv-5m/serviceable") != 1 ) return; #power off
+
+if (getprop("tu154/instrumentation/rv-5m[0]/blank") and
+    getprop("tu154/instrumentation/rv-5m[1]/blank"))
+    return;
+
 var alt = getprop( "fdm/jsbsim/instrumentation/indicated-altitude-m" );
 if( alt == nil ) alt = 0.0;
 # flash control
@@ -444,7 +446,6 @@ var check_lamps_capt = func{
         setprop("tu154/systems/electrical/indicators/wrong-approach-h", param );
         setprop("tu154/systems/electrical/indicators/wrong-approach-v", param );
         setprop("tu154/systems/electrical/indicators/fire", param );
-        setprop("tu154/systems/electrical/indicators/fuel-2500", param );
         setprop("tu154/systems/electrical/indicators/speed-limit", param );
         setprop("tu154/systems/electrical/indicators/acceleration", param );
         setprop("tu154/systems/electrical/indicators/alpha", param );
@@ -467,11 +468,11 @@ var check_lamps_capt = func{
         setprop("tu154/systems/electrical/indicators/nvu-failure", param );
 	setprop("tu154/systems/electrical/indicators/nvu-vor-avton", param );
 	
-	setprop("tu154/systems/electrical/indicators/memory-diss", param );
         setprop("tu154/systems/electrical/indicators/rudder-trim-neutral", param );
         setprop("tu154/systems/electrical/indicators/aileron-trim-neutral", param );
         setprop("tu154/systems/electrical/indicators/elevator-trim-neutral", param );
-        setprop("tu154/systems/electrical/indicators/stab-on", param);	
+        setprop("tu154/systems/electrical/indicators/stab-on/state", param);
+        setprop("tu154/systems/electrical/indicators/fuel-2500/state", param);
         setprop("tu154/systems/electrical/indicators/flaps-1", param );
         setprop("tu154/systems/electrical/indicators/flaps-2", param );
         setprop("tu154/systems/electrical/indicators/interceptor-outer", param );
@@ -516,20 +517,18 @@ if(  pwr < 13.0 )
 # Check lamps on captain panel
 if( getprop( "tu154/systems/electrical/checking-lamps/main-panel" ) == 1.0 ) return;
 
-var param = 0.0;
-
 # "Podg navigacii" switch control 
-if( getprop("tu154/switches/pn-5-posadk") ) param = param + 1;
-if( !getprop("tu154/switches/pn-5-navigac") ) param = param + 1;
-if( param == 2 ){
- 	setprop("tu154/instrumentation/pn-6/lamp-1", 1.0 );
- 	setprop("tu154/instrumentation/pn-6/lamp-2", 1.0 );
- 	setprop("tu154/instrumentation/pn-6/lamp-3", 1.0 );
-	}
-else {
- 	setprop("tu154/instrumentation/pn-6/lamp-1", 0.0 );
- 	setprop("tu154/instrumentation/pn-6/lamp-2", 0.0 );
- 	setprop("tu154/instrumentation/pn-6/lamp-3", 0.0 );
+var stu_enabled = (getprop("tu154/switches/pn-5-posadk") !=
+                   getprop("tu154/switches/pn-5-navigac"));
+var stu_posadk = getprop("tu154/switches/pn-5-posadk");
+if (stu_enabled) {
+    setprop("tu154/instrumentation/pn-6/lamp-1", 1.0);
+    setprop("tu154/instrumentation/pn-6/lamp-2", stu_posadk);
+    setprop("tu154/instrumentation/pn-6/lamp-3", stu_posadk);
+} else {
+    setprop("tu154/instrumentation/pn-6/lamp-1", 0.0);
+    setprop("tu154/instrumentation/pn-6/lamp-2", 0.0);
+    setprop("tu154/instrumentation/pn-6/lamp-3", 0.0);
 }
 
 # not ready to takeoff
@@ -614,12 +613,12 @@ if( getprop( "fdm/jsbsim/ap/roll-hold" ) == 1.0 )
          setprop("tu154/systems/warning/absu", 1 );
          setprop("tu154/systems/electrical/indicators/heading", 0 );
          setprop("tu154/systems/electrical/indicators/vor", 0 );
-         setprop("tu154/instrumentation/pkp/kurs-blanker", 1 );
  }
  else  { setprop("tu154/systems/electrical/indicators/bank", 0 );
          setprop("tu154/systems/warning/absu", 0 );
  }
- 	
+ setprop("tu154/instrumentation/pkp/kurs-failure",
+         (!stu_enabled or param > 0));
 	
 	
 # ABSU pitch hydrosystem failure
@@ -648,11 +647,13 @@ if( param > 0.0 ) {
         setprop("tu154/systems/electrical/indicators/pitch", 1 );
         setprop("tu154/systems/warning/absu", 1 );
         setprop("tu154/systems/electrical/indicators/glideslope", 0 );
-        setprop("tu154/instrumentation/pkp/gliss-blanker", 1 );
 }
 else  { setprop("tu154/systems/electrical/indicators/pitch", 0 );
         setprop("tu154/systems/warning/absu", 0 );
 }
+setprop("tu154/instrumentation/pkp/gliss-failure",
+        (!stu_enabled or !stu_posadk or param > 0));
+
 # ISO
 param = 0.0;
 if( getprop( "fdm/jsbsim/instrumentation/indicated-altitude-m" ) < 60.0 )
@@ -715,9 +716,17 @@ else setprop("tu154/systems/electrical/indicators/fire", 0 );
 # Low fuel
 param = getprop( "consumables/fuel/tank[0]/level-gal_us" );
 if ( param == nil ) param = 0.0;
-if(  param < 826 ) # 2500 kg 0.8 kg/l 3.78 l/gal
-    	setprop("tu154/systems/electrical/indicators/fuel-2500", 1 );
-else setprop("tu154/systems/electrical/indicators/fuel-2500", 0 );
+if(  param < 826 ) { # 2500 kg 0.8 kg/l 3.78 l/gal
+     if (!getprop("tu154/systems/electrical/indicators/fuel-2500/enabled")) {
+         fuel_2500.switch(1);
+         setprop("tu154/systems/electrical/indicators/fuel-2500/alarm", 1);
+         interpolate("tu154/systems/electrical/indicators/fuel-2500/alarm", 0,
+                     15);
+     }
+} else {
+     fuel_2500.switch(0);
+     interpolate("tu154/systems/electrical/indicators/fuel-2500/alarm", 0, 0);
+}
 
 # Ground
 param = 0.0;
@@ -797,12 +806,6 @@ if(  getprop( "tu154/instrumentation/uap-12/powered" ) > 0.0 )
 
  }
 
-# DISS
-
-if( getprop("tu154/instrumentation/diss/serviceable") == 0.0 )
-		setprop("tu154/systems/electrical/indicators/memory-diss", 1 );
-else setprop("tu154/systems/electrical/indicators/memory-diss", 0 );
-
 # Loaders RV-RN
 param = getprop("tu154/systems/warning/rvrn/timeout");
 if( param == nil ) param = 0.0;
@@ -824,14 +827,14 @@ if( abs( getprop("controls/flight/aileron-trim") ) < 0.004 )
 else setprop("tu154/systems/electrical/indicators/aileron-trim-neutral", 0 );
 
 # Elevator trim
-if( abs( getprop("controls/flight/elevator-trim") ) < 0.004 )
+if( abs( getprop("fdm/jsbsim/ap/pitch/met-integrator") ) < 0.01 )
 		setprop("tu154/systems/electrical/indicators/elevator-trim-neutral", 1 );
 else setprop("tu154/systems/electrical/indicators/elevator-trim-neutral", 0 );
 
 # stabilizer indicator
 if( getprop("tu154/systems/warning/run-stabilizer") == 1.0 )
-	setprop("tu154/systems/electrical/indicators/stab-on", 1.0 );
-else setprop("tu154/systems/electrical/indicators/stab-on", 0.0);	
+    stab_on.switch(1);
+else stab_on.switch(0);
 setprop("tu154/systems/warning/run-stabilizer", 0.0 );		
 
 # Flaps indicator
@@ -907,10 +910,21 @@ if( getprop("gear/gear[2]/position-norm") == 1.0 )
 	setprop("tu154/systems/electrical/indicators/gear-green-3", 1.0 );
 else 	
 	setprop("tu154/systems/electrical/indicators/gear-green-3", 0.0 );
+
+if (getprop("fdm/jsbsim/gear/gear-pos-norm") == 0.0 or
+    getprop("fdm/jsbsim/gear/gear-pos-norm") == 1.0) {
+    if (getprop("tu154/systems/warning/voice/gear-hs-state") == 0.0 and
+        getprop("fdm/jsbsim/hs/hs1-pressure") >= 205.0) {
+        interpolate("tu154/systems/warning/voice/gear-hs-state", 1.15, 23.0);
+    }
+} else {
+    interpolate("tu154/systems/warning/voice/gear-hs-state", 0.0, 0.0);
+}
+
 # Retract Gear indicator
 param = 0.0;
 if( getprop( "fdm/jsbsim/gear/gear-pos-norm" ) != 1.0 )
-	if( getprop( "controls/engines/engine/throttle" ) < 0.97 )
+	if( getprop( "controls/engines/engine/throttle" ) <= 0.91 )
 		if( getprop( "fdm/jsbsim/velocities/vc-kts" ) < 175.5 )
 		param = param + 1.0;
 

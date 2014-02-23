@@ -28,7 +28,7 @@
 <animation>
     <type>rotate</type>
     <object-name>needle</object-name>
-    <property>engines/engine[3]/n2</property>
+    <property>tu154/systems/APU/n2</property>
     <interpolation>
       <entry><ind>	0.0</ind>	<dep>	51.0</dep></entry>
       <entry><ind>	60.0</ind>	<dep>	236.0</dep></entry>
