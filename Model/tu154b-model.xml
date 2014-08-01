@@ -3482,7 +3482,7 @@
       <mapping>nasal</mapping>
       <script>
         var page = arg[0];
-        var pages = size(mapcase.root.getChildren());
+        var pages = getprop("tu154/instrumentation/mapcase/total_pages");
         return sprintf("%d/%d", page, pages);
       </script>
     </binding>
