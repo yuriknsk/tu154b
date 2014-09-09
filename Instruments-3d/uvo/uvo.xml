@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff			 	  	#
+    #    	yurik@megasignal.com					   	#
+    #    	Jul 2007						   	#
+    #############################################################################	  
+    -->
+
+<!-- UVO altimeter
+     3D instrument for Tu-154 -->
+<PropertyList>
+ <path>uvo.ac</path>
+ 
+  <effect>
+    <inherits-from>Effects/model-transparent</inherits-from>
+  <object-name>long_needle</object-name>
+  <object-name>short_needle</object-name>
+ </effect>
+
+ 
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+  <object-name>long_needle</object-name>
+  <object-name>short_needle</object-name>
+  <object-name>dig_p_ones</object-name>
+  <object-name>dig_p_dec</object-name>
+  <object-name>dig_p_hund</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+<!--Needles-->
+<animation>
+  <type>rotate</type>
+  <object-name>long_needle</object-name>
+  <property>instrumentation/altimeter/indicated-altitude-ft</property>
+  <factor>-0.11</factor>
+  <condition>
+    <property>tu154/systems/svs/powered</property>
+  </condition>
+  <axis>
+    <x>1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>short_needle</object-name>
+  <property>instrumentation/altimeter/indicated-altitude-ft</property>
+  <factor>-0.011</factor>
+  <condition>
+    <property>tu154/systems/svs/powered</property>
+  </condition>
+  <axis>
+    <x>1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+
+<!--Pressure digits-->
+<animation>
+  <type>rotate</type>
+  <object-name>dig_p_ones</object-name>
+  <property>tu154/instrumentation/altimeter/mmhg</property>
+  <factor>36.0</factor>
+  <center>
+    <x-m>-0.01117</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.02310</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>dig_p_dec</object-name>
+  <expression>
+    <table>
+      <mod>
+        <property>tu154/instrumentation/altimeter/mmhg</property>
+        <value>100</value>
+      </mod>
+      <entry><ind>	 0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 9</ind>	<dep>	0</dep></entry>
+      <entry><ind>	10</ind>	<dep>	36</dep></entry>
+      <entry><ind>	19</ind>	<dep>	36</dep></entry>
+      <entry><ind>	20</ind>	<dep>	72</dep></entry>
+      <entry><ind>	29</ind>	<dep>	72</dep></entry>
+      <entry><ind>	30</ind>	<dep>	108</dep></entry>
+      <entry><ind>	39</ind>	<dep>	108</dep></entry>
+      <entry><ind>	40</ind>	<dep>	144</dep></entry>
+      <entry><ind>	49</ind>	<dep>	144</dep></entry>
+      <entry><ind>	50</ind>	<dep>	180</dep></entry>
+      <entry><ind>	59</ind>	<dep>	180</dep></entry>
+      <entry><ind>	60</ind>	<dep>	216</dep></entry>
+      <entry><ind>	69</ind>	<dep>	216</dep></entry>
+      <entry><ind>	70</ind>	<dep>	252</dep></entry>
+      <entry><ind>	79</ind>	<dep>	252</dep></entry>
+      <entry><ind>	80</ind>	<dep>	288</dep></entry>
+      <entry><ind>	89</ind>	<dep>	288</dep></entry>
+      <entry><ind>	90</ind>	<dep>	324</dep></entry>
+      <entry><ind>	99</ind>	<dep>	324</dep></entry>
+      <entry><ind>	99.9</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01117</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.02310</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>dig_p_hund</object-name>
+  <expression>
+    <table>
+      <mod>
+        <property>tu154/instrumentation/altimeter/mmhg</property>
+        <value>1000</value>
+      </mod>
+      <entry><ind>	  0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 99</ind>	<dep>	0</dep></entry>
+      <entry><ind>	100</ind>	<dep>	36</dep></entry>
+      <entry><ind>	199</ind>	<dep>	36</dep></entry>
+      <entry><ind>	200</ind>	<dep>	72</dep></entry>
+      <entry><ind>	299</ind>	<dep>	72</dep></entry>
+      <entry><ind>	300</ind>	<dep>	108</dep></entry>
+      <entry><ind>	399</ind>	<dep>	108</dep></entry>
+      <entry><ind>	400</ind>	<dep>	144</dep></entry>
+      <entry><ind>	499</ind>	<dep>	144</dep></entry>
+      <entry><ind>	500</ind>	<dep>	180</dep></entry>
+      <entry><ind>	599</ind>	<dep>	180</dep></entry>
+      <entry><ind>	600</ind>	<dep>	216</dep></entry>
+      <entry><ind>	699</ind>	<dep>	216</dep></entry>
+      <entry><ind>	700</ind>	<dep>	252</dep></entry>
+      <entry><ind>	799</ind>	<dep>	252</dep></entry>
+      <entry><ind>	800</ind>	<dep>	288</dep></entry>
+      <entry><ind>	899</ind>	<dep>	288</dep></entry>
+      <entry><ind>	900</ind>	<dep>	324</dep></entry>
+      <entry><ind>	999</ind>	<dep>	324</dep></entry>
+      <entry><ind>	999.9</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01117</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.02310</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+
+
+</PropertyList>

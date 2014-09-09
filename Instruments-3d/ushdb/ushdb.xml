@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2006 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+
+<!--ADF/VOR indicator USHDB
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>ushdb.ac</path>
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+  <object-name>txt1</object-name>
+  <object-name>txt2</object-name>
+  <object-name>txt3</object-name>
+  <object-name>compass</object-name>
+  <object-name>needle_1</object-name>
+  <object-name>needle_2</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+<!--Compass-->
+<animation>
+  <type>rotate</type>
+  <object-name>compass</object-name>
+  <property>tu154/instrumentation/ushdb/compass</property>
+  <axis>
+   <x>-1.0</x>
+   <y>0.0</y>
+   <z>0.0</z>
+  </axis>
+</animation>
+
+
+<!--Needles-->
+<animation>
+    <type>rotate</type>
+    <object-name>needle_1</object-name>
+    <property>tu154/instrumentation/ushdb/heading-deg-1</property>
+    <axis>
+      <x>-1.0</x>
+      <y>0.0</y>
+      <z>0.0</z>
+    </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>needle_2</object-name>
+  <property>tu154/instrumentation/ushdb/heading-deg-2</property>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<!-- Controls -->
+
+<animation>
+  <type>knob</type>
+  <object-name>hs</object-name>
+  <visible>false</visible>
+  <action>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/ushdb/compass</property>
+      <min>0</min>
+      <max>360</max>
+      <wrap>true</wrap>
+    </binding>
+  </action>
+</animation>
+
+
+</PropertyList>

@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2006 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+
+<!-- Heading indicator USH
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>ush.ac</path>
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>index</object-name>
+  <object-name>compass</object-name>
+  <object-name>needle_1</object-name>
+  <object-name>needle_2</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+<!--External panel lighting-->
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+  <emission>
+    <red-prop>tu154/light/panel/ext-red</red-prop>
+    <green-prop>tu154/light/panel/ext-green</green-prop>
+    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+  </emission>
+</animation>
+
+  
+<!--Needles-->
+<animation>
+    <type>rotate</type>
+    <object-name>needle_1</object-name>
+    <object-name>needle_2</object-name>
+    <property>fdm/jsbsim/instrumentation/ga3-corrected-1</property>
+    <axis>
+      <x>-1.0</x>
+      <y>0.0</y>
+      <z>0.0</z>
+    </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>index</object-name>
+  <property>fdm/jsbsim/instrumentation/ga3-corrected-2</property>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>needle_2</object-name>
+  <property>fdm/jsbsim/instrumentation/nvu/drift-angle</property>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!--mk lamp-->
+<animation>
+  <type>select</type>
+  <object-name>mk</object-name>
+    <condition>
+     <equals>
+      <property>tu154/switches/pu-11-gpk</property>
+      <value>1.0</value>
+     </equals>
+  </condition>
+</animation>
+<!--gpk lamp-->
+<animation>
+  <type>select</type>
+  <object-name>gpk</object-name>
+  <condition>
+    <equals>
+      <property>tu154/switches/pu-11-gpk</property>
+      <value>0.0</value>
+    </equals>
+  </condition>
+</animation>
+<!--ak lamp-->
+<animation>
+  <type>select</type>
+  <object-name>ak</object-name>
+  <condition>
+    <equals>
+      <property>tu154/switches/pu-11-gpk</property>
+      <value>-1.0</value>
+    </equals>
+  </condition>
+</animation>
+
+
+</PropertyList>

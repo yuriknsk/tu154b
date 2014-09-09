@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff			 	  	#
+    #    	yurik@megasignal.com					   	#
+    #    	Jul 2007						   	#
+    #############################################################################	  
+    -->
+
+<!-- Radio altimeter
+3D instrument for Tu-154 -->
+<PropertyList>
+  <params>
+    <altitude>tu154/instrumentation/rv-5m[0]/altitude</altitude>
+    <blank>tu154/instrumentation/rv-5m[0]/blank</blank>
+    <warn>tu154/instrumentation/rv-5m[0]/warn</warn>
+    <dialed>tu154/instrumentation/rv-5m[0]/dialed</dialed>
+  </params>
+
+ <path>rv-5m.ac</path>
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>text</object-name>
+  <object-name>needle</object-name>
+  <object-name>index</object-name>
+  <object-name>flag</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+<!-- External instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+  <emission>
+    <red-prop>tu154/light/panel/ext-red</red-prop>
+    <green-prop>tu154/light/panel/ext-green</green-prop>
+    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+  </emission>
+</animation>
+
+
+<!--Blank-->
+<animation>
+  <type>select</type>
+  <object-name>flag</object-name>
+  <condition>
+    <property alias="../../../params/blank"/>
+  </condition>
+</animation>
+
+<!--Warning lamp-->
+<animation>
+  <type>material</type>
+  <object-name>lamp</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/systems/electrical/checking-lamps/lamps-power</factor-prop>
+  </emission>
+</animation>
+
+<animation>
+  <type>select</type>
+  <object-name>lamp</object-name>
+  <condition>
+    <or>
+      <property alias="../../../../params/warn"/>
+      <property>tu154/systems/electrical/checking-lamps/main-panel</property>
+    </or>
+  </condition>
+</animation>
+
+
+<!--Needles-->
+<animation>
+    <type>rotate</type>
+    <object-name>needle</object-name>
+    <property alias="../../params/altitude"/>
+    <interpolation>
+      <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+      <entry><ind>	50.0</ind>	<dep>	75.0</dep></entry>
+      <entry><ind>	60.0</ind>	<dep>	91.5</dep></entry>
+      <entry><ind>	80.0</ind>	<dep>	123.0</dep></entry>
+      <entry><ind>	100.0</ind>	<dep>	155.0</dep></entry>
+      <entry><ind>	200.0</ind>	<dep>	179.0</dep></entry>
+      <entry><ind>	300.0</ind>	<dep>	203.0</dep></entry>
+      <entry><ind>	400.0</ind>	<dep>	226.0</dep></entry>
+      <entry><ind>	500.0</ind>	<dep>	251.0</dep></entry>
+      <entry><ind>	700.0</ind>	<dep>	300.0</dep></entry>
+      <entry><ind>	800.0</ind>	<dep>	325.0</dep></entry>
+    </interpolation>
+    <axis>
+      <x>-1.0</x>
+      <y>0.0</y>
+      <z>0.0</z>
+    </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>index</object-name>
+  <property alias="../../params/dialed"/>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	50.0</ind>	<dep>	75.0</dep></entry>
+    <entry><ind>	60.0</ind>	<dep>	91.5</dep></entry>
+    <entry><ind>	80.0</ind>	<dep>	123.0</dep></entry>
+    <entry><ind>	100.0</ind>	<dep>	155.0</dep></entry>
+    <entry><ind>	200.0</ind>	<dep>	179.0</dep></entry>
+    <entry><ind>	300.0</ind>	<dep>	203.0</dep></entry>
+    <entry><ind>	400.0</ind>	<dep>	226.0</dep></entry>
+    <entry><ind>	500.0</ind>	<dep>	251.0</dep></entry>
+    <entry><ind>	700.0</ind>	<dep>	300.0</dep></entry>
+    <entry><ind>	800.0</ind>	<dep>	325.0</dep></entry>
+  </interpolation>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!--Controls-->
+
+<animation>
+  <type>knob</type>
+  <object-name>hs</object-name>
+  <visible>false</visible>
+  <action>
+    <binding>
+      <command>property-adjust</command>
+      <property alias="../../../../params/dialed"/>
+      <factor>5</factor>
+      <min>0</min>
+      <max>750</max>
+    </binding>
+  </action>
+</animation>
+
+
+</PropertyList>

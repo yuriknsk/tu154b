@@ -1,0 +1,586 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################
+    -->
+
+<!-- V-140 NVU (navigation system) control
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>v-140.ac</path>
+<!--External panel lighting-->
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+    <emission>
+    <red-prop>tu154/light/panel/ext-red</red-prop>
+    <green-prop>tu154/light/panel/ext-green</green-prop>
+    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+  </emission>
+</animation>
+
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>text</object-name>
+  <object-name>digits</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+<!--Indicators-->
+<animation>
+  <type>material</type>
+  <object-name>I</object-name>
+  <object-name>II</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/systems/electrical/checking-lamps/lamps-power</factor-prop>
+  </emission>
+</animation>
+
+<animation>
+  <type>select</type>
+  <object-name>I</object-name>
+  <condition>
+    <equals>
+      <property>fdm/jsbsim/instrumentation/nvu/active</property>
+      <value>1</value>
+    </equals>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>II</object-name>
+  <condition>
+    <equals>
+      <property>fdm/jsbsim/instrumentation/nvu/active</property>
+      <value>2</value>
+    </equals>
+  </condition>
+</animation>
+<!-- Digits I -->
+<animation>
+  <type>rotate</type>
+  <object-name>dig_1_min</object-name>
+  <property>tu154/systems/nvu/ZPU-1-smooth</property>
+  <factor>360</factor>
+  <center>
+    <x-m>-0.02611</x-m>
+    <y-m>0</y-m>
+    <z-m>0.02395</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>dig_1_ones</object-name>
+  <expression>
+    <table>
+      <mod>
+        <property>tu154/systems/nvu/ZPU-1-smooth</property>
+        <value>10</value>
+      </mod>
+      <entry><ind>	0.0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	0.9</ind>	<dep>	0</dep></entry>
+      <entry><ind>	1.0</ind>	<dep>	36</dep></entry>
+      <entry><ind>	1.9</ind>	<dep>	36</dep></entry>
+      <entry><ind>	2.0</ind>	<dep>	72</dep></entry>
+      <entry><ind>	2.9</ind>	<dep>	72</dep></entry>
+      <entry><ind>	3.0</ind>	<dep>	108</dep></entry>
+      <entry><ind>	3.9</ind>	<dep>	108</dep></entry>
+      <entry><ind>	4.0</ind>	<dep>	144</dep></entry>
+      <entry><ind>	4.9</ind>	<dep>	144</dep></entry>
+      <entry><ind>	5.0</ind>	<dep>	180</dep></entry>
+      <entry><ind>	5.9</ind>	<dep>	180</dep></entry>
+      <entry><ind>	6.0</ind>	<dep>	216</dep></entry>
+      <entry><ind>	6.9</ind>	<dep>	216</dep></entry>
+      <entry><ind>	7.0</ind>	<dep>	252</dep></entry>
+      <entry><ind>	7.9</ind>	<dep>	252</dep></entry>
+      <entry><ind>	8.0</ind>	<dep>	288</dep></entry>
+      <entry><ind>	8.9</ind>	<dep>	288</dep></entry>
+      <entry><ind>	9.0</ind>	<dep>	324</dep></entry>
+      <entry><ind>	9.9</ind>	<dep>	324</dep></entry>
+      <entry><ind>	9.99</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.02611</x-m>
+    <y-m>0</y-m>
+    <z-m>0.02395</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>dig_1_dec</object-name>
+  <expression>
+    <table>
+      <mod>
+        <property>tu154/systems/nvu/ZPU-1-smooth</property>
+        <value>360</value>
+      </mod>
+      <entry><ind>	  0.0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	  9.9</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 10.0</ind>	<dep>	36</dep></entry>
+      <entry><ind>	 19.9</ind>	<dep>	36</dep></entry>
+      <entry><ind>	 20.0</ind>	<dep>	72</dep></entry>
+      <entry><ind>	 29.9</ind>	<dep>	72</dep></entry>
+      <entry><ind>	 30.0</ind>	<dep>	108</dep></entry>
+      <entry><ind>	 39.9</ind>	<dep>	108</dep></entry>
+      <entry><ind>	 40.0</ind>	<dep>	144</dep></entry>
+      <entry><ind>	 49.9</ind>	<dep>	144</dep></entry>
+      <entry><ind>	 50.0</ind>	<dep>	180</dep></entry>
+      <entry><ind>	 59.9</ind>	<dep>	180</dep></entry>
+      <entry><ind>	 60.0</ind>	<dep>	216</dep></entry>
+      <entry><ind>	 69.9</ind>	<dep>	216</dep></entry>
+      <entry><ind>	 70.0</ind>	<dep>	252</dep></entry>
+      <entry><ind>	 79.9</ind>	<dep>	252</dep></entry>
+      <entry><ind>	 80.0</ind>	<dep>	288</dep></entry>
+      <entry><ind>	 89.9</ind>	<dep>	288</dep></entry>
+      <entry><ind>	 90.0</ind>	<dep>	324</dep></entry>
+      <entry><ind>	 99.9</ind>	<dep>	324</dep></entry>
+      <entry><ind>	 99.99</ind>	<dep>	359.9</dep></entry>
+      <entry><ind>	100.0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	109.9</ind>	<dep>	0</dep></entry>
+      <entry><ind>	110.0</ind>	<dep>	36</dep></entry>
+      <entry><ind>	119.9</ind>	<dep>	36</dep></entry>
+      <entry><ind>	120.0</ind>	<dep>	72</dep></entry>
+      <entry><ind>	129.9</ind>	<dep>	72</dep></entry>
+      <entry><ind>	130.0</ind>	<dep>	108</dep></entry>
+      <entry><ind>	139.9</ind>	<dep>	108</dep></entry>
+      <entry><ind>	140.0</ind>	<dep>	144</dep></entry>
+      <entry><ind>	149.9</ind>	<dep>	144</dep></entry>
+      <entry><ind>	150.0</ind>	<dep>	180</dep></entry>
+      <entry><ind>	159.9</ind>	<dep>	180</dep></entry>
+      <entry><ind>	160.0</ind>	<dep>	216</dep></entry>
+      <entry><ind>	169.9</ind>	<dep>	216</dep></entry>
+      <entry><ind>	170.0</ind>	<dep>	252</dep></entry>
+      <entry><ind>	179.9</ind>	<dep>	252</dep></entry>
+      <entry><ind>	180.0</ind>	<dep>	288</dep></entry>
+      <entry><ind>	189.9</ind>	<dep>	288</dep></entry>
+      <entry><ind>	190.0</ind>	<dep>	324</dep></entry>
+      <entry><ind>	199.9</ind>	<dep>	324</dep></entry>
+      <entry><ind>	199.99</ind>	<dep>	359.9</dep></entry>
+      <entry><ind>	200.0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	209.9</ind>	<dep>	0</dep></entry>
+      <entry><ind>	210.0</ind>	<dep>	36</dep></entry>
+      <entry><ind>	219.9</ind>	<dep>	36</dep></entry>
+      <entry><ind>	220.0</ind>	<dep>	72</dep></entry>
+      <entry><ind>	229.9</ind>	<dep>	72</dep></entry>
+      <entry><ind>	230.0</ind>	<dep>	108</dep></entry>
+      <entry><ind>	239.9</ind>	<dep>	108</dep></entry>
+      <entry><ind>	240.0</ind>	<dep>	144</dep></entry>
+      <entry><ind>	249.9</ind>	<dep>	144</dep></entry>
+      <entry><ind>	250.0</ind>	<dep>	180</dep></entry>
+      <entry><ind>	259.9</ind>	<dep>	180</dep></entry>
+      <entry><ind>	260.0</ind>	<dep>	216</dep></entry>
+      <entry><ind>	269.9</ind>	<dep>	216</dep></entry>
+      <entry><ind>	270.0</ind>	<dep>	252</dep></entry>
+      <entry><ind>	279.9</ind>	<dep>	252</dep></entry>
+      <entry><ind>	280.0</ind>	<dep>	288</dep></entry>
+      <entry><ind>	289.9</ind>	<dep>	288</dep></entry>
+      <entry><ind>	290.0</ind>	<dep>	324</dep></entry>
+      <entry><ind>	299.9</ind>	<dep>	324</dep></entry>
+      <entry><ind>	299.99</ind>	<dep>	359.9</dep></entry>
+      <entry><ind>	300.0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	309.9</ind>	<dep>	0</dep></entry>
+      <entry><ind>	310.0</ind>	<dep>	36</dep></entry>
+      <entry><ind>	319.9</ind>	<dep>	36</dep></entry>
+      <entry><ind>	320.0</ind>	<dep>	72</dep></entry>
+      <entry><ind>	329.9</ind>	<dep>	72</dep></entry>
+      <entry><ind>	330.0</ind>	<dep>	108</dep></entry>
+      <entry><ind>	339.9</ind>	<dep>	108</dep></entry>
+      <entry><ind>	340.0</ind>	<dep>	144</dep></entry>
+      <entry><ind>	349.9</ind>	<dep>	144</dep></entry>
+      <entry><ind>	350.0</ind>	<dep>	180</dep></entry>
+      <entry><ind>	359.9</ind>	<dep>	180</dep></entry>
+      <entry><ind>	359.99</ind>	<dep>	359.99</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.02611</x-m>
+    <y-m>0</y-m>
+    <z-m>0.02395</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>dig_1_hund</object-name>
+  <expression>
+    <table>
+      <mod>
+        <property>tu154/systems/nvu/ZPU-1-smooth</property>
+        <value>360</value>
+      </mod>
+      <entry><ind>	  0.0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 99.9</ind>	<dep>	0</dep></entry>
+      <entry><ind>	100.0</ind>	<dep>	36</dep></entry>
+      <entry><ind>	199.9</ind>	<dep>	36</dep></entry>
+      <entry><ind>	200.0</ind>	<dep>	72</dep></entry>
+      <entry><ind>	299.9</ind>	<dep>	72</dep></entry>
+      <entry><ind>	300.0</ind>	<dep>	108</dep></entry>
+      <entry><ind>	359.9</ind>	<dep>	108</dep></entry>
+      <entry><ind>	359.99</ind>	<dep>	359.99</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.02611</x-m>
+    <y-m>0</y-m>
+    <z-m>0.02395</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<!-- Digits II -->
+<animation>
+  <type>rotate</type>
+  <object-name>dig_2_min</object-name>
+  <property>tu154/systems/nvu/ZPU-2-smooth</property>
+  <factor>360</factor>
+  <center>
+    <x-m>-0.02611</x-m>
+    <y-m>0</y-m>
+    <z-m>-0.02095</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>dig_2_ones</object-name>
+  <expression>
+    <table>
+      <mod>
+        <property>tu154/systems/nvu/ZPU-2-smooth</property>
+        <value>10</value>
+      </mod>
+      <entry><ind>	0.0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	0.9</ind>	<dep>	0</dep></entry>
+      <entry><ind>	1.0</ind>	<dep>	36</dep></entry>
+      <entry><ind>	1.9</ind>	<dep>	36</dep></entry>
+      <entry><ind>	2.0</ind>	<dep>	72</dep></entry>
+      <entry><ind>	2.9</ind>	<dep>	72</dep></entry>
+      <entry><ind>	3.0</ind>	<dep>	108</dep></entry>
+      <entry><ind>	3.9</ind>	<dep>	108</dep></entry>
+      <entry><ind>	4.0</ind>	<dep>	144</dep></entry>
+      <entry><ind>	4.9</ind>	<dep>	144</dep></entry>
+      <entry><ind>	5.0</ind>	<dep>	180</dep></entry>
+      <entry><ind>	5.9</ind>	<dep>	180</dep></entry>
+      <entry><ind>	6.0</ind>	<dep>	216</dep></entry>
+      <entry><ind>	6.9</ind>	<dep>	216</dep></entry>
+      <entry><ind>	7.0</ind>	<dep>	252</dep></entry>
+      <entry><ind>	7.9</ind>	<dep>	252</dep></entry>
+      <entry><ind>	8.0</ind>	<dep>	288</dep></entry>
+      <entry><ind>	8.9</ind>	<dep>	288</dep></entry>
+      <entry><ind>	9.0</ind>	<dep>	324</dep></entry>
+      <entry><ind>	9.9</ind>	<dep>	324</dep></entry>
+      <entry><ind>	9.99</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.02611</x-m>
+    <y-m>0</y-m>
+    <z-m>-0.02095</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>dig_2_dec</object-name>
+  <expression>
+    <table>
+      <mod>
+        <property>tu154/systems/nvu/ZPU-2-smooth</property>
+        <value>360</value>
+      </mod>
+      <entry><ind>	  0.0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	  9.9</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 10.0</ind>	<dep>	36</dep></entry>
+      <entry><ind>	 19.9</ind>	<dep>	36</dep></entry>
+      <entry><ind>	 20.0</ind>	<dep>	72</dep></entry>
+      <entry><ind>	 29.9</ind>	<dep>	72</dep></entry>
+      <entry><ind>	 30.0</ind>	<dep>	108</dep></entry>
+      <entry><ind>	 39.9</ind>	<dep>	108</dep></entry>
+      <entry><ind>	 40.0</ind>	<dep>	144</dep></entry>
+      <entry><ind>	 49.9</ind>	<dep>	144</dep></entry>
+      <entry><ind>	 50.0</ind>	<dep>	180</dep></entry>
+      <entry><ind>	 59.9</ind>	<dep>	180</dep></entry>
+      <entry><ind>	 60.0</ind>	<dep>	216</dep></entry>
+      <entry><ind>	 69.9</ind>	<dep>	216</dep></entry>
+      <entry><ind>	 70.0</ind>	<dep>	252</dep></entry>
+      <entry><ind>	 79.9</ind>	<dep>	252</dep></entry>
+      <entry><ind>	 80.0</ind>	<dep>	288</dep></entry>
+      <entry><ind>	 89.9</ind>	<dep>	288</dep></entry>
+      <entry><ind>	 90.0</ind>	<dep>	324</dep></entry>
+      <entry><ind>	 99.9</ind>	<dep>	324</dep></entry>
+      <entry><ind>	 99.99</ind>	<dep>	359.9</dep></entry>
+      <entry><ind>	100.0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	109.9</ind>	<dep>	0</dep></entry>
+      <entry><ind>	110.0</ind>	<dep>	36</dep></entry>
+      <entry><ind>	119.9</ind>	<dep>	36</dep></entry>
+      <entry><ind>	120.0</ind>	<dep>	72</dep></entry>
+      <entry><ind>	129.9</ind>	<dep>	72</dep></entry>
+      <entry><ind>	130.0</ind>	<dep>	108</dep></entry>
+      <entry><ind>	139.9</ind>	<dep>	108</dep></entry>
+      <entry><ind>	140.0</ind>	<dep>	144</dep></entry>
+      <entry><ind>	149.9</ind>	<dep>	144</dep></entry>
+      <entry><ind>	150.0</ind>	<dep>	180</dep></entry>
+      <entry><ind>	159.9</ind>	<dep>	180</dep></entry>
+      <entry><ind>	160.0</ind>	<dep>	216</dep></entry>
+      <entry><ind>	169.9</ind>	<dep>	216</dep></entry>
+      <entry><ind>	170.0</ind>	<dep>	252</dep></entry>
+      <entry><ind>	179.9</ind>	<dep>	252</dep></entry>
+      <entry><ind>	180.0</ind>	<dep>	288</dep></entry>
+      <entry><ind>	189.9</ind>	<dep>	288</dep></entry>
+      <entry><ind>	190.0</ind>	<dep>	324</dep></entry>
+      <entry><ind>	199.9</ind>	<dep>	324</dep></entry>
+      <entry><ind>	199.99</ind>	<dep>	359.9</dep></entry>
+      <entry><ind>	200.0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	209.9</ind>	<dep>	0</dep></entry>
+      <entry><ind>	210.0</ind>	<dep>	36</dep></entry>
+      <entry><ind>	219.9</ind>	<dep>	36</dep></entry>
+      <entry><ind>	220.0</ind>	<dep>	72</dep></entry>
+      <entry><ind>	229.9</ind>	<dep>	72</dep></entry>
+      <entry><ind>	230.0</ind>	<dep>	108</dep></entry>
+      <entry><ind>	239.9</ind>	<dep>	108</dep></entry>
+      <entry><ind>	240.0</ind>	<dep>	144</dep></entry>
+      <entry><ind>	249.9</ind>	<dep>	144</dep></entry>
+      <entry><ind>	250.0</ind>	<dep>	180</dep></entry>
+      <entry><ind>	259.9</ind>	<dep>	180</dep></entry>
+      <entry><ind>	260.0</ind>	<dep>	216</dep></entry>
+      <entry><ind>	269.9</ind>	<dep>	216</dep></entry>
+      <entry><ind>	270.0</ind>	<dep>	252</dep></entry>
+      <entry><ind>	279.9</ind>	<dep>	252</dep></entry>
+      <entry><ind>	280.0</ind>	<dep>	288</dep></entry>
+      <entry><ind>	289.9</ind>	<dep>	288</dep></entry>
+      <entry><ind>	290.0</ind>	<dep>	324</dep></entry>
+      <entry><ind>	299.9</ind>	<dep>	324</dep></entry>
+      <entry><ind>	299.99</ind>	<dep>	359.9</dep></entry>
+      <entry><ind>	300.0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	309.9</ind>	<dep>	0</dep></entry>
+      <entry><ind>	310.0</ind>	<dep>	36</dep></entry>
+      <entry><ind>	319.9</ind>	<dep>	36</dep></entry>
+      <entry><ind>	320.0</ind>	<dep>	72</dep></entry>
+      <entry><ind>	329.9</ind>	<dep>	72</dep></entry>
+      <entry><ind>	330.0</ind>	<dep>	108</dep></entry>
+      <entry><ind>	339.9</ind>	<dep>	108</dep></entry>
+      <entry><ind>	340.0</ind>	<dep>	144</dep></entry>
+      <entry><ind>	349.9</ind>	<dep>	144</dep></entry>
+      <entry><ind>	350.0</ind>	<dep>	180</dep></entry>
+      <entry><ind>	359.9</ind>	<dep>	180</dep></entry>
+      <entry><ind>	359.99</ind>	<dep>	359.99</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.02611</x-m>
+    <y-m>0</y-m>
+    <z-m>-0.02095</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>dig_2_hund</object-name>
+  <expression>
+    <table>
+      <mod>
+        <property>tu154/systems/nvu/ZPU-2-smooth</property>
+        <value>360</value>
+      </mod>
+      <entry><ind>	  0.0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 99.9</ind>	<dep>	0</dep></entry>
+      <entry><ind>	100.0</ind>	<dep>	36</dep></entry>
+      <entry><ind>	199.9</ind>	<dep>	36</dep></entry>
+      <entry><ind>	200.0</ind>	<dep>	72</dep></entry>
+      <entry><ind>	299.9</ind>	<dep>	72</dep></entry>
+      <entry><ind>	300.0</ind>	<dep>	108</dep></entry>
+      <entry><ind>	359.9</ind>	<dep>	108</dep></entry>
+      <entry><ind>	359.99</ind>	<dep>	359.99</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.02611</x-m>
+    <y-m>0</y-m>
+    <z-m>-0.02095</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+
+<!--Buttons-->
+<animation>
+  <type>pick</type>
+  <object-name>hs_1</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.nvu_zpu_adjust(1, -1)</script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>nasal</command>
+        <script>instruments.nvu_zpu_adjust(1, 0)</script>
+      </binding>
+    </mod-up>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_2</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-cycle</command>
+      <property>tu154/instrumentation/v-140/adjust-step-1</property>
+      <value>0.1</value>
+      <value>10</value>
+    </binding>
+  </action>
+  <hovered>
+    <binding>
+      <command>set-tooltip</command>
+      <tooltip-id>nvu-adjust-step-1</tooltip-id>
+      <label>Adjust speed: %s</label>
+      <property>tu154/instrumentation/v-140/adjust-step-1</property>
+      <mapping>nasal</mapping>
+      <script>return (arg[0] == 0.1 ? "slow" : "fast")</script>
+    </binding>
+  </hovered>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_3</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.nvu_zpu_adjust(1, 1)</script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>nasal</command>
+        <script>instruments.nvu_zpu_adjust(1, 0)</script>
+      </binding>
+    </mod-up>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_4</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.nvu_zpu_adjust(2, -1)</script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>nasal</command>
+        <script>instruments.nvu_zpu_adjust(2, 0)</script>
+      </binding>
+    </mod-up>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_5</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-cycle</command>
+      <property>tu154/instrumentation/v-140/adjust-step-2</property>
+      <value>0.1</value>
+      <value>10</value>
+    </binding>
+  </action>
+  <hovered>
+    <binding>
+      <command>set-tooltip</command>
+      <tooltip-id>nvu-adjust-step-2</tooltip-id>
+      <label>Adjust speed: %s</label>
+      <property>tu154/instrumentation/v-140/adjust-step-2</property>
+      <mapping>nasal</mapping>
+      <script>return (arg[0] == 0.1 ? "slow" : "fast")</script>
+    </binding>
+  </hovered>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_6</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
+    <binding>
+      <command>nasal</command>
+      <script>instruments.nvu_zpu_adjust(2, 1)</script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>nasal</command>
+        <script>instruments.nvu_zpu_adjust(2, 0)</script>
+      </binding>
+    </mod-up>
+  </action>
+</animation>
+
+</PropertyList>

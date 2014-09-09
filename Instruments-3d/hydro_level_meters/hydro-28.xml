@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+
+<!-- Hydro system level meter
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>hydro_28.ac</path>
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+  <object-name>needle</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+  
+<!--Needle-->
+<animation>
+    <type>rotate</type>
+    <object-name>needle</object-name>
+    <!--<property>tu154/hl</property>-->
+    <!-- Hydro liquid l -->
+    <interpolation>
+      <entry><ind>	0.0</ind>	<dep>	-180.0</dep></entry>
+      <entry><ind>	15.0</ind>	<dep>	-130.0</dep></entry>
+      <entry><ind>	16.0</ind>	<dep>	-110.0</dep></entry>
+      <entry><ind>	17.0</ind>	<dep>	-75.0</dep></entry>
+      <entry><ind>	20.0</ind>	<dep>	-31.0</dep></entry>
+      <entry><ind>	24.0</ind>	<dep>	31.0</dep></entry>
+      <entry><ind>	28.0</ind>	<dep>	90.0</dep></entry>
+      <entry><ind>	29.0</ind>	<dep>	105.0</dep></entry>
+      <entry><ind>	30.0</ind>	<dep>	134.0</dep></entry>
+    </interpolation>
+    <axis>
+      <x>-1.0</x>
+      <y>0.0</y>
+      <z>0.0</z>
+    </axis>
+</animation>
+
+
+</PropertyList>

@@ -1,0 +1,528 @@
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff			 	  	#
+    #    	yurik@megasignal.com					   	#
+    #    	Jul 2007						   	#
+    #############################################################################	  
+    -->
+<!-- Heading indicator PNP
+     3D instrument for Tu-154 -->
+<PropertyList>
+  <params>
+    <mode>tu154/instrumentation/pnp[0]/mode</mode>
+    <distance>tu154/instrumentation/pnp[0]/distance</distance>
+    <compass>fdm/jsbsim/instrumentation/pnp-heading-left</compass>
+    <plane-dialed>tu154/instrumentation/pnp[0]/plane-dialed</plane-dialed>
+    <dir-course>tu154/instrumentation/pnp[0]/heading-deg</dir-course>
+    <dir-plane>tu154/instrumentation/pnp[0]/plane-deg</dir-plane>
+    <defl-course>tu154/instrumentation/pnp[0]/defl-course</defl-course>
+    <defl-gs>tu154/instrumentation/pnp[0]/defl-gs</defl-gs>
+    <serviceable>instrumentation/heading-indicator[0]/serviceable</serviceable>
+    <blank-course>tu154/instrumentation/pnp[0]/blank-course</blank-course>
+    <blank-gs>tu154/instrumentation/pnp[0]/blank-gs</blank-gs>
+    <blank-dist>tu154/instrumentation/pnp[0]/blank-dist</blank-dist>
+  </params>
+
+  <path>pnp.ac</path>
+  <!--External panel lighting-->
+  <animation>
+    <type>material</type>
+    <object-name>cover</object-name>
+    <emission>
+      <red-prop>tu154/light/panel/ext-red</red-prop>
+      <green-prop>tu154/light/panel/ext-green</green-prop>
+      <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+    </emission>
+  </animation>
+
+  <!-- Internal instrument lighting -->  
+  <animation>
+    <type>material</type>
+    <object-name>compass</object-name>
+    <object-name>needle</object-name>
+    <object-name>kurs_plan</object-name>
+    <object-name>center</object-name>
+    <object-name>kurs_planka</object-name>
+    <object-name>limb</object-name>
+    <object-name>dkm</object-name>
+    <object-name>drift</object-name>
+    <object-name>plane_sym</object-name>
+    <object-name>plane_sym_handle</object-name>
+    <object-name>heading_sym_handle</object-name>
+    <object-name>dig_plane_ones</object-name>
+    <object-name>dig_plane_dec</object-name>
+    <object-name>dig_plane_hund</object-name>
+    <object-name>dig_heading_ones</object-name>
+    <object-name>dig_heading_dec</object-name>
+    <object-name>dig_heading_hund</object-name>
+    <object-name>blanker_k</object-name>
+    <object-name>blanker_g</object-name>
+    <object-name>blanker_ks</object-name>
+    <emission>
+      <red-prop>tu154/light/instruments/int-red</red-prop>
+      <green-prop>tu154/light/instruments/int-green</green-prop>
+      <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+    </emission>
+  </animation>
+  <!--Yellow color-->
+  <animation>
+    <type>material</type>
+    <object-name>gliss_planka</object-name>
+    <object-name>heading_marker_main</object-name>
+    <object-name>heading_marker_90</object-name>
+    <object-name>heading_marker_180</object-name>
+    <object-name>heading_marker_270</object-name>
+    <emission>
+      <red-prop>tu154/light/instruments/int-red</red-prop>
+      <green-prop>tu154/light/instruments/int-green</green-prop>
+    </emission>
+  </animation>
+  <!--Red color-->
+  <animation>
+    <type>material</type>
+    <object-name>blanker_dkm</object-name>
+    <object-name>blanker_heading</object-name>
+    <emission>
+      <red-prop>tu154/light/instruments/int-red</red-prop>
+    </emission>
+  </animation>
+  <animation>
+	  <type>material</type>
+	  <object-name>sp_on</object-name>
+	  <object-name>vor_on</object-name>
+	  <object-name>nv_on</object-name>
+	  <object-name>rsbn_on</object-name>
+	  <emission>
+		  <red>1.0</red>
+		  <green>1.0</green>
+		  <blue>1.0</blue>
+	  </emission>
+  </animation>
+
+<!--mode selector-->
+<animation>
+	<type>material</type>
+	<object-name>sp_on</object-name>
+	<object-name>vor_on</object-name>
+	<object-name>nv_on</object-name>
+	<object-name>rsbn_on</object-name>
+	<emission>
+		<red>1.0</red>
+		<green>1.0</green>
+		<blue>1.0</blue>
+	</emission>
+</animation>
+
+<animation>
+  <type>select</type>
+  <object-name>sp_on</object-name>
+  <condition>
+    <equals>
+      <property alias="../../../../params/mode"/>
+      <value>4</value>
+    </equals>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>vor_on</object-name>
+  <condition>
+    <or>
+      <equals>
+        <property alias="../../../../../params/mode"/>
+        <value>2</value>
+      </equals>
+      <equals>
+        <property alias="../../../../../params/mode"/>
+        <value>3</value>
+      </equals>
+    </or>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>nv_on</object-name>
+  <condition>
+    <equals>
+      <property alias="../../../../params/mode"/>
+      <value>1</value>
+    </equals>
+  </condition>
+</animation>
+<!--Not in use-->
+<animation>
+  <type>select</type>
+  <object-name>rsbn_on</object-name>
+<!--  <condition>
+    <property>tu154/rsbn_on</property>
+  </condition>-->
+</animation>
+
+<!--Blankers-->
+<animation>
+  <type>select</type>
+  <object-name>blanker_dkm</object-name>
+  <condition>
+    <property alias="../../../params/blank-dist"/>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>blanker_heading</object-name>
+<!--  <condition>
+    <property>tu154/blankers</property>
+  </condition>-->
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>blanker_k</object-name>
+  <condition>
+    <property alias="../../../params/blank-course"/>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>blanker_g</object-name>
+  <condition>
+    <property alias="../../../params/blank-gs"/>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>blanker_ks</object-name>
+  <condition>
+    <not><property alias="../../../../params/serviceable"/></not>
+  </condition>
+</animation>
+
+<!--Needles-->  
+<animation>
+  <type>rotate</type>
+  <object-name>needle</object-name>
+  <object-name>kurs_plan</object-name>
+  <object-name>kurs_planka</object-name>
+  <property alias="../../params/dir-plane"/>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<!--Marker-->
+<animation>
+  <type>rotate</type>
+  <object-name>heading_marker_main</object-name>
+  <object-name>heading_marker_90</object-name>
+  <object-name>heading_marker_180</object-name>
+  <object-name>heading_marker_270</object-name>
+  <property alias="../../params/dir-course"/>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+
+<!--Compass-->
+  <animation>
+    <type>rotate</type>
+    <object-name>compass</object-name>
+    <object-name>needle</object-name>
+    <object-name>kurs_plan</object-name>
+    <object-name>kurs_planka</object-name>
+    <object-name>heading_marker_main</object-name>
+    <object-name>heading_marker_90</object-name>
+    <object-name>heading_marker_180</object-name>
+    <object-name>heading_marker_270</object-name>
+    <property alias="../../params/compass"/>
+    <axis>
+      <x>1.0</x>
+      <y>0.0</y>
+      <z>0.0</z>
+    </axis>
+  </animation>
+  
+  <!--Drift indicator-->
+  <animation>
+    <type>rotate</type>
+    <object-name>drift</object-name>
+    <property>fdm/jsbsim/instrumentation/nvu/drift-angle</property>
+    <max-deg>20.0</max-deg>
+    <min-deg>-20.0</min-deg>
+    <axis>
+      <x>-1.0</x>
+      <y>0.0</y>
+      <z>0.0</z>
+    </axis>
+  </animation>
+
+  <!--ILS-->
+  <animation>
+    <type>translate</type>
+    <object-name>kurs_planka</object-name>
+    <property alias="../../params/defl-course"/>
+    <factor>0.019</factor>
+    <axis>
+      <x>0.0</x>
+      <y>1.0</y>
+      <z>0.0</z>
+    </axis>
+  </animation>
+  <animation>
+    <type>translate</type>
+    <object-name>gliss_planka</object-name>
+    <property alias="../../params/defl-gs"/>
+    <factor>0.019</factor>
+    <axis>
+      <x>0.0</x>
+      <y>0.0</y>
+      <z>1.0</z>
+    </axis>
+  </animation>
+
+
+
+<!--Digits-->
+<!--Distance-->
+<animation>
+  <type>rotate</type>
+  <object-name>dig_heading_ones</object-name>
+  <expression>
+    <product>
+      <abs><property alias="../../../../../params/distance"/></abs>
+      <value>0.036</value>
+    </product>
+  </expression>
+  <center>
+    <x-m>-0.01393</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.0534</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>dig_heading_dec</object-name>
+  <expression>
+    <table>
+      <mod>
+        <abs><property alias="../../../../../../params/distance"/></abs>
+        <value>100000</value>
+      </mod>
+      <entry><ind>	    0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 9000</ind>	<dep>	0</dep></entry>
+      <entry><ind>	10000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	19000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	20000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	29000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	30000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	39000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	40000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	49000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	50000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	59000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	60000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	69000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	70000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	79000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	80000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	89000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	90000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	99000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	99900</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01393</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.0534</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>dig_heading_hund</object-name>
+  <expression>
+    <table>
+      <mod>
+        <abs><property alias="../../../../../../params/distance"/></abs>
+        <value>1000000</value>
+      </mod>
+      <entry><ind>	     0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 99000</ind>	<dep>	0</dep></entry>
+      <entry><ind>	100000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	199000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	200000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	299000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	300000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	399000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	400000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	499000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	500000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	599000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	600000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	699000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	700000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	799000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	800000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	899000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	900000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	999000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	999900</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01393</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.0534</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!--Plane deg-->  
+<animation>
+  <type>rotate</type>
+  <object-name>dig_plane_ones</object-name>
+  <property alias="../../params/plane-dialed"/>
+  <factor>36</factor>
+  <center>
+    <x-m>-0.01393</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.0534</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>dig_plane_dec</object-name>
+  <expression>
+    <product>
+      <difference>
+        <mod>
+          <property alias="../../../../../../params/plane-dialed"/>
+          <value>100</value>
+        </mod>
+        <mod>
+          <property alias="../../../../../../params/plane-dialed"/>
+          <value>10</value>
+        </mod>
+      </difference>
+      <value>3.6</value>
+    </product>
+  </expression>
+  <center>
+    <x-m>-0.01393</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.0534</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>dig_plane_hund</object-name>
+  <expression>
+    <product>
+      <difference>
+        <mod>
+          <property alias="../../../../../../params/plane-dialed"/>
+          <value>1000</value>
+        </mod>
+        <mod>
+          <property alias="../../../../../../params/plane-dialed"/>
+          <value>100</value>
+        </mod>
+      </difference>
+      <value>0.36</value>
+    </product>
+  </expression>
+  <center>
+    <x-m>-0.01393</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.0534</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+
+
+<!--Handles-->
+<animation>
+  <type>knob</type>
+  <object-name>plane_sym_handle</object-name>
+  <property alias="../../params/plane-dialed"/>
+  <factor>5.0</factor>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>0.05358</y-m>
+    <z-m>-0.05518</z-m>
+  </center>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+  <action>
+    <binding>
+      <command>property-adjust</command>
+      <property alias="../../../../params/plane-dialed"/>
+      <factor>1</factor>
+      <min>0</min>
+      <max>360</max>
+      <wrap>true</wrap>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>knob</type>
+  <object-name>heading_sym_handle</object-name>
+  <property alias="../../params/dir-course"/>
+  <factor>5.0</factor>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>-0.05386</y-m>
+    <z-m>-0.05461</z-m>
+  </center>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+  <action>
+    <binding>
+      <command>property-adjust</command>
+      <property alias="../../../../params/dir-course"/>
+      <factor>1</factor>
+      <min>0</min>
+      <max>360</max>
+      <wrap>true</wrap>
+    </binding>
+  </action>
+</animation>
+
+
+</PropertyList>

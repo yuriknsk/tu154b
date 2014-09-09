@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff			 	  	#
+    #    	yurik@megasignal.com					   	#
+    #    	Jul 2007						   	#
+    #############################################################################
+    -->
+
+<!-- IKU-1 heading indicator
+3D instrument for Tu-154 -->
+<PropertyList>
+  <params>
+    <compass>fdm/jsbsim/instrumentation/bgmk-1</compass>
+    <heading-1>tu154/instrumentation/iku-1[0]/heading-1</heading-1>
+    <heading-2>tu154/instrumentation/iku-1[0]/heading-2</heading-2>
+    <mode-1>tu154/instrumentation/iku-1[0]/mode-1</mode-1>
+    <mode-2>tu154/instrumentation/iku-1[0]/mode-2</mode-2>
+    <trans-1>tu154/instrumentation/iku-1[0]/trans-1</trans-1>
+    <trans-2>tu154/instrumentation/iku-1[0]/trans-2</trans-2>
+  </params>
+
+ <path>iku-1.ac</path>
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>text</object-name>
+  <object-name>compass</object-name>
+  <object-name>l_handle</object-name>
+  <object-name>r_handle</object-name>
+  <object-name>l_src</object-name>
+  <object-name>r_src</object-name>
+  <object-name>white_needle</object-name>
+  <object-name>yellow_needle</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+<!-- External instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+  <emission>
+    <red-prop>tu154/light/panel/ext-red</red-prop>
+    <green-prop>tu154/light/panel/ext-green</green-prop>
+    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+  </emission>
+</animation>
+
+<!-- Compass -->
+<animation>
+  <type>rotate</type>
+  <object-name>compass</object-name>
+  <property alias="../../params/compass"/>
+  <axis>
+    <x>1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+
+<!--Needles-->
+<animation>
+  <type>rotate</type>
+  <object-name>yellow_needle</object-name>
+  <property alias="../../params/heading-1"/>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>white_needle</object-name>
+  <property alias="../../params/heading-2"/>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!--Handles-->
+<animation>
+  <type>knob</type>
+  <object-name>l_handle</object-name>
+  <property alias="../../params/trans-1"/>
+  <factor>90.0</factor>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>-0.03140</y-m>
+    <z-m>-0.03425</z-m>
+  </center>
+  <axis>
+    <x>1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+  <action>
+    <binding>
+      <command>property-adjust</command>
+      <property alias="../../../../params/mode-1"/>
+      <min>0</min>
+      <max>2</max>
+      <wrap>true</wrap>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>knob</type>
+  <object-name>r_handle</object-name>
+  <property alias="../../params/trans-2"/>
+  <factor>90.0</factor>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>0.03062</y-m>
+    <z-m>-0.03425</z-m>
+  </center>
+  <axis>
+    <x>1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+  <action>
+    <binding>
+      <command>property-adjust</command>
+      <property alias="../../../../params/mode-2"/>
+      <min>0</min>
+      <max>2</max>
+      <wrap>true</wrap>
+    </binding>
+  </action>
+</animation>
+
+<!--VOR/ADF indicators-->
+<animation>
+  <type>rotate</type>
+  <object-name>l_src</object-name>
+  <property alias="../../params/trans-1"/>
+  <factor>120.0</factor>
+  <center>
+    <x-m>0.00045</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.04601</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>r_src</object-name>
+  <property alias="../../params/trans-2"/>
+  <factor>120.0</factor>
+  <center>
+    <x-m>0.00045</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.04601</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+</PropertyList>

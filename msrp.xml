@@ -1,0 +1,225 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+	<comment>
+		<![CDATA[
+			  Usage:
+			  
+			  Recording: fgfs --aircraft=tu154b --generic=file,out,2,flightgear154.txt,msrp
+			  ]]>
+	</comment>
+	
+	<generic>
+		
+		<output>
+			<line_separator>newline</line_separator>
+			<var_separator>tab</var_separator>
+			
+			<chunk>
+				<name>el_time (sek)</name>
+				<type>double</type>
+				<format>%.8f</format>
+				<node>/sim/time/elapsed-sec</node>
+			</chunk>
+			
+			<chunk>
+				<name>time (HH:MM:SS)</name>
+				<type>string</type>
+				<format>%s</format>
+				<node>/sim/time/gmt-string</node>
+			</chunk>
+			
+			<chunk>
+				<name>m_kurs (deg)</name>
+				<type>double</type>
+				<format>%.2f</format>
+				<node>/orientation/heading-magnetic-deg</node>
+			</chunk>
+			
+			<chunk>
+				<name>kren (deg)</name>
+				<format></format>
+				<node>/orientation/roll-deg</node>
+			</chunk>
+			
+			<chunk>
+				<name>tang (deg)</name>
+				<format></format>
+				<node>/orientation/pitch-deg</node>
+			</chunk>
+			
+			<chunk>
+				<name>alt_bar (m)</name>
+				<format></format>
+				<!--это для СВС, для футомера - altimeter[1]-->
+				<!--Нужно пересчитать в метры-->
+			<node>/instrumentation/altimeter[0]/indicated-altitude-ft</node>
+			</chunk>
+			
+			<chunk>
+				<name>alt_r (m)</name>
+				<format></format>
+				<node>/tu154/instrumentation/rv-5m[0]/altitude</node>
+			</chunk>
+			
+			<chunk>
+				<name>IAS (km/h)</name>
+				<format></format>
+				<node>/instrumentation/airspeed-indicator/indicated-speed-kt</node>
+			</chunk>
+			
+			<chunk>
+				<name>v_y (m/sek)</name>
+				<format></format>
+				<node>/instrumentation/vertical-speed-indicator/indicated-speed-fpm</node>
+			</chunk>
+			
+			<chunk>
+				<name>alpfa (deg)</name>
+				<format></format>
+				<node>/orientation/alpha-deg</node>
+			</chunk>
+			
+			<chunk>
+				<name>n_y (g)</name>
+		<!--Ускорение фильтровано, т.е. короткие пики при ударе сглажены-->
+				<format></format>
+				<node>/fdm/jsbsim/instrumentation/n-norm</node>
+			</chunk>
+			
+			<chunk>
+				<name>kolonka (mm)</name>
+				<format></format>
+				<node>/fdm/jsbsim/fcs/elevator-cmd-norm</node>
+			</chunk>
+			
+			<!--Не понял, что это?-->
+			<chunk>
+				<name>RV_pos (deg)</name>
+				<format></format>
+				<node></node>
+			</chunk>
+			
+			<chunk>
+				<name>met (mm)</name>
+				<format></format>
+				<node>/fdm/jsbsim/fcs/pitch-trim-cmd-norm</node>
+			</chunk>
+			
+			<chunk>
+				<name>stab_pos (deg)</name>
+				<format></format>
+				<node>/fdm/jsbsim/fcs/stabilizer-pos-rad</node>
+			</chunk>
+			
+			<chunk>
+				<name>el_pos (deg)</name>
+				<format></format>
+				<node>/fdn/jsbsim/fcs/elevator-pos-rad</node>
+			</chunk>
+			
+			<!--Не понял, что это?-->
+			<chunk>
+				<name>RP_pos (deg)</name>
+				<format></format>
+				<node></node>
+			</chunk>
+			
+			<chunk>
+				<name>flaps_pos (deg)</name>
+				<format></format>
+				<node>/fdm/jsbsim/fcs/flap-pos-deg</node>
+			</chunk>
+			
+			<chunk>
+				<name>COG (deg)</name> <!--Наверно, в процентах?-->
+				<format></format>
+				<node>/fdm/jsbsim/aero/function/CAX</node>
+			</chunk>
+			
+			<chunk>
+				<name>eng1_n1 (rpm)</name>
+				<format></format>
+				<node>/fdm/jsbsim/propulsion/engine[0]/n1</node>
+			</chunk>
+			
+			<chunk>
+				<name>eng1_n2 (rpm)</name>
+				<format></format>
+				<node>/fdm/jsbsim/propulsion/engine[0]/n2</node>
+			</chunk>
+			
+			<chunk>
+				<name>fuelflow (t/hour)</name>
+				<format></format>
+		<!--На первый двигатель! Чтобы получить общий - суммируй по трем!-->
+		<node>engines/engine[0]/fuel-flow_pph</node>
+			</chunk>
+			
+			<chunk>
+				<name>latt (deg)</name>
+				<format></format>
+				<!--см. также latitude-string-->
+				<node>/position/latitude-deg</node>
+			</chunk>
+			
+			<chunk>
+				<name>long (deg)</name>
+				<format></format>
+				<node>/position/longitude-deg</node>
+			</chunk>
+			
+			<chunk>
+				<name>on_ground</name>
+				<format></format>
+				<node>/fdm/jsbsim/fcs/wow</node>
+			</chunk>
+			
+ 		<!--Тут заданный крен от всех источников - задатчик, ИЛС, VOR етс.-->
+			<chunk>
+				<name>AP_kren</name>
+				<format></format>
+				<node>/fdm/jsbsim/ap/input-roll-rad</node>
+			</chunk>
+			
+			<chunk>
+				<!--то же самое-->
+				<name>AP_tang</name>
+				<format></format>
+				<node>/fdm/jsbsim/ap/input-pitch-rad</node>
+			</chunk>
+			
+			<!--Заданная скорость автотяги в fps-->
+			<chunk>
+				<name>AT</name>
+				<format></format>
+				<node>/fdm/jsbsim/ap/input-at</node>
+			</chunk>
+			
+			<chunk>
+				<name>gear</name>
+				<format></format>
+				<node>/fdm/jsbsim/gear/gear-pos-norm</node>
+			</chunk>
+			
+<!--			0,0 - все убраны
+			0.4 - 40' средняя секция (плавное управление), убрана внутренняя.
+			>0.4...1.0 - 40' средняя секция, 45' внутренняя. -->
+			<chunk>
+				<name>spoilers</name>
+				<format></format>
+				<node>/fdm/jsbsim/fcs/speedbrake-pos-norm</node>
+			</chunk>
+			
+			<!--Не понял, что это?-->
+			<chunk>
+				<name>OMI</name>
+				<format></format>
+				<node></node>
+			</chunk>
+			
+		</output>
+		
+	</generic>
+	
+</PropertyList>

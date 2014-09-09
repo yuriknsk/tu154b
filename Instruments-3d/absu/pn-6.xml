@@ -1,0 +1,694 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+
+<!-- PN-6 ABSU (autothrottle) control
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>pn-6.ac</path>
+<!--External panel lighting-->
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+  <object-name>selector</object-name>
+  <object-name>cover_1</object-name>
+  <object-name>cover_2</object-name>
+  <object-name>box_1</object-name>
+  <object-name>box_2</object-name>
+  <object-name>otkl</object-name>
+  <object-name>podg</object-name>
+  <object-name>lev_prav</object-name>
+  <object-name>at</object-name>
+  <object-name>at_wheel</object-name>
+    <emission>
+    <red-prop>tu154/light/panel/ext-red</red-prop>
+    <green-prop>tu154/light/panel/ext-green</green-prop>
+    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+  </emission>
+</animation>
+
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>text</object-name>
+  <object-name>_handle_marker</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+<animation>
+  <type>material</type>
+  <object-name>lamp_1</object-name>
+  <object-name>lamp_2</object-name>
+  <object-name>lamp_3</object-name>
+  <object-name>lamp_4</object-name>
+  <object-name>lamp_5</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/instrumentation/pn-6/serviceable</factor-prop>
+  </emission>
+</animation>
+<!--AT selector-->
+<animation>
+  <type>rotate</type>
+  <object-name>selector</object-name>
+  <property>tu154/switches/pn-6-selector</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	-70.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	-40.0</dep></entry>
+    <entry><ind>	2.0</ind>	<dep>	-10.0</dep></entry>
+    <entry><ind>	3.0</ind>	<dep>	10.0</dep></entry>
+    <entry><ind>	4.0</ind>	<dep>	40.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>0.02679</y-m>
+    <z-m>0.07615</z-m>
+  </center>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<!--AT wheels-->
+<animation>
+  <type>rotate</type>
+  <object-name>at_wheel</object-name>
+  <property>tu154/switches/pn-6-wheel</property>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.00815</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<!--AT buttons-->
+<animation>
+  <type>translate</type>
+  <object-name>at</object-name>
+  <property>tu154/switches/pn-6-button</property>  
+  <factor>0.01</factor>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<!--Lamp buttons-->
+<animation>
+  <type>material</type>
+  <object-name>g1</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/instrumentation/pn-6/g1</factor-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>g2</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/instrumentation/pn-6/g2</factor-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>g3</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/instrumentation/pn-6/g3</factor-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>stab</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/instrumentation/pn-6/stab</factor-prop>
+  </emission>
+</animation>
+
+<!--Switch covers-->
+<animation>
+  <type>rotate</type>
+  <object-name>cover_1</object-name>
+  <property>tu154/switches/pn-6-cover-1</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	10.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	120.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>0.0036</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.02798</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>cover_2</object-name>
+  <property>tu154/switches/pn-6-cover-2</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	10.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	120.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>0.0036</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.02798</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!--Switches-->
+<animation>
+  <type>rotate</type>
+  <object-name>otkl</object-name>
+  <property>tu154/switches/pn-6-otkl</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	-60.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	60.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.04342</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>podg</object-name>
+  <property>tu154/switches/pn-6-podg</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	-60.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	60.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.04342</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>lev_prav</object-name>
+  <property>tu154/switches/pn-6-lp</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	-60.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	60.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.04483</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<!--Lamps-->
+<animation>
+  <type>select</type>
+  <object-name>lamp_1</object-name>
+  <condition>
+      <property>tu154/instrumentation/pn-6/lamp-1</property>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>lamp_2</object-name>
+  <condition>
+    <property>tu154/instrumentation/pn-6/lamp-2</property>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>lamp_3</object-name>
+  <condition>
+    <property>tu154/instrumentation/pn-6/lamp-3</property>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>lamp_4</object-name>
+  <condition>
+    <property>tu154/instrumentation/pn-6/lamp-4</property>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>lamp_5</object-name>
+  <condition>
+    <property>tu154/instrumentation/pn-6/lamp-5</property>
+  </condition>
+</animation>
+
+
+<!--************************ Controls *******************************-->
+<!--AT knobs-->
+<animation>
+  <type>pick</type>
+  <object-name>at</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/pn-6-button", 1.0, 0.1 );
+      </script>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>
+        absu.absu_at_check(1);
+      </script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>nasal</command>
+        <script>
+          interpolate("tu154/switches/pn-6-button", 0.0, 0.1 );
+        </script>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>
+          absu.absu_at_check(0);
+        </script>
+      </binding>
+    </mod-up>
+  </action>
+</animation>
+
+<!--Lamp Buttons-->
+<animation>
+  <type>pick</type>
+  <object-name>g1</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-toggle</command>
+      <property>tu154/instrumentation/pn-6/g1</property>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>g2</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-toggle</command>
+      <property>tu154/instrumentation/pn-6/g2</property>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>g3</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-toggle</command>
+      <property>tu154/instrumentation/pn-6/g3</property>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>stab</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        absu.absu_at_start();
+      </script>
+    </binding>
+  </action>
+</animation>
+
+<!--Covers-->
+<animation>
+  <type>pick</type>
+  <object-name>cover_1</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        if( getprop("tu154/switches/pn-6-cover-1") == 0.0 ){
+        interpolate("tu154/switches/pn-6-cover-1", 1.0, 0.1 );}
+        else {interpolate("tu154/switches/pn-6-cover-1", 0.0, 0.1 );}
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>cover_2</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        if( getprop("tu154/switches/pn-6-cover-2") == 0.0 ){
+        interpolate("tu154/switches/pn-6-cover-2", 1.0, 0.1 );}
+        else {interpolate("tu154/switches/pn-6-cover-2", 0.0, 0.1 );}
+      </script>
+    </binding>
+  </action>
+</animation>
+<!--Switches-->
+<animation>
+  <type>pick</type>
+  <object-name>hs_1</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/pn-6-otkl", 1.0, 0.1 );
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_2</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/pn-6-otkl", 0.0, 0.1 );
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_3</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/pn-6-podg", 1.0, 0.1 );
+      </script>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>
+        absu.absu_at_handler(3);
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_4</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/pn-6-podg", 0.0, 0.1 );
+      </script>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>
+        absu.absu_at_handler(2);
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_5</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/pn-6-lp", 1.0, 0.1 );
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_6</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/pn-6-lp", 0.0, 0.1 );
+      </script>
+    </binding>
+  </action>
+</animation>
+<!--Selector-->
+<animation>
+  <type>pick</type>
+  <object-name>selector</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/pn-6-selector</property>
+      <step>1.0</step>
+      <min>0.0</min>
+      <max>4.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>selector</object-name>
+  <visible>true</visible>
+  <action>
+    <button>1</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/pn-6-selector</property>
+      <step>-1.0</step>
+      <min>0.0</min>
+      <max>4.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+<!--Mouse wheel-->
+<animation>
+  <type>pick</type>
+  <object-name>selector</object-name>
+  <visible>true</visible>
+  <action>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/pn-6-selector</property>
+      <step>1.0</step>
+      <min>0.0</min>
+      <max>4.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>selector</object-name>
+  <visible>true</visible>
+  <action>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/pn-6-selector</property>
+      <step>-1.0</step>
+      <min>0.0</min>
+      <max>4.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+</animation>
+<!--AT wheel-->
+<animation>
+  <type>pick</type>
+  <object-name>at_wheel</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/pn-6-wheel</property>
+      <step>5.0</step>
+    </binding>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/pn-6/at-kt</property>
+      <step>1.0</step>
+      <max>323.0</max>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>help.at()</script>
+    </binding>    
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>at_wheel</object-name>
+  <visible>true</visible>
+  <action>
+    <button>1</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/pn-6-wheel</property>
+      <step>-5.0</step>
+    </binding>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/pn-6/at-kt</property>
+      <step>-1.0</step>
+      <min>118.0</min>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>help.at()</script>
+    </binding>    
+  </action>
+</animation>
+<!--Mouse wheel AT -->
+<animation>
+  <type>pick</type>
+  <object-name>at_wheel</object-name>
+  <visible>true</visible>
+  <action>
+    <button>3</button>
+    <repeatable>false</repeatable>  
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/pn-6-wheel</property>
+      <step>5.0</step>
+    </binding>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/pn-6/at-kt</property>
+      <step>1.0</step>
+      <max>323.0</max>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>help.at()</script>
+    </binding>    
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>at_wheel</object-name>
+  <visible>true</visible>
+  <action>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/pn-6-wheel</property>
+      <step>-5.0</step>
+    </binding>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/pn-6/at-kt</property>
+      <step>-1.0</step>
+      <min>118.0</min>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>help.at()</script>
+    </binding>    
+  </action>
+</animation>
+
+
+</PropertyList>

@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2006 by Yurik V. Nikiforoff - port for FGFS,  FDM,   	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+
+<!-- Variometer
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>var-30.ac</path>
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+<animation>
+  <type>material</type>
+  <object-name>needle</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+<!--Needles-->
+<animation>
+    <type>rotate</type>
+    <object-name>needle</object-name>
+    <property>instrumentation/vertical-speed-indicator/indicated-speed-fpm</property>
+    <interpolation>
+  	<entry><ind>	5708.66</ind>	<dep>	177.0</dep></entry>
+	<entry><ind>	3937.0</ind>	<dep>	142.0</dep></entry>
+	<entry><ind>	1968.5</ind>	<dep>	83.0</dep></entry>
+	<entry><ind>	984.25</ind>	<dep>	44.0</dep></entry>
+	<entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+        <entry><ind>	-984.25</ind>	<dep>	-44.0</dep></entry>
+        <entry><ind>	-1968.5</ind>	<dep>	-83.0</dep></entry>
+        <entry><ind>	-3937.0</ind>	<dep>	-142.0</dep></entry>
+        <entry><ind>	-5708.66</ind>	<dep>	-177.0</dep></entry>
+    </interpolation>
+    <axis>
+      <x>-1.0</x>
+      <y>0.0</y>
+      <z>0.0</z>
+    </axis>
+</animation>
+
+
+
+</PropertyList>

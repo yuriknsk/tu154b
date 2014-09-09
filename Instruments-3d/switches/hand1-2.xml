@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+
+<!-- Handle type 1
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>handle.ac</path>
+<!--External panel lighting-->
+<animation>
+  <type>material</type>
+  <object-name>handle</object-name>
+  <emission>
+    <red-prop>tu154/light/panel/ext-red</red-prop>
+    <green-prop>tu154/light/panel/ext-green</green-prop>
+    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+  </emission>
+</animation>
+
+  
+<animation>
+  <type>rotate</type>
+  <object-name>handle</object-name>
+  <property>tu154/switches/voltage-phase-selector</property>  
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	-45.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	2.0</ind>	<dep>	45.0</dep></entry>
+  </interpolation>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!--Control-->
+<animation>
+  <type>pick</type>
+  <object-name>handle</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        max = 2.0;
+        pos = getprop("tu154/switches/voltage-phase-selector");
+        if( pos == nil){ pos = 0.0; }
+        pos = pos + 1.0;
+        if( pos > max ){ pos = max; }
+        interpolate("tu154/switches/voltage-phase-selector", pos, 0.1 );
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>handle</object-name>
+  <visible>true</visible>
+  <action>
+    <button>1</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        pos = getprop("tu154/switches/voltage-phase-selector");
+        if( pos == nil){ pos = 0.0; }
+        pos = pos - 1.0;
+        if( 0.0 > pos ){ pos = 0.0; }
+        interpolate("tu154/switches/voltage-phase-selector", pos, 0.1 );
+      </script>
+    </binding>
+  </action>
+</animation>
+<!--Mouse wheel-->
+<animation>
+  <type>pick</type>
+  <object-name>handle</object-name>
+  <visible>true</visible>
+  <action>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        max = 2.0;
+        pos = getprop("tu154/switches/voltage-phase-selector");
+        if( pos == nil){ pos = 0.0; }
+        pos = pos + 1.0;
+        if( pos > max ){ pos = max; }
+        interpolate("tu154/switches/voltage-phase-selector", pos, 0.1 );
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>handle</object-name>
+  <visible>true</visible>
+  <action>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        pos = getprop("tu154/switches/voltage-phase-selector");
+        if( pos == nil){ pos = 0.0; }
+        pos = pos - 1.0;
+        if( 0.0 > pos ){ pos = 0.0; }
+        interpolate("tu154/switches/voltage-phase-selector", pos, 0.1 );
+      </script>
+    </binding>
+  </action>
+</animation>
+
+
+</PropertyList>

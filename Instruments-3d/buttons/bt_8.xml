@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2006 by Yurik V. Nikiforoff - port for FGFS,  FDM,   	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+
+<!-- APU stop button
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>knob_2.ac</path>
+<!--External panel lighting-->
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+  <object-name>button</object-name>
+  <emission>
+    <red-prop>tu154/light/panel/ext-red</red-prop>
+    <green-prop>tu154/light/panel/ext-green</green-prop>
+    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+  </emission>
+</animation>
+
+  
+<animation>
+  <type>translate</type>
+  <object-name>button</object-name>
+  <property>tu154/switches/APU-stop</property>  
+  <factor>0.001</factor>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!--Control-->
+<animation>
+  <type>pick</type>
+  <object-name>button</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-assign</command>
+      <property>tu154/switches/APU-stop</property>  
+      <value>1.0</value>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>engines.stop_apu();</script>  
+    </binding>    
+    <mod-up>
+      <binding>
+        <command>property-assign</command>
+        <property>tu154/switches/APU-stop</property>  
+        <value>0.0</value>
+      </binding>
+    </mod-up>
+  </action>
+</animation>
+
+
+
+</PropertyList>

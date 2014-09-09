@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+
+<!-- AZS type 3 with cover
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>azs_5.ac</path>
+<!--External panel lighting-->
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+  <object-name>handle</object-name>
+  <object-name>cover_up</object-name>
+  <emission>
+    <red-prop>tu154/light/panel/ext-red</red-prop>
+    <green-prop>tu154/light/panel/ext-green</green-prop>
+    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+  </emission>
+</animation>
+
+  
+<animation>
+  <type>rotate</type>
+  <object-name>handle</object-name>
+  <property>tu154/switches/BKK-test</property>  
+  <factor>60</factor>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>cover</object-name>
+  <property>tu154/switches/BKK-test-cover</property>  
+  <factor>100</factor>
+  <offset-deg>10</offset-deg>
+  <center>
+    <x-m>0.00378</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.01429</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+
+<!--Control-->
+<animation>
+  <type>pick</type>
+  <object-name>hotspot_1</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/BKK-test", 1, 0.1 );
+        instruments.bkk_reset(2);
+      </script>
+    </binding>
+  <mod-up>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/BKK-test", 0, 0.1 );
+      </script>
+    </binding>
+  </mod-up>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hotspot_2</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/BKK-test", -1, 0.1 );
+        instruments.bkk_reset(1);
+      </script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>nasal</command>
+        <script>
+          interpolate("tu154/switches/BKK-test", 0, 0.1 );
+        </script>
+      </binding>
+    </mod-up>
+  </action>
+</animation>
+
+
+<animation>
+  <type>pick</type>
+  <object-name>cover_up</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        if( getprop("tu154/switches/BKK-test-cover") == 0.0 ){
+        interpolate("tu154/switches/BKK-test-cover", 1.0, 0.1 );}
+        else {interpolate("tu154/switches/BKK-test-cover", 0.0, 0.1 );}
+      </script>
+    </binding>
+  </action>
+</animation>
+
+
+
+</PropertyList>

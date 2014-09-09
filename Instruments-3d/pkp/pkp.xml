@@ -1,0 +1,508 @@
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff			 	  	#
+    #    	yurik.nsk@gmail.com					   	#
+    #    	Jul 2007, nov 2013					   	#
+    #############################################################################	  
+    -->
+<!-- Attitude indicator
+     3D instrument for Tu-154 -->
+<PropertyList>
+  <params>
+    <pitch>instrumentation/attitude-indicator[0]/indicated-pitch-deg</pitch>
+    <roll>instrumentation/attitude-indicator[0]/indicated-roll-deg</roll>
+    <defl-course>tu154/instrumentation/pnp[0]/defl-course</defl-course>
+    <defl-gs>tu154/instrumentation/pnp[0]/defl-gs</defl-gs>
+    <failed>tu154/instrumentation/bkk/mgv-1-failure</failed>
+  </params>
+
+  <path>pkp.ac</path>
+  <!--External panel lighting-->
+  <animation>
+    <type>material</type>
+    <object-name>cover</object-name>
+    <emission>
+      <red-prop>tu154/light/panel/ext-red</red-prop>
+      <green-prop>tu154/light/panel/ext-green</green-prop>
+      <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+    </emission>
+  </animation>
+
+  <!-- Internal instrument lighting -->  
+  <animation>
+    <type>material</type>
+    <object-name>internal</object-name>
+    <object-name>sphere</object-name>
+    <object-name>text_1</object-name>
+    <object-name>cylinder_1_t</object-name>
+    <object-name>cylinder_2_t</object-name>
+    <object-name>cylinder_3_t</object-name>
+    <object-name>right_face_t</object-name>
+    <object-name>right_h_t</object-name>
+    <object-name>right_v_t</object-name>
+    <object-name>test_t</object-name>
+    <object-name>center</object-name>
+    <object-name>right_h_t</object-name>
+    <object-name>gliss_flag</object-name>
+    <object-name>kurs_flag</object-name>
+    <object-name>ag_flag</object-name>
+    <object-name>kurs_marker</object-name>
+    <object-name>gliss_marker</object-name>
+    <object-name>gliss_ring</object-name>
+    <object-name>gliss_director</object-name>
+    <object-name>kurs_director</object-name>
+    <object-name>roll_marker</object-name>
+    <object-name>handle_marker</object-name>
+    <emission>
+      <red-prop>tu154/light/instruments/int-red</red-prop>
+      <green-prop>tu154/light/instruments/int-green</green-prop>
+      <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+    </emission>
+  </animation>
+
+<!--Attitude-->
+<animation>
+    <type>rotate</type>
+    <object-name>sphere</object-name>
+    <object-name>roll_marker</object-name>
+    <property alias="../../params/roll"/>
+    <center>
+      <x-m>-0.07892</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.0</z-m>
+    </center>
+    <axis>
+      <x>1.0</x>
+      <y>0.0</y>
+      <z>0.0</z>
+    </axis>
+</animation>
+  
+<animation>
+  <type>rotate</type>
+  <object-name>sphere</object-name>
+  <property alias="../../params/pitch"/>
+  <center>
+    <x-m>-0.07892</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.0</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+  
+<!--Markers-->
+
+<animation>
+  <type>rotate</type>
+  <object-name>gliss_marker</object-name>
+  <property alias="../../params/defl-gs"/>
+  <factor>25.0</factor>
+  <center>
+    <x-m>-0.06405</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.0</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>gliss_ring</object-name>
+  <property>fdm/jsbsim/ap/at-error</property>
+  <factor>0.8</factor>
+  <max-deg>30.0</max-deg>
+  <min-deg>-30.0</min-deg>
+  <center>
+    <x-m>-0.06405</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.0</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>kurs_marker</object-name>
+  <property alias="../../params/defl-course"/>
+  <factor>25.0</factor>
+  <center>
+    <x-m>-0.05872</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.0</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>0.0</y>
+    <z>1.0</z>
+  </axis>
+</animation>
+
+<!--Directors-->
+
+<animation>
+  <type>rotate</type>
+  <object-name>kurs_director</object-name>
+  <property>tu154/instrumentation/pkp[0]/roll-director</property>  
+  <factor>57.3</factor>
+  <max-deg>30.0</max-deg>
+  <min-deg>-30.0</min-deg>
+
+  <center>
+    <x-m>-0.07892</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.0</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>0.0</y>
+    <z>1.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>gliss_director</object-name>
+  <property>tu154/instrumentation/pkp[0]/pitch-director</property>  
+  <factor>114.6</factor>
+  <max-deg>30.0</max-deg>
+  <min-deg>-30.0</min-deg>
+  <center>
+    <x-m>-0.07892</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.0</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+
+<!--Slip-->
+<animation>
+  <type>rotate</type>
+  <object-name>slip_ball</object-name>
+  <property>instrumentation/slip-skid-ball/indicated-slip-skid</property>
+  <max-deg>10.0</max-deg>
+  <min-deg>-10.0</min-deg>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.1</z-m>
+  </center>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!--Blankers-->
+
+<animation>
+  <type>rotate</type>
+  <object-name>kurs_flag</object-name>
+  <expression>
+    <table>
+      <sum>
+        <property>tu154/instrumentation/pnp[0]/blank-gs</property>
+        <property>tu154/instrumentation/pkp/gliss-failure</property>
+      </sum>
+      <entry><ind>0</ind><dep>180</dep></entry>
+      <entry><ind>1</ind><dep>360</dep></entry>
+      <entry><ind>2</ind><dep>360</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>0.024</y-m>
+    <z-m>0.0488</z-m>
+  </center>
+  <axis>
+    <x>1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>gliss_flag</object-name>
+  <expression>
+    <table>
+      <sum>
+        <property>tu154/instrumentation/pnp[0]/blank-course</property>
+        <property>tu154/instrumentation/pkp/kurs-failure</property>
+      </sum>
+      <entry><ind>0</ind><dep>180</dep></entry>
+      <entry><ind>1</ind><dep>360</dep></entry>
+      <entry><ind>2</ind><dep>360</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>-0.055</y-m>
+    <z-m>0.0267</z-m>
+  </center>
+  <axis>
+    <x>1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>ag_flag</object-name>
+  <property alias="../../params/failed"/>
+  <factor>180.0</factor>
+  <offset-deg>180.0</offset-deg>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>-0.0615</y-m>
+    <z-m>-0.0397</z-m>
+  </center>
+  <axis>
+    <x>1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!--+++++++++++++++++ pitch ++++++++++++++++++-->
+
+<!--Modified by Yurik dec 2013 for new AP code-->
+<animation>
+  <type>pick</type>
+  <object-name>hs2</object-name>
+  <object-name>hs4</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <binding>
+      <command>property-assign</command>
+      <property>fdm/jsbsim/ap/stab-input-pitch-rad</property>
+      <value>0.0</value>
+    </binding>
+    <binding>
+      <command>property-assign</command>
+      <property>tu154/switches/pu-46-pitch-wheel</property>
+      <value>0.0</value>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>absu.absu_drop_mvh()</script>
+    </binding>    
+  </action>
+</animation>
+
+<!--Mouse wheel-->
+
+<animation>
+  <type>pick</type>
+  <object-name>hs2</object-name>
+  <object-name>hs4</object-name>
+  <visible>false</visible>
+  <action>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/pu-46-pitch-wheel</property>
+      <step>5.0</step>
+      <max>170</max>
+    </binding>
+    <binding>
+      <command>property-adjust</command>
+      <property>fdm/jsbsim/ap/stab-input-pitch-rad</property>
+      <step>-0.0085</step>
+      <min>-0.3</min>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>absu.absu_drop_mvh()</script>
+    </binding>
+  </action>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>hs2</object-name>
+  <object-name>hs4</object-name>
+  <visible>false</visible>
+  <action>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/pu-46-pitch-wheel</property>
+      <step>-5.0</step>
+      <min>-170.0</min>
+    </binding>
+    <binding>
+      <command>property-adjust</command>
+      <property>fdm/jsbsim/ap/stab-input-pitch-rad</property>
+      <step>0.0085</step>
+      <max>0.3</max>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>absu.absu_drop_mvh()</script>
+    </binding>
+  </action>
+</animation>
+
+<!--+++++++++++++++++heading++++++++++++++++++-->
+<animation>
+  <type>pick</type>
+  <object-name>hs1</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/pu-46-heading-wheel</property>
+      <step>1.0</step>
+      <min>-90.0</min>
+      <max>90.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>property-adjust</command>
+      <property>fdm/jsbsim/ap/stab-input-roll-rad</property>
+      <step>0.0056</step>
+      <max>0.5</max>
+    </binding>
+  </action>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>hs3</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/pu-46-heading-wheel</property>
+      <step>-1.0</step>
+      <min>-90.0</min>
+      <max>90.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>property-adjust</command>
+      <property>fdm/jsbsim/ap/stab-input-roll-rad</property>
+      <step>-0.0056</step>
+      <min>-0.5</min>
+    </binding>
+  </action>
+</animation>
+
+<!--Mouse wheel-->
+<animation>
+  <type>pick</type>
+  <object-name>hs1</object-name>
+  <visible>false</visible>
+  <action>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/pu-46-heading-wheel</property>
+      <step>5.0</step>
+      <min>-90.0</min>
+      <max>90.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>property-adjust</command>
+      <property>fdm/jsbsim/ap/stab-input-roll-rad</property>
+      <step>0.028</step>
+      <max>0.5</max>
+    </binding>
+  </action>
+    <action>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/pu-46-heading-wheel</property>
+      <step>-5.0</step>
+      <min>-90.0</min>
+      <max>90.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>property-adjust</command>
+      <property>fdm/jsbsim/ap/stab-input-roll-rad</property>
+      <step>-0.028</step>
+      <min>-0.5</min>
+    </binding>
+  </action>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>hs3</object-name>
+  <visible>false</visible>
+    <action>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/pu-46-heading-wheel</property>
+      <step>5.0</step>
+      <min>-90.0</min>
+      <max>90.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>property-adjust</command>
+      <property>fdm/jsbsim/ap/stab-input-roll-rad</property>
+      <step>0.028</step>
+      <max>0.5</max>
+    </binding>
+  </action>
+    <action>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/pu-46-heading-wheel</property>
+      <step>-5.0</step>
+      <min>-90.0</min>
+      <max>90.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>property-adjust</command>
+      <property>fdm/jsbsim/ap/stab-input-roll-rad</property>
+      <step>-0.028</step>
+      <min>-0.5</min>
+    </binding>
+  </action>
+</animation>
+
+
+
+
+
+</PropertyList>

@@ -1,0 +1,501 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+
+<!-- PU-11 control gauge
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>pu-11.ac</path>
+<!--External panel lighting-->
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+    <emission>
+    <red-prop>tu154/light/panel/ext-red</red-prop>
+    <green-prop>tu154/light/panel/ext-green</green-prop>
+    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>switches</object-name>
+  <emission>
+    <red-prop>tu154/light/panel/ext-red</red-prop>
+    <green-prop>tu154/light/panel/ext-green</green-prop>
+    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+    <factor>0.5</factor>
+  </emission>
+</animation>
+
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>text</object-name>
+  <object-name>lat</object-name>
+  <object-name>handle_fi</object-name>
+  <object-name>otkaz_o_2</object-name>
+  <object-name>otkaz_k_2</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+
+
+<!--Failure lamps-->
+
+<!--Have voltage?-->
+<animation>
+  <type>material</type>
+  <object-name>otkaz_o_on</object-name>
+  <object-name>otkaz_k_on</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>0.0</green>
+    <blue>0.0</blue>
+    <factor-prop>tu154/systems/electrical/buses/DC27-bus-L/volts</factor-prop>
+  </emission>
+</animation>
+
+
+<animation>
+  <type>select</type>
+  <object-name>otkaz_o_on</object-name>
+  <condition>
+    <not><property>instrumentation/heading-indicator[0]/serviceable</property></not>
+ </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>otkaz_k_on</object-name>
+  <condition>
+    <not><property>instrumentation/heading-indicator[1]/serviceable</property></not>
+  </condition>
+</animation>
+  
+<animation>
+  <type>rotate</type>
+  <object-name>potr_handle</object-name>
+  <property>tu154/switches/pu-11-consumers</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	-45.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	45.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>-0.00274</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.00725</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>korr_handle</object-name>
+  <property>tu154/switches/pu-11-corr</property> 
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	-45.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	45.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>-0.00271</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.00721</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>auto_handle</object-name>
+  <property>tu154/switches/pu-11-auto</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	-45.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	45.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>-0.00280</x-m>
+    <y-m>-0.05414</y-m>
+    <z-m>0.0</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>0.0</y>
+    <z>-1.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>gpk_handle</object-name>
+  <property>tu154/switches/pu-11-gpk</property>
+  <interpolation>
+    <entry><ind>	-1.0</ind>	<dep>	-45.0</dep></entry>
+    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	45.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>-0.0028</x-m>
+    <y-m>0.00255</y-m>
+    <z-m>0.0</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>0.0</y>
+    <z>-1.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>kurs_handle</object-name>
+  <property>tu154/switches/pu-11-kurs</property>
+  <interpolation>
+    <entry><ind>	-1.0</ind>	<dep>	-45.0</dep></entry>
+    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	45.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>-0.0028</x-m>
+    <y-m>0.00258</y-m>
+    <z-m>0.0</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>0.0</y>
+    <z>-1.0</z>
+  </axis>
+</animation>
+
+<!--Latitude disc-->
+<animation>
+  <type>rotate</type>
+  <object-name>lat</object-name>
+  <property>fdm/jsbsim/instrumentation/tks-lat-deg</property>
+  <interpolation>
+    <entry><ind>	90.0</ind>	<dep>	-131.0</dep></entry>
+    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	-90.0</ind>	<dep>	139.0</dep></entry>
+  </interpolation>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<!--Latitude handle-->
+<animation>
+  <type>knob</type>
+  <object-name>handle_fi</object-name>
+  <property>fdm/jsbsim/instrumentation/pu11-latitude</property>
+  <factor>20.0</factor>
+  <visible>true</visible>
+  <action>
+    <binding>
+      <command>property-adjust</command>
+      <property>fdm/jsbsim/instrumentation/pu11-latitude</property>
+      <min>-90.0</min>
+      <max>90.0</max>
+      <wrap>false</wrap>
+    </binding>
+  </action>
+  <hovered>
+    <binding>
+      <command>set-tooltip</command>
+      <tooltip-id>pu-11-latitude</tooltip-id>
+      <label>Latitude: %+03d°</label>
+      <property>fdm/jsbsim/instrumentation/pu11-latitude</property>
+    </binding>
+  </hovered>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>0.05483</y-m>
+    <z-m>0.0303</z-m>
+  </center>
+  <axis>
+    <x>1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+
+<!--Button-->
+<animation>
+  <type>translate</type>
+  <object-name>button</object-name>
+  <property>tu154/switches/pu-11-button</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	0.003</dep></entry>
+  </interpolation>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!--Hotspots-->
+
+<animation>
+  <type>pick</type>
+  <object-name>potr_hotspot_1</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/pu-11-consumers", 1.0, 0.1 );
+      </script>
+    </binding>
+    <binding>
+      <command>property-assign</command>
+      <property>fdm/jsbsim/instrumentation/tks-consumers</property>
+      <value>0.0</value>
+    </binding>    
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>potr_hotspot_2</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/pu-11-consumers", 0.0, 0.1 );
+      </script>
+    </binding>
+    <binding>
+      <command>property-assign</command>
+      <property>fdm/jsbsim/instrumentation/tks-consumers</property>
+      <value>1.0</value>
+    </binding>    
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>korr_hotspot_1</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/pu-11-corr", 1.0, 0.1 );
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>korr_hotspot_2</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/pu-11-corr", 0.0, 0.1 );
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>auto_hotspot_1</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/pu-11-auto", 1.0, 0.1 );
+      </script>
+    </binding>
+    <binding>
+      <command>property-assign</command>
+      <property>fdm/jsbsim/instrumentation/tks-latitude-auto</property>
+      <value>1.0</value>
+    </binding>    
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>auto_hotspot_2</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/pu-11-auto", 0.0, 0.1 );
+      </script>
+    </binding>
+    <binding>
+      <command>property-assign</command>
+      <property>fdm/jsbsim/instrumentation/tks-latitude-auto</property>
+      <value>0.0</value>
+    </binding>    
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>gpk_hotspot_3</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/pu-11-gpk", -1.0, 0.1 );
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>gpk_hotspot_2</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/pu-11-gpk", 0.0, 0.1 );
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>gpk_hotspot_1</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/pu-11-gpk", 1.0, 0.1 );
+      </script>
+    </binding>
+  </action>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>kur_hotspot_2</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/pu-11-kurs", -1.0, 0.1 );
+      </script>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>
+        instruments.tks_adj(1);
+      </script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>nasal</command>
+        <script>
+          interpolate("tu154/switches/pu-11-kurs", 0.0, 0.1 );
+        </script>
+      </binding>      
+    </mod-up>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>kur_hotspot_1</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/pu-11-kurs", 1.0, 0.1 );
+      </script>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>
+        instruments.tks_adj(0);
+      </script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>nasal</command>
+        <script>
+          interpolate("tu154/switches/pu-11-kurs", 0.0, 0.1 );
+        </script>
+      </binding>      
+    </mod-up>
+  </action>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>button</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/pu-11-button", 1.0, 0.1 );
+        instruments.tks_corr();
+      </script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>nasal</command>
+        <script>
+          interpolate("tu154/switches/pu-11-button", 0.0, 0.1 );
+          setprop("fdm/jsbsim/instrumentation/bgmk-corrector-1",0);
+          setprop("fdm/jsbsim/instrumentation/bgmk-corrector-2",0);
+        </script>
+      </binding>      
+    </mod-up>
+  </action>
+</animation>
+
+</PropertyList>

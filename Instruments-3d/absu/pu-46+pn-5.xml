@@ -1,0 +1,1137 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+
+<!-- PU-46 & PN-5 ABSU (autopilot) control
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>pu-46+pn-5.ac</path>
+<!--External panel lighting-->
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+  <object-name>pnp_selector</object-name>
+  <object-name>pitch_wheel</object-name>
+  <object-name>kurs_handle</object-name>
+  <object-name>cover_1</object-name>
+  <object-name>cover_2</object-name>
+  <object-name>tang</object-name>
+  <object-name>kren</object-name>
+  <object-name>boltanka</object-name>
+  <object-name>strelki</object-name>  
+  <object-name>navigac</object-name>
+  <object-name>posadk</object-name>
+    <emission>
+    <red-prop>tu154/light/panel/ext-red</red-prop>
+    <green-prop>tu154/light/panel/ext-green</green-prop>
+    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+  </emission>
+</animation>
+
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>text</object-name>
+  <object-name>otkl_heading</object-name>
+  <object-name>yoke_heading</object-name>
+  <object-name>auto_heading</object-name>
+  <object-name>otkl_pitch</object-name>
+  <object-name>yoke_pitch</object-name>
+  <object-name>auto_pitch</object-name>
+  <object-name>_handle_marker</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+<!--Indicators-->
+<!--Heading-->
+<animation>
+  <type>select</type>
+  <object-name>otkl_heading</object-name>
+  <condition>
+    <equals>
+      <property>tu154/instrumentation/pn-5/heading-state</property>
+      <value>0.0</value>
+    </equals>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>yoke_heading</object-name>
+  <condition>
+    <equals>
+      <property>tu154/instrumentation/pn-5/heading-state</property>
+      <value>1.0</value>
+    </equals>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>auto_heading</object-name>
+  <condition>
+    <equals>
+      <property>tu154/instrumentation/pn-5/heading-state</property>
+      <value>2.0</value>
+    </equals>
+  </condition>
+</animation>
+<!-- Pitch -->
+<animation>
+  <type>select</type>
+  <object-name>otkl_pitch</object-name>
+  <condition>
+    <equals>
+      <property>tu154/instrumentation/pn-5/pitch-state</property>
+      <value>0.0</value>
+    </equals>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>yoke_pitch</object-name>
+  <condition>
+    <equals>
+      <property>tu154/instrumentation/pn-5/pitch-state</property>
+      <value>1.0</value>
+    </equals>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>auto_pitch</object-name>
+  <condition>
+    <equals>
+      <property>tu154/instrumentation/pn-5/pitch-state</property>
+      <value>2.0</value>
+    </equals>
+  </condition>
+</animation>
+
+<!--Buttons-->
+<animation>
+  <type>translate</type>
+  <object-name>sogl_but</object-name>
+  <property>tu154/switches/pu-46-button</property>  
+  <factor>0.01</factor>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>material</type>
+  <object-name>zk</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/instrumentation/pn-5/zk</factor-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>sbros</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/instrumentation/pn-5/sbros</factor-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>nvu</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/instrumentation/pn-5/nvu</factor-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>az-1</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/instrumentation/pn-5/az-1</factor-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>az-2</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/instrumentation/pn-5/az-2</factor-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>gliss</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/instrumentation/pn-5/gliss</factor-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>zahod</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/instrumentation/pn-5/zahod</factor-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>m</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/instrumentation/pu-46/m</factor-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>v</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/instrumentation/pu-46/v</factor-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>h</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/instrumentation/pu-46/h</factor-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>stab</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/instrumentation/pu-46/stab</factor-prop>
+  </emission>
+</animation>
+
+<!--PNP selector-->
+<animation>
+  <type>rotate</type>
+  <object-name>pnp_selector</object-name>
+  <property>tu154/switches/pn-5-pnp-selector</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	-30.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	30.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>0.01441</y-m>
+    <z-m>0.18065</z-m>
+  </center>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!--Autopilot wheels-->
+<animation>
+  <type>rotate</type>
+  <object-name>pitch_wheel</object-name>
+  <property>tu154/switches/pu-46-pitch-wheel</property>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.14988</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>kurs_handle</object-name>
+  <property>tu154/switches/pu-46-heading-wheel</property>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>-0.01969</y-m>
+    <z-m>-0.15</z-m>
+  </center>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!--Switch covers-->
+<animation>
+  <type>rotate</type>
+  <object-name>cover_1</object-name>
+  <property>tu154/switches/pu-46-cover-1</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	10.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	120.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>0.0036</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.1978</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>cover_2</object-name>
+  <property>tu154/switches/pu-46-cover-2</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	10.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	120.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>0.0036</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.02486</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!--Switches-->
+
+<animation>
+  <type>rotate</type>
+  <object-name>kren</object-name>
+  <property>tu154/switches/pu-46-kren</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	-60.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	60.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>0.00033</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.22273</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>tang</object-name>
+  <property>tu154/switches/pu-46-tang</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	-60.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	60.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>0.00033</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.22273</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>boltanka</object-name>
+  <property>tu154/switches/pu-46-boltanka</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	-60.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	60.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>0.00033</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.21642</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+
+
+<animation>
+  <type>rotate</type>
+  <object-name>strelki</object-name>
+  <property>tu154/switches/pn-5-strelki</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	-60.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	60.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>0.00033</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.01089</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>navigac</object-name>
+  <property>tu154/switches/pn-5-navigac</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	-60.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	60.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>0.00033</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.06224</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>posadk</object-name>
+  <property>tu154/switches/pn-5-posadk</property>
+  <interpolation>
+    <entry><ind>	0.0</ind>	<dep>	-60.0</dep></entry>
+    <entry><ind>	1.0</ind>	<dep>	60.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>0.00033</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.06224</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+
+<!--*************** Controls ***************-->
+<!--Buttons-->
+
+<!--"Soglasovanie" knobs-->
+<animation>
+  <type>pick</type>
+  <object-name>sogl_but</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
+
+<!--    <repeatable>false</repeatable>-->
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/pu-46-button", 1.0, 0.1 );
+        instruments.bkk_adjust();
+      </script>
+    </binding>
+    <mod-up>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/pu-46-button", 0.0, 0.1 );
+<!--        instruments.bkk_adjust(0);-->
+      </script>
+    </binding>
+  </mod-up>
+  </action>
+</animation>
+
+
+<animation>
+  <type>pick</type>
+  <object-name>zk</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>absu.absu_zk()</script>
+    </binding>
+  </action>
+</animation>
+
+
+<animation>
+  <type>pick</type>
+  <object-name>sbros</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>absu.absu_reset()</script>
+    </binding>
+  </action>
+</animation>
+
+
+<animation>
+  <type>pick</type>
+  <object-name>nvu</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>absu.absu_nvu()</script>
+    </binding>
+  </action>
+</animation>
+
+
+
+<animation>
+  <type>pick</type>
+  <object-name>az-1</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>absu.absu_az1()</script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>az-2</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>absu.absu_az2()</script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>gliss</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>absu.absu_glideslope()</script>
+    </binding>
+  </action>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>zahod</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>absu.absu_approach()</script>
+    </binding>
+  </action>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>m</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>absu.absu_m()</script>
+    </binding>
+  </action>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>v</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>absu.absu_v()</script>
+    </binding>
+  </action>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>h</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>absu.absu_h()</script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>stab</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>absu.absu_stab_on()</script>
+    </binding>
+  </action>
+</animation>
+
+
+<!--Covers-->
+<animation>
+  <type>pick</type>
+  <object-name>cover_1</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        if( getprop("tu154/switches/pu-46-cover-1") == 0.0 ){
+        interpolate("tu154/switches/pu-46-cover-1", 1.0, 0.1 );}
+        else {
+            interpolate("tu154/switches/pu-46-cover-1", 0.0, 0.1 );
+            interpolate("tu154/switches/pu-46-boltanka", 0.0, 0.1 );
+            setprop("fdm/jsbsim/ap/turbulence", 0.0 );
+        }
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>cover_2</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        if( getprop("tu154/switches/pu-46-cover-2") == 0.0 ){
+        interpolate("tu154/switches/pu-46-cover-2", 1.0, 0.1 );}
+        else {interpolate("tu154/switches/pu-46-cover-2", 0.0, 0.1 );}
+      </script>
+    </binding>
+  </action>
+</animation>
+
+
+<!--Switches-->
+<animation>
+  <type>pick</type>
+  <object-name>hs_1</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/pu-46-boltanka", 1.0, 0.1 );
+	setprop("fdm/jsbsim/ap/turbulence", 1.0 );
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_2</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/pu-46-boltanka", 0.0, 0.1 );
+	setprop("fdm/jsbsim/ap/turbulence", 0.0 );
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_3</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+      	interpolate("tu154/switches/pu-46-kren", 1.0, 0.1 );
+        absu.absu_stab_kren(1);
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_4</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+      	interpolate("tu154/switches/pu-46-kren", 0.0, 0.1 );
+        absu.absu_stab_kren(0);
+      </script>
+    </binding>
+  </action>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>hs_5</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+      	interpolate("tu154/switches/pu-46-tang", 1.0, 0.1 );
+        absu.absu_stab_tang(1);
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_6</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+      	interpolate("tu154/switches/pu-46-tang", 0.0, 0.1 );
+        absu.absu_stab_tang(0);
+      </script>
+    </binding>
+  </action>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>hs_7</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/pn-5-navigac", 1.0, 0.1 );
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_8</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/pn-5-navigac", 0.0, 0.1 );
+      </script>
+    </binding>
+  </action>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>hs_9</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/pn-5-posadk", 1.0, 0.1 );
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_10</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/pn-5-posadk", 0.0, 0.1 );
+      </script>
+    </binding>
+  </action>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>hs_11</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/pn-5-strelki", 1.0, 0.1 );
+      </script>
+    </binding>
+    <binding>
+      <command>property-assign</command>
+      <property>fdm/jsbsim/ap/ena-needles</property>
+      <value>1.0</value>
+    </binding>    
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_12</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        interpolate("tu154/switches/pn-5-strelki", 0.0, 0.1 );
+      </script>
+    </binding>
+    <binding>
+      <command>property-assign</command>
+      <property>fdm/jsbsim/ap/ena-needles</property>
+      <value>0.0</value>
+    </binding>    
+  </action>
+</animation>
+
+<!--PNP selector-->
+<animation>
+  <type>pick</type>
+  <object-name>pnp_selector</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        if( getprop("tu154/switches/pn-5-pnp-selector" ) == 1.0 ){
+        interpolate("tu154/switches/pn-5-pnp-selector", 0.0, 0.1 );
+        setprop("fdm/jsbsim/instrumentation/pnp-selector", 0.0);
+        }
+        else {
+        interpolate("tu154/switches/pn-5-pnp-selector", 1.0, 0.1 );
+        setprop("fdm/jsbsim/instrumentation/pnp-selector", 1.0);
+        }
+      </script>
+    </binding>
+  </action>
+</animation>
+
+<!--Wheels-->
+<!--+++++++++++++++++ pitch ++++++++++++++++++-->
+
+<!--Modified by Yurik dec 2013 for new AP code-->
+<animation>
+  <type>pick</type>
+  <object-name>pitch_wheel</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <binding>
+      <command>property-assign</command>
+      <property>fdm/jsbsim/ap/stab-input-pitch-rad</property>
+      <value>0.0</value>
+    </binding>
+    <binding>
+      <command>property-assign</command>
+      <property>tu154/switches/pu-46-pitch-wheel</property>
+      <value>0.0</value>
+    </binding>    
+    <binding>
+      <command>nasal</command>
+      <script>absu.absu_drop_mvh()</script>
+    </binding>
+  </action>
+</animation>
+
+<!--Mouse wheel-->
+
+<animation>
+  <type>pick</type>
+  <object-name>pitch_wheel</object-name>
+  <visible>true</visible>
+  <action>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/pu-46-pitch-wheel</property>
+      <step>5.0</step>
+      <max>170</max>
+    </binding>
+    <binding>
+      <command>property-adjust</command>
+      <property>fdm/jsbsim/ap/stab-input-pitch-rad</property>
+      <step>-0.0085</step>
+      <min>-0.3</min>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>absu.absu_drop_mvh()</script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>pitch_wheel</object-name>
+  <visible>true</visible>
+  <action>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/pu-46-pitch-wheel</property>
+      <step>-5.0</step>
+      <min>-170.0</min>
+    </binding>
+    <binding>
+      <command>property-adjust</command>
+      <property>fdm/jsbsim/ap/stab-input-pitch-rad</property>
+      <step>0.0085</step>
+      <max>0.3</max>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>absu.absu_drop_mvh()</script>
+    </binding>
+  </action>
+</animation>
+
+<!--+++++++++++++++++heading++++++++++++++++++-->
+<animation>
+  <type>pick</type>
+  <object-name>hs_14</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/pu-46-heading-wheel</property>
+      <step>1.0</step>
+      <min>-90.0</min>
+      <max>90.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>property-adjust</command>
+      <property>fdm/jsbsim/ap/stab-input-roll-rad</property>
+      <step>0.0056</step>
+      <max>0.5</max>
+    </binding>
+<!--    <binding>
+      <command>nasal</command>
+      <script>absu.absu_reset()</script>
+    </binding>-->
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs_13</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/pu-46-heading-wheel</property>
+      <step>-1.0</step>
+      <min>-90.0</min>
+      <max>90.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>property-adjust</command>
+      <property>fdm/jsbsim/ap/stab-input-roll-rad</property>
+      <step>-0.0056</step>
+      <min>-0.5</min>
+    </binding>
+<!--    <binding>
+      <command>nasal</command>
+      <script>absu.absu_reset()</script>
+    </binding>-->
+  </action>
+</animation>
+<!--Jump to zero-->
+<animation>
+  <type>pick</type>
+  <object-name>kurs_handle</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-assign</command>
+      <property>tu154/switches/pu-46-heading-wheel</property>
+      <value>0.0</value>
+    </binding>
+    <binding>
+      <command>property-assign</command>
+      <property>fdm/jsbsim/ap/stab-input-roll-rad</property>
+      <value>0.0</value>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>absu.absu_reset()</script>
+    </binding>
+  </action>
+</animation>
+<!--Mouse wheel-->
+<animation>
+  <type>pick</type>
+  <object-name>kurs_handle</object-name>
+  <visible>true</visible>
+  <action>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/pu-46-heading-wheel</property>
+      <step>5.0</step>
+      <min>-90.0</min>
+      <max>90.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>property-adjust</command>
+      <property>fdm/jsbsim/ap/stab-input-roll-rad</property>
+      <step>0.028</step>
+      <max>0.5</max>
+    </binding>
+<!--    <binding>
+      <command>nasal</command>
+      <script>absu.absu_reset()</script>
+    </binding>-->
+  </action>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>kurs_handle</object-name>
+  <visible>true</visible>
+  <action>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/switches/pu-46-heading-wheel</property>
+      <step>-5.0</step>
+      <min>-90.0</min>
+      <max>90.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>property-adjust</command>
+      <property>fdm/jsbsim/ap/stab-input-roll-rad</property>
+      <step>-0.028</step>
+      <min>-0.5</min>
+    </binding>
+<!--    <binding>
+      <command>nasal</command>
+      <script>absu.absu_reset()</script>
+    </binding>-->
+  </action>
+</animation>
+
+
+</PropertyList>

@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2008 by Yurik V. Nikiforoff - port for FGFS,  FDM,   	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+
+<!-- KM-5 gauge from TKS compass system
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>km-5.ac</path>
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>text</object-name>
+  <object-name>needle</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+<animation>
+  <type>material</type>
+  <object-name>index</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+  </emission>
+</animation>
+
+  
+<!--Needles-->
+<animation>
+    <type>rotate</type>
+    <object-name>needle</object-name>
+    <property>fdm/jsbsim/instrumentation/km-5-magvar-1</property>
+    <axis>
+      <x>1.0</x>
+      <y>0.0</y>
+      <z>0.0</z>
+    </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>index</object-name>
+  <property>fdm/jsbsim/instrumentation/km-5-1</property>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>hs</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
+    <binding>
+      <command>property-adjust</command>
+      <property>fdm/jsbsim/instrumentation/km-5-magvar-1</property>
+      <step>0.5</step>
+      <min>-180.0</min>
+      <max>180.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>help.km();</script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs</object-name>
+  <visible>false</visible>
+  <action>
+    <button>1</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.15</interval-sec>
+    <binding>
+      <command>property-adjust</command>
+      <property>fdm/jsbsim/instrumentation/km-5-magvar-1</property>
+      <step>-0.5</step>
+      <min>-180.0</min>
+      <max>180.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>help.km();</script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs</object-name>
+  <visible>false</visible>
+  <action>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>fdm/jsbsim/instrumentation/km-5-magvar-1</property>
+      <step>0.5</step>
+      <min>-180.0</min>
+      <max>180.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>help.km();</script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>hs</object-name>
+  <visible>false</visible>
+  <action>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-adjust</command>
+      <property>fdm/jsbsim/instrumentation/km-5-magvar-1</property>
+      <step>-0.5</step>
+      <min>-180.0</min>
+      <max>180.0</max>
+      <wrap>false</wrap>
+    </binding>
+    <binding>
+      <command>nasal</command>
+      <script>help.km();</script>
+    </binding>
+  </action>
+</animation>
+
+
+</PropertyList>

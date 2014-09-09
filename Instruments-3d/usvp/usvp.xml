@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff - port for FGFS,  FDM, 	  	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################
+    -->
+
+<!-- IAS/groundspeed indicator USVP
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>usvp.ac</path>
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+  <object-name>text</object-name>
+  <object-name>needle</object-name>
+  <object-name>vozd</object-name>
+  <object-name>put</object-name>
+  <object-name>top</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+
+<!--Needles-->
+<animation>
+    <type>rotate</type>
+    <object-name>needle</object-name>
+    <property>tu154/instrumentation/usvp/speed-fps</property>
+    <factor>0.3950208</factor>
+    <axis>
+      <x>-1.0</x>
+      <y>0.0</y>
+      <z>0.0</z>
+    </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>handle</object-name>
+  <property>tu154/switches/usvp-selector-trans</property>
+  <factor>30.0</factor>
+  <center>
+    <x-m>0.0</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.04844</z-m>
+  </center>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>hs</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        var sel = getprop("tu154/switches/usvp-selector") or 0;
+        sel = 1 - sel;
+        setprop("tu154/switches/usvp-selector", sel);
+        interpolate("tu154/switches/usvp-selector-trans", sel, 0.15);
+      </script>
+    </binding>
+  </action>
+</animation>
+
+
+</PropertyList>

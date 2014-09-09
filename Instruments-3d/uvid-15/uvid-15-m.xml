@@ -1,0 +1,340 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff			 	  	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+<!-- Altimeter UVO-15 metric
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>uvid-15m.ac</path>
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+  <object-name>dig_a_dec</object-name>
+  <object-name>dig_a_hund</object-name>
+  <object-name>dig_a_ths</object-name>
+  <object-name>dig_a_decths</object-name>
+  <object-name>dig_p_ones</object-name>
+  <object-name>dig_p_dec</object-name>
+  <object-name>dig_p_hund</object-name>
+  <object-name>needle</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+<!--Needles-->
+<animation>
+    <type>rotate</type>
+    <object-name>needle</object-name>
+    <property>instrumentation/altimeter/indicated-altitude-ft</property>
+    <factor>0.10973</factor>
+    <condition>
+     <property>tu154/systems/svs/powered</property>
+    </condition>
+    <axis>
+      <x>-1.0</x>
+      <y>0.0</y>
+      <z>0.0</z>
+    </axis>
+</animation>
+
+<!--Altitude digits-->
+<animation>
+  <type>rotate</type>
+  <object-name>dig_a_dec</object-name>
+  <condition>
+    <property>tu154/systems/svs/powered</property>
+  </condition>
+  <property>instrumentation/altimeter/indicated-altitude-ft</property>
+  <factor>1.0973</factor>
+  <center>
+    <x-m>-0.01866</x-m>
+    <y-m>0</y-m>
+    <z-m>0.00547</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>dig_a_hund</object-name>
+  <condition>
+    <property>tu154/systems/svs/powered</property>
+  </condition>
+  <expression>
+    <table>
+      <mod>
+        <product>
+          <property>instrumentation/altimeter/indicated-altitude-ft</property>
+          <value>0.3048</value>
+        </product>
+        <value>1000</value>
+      </mod>
+      <entry><ind>	  0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 90</ind>	<dep>	0</dep></entry>
+      <entry><ind>	100</ind>	<dep>	36</dep></entry>
+      <entry><ind>	190</ind>	<dep>	36</dep></entry>
+      <entry><ind>	200</ind>	<dep>	72</dep></entry>
+      <entry><ind>	290</ind>	<dep>	72</dep></entry>
+      <entry><ind>	300</ind>	<dep>	108</dep></entry>
+      <entry><ind>	390</ind>	<dep>	108</dep></entry>
+      <entry><ind>	400</ind>	<dep>	144</dep></entry>
+      <entry><ind>	490</ind>	<dep>	144</dep></entry>
+      <entry><ind>	500</ind>	<dep>	180</dep></entry>
+      <entry><ind>	590</ind>	<dep>	180</dep></entry>
+      <entry><ind>	600</ind>	<dep>	216</dep></entry>
+      <entry><ind>	690</ind>	<dep>	216</dep></entry>
+      <entry><ind>	700</ind>	<dep>	252</dep></entry>
+      <entry><ind>	790</ind>	<dep>	252</dep></entry>
+      <entry><ind>	800</ind>	<dep>	288</dep></entry>
+      <entry><ind>	890</ind>	<dep>	288</dep></entry>
+      <entry><ind>	900</ind>	<dep>	324</dep></entry>
+      <entry><ind>	990</ind>	<dep>	324</dep></entry>
+      <entry><ind>	999</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01866</x-m>
+    <y-m>0</y-m>
+    <z-m>0.00547</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>dig_a_ths</object-name>
+  <condition>
+    <property>tu154/systems/svs/powered</property>
+  </condition>
+  <expression>
+    <table>
+      <mod>
+        <product>
+          <property>instrumentation/altimeter/indicated-altitude-ft</property>
+          <value>0.3048</value>
+        </product>
+        <value>10000</value>
+      </mod>
+      <entry><ind>	   0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 990</ind>	<dep>	0</dep></entry>
+      <entry><ind>	1000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	1990</ind>	<dep>	36</dep></entry>
+      <entry><ind>	2000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	2990</ind>	<dep>	72</dep></entry>
+      <entry><ind>	3000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	3990</ind>	<dep>	108</dep></entry>
+      <entry><ind>	4000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	4990</ind>	<dep>	144</dep></entry>
+      <entry><ind>	5000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	5990</ind>	<dep>	180</dep></entry>
+      <entry><ind>	6000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	6990</ind>	<dep>	216</dep></entry>
+      <entry><ind>	7000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	7990</ind>	<dep>	252</dep></entry>
+      <entry><ind>	8000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	8990</ind>	<dep>	288</dep></entry>
+      <entry><ind>	9000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	9990</ind>	<dep>	324</dep></entry>
+      <entry><ind>	9999</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01866</x-m>
+    <y-m>0</y-m>
+    <z-m>0.00547</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>dig_a_decths</object-name>
+  <condition>
+    <property>tu154/systems/svs/powered</property>
+  </condition>
+  <expression>
+    <table>
+      <mod>
+        <product>
+          <property>instrumentation/altimeter/indicated-altitude-ft</property>
+          <value>0.3048</value>
+        </product>
+        <value>100000</value>
+      </mod>
+      <entry><ind>	    0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 9990</ind>	<dep>	0</dep></entry>
+      <entry><ind>	10000</ind>	<dep>	36</dep></entry>
+      <entry><ind>	19990</ind>	<dep>	36</dep></entry>
+      <entry><ind>	20000</ind>	<dep>	72</dep></entry>
+      <entry><ind>	29990</ind>	<dep>	72</dep></entry>
+      <entry><ind>	30000</ind>	<dep>	108</dep></entry>
+      <entry><ind>	39990</ind>	<dep>	108</dep></entry>
+      <entry><ind>	40000</ind>	<dep>	144</dep></entry>
+      <entry><ind>	49990</ind>	<dep>	144</dep></entry>
+      <entry><ind>	50000</ind>	<dep>	180</dep></entry>
+      <entry><ind>	59990</ind>	<dep>	180</dep></entry>
+      <entry><ind>	60000</ind>	<dep>	216</dep></entry>
+      <entry><ind>	69990</ind>	<dep>	216</dep></entry>
+      <entry><ind>	70000</ind>	<dep>	252</dep></entry>
+      <entry><ind>	79990</ind>	<dep>	252</dep></entry>
+      <entry><ind>	80000</ind>	<dep>	288</dep></entry>
+      <entry><ind>	89990</ind>	<dep>	288</dep></entry>
+      <entry><ind>	90000</ind>	<dep>	324</dep></entry>
+      <entry><ind>	99990</ind>	<dep>	324</dep></entry>
+      <entry><ind>	99999</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01866</x-m>
+    <y-m>0</y-m>
+    <z-m>0.00547</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+
+<!--Pressure digits-->
+<animation>
+  <type>rotate</type>
+  <object-name>dig_p_ones</object-name>
+  <property>tu154/instrumentation/altimeter/mmhg</property>
+  <factor>36.0</factor>
+  <center>
+    <x-m>-0.01138</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.0301</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>dig_p_dec</object-name>
+  <expression>
+    <table>
+      <mod>
+        <property>tu154/instrumentation/altimeter/mmhg</property>
+        <value>100</value>
+      </mod>
+      <entry><ind>	 0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 9</ind>	<dep>	0</dep></entry>
+      <entry><ind>	10</ind>	<dep>	36</dep></entry>
+      <entry><ind>	19</ind>	<dep>	36</dep></entry>
+      <entry><ind>	20</ind>	<dep>	72</dep></entry>
+      <entry><ind>	29</ind>	<dep>	72</dep></entry>
+      <entry><ind>	30</ind>	<dep>	108</dep></entry>
+      <entry><ind>	39</ind>	<dep>	108</dep></entry>
+      <entry><ind>	40</ind>	<dep>	144</dep></entry>
+      <entry><ind>	49</ind>	<dep>	144</dep></entry>
+      <entry><ind>	50</ind>	<dep>	180</dep></entry>
+      <entry><ind>	59</ind>	<dep>	180</dep></entry>
+      <entry><ind>	60</ind>	<dep>	216</dep></entry>
+      <entry><ind>	69</ind>	<dep>	216</dep></entry>
+      <entry><ind>	70</ind>	<dep>	252</dep></entry>
+      <entry><ind>	79</ind>	<dep>	252</dep></entry>
+      <entry><ind>	80</ind>	<dep>	288</dep></entry>
+      <entry><ind>	89</ind>	<dep>	288</dep></entry>
+      <entry><ind>	90</ind>	<dep>	324</dep></entry>
+      <entry><ind>	99</ind>	<dep>	324</dep></entry>
+      <entry><ind>	99.9</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01138</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.0301</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>dig_p_hund</object-name>
+  <expression>
+    <table>
+      <mod>
+        <property>tu154/instrumentation/altimeter/mmhg</property>
+        <value>1000</value>
+      </mod>
+      <entry><ind>	  0</ind>	<dep>	0</dep></entry>
+      <entry><ind>	 99</ind>	<dep>	0</dep></entry>
+      <entry><ind>	100</ind>	<dep>	36</dep></entry>
+      <entry><ind>	199</ind>	<dep>	36</dep></entry>
+      <entry><ind>	200</ind>	<dep>	72</dep></entry>
+      <entry><ind>	299</ind>	<dep>	72</dep></entry>
+      <entry><ind>	300</ind>	<dep>	108</dep></entry>
+      <entry><ind>	399</ind>	<dep>	108</dep></entry>
+      <entry><ind>	400</ind>	<dep>	144</dep></entry>
+      <entry><ind>	499</ind>	<dep>	144</dep></entry>
+      <entry><ind>	500</ind>	<dep>	180</dep></entry>
+      <entry><ind>	599</ind>	<dep>	180</dep></entry>
+      <entry><ind>	600</ind>	<dep>	216</dep></entry>
+      <entry><ind>	699</ind>	<dep>	216</dep></entry>
+      <entry><ind>	700</ind>	<dep>	252</dep></entry>
+      <entry><ind>	799</ind>	<dep>	252</dep></entry>
+      <entry><ind>	800</ind>	<dep>	288</dep></entry>
+      <entry><ind>	899</ind>	<dep>	288</dep></entry>
+      <entry><ind>	900</ind>	<dep>	324</dep></entry>
+      <entry><ind>	999</ind>	<dep>	324</dep></entry>
+      <entry><ind>	999.9</ind>	<dep>	359.9</dep></entry>
+    </table>
+  </expression>
+  <center>
+    <x-m>-0.01138</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.0301</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!--Controls-->
+
+<animation>
+  <type>knob</type>
+  <object-name>hs</object-name>
+  <visible>false</visible>
+  <action>
+    <binding>
+      <command>property-adjust</command>
+      <property>tu154/instrumentation/altimeter/inhgX100</property>
+      <min>0</min>
+      <max>3365</max>
+    </binding>
+  </action>
+</animation>
+
+</PropertyList>

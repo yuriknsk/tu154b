@@ -1,0 +1,204 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2007 by Yurik V. Nikiforoff			 	  	#
+    #    	yurik@megasignal.com					   	#
+    #    	Jul 2007						   	#
+    #############################################################################	  
+    -->
+
+<!-- UAP-12 from AUASP (AOA & n & stall warning gauge)
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>uap-12.ac</path>
+<!-- Internal instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>a_txt</object-name>
+  <object-name>n_txt</object-name>
+  <object-name>a_needle</object-name>
+  <object-name>n_needle</object-name>
+  <object-name>n_max</object-name>
+  <object-name>n_min</object-name>
+  <object-name>sector</object-name>
+  <object-name>n_blank</object-name>
+  <emission>
+    <red-prop>tu154/light/instruments/int-red</red-prop>
+    <green-prop>tu154/light/instruments/int-green</green-prop>
+    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+  </emission>
+</animation>
+
+<!-- External instruments lighting -->
+<animation>
+  <type>material</type>
+  <object-name>center</object-name>
+  <object-name>corner</object-name>
+  <emission>
+    <red-prop>tu154/light/panel/ext-red</red-prop>
+    <green-prop>tu154/light/panel/ext-green</green-prop>
+    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+  </emission>
+</animation>
+
+
+<!--Warning lamp-->
+<animation>
+  <type>material</type>
+  <object-name>lamp</object-name>
+  <emission>
+    <red>1.0</red>
+    <green>1.0</green>
+    <blue>1.0</blue>
+    <factor-prop>tu154/systems/electrical/checking-lamps/lamps-power</factor-prop>
+  </emission>
+</animation>
+
+<animation>
+  <type>select</type>
+  <object-name>lamp</object-name>
+  <condition>
+    <or>
+  	<property>tu154/instrumentation/uap-12/warn</property>
+        <property>tu154/systems/electrical/checking-lamps/main-panel</property>
+    </or>
+  </condition>
+</animation>
+
+
+<!--Needles-->
+<animation>
+    <type>rotate</type>
+    <object-name>a_needle</object-name>
+    <property>fdm/jsbsim/aero/alpha-wing-rad</property>
+    <condition>
+      <property>tu154/instrumentation/uap-12/powered</property>
+      <greater-than>
+      	<property>fdm/jsbsim/velocities/vg-fps</property>
+        <value>10.0</value>
+      </greater-than>
+    </condition>
+    <interpolation>
+      <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
+      <entry><ind>	0.0524</ind>	<dep>	37.0</dep></entry>
+      <entry><ind>	0.1047</ind>	<dep>	72.0</dep></entry>
+      <entry><ind>	0.157</ind>	<dep>	107.0</dep></entry>
+      <entry><ind>	0.209</ind>	<dep>	142.0</dep></entry>
+      <entry><ind>	0.262</ind>	<dep>	180.0</dep></entry>
+    </interpolation>
+    <axis>
+      <x>-1.0</x>
+      <y>0.0</y>
+      <z>0.0</z>
+    </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>sector</object-name>
+  <property>fdm/jsbsim/aero/function/auasp</property>
+  <condition>
+    <property>tu154/instrumentation/uap-12/powered</property>
+  </condition>
+  <interpolation>
+    <entry><ind>	15.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	12.0</ind>	<dep>	37.0</dep></entry>
+    <entry><ind>	9.0</ind>	<dep>	72.0</dep></entry>
+    <entry><ind>	6.0</ind>	<dep>	107.0</dep></entry>
+    <entry><ind>	3.0</ind>	<dep>	142.0</dep></entry>
+    <entry><ind>	0.0</ind>	<dep>	180.0</dep></entry>
+  </interpolation>
+  <axis>
+    <x>1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>n_needle</object-name>
+  <property>fdm/jsbsim/instrumentation/n-norm</property>
+  <condition>
+    <property>tu154/instrumentation/uap-12/powered</property>
+    <greater-than>
+      <property>fdm/jsbsim/velocities/vg-fps</property>
+      <value>10.0</value>
+    </greater-than>
+  </condition>
+  <interpolation>
+    <entry><ind>	1.0</ind>	<dep>	90.0</dep></entry>
+    <entry><ind>	0.0</ind>	<dep>	44.0</dep></entry>
+    <entry><ind>	-1.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	-2.0</ind>	<dep>	-45.0</dep></entry>
+    <entry><ind>	-3.0</ind>	<dep>	-90.0</dep></entry>
+  </interpolation>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>n_max</object-name>
+  <property>tu154/instrumentation/uap-12/accelerate-max</property>
+  <condition>
+    <property>tu154/instrumentation/uap-12/powered</property>
+  </condition>
+  <interpolation>
+    <entry><ind>	1.0</ind>	<dep>	90.0</dep></entry>
+    <entry><ind>	0.0</ind>	<dep>	44.0</dep></entry>
+    <entry><ind>	-1.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	-2.0</ind>	<dep>	-45.0</dep></entry>
+    <entry><ind>	-3.0</ind>	<dep>	-90.0</dep></entry>
+  </interpolation>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>n_min</object-name>
+  <property>tu154/instrumentation/uap-12/accelerate-min</property>
+  <condition>
+    <property>tu154/instrumentation/uap-12/powered</property>
+  </condition>
+  <interpolation>
+    <entry><ind>	1.0</ind>	<dep>	90.0</dep></entry>
+    <entry><ind>	0.0</ind>	<dep>	44.0</dep></entry>
+    <entry><ind>	-1.0</ind>	<dep>	0.0</dep></entry>
+    <entry><ind>	-2.0</ind>	<dep>	-45.0</dep></entry>
+    <entry><ind>	-3.0</ind>	<dep>	-90.0</dep></entry>
+  </interpolation>
+  <axis>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>hs</object-name>
+  <visible>false</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-assign</command>
+      <property>tu154/instrumentation/uap-12/accelerate-max</property>
+      <value>-1.0</value>
+    </binding>
+    <binding>
+      <command>property-assign</command>
+      <property>tu154/instrumentation/uap-12/accelerate-min</property>
+      <value>-1.0</value>
+    </binding>
+  </action>
+</animation>
+
+
+</PropertyList>

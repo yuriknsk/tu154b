@@ -1,0 +1,386 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <name>nav</name>
+  <layout>vbox</layout>
+  <resizable>true</resizable>
+  <draggable>true</draggable>
+
+  <nasal>
+    <open>
+      var deg_norm = func(deg, min, max) {
+          while (min > deg)
+              deg += (max - min);
+          while (deg >= max)
+              deg -= (max - min);
+
+          return int(deg * 10 + 0.5) / 10;
+      }
+
+      var deg2dm = func(deg) {
+          var i = int(deg);
+          var frac = deg - i;
+          return i + frac * 0.6;
+      }
+
+      var dialog = cmdarg();
+      var list = dialog.getNode("list");
+      var fork_btn_legend = dialog.getNode("group[2]/button[2]/legend", 1);
+      var route = props.globals.getNode("tu154/systems/nvu-calc/route", 1);
+      var selected = props.globals.getNode("tu154/systems/nvu-calc/selected", 1);
+      selected.setIntValue(-1);
+
+      var toggle_fork = func {
+          var fork_applied = getprop("tu154/systems/nvu-calc/fork-applied");
+          setprop("tu154/systems/nvu-calc/fork-applied", !fork_applied);
+          fork_btn_legend.setValue(fork_applied ? "Apply fork" : "Revert fork");
+          # For legend change to take effect the only way is to reopen
+          # the dialog.
+          var dialog_name = props.Node.new({"dialog-name": "nav"});
+          fgcommand("dialog-close", dialog_name);
+          fgcommand("dialog-show", dialog_name);
+      }
+
+      var calculate = func {
+          var fp = flightplan();
+          var fp_size = fp.getPlanSize();
+          if (2 > fp_size)
+              return;
+
+          var wpB = fp.getWP(0);
+          var wpE = fp.getWP(fp_size - 1);
+
+          var magvar_dep =
+              num(getprop("tu154/systems/nvu-calc/magvar-dep")) or 0;
+          if (getprop("tu154/systems/nvu-calc/magvar-dep-at-loc"))
+              magvar_dep = magvar(wpB.lat, wpB.lon);
+          setprop("tu154/systems/nvu-calc/magvar-dep",
+                  sprintf("%+.1f", deg_norm(magvar_dep, -180, 180)));
+          var magvar_dest =
+              num(getprop("tu154/systems/nvu-calc/magvar-dest")) or 0;
+          if (getprop("tu154/systems/nvu-calc/magvar-dest-at-loc"))
+              magvar_dest = magvar(wpE.lat, wpE.lon);
+          setprop("tu154/systems/nvu-calc/magvar-dest",
+                  sprintf("%+.1f", deg_norm(magvar_dest, -180, 180)));
+
+          var faz = wpE.courseAndDistanceFrom(wpB.lat, wpB.lon)[0];
+          var baz = wpB.courseAndDistanceFrom(wpE.lat, wpE.lon)[0];
+
+          var fork_applied = getprop("tu154/systems/nvu-calc/fork-applied");
+          var fork = magvar_dep - magvar_dest - (faz - (baz - 180));
+          var fork_norm = deg_norm(fork, -180, 180);
+          setprop("tu154/systems/nvu-calc/fork", fork_norm);
+          setprop("tu154/systems/nvu-calc/fork-str",
+                  sprintf("%+.2f' (%+.1f)", deg2dm(fork_norm), fork_norm));
+
+          route.removeChildren("leg");
+          list.removeChildren("value");
+          var dist_total = wpE.distance_along_route * 1.852;
+          var wp0 = wpB;
+          var az_corr = 0;
+          for (var i = 1; fp_size > i; i += 1) {
+              var S = -wp0.leg_distance * 1.852;
+              var ZPU = wp0.leg_bearing - magvar_dep + az_corr;
+              if (fork_applied)
+                  ZPU += fork;
+              ZPU = deg_norm(ZPU, 0, 360);
+
+              var wp1 = fp.getWP(i);
+              var leg = {
+                  from: wp0.wp_name,
+                  to: wp1.wp_name,
+                  S: S,
+                  ZPU: ZPU,
+              };
+              route.getChild("leg", i - 1, 1).setValues(leg);
+              var dist = dist_total - wp0.distance_along_route * 1.852;
+              var descr = sprintf("% 3d: %s - %s (%.1f km),"
+                                  ~" S: %+.1f km, ZPU: %06.2f'",
+                                  i, leg.from, leg.to, dist, leg.S,
+                                  deg2dm(leg.ZPU));
+              var beacon = route.getChild("beacon", i - 1);
+              if (beacon != nil) {
+                  var b = beacon.getValues();
+                  var name = split(" ", b.name);
+                  pop(name);
+                  name = string.join(" ", name);
+                  descr ~= sprintf(", beacon %s (%s %.2f mhz),"
+                                   ~ " S: %+.1f km, Z: %+.1f km, UK: %06.2f'",
+                                   name, b.ident, b.freq, b.S, b.Z,
+                                   deg2dm(b.UK));
+              }
+              list.getChild("value", i - 1, 1).setValue(descr);
+
+              var faz = wp1.courseAndDistanceFrom(wpB.lat, wpB.lon)[0];
+              var baz = wpB.courseAndDistanceFrom(wp1.lat, wp1.lon)[0];
+              az_corr = faz - (baz - 180);
+              wp0 = wp1;
+          }
+      }
+
+      var beacon_add = func {
+          var i = getprop("tu154/systems/nvu-calc/selected") + 1;
+          var ident = getprop("tu154/systems/nvu-calc/ident");
+          if (!i or !ident)
+              return;
+
+          var fp = flightplan();
+          var wp0 = fp.getWP(i - 1);
+          var wp1 = fp.getWP(i);
+          var vors = navinfo(wp1.lat, wp1.lon, "vor", ident);
+          if (!size(vors))
+              return;
+
+          var vor = vors[0];
+          var (b, d) = wp1.courseAndDistanceFrom(vor.lat, vor.lon);
+          b = (wp0.leg_bearing - b) / 57.2958;
+          d *= 1.852;
+          var S = -d * math.cos(b);
+          var Z = d * math.sin(b);
+
+          route.getChild("beacon", i - 1, 1).setValues({
+              name: vor.name,
+              ident: vor.id,
+              freq: vor.frequency / 100,
+              S: S,
+              Z: Z,
+              UK: deg_norm(wp0.leg_bearing, 0, 360),
+          });
+      }
+
+      var beacon_remove = func {
+         route.removeChild("beacon", getprop("tu154/systems/nvu-calc/selected"));
+      }
+
+      var load_selected = func {
+          var i = getprop("tu154/systems/nvu-calc/selected");
+          if (i == -1)
+              return;
+
+          setprop("tu154/systems/nvu/leg-next", i);
+          instruments.nvu_calculator_load();
+      }
+
+      calculate();
+    </open>
+
+    <close>
+      <!-- Leave this empty or fix close/open on fork toggle first. -->
+    </close>
+  </nasal>
+
+  <group>
+    <layout>hbox</layout>
+
+    <empty><stretch>1</stretch></empty>
+
+    <text>
+      <label>NVU Calculator</label>
+    </text>
+
+    <empty><stretch>1</stretch></empty>
+
+    <button>
+      <pref-width>16</pref-width>
+      <pref-height>16</pref-height>
+      <legend></legend>
+      <key>Esc</key>
+      <border>2</border>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+  </group>
+
+  <hrule/>
+
+  <list>
+    <name>result</name>
+    <halign>fill</halign>
+    <valign>fill</valign>
+    <stretch>true</stretch>
+    <pref-width>600</pref-width>
+    <pref-height>400</pref-height>
+    <property>tu154/systems/nvu-calc/selected</property>
+    <binding>
+      <command>dialog-apply</command>
+    </binding>
+    <binding>
+      <command>dialog-update</command>
+      <object-name>list</object-name>
+    </binding>
+  </list>
+
+  <group>
+    <layout>hbox</layout>
+    <default-padding>4</default-padding>
+
+    <text>
+      <label> Departure mag var:</label>
+    </text>
+    <input>
+      <name>input-magvar-dep</name>
+      <stretch>false</stretch>
+      <pref-width>80</pref-width>
+      <property>tu154/systems/nvu-calc/magvar-dep</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>calculate()</script>
+      </binding>
+      <binding>
+        <command>dialog-update</command>
+      </binding>
+    </input>
+    <checkbox>
+      <property>tu154/systems/nvu-calc/magvar-dep-at-loc</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>calculate()</script>
+      </binding>
+      <binding>
+        <command>dialog-update</command>
+      </binding>
+    </checkbox>
+    <text>
+      <label>at location    Destination mag var:</label>
+    </text>
+    <input>
+      <name>input-magvar-dest</name>
+      <stretch>false</stretch>
+      <pref-width>80</pref-width>
+      <property>tu154/systems/nvu-calc/magvar-dest</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>calculate()</script>
+      </binding>
+      <binding>
+        <command>dialog-update</command>
+      </binding>
+    </input>
+    <checkbox>
+      <property>tu154/systems/nvu-calc/magvar-dest-at-loc</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>calculate()</script>
+      </binding>
+      <binding>
+        <command>dialog-update</command>
+      </binding>
+    </checkbox>
+    <text>
+      <label>at location    </label>
+    </text>
+    <text>
+      <label>Fork: -179.54' (-179.9)</label>
+      <format>Fork: %s</format>
+      <property>tu154/systems/nvu-calc/fork-str</property>
+    </text>
+
+    <empty><stretch>1</stretch></empty>
+
+    <button>
+      <legend>Load selected</legend>
+      <pref-width>120</pref-width>
+      <binding>
+        <command>nasal</command>
+        <script>load_selected()</script>
+      </binding>
+    </button>
+  </group>
+
+  <hrule/>
+
+  <group>
+    <layout>hbox</layout>
+    <default-padding>4</default-padding>
+
+    <text>
+      <label> Beacon ident for selected leg:</label>
+    </text>
+    <input>
+      <name>input-ident</name>
+      <halign>fill</halign>
+      <stretch>false</stretch>
+      <pref-width>80</pref-width>
+      <property>tu154/systems/nvu-calc/ident</property>
+    </input>
+    <button>
+      <legend>Add</legend>
+      <pref-width>50</pref-width>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>beacon_add(); calculate()</script>
+      </binding>
+      <binding>
+        <command>dialog-update</command>
+      </binding>
+    </button>
+    <button>
+      <legend>Remove beacon</legend>
+      <pref-width>120</pref-width>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>beacon_remove(); calculate()</script>
+      </binding>
+      <binding>
+        <command>dialog-update</command>
+      </binding>
+    </button>
+
+    <empty><stretch>1</stretch></empty>
+
+    <checkbox>
+      <property>tu154/systems/nvu-calc/virtual-navigator</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </checkbox>
+    <text>
+      <label>Virtual navigator</label>
+    </text>
+
+    <empty><stretch>1</stretch></empty>
+
+    <button>
+      <legend>Apply fork</legend>
+      <pref-width>100</pref-width>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>toggle_fork(); calculate()</script>
+      </binding>
+    </button>
+    <checkbox>
+      <property>tu154/systems/nvu-calc/fork-only-route</property>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+    </checkbox>
+    <text>
+      <label>only update route </label>
+    </text>
+  </group>
+
+</PropertyList>
