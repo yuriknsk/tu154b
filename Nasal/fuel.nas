@@ -445,9 +445,14 @@ if( consumed_norm < 0.9545 )    # -150 kg in tank 1
 	portioner_flag = 1.0;
 	setprop( "tu154/systems/fuel/portioner", portioner_flag );
 	interpolate( "tu154/systems/fuel/portioner", 0.0, PORTIONER_TIME );
+     
 	# refueling tank 1
 	setprop( "consumables/fuel/tank[0]/last-gal_us", total);
-	interpolate( "consumables/fuel/tank[0]/level-gal_us", total, PORTIONER_TIME );
+# Modified by Yurik apr 2015
+# Bug 1717 The Tu-154 has too much range
+# Reported by Ludovic Brenta
+#	interpolate( "consumables/fuel/tank[0]/level-gal_us", total, PORTIONER_TIME );
+	setprop( "consumables/fuel/tank[0]/level-gal_us", total );
 	# get fuel from tanks 2
 	tank_2_l = tank_2_l - consumed * k2_l;
 	if( tank_2_l < 1.0 ) tank_2_l = 0.0;
@@ -477,12 +482,20 @@ if( portioner_flag == 0.0 ) # don't transfer if portioner in operate
 	if( trans_valve_1 == 1.0 )
 		{
 		#get
-		consumed = ( k3_l + k3_r ) * TRANSFER_CONST;
+		  
+# Modified by Yurik apr 2015
+# Bug 1717 The Tu-154 has too much range
+# Reported by Ludovic Brenta
+		
+#		consumed = ( k3_l + k3_r ) * TRANSFER_CONST;
+		consumed = 0.0;
 		tank_3_l = tank_3_l - k3_l * TRANSFER_CONST;
 		if( tank_3_l < 1.0 ) tank_3_l = 0.0;
+		else consumed = k3_l * TRANSFER_CONST;
 		setprop( "consumables/fuel/tank[2]/level-gal_us", tank_3_l );
 		tank_3_r = tank_3_r - k3_r * TRANSFER_CONST;
 		if( tank_3_r < 1.0 ) tank_3_r = 0.0;
+		else consumed = consumed + k3_r * TRANSFER_CONST;
 		setprop( "consumables/fuel/tank[4]/level-gal_us", tank_3_r );
 		# put to tank 1
 		level = level + consumed;
@@ -496,9 +509,15 @@ if( portioner_flag == 0.0 ) # don't transfer if portioner in operate
 	if( trans_valve_2 == 1.0 )
 		{
 		#get
-		consumed = k4 * TRANSFER_CONST;
-		tank_4 = tank_4 - consumed;
+# Modified by Yurik apr 2015
+# Bug 1717 The Tu-154 has too much range
+# Reported by Ludovic Brenta
+		
+#		consumed = k4 * TRANSFER_CONST;
+		consumed = 0.0;  
+		tank_4 = tank_4 - k4 * TRANSFER_CONST;
 		if( tank_4 < 1.0 ) tank_4 = 0.0;
+		else consumed = k4 * TRANSFER_CONST;
 		setprop( "consumables/fuel/tank[5]/level-gal_us", tank_4 );
 		# put to tank 1
 		level = level + consumed;
