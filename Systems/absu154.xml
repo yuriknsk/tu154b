@@ -1410,11 +1410,14 @@ There is a system for enchance pitch control. It read pitch trimmer position and
           </test>
           <test value="1.0">
             ap/at-error > 0.0
-            ap/at-pid-output > 0.9
+	    <!--Error found by Francisco Jerez-->
+	    <!--ap/at-pid-output > 0.9-->
+            ap/at-pid-output lt 0.1	
           </test>
           <test value="1.0">
             ap/at-error lt 0.0
-            ap/at-pid-output lt 0.1
+	    <!--ap/at-pid-output lt 0.1-->
+	    ap/at-pid-output > 0.9
           </test>
           
         </switch>

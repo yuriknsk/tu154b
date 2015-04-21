@@ -965,6 +965,21 @@
 
     
     <aerodynamics>
+ <!--Kg/(Newton per hour)-->
+      
+<function name="propulsion/fuel-cft"> 
+	<product>
+          <quotient>
+	    <product>
+	      <property>propulsion/engine[0]/fuel-flow-rate-gph</property>
+	      <value>0.702</value>
+	    </product>
+           <property>propulsion/engine[0]/thrust-lbs</property>
+	  </quotient>
+	  <value>1.0</value>
+	</product>
+</function>
+      
       
       <function name="aero/function/CAX">
 	<product>
