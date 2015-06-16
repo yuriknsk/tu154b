@@ -1234,7 +1234,7 @@ else {
 
 	}
 
-if( getprop("tu154/instrumentation/bkk/mgv-1-failure" == 0 ) ){
+if( getprop("tu154/instrumentation/bkk/mgv-1-failure" ) == 0 ){
 	if( abs( mgv_1_roll ) > limit ){
 		if( mgv_1_roll < 0 ){
 		setprop("tu154/systems/electrical/indicators/left-bank", 1); }

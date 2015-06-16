@@ -396,7 +396,7 @@ modified by Yurik nov 2013
     <input>-ap/pitch/altitude-error</input>
     <kp> 0.0 </kp>
     <ki> 0.0 </ki>
-    <kd> 0.0005 </kd>
+    <kd> 0.002 </kd><!--<kd> 0.0005 </kd>--><!--Patched by Francisco Jerez jun 2015-->
   </pid>
   
   <switch name="ap/pitch/h-pid-d-switched">

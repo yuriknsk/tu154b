@@ -917,7 +917,9 @@ ACAlternatorClass.rpm_handler = func {
     if( rpm < 1000.0 ) volts = 0.0;
     else volts = me.ideal_volts*math.ln(rpm)/9;
     me.volts.setValue( volts );
-    if( me.bus != nil ) setprop(me.bus.volts, volts );
+# Fixed by Francisco Jerez jun 2015
+#    if( me.bus != nil ) setprop(me.bus.volts, volts );
+    if( me.bus != nil ) me.bus.volts.setValue( volts );
 }
 
 ACAlternatorClass.get_output_amps = func(src ){
