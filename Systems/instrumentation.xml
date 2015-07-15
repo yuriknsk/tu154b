@@ -363,15 +363,4 @@
           </channel>
           <!--******************** END externals channel ***********************-->
 
-	  <!--allow for ATIS listening-->
-	  <comm-radio>
-	    <name>comm</name>
-	    <number>0</number>>
-	  </comm-radio>
-
-	  <comm-radio>
-	    <name>comm</name>
-	    <number>1</number>
-	  </comm-radio>
-
 </system>
