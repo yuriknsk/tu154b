@@ -8,7 +8,6 @@ TU154B project
 **********************************************************************
 -->
 
-
 <PropertyList>
   
   <adf>
@@ -206,5 +205,16 @@ TU154B project
     <name>mk-viii</name>
     <number>0</number>
   </mk-viii>
+
+  <!-- allow for ATIS listening -->
+  <comm-radio>
+    <name>comm</name>
+    <number>0</number>>
+  </comm-radio>
+
+  <comm-radio>
+    <name>comm</name>
+    <number>1</number>
+  </comm-radio>
   
 </PropertyList>
