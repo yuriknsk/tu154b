@@ -14,7 +14,7 @@
 	 <description>Tupolev Tu-154b airliner</description>
 	 <author>Yurik V. Nikiforoff aka Yurik_nsk</author>
 
-	 
+
 	 <status>advanced production</status>
 	 <rating>
 	  <FDM type="int">5</FDM>
@@ -22,7 +22,7 @@
 	  <cockpit type="int">5</cockpit>
 	  <model type="int">5</model>
 	</rating>
-	
+
 	 <help>
 	   <title>Tu-154B-2</title>
    	   <key>
@@ -78,7 +78,7 @@
 		      <dialog-name>nav</dialog-name>
 	      </binding>
       </item>
-      
+
       <item>
 	      <label>Pushback</label>
 	      <name>pushback</name>
@@ -87,8 +87,8 @@
 	      <dialog-name>pushback</dialog-name>
 	      </binding>
       </item>
-      
-    </menu>    
+
+    </menu>
   </default>
 </menubar>
 
@@ -116,7 +116,7 @@
  <livery>
   <file type="string">85363-AFL</file>
  </livery>
- 
+
  <pushback>
   <kp type="double">100</kp>
   <ki type="double">25</ki>
@@ -136,19 +136,19 @@
 </sound>
 
   <checklists include="tu154b-checklists.xml"/>
-  
+
   <flaps>
 	  <setting>0.0</setting>
 	  <setting>0.3333</setting>
 	  <setting>0.62</setting>
 	  <setting>1.0</setting>
   </flaps>
-  
-  
+
+
   <virtual-cockpit >true</virtual-cockpit>
   <allow-toggle-cockpit >true</allow-toggle-cockpit>
   <chase-distance-m type="double" >-110.0</chase-distance-m>
-  
+
   <view>
     <name>Captain View</name>
    <internal >true</internal>
@@ -269,7 +269,7 @@
       <dynamic-view type="bool">true</dynamic-view>
     </config>
   </view>
-  
+
   <view n="105">
     <name>Passenger View</name>
     <!--<enabled type="bool" >true</enabled>-->
@@ -298,15 +298,15 @@
       <dynamic-view type="bool">true</dynamic-view>
     </config>
   </view>
-  
-  
+
+
   <instrumentation>
     <path>Aircraft/tu154b/Systems/instrumentation-config.xml</path>
   </instrumentation>
   <realism>
 	  <false-radio-courses-enabled type="bool">false</false-radio-courses-enabled>
   </realism>
-  
+
   <multiplay>
             <generic>
 		<int n="0" alias="/tu154/light/nav/blue"/>
@@ -473,7 +473,7 @@
   </nav>
   <nav n="1">
 	  <volume type="double" >0.2</volume>
-  </nav>  
+  </nav>
   <nav n="2">
    <frequencies>
     <selected-mhz type="double">108.0</selected-mhz>
@@ -553,7 +553,7 @@
         </engines>
         <fuel>
           <file>Aircraft/tu154b/Nasal/fuel.nas</file>
-        </fuel>        
+        </fuel>
         <warning>
           <file>Aircraft/tu154b/Nasal/warn.nas</file>
         </warning>
@@ -629,14 +629,14 @@
       <gear-cmd-static type="double">1.0</gear-cmd-static>
     </gear>
     <fcs>
-      <stabilizer-cmd-norm>0.0</stabilizer-cmd-norm>      
+      <stabilizer-cmd-norm>0.0</stabilizer-cmd-norm>
       <stab-manu-cmd>0.0</stab-manu-cmd>
       <stab-auto-cmd>1.0</stab-auto-cmd>
-      
+
       <revers-by-joy type="double">0.0</revers-by-joy>
       <revers-1-limit type="double">0.1</revers-1-limit>
       <revers-2-limit type="double">0.05</revers-2-limit><!-- Set here value about 0.03-0.06  if you want reverser control by joystick. Set revers-by-joy to 1 -->
-      
+
     </fcs>
 <!--    <metrics>
 	<stabilizer-factor>-0.48</stabilizer-factor>
@@ -660,9 +660,9 @@
 
 <input>
   <keyboard>
-    
+
 <!--It developer code. It should be commented for release-->
-<!--    
+<!--
 <key n="357">
       <name>up</name>
       <binding n="0">
@@ -679,7 +679,7 @@
         <step>-0.001</step>
       </binding>
     </key>
-    
+
     <key n="356">
       <name>left</name>
       <binding n="0">
@@ -696,7 +696,7 @@
         <step>0.001</step>
       </binding>
     </key>
-    
+
     <key n="360">
       <name>fwd</name>
       <binding n="0">
@@ -712,10 +712,10 @@
         <property>/tu154/x</property>
         <step>0.001</step>
       </binding>
-    </key>-->    
+    </key>-->
 
 <!--End developer keys biding-->
-    
+
     <key n="115">
 	    <name>s</name>
 	    <desc>Auto Startup</desc>
@@ -727,7 +727,7 @@
 		    <binding>
 			    <command>nasal</command>
 			    <script>print("Autostart")</script>
-		    </binding>		    
+		    </binding>
 	    </mod-up>
     </key>
 
@@ -743,7 +743,7 @@
 	</script>
       </binding>
     </key>
-    
+
     <key n="68">
       <name>D</name>
       <desc>Autothrottle on</desc>
@@ -827,8 +827,8 @@
         <value>0.87</value>
       </binding>
     </key>
-    
-    
+
+
     <key n="42">
       <name>*</name>
       <desc>small thrust</desc>
@@ -923,7 +923,7 @@
         <script>controls.centerFlightControls()</script>
       </binding>
     </key>
-    
+
 <!-- Reverser -->
  <key n="258">
   <name>F2</name>
@@ -934,15 +934,15 @@
     <command>nasal</command>
     <script>setprop("/fdm/jsbsim/fcs/revers-by-key",1.0);</script>
   </binding>
-  <!--Stop reverser-->  
+  <!--Stop reverser-->
   <mod-up>
     <binding>
       <command>nasal</command>
       <script>setprop("/fdm/jsbsim/fcs/revers-by-key",0.0);</script>
     </binding>
   </mod-up>
-  
-  
+
+
   <mod-shift>
    <desc>Save flight.</desc>
    <binding>
@@ -951,8 +951,8 @@
    </binding>
   </mod-shift>
  </key>
-    
-  </keyboard>		
+
+  </keyboard>
 </input>
 <tu154>
 
@@ -987,18 +987,18 @@
       <ext-blue-def type="double" >0.0</ext-blue-def>
       <amb-red-def type="double" >0.0</amb-red-def>
       <amb-green-def type="double" >0.0</amb-green-def>
-      <amb-blue-def type="double" >0.0</amb-blue-def>      
+      <amb-blue-def type="double" >0.0</amb-blue-def>
     </panel>
     <!--<window-alpha type="double" >0.3</window-alpha>      -->
   </light>
-  
+
   <textures>
     <capt-panel>vc01_t.png</capt-panel>
     <copilot-panel>vc02_t.png</copilot-panel>
     <overhead-panel>vc06_t.png</overhead-panel>
     <fe-panel>vc08_t.png</fe-panel>
   </textures>
-  
+
   <instrumentation>
     <distance-to-pnp type="bool">true</distance-to-pnp>
     <altimeters-sync-inhg type="bool">true</altimeters-sync-inhg>
@@ -1030,7 +1030,7 @@
     <pn-6>
       <serviceable type="bool" >true</serviceable>
       <at-kt type="double" >0.0</at-kt>
-      <stab type="double" >false</stab>
+      <stab type="double" >0.0</stab>
       <mode type="double" >0.0</mode>
     </pn-6>
     <rv-5m n="0">
@@ -1052,7 +1052,7 @@
       <accelerate-max type="double" >-2.0</accelerate-max>
       <accelerate-min type="double" >0.8</accelerate-min>
       <alpha-limit-deg type="double" >11.5</alpha-limit-deg>
-    </uap-12>   
+    </uap-12>
     <pnp>
       <plane-dialed>252.0</plane-dialed>
       <distance type="double">0</distance>
@@ -1095,7 +1095,7 @@
     <mgv-contr-failure type="bool" >true</mgv-contr-failure>
     <delta-deg type="double" >1.0</delta-deg>
     <!--<roll-limit type="double" >15.0</roll-limit>-->
-  </bkk>   
+  </bkk>
   <v-57>
     <speed-adjust-step type="double">0.25</speed-adjust-step>
     <azimuth-adjust-step type="double">0.25</azimuth-adjust-step>
@@ -1113,7 +1113,7 @@
       <outer type="int">0</outer>
       <inner type="int">0</inner>
     </b-8m>
-  
+
   <uap-12>
     <accelerate-max type="double" >-1.0</accelerate-max>
     <accelerate-min type="double" >-1.0</accelerate-min>
@@ -1129,8 +1129,8 @@
     </v-51>
 
   </instrumentation>
-  
-  
+
+
   <systems>
     <APU>
       <!--<rpm type="double" >0.0</rpm>-->
@@ -1201,7 +1201,7 @@
     <adf-1-selector type="double" >0.0</adf-1-selector>
     <adf-2-selector type="double" >0.0</adf-2-selector>
     <pu-46-kren type="double" >0.0</pu-46-kren>
-    <pu-46-tang type="double" >0.0</pu-46-tang> 
+    <pu-46-tang type="double" >0.0</pu-46-tang>
     <pn-5-strelki type="double" >0.0</pn-5-strelki>
     <pn-5-navigac type="double" >0.0</pn-5-navigac>
     <pn-5-posadk type="double" >0.0</pn-5-posadk>
@@ -1270,7 +1270,7 @@
       <heading-offset-deg type="double">270.0</heading-offset-deg>
       <pitch-offset-deg type="double">-16.0</pitch-offset-deg>
       <roll-offset-deg type="double">0.0</roll-offset-deg>
-    </mod-view>    
+    </mod-view>
   </mod-views>
 </tu154>
 </PropertyList>
