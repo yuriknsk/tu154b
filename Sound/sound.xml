@@ -30,7 +30,7 @@
       <greater-than>
         <property>engines/engine[2]/n2</property>
         <value>95.0</value>
-      </greater-than>      
+      </greater-than>
       <property>fdm/jsbsim/fcs/wow</property>
     </condition>
     <mode>once</mode>
@@ -56,7 +56,7 @@
     <greater-than>
       <property>tu154/systems/electrical/buses/AC3x200-bus-3L/volts</property>
       <value>150.0</value>
-    </greater-than> 
+    </greater-than>
     <not><property>tu154/lamps/gen-1-failure</property></not>
     <not><property>tu154/lamps/gen-2-failure</property></not>
     <not><property>tu154/lamps/gen-3-failure</property></not>
@@ -152,7 +152,7 @@
     <y>-1</y>
     <z>1.5</z>
   </position>
-</voice> 
+</voice>
 
 <voice>
   <name>sp_ready</name>
@@ -254,7 +254,7 @@
     <y>0</y>
     <z>1.5</z>
   </position>
-</voice> 
+</voice>
 
 <voice>
   <name>s_flaps_deploy</name>
@@ -271,7 +271,7 @@
     <y>0</y>
     <z>1.5</z>
   </position>
-</voice> 
+</voice>
 
 <voice>
   <name>s_flaps_28</name>
@@ -288,7 +288,7 @@
     <y>0</y>
     <z>1.5</z>
   </position>
-</voice> 
+</voice>
 
 <voice>
   <name>s_flaps_full</name>
@@ -338,8 +338,8 @@
       <y>0</y>
       <z>1.5</z>
     </position>
-</voice> 
-  
+</voice>
+
 <voice>
     <name>s_v_2</name>
     <path>Aircraft/tu154b/Sound/voice/St_V2.wav</path>
@@ -652,7 +652,7 @@
       <y>0</y>
       <z>1.5</z>
     </position>
-</voice> 
+</voice>
 
 <voice>
     <name>s_h_200</name>
@@ -669,7 +669,7 @@
       <y>0</y>
       <z>1.5</z>
     </position>
-</voice> 
+</voice>
 
 <voice>
     <name>s_h_150</name>
@@ -686,7 +686,7 @@
       <y>0</y>
       <z>1.5</z>
     </position>
-</voice> 
+</voice>
 
 <voice>
     <name>s_h_120</name>
@@ -703,8 +703,8 @@
       <y>0</y>
       <z>1.5</z>
     </position>
-</voice> 
- 
+</voice>
+
 <voice>
     <name>s_h_100</name>
     <path>Aircraft/tu154b/Sound/voice/St_H_100.wav</path>
@@ -720,7 +720,7 @@
       <y>0</y>
       <z>1.5</z>
     </position>
-</voice> 
+</voice>
 
   <voice>
     <name>s_h_oz</name>
@@ -756,7 +756,7 @@
       <y>0</y>
       <z>1.5</z>
     </position>
-</voice> 
+</voice>
 
 <voice>
     <name>s_h_60</name>
@@ -773,7 +773,7 @@
       <y>0</y>
       <z>1.5</z>
     </position>
-</voice> 
+</voice>
 
 <voice>
     <name>s_h_ch</name>
@@ -790,7 +790,7 @@
       <y>0</y>
       <z>1.5</z>
     </position>
-</voice> 
+</voice>
 
 <voice>
     <name>s_h_40</name>
@@ -807,7 +807,7 @@
       <y>0</y>
       <z>1.5</z>
     </position>
-</voice> 
+</voice>
 
 <voice>
     <name>s_h_30</name>
@@ -824,7 +824,7 @@
       <y>0</y>
       <z>1.5</z>
     </position>
-</voice> 
+</voice>
 
 <voice>
     <name>s_h_20</name>
@@ -841,7 +841,7 @@
       <y>0</y>
       <z>1.5</z>
     </position>
-</voice> 
+</voice>
 
 <voice>
     <name>s_h_10</name>
@@ -859,7 +859,7 @@
       <y>0</y>
       <z>1.5</z>
     </position>
-</voice> 
+</voice>
 
 <voice>
     <name>s_h_6</name>
@@ -877,7 +877,7 @@
       <y>0</y>
       <z>1.5</z>
     </position>
-</voice> 
+</voice>
 
 <voice>
     <name>s_h_3</name>
@@ -895,7 +895,7 @@
       <y>0</y>
       <z>1.5</z>
     </position>
-</voice> 
+</voice>
 <voice>
   <name>s_h_1</name>
   <path>Aircraft/tu154b/Sound/voice/St_H_1.wav</path>
@@ -913,7 +913,7 @@
     <z>1.5</z>
   </position>
 </voice>
-<!--PNK sound-->  
+<!--PNK sound-->
 <pnk>
   <name>rv1_altitude</name>
   <path>Aircraft/tu154b/Sound/misc/telefony.wav</path>
@@ -954,7 +954,7 @@
     <y>0</y>
     <z>-2.5</z>
   </position>
-</gear> 
+</gear>
 
 <gear>
   <name>gear down</name>
@@ -971,7 +971,7 @@
     <y>0</y>
     <z>-2.5</z>
   </position>
-</gear> 
+</gear>
 
 <gear>
   <name>wow nose</name>
@@ -986,7 +986,7 @@
     <y>0.0</y>
     <z>-2.5</z>
   </position>
-</gear> 
+</gear>
 <gear>
   <name>wow left</name>
   <path>Aircraft/tu154b/Sound/misc/osn_154.wav</path>
@@ -1000,7 +1000,7 @@
     <y>5.75</y>
     <z>-2.5</z>
   </position>
-</gear> 
+</gear>
 <gear>
   <name>wow right</name>
   <path>Aircraft/tu154b/Sound/misc/osn_154.wav</path>
@@ -1014,7 +1014,7 @@
     <y>-5.75</y>
     <z>-2.5</z>
   </position>
-</gear> 
+</gear>
 
 <gear>
   <name>roll sound</name>
@@ -1039,7 +1039,7 @@
     <factor>0.004</factor>
     <offset>0.0</offset>
   </volume>
-</gear> 
+</gear>
 
 <gear>
   <name>bump sound nose</name>
@@ -1122,7 +1122,7 @@
   <name>electrical</name>
   <path>Aircraft/tu154b/Sound/misc/el_loop.wav</path>
   <condition>
-    <property>tu154/systems/electrical/suppliers/battery_charge</property>
+    <property>tu154/switches/main-battery</property>
   </condition>
   <mode>looped</mode>
   <position>
@@ -1159,7 +1159,7 @@
     <inner-angle>90.0</inner-angle>
     <outer-angle>180.0</outer-angle>
     <outer-gain>0.0</outer-gain>
-  </orientation>    
+  </orientation>
   <volume>
     <property>engines/engine[0]/n2</property>
   </volume>
@@ -1168,7 +1168,7 @@
     <factor>-0.7</factor>
     <offset>1</offset>
   </volume>
-</revers> 
+</revers>
 <revers>
   <name>revers_3</name>
   <path>Sounds/rumble.wav</path>
@@ -1192,7 +1192,7 @@
     <inner-angle>90.0</inner-angle>
     <outer-angle>180.0</outer-angle>
     <outer-gain>0.0</outer-gain>
-  </orientation>    
+  </orientation>
   <volume>
     <property>engines/engine[2]/n2</property>
   </volume>
@@ -1201,7 +1201,7 @@
     <factor>-0.7</factor>
     <offset>1</offset>
   </volume>
-</revers> 
+</revers>
 
 <!--STOP ENGINES internal-->
 <engine>
@@ -1858,7 +1858,7 @@
       <max>1.78</max>
     </pitch>
   </engine>
-  
+
   <engine>
     <name>jet_whine_1_4</name>
     <path>Aircraft/tu154b/Sound/engine/xtaa14.wav</path>
@@ -1885,7 +1885,7 @@
       <offset>0.0</offset>
     </pitch>
   </engine>
-  
+
   <engine>
     <name>combustion_1_1</name>
     <path>Aircraft/tu154b/Sound/engine/xtaa21.wav</path>
@@ -1907,7 +1907,7 @@
       <max>0.25</max>
     </volume>
   </engine>
-  
+
   <engine>
     <name>combustion_1_2</name>
     <path>Aircraft/tu154b/Sound/engine/xtaa22.wav</path>
@@ -1954,7 +1954,7 @@
       <inner-angle>90.0</inner-angle>
       <outer-angle>150.0</outer-angle>
       <outer-gain>0.0</outer-gain>
-    </orientation>    
+    </orientation>
     <volume>
       <property>engines/engine[0]/n2</property>
       <factor type="double">0.01</factor>
@@ -2047,7 +2047,7 @@
       <max>1.78</max>
     </pitch>
   </engine>
-  
+
   <engine>
     <name>jet_whine_2_4</name>
     <path>Aircraft/tu154b/Sound/engine/xtaa14.wav</path>
@@ -2074,7 +2074,7 @@
       <offset>0.0</offset>
     </pitch>
   </engine>
-  
+
   <engine>
     <name>combustion_2_1</name>
     <path>Aircraft/tu154b/Sound/engine/xtaa21.wav</path>
@@ -2096,7 +2096,7 @@
       <max>0.25</max>
     </volume>
   </engine>
-  
+
   <engine>
     <name>combustion_2_2</name>
     <path>Aircraft/tu154b/Sound/engine/xtaa22.wav</path>
@@ -2143,13 +2143,13 @@
       <inner-angle>90.0</inner-angle>
       <outer-angle>150.0</outer-angle>
       <outer-gain>0.0</outer-gain>
-    </orientation>    
+    </orientation>
     <volume>
       <property>engines/engine[1]/n2</property>
       <factor type="double">0.01</factor>
       <offset type="double">0.0</offset>
     </volume>
-  </engine>   
+  </engine>
 <!--************************* ENGINE 3 EXTERNAL SOUND *******************************-->
 <engine>
    <name>jet_whine_3_1</name>
@@ -2235,7 +2235,7 @@
      <max>1.78</max>
    </pitch>
  </engine>
-  
+
  <engine>
    <name>jet_whine_3_4</name>
    <path>Aircraft/tu154b/Sound/engine/xtaa14.wav</path>
@@ -2262,7 +2262,7 @@
      <offset>0.0</offset>
    </pitch>
  </engine>
- 
+
  <engine>
    <name>combustion_3_1</name>
    <path>Aircraft/tu154b/Sound/engine/xtaa21.wav</path>
@@ -2284,7 +2284,7 @@
      <max>0.25</max>
    </volume>
  </engine>
- 
+
  <engine>
    <name>combustion_3_2</name>
    <path>Aircraft/tu154b/Sound/engine/xtaa22.wav</path>
@@ -2331,16 +2331,16 @@
      <inner-angle>90.0</inner-angle>
      <outer-angle>150.0</outer-angle>
      <outer-gain>0.0</outer-gain>
-   </orientation>    
+   </orientation>
    <volume>
      <property>engines/engine[2]/n2</property>
      <factor type="double">0.01</factor>
      <offset type="double">0.0</offset>
    </volume>
   </engine>
-  
+
 <!--********************************* END ENGINES SOUND ******************************-->
-  
+
 <!--Signals-->
 <horn>
     <name>horn_const</name>
@@ -2377,7 +2377,7 @@
       <offset type="double">0.5</offset>
     </volume>
   </horn>
-  
+
   <dynamic>
     <name>dynamic_const</name>
     <path>Aircraft/tu154b/Sound/misc/dinamik.wav</path>
@@ -2395,7 +2395,7 @@
       <offset type="double">0.5</offset>
     </volume>
   </dynamic>
-  
+
   <dynamic>
     <name>dynamic_pulse</name>
     <path>Aircraft/tu154b/Sound/misc/dinamik_pr.wav</path>
@@ -2433,7 +2433,7 @@
       <offset type="double">0.5</offset>
     </volume>
   </dynamic>
-  
+
   <marker>
     <name>inner</name>
     <path>Aircraft/tu154b/Sound/misc/omi_1.wav</path>
@@ -2468,7 +2468,7 @@
       <offset type="double">0.5</offset>
     </volume>
   </marker>
-  
+
   <marker>
     <name>outer</name>
     <path>Aircraft/tu154b/Sound/misc/omi_3.wav</path>
@@ -2486,10 +2486,8 @@
       <offset type="double">0.5</offset>
     </volume>
   </marker>
- 
 
-</fx> 
+
+</fx>
 
 </PropertyList>
-
-
