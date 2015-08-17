@@ -4,8 +4,6 @@
 # Novosibirsk, Russia
 # jun 2007, dec 2013
 #
-# OrangeTiger, August 2015
-#
 
 
 ######################################################################
@@ -307,7 +305,6 @@ var dme_distance = func(i) {
         interpolate("tu154/instrumentation/dme["~i~"]/distance", distance, 0.2);
     }
 }
-
 setlistener("instrumentation/dme[0]/indicated-distance-nm",
             func { dme_distance(0) }, 0, 0);
 setlistener("instrumentation/dme[1]/indicated-distance-nm",
@@ -315,21 +312,13 @@ setlistener("instrumentation/dme[1]/indicated-distance-nm",
 setlistener("instrumentation/dme[2]/indicated-distance-nm",
             func { dme_distance(2) }, 0, 0);
 
-#Inserted by OrangeTiger
-var dme_watchdog_power = func(i) {
-	setprop("instrumentation/dme["~i~"]/serviceable", 1);
-}
-
-setlistener("instrumentation/nav[0]/operable", func { dme_watchdog_power(0) }, 0, 0);
-setlistener("instrumentation/nav[1]/operable", func { dme_watchdog_power(1) }, 0, 0);
-#Inserted by OrangeTiger
 
 # Added by Yurik dec 2013
-#setprop("instrumentation/dme[0]/frequencies/selected-mhz", 
-#  getprop("instrumentation/nav[0]/frequencies/selected-mhz") );
+setprop("instrumentation/dme[0]/frequencies/selected-mhz", 
+  getprop("instrumentation/nav[0]/frequencies/selected-mhz") );
 
-#setprop("instrumentation/dme[1]/frequencies/selected-mhz", 
-#  getprop("instrumentation/nav[1]/frequencies/selected-mhz") );
+setprop("instrumentation/dme[1]/frequencies/selected-mhz", 
+  getprop("instrumentation/nav[1]/frequencies/selected-mhz") );
 
 ######################################################################
 #
@@ -1550,8 +1539,7 @@ if( arg[0] == 0 )	# proceed captain panel
 	var freq_low = getprop("tu154/instrumentation/kurs-mp-1/digit-f-low");
 	if( freq_low == nil ) return;
 	frequency = freq_hi + freq_low/100.0;
-	setprop("instrumentation/nav[0]/frequencies/selected-mhz", frequency );	
-	setprop("instrumentation/dme[0]/frequencies/selected-mhz", frequency );		#Inserted by OrangeTiger
+	setprop("instrumentation/nav[0]/frequencies/selected-mhz", frequency );
 	# heading
 	var hdg_ones = getprop("tu154/instrumentation/kurs-mp-1/digit-h-ones");
 	if( hdg_ones == nil ) return;
@@ -1577,7 +1565,6 @@ if( arg[0] == 1 ) # co-pilot
 	if( freq_low == nil ) return;
 	frequency = freq_hi + freq_low/100.0;
 	setprop("instrumentation/nav[1]/frequencies/selected-mhz", frequency );
-	setprop("instrumentation/dme[1]/frequencies/selected-mhz", frequency );		#Inserted by OrangeTiger
 	# heading
 	var hdg_ones = getprop("tu154/instrumentation/kurs-mp-2/digit-h-ones");
 	if( hdg_ones == nil ) return;
@@ -1598,25 +1585,26 @@ if( arg[0] == 1 ) # co-pilot
 
 # initialize KURS-MP frequencies & headings
 var kursmp_init = func{
-	var freq = getprop("instrumentation/nav[0]/frequencies/selected-mhz");
-	if( freq == nil ) { settimer( kursmp_init, 1.0 ); return; } # try until success
-	setprop("tu154/instrumentation/kurs-mp-1/digit-f-hi", int(freq) );
-	setprop("tu154/instrumentation/kurs-mp-1/digit-f-low", (freq - int(freq) ) * 100 );
-	var hdg = getprop("instrumentation/nav[0]/radials/selected-deg");
-	if( hdg == nil ) { settimer( kursmp_init, 1.0 ); return; }
-	setprop("tu154/instrumentation/kurs-mp-1/digit-h-hund", int(hdg/100) );
-	setprop("tu154/instrumentation/kurs-mp-1/digit-h-dec", int( (hdg/10.0)-int(hdg/100.0 )*10.0) );
-	setprop("tu154/instrumentation/kurs-mp-1/digit-h-ones", int(hdg-int(hdg/10.0 )*10.0) );
-	# second KURS-MP
-	freq = getprop("instrumentation/nav[1]/frequencies/selected-mhz");
-	if( freq == nil ) { settimer( kursmp_init, 1.0 ); return; } # try until success
-	setprop("tu154/instrumentation/kurs-mp-2/digit-f-hi", int(freq) );
-	setprop("tu154/instrumentation/kurs-mp-2/digit-f-low", (freq - int(freq) ) * 100 );
-	hdg = getprop("instrumentation/nav[1]/radials/selected-deg");
-	if( hdg == nil ) { settimer( kursmp_init, 1.0 ); return; }
-	setprop("tu154/instrumentation/kurs-mp-2/digit-h-hund", int( hdg/100) );
-	setprop("tu154/instrumentation/kurs-mp-2/digit-h-dec",int( ( hdg / 10.0 )-int( hdg / 100.0 ) * 10.0 ) );
-	setprop("tu154/instrumentation/kurs-mp-2/digit-h-ones", int( hdg-int( hdg/10.0 )* 10.0 ) );
+var freq = getprop("instrumentation/nav[0]/frequencies/selected-mhz");
+if( freq == nil ) { settimer( kursmp_init, 1.0 ); return; } # try until success
+setprop("tu154/instrumentation/kurs-mp-1/digit-f-hi", int(freq) );
+setprop("tu154/instrumentation/kurs-mp-1/digit-f-low", (freq - int(freq) ) * 100 );
+var hdg = getprop("instrumentation/nav[0]/radials/selected-deg");
+if( hdg == nil ) { settimer( kursmp_init, 1.0 ); return; }
+setprop("tu154/instrumentation/kurs-mp-1/digit-h-hund", int(hdg/100) );
+setprop("tu154/instrumentation/kurs-mp-1/digit-h-dec", int( (hdg/10.0)-int(hdg/100.0 )*10.0) );
+setprop("tu154/instrumentation/kurs-mp-1/digit-h-ones", int(hdg-int(hdg/10.0 )*10.0) );
+# second KURS-MP
+freq = getprop("instrumentation/nav[1]/frequencies/selected-mhz");
+if( freq == nil ) { settimer( kursmp_init, 1.0 ); return; } # try until success
+setprop("tu154/instrumentation/kurs-mp-2/digit-f-hi", int(freq) );
+setprop("tu154/instrumentation/kurs-mp-2/digit-f-low", (freq - int(freq) ) * 100 );
+hdg = getprop("instrumentation/nav[1]/radials/selected-deg");
+if( hdg == nil ) { settimer( kursmp_init, 1.0 ); return; }
+setprop("tu154/instrumentation/kurs-mp-2/digit-h-hund", int( hdg/100) );
+setprop("tu154/instrumentation/kurs-mp-2/digit-h-dec",int( ( hdg / 10.0 )-int( hdg / 100.0 ) * 10.0 ) );
+setprop("tu154/instrumentation/kurs-mp-2/digit-h-ones", int( hdg-int( hdg/10.0 )* 10.0 ) );
+
 }
 
 var kursmp_watchdog_1 = func{
@@ -1645,7 +1633,6 @@ else electrical.AC3x200_bus_1L.rm_output( "KURS-MP-1" );
 var kursmp_power_2 = func{
 if( getprop( "tu154/switches/KURS-MP-2" ) == 1.0 )
 	electrical.AC3x200_bus_3R.add_output( "KURS-MP-2", 20.0);
-
 else electrical.AC3x200_bus_3R.rm_output( "KURS-MP-2" );		
 }
 
@@ -2037,8 +2024,8 @@ if( ac200 == nil ) return; # system not ready yet
 if( ac200 > 150.0 )
 	{ # 200 V 400 Hz Line 1 Power OK
 	setprop("tu154/instrumentation/ark-15[0]/powered", 1 ); 
-        #setprop("instrumentation/dme[0]/serviceable",
-        #        (getprop("tu154/switches/dme-1-power") == 1));
+        setprop("instrumentation/dme[0]/serviceable",
+                (getprop("tu154/switches/dme-1-power") == 1));
 	setprop("instrumentation/nav[2]/powered", 1 ); 
 	setprop("instrumentation/dme[2]/serviceable", 1 );
         setprop("tu154/systems/nvu/powered",
@@ -2049,15 +2036,13 @@ if( ac200 > 150.0 )
 		setprop("instrumentation/nav[0]/power-btn", 1 );
 		setprop("instrumentation/nav[0]/serviceable", 1 );
 		setprop("instrumentation/marker-beacon[0]/power-btn", 1 );
-		setprop("instrumentation/marker-beacon[0]/serviceable", 1 );
-		setprop("instrumentation/dme[0]/serviceable", 1 );			#Added by OrangeTiger	
+		setprop("instrumentation/marker-beacon[0]/serviceable", 1 );		
 		}
 	else	{
 		setprop("instrumentation/nav[0]/power-btn", 0 );
 		setprop("instrumentation/nav[0]/serviceable", 0 );
 		setprop("instrumentation/marker-beacon[0]/power-btn", 0 );
 		setprop("instrumentation/marker-beacon[0]/serviceable", 0 );
-		setprop("instrumentation/dme[0]/serviceable", 0 );			#Added by OrangeTiger	
 		}
 	# GA3-1
 	if( getprop( "tu154/switches/TKC-power-1" ) == 1.0 )
@@ -2147,19 +2132,17 @@ if( ac200 == nil ) return; # system not ready yet
 if( ac200 > 150.0 )
 	{ # 200 V 400 Hz Line 3 Power OK
 	setprop("tu154/instrumentation/ark-15[1]/powered", 1 );
-        #setprop("instrumentation/dme[1]/serviceable",
-        #        (getprop("tu154/switches/dme-2-power") == 1));
+        setprop("instrumentation/dme[1]/serviceable",
+                (getprop("tu154/switches/dme-2-power") == 1));
 	# KURS-MP right
 	if( getprop( "tu154/switches/KURS-MP-2" ) == 1.0 )
 		{
 		setprop("instrumentation/nav[1]/power-btn", 1 );
 		setprop("instrumentation/nav[1]/serviceable", 1 );
-		setprop("instrumentation/dme[1]/serviceable", 1 );		#Added by OrangeTiger
 		}
 	else	{
 		setprop("instrumentation/nav[1]/power-btn", 0 );
 		setprop("instrumentation/nav[1]/serviceable", 0 );
-		setprop("instrumentation/dme[1]/serviceable", 0 );		#Added by OrangeTiger
 		}
 	# GA3-2
 	if( getprop( "tu154/switches/TKC-power-2" ) == 1.0 )
