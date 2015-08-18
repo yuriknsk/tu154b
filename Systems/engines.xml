@@ -340,7 +340,7 @@
     <!--Set throttle cmd - APU always throttle const-->
     <switch name="propulsion/engine[3]/thr">
       <default value="0.0"/>
-      <test value="0.97">
+      <test value="1.0">
         propulsion/engine[3]/n2 > 22.0
       </test>
       <output>fcs/throttle-pos-norm[3]</output>
