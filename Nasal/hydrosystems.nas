@@ -17,7 +17,7 @@ settimer( hs_handler, UPDATE_PERIOD );
 var param = getprop("fdm/jsbsim/hs/busters-serviceable");
 if( param == nil ) param = 0;
 if( param != 0 ) # if 0 - hydro power failure, surfaces are freese
-    {  
+    {
     # copy current position of surfaces if hydro power OK
     param = getprop("fdm/jsbsim/fcs/pitch-absu-sum");
     if( param == nil ) param = 0;
@@ -51,13 +51,13 @@ if( param != 0 ) # if 0 - hydro power failure, surfaces are freese
     setprop("fdm/jsbsim/gear/gear-cmd-static", param );
 	}
 # delivery info about direct 27V electrical power into FDM property tree
-# for correct operating of electrical switch 
+# for correct operating of electrical switch
     param = getprop("tu154/systems/electrical/buses/DC27-bus-L/volts");
     if( param == nil ) param = 0.0;
     if( param > 13.0 ) setprop("fdm/jsbsim/systems/electrical-ok", 1.0 );
     else setprop("fdm/jsbsim/systems/electrical-ok", 0.0 );
 
-    
+
 }
 
 hs_handler();
