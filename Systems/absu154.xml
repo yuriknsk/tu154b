@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-    
+
     Author:   Yurik V. Nikiforoff, yurik@megasignal.com
     Date:     apr-nov 2008
     Function: Autopilot fot TU-154B
@@ -28,24 +28,24 @@
   <property>ap/input-heading-pnp</property>
   <property>ap/input-heading-zk</property>
   <property>ap/input-at</property>
-  
+
   <property>ap/suu-enable</property>
-  
+
 <!--  <property>ap/gs-distance</property>
   <property>ap/crosstrack-m</property> -->
-  
-  <property>ap/ils-epsilon</property> 
-  
-  <property>ap/at-pid-output</property> 
+
+  <property>ap/ils-epsilon</property>
+
+  <property>ap/at-pid-output</property>
   <property>ap/at-podg</property>
   <property>ap/at-hold-0</property>
   <property>ap/at-hold-1</property>
   <property>ap/at-hold-2</property>
-  
+
   <property>ap/input-heading-delta</property>
   <property>ap/heading-cmd-norm</property>
 
-  
+
   <property>ap/stab-input-roll-rad</property>
   <property>ap/roll-hold</property>
 
@@ -58,7 +58,7 @@
 
   <property>ap/input-glideslope-speed</property>
   <property>ap/input-glideslope-delta</property>
-  
+
   <property>ap/glideslope-cmd-norm</property>
 
 
@@ -72,15 +72,15 @@
 
   <property>ap/input-altitude</property>
   <property>ap/altitude-cmd-norm</property>
-  
+
 
   <property>ap/stab-input-pitch-rad</property>
   <property>ap/offset-pitch-rad</property>
- 
- 
+
+
   <property>ap/pitch-hold</property>
   <property>ap/pitch/latch-out-rad</property>
-  
+
 
   <property>ap/windup-trigger</property>
 
@@ -89,10 +89,10 @@
   <property>ap/ena-needles</property>
 
 							<!--RESTORE IT FOR RELEASE!!!-->
-							
-							
+
+
 <channel name="Glue">
-  
+
 <fcs_function name="ap/navigac" >
     <function>
        <property>/tu154/switches/pn-5-navigac</property>
@@ -154,7 +154,7 @@
    <input>position/h-agl-ft</input>
    <gain>0.3048</gain>
  </pure_gain>
- 
+
  <fcs_function name="debug/gs-epsilon">
    <function>
      <product>
@@ -176,16 +176,16 @@
     <max>1.0</max>
    </clipto>
  </fcs_function>
- 
+
  <pure_gain name="debug/wp-hdg-corrected">
    <input>debug/wp-hdg</input>
    <gain>0.77</gain>
    <clipto>
     <min>-1.0</min>
     <max>1.0</max>
-   </clipto>   
+   </clipto>
  </pure_gain>
- 
+
 </channel>-->
 
 
@@ -198,7 +198,7 @@ modified by Yurik nov 2013
  -->
 
 <channel name="Pitch stab">
-  
+
 <!-- Glideslope path system -->
   <switch name="ap/pitch/gs-epsilon-gain">
     <default value="-3.0"/>
@@ -212,12 +212,12 @@ modified by Yurik nov 2013
 <!--<input>debug/gs-epsilon</input>-->			    <!--COMMENT IT FOR RELEASE!!!-->
     <gain>ap/pitch/gs-epsilon-gain</gain>
   </pure_gain>
-  
+
   <pure_gain name="ap/pitch/gs-k7">
     <input>ap/pitch/gs-epsilon</input>
     <gain>0.5</gain>
   </pure_gain>
-  
+
   <pure_gain name="ap/pitch/gs-gain-k2">
     <input>ap/pitch/gs-epsilon</input>
     <gain>0.7</gain>
@@ -227,7 +227,7 @@ modified by Yurik nov 2013
   <input>ap/pitch/gs-gain-k2</input>
   <c1>0.3</c1>
   </washout_filter>
-  
+
   <summer name="ap/pitch/gs-attitude">
     <input>attitude/theta-rad</input>
     <bias>-0.0087</bias>	<!--0.5 deg-->
@@ -242,7 +242,7 @@ modified by Yurik nov 2013
     <input>ap/pitch/gs-gain-k11</input>
     <c1>0.3</c1>
   </washout_filter>
-  
+
   <summer name="ap/pitch/gs-sum-internal">
     <input>ap/pitch/gs-k7</input>
     <input>ap/pitch/gs-k2</input>
@@ -253,36 +253,36 @@ modified by Yurik nov 2013
     <input>ap/pitch/gs-attitude</input>
     <gain>0.3</gain>
   </pure_gain>
-  
+
   <lag_filter name="ap/pitch/gs-k4">
     <input>ap/pitch/gs-sum-internal</input>
     <c1>4.0</c1>
-  </lag_filter> 
-  
+  </lag_filter>
+
   <lag_filter name="ap/pitch/gs-k8">
     <input>ap/pitch/gs-k10</input>
     <c1>4.0</c1>
-  </lag_filter> 
-  
+  </lag_filter>
+
   <switch name="ap/pitch/gs-k8-switched">
     <default value="0.0"/>
     <test value="ap/pitch/gs-k8">
       ap/pitch-hold == 1
     </test>
   </switch>
-  
+
   <summer name="ap/pitch/gs-sum-out">
     <input>ap/pitch/gs-k4</input>
     <input>ap/pitch/gs-k8-switched</input>
   </summer>
-  
+
   <switch name="ap/pitch/gs-sum-out-switched">
     <default value="0.0"/>
     <test value="ap/pitch/gs-sum-out">
       ap/posadk == 1
     </test>
   </switch>
-  
+
   <pure_gain name="ap/pitch/gs-k5">
     <input>ap/pitch/gs-sum-out-switched</input>
     <gain>5.0</gain>
@@ -291,7 +291,7 @@ modified by Yurik nov 2013
       <max>0.6</max>
     </clipto>
   </pure_gain>
-  
+
   <pure_gain name="ap/pitch/gs-needle">
     <input>ap/pitch/gs-sum-out-switched</input>
     <gain>-0.5</gain>
@@ -300,8 +300,8 @@ modified by Yurik nov 2013
       <max>1.0</max>
     </clipto>
   </pure_gain>
-  
-  
+
+
 <!--M stab-->
   <summer name="ap/pitch/mach-error">
     <input>ap/input-mach</input>
@@ -311,7 +311,7 @@ modified by Yurik nov 2013
       <max>0.5</max>
     </clipto>
   </summer>
-  
+
   <switch name="ap/pitch/mach-windup">
     <default value="-1.0"/>
     <test value="0.0">
@@ -319,9 +319,9 @@ modified by Yurik nov 2013
       ap/pitch-hold == 1
     </test>
   </switch>
-  
+
   <pid name="ap/pitch/m-pid">
-    <input>ap/pitch/mach-error</input>	    
+    <input>ap/pitch/mach-error</input>
     <kp> 5.0 </kp>
     <ki> 0.5 </ki>
     <kd> 5.0 </kd>
@@ -343,7 +343,7 @@ modified by Yurik nov 2013
       <max>100</max>
     </clipto>
   </summer>
-  
+
   <switch name="ap/pitch/speed-windup">
     <default value="-1.0"/>
     <test value="0.0">
@@ -351,9 +351,9 @@ modified by Yurik nov 2013
       ap/pitch-hold == 1
     </test>
   </switch>
-  
+
   <pid name="ap/pitch/v-pid">
-    <input>ap/pitch/speed-error</input>	    
+    <input>ap/pitch/speed-error</input>
     <kp> 0.01 </kp>
     <ki> 0.001 </ki>
     <kd> 0.01 </kd>
@@ -383,7 +383,7 @@ modified by Yurik nov 2013
       ap/pitch-hold == 1
     </test>
   </switch>
-  
+
   <pid name="ap/pitch/h-pid-pi">
     <input>-ap/pitch/altitude-error</input>
     <kp> 0.0005 </kp>
@@ -391,21 +391,21 @@ modified by Yurik nov 2013
     <kd> 0.0 </kd>
     <trigger>ap/pitch/h-windup</trigger>
   </pid>
-  
+
   <pid name="ap/pitch/h-pid-d">
     <input>-ap/pitch/altitude-error</input>
     <kp> 0.0 </kp>
     <ki> 0.0 </ki>
     <kd> 0.002 </kd><!--<kd> 0.0005 </kd>--><!--Patched by Francisco Jerez jun 2015-->
   </pid>
-  
+
   <switch name="ap/pitch/h-pid-d-switched">
     <default value="ap/pitch/h-pid-d"/>
     <test value="0.0">
       ap/turbulence == 1
     </test>
   </switch>
-  
+
   <summer name="ap/pitch/h-pid">
     <input>ap/pitch/h-pid-pi</input>
     <input>ap/pitch/h-pid-d</input>
@@ -439,19 +439,19 @@ modified by Yurik nov 2013
     </table>
   </function>
   </fcs_function>
-  
+
   <switch name="ap/pitch/go-around-pitch-rad-switched">
     <default value="0.0"/>
     <test value="ap/pitch/go-around-pitch-rad">
       ap/pitch-selector == 6
     </test>
   </switch>
-  
+
   <washout_filter name="ap/pitch/go-around-pitch-rad-dot">
     <input>ap/pitch/go-around-pitch-rad-switched</input>
     <c1>0.1</c1>
   </washout_filter>
-  
+
   <summer name="ap/pitch/go-around-f5">
     <input>ap/pitch/go-around-speed</input>
     <input>-velocities/vc-fps</input>
@@ -465,7 +465,7 @@ modified by Yurik nov 2013
     <input>ap/pitch/go-around-f5</input>
     <gain>0.005</gain>
   </pure_gain>
-  
+
   <pure_gain name="ap/pitch/go-around-kd">
     <input>-velocities/vc-fps</input>
     <gain>0.005</gain>
@@ -475,17 +475,17 @@ modified by Yurik nov 2013
     <input>ap/pitch/go-around-kd</input>
     <c1>0.3</c1>
   </washout_filter>
-  
+
   <summer name="ap/pitch/go-around-sum-1">
     <input>ap/pitch/go-around-kv</input>
     <input>ap/pitch/go-around-d</input>
   </summer>
-  
+
   <lag_filter name="ap/pitch/go-around-sum-1-filtered">
     <input>ap/pitch/go-around-sum-1</input>
     <c1>2.0</c1>
-  </lag_filter> 
-  
+  </lag_filter>
+
   <washout_filter name="ap/pitch/go-around-theta-rad-dot">
     <input>attitude/theta-rad</input>
     <c1>0.1</c1>
@@ -496,13 +496,13 @@ modified by Yurik nov 2013
     <input>-ap/pitch/go-around-pitch-rad-dot</input>
     <input>ap/pitch/go-around-theta-rad-dot</input>
   </summer>
-  
+
   <pure_gain name="ap/pitch/go-around-f">
     <input>ap/pitch/go-around-sum-2</input>
     <gain>5.0</gain>
   </pure_gain>
-  
-  
+
+
 <!--End go around stab-->
 
 
@@ -520,7 +520,7 @@ modified by Yurik nov 2013
       ap/pitch-selector == 4
     </test>
   </switch>
-    
+
 
 <!--Theta stabilizer-->
   <switch name="ap/pitch/theta-latched-rad">
@@ -529,7 +529,7 @@ modified by Yurik nov 2013
       ap/pitch-selector ne 0
     </test>
   </switch>
-  
+
   <summer name="ap/pitch/theta-sum-rad">
     <input>-ap/pitch/theta-latched-rad</input>
     <input>attitude/theta-rad</input>
@@ -546,7 +546,7 @@ modified by Yurik nov 2013
       <product>
 	<abs>
 	  <property>attitude/phi-rad</property>
-	</abs>  
+	</abs>
 	<value>-0.015</value>
       </product>
     </function>
@@ -582,8 +582,8 @@ modified by Yurik nov 2013
     <input>ap/pitch/stab-selector</input>
     <output>ap/pitch/latch-out-rad</output>
   </summer>
-  
-  
+
+
   <pure_gain name="ap/pitch/main_stab">
     <input>ap/pitch/main_stab_summer</input>
     <gain>5.0</gain>
@@ -609,7 +609,7 @@ modified by Yurik nov 2013
     </test>
     <test value="ap/pitch/go-around-f">		<!--Go around-->
       ap/pitch-selector == 6
-    </test>    
+    </test>
   </switch>
 
   <switch name="ap/pitch/ap-selector">
@@ -634,19 +634,19 @@ modified by Yurik nov 2013
 		ap/met-neutral == 1	<!-- Set it to 1 if you want move MET to neutral -->
 	      </test>
 	    </switch>
-	    
+
 	    <!--Input MET threshold (deadband zone)-->
 	    <deadband name="ap/pitch/met-input-deadband">
 	      <input>ap/pitch/met-selector</input>
 	      <width>0.2</width>
 	    </deadband>
-	    
+
 	    <!--Limit for output MET value-->
 	    <deadband name="ap/pitch/met-output-deadband">
 	      <input>ap/pitch/met-integr-out</input>
 	      <width>2.0</width> <!-- -1 ... 1 -->
 	    </deadband>
-	    
+
 	    <switch name="ap/pitch/met-threshold">
               <default value="0.0"/>
 	      <test value="0.0625">	<!--1/16 sec -> 32 sec for moving MET to all band -1..1 -->
@@ -656,9 +656,9 @@ modified by Yurik nov 2013
               <test value="-0.0625">
                 ap/pitch/met-input-deadband ne 0
 		ap/pitch/met-selector lt 0
-              </test>	      
+              </test>
             </switch>
-	    
+
 	    <switch name="ap/pitch/met-input">
               <default value="ap/pitch/met-threshold"/>
               <test value="0.0">
@@ -670,9 +670,9 @@ modified by Yurik nov 2013
                 ap/pitch/met-output-deadband ne 0
 		ap/pitch/met-integr-out gt 0
 		ap/pitch/met-threshold gt 0
-              </test>	      
+              </test>
             </switch>
-	    
+
 	    <pid name="ap/pitch/met-integrator">
               <input>ap/pitch/met-input</input>
 	      <kp>0.0</kp>
@@ -681,17 +681,17 @@ modified by Yurik nov 2013
 	      <trigger>ap/pitch/met-trigger</trigger>
 	      <output>ap/pitch/met-integr-out</output>
             </pid>
-	    
+
 	    <pure_gain name="ap/pitch/met">
 	      <input>ap/pitch/met-integrator</input>
 	      <gain>0.7</gain>
 	    </pure_gain>
-  
+
 <!-- ***************** End MET section ****************************-->
 
 <!-- +++++++++++++++++++ SUU ( enchance control system ) ++++++++++++++++++ -->
-<!-- 
-There is a system for enchance pitch control. It read pitch trimmer position and adjust gain of pitch channel of yoke control. 
+<!--
+There is a system for enchance pitch control. It read pitch trimmer position and adjust gain of pitch channel of yoke control.
 -->
             <scheduled_gain name="ap/suu">
               <input>fcs/elevator-cmd-norm</input>
@@ -708,14 +708,14 @@ There is a system for enchance pitch control. It read pitch trimmer position and
                 </tableData>
               </table>
             </scheduled_gain>
-            
+
             <switch name="ap/suu-switched">
               <default value="0.0"/>
               <test value="ap/suu">
                 ap/suu-enable == 1
               </test>
             </switch>
-	    
+
 	    <pure_gain name="ap/suu-gain">
 	      <input>ap/suu-switched</input>
 	      <gain>-0.5</gain>
@@ -725,7 +725,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
 
 
 
-<!--Pitch damper-->  
+<!--Pitch damper-->
   <pure_gain name="ap/pitch/kwz-main">
     <input>velocities/thetadot-rad_sec</input>
     <gain>4.0</gain>
@@ -735,7 +735,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
     <input>velocities/thetadot-rad_sec</input>
     <gain>4.0</gain>
   </pure_gain>
-  
+
   <switch name="ap/pitch/kwz-gs-switched">
     <default value="0.0"/>
     <test value="ap/pitch/kwz-gs">
@@ -747,9 +747,9 @@ There is a system for enchance pitch control. It read pitch trimmer position and
       ap/pitch-hold == 1
     </test>
   </switch>
-  
+
 <!--End pitch damper  -->
-  
+
   <summer name="ap/pitch/ap-summer">
     <input>ap/pitch/kwz-main</input>
     <input>ap/pitch/kwz-gs-switched</input>
@@ -758,13 +758,13 @@ There is a system for enchance pitch control. It read pitch trimmer position and
     <clipto>
       <min>-0.6</min>
       <max>0.6</max>
-    </clipto>	      
+    </clipto>
   </summer>
 
-  
+
   <pure_gain name="ap/pitch/elevator-cmd">
     <input>ap/pitch/ap-summer</input>
-    <gain>systems/electrical-ok</gain>    
+    <gain>systems/electrical-ok</gain>
     <output>fcs/absu-pitch</output>
   </pure_gain>
 
@@ -774,15 +774,15 @@ There is a system for enchance pitch control. It read pitch trimmer position and
 <!-- *********************** Heading channels ************************ -->
 
       <channel name="Heading stab">
-        
+
 <!--******************************* VOR Staff ***************************-->
         <summer name="ap/heading-error-pnp">
           <input> -instrumentation/pnp-heading </input>
           <input> ap/input-heading-pnp </input>
           <input> -instrumentation/nvu/drift-angle </input>
         </summer>
-        
-<!--VOR angle stabilizer (epsilon) -->        
+
+<!--VOR angle stabilizer (epsilon) -->
         <pure_gain name="ap/vor-beam-error">
          <input> -ap/input-heading-delta </input>
          <gain> 2.0 </gain><!--1-->
@@ -795,13 +795,13 @@ There is a system for enchance pitch control. It read pitch trimmer position and
         <lag_filter name="ap/beam-error-filtered">
           <input>ap/vor-beam-error</input>
          <c1>5.0</c1>
-        </lag_filter> 
-        
+        </lag_filter>
+
         <pure_gain name="ap/beam-error-adjusted">
           <input> ap/beam-error-filtered </input>
           <gain> 7.0 </gain>
         </pure_gain>
-        
+
         <switch name="ap/vor-eps">
           <default value="0.0"/>
           <test value="ap/beam-error-adjusted">
@@ -825,7 +825,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
             <max>  60 </max>
           </clipto>
         </pure_gain>
-        
+
         <summer name="ap/heading-error-nvu">
           <input> -instrumentation/tks-heading </input>
           <input> instrumentation/nvu/ZPU-active </input>
@@ -849,7 +849,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
             ap/heading-error-ils gt 180
           </test>
         </switch>
-        
+
         <switch name="ap/ils-beam-ki">
           <default value="0.003"/><!--0.003-->
           <test value="0.007"><!--0.007-->
@@ -862,23 +862,23 @@ There is a system for enchance pitch control. It read pitch trimmer position and
 <input> ap/heading-epsilon </input><!-- -1...1 -->	<!--RESTORE IT FOR RELEASE!!!-->
           <gain> 3.0 </gain>
         </pure_gain>
-        
-        
+
+
         <pure_gain name="ap/ils-hdg-k10">
 	  <input> ap/ils-epsilon-input</input>
           <gain> 1.0 </gain>
         </pure_gain>
-	
+
         <pure_gain name="ap/ils-gain-k17">
 	  <input> ap/ils-epsilon-input</input>
           <gain> 10.0 </gain>
         </pure_gain>
-        
+
 <!--        <lag_filter name="ap/ils-beam-filtered">
           <input>ap/ils-beam-error</input>
           <c1>5.0</c1>
         </lag_filter> -->
-        
+
 
  <!-- ILS heading  -->
 <!-- modified by Yurik jul 2013
@@ -888,19 +888,19 @@ There is a system for enchance pitch control. It read pitch trimmer position and
           <input> ap/ils-error-bias-switch </input>
           <input> ap/heading-error-ils </input>
         </summer>
-	
+
         <pure_gain name="ap/ils-hdg-gain-k2">
 	  <input> ap/ils-hdg-mainsummer </input>
           <gain> 0.2 </gain><!--0.2-->
         </pure_gain>
-	
+
         <switch name="ap/ils-hdg-gain-k2-switched">
           <default value="0.0"/>
           <test value="ap/ils-hdg-gain-k2">
             instrumentation/indicated-altitude-m lt 250.0
           </test>
         </switch>
-	
+
         <pure_gain name="ap/ils-hdg-k3">
 	  <input> ap/ils-hdg-deviation </input>
           <gain> -0.7 </gain>
@@ -912,29 +912,29 @@ There is a system for enchance pitch control. It read pitch trimmer position and
             instrumentation/indicated-altitude-m gt 250.0
           </test>
         </switch>
-                
+
         <lag_filter name="ap/ils-hdg-k4">
           <input>ap/ils-hdg-gain-k2-switched</input>
           <c1>1.0</c1>
         </lag_filter>
-        
+
         <pure_gain name="ap/ils-hdg-gain-k5">
 	  <input> ap/ils-hdg-deviation </input>
           <gain> 0.175 </gain>
         </pure_gain>
-	
+
         <pure_gain name="ap/ils-hdg-k6">
 	  <input> ap/ils-hdg-deviation </input>
           <gain> 0.7 </gain>
         </pure_gain>
-	
+
         <switch name="ap/ils-hdg-k6-switched">
           <default value="0.0"/>
           <test value="ap/ils-hdg-k6">
             instrumentation/indicated-altitude-m gt 250.0
           </test>
         </switch>
-	
+
         <washout_filter name="ap/ils-hdg-k5">
 	  <input> ap/ils-hdg-gain-k5</input>
           <c1>0.3</c1>
@@ -948,14 +948,14 @@ There is a system for enchance pitch control. It read pitch trimmer position and
         <summer name="ap/ils-hdg-f1">
          <input> ap/ils-hdg-k3-switched </input>
 	 <input> ap/ils-hdg-k10 </input>
-	 <input> ap/ils-hdg-k4 </input>  
+	 <input> ap/ils-hdg-k4 </input>
          <clipto>
            <min> -20.0 </min>
            <max> 20.0 </max>
          </clipto>
         </summer>
 
-        
+
         <summer name="ap/ils-hdg-mainsummer">
          <input> ap/ils-hdg-k6-switched </input>
 	 <input> ap/ils-hdg-f1 </input>
@@ -966,14 +966,14 @@ There is a system for enchance pitch control. It read pitch trimmer position and
            <max> 0.38 </max>
          </clipto>-->
         </summer>
-	
+
         <pure_gain name="ap/ils-out">
 	  <input> ap/ils-hdg-mainsummer </input>
           <gain> 0.043 </gain>
         </pure_gain>
 
-	
-        
+
+
 <!-- ############################## Needles ############################## -->
         <pure_gain name="ap/heading-needle-deflection-ils">
           <!--<input> ap/ils-angle-deviation </input>-->
@@ -984,7 +984,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
             <max>  1 </max>
           </clipto>
         </pure_gain>
-	
+
         <pure_gain name="ap/heading-needle-deflection-vor">
           <input> -ap/input-heading-delta </input>
           <gain>0.02</gain>
@@ -993,7 +993,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
             <max>  1 </max>
           </clipto>
         </pure_gain>
-	
+
         <pure_gain name="ap/heading-needle-deflection-nvu">
           <input> -instrumentation/nvu/Z-active </input>
           <gain>0.0002</gain>
@@ -1002,7 +1002,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
             <max>  1 </max>
           </clipto>
         </pure_gain>
-        
+
         <switch name="ap/heading-needle-deflection">
           <default value="0.0"/>
           <test value="ap/heading-needle-deflection-vor">
@@ -1034,9 +1034,9 @@ There is a system for enchance pitch control. It read pitch trimmer position and
             <!--ap/pitch-selector eq 5-->
 	    ap/posadk eq 1
           </test>
-	</switch>        
+	</switch>
 <!--****************************** Heading stabilizer **********************-->
-<!--ILS approach (STU Kurs) have own pid. -->        
+<!--ILS approach (STU Kurs) have own pid. -->
 <switch name="ap/heading-error">
           <default value="0.0"/>
           <test value="ap/heading-error-zk">
@@ -1051,7 +1051,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
 	    ap/navigac == 1
           </test>
         </switch>
-        
+
         <switch name="ap/heading-error-bias-switch">
          <default value="0.0"/>
          <test value="360.0">
@@ -1067,7 +1067,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
          <input> ap/heading-error </input>
          <input> ap/vor-eps </input>
        </summer>
-        
+
        <pid name="ap/heading-pid">
           <input>ap/heading-deviation</input>
           <kp> 0.035 </kp>
@@ -1075,23 +1075,23 @@ There is a system for enchance pitch control. It read pitch trimmer position and
           <kd> 0.025 </kd>
           <output>ap/heading-cmd-norm</output>
         </pid>
-    
-      </channel>      
+
+      </channel>
 
 <!-- *********************** Wing leveler  ************************ -->
     <channel name="Roll">
-<!--              Roll stab mode selector         
+<!--              Roll stab mode selector
     ap/roll-selector state:
     0 - roll damper
     1 - stabilize current roll value
     2 - stabilize current heading by variate roll
-    3 - VOR 
+    3 - VOR
     4 - NVU
     5 - ILS (STU kurs)
 
 -->
             <switch name="ap/roll-trigger">
-              <default value="-1.0"/> 
+              <default value="-1.0"/>
               <test value="0.0">
                 ap/roll-hold ne 0
               </test>
@@ -1099,7 +1099,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
 
             <switch name="ap/input-roll-rad">
               <!--All automatic stabilizer exclude ILS use it-->
-	      <default value="ap/heading-cmd-norm"/> 
+	      <default value="ap/heading-cmd-norm"/>
               <test value="0.0">
                 ap/roll-selector == 0 <!--Roll damper only-->
               </test>
@@ -1108,12 +1108,12 @@ There is a system for enchance pitch control. It read pitch trimmer position and
                 ap/roll-selector == 1 <!--Roll wheel-->
               </test>
 
-              <test value="ap/ils-out"> 
+              <test value="ap/ils-out">
                 ap/roll-selector == 5 <!--ILS (STU Kurs) pid-->
 		ap/posadk == 1
-              </test>	     
+              </test>
             </switch>
-            
+
             <lag_filter name="ap/input-roll-rad-clipped">
               <input>ap/input-roll-rad</input>
               <c1>0.7</c1>
@@ -1121,7 +1121,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
                 <min>-0.43</min>
                 <max>0.43</max>
               </clipto>
-            </lag_filter> 
+            </lag_filter>
 
             <summer name="ap/roll-error">
               <input>ap/input-roll-rad-clipped</input>
@@ -1146,7 +1146,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
                 ap/roll-hold ne 0
               </test>
             </switch>
-            
+
             <pid name="ap/roll-damper">
 	      <input>-attitude/roll-rad</input>
               <kp> 0.0 </kp>
@@ -1158,7 +1158,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
               </clipto>
             </pid>
 
-            <!--Output-->            
+            <!--Output-->
             <summer name="ap/roll-out">
  <!--<input>ap/roll-damper</input>-->
               <input>ap/roll-pid-switched</input>
@@ -1167,8 +1167,8 @@ There is a system for enchance pitch control. It read pitch trimmer position and
                 <max>1</max>
               </clipto>
             </summer>
-	    
-	    <!--Turbulence switch-->	    
+
+	    <!--Turbulence switch-->
             <scheduled_gain name="ap/roll-turb">
               <input>ap/roll-out</input>
               <table>
@@ -1179,28 +1179,28 @@ There is a system for enchance pitch control. It read pitch trimmer position and
                 </tableData>
               </table>
             </scheduled_gain>
-            
+
             <pure_gain name="ap/aileron">
               <input>ap/roll-turb</input>
               <gain>1.0</gain>
               <output>fcs/absu-roll</output>
-            </pure_gain>       
-      </channel>      
-      
+            </pure_gain>
+      </channel>
+
 <!--******************************** Yaw control *****************************-->
       <channel name="Yaw">
-    
-	<!--Yaw damper-->        
+
+	<!--Yaw damper-->
         <washout_filter name="ap/yaw-wf">
           <input>velocities/r-aero-rad_sec</input>
           <c1>0.4</c1>
         </washout_filter>
-        
+
         <pure_gain name="ap/yaw-damper">
           <input>ap/yaw-wf</input>
           <gain>8.0</gain><!--8-->
         </pure_gain>
-        
+
         <!--Slip stabilizer-->
         <switch name="ap/beta-rad-switched">
           <default value="0.0"/>
@@ -1208,7 +1208,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
             ap/roll-hold ne 0
           </test>
         </switch>
-        
+
         <pid name="ap/yaw-pid">
           <input>ap/beta-rad-switched</input>
           <kp> 1.0 </kp>
@@ -1219,15 +1219,15 @@ There is a system for enchance pitch control. It read pitch trimmer position and
             <max>0.5</max>
           </clipto>
         </pid>
-        <!--             Autopilot or  Yaw Damper only?        -->        
+        <!--             Autopilot or  Yaw Damper only?        -->
         <switch name="ap/yaw-pid-switched">
           <default value="0.0"/>
           <test value="ap/yaw-pid">
             ap/roll-hold ne 0
           </test>
         </switch>
-               
-        <!--Output-->            
+
+        <!--Output-->
         <summer name="ap/yaw-out">
           <input>ap/yaw-damper</input>
           <!--<input>ap/yaw-suu</input>-->
@@ -1237,7 +1237,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
             <max>1</max>
           </clipto>
         </summer>
-     	    <!--Turbulence switch-->	    
+     	    <!--Turbulence switch-->
         <scheduled_gain name="ap/yaw-turb">
            <input>ap/yaw-out</input>
              <table>
@@ -1254,16 +1254,16 @@ There is a system for enchance pitch control. It read pitch trimmer position and
           <gain>1.0</gain>
           <output>fcs/absu-yaw</output>
         </pure_gain>
-	
+
       </channel>
 <!-- ***************************** Reverser ******************************* -->
 <channel name="Reverser">
-  
+
         <switch name="fcs/rev-1-left-cmd">
           <default value="0.0"/>
           <test value="1.0">
             fcs/revers-by-key gt 0.5
-          </test>          
+          </test>
           <test value="fcs/revers-by-joy">
             fcs/throttle-cmd-norm[0] lt fcs/revers-1-limit
           </test>
@@ -1272,7 +1272,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
           <default value="0.0"/>
           <test value="1.0">
             fcs/revers-by-key gt 0.5
-          </test>          
+          </test>
           <test value="fcs/revers-by-joy">
             fcs/throttle-cmd-norm[2] lt fcs/revers-1-limit
           </test>
@@ -1281,7 +1281,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
           <default value="0.0"/>
           <test value="1.0">
             fcs/revers-by-key gt 0.5
-          </test>          
+          </test>
           <test value="fcs/revers-by-joy">
             fcs/throttle-cmd-norm[0] lt fcs/revers-2-limit
           </test>
@@ -1290,12 +1290,12 @@ There is a system for enchance pitch control. It read pitch trimmer position and
           <default value="0.0"/>
           <test value="1.0">
             fcs/revers-by-key gt 0.5
-          </test>          
+          </test>
           <test value="fcs/revers-by-joy">
             fcs/throttle-cmd-norm[2] lt fcs/revers-2-limit
           </test>
         </switch>
-        
+
         <kinematic name="fcs/reverser-lever-left">
           <input>fcs/rev-1-left-cmd</input>
           <traverse>
@@ -1310,7 +1310,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
           </traverse>
           <output>propulsion/engine[0]/reverser-angle-rad</output>
         </kinematic>
-        
+
         <kinematic name="fcs/reverser-lever-right">
           <input>fcs/rev-1-right-cmd</input>
           <traverse>
@@ -1339,7 +1339,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
             </setting>
           </traverse>
         </kinematic>
-        
+
         <kinematic name="fcs/reverser-throttle-right">
           <input>fcs/rev-2-right-cmd</input>
           <traverse>
@@ -1353,11 +1353,11 @@ There is a system for enchance pitch control. It read pitch trimmer position and
             </setting>
           </traverse>
         </kinematic>
-	
+
 </channel>
-<!-- ***************************** Autothrottle ******************************* -->      
+<!-- ***************************** Autothrottle ******************************* -->
       <channel name="At">
-        
+
         <summer name="ap/at-error">
           <input>-ap/input-at</input>
           <input>velocities/vc-fps</input>
@@ -1372,20 +1372,20 @@ There is a system for enchance pitch control. It read pitch trimmer position and
           <input>fcs/throttle-cmd-norm[0]</input>
           <input>-ap/at-pid-output</input>
         </summer>
-                
+
         <switch name="ap/at-tr-err-switched">
           <default value="0.0"/>
           <test value="-ap/at-transient-error">
             ap/at-podg == 1
           </test>
         </switch>
-        
+
         <pure_gain name="ap/at-transient-compensator">
           <input>ap/at-tr-err-switched</input>
           <gain>20.0</gain>
-        </pure_gain>       
+        </pure_gain>
 
-        <!--End transient procedure -->            
+        <!--End transient procedure -->
 <!--Helpers-->
         <switch name="ap/at-hold">
           <default value="0.0"/>
@@ -1399,7 +1399,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
             ap/at-hold-2 == 1
           </test>
         </switch>
-        
+
         <switch name="ap/at-trigger">
           <default value="0.0"/>
           <test value="-1.0">
@@ -1412,14 +1412,14 @@ There is a system for enchance pitch control. It read pitch trimmer position and
             ap/at-error > 0.0
 	    <!--Error found by Francisco Jerez-->
 	    <!--ap/at-pid-output > 0.9-->
-            ap/at-pid-output lt 0.1	
+            ap/at-pid-output lt 0.1
           </test>
           <test value="1.0">
             ap/at-error lt 0.0
 	    <!--ap/at-pid-output lt 0.1-->
 	    ap/at-pid-output > 0.9
           </test>
-          
+
         </switch>
 
         <switch name="ap/at-error-switched">
@@ -1428,7 +1428,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
             ap/at-hold == 1
           </test>
         </switch>
-        
+
         <switch name="ap/at-pid-ki">
           <default value="0.1"/>
           <test value="0.001">
@@ -1441,7 +1441,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
             ap/at-hold == 1
           </test>
         </switch>
-        
+
         <pid name="ap/at-pid">
           <input>-ap/at-error-switched</input>
           <kp> 0.04 </kp>
@@ -1465,7 +1465,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
           </test>
           <output>fcs/at-throttle-cmd-norm[0]</output>
         </switch>
-        
+
         <switch name="ap/at-thr-switched-1">
           <default value="fcs/throttle-cmd-norm[1]"/>
           <test value="ap/at-pid">
@@ -1473,7 +1473,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
           </test>
           <output>fcs/at-throttle-cmd-norm[1]</output>
         </switch>
-        
+
         <switch name="ap/at-thr-switched-2">
           <default value="fcs/throttle-cmd-norm[2]"/>
           <test value="fcs/reverser-throttle-right">
@@ -1484,7 +1484,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
           </test>
           <output>fcs/at-throttle-cmd-norm[2]</output>
         </switch>
-      
+
       </channel>
-      
+
 </autopilot>
