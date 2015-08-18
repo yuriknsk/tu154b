@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <!--
-    
+
     Author:   Yurik V. Nikiforoff, yurik@megasignal.com
     Date:     15 apr 2009
     Function: JSBSim global properties
-    
+
     -->
 
 
@@ -18,9 +18,9 @@
         <property>fcs/stabilizer-pos-rad</property>-->
 <!--        <property>fcs/stab-manu-cmd</property>-->
         <property>fcs/stab-manu-switch</property>
-        
+
 	<property value="0.0">fcs/met-cmd</property>	<!--New MET system-->
-	
+
         <!--Hydro power support-->
         <property>fcs/elevator-pos-static</property>
         <property>fcs/aileron-pos-static</property>
@@ -40,12 +40,12 @@
 
         <!--Electrical support-->
         <property>systems/electrical-ok</property>
-	
+
 	<!--Refuel systems-->
       <property>tu154/systems/flight/fl</property>
       <property>tu154/systems/flight/dist</property>
 
-      
+
       <!--******************************************** For script controlled flight ************************************-->
 <!--
       <property>/gear/gear/wow</property>
@@ -53,19 +53,19 @@
       <property>sim-time-sec</property>
       <property value="2.0">fcs/stab-auto-cmd</property>
       <property>fcs/stabilizer-cmd-norm</property>
-            
+
       <property>systems/electrical-ok</property>
-      
+
       <property>hs/max-pressure</property>
-      
+
       <property>hs/buster-1-switch</property>
       <property>hs/buster-2-switch</property>
       <property>hs/buster-3-switch</property>
-      
+
       <property>hs/ra56-pitch-1</property>
       <property>hs/ra56-pitch-2</property>
       <property>hs/ra56-pitch-3</property>
-      
+
       <property>hs/ra56-roll-1</property>
       <property>hs/ra56-roll-2</property>
       <property>hs/ra56-roll-3</property>
@@ -79,22 +79,22 @@
       <property>instrumentation/tks-latitude-auto</property>
       <property>instrumentation/tks-consumers</property>
       <property>instrumentation/pnp-left-selector</property>
-      
+
       <property>instrumentation/pnp-left-selector</property>
       <property>instrumentation/indicated-altitude-m</property>
 
       <property>instrumentation/nvu/active</property>
       <property>instrumentation/nvu/stopped</property>
-      
-      
-      
+
+
+
       <property>ap/navigac</property>
       <property>ap/posadk</property>
-      
+
       <property>fcs/revers-1-limit</property>
       <property>fcs/revers-2-limit</property>
       <property>gear/gear-cmd-static</property>
-      
+
       <property value="7.2">debug/wp-lat-deg</property>
       <property value="150.2">debug/wp-lon-deg</property>
       <property>ap/heading-epsilon</property>

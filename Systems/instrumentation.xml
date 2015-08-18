@@ -8,18 +8,18 @@
 -->
 <system name="Instrumentation">
   <!--Interface to TKS compass system-->
-  
+
   <property>instrumentation/km-5-magvar-1</property>
   <property>instrumentation/km-5-magvar-2</property>
-<!--  
+<!--
   <property>instrumentation/pu11-latitude</property>
   <property>instrumentation/bgmk-offset-1</property>
   <property>instrumentation/bgmk-offset-2</property>
   -->
-  
+
   <property>instrumentation/bgmk-failure-1</property>
   <property>instrumentation/bgmk-failure-2</property>
-  
+
   <property>instrumentation/bgmk-corrector-1</property>
   <property>instrumentation/bgmk-corrector-2</property>
 
@@ -38,17 +38,17 @@
       <input>inertia/weight-lbs</input>
       <gain>0.454</gain>
     </pure_gain>
-    
+
     <pure_gain name="instrumentation/mass-t">
       <input>instrumentation/mass-kg</input>
       <gain>0.001</gain>
     </pure_gain>
-    
+
     <pure_gain name="instrumentation/vc-kmh">
       <input>velocities/vc-fps</input>
       <gain>1.09728</gain>
     </pure_gain>
-    
+
     <!--Safe speed-->
     <fcs_function name="instrumentation/v-2">
       <description>Safe speed</description>
@@ -57,7 +57,7 @@
           <independentVar lookup="row">instrumentation/mass-t</independentVar>
           <independentVar lookup="column">fcs/flap-pos-deg</independentVar>
           <tableData>
-            0             15            28            
+            0             15            28
             70             314           246           237
             72             317           250           240
             74             322           253           243
@@ -85,7 +85,7 @@
           <independentVar lookup="row">instrumentation/mass-t</independentVar>
           <independentVar lookup="column">fcs/flap-pos-deg</independentVar>
           <tableData>
-            15            28            
+            15            28
             70             231           222
             72             234           225
             74             237           229
@@ -114,7 +114,7 @@
           <independentVar lookup="column">fcs/flap-pos-deg</independentVar>
           <tableData>
             0             15            28           45
-            60             290           265           247          233 
+            60             290           265           247          233
             62             295           268           251          237
             64             300           273           255          240
             66             306           277           259          245
@@ -138,28 +138,28 @@
         </table>
       </function>
     </fcs_function>
-    
+
     <summer name="instrumentation/v-1">
       <input>instrumentation/v-2</input>
       <bias>-30.0</bias>
     </summer>
-    
-    
-    <!-- ******************* AUASP ****************** -->   
+
+
+    <!-- ******************* AUASP ****************** -->
             <lag_filter name="instrumentation/n-norm">
               <input>accelerations/n-pilot-z-norm</input>
               <c1>5.0</c1>
-            </lag_filter> 
-            
+            </lag_filter>
+
 <!--************************** TKS staff ****************************-->
-            
+
             <!--Latitudal correction-->
-            
+
             <pure_gain name="instrumentation/pu11-lat-rad">
               <input>instrumentation/pu11-latitude</input>
               <gain>0.01745</gain>
             </pure_gain>
-            
+
             <switch name="instrumentation/tks-lat-rad">
               <default value="instrumentation/pu11-lat-rad"/>
               <test value="position/lat-gc-rad">
@@ -176,14 +176,14 @@
               <input>instrumentation/tks-lat-rad</input>
               <gain>57.3</gain>
             </pure_gain>
-	    
+
             <pure_gain name="instrumentation/tks-timeoffset-deg">
              <input>simulation/sim-time-sec</input>
 <!--<input>sim-time-sec</input>-->
               <gain>0.0041666667</gain>
             </pure_gain>
-            
-            
+
+
             <fcs_function name="instrumentation/tks-lat-corr">
               <description>Latitudal correction</description>
               <function>
@@ -195,12 +195,12 @@
 		    </sin>
 		    <sin>
 		      <property>position/lat-gc-rad</property>
-		    </sin>		    
+		    </sin>
 	    	  </difference>
                 </product>
               </function>
             </fcs_function>
-            
+
 <!--For debug only!-->
 <!--
 <pure_gain name="instrumentation/heading-true-deg">
@@ -210,13 +210,13 @@
             -->
             <summer name="instrumentation/ga3-corrected-1">
               <input>ap/input-heading-gyro-1</input>
-	      
+
 	<!--<input>instrumentation/heading-true-deg</input>-->
-	
+
 	      <input>instrumentation/az-err</input>
               <input>-instrumentation/tks-lat-corr</input>
             </summer>
-            
+
             <summer name="instrumentation/ga3-corrected-2">
               <input>ap/input-heading-gyro-2</input>
 	      <input>instrumentation/az-err</input>
@@ -229,7 +229,7 @@
                 instrumentation/tks-consumers == 1
               </test>
             </switch>
-            
+
             <!--KM-5 procedure-->
             <!--1\2 mag deviation-->
             <!--Disabled yet-->
@@ -246,7 +246,7 @@
                 </tableData>
               </table>
             </scheduled_gain>
-            
+
             <scheduled_gain name="instrumentation/km-5-dev-2">
               <input>systems/electrical-ok</input>	<!--Need 1 here-->
               <table>
@@ -260,22 +260,22 @@
                 </tableData>
               </table>
             </scheduled_gain>
-            
+
             <summer name="instrumentation/km-5-1">
               <input>ap/input-magnetic-heading</input>
               <input>instrumentation/km-5-dev-1</input>
               <input>instrumentation/km-5-magvar-1</input>
             </summer>
-            
+
             <summer name="instrumentation/km-5-2">
               <input>ap/input-magnetic-heading</input>
               <input>instrumentation/km-5-dev-2</input>
               <input>instrumentation/km-5-magvar-2</input>
             </summer>
-            
-            <!--Gyro-magnetic heading procedure-->    
+
+            <!--Gyro-magnetic heading procedure-->
             <!--BGMK-1-->
-            
+
             <summer name="instrumentation/bgmk-fork-1">
               <input>-instrumentation/ga3-corrected-1</input>
               <input>instrumentation/km-5-1</input>
@@ -285,26 +285,26 @@
                 <max>10.0</max>
               </clipto>
             </summer>
-            
+
             <switch name="instrumentation/bgmk-tau-1">
               <default value="0.0042"/>
               <test value="0.3">
                 instrumentation/bgmk-corrector-1 == 1
               </test>
             </switch>
-            
+
             <integrator name="instrumentation/bgmk-1-integrator">
               <input>instrumentation/bgmk-fork-1</input>
               <c1>instrumentation/bgmk-tau-1</c1>
               <trigger>instrumentation/bgmk-failure-1</trigger>
               <output>instrumentation/bgmk-offset-1</output>
             </integrator>
-            
+
             <summer name="instrumentation/bgmk-1">
               <input>instrumentation/ga3-corrected-1</input>
               <input>instrumentation/bgmk-1-integrator</input>
             </summer>
-            
+
             <!--End BGMK-1-->
             <!--BGMK-2-->
             <summer name="instrumentation/bgmk-fork-2">
@@ -316,49 +316,49 @@
                 <max>10.0</max>
               </clipto>
             </summer>
-            
+
             <switch name="instrumentation/bgmk-tau-2">
               <default value="0.0042"/>
               <test value="0.3">
                 instrumentation/bgmk-corrector-2 == 1
               </test>
             </switch>
-            
+
             <integrator name="instrumentation/bgmk-2-integrator">
               <input>instrumentation/bgmk-fork-2</input>
               <c1>instrumentation/bgmk-tau-2</c1>
               <trigger>instrumentation/bgmk-failure-2</trigger>
               <output>instrumentation/bgmk-offset-2</output>
             </integrator>
-            
+
             <summer name="instrumentation/bgmk-2">
               <input>instrumentation/ga3-corrected-2</input>
               <input>instrumentation/bgmk-2-integrator</input>
             </summer>
             <!--End BGMK-2-->
             <!--End gyro-magnetic proc-->
-            <!--PNP switches-->    
+            <!--PNP switches-->
             <switch name="instrumentation/pnp-heading-left">
               <default value="instrumentation/ga3-corrected-1"/>
               <test value="instrumentation/bgmk-1">
                 instrumentation/pnp-left-selector == 0
               </test>
             </switch>
-	    
+
             <switch name="instrumentation/pnp-heading-right">
               <default value="instrumentation/ga3-corrected-2"/>
               <test value="instrumentation/bgmk-2">
                 instrumentation/pnp-right-selector == 0
               </test>
             </switch>
-	    
+
             <switch name="instrumentation/pnp-heading">
               <default value="instrumentation/pnp-heading-left"/>
               <test value="instrumentation/pnp-heading-right">
                 instrumentation/pnp-selector == 1
               </test>
             </switch>
-            
+
             <!--************************** End TKS staff ****************************-->
           </channel>
           <!--******************** END externals channel ***********************-->
