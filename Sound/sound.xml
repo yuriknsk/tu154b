@@ -1122,7 +1122,10 @@
   <name>electrical</name>
   <path>Aircraft/tu154b/Sound/misc/el_loop.wav</path>
   <condition>
-    <property>tu154/systems/electrical/suppliers/battery_charge</property>
+      <or>
+        <property>tu154/systems/electrical/suppliers/battery_charge</property>
+        <property>tu154/switches/main-battery</property>
+      </or>
   </condition>
   <mode>looped</mode>
   <position>
