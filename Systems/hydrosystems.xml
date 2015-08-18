@@ -127,8 +127,8 @@
               <independentVar> hs/ns46-1-n </independentVar>
               <tableData>
                 15             0
-                20            2.0 	<!--Min pump flow-->
-                30		  20.0	<!--Max pump flow-->
+                20            4.9 	<!--Min pump flow-->
+                30		  44.12	<!--Max pump flow-->
               </tableData>
             </table>
           </scheduled_gain>
@@ -146,8 +146,8 @@
               <independentVar> hs/ns46-2-n </independentVar>
               <tableData>
                 15             0
-                20            2.0	<!--Min pump flow-->
-                30		  20.0	<!--Max pump flow-->
+                20            4.9	<!--Min pump flow-->
+                30		  44.12	<!--Max pump flow-->
               </tableData>
             </table>
           </scheduled_gain>
