@@ -2027,7 +2027,7 @@ if( ac200 > 150.0 )
         setprop("instrumentation/dme[0]/serviceable",
                 (getprop("tu154/switches/dme-1-power") == 1));
 	setprop("instrumentation/nav[2]/powered", 1 ); 
-	setprop("instrumentation/dme[2]/serviceable", 1 );
+	#setprop("instrumentation/dme[2]/serviceable", 1 );			# Commented by OrangeTiger
         setprop("tu154/systems/nvu/powered",
                 (getprop("tu154/switches/v-51-power") ? 1 : 0));
 	# KURS-MP left

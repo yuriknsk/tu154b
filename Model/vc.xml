@@ -867,6 +867,45 @@
   </axis>
 </animation>
 
+<!--Added by OrangeTiger-->
+<animation>
+	<type>pick</type>
+	<object-name>lever_speedbrake</object-name>
+	<visible>true</visible>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>controls.stepSpoilers(1)</script>
+		</binding>
+	</action>
+	<action>
+		<button>1</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>controls.stepSpoilers(-1)</script>
+		</binding>
+	</action>  
+	<action>
+		<button>3</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>controls.stepSpoilers(1)</script>
+		</binding>
+	</action>
+	<action>
+		<button>4</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>controls.stepSpoilers(-1)</script>
+		</binding>
+	</action>
+</animation>
+
 <!--Hide levers for navigator view - avoid shade nav indicators-->
 <animation>
   <type>select</type>
