@@ -1124,12 +1124,15 @@ var skawk_handler = func{
   var digit_3 = getprop( "tu154/instrumentation/skawk/handle-3" );
   var digit_4 = getprop( "tu154/instrumentation/skawk/handle-4" );
   var mode_handle = getprop("tu154/instrumentation/skawk/handle-5" );
-  var mode = 1;
+  var power = getprop( "tu154/instrumentation/skawk/power");			# Added by OrangeTiger
+  var mode = 0;
 
-  if( mode_handle == 0 ) mode = 4;	# A mode
-  if( mode_handle == 2 ) mode = 5;	# C mode
-  if( mode_handle == 1 ) mode = 1;	# Standby mode (B)
-  if( mode_handle == 3 ) mode = 3;	# Ground mode (D)
+  if( power == 1) {								# Added by OrangeTiger
+    if( mode_handle == 0 ) mode = 4;	# A mode
+    if( mode_handle == 2 ) mode = 5;	# C mode
+    if( mode_handle == 1 ) mode = 1;	# Standby mode (B)
+    if( mode_handle == 3 ) mode = 3;	# Ground mode (D)
+  }
 
   setprop("instrumentation/transponder/inputs/knob-mode", mode );
   setprop("instrumentation/transponder/inputs/digit[3]", digit_1 );
@@ -1145,13 +1148,14 @@ setprop( "tu154/instrumentation/skawk/handle-2", getprop( "instrumentation/trans
 setprop( "tu154/instrumentation/skawk/handle-3", getprop( "instrumentation/transponder/inputs/digit[1]" ) );
 setprop( "tu154/instrumentation/skawk/handle-4", getprop( "instrumentation/transponder/inputs/digit" ) );
 setprop( "tu154/instrumentation/skawk/handle-5", 1 );
-setprop( "instrumentation/transponder/inputs/knob-mode", 1 );
+setprop( "instrumentation/transponder/inputs/knob-mode", 0 );
 
 setlistener("tu154/instrumentation/skawk/handle-1", skawk_handler,0,0 );
 setlistener("tu154/instrumentation/skawk/handle-2", skawk_handler,0,0 );
 setlistener("tu154/instrumentation/skawk/handle-3", skawk_handler,0,0 );
 setlistener("tu154/instrumentation/skawk/handle-4", skawk_handler,0,0 );
 setlistener("tu154/instrumentation/skawk/handle-5", skawk_handler,0,0 );
+setlistener("tu154/instrumentation/skawk/power", skawk_handler,0,0 );
 }
 
 # We use transponder for FG 2.10 and newest
