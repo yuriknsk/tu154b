@@ -31,11 +31,63 @@
   <object-name>handle_3</object-name>
   <object-name>handle_4</object-name>
   <object-name>handle_5</object-name>
+  	<object-name>power</object-name>				<!-- Added by OrangeTiger -->
   <emission>
     <red-prop>tu154/light/instruments/int-red</red-prop>
     <green-prop>tu154/light/instruments/int-green</green-prop>
     <blue-prop>tu154/light/instruments/int-blue</blue-prop>
   </emission>
+</animation>
+
+<!-- Added by OrangeTiger -->
+<animation>
+	<type>rotate</type>
+	<object-name>power</object-name>
+	<property>tu154/instrumentation/skawk/power</property>
+	<interpolation>
+		<entry><ind>	0.0</ind>	<dep>	45.0</dep></entry>
+		<entry><ind>	1.0</ind>	<dep>	-45.0</dep></entry>
+	</interpolation>
+	<center>
+		<x-m>0.0023</x-m>
+		<y-m>0.0</y-m>
+		<z-m>0.00868</z-m>
+	</center>
+	<axis>
+		<x>0</x>
+		<y>1</y>
+		<z>0</z>
+	</axis>
+</animation>
+<animation>
+	<type>pick</type>
+	<object-name>hs_1</object-name>
+	<visible>false</visible>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>property-interpolate</command>
+			<property>tu154/instrumentation/skawk/power</property>
+			<value type="double">1</value>
+			<time>0.1</time>
+		</binding>
+	</action>
+</animation>
+<animation>
+	<type>pick</type>
+	<object-name>hs_2</object-name>
+	<visible>false</visible>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>property-interpolate</command>
+			<property>tu154/instrumentation/skawk/power</property>
+			<value type="double">0</value>
+			<time>0.1</time>
+		</binding>
+	</action>
 </animation>
 
 <animation>
