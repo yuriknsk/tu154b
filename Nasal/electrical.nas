@@ -502,6 +502,8 @@ init_electrical = func {
   setprop("tu154/switches/fuel-cutoff-valve-2-cover", 0);  
   setprop("tu154/switches/fuel-cutoff-valve-3", 0);  
   setprop("tu154/switches/fuel-cutoff-valve-3-cover", 0);  
+  setprop("tu154/switches/fuel-2500-alarm-mute", 0);
+  setprop("tu154/switches/fuel-2500-alarm-mute-cover", 0);
 #  setprop("tu154/switches/azs3-1", 0);  
   setprop("tu154/switches/capt-idr-selector", 0);  
   setprop("tu154/switches/copilot-idr-selector", 0);  

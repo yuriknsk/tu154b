@@ -3177,6 +3177,19 @@
     <heading-deg>-90.0</heading-deg>
   </offsets>
 </model>
+<!--Flight engineer overhead panel-->
+<model>
+	<name>sw-97</name>
+	<path>Aircraft/tu154b/Instruments-3d/switches/azs3-20.xml</path>
+	<offsets>
+		<x-m>-20.129</x-m>
+		<y-m>0.8833</y-m>
+		<z-m>2.3388</z-m>
+		<heading-deg>-90.0</heading-deg>
+		<pitch-deg>-47</pitch-deg>
+		<roll-deg>180</roll-deg>
+	</offsets>
+</model>
 
 <!--Hydrosystem control panel on FE-->
 <!--Pitch-->
