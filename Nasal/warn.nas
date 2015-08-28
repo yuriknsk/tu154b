@@ -708,10 +708,20 @@ else setprop("tu154/systems/electrical/indicators/wrong-approach-v", 0 );
 
 # Fire warning
 # not implemented yet
-
 if( getprop( "tu154/systems/warning/fire/fire" ) == 1 ) 
 	setprop("tu154/systems/electrical/indicators/fire", 1 );
 else setprop("tu154/systems/electrical/indicators/fire", 0 );
+
+# Hijack warning
+# Transponder code 7500
+if ((getprop("instrumentation/transponder/inputs/digit[3]") == 7) and
+	(getprop("instrumentation/transponder/inputs/digit[2]") == 5) and
+	(getprop("instrumentation/transponder/inputs/digit[1]") == 0) and
+	(getprop("instrumentation/transponder/inputs/digit") == 0) and
+	(getprop("instrumentation/transponder/inputs/knob-mode") > 0))
+		setprop("tu154/systems/electrical/indicators/signal-danger", 1);
+else
+		setprop("tu154/systems/electrical/indicators/signal-danger", 0);
 
 # Low fuel
 param = getprop( "consumables/fuel/tank[0]/level-gal_us" );
