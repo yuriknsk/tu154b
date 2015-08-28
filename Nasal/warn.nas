@@ -321,8 +321,10 @@ if( getprop( "tu154/systems/electrical/indicators/speed-limit" ) > 0.0 )
 		alarm_pulse_src = alarm_pulse_src + 1.0;
 
 # Fuel
-if( getprop("tu154/systems/electrical/indicators/fuel-2500/alarm") )
+if (getprop("tu154/systems/electrical/indicators/fuel-2500/enabled") and
+	!getprop("tu154/switches/fuel-2500-alarm-mute"))
 		alarm_pulse_src = alarm_pulse_src + 1.0;
+
 # Checking lamps
 if( getprop( "tu154/systems/electrical/checking-lamps/main-panel" ) > 0.0 )
 		alarm_pulse_src = 0.0;
@@ -724,19 +726,11 @@ else
 		setprop("tu154/systems/electrical/indicators/signal-danger", 0);
 
 # Low fuel
-param = getprop( "consumables/fuel/tank[0]/level-gal_us" );
-if ( param == nil ) param = 0.0;
-if(  param < 826 ) { # 2500 kg 0.8 kg/l 3.78 l/gal
-     if (!getprop("tu154/systems/electrical/indicators/fuel-2500/enabled")) {
-         fuel_2500.switch(1);
-         setprop("tu154/systems/electrical/indicators/fuel-2500/alarm", 1);
-         interpolate("tu154/systems/electrical/indicators/fuel-2500/alarm", 0,
-                     15);
-     }
-} else {
-     fuel_2500.switch(0);
-     interpolate("tu154/systems/electrical/indicators/fuel-2500/alarm", 0, 0);
-}
+param = getprop("consumables/fuel/tank[0]/level-kg") or 0;
+if (param < 2500)
+	fuel_2500.switch(1);
+else
+	fuel_2500.switch(0);
 
 # Ground
 param = 0.0;
