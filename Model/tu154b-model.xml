@@ -52,6 +52,8 @@
  <effect>
     <inherits-from>Effects/model-transparent</inherits-from>
     <object-name>MESH178</object-name>
+    <object-name>LeftWindowGlassExt</object-name>
+    <object-name>RightWindowGlassExt</object-name>
  </effect>
 
 <!-- Glass Shader-->
@@ -60,6 +62,8 @@
    <shader>chrome</shader>
    <texture>glass_shader.png</texture>
    <object-name>MESH178</object-name>
+   <object-name>LeftWindowGlassExt</object-name>
+   <object-name>RightWindowGlassExt</object-name>
  </animation>
 
 <!-- 
@@ -5991,6 +5995,10 @@
 <animation>
   <type>material</type>
   <object-name>MESH17</object-name>
+  <object-name>LeftWindow</object-name>
+  <object-name>LeftWindowHandle</object-name>
+  <object-name>RightWindow</object-name>
+  <object-name>RightWindowHandle</object-name>
   <object-name>MESH23</object-name>
   <object-name>MESH25</object-name>
   <object-name>MESH27</object-name>
@@ -6413,6 +6421,8 @@
     <object-name>c_gear_M10</object-name>
     <object-name>MESH17external</object-name>
     <object-name>MESH178</object-name>
+    <object-name>LeftWindowGlassExt</object-name>
+    <object-name>RightWindowGlassExt</object-name>
     <object-name>lever_sti3</object-name>
     <object-name>lever_sti4</object-name>
     <object-name>MESH23external</object-name>
@@ -6435,6 +6445,8 @@
     <object-name>lever_cow0</object-name>
     <object-name>lever_cowl</object-name>
     <object-name>MESH18</object-name>
+    <object-name>LeftWindowExt</object-name>
+    <object-name>RightWindowExt</object-name>
     <object-name>MESH24</object-name>
     <object-name>rudder</object-name>
     <object-name>Door_Carg0</object-name>
