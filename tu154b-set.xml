@@ -1272,5 +1272,10 @@
       <roll-offset-deg type="double">0.0</roll-offset-deg>
     </mod-view>
   </mod-views>
+
+  <door>
+    <window-left type="double">1</window-left>
+    <window-right type="double">1</window-right>
+  </door>
 </tu154>
 </PropertyList>
