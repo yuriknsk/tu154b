@@ -302,4 +302,43 @@
     </period>
   </filter>
 
+  <filter>
+    <name>left-engine-intake-flaps</name>
+    <type>gain</type>
+    <gain>24</gain>
+    <input>
+      <property>engines/engine[0]/n1</property>
+      <scale>0.05</scale>
+      <offset>-4</offset>
+    </input>
+    <reference>
+      <property>velocities/airspeed-kt</property>
+      <scale>0.01</scale>
+      <offset>-1</offset>
+      <min>0</min>
+    </reference>
+    <output>engines/engine[0]/intake-flaps</output>
+    <min>0</min>
+    <max>24</max>
+  </filter>
+  <filter>
+    <name>right-engine-intake-flaps</name>
+    <type>gain</type>
+    <gain>24</gain>
+    <input>
+      <property>engines/engine[2]/n1</property>
+      <scale>0.05</scale>
+      <offset>-4</offset>
+    </input>
+    <reference>
+      <property>velocities/airspeed-kt</property>
+      <scale>0.01</scale>
+      <offset>-1</offset>
+      <min>0</min>
+    </reference>
+    <output>engines/engine[2]/intake-flaps</output>
+    <min>0</min>
+    <max>24</max>
+  </filter>
+
 </PropertyList>
