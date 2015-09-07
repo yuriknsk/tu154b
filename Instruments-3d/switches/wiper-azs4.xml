@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<PropertyList>
+ <path>azs_3.ac</path>
+ <params>
+   <switch></switch>
+ </params>
+
+ <animation>
+   <type>material</type>
+   <object-name>handle</object-name>
+   <emission>
+     <red-prop>tu154/light/panel/ext-red</red-prop>
+     <green-prop>tu154/light/panel/ext-green</green-prop>
+     <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+   </emission>
+ </animation>
+
+ <animation>
+   <type>rotate</type>
+   <object-name>handle</object-name>
+   <property alias="../../params/switch"/>
+   <factor>-60</factor>
+   <axis>
+     <x>0.0</x>
+     <y>1.0</y>
+     <z>0.0</z>
+   </axis>
+ </animation>
+
+ <animation>
+   <type>pick</type>
+   <object-name>hotspot_3</object-name>
+   <visible>false</visible>
+   <action>
+     <button>0</button>
+     <repeatable>false</repeatable>
+     <binding>
+       <command>property-interpolate</command>
+       <property alias="../../../../params/switch"/>
+       <value type="double">-1</value>
+       <time>0.1</time>
+     </binding>
+   </action>
+ </animation>
+ <animation>
+   <type>pick</type>
+   <object-name>hotspot_2</object-name>
+   <visible>false</visible>
+   <action>
+     <button>0</button>
+     <repeatable>false</repeatable>
+     <binding>
+       <command>property-interpolate</command>
+       <property alias="../../../../params/switch"/>
+       <value type="double">0</value>
+       <time>0.1</time>
+     </binding>
+   </action>
+ </animation>
+ <animation>
+   <type>pick</type>
+   <object-name>hotspot_1</object-name>
+   <visible>false</visible>
+   <action>
+     <button>0</button>
+     <repeatable>false</repeatable>
+     <binding>
+       <command>property-interpolate</command>
+       <property alias="../../../../params/switch"/>
+       <value type="double">1</value>
+       <time>0.1</time>
+     </binding>
+   </action>
+ </animation>
+</PropertyList>
