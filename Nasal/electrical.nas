@@ -599,14 +599,20 @@ if( src == 6 ) {
 src = getprop( "tu154/switches/current-src-selector" );
 if( src == nil ) src = 0;
 var current = 0.0;
-if( src == 0 )
-	current = getprop( "tu154/systems/electrical/buses/AC3x200-bus-1L/load" );
-if( src == 1 )
-	current = getprop( "tu154/systems/electrical/buses/AC3x200-bus-2/load" );
-if( src == 2 )
-	current = getprop( "tu154/systems/electrical/buses/AC3x200-bus-3L/load" );
-if( src == 4 ) # It's evil hack...
-	current = getprop( "tu154/systems/electrical/buses/AC3x200-bus-1L/load" );
+var powersrc = getprop("tu154/switches/APU-RAP-selector");
+
+if( powersrc == 1 ) {
+  if( src == 0 )
+  	current = getprop( "tu154/systems/electrical/buses/AC3x200-bus-1L/load" );
+  if( src == 1 )
+  	current = getprop( "tu154/systems/electrical/buses/AC3x200-bus-2/load" );
+  if( src == 2 )
+  	current = getprop( "tu154/systems/electrical/buses/AC3x200-bus-3L/load" );
+}
+if( src == 3 ) {
+  if( powersrc == 0 )
+    current = getprop( "tu154/systems/electrical/buses/AC3x200-bus-1L/load" ) + getprop( "tu154/systems/electrical/buses/AC3x200-bus-2/load" ) + getprop( "tu154/systems/electrical/buses/AC3x200-bus-3L/load" );
+}
 
 	if( current == nil ) current = 0.0;
 
