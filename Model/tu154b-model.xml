@@ -5999,6 +5999,8 @@
   <object-name>LeftWindowHandle</object-name>
   <object-name>RightWindow</object-name>
   <object-name>RightWindowHandle</object-name>
+  <object-name>WiperLeft</object-name>
+  <object-name>WiperRight</object-name>
   <object-name>MESH23</object-name>
   <object-name>MESH25</object-name>
   <object-name>MESH27</object-name>
@@ -6426,6 +6428,8 @@
     <object-name>lever_sti3</object-name>
     <object-name>lever_sti4</object-name>
     <object-name>MESH23external</object-name>
+    <object-name>WiperLeftExt</object-name>
+    <object-name>WiperRightExt</object-name>
     <object-name>Door_Cargo</object-name>
     <object-name>Door_Passe</object-name>
     <object-name>MESH134</object-name>
