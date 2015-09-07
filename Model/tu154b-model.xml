@@ -7488,5 +7488,123 @@
   </condition>
 </animation>
 
+<!-- Windshield wipers -->
+<animation>
+  <type>rotate</type>
+  <object-name>WiperLeftExt</object-name>
+  <property>tu154/wipers/pos-left</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>-5</dep>
+    </entry>
+    <entry>
+      <ind>0.5</ind>
+      <dep>47</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>-5</dep>
+    </entry>
+  </interpolation>
+  <center>
+    <x-m>-23.05545</x-m>
+    <y-m>-0.55032</y-m>
+    <z-m>1.94338</z-m>
+  </center>
+  <axis>
+    <x>-0.326150037</x>
+    <y>-0.222758536</y>
+    <z>0.37999137</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>WiperLeft</object-name>
+  <property>tu154/wipers/pos-left</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>-5</dep>
+    </entry>
+    <entry>
+      <ind>0.5</ind>
+      <dep>47</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>-5</dep>
+    </entry>
+  </interpolation>
+  <center>
+    <x-m>0.20545</x-m>
+    <y-m>-0.55032</y-m>
+    <z-m>0.87338</z-m>
+  </center>
+  <axis>
+    <x>-0.326150037</x>
+    <y>-0.222758536</y>
+    <z>0.37999137</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>WiperRightExt</object-name>
+  <property>tu154/wipers/pos-right</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>5</dep>
+    </entry>
+    <entry>
+      <ind>0.5</ind>
+      <dep>-47</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>5</dep>
+    </entry>
+  </interpolation>
+  <center>
+    <x-m>-23.05545</x-m>
+    <y-m>0.55050</y-m>
+    <z-m>1.94338</z-m>
+  </center>
+  <axis>
+    <x>-0.325921264</x>
+    <y>0.222656236</y>
+    <z>0.379683264</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>WiperRight</object-name>
+  <property>tu154/wipers/pos-right</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>5</dep>
+    </entry>
+    <entry>
+      <ind>0.5</ind>
+      <dep>-47</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>5</dep>
+    </entry>
+  </interpolation>
+  <center>
+    <x-m>0.20545</x-m>
+    <y-m>0.55050</y-m>
+    <z-m>0.87338</z-m>
+  </center>
+  <axis>
+    <x>-0.325921264</x>
+    <y>0.222656236</y>
+    <z>0.379683264</z>
+  </axis>
+</animation>
+
 </PropertyList>
 
