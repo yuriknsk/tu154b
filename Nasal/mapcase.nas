@@ -31,36 +31,7 @@ var filenames = [
     "Instruments-3d/mapcase/back-course.png",
 ];
 
-
-print("Map case page loader started");
-var mapcase = canvas.new({
-    name: "MapCase",
-    size: [1024, 1024],
-    view: [1024, 988],
-    mipmapping: 1,
-});
-mapcase.addPlacement({ node: "mapcase" });
-mapcase.setColorBackground(0.82, 0.82, 0.82, 1);
-
-var root = mapcase.createGroup();
-
 var images = {};
-foreach (var name; filenames) {
-    if (images[name] != nil)
-        continue;
-    print("Loading ", name);
-    var path = getprop("sim/aircraft-dir")~"/"~name;
-    var g = root.createChild("group", name);
-    if (substr(name, -4) == ".svg")
-        canvas.parsesvg(g, path);
-    else
-        g.createChild("image").setFile(path).setSize(1024, 988);
-    g.hide();
-    images[name] = g;
-}
-print("Map case page loader done");
-
-
 var switch_page = func(i) {
     var total = size(filenames);
     if (total == 0)
@@ -75,6 +46,37 @@ var switch_page = func(i) {
     images[filenames[page - 1]].show();
     setprop("tu154/instrumentation/mapcase/page", page);
 }
-setprop("tu154/instrumentation/mapcase/total_pages", size(filenames));
-setprop("tu154/instrumentation/mapcase/page", 1);
-switch_page(0);
+
+var init = func {
+    removelistener(init_event);
+    print("Map case page loader started");
+    var mapcase = canvas.new({
+        name: "MapCase",
+        size: [1024, 1024],
+        view: [1024, 988],
+        mipmapping: 1,
+    });
+    mapcase.addPlacement({ node: "mapcase" });
+    mapcase.setColorBackground(0.82, 0.82, 0.82, 1);
+
+    var root = mapcase.createGroup();
+    foreach (var name; filenames) {
+        if (images[name] != nil)
+            continue;
+        print("Loading ", name);
+        var path = getprop("sim/aircraft-dir")~"/"~name;
+        var g = root.createChild("group", name);
+        if (substr(name, -4) == ".svg")
+            canvas.parsesvg(g, path);
+        else
+            g.createChild("image").setFile(path).setSize(1024, 988);
+        g.hide();
+        images[name] = g;
+    }
+    print("Map case page loader done");
+
+    setprop("tu154/instrumentation/mapcase/total_pages", size(filenames));
+    setprop("tu154/instrumentation/mapcase/page", 1);
+    switch_page(0);
+}
+var init_event = setlistener("nasal/mapcase/loaded", init);
