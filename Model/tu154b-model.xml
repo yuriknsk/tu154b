@@ -6723,6 +6723,7 @@
 <animation>
     <type>material</type>
     <object-name>MESH91</object-name>
+    <object-name>RefuelCover</object-name>
     <object-name>r_gear_ME1</object-name>
     <object-name>r_pct_tra1</object-name>
     <object-name>r_pct_tra2</object-name>
