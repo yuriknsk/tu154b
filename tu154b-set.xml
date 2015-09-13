@@ -336,6 +336,33 @@
       <dynamic-view type="bool">true</dynamic-view>
     </config>
   </view>
+  <view n="107">
+    <name>Refuel Panel View</name>
+    <type>lookfrom</type>
+    <internal type="bool">false</internal>
+    <config>
+      <from-model type="bool">true</from-model>
+      <x-offset-m type="double" >3.54</x-offset-m>
+      <y-offset-m type="double" >-0.67</y-offset-m>
+      <z-offset-m type="double" >-4.56</z-offset-m>
+      <heading-offset-deg type="double">147</heading-offset-deg>
+      <pitch-offset-deg type="double">70</pitch-offset-deg>
+      <from-model-idx type="int">0</from-model-idx>
+      <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
+      <default-field-of-view-deg type="double">49</default-field-of-view-deg>
+      <default-pitch-deg type="double">0</default-pitch-deg>
+      <default-heading-deg type="double">0</default-heading-deg>
+      <front-direction-deg type="double">0</front-direction-deg>
+      <front-left-direction-deg type="double">45</front-left-direction-deg>
+      <left-direction-deg type="double">90</left-direction-deg>
+      <back-left-direction-deg type="double">135</back-left-direction-deg>
+      <back-direction-deg type="double">180</back-direction-deg>
+      <back-right-direction-deg type="double">225</back-right-direction-deg>
+      <right-direction-deg type="double">270</right-direction-deg>
+      <front-right-direction-deg type="double">315</front-right-direction-deg>
+      <dynamic-view type="bool">true</dynamic-view>
+    </config>
+  </view>
 
   <instrumentation>
     <path>Aircraft/tu154b/Systems/instrumentation-config.xml</path>
@@ -1007,6 +1034,14 @@
       <binding>
         <command>nasal</command>
         <script>view.forceView(5);</script>
+      </binding>
+    </key>
+    <key n="55">
+      <name>7</name>
+      <desc>Refuel Panel View</desc>
+      <binding>
+        <command>nasal</command>
+        <script>view.forceView(7);</script>
       </binding>
     </key>
     <key n="127">
