@@ -7535,6 +7535,40 @@
   </axis>
 </animation>
 
+<animation>
+  <type>pick</type>
+  <object-name>RefuelCover</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        if (getprop("tu154/door/refuel")) {
+            interpolate("tu154/door/refuel", 0, 0.5);
+        } else {
+            interpolate("tu154/door/refuel", 1, 0.5);
+        }
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>RefuelCover</object-name>
+  <property>tu154/door/refuel</property>
+  <factor>85</factor>
+  <axis>
+    <x1-m>-4.48886</x1-m>
+    <y1-m>3.44460</y1-m>
+    <z1-m>-0.03075</z1-m>
+    <x2-m>-4.43994</x2-m>
+    <y2-m>3.51918</y2-m>
+    <z2-m>-0.02736</z2-m>
+  </axis>
+</animation>
+
 
 <!-- CONTRAIL -->
  

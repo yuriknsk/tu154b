@@ -1396,6 +1396,7 @@
   <door>
     <window-left type="double">1</window-left>
     <window-right type="double">1</window-right>
+    <refuel type="double">0</refuel>
   </door>
 
   <wipers>
