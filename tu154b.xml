@@ -388,7 +388,7 @@
                 <z> 0 </z>
             </location>
             <capacity unit="KG">9500</capacity>
-            <contents unit="KG">2200</contents>
+            <contents unit="KG">1500</contents>
         </tank>
         <tank type="FUEL">
             <location unit="M">
@@ -397,7 +397,7 @@
                 <z> 0 </z>
             </location>
             <capacity unit="KG">5425</capacity>
-            <contents unit="KG">1000</contents>
+            <contents unit="KG">3225</contents>
         </tank>
         <tank type="FUEL">
             <location unit="M">
@@ -406,7 +406,7 @@
                 <z> 0 </z>
             </location>
             <capacity unit="KG">9500</capacity>
-            <contents unit="KG">2200</contents>
+            <contents unit="KG">1500</contents>
         </tank>
         <tank type="FUEL">
             <location unit="M">
@@ -415,7 +415,7 @@
                 <z> 0 </z>
             </location>
             <capacity unit="KG">5425</capacity>
-            <contents unit="KG">1000</contents>
+            <contents unit="KG">3225</contents>
         </tank>
         <tank type="FUEL">
             <location unit="M">
@@ -424,8 +424,7 @@
                 <z> 0 </z>
             </location>
             <capacity unit="KG">6600</capacity>
-<!--            <contents unit="KG">3000</contents>-->
-            <contents unit="KG">5000</contents>
+            <contents unit="KG">4000</contents>
         </tank>
     </propulsion>
     
