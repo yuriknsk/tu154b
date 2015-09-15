@@ -2619,6 +2619,35 @@
     </volume>
   </windows>
 
-</fx>
+  <wipers>
+    <name>left windshield wiper</name>
+    <path>Aircraft/tu154b/Sound/misc/wiper.wav</path>
+    <condition>
+      <property>sim/current-view/internal</property>
+      <property>tu154/wipers/pos-left</property>
+    </condition>
+    <mode>in-transit</mode>
+    <position>
+      <x>-2</x>
+      <y>-1</y>
+      <z>1.5</z>
+    </position>
+  </wipers>
+  <wipers>
+    <name>right windshield wiper</name>
+    <path>Aircraft/tu154b/Sound/misc/wiper.wav</path>
+    <condition>
+      <property>sim/current-view/internal</property>
+      <property>tu154/wipers/pos-right</property>
+    </condition>
+    <mode>in-transit</mode>
+    <position>
+      <x>-2</x>
+      <y>1</y>
+      <z>1.5</z>
+    </position>
+  </wipers>
+
+</fx> 
 
 </PropertyList>

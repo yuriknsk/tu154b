@@ -3181,6 +3181,36 @@
     <heading-deg>-90.0</heading-deg>
   </offsets>
 </model>
+<model>
+  <name>sw-wiper-left</name>
+  <path>Aircraft/tu154b/Instruments-3d/switches/wiper-azs4.xml</path>
+  <overlay>
+    <params>
+      <switch>tu154/wipers/switch-left</switch>
+    </params>
+  </overlay>
+  <offsets>
+    <x-m>-22.194</x-m>
+    <y-m>-1.015</y-m>
+    <z-m>1.659</z-m>
+    <heading-deg>72</heading-deg>
+  </offsets>
+</model>
+<model>
+  <name>sw-wiper-right</name>
+  <path>Aircraft/tu154b/Instruments-3d/switches/wiper-azs4.xml</path>
+  <overlay>
+    <params>
+      <switch>tu154/wipers/switch-right</switch>
+    </params>
+  </overlay>
+  <offsets>
+    <x-m>-22.22</x-m>
+    <y-m>1.02</y-m>
+    <z-m>1.665</z-m>
+    <heading-deg>-72</heading-deg>
+  </offsets>
+</model>
 
 <!--Hydrosystem control panel on FE-->
 <!--Pitch-->
@@ -5999,6 +6029,8 @@
   <object-name>LeftWindowHandle</object-name>
   <object-name>RightWindow</object-name>
   <object-name>RightWindowHandle</object-name>
+  <object-name>WiperLeft</object-name>
+  <object-name>WiperRight</object-name>
   <object-name>MESH23</object-name>
   <object-name>MESH25</object-name>
   <object-name>MESH27</object-name>
@@ -6426,6 +6458,8 @@
     <object-name>lever_sti3</object-name>
     <object-name>lever_sti4</object-name>
     <object-name>MESH23external</object-name>
+    <object-name>WiperLeftExt</object-name>
+    <object-name>WiperRightExt</object-name>
     <object-name>Door_Cargo</object-name>
     <object-name>Door_Passe</object-name>
     <object-name>MESH134</object-name>
@@ -7798,6 +7832,124 @@
     </greater-than>
     <property>sim/current-view/internal</property>
   </condition>
+</animation>
+
+<!-- Windshield wipers -->
+<animation>
+  <type>rotate</type>
+  <object-name>WiperLeftExt</object-name>
+  <property>tu154/wipers/pos-left</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>-5</dep>
+    </entry>
+    <entry>
+      <ind>0.5</ind>
+      <dep>47</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>-5</dep>
+    </entry>
+  </interpolation>
+  <center>
+    <x-m>-23.05545</x-m>
+    <y-m>-0.55032</y-m>
+    <z-m>1.94338</z-m>
+  </center>
+  <axis>
+    <x>-0.326150037</x>
+    <y>-0.222758536</y>
+    <z>0.37999137</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>WiperLeft</object-name>
+  <property>tu154/wipers/pos-left</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>-5</dep>
+    </entry>
+    <entry>
+      <ind>0.5</ind>
+      <dep>47</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>-5</dep>
+    </entry>
+  </interpolation>
+  <center>
+    <x-m>0.20545</x-m>
+    <y-m>-0.55032</y-m>
+    <z-m>0.87338</z-m>
+  </center>
+  <axis>
+    <x>-0.326150037</x>
+    <y>-0.222758536</y>
+    <z>0.37999137</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>WiperRightExt</object-name>
+  <property>tu154/wipers/pos-right</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>5</dep>
+    </entry>
+    <entry>
+      <ind>0.5</ind>
+      <dep>-47</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>5</dep>
+    </entry>
+  </interpolation>
+  <center>
+    <x-m>-23.05545</x-m>
+    <y-m>0.55050</y-m>
+    <z-m>1.94338</z-m>
+  </center>
+  <axis>
+    <x>-0.325921264</x>
+    <y>0.222656236</y>
+    <z>0.379683264</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>WiperRight</object-name>
+  <property>tu154/wipers/pos-right</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>5</dep>
+    </entry>
+    <entry>
+      <ind>0.5</ind>
+      <dep>-47</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>5</dep>
+    </entry>
+  </interpolation>
+  <center>
+    <x-m>0.20545</x-m>
+    <y-m>0.55050</y-m>
+    <z-m>0.87338</z-m>
+  </center>
+  <axis>
+    <x>-0.325921264</x>
+    <y>0.222656236</y>
+    <z>0.379683264</z>
+  </axis>
 </animation>
 
 </PropertyList>
