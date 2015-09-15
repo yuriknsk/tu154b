@@ -18,6 +18,8 @@
  <effect>
     <inherits-from>Effects/model-transparent</inherits-from>
     <object-name>MESH199</object-name>
+    <object-name>LeftWindowGlass</object-name>
+    <object-name>RightWindowGlass</object-name>
  </effect>
 
 <!-- Uncomment it if you want remove cabin glass -->
@@ -25,6 +27,8 @@
 <animation>
 	<type>select</type>
 	<object-name>MESH199</object-name>
+        <object-name>LeftWindowGlass</object-name>
+        <object-name>RightWindowGlass</object-name>
         <condition>
 	<not>	<property>/sim/rendering/rembrandt/enabled</property>	</not>
       	</condition>

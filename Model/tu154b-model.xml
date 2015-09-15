@@ -52,6 +52,8 @@
  <effect>
     <inherits-from>Effects/model-transparent</inherits-from>
     <object-name>MESH178</object-name>
+    <object-name>LeftWindowGlassExt</object-name>
+    <object-name>RightWindowGlassExt</object-name>
  </effect>
 
 <!-- Glass Shader-->
@@ -60,6 +62,8 @@
    <shader>chrome</shader>
    <texture>glass_shader.png</texture>
    <object-name>MESH178</object-name>
+   <object-name>LeftWindowGlassExt</object-name>
+   <object-name>RightWindowGlassExt</object-name>
  </animation>
 
 <!-- 
@@ -5991,6 +5995,10 @@
 <animation>
   <type>material</type>
   <object-name>MESH17</object-name>
+  <object-name>LeftWindow</object-name>
+  <object-name>LeftWindowHandle</object-name>
+  <object-name>RightWindow</object-name>
+  <object-name>RightWindowHandle</object-name>
   <object-name>MESH23</object-name>
   <object-name>MESH25</object-name>
   <object-name>MESH27</object-name>
@@ -6413,6 +6421,8 @@
     <object-name>c_gear_M10</object-name>
     <object-name>MESH17external</object-name>
     <object-name>MESH178</object-name>
+    <object-name>LeftWindowGlassExt</object-name>
+    <object-name>RightWindowGlassExt</object-name>
     <object-name>lever_sti3</object-name>
     <object-name>lever_sti4</object-name>
     <object-name>MESH23external</object-name>
@@ -6435,6 +6445,8 @@
     <object-name>lever_cow0</object-name>
     <object-name>lever_cowl</object-name>
     <object-name>MESH18</object-name>
+    <object-name>LeftWindowExt</object-name>
+    <object-name>RightWindowExt</object-name>
     <object-name>MESH24</object-name>
     <object-name>rudder</object-name>
     <object-name>Door_Carg0</object-name>
@@ -6597,6 +6609,284 @@
     <property-base>tu154/livery/wingr</property-base>
     <texture-prop>texture</texture-prop>
     <texture>wingr_t.png</texture>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>LeftWindow</object-name>
+  <object-name>LeftWindowExt</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        var pos = getprop("tu154/door/window-left");
+        if (pos) {
+            interpolate("tu154/door/window-left", 0, pos * 2);
+        } else {
+            interpolate("tu154/door/window-left", 1, 2);
+        }
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>LeftWindowHandle</object-name>
+  <property>tu154/door/window-left</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.25</ind>
+      <dep>-45</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>0</dep>
+    </entry>
+  </interpolation>
+  <axis>
+    <x1-m>1.03910</x1-m>
+    <y1-m>-0.88881</y1-m>
+    <z1-m>1.13192</z1-m>
+    <x2-m>1.01643</x2-m>
+    <y2-m>-0.87914</y2-m>
+    <z2-m>1.13592</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>LeftWindow</object-name>
+  <property>tu154/door/window-left</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.1</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.25</ind>
+      <dep>-5</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>-3</dep>
+    </entry>
+  </interpolation>
+  <axis>
+    <x1-m>0.7706</x1-m>
+    <y1-m>-0.70364</y1-m>
+    <z1-m>1.276</z1-m>
+    <x2-m>0.4761</x2-m>
+    <y2-m>-0.82664</y2-m>
+    <z2-m>0.94192</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>LeftWindowExt</object-name>
+  <property>tu154/door/window-left</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.1</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.25</ind>
+      <dep>-5</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>-3</dep>
+    </entry>
+  </interpolation>
+  <axis>
+    <x1-m>-22.35140</x1-m>
+    <y1-m>-0.68121</y1-m>
+    <z1-m>2.30679</z1-m>
+    <x2-m>-22.72380</x2-m>
+    <y2-m>-0.83034</y2-m>
+    <z2-m>1.89199</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>translate</type>
+  <object-name>LeftWindow</object-name>
+  <object-name>LeftWindowExt</object-name>
+  <property>tu154/door/window-left</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.25</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>0.4</dep>
+    </entry>
+  </interpolation>
+  <axis>
+    <x1-m>0.94910</x1-m>
+    <y1-m>-0.99614</y1-m>
+    <z1-m>0.85592</z1-m>
+    <x2-m>1.44310</x2-m>
+    <y2-m>-1.15914</y2-m>
+    <z2-m>0.81692</z2-m>
+  </axis>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>RightWindow</object-name>
+  <object-name>RightWindowExt</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        var pos = getprop("tu154/door/window-right");
+        if (pos) {
+            interpolate("tu154/door/window-right", 0, pos * 2);
+        } else {
+            interpolate("tu154/door/window-right", 1, 2);
+        }
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>RightWindowHandle</object-name>
+  <property>tu154/door/window-right</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.25</ind>
+      <dep>45</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>0</dep>
+    </entry>
+  </interpolation>
+  <axis>
+    <x1-m>1.03910</x1-m>
+    <y1-m>0.90053</y1-m>
+    <z1-m>1.13192</z1-m>
+    <x2-m>1.01676</x2-m>
+    <y2-m>0.89053</y2-m>
+    <z2-m>1.13426</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>RightWindow</object-name>
+  <property>tu154/door/window-right</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.1</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.25</ind>
+      <dep>5</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>3</dep>
+    </entry>
+  </interpolation>
+  <axis>
+    <x1-m>0.7701</x1-m>
+    <y1-m>0.72564</y1-m>
+    <z1-m>1.281</z1-m>
+    <x2-m>0.4700</x2-m>
+    <y2-m>0.84086</y2-m>
+    <z2-m>0.96000</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>RightWindowExt</object-name>
+  <property>tu154/door/window-right</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.1</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.25</ind>
+      <dep>5</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>3</dep>
+    </entry>
+  </interpolation>
+  <axis>
+    <x1-m>-22.35140</x1-m>
+    <y1-m>0.68139</y1-m>
+    <z1-m>2.30679</z1-m>
+    <x2-m>-22.72380</x2-m>
+    <y2-m>0.83052</y2-m>
+    <z2-m>1.89198</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>translate</type>
+  <object-name>RightWindow</object-name>
+  <object-name>RightWindowExt</object-name>
+  <property>tu154/door/window-right</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.25</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>0.4</dep>
+    </entry>
+  </interpolation>
+  <axis>
+    <x1-m>0.94910</x1-m>
+    <y1-m>1.00786</y1-m>
+    <z1-m>0.85592</z1-m>
+    <x2-m>1.44310</x2-m>
+    <y2-m>1.17086</y2-m>
+    <z2-m>0.81692</z2-m>
+  </axis>
 </animation>
 
 <animation>
