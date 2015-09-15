@@ -78,13 +78,13 @@
           var wp0 = wpB;
           var az_corr = 0;
           for (var i = 1; fp_size > i; i += 1) {
-              var S = -wp0.leg_distance * 1.852;
-              var ZPU = wp0.leg_bearing - magvar_dep + az_corr;
+              var wp1 = fp.getWP(i);
+              var S = -wp1.leg_distance * 1.852;
+              var ZPU = wp1.leg_bearing - magvar_dep + az_corr;
               if (fork_applied)
                   ZPU += fork;
               ZPU = deg_norm(ZPU, 0, 360);
 
-              var wp1 = fp.getWP(i);
               var leg = {
                   from: wp0.wp_name,
                   to: wp1.wp_name,
@@ -132,7 +132,7 @@
 
           var vor = vors[0];
           var (b, d) = wp1.courseAndDistanceFrom(vor.lat, vor.lon);
-          b = (wp0.leg_bearing - b) / 57.2958;
+          b = (wp1.leg_bearing - b) / 57.2958;
           d *= 1.852;
           var S = -d * math.cos(b);
           var Z = d * math.sin(b);
@@ -143,7 +143,7 @@
               freq: vor.frequency / 100,
               S: S,
               Z: Z,
-              UK: deg_norm(wp0.leg_bearing, 0, 360),
+              UK: deg_norm(wp1.leg_bearing, 0, 360),
           });
       }
 
