@@ -7078,6 +7078,322 @@
   </axis>
 </animation>
 
+<!-- Left engine additional air intake flaps. -->
+<animation>
+  <type>rotate</type>
+  <object-name>lever_prop</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.90387</x1-m>
+    <y1-m>-3.04216</y1-m>
+    <z1-m>2.68102</z1-m>
+    <x2-m>5.87026</x2-m>
+    <y2-m>-2.77490</y2-m>
+    <z2-m>2.52685</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pro0</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.94318</x1-m>
+    <y1-m>-3.44121</y1-m>
+    <z1-m>2.70357</z1-m>
+    <x2-m>5.91375</x2-m>
+    <y2-m>-3.13226</y2-m>
+    <z2-m>2.70511</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pro1</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.96779</x1-m>
+    <y1-m>-3.79855</y1-m>
+    <z1-m>2.52174</z1-m>
+    <x2-m>5.95048</x2-m>
+    <y2-m>-3.53131</y2-m>
+    <z2-m>2.67858</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pro2</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.97104</x1-m>
+    <y1-m>-4.01707</y1-m>
+    <z1-m>2.18533</z1-m>
+    <x2-m>5.97050</x2-m>
+    <y2-m>-3.86352</y2-m>
+    <z2-m>2.45504</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pro3</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.9516</x1-m>
+    <y1-m>-4.03842</y1-m>
+    <z1-m>1.78620</z1-m>
+    <x2-m>5.96852</x2-m>
+    <y2-m>-4.03967</y2-m>
+    <z2-m>2.09612</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pro4</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.91641</x1-m>
+    <y1-m>-3.85852</y1-m>
+    <z1-m>1.43196</z1-m>
+    <x2-m>5.94525</x2-m>
+    <y2-m>-4.01392</y2-m>
+    <z2-m>1.69906</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pro5</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.87343</x1-m>
+    <y1-m>-3.52692</y1-m>
+    <z1-m>1.21647</z1-m>
+    <x2-m>5.90705</x2-m>
+    <y2-m>-3.79479</y2-m>
+    <z2-m>1.36955</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pro6</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.83464</x1-m>
+    <y1-m>-3.13226</y1-m>
+    <z1-m>1.19572</z1-m>
+    <x2-m>5.86408</x2-m>
+    <y2-m>-3.44121</y2-m>
+    <z2-m>1.19418</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pro7</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.81024</x1-m>
+    <y1-m>-2.77868</y1-m>
+    <z1-m>1.37463</z1-m>
+    <x2-m>5.82766</x2-m>
+    <y2-m>-3.04655</y2-m>
+    <z2-m>1.21886</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pro8</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.80668</x1-m>
+    <y1-m>-2.55955</y1-m>
+    <z1-m>1.70632</z1-m>
+    <x2-m>5.80745</x2-m>
+    <y2-m>-2.71495</y2-m>
+    <z2-m>1.43767</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pro9</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.82505</x1-m>
+    <y1-m>-2.53380</y1-m>
+    <z1-m>2.10364</z1-m>
+    <x2-m>5.80892</x2-m>
+    <y2-m>-2.53503</y2-m>
+    <z2-m>1.79371</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr10</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.86059</x1-m>
+    <y1-m>-2.70993</y1-m>
+    <z1-m>2.46080</z1-m>
+    <x2-m>5.8318</x2-m>
+    <y2-m>-2.556407</y2-m>
+    <z2-m>2.19262</z2-m>
+  </axis>
+</animation>
+
+<!-- Right engine additional air intake flaps. -->
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr11</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.91374</x1-m>
+    <y1-m>3.13244</y1-m>
+    <z1-m>2.70511</z1-m>
+    <x2-m>5.94318</x2-m>
+    <y2-m>3.44139</y2-m>
+    <z2-m>2.70357</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr12</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.87026</x1-m>
+    <y1-m>2.77508</y1-m>
+    <z1-m>2.52685</z1-m>
+    <x2-m>5.90387</x2-m>
+    <y2-m>3.04234</y2-m>
+    <z2-m>2.68102</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr13</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.96852</x1-m>
+    <y1-m>4.03983</y1-m>
+    <z1-m>2.09612</z1-m>
+    <x2-m>5.95216</x2-m>
+    <y2-m>4.03859</y2-m>
+    <z2-m>1.78620</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr14</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.95048</x1-m>
+    <y1-m>3.53148</y1-m>
+    <z1-m>2.67858</z1-m>
+    <x2-m>5.96779</x2-m>
+    <y2-m>3.79872</y2-m>
+    <z2-m>2.52174</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr15</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.97050</x1-m>
+    <y1-m>3.86369</y1-m>
+    <z1-m>2.45504</z1-m>
+    <x2-m>5.97104</x2-m>
+    <y2-m>4.01724</y2-m>
+    <z2-m>2.18533</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr16</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.80745</x1-m>
+    <y1-m>2.71513</y1-m>
+    <z1-m>1.43767</z1-m>
+    <x2-m>5.80668</x2-m>
+    <y2-m>2.55972</y2-m>
+    <z2-m>1.70632</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr17</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.82767</x1-m>
+    <y1-m>3.04673</y1-m>
+    <z1-m>1.21886</z1-m>
+    <x2-m>5.81024</x2-m>
+    <y2-m>2.77886</y2-m>
+    <z2-m>1.37463</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr18</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.86408</x1-m>
+    <y1-m>3.44139</y1-m>
+    <z1-m>1.19418</z1-m>
+    <x2-m>5.83464</x2-m>
+    <y2-m>3.13244</y2-m>
+    <z2-m>1.19572</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr19</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.90705</x1-m>
+    <y1-m>3.79496</y1-m>
+    <z1-m>1.36955</z1-m>
+    <x2-m>5.87343</x2-m>
+    <y2-m>3.52709</y2-m>
+    <z2-m>1.21647</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr20</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.94525</x1-m>
+    <y1-m>4.01409</y1-m>
+    <z1-m>1.69905</z1-m>
+    <x2-m>5.91641</x2-m>
+    <y2-m>3.85869</y2-m>
+    <z2-m>1.43196</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr21</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.83187</x1-m>
+    <y1-m>2.55657</y1-m>
+    <z1-m>2.19262</z1-m>
+    <x2-m>5.86059</x2-m>
+    <y2-m>2.71011</y2-m>
+    <z2-m>2.46080</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr22</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.80892</x1-m>
+    <y1-m>2.53520</y1-m>
+    <z1-m>1.79371</z1-m>
+    <x2-m>5.82505</x2-m>
+    <y2-m>2.53397</y2-m>
+    <z2-m>2.10364</z2-m>
+  </axis>
+</animation>
+
 
 <!-- CONTRAIL -->
  
