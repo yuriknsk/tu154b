@@ -49,6 +49,10 @@
 	    <name>Delete</name>
 	    <desc>Center aileron, elevator, and rudder</desc>
 	   </key>
+	   <key>
+	    <name>m</name>
+	    <desc>Map case zoom-in</desc>
+	   </key>
 	 </help>
 
 <menubar>
@@ -299,6 +303,35 @@
     </config>
   </view>
 
+  <view n="106">
+    <name>Map Case View</name>
+    <enabled type="bool">false</enabled>
+    <internal type="bool">true</internal>
+    <type>lookfrom</type>
+    <config>
+      <heading-offset-deg>5.25</heading-offset-deg>
+      <pitch-offset-deg>-16.3</pitch-offset-deg>
+      <field-of-view>56.0</field-of-view>
+      <from-model type="bool">true</from-model>
+      <x-offset-m >0.22</x-offset-m>
+      <y-offset-m >1.74</y-offset-m>
+      <z-offset-m >-22.3</z-offset-m>
+      <from-model-idx type="int">0</from-model-idx>
+      <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
+      <default-field-of-view-deg type="double">56.0</default-field-of-view-deg>
+      <default-pitch-deg type="double">0</default-pitch-deg>
+      <default-heading-deg type="double">0</default-heading-deg>
+      <front-direction-deg type="double">0</front-direction-deg>
+      <front-left-direction-deg type="double">45</front-left-direction-deg>
+      <left-direction-deg type="double">90</left-direction-deg>
+      <back-left-direction-deg type="double">135</back-left-direction-deg>
+      <back-direction-deg type="double">180</back-direction-deg>
+      <back-right-direction-deg type="double">225</back-right-direction-deg>
+      <right-direction-deg type="double">270</right-direction-deg>
+      <front-right-direction-deg type="double">315</front-right-direction-deg>
+      <dynamic-view type="bool">true</dynamic-view>
+    </config>
+  </view>
 
   <instrumentation>
     <path>Aircraft/tu154b/Systems/instrumentation-config.xml</path>
@@ -922,6 +955,29 @@
         <command>nasal</command>
         <script>controls.centerFlightControls()</script>
       </binding>
+    </key>
+    <key n="109">
+      <name>m</name>
+      <desc>Map Case view</desc>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>nasal</command>
+        <script>
+          var view_number = getprop("sim/current-view/view-number");
+          if (view_number > 0)
+              view_number -= getprop("tu154/mod-views/view-offset");
+          setprop("tu154/var/previous-view-number", view_number);
+          view.forceView(6);
+        </script>
+      </binding>
+      <mod-up>
+        <binding>
+          <command>nasal</command>
+          <script>
+            view.forceView(getprop("tu154/var/previous-view-number"));
+          </script>
+        </binding>
+      </mod-up>
     </key>
 
 <!-- Reverser -->
