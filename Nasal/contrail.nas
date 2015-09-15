@@ -20,7 +20,7 @@ var smoke2 = func() {
 }
         settimer(smoke2, 1);
 }
-_setlistener("/sim/signals/fdm-initialized", func { smoke2() }); 
+_setlistener("/sim/signals/fdm-initialized", func { smoke2() });
 
 setprop("tu154/contrail/smoke3", 0 );
 setprop("engines/engine[2]/rpm", 0);

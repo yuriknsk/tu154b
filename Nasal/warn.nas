@@ -60,7 +60,7 @@ setprop("tu154/systems/electrical/indicators/stab-m", 0 );
 setprop("tu154/systems/electrical/indicators/stab-v", 0 );
 setprop("tu154/systems/electrical/indicators/stab-h", 0 );
 setprop("tu154/systems/electrical/indicators/nvu", 0 );
-setprop("tu154/systems/electrical/indicators/beacon-inner", 0 );	
+setprop("tu154/systems/electrical/indicators/beacon-inner", 0 );
 setprop("tu154/systems/electrical/indicators/beacon-middle", 0 );
 setprop("tu154/systems/electrical/indicators/beacon-outer", 0 );
 setprop("tu154/systems/electrical/indicators/azimuth-avton", 0 );
@@ -76,10 +76,10 @@ setprop("tu154/systems/electrical/indicators/aileron-trim-neutral", 0 );
 setprop("tu154/systems/electrical/indicators/elevator-trim-neutral", 0 );
 setprop("tu154/systems/electrical/indicators/stab-on/state", 0.0);
 setprop("tu154/systems/electrical/indicators/fuel-2500/state", 0.0);
-setprop("tu154/systems/warning/run-stabilizer/state", 0.0 );		
+setprop("tu154/systems/warning/run-stabilizer/state", 0.0 );
 setprop("tu154/systems/electrical/indicators/flaps-1", 0.0 );
 setprop("tu154/systems/electrical/indicators/flaps-2", 0.0 );
-setprop("tu154/systems/warning/run-flaps/state", 0.0 );		
+setprop("tu154/systems/warning/run-flaps/state", 0.0 );
 setprop("tu154/systems/warning/iso/state", 0.0 );
 setprop("tu154/systems/electrical/indicators/interceptor-outer", 0.0 );
 setprop("tu154/systems/electrical/indicators/interceptor-inner", 0.0 );
@@ -130,7 +130,7 @@ setprop("tu154/systems/warning/voice/sp-ready", 0.0 );
 # flashes
 iso.switch(0);
 horn.switch(0);
-alarm.switch(0); 
+alarm.switch(0);
 ground.switch(0);
 rvrn.switch(0);
 slats.switch(0);
@@ -213,17 +213,17 @@ if( arg[0] ) {
 	setprop("tu154/textures/tablo_13","tablo_14_n.rgb" );
 	setprop("tu154/textures/tablo_14","tablo_15_n.rgb" );
 	setprop("tu154/textures/tablo_15","tablo_16_n.rgb" );
-			
+
 	}
 else {
         setprop("tu154/light/instruments/int-blue",0.0);
         setprop("tu154/light/instruments/int-green",0.0);
         setprop("tu154/light/instruments/int-red",0.0);
-        
+
         setprop("tu154/light/panel/ext-blue",0.0);
         setprop("tu154/light/panel/ext-green",0.0);
         setprop("tu154/light/panel/ext-red",0.0);
-        
+
         setprop("tu154/light/panel/amb-blue",0.0);
         setprop("tu154/light/panel/amb-green",0.0);
         setprop("tu154/light/panel/amb-red",0.0);
@@ -254,7 +254,7 @@ var pwr = getprop("tu154/systems/electrical/buses/DC27-bus-L/volts");
 if( pwr == nil ) return;
 if(  pwr < 13.0 )
 	{ #27 V absent
-	horn.switch(0); 
+	horn.switch(0);
 	setprop("tu154/systems/warning/horn/const", 0 );
 	return;
 	}
@@ -289,9 +289,9 @@ if( getprop( "gear/gear[1]/wow" ) == 0 )			# in air
   }
 
 # set output
-if( horn_const_src > 0.0 ) 
+if( horn_const_src > 0.0 )
 	setprop("tu154/systems/warning/horn/const", 1 );
-else 	
+else
 	setprop("tu154/systems/warning/horn/const", 0 );
 
 }
@@ -302,7 +302,7 @@ var pwr = getprop("tu154/systems/electrical/buses/DC27-bus-L/volts");
 if( pwr == nil ) return;
 if(  pwr < 13.0 )
 	{ #27 V absent
-	alarm.switch(0); 
+	alarm.switch(0);
 	setprop("tu154/systems/warning/alarm/const", 0 );
 	return;
 	}
@@ -357,7 +357,7 @@ if( getprop( "velocities/speed-down-fps" ) < 0.0 ) { voice_h.switch(0); return; 
 if( getprop( "gear/gear[0]/wow" ) == 1.0 ) { voice_h.switch(0); return; }
 if( getprop( "gear/gear[1]/wow" ) == 1.0 ) { voice_h.switch(0); return; }
 if( getprop( "gear/gear[2]/wow" ) == 1.0 ) { voice_h.switch(0); return; }
-	
+
 if( alt > RV_OFFSET ){
 	if( alt < (1.3 + RV_OFFSET) )
 		{
@@ -382,7 +382,7 @@ if( alt < (10.0 + RV_OFFSET) ){
 		setprop( "tu154/systems/warning/voice/altitude", 10.0 );
 		voice_h.switch(1);
 }}
-# Non-repeatable count		
+# Non-repeatable count
 if( alt < (20.0 + RV_OFFSET) )
 	if( alt > (11.0 + RV_OFFSET) )
 		setprop( "tu154/systems/warning/voice/altitude", 20.0 );
@@ -394,7 +394,7 @@ if( alt < (40.0 + RV_OFFSET) )
 		setprop( "tu154/systems/warning/voice/altitude", 40.0 );
 if( alt < (55.0 + RV_OFFSET) )
 	if( alt > (53.0 + RV_OFFSET) )
-		setprop( "tu154/systems/warning/voice/altitude", 55.0 );		
+		setprop( "tu154/systems/warning/voice/altitude", 55.0 );
 if( alt < (60.0 + RV_OFFSET) )
 	if( alt > (58.0 + RV_OFFSET) )
 		setprop( "tu154/systems/warning/voice/altitude", 60.0 );
@@ -403,7 +403,7 @@ if( alt < (80.0 + RV_OFFSET) )
 		setprop( "tu154/systems/warning/voice/altitude", 80.0 );
 if( alt < (90.0 + RV_OFFSET) )
 	if( alt > (88.0 + RV_OFFSET) )
-		setprop( "tu154/systems/warning/voice/altitude", 90.0 );		
+		setprop( "tu154/systems/warning/voice/altitude", 90.0 );
 if( alt < (100.0 + RV_OFFSET) )
 	if( alt > (98.0 + RV_OFFSET) )
 		setprop( "tu154/systems/warning/voice/altitude", 100.0 );
@@ -460,14 +460,14 @@ var check_lamps_capt = func{
 	setprop("tu154/systems/electrical/indicators/stab-v", param );
 	setprop("tu154/systems/electrical/indicators/stab-h", param );
 	setprop("tu154/systems/electrical/indicators/nvu", param );
-        setprop("tu154/systems/electrical/indicators/beacon-inner", param );	
+        setprop("tu154/systems/electrical/indicators/beacon-inner", param );
         setprop("tu154/systems/electrical/indicators/beacon-middle", param );
         setprop("tu154/systems/electrical/indicators/beacon-outer", param );
 #setprop("tu154/systems/electrical/indicators/change-waypoint", param );
         setprop("tu154/systems/electrical/indicators/nvu-correction-on", param );
         setprop("tu154/systems/electrical/indicators/nvu-failure", param );
 	setprop("tu154/systems/electrical/indicators/nvu-vor-avton", param );
-	
+
         setprop("tu154/systems/electrical/indicators/rudder-trim-neutral", param );
         setprop("tu154/systems/electrical/indicators/aileron-trim-neutral", param );
         setprop("tu154/systems/electrical/indicators/elevator-trim-neutral", param );
@@ -485,8 +485,8 @@ var check_lamps_capt = func{
         setprop("tu154/systems/electrical/indicators/gear-green-3", param );
         setprop("tu154/systems/electrical/indicators/azimuth-avton", param );
         setprop("tu154/systems/electrical/indicators/range-avton", param );
-        
-	setprop("tu154/systems/warning/run-stabilizer/state", param );		
+
+	setprop("tu154/systems/warning/run-stabilizer/state", param );
         setprop("tu154/systems/warning/run-flaps/state", param );
         setprop("tu154/systems/warning/iso/state", param );
         setprop("tu154/systems/warning/not_ready/state", param );
@@ -517,7 +517,7 @@ if(  pwr < 13.0 )
 # Check lamps on captain panel
 if( getprop( "tu154/systems/electrical/checking-lamps/main-panel" ) == 1.0 ) return;
 
-# "Podg navigacii" switch control 
+# "Podg navigacii" switch control
 var stu_enabled = (getprop("tu154/switches/pn-5-posadk") !=
                    getprop("tu154/switches/pn-5-navigac"));
 var stu_posadk = getprop("tu154/switches/pn-5-posadk");
@@ -555,8 +555,8 @@ else { if( getprop( "tu154/systems/warning/not-ready/enabled" ) != 0 )
 
 # wrong trim
 param = 0.0;
-if( getprop( "tu154/systems/warning/elevator-trim-pressed" ) == 1.0 ) 
-	if( getprop( "fdm/jsbsim/ap/pitch-hold" ) == 1.0 ) 
+if( getprop( "tu154/systems/warning/elevator-trim-pressed" ) == 1.0 )
+	if( getprop( "fdm/jsbsim/ap/pitch-hold" ) == 1.0 )
 		param = param + 1.0;
 
 setprop("tu154/systems/warning/elevator-trim-pressed", 0.0 );
@@ -566,38 +566,38 @@ else setprop("tu154/systems/electrical/indicators/wrong-trim", 0 );
 
 # ABSU roll hydrosystem failure
 param = 0.0;
-if( getprop( "tu154/systems/absu/roll_ok" ) == 0.0 ) 
-	if( getprop( "fdm/jsbsim/ap/roll-hold" ) == 1.0 ) 
+if( getprop( "tu154/systems/absu/roll_ok" ) == 0.0 )
+	if( getprop( "fdm/jsbsim/ap/roll-hold" ) == 1.0 )
 		param = param + 1.0;
-		
+
 # KURS-MP failure approach
-if( getprop( "fdm/jsbsim/ap/roll-hold" ) == 1.0 ) 
-   if( getprop( "fdm/jsbsim/ap/roll-selector" ) == 5.0 ) 
+if( getprop( "fdm/jsbsim/ap/roll-hold" ) == 1.0 )
+   if( getprop( "fdm/jsbsim/ap/roll-selector" ) == 5.0 )
 	if( getprop("instrumentation/nav[0]/data-is-valid" ) != 1 )
 		param = param + 1.0;
-		
-if( getprop( "fdm/jsbsim/ap/roll-hold" ) == 1.0 ) 
-   if( getprop( "fdm/jsbsim/ap/roll-selector" ) == 5.0 ) 
+
+if( getprop( "fdm/jsbsim/ap/roll-hold" ) == 1.0 )
+   if( getprop( "fdm/jsbsim/ap/roll-selector" ) == 5.0 )
 	if( getprop("instrumentation/nav[0]/nav-loc" ) != 1 )
 		param = param + 1.0;
-		
-if( getprop( "fdm/jsbsim/ap/roll-hold" ) == 1.0 ) 
-   if( getprop( "fdm/jsbsim/ap/roll-selector" ) == 5.0 ) 
+
+if( getprop( "fdm/jsbsim/ap/roll-hold" ) == 1.0 )
+   if( getprop( "fdm/jsbsim/ap/roll-selector" ) == 5.0 )
 	if( getprop("instrumentation/nav[0]/in-range" ) != 1 )
 		param = param + 1.0;
 # TKS failure approach
-if( getprop( "fdm/jsbsim/ap/roll-hold" ) == 1.0 ) 
-   if( getprop( "fdm/jsbsim/ap/roll-selector" ) == 5.0 ) 
+if( getprop( "fdm/jsbsim/ap/roll-hold" ) == 1.0 )
+   if( getprop( "fdm/jsbsim/ap/roll-selector" ) == 5.0 )
 	if( getprop("instrumentation/heading-indicator[0]/serviceable" ) != 1 )
 		if( getprop("instrumentation/heading-indicator[1]/serviceable" ) != 1 )
 		param = param + 1.0;
 
 # KURS-MP failure VOR
-# 
-# if( getprop( "tu154/systems/electrical/indicators/vor" ) == 1.0 ) 
+#
+# if( getprop( "tu154/systems/electrical/indicators/vor" ) == 1.0 )
 # 	if( getprop("instrumentation/nav[0]/data-is-valid" ) != 1 )
 # 		param = param + 1.0;
-# if( getprop( "tu154/systems/electrical/indicators/vor" ) == 1.0 ) 
+# if( getprop( "tu154/systems/electrical/indicators/vor" ) == 1.0 )
 # 	if( getprop("instrumentation/nav[0]/in-range" ) != 1 )
 # 		param = param + 1.0;
  if( param > 0.0 ) {
@@ -607,7 +607,7 @@ if( getprop( "fdm/jsbsim/ap/roll-hold" ) == 1.0 )
  else  { setprop("tu154/systems/electrical/indicators/pitch", 0 );
          setprop("tu154/systems/warning/absu", 0 );
  }
- 		
+
  if( param > 0.0 ) {
          setprop("tu154/systems/electrical/indicators/bank", 1 );
          setprop("tu154/systems/warning/absu", 1 );
@@ -619,30 +619,30 @@ if( getprop( "fdm/jsbsim/ap/roll-hold" ) == 1.0 )
  }
  setprop("tu154/instrumentation/pkp/kurs-failure",
          (!stu_enabled or param > 0));
-	
-	
+
+
 # ABSU pitch hydrosystem failure
 param = 0.0;
-if( getprop( "tu154/systems/absu/pitch_ok" ) == 0.0 ) 
-	if( getprop( "fdm/jsbsim/ap/pitch-hold" ) == 1.0 ) 
+if( getprop( "tu154/systems/absu/pitch_ok" ) == 0.0 )
+	if( getprop( "fdm/jsbsim/ap/pitch-hold" ) == 1.0 )
 		param = param + 1.0;
 
 # KURS-MP failure glideslope
-if( getprop( "fdm/jsbsim/ap/pitch-hold" ) == 1.0 ) 
-   if( getprop( "fdm/jsbsim/ap/pitch-selector" ) == 5.0 ) 
+if( getprop( "fdm/jsbsim/ap/pitch-hold" ) == 1.0 )
+   if( getprop( "fdm/jsbsim/ap/pitch-selector" ) == 5.0 )
 	if( getprop("instrumentation/nav[0]/data-is-valid" ) != 1 )
 		param = param + 1.0;
-		
-if( getprop( "fdm/jsbsim/ap/pitch-hold" ) == 1.0 ) 
-   if( getprop( "fdm/jsbsim/ap/pitch-selector" ) == 5.0 ) 
+
+if( getprop( "fdm/jsbsim/ap/pitch-hold" ) == 1.0 )
+   if( getprop( "fdm/jsbsim/ap/pitch-selector" ) == 5.0 )
 	if( getprop("instrumentation/nav[0]/has-gs" ) != 1 )
 		param = param + 1.0;
-		
-if( getprop( "fdm/jsbsim/ap/pitch-hold" ) == 1.0 ) 
-   if( getprop( "fdm/jsbsim/ap/pitch-selector" ) == 5.0 ) 
+
+if( getprop( "fdm/jsbsim/ap/pitch-hold" ) == 1.0 )
+   if( getprop( "fdm/jsbsim/ap/pitch-selector" ) == 5.0 )
 	if( getprop("instrumentation/nav[0]/in-range" ) != 1 )
 		param = param + 1.0;
-		
+
 if( param > 0.0 ) {
         setprop("tu154/systems/electrical/indicators/pitch", 1 );
         setprop("tu154/systems/warning/absu", 1 );
@@ -677,7 +677,7 @@ param = 0.0;
 if( absu.absu_powered() == 1 )
 	if( getprop( "tu154/instrumentation/pn-6/serviceable" ) == 0 )
      		param = param + 1.0;
-     		
+
 if( param > 0.0 ) {
         setprop("tu154/systems/electrical/indicators/at-failure", 1 );
         setprop("tu154/systems/warning/absu", 1 );
@@ -693,7 +693,7 @@ if( getprop( "fdm/jsbsim/instrumentation/indicated-altitude-m" ) < 100.0 )
      if( getprop( "tu154/instrumentation/rv-5m/warn" ) == 0 )
      	if( abs( getprop( "fdm/jsbsim/ap/heading-needle-deflection" )) > 0.2 )
      		param = param + 1.0;
-     		
+
 if( param > 0.0 ) setprop("tu154/systems/electrical/indicators/wrong-approach-h", 1 );
 else setprop("tu154/systems/electrical/indicators/wrong-approach-h", 0 );
 
@@ -702,14 +702,14 @@ if( getprop( "fdm/jsbsim/instrumentation/indicated-altitude-m" ) < 100.0 )
      if( getprop( "tu154/instrumentation/rv-5m/warn" ) == 0 )
      	if( abs( getprop( "instrumentation/nav[0]/gs-needle-deflection" )) > 0.3 )
      		param = param + 1.0;
-     		
+
 if( param > 0.0 ) setprop("tu154/systems/electrical/indicators/wrong-approach-v", 1 );
 else setprop("tu154/systems/electrical/indicators/wrong-approach-v", 0 );
 
 # Fire warning
 # not implemented yet
 
-if( getprop( "tu154/systems/warning/fire/fire" ) == 1 ) 
+if( getprop( "tu154/systems/warning/fire/fire" ) == 1 )
 	setprop("tu154/systems/electrical/indicators/fire", 1 );
 else setprop("tu154/systems/electrical/indicators/fire", 0 );
 
@@ -760,7 +760,7 @@ if( getprop( "velocities/speed-down-fps" ) > 45.0 )
 if( getprop( "velocities/speed-down-fps" ) > 50.0 )
 	if( getprop( "fdm/jsbsim/instrumentation/indicated-altitude-m" ) < 600 )
 		param = param + 1.0;
-     		
+
 if( param > 0.0 ){ horn.switch(1); ground.switch(1); }
 else { horn.switch(0); ground.switch(0); }
 
@@ -800,7 +800,7 @@ if(  getprop( "tu154/instrumentation/uap-12/powered" ) > 0.0 )
 		param = param + 1.0;
 	}
 	else { setprop("tu154/systems/electrical/indicators/acceleration", 0 ); }
-		
+
  if( param > 0.0 ) setprop("tu154/instrumentation/uap-12/warn", 1 );
  else setprop("tu154/instrumentation/uap-12/warn", 0 );
 
@@ -835,7 +835,7 @@ else setprop("tu154/systems/electrical/indicators/elevator-trim-neutral", 0 );
 if( getprop("tu154/systems/warning/run-stabilizer") == 1.0 )
     stab_on.switch(1);
 else stab_on.switch(0);
-setprop("tu154/systems/warning/run-stabilizer", 0.0 );		
+setprop("tu154/systems/warning/run-stabilizer", 0.0 );
 
 # Flaps indicator
 if( getprop("tu154/systems/warning/run-flaps") == 1.0 )
@@ -847,14 +847,14 @@ else 	{
 	setprop("tu154/systems/electrical/indicators/flaps-1", 0.0 );
 	setprop("tu154/systems/electrical/indicators/flaps-2", 0.0 );
 	}
-setprop("tu154/systems/warning/run-flaps", 0.0 );		
+setprop("tu154/systems/warning/run-flaps", 0.0 );
 
 # Slats indicator
 param = 0.0;
 if( getprop("fdm/jsbsim/fcs/flap-pos-deg" ) > 0.1 )
 	if( getprop("fdm/jsbsim/fcs/flap-pos-deg" ) < 14.0 )
 		param = 1.0;
-		
+
 if( param > 0.0 ) slats.switch(1);
 else {
 	slats.switch(0);
@@ -863,16 +863,16 @@ else {
 	else setprop("tu154/systems/warning/slats/state", 0.0 );
 	}
 
-# Speedbrake middle indicators	
+# Speedbrake middle indicators
 if( getprop("surface-positions/speedbrake-pos-norm") > 0.0 )
 	setprop("tu154/systems/electrical/indicators/interceptor-outer", 1.0 );
-else 	
+else
 	setprop("tu154/systems/electrical/indicators/interceptor-outer", 0.0 );
 if( getprop("surface-positions/speedbrake-pos-norm") > 0.4 )
 	setprop("tu154/systems/electrical/indicators/interceptor-inner", 1.0 );
-else 	
+else
 	setprop("tu154/systems/electrical/indicators/interceptor-inner", 0.0 );
-	
+
 # Gear indicator
 # Nose
 param = 0.0;
@@ -884,7 +884,7 @@ else 	setprop("tu154/systems/electrical/indicators/gear-red-2", 0.0 );
 
 if( getprop("gear/gear[0]/position-norm") == 1.0 )
 	setprop("tu154/systems/electrical/indicators/gear-green-2", 1.0 );
-else 	
+else
 	setprop("tu154/systems/electrical/indicators/gear-green-2", 0.0 );
 # Left
 param = 0.0;
@@ -896,7 +896,7 @@ else 	setprop("tu154/systems/electrical/indicators/gear-red-1", 0.0 );
 
 if( getprop("gear/gear[1]/position-norm") == 1.0 )
 	setprop("tu154/systems/electrical/indicators/gear-green-1", 1.0 );
-else 	
+else
 	setprop("tu154/systems/electrical/indicators/gear-green-1", 0.0 );
 # Right
 param = 0.0;
@@ -908,7 +908,7 @@ else 	setprop("tu154/systems/electrical/indicators/gear-red-3", 0.0 );
 
 if( getprop("gear/gear[2]/position-norm") == 1.0 )
 	setprop("tu154/systems/electrical/indicators/gear-green-3", 1.0 );
-else 	
+else
 	setprop("tu154/systems/electrical/indicators/gear-green-3", 0.0 );
 
 if (getprop("fdm/jsbsim/gear/gear-pos-norm") == 0.0 or
@@ -932,7 +932,7 @@ if( param == 0.0 )
 if( getprop( "tu154/systems/warning/deploy-flaps" ) > 0.1 )
 	if( getprop( "fdm/jsbsim/gear/gear-pos-norm" ) < 0.9 )
 			param = 1.0;
-		
+
 if( param > 0.0 ) gear.switch(1);
 else	gear.switch(0);
 
@@ -944,11 +944,11 @@ if( getprop( "fdm/jsbsim/gear/gear-pos-norm" ) != 0.0 )
 
 # Marker beacon
 if( getprop( "instrumentation/marker-beacon[0]/serviceable" ) ) {
-setprop("tu154/systems/electrical/indicators/beacon-inner", 
+setprop("tu154/systems/electrical/indicators/beacon-inner",
 		getprop( "instrumentation/marker-beacon[0]/inner" ));
-setprop("tu154/systems/electrical/indicators/beacon-middle", 
+setprop("tu154/systems/electrical/indicators/beacon-middle",
 		getprop( "instrumentation/marker-beacon[0]/middle" ));
-setprop("tu154/systems/electrical/indicators/beacon-outer", 
+setprop("tu154/systems/electrical/indicators/beacon-outer",
 		getprop( "instrumentation/marker-beacon[0]/outer" ));
 }
  else {
@@ -956,7 +956,7 @@ setprop("tu154/systems/electrical/indicators/beacon-inner", 0 );
 setprop("tu154/systems/electrical/indicators/beacon-middle", 0 );
 setprop("tu154/systems/electrical/indicators/beacon-outer", 0 );
 }
-	
+
 # Reverser signals
 param = 0.0;
 if( getprop( "fdm/jsbsim/propulsion/engine[0]/reverser-angle-rad" ) > 0.0 )
@@ -978,7 +978,7 @@ if( getprop( "fdm/jsbsim/propulsion/engine[2]/reverser-angle-rad" ) > 2.3 )
 	setprop("tu154/systems/electrical/indicators/engine-3/revers-dampers",1.0);
 else setprop("tu154/systems/electrical/indicators/engine-3/revers-dampers",0.0);
 
-#Hydrosystems 
+#Hydrosystems
 if( getprop( "fdm/jsbsim/hs/hs1-pressure" ) < 100.0 )
 			setprop("tu154/lamps/p-hydro-1",1.0);
 else setprop("tu154/lamps/p-hydro-1",0.0);
@@ -1025,7 +1025,7 @@ setprop("tu154/systems/warning/run-flaps", 1.0 );
 if( getprop("fdm/jsbsim/fcs/flap-pos-deg" ) < 10.0 )
 		{
 		setprop("tu154/systems/warning/rvrn/timeout", 1.0 );
-		# Time should be above 13 s 
+		# Time should be above 13 s
 		interpolate("tu154/systems/warning/rvrn/timeout", 0.0, 3 );
 		}
 if( getprop( "controls/flight/flaps" ) < 0.1 )
@@ -1065,8 +1065,8 @@ if(  pwr > 13.0 ) {
 		setprop("tu154/light/headlight-selector", 0.0 );
 		}
 	}
-else { # set off lamps, but not change position 
-	setprop	("tu154/light/headlight-selector", 0.0 ); 	
+else { # set off lamps, but not change position
+	setprop	("tu154/light/headlight-selector", 0.0 );
 	}
 }
 
@@ -1088,13 +1088,13 @@ if(  pwr > 13.0 ) {
 # }
 # beacon_middle_watchdog = func{
 # if( getprop( "instrumentation/marker-beacon[0]/serviceable" ) > 0 )
-# 	setprop("tu154/systems/electrical/indicators/beacon-middle", 
+# 	setprop("tu154/systems/electrical/indicators/beacon-middle",
 #  		getprop( "instrumentation/marker-beacon[0]/middle" ) );
 #  else setprop("tu154/systems/electrical/indicators/beacon-middle", 0 );
 # }
 # beacon_outer_watchdog = func{
 # if( getprop( "instrumentation/marker-beacon[0]/serviceable" ) > 0 )
-# 	setprop("tu154/systems/electrical/indicators/beacon-outer", 
+# 	setprop("tu154/systems/electrical/indicators/beacon-outer",
 #  		getprop( "instrumentation/marker-beacon[0]/outer" ) );
 #  else setprop("tu154/systems/electrical/indicators/beacon-outer", 0 );
 # }
@@ -1116,4 +1116,3 @@ voice_handler();
 
 
 print("Warning subsystem started");
-
