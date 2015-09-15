@@ -616,9 +616,6 @@
         <engines>
           <file>Aircraft/tu154b/Nasal/engines.nas</file>
         </engines>
-        <fuel>
-          <file>Aircraft/tu154b/Nasal/fuel.nas</file>
-        </fuel>
         <warning>
           <file>Aircraft/tu154b/Nasal/warn.nas</file>
         </warning>
