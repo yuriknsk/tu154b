@@ -258,5 +258,9 @@ var autostart_helper_2 = func{
 	setprop("controls/gear/nose-wheel-steering", 1.0 );
 	setprop("controls/gear/steering", 10.0 );
 
+        # Close cockpit windows.
+        interpolate("tu154/door/window-left", 0, 2);
+        interpolate("tu154/door/window-right", 0, 2);
+
 	help.messenger("Autostart done");
 }
