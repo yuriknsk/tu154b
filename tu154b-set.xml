@@ -1272,5 +1272,17 @@
       <roll-offset-deg type="double">0.0</roll-offset-deg>
     </mod-view>
   </mod-views>
+
+  <door>
+    <window-left type="double">1</window-left>
+    <window-right type="double">1</window-right>
+  </door>
+
+  <wipers>
+    <pos-left type="double">0</pos-left>
+    <pos-right type="double">0</pos-right>
+    <switch-left type="double">0</switch-left>
+    <switch-right type="double">0</switch-right>
+  </wipers>
 </tu154>
 </PropertyList>

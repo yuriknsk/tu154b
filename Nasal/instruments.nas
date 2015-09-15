@@ -1097,6 +1097,39 @@ var nvu_wind_adjust = func(which, sign) {
 
 
 ######################################################################
+#
+# Windshield wipers.
+#
+
+var wiper_timer = {};
+var wiper_func = func(side) {
+    var switch = getprop("tu154/wipers/switch-"~side);
+    var pos = "tu154/wipers/pos-"~side;
+    var bus = (side == "left" ? "DC27-bus-L" : "DC27-bus-R");
+    var power = getprop("tu154/systems/electrical/buses/"~bus~"/volts");
+    if (power > 12) {
+       interpolate(pos, 1, 0);  # Stop any interpolation in progress.
+       setprop(pos, 1);  # The line above doesn't set the value.
+       interpolate(pos, 0, 1.74);
+    }
+}
+var wiper = func(side) {
+    var switch = getprop("tu154/wipers/switch-"~side);
+    if (switch) {
+        if (!wiper_timer[side].isRunning)
+            wiper_func(side);
+        wiper_timer[side].restart(switch > 0 ? 1.74 : 4);
+    } else
+        wiper_timer[side].stop();
+}
+wiper_timer["left"] = maketimer(0, func { wiper_func("left"); });
+wiper_timer["right"] = maketimer(0, func { wiper_func("right"); });
+
+setlistener("tu154/wipers/switch-left", func { wiper("left"); }, 0, 0);
+setlistener("tu154/wipers/switch-right", func { wiper("right"); }, 0, 0);
+
+
+######################################################################
 
 svs_power = func{
 if( getprop( "tu154/switches/SVS-power" ) == 1.0 )

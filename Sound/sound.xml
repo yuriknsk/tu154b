@@ -2486,7 +2486,164 @@
       <offset type="double">0.5</offset>
     </volume>
   </marker>
- 
+
+  <windows>
+    <name>left window moving</name>
+    <path>Aircraft/tu154b/Sound/misc/window-move.wav</path>
+    <condition>
+      <property>sim/current-view/internal</property>
+      <greater-than>
+        <property>tu154/door/window-left</property>
+        <value>0.25</value>
+      </greater-than>
+      <less-than>
+        <property>tu154/door/window-left</property>
+        <value>1</value>
+      </less-than>
+    </condition>
+    <mode>looped</mode>
+    <position>
+      <x>-1</x>
+      <y>1</y>
+      <z>1.5</z>
+    </position>
+  </windows>
+  <windows>
+    <name>left window close</name>
+    <path>Aircraft/tu154b/Sound/misc/window-close.wav</path>
+    <condition>
+      <property>sim/current-view/internal</property>
+      <greater-than>
+        <property>tu154/door/window-left</property>
+        <value>0</value>
+      </greater-than>
+      <less-than>
+        <property>tu154/door/window-left</property>
+        <value>0.15</value>
+      </less-than>
+    </condition>
+    <mode>once</mode>
+    <position>
+      <x>-1</x>
+      <y>1</y>
+      <z>1.5</z>
+    </position>
+  </windows>
+  <windows>
+    <name>right window moving</name>
+    <path>Aircraft/tu154b/Sound/misc/window-move.wav</path>
+    <condition>
+      <property>sim/current-view/internal</property>
+      <greater-than>
+        <property>tu154/door/window-right</property>
+        <value>0.25</value>
+      </greater-than>
+      <less-than>
+        <property>tu154/door/window-right</property>
+        <value>1</value>
+      </less-than>
+    </condition>
+    <mode>looped</mode>
+    <position>
+      <x>-1</x>
+      <y>-1</y>
+      <z>1.5</z>
+    </position>
+  </windows>
+  <windows>
+    <name>right window close</name>
+    <path>Aircraft/tu154b/Sound/misc/window-close.wav</path>
+    <condition>
+      <property>sim/current-view/internal</property>
+      <greater-than>
+        <property>tu154/door/window-right</property>
+        <value>0</value>
+      </greater-than>
+      <less-than>
+        <property>tu154/door/window-right</property>
+        <value>0.15</value>
+      </less-than>
+    </condition>
+    <mode>once</mode>
+    <position>
+      <x>-1</x>
+      <y>-1</y>
+      <z>1.5</z>
+    </position>
+  </windows>
+  <windows>
+    <name>left window wind</name>
+    <path>Aircraft/tu154b/Sound/misc/wind.wav</path>
+    <condition>
+      <property>sim/current-view/internal</property>
+      <property>tu154/door/window-left</property>
+    </condition>
+    <mode>looped</mode>
+    <position>
+      <x>-1</x>
+      <y>1</y>
+      <z>1.5</z>
+    </position>
+    <volume>
+      <property>tu154/door/window-left</property>
+    </volume>
+    <volume>
+      <property>velocities/airspeed-kt</property>
+      <factor>0.004</factor>
+      <offset>0.0</offset>
+    </volume>
+  </windows>
+  <windows>
+    <name>right window wind</name>
+    <path>Aircraft/tu154b/Sound/misc/wind.wav</path>
+    <condition>
+      <property>sim/current-view/internal</property>
+      <property>tu154/door/window-right</property>
+    </condition>
+    <mode>looped</mode>
+    <position>
+      <x>-1</x>
+      <y>-1</y>
+      <z>1.5</z>
+    </position>
+    <volume>
+      <property>tu154/door/window-right</property>
+    </volume>
+    <volume>
+      <property>velocities/airspeed-kt</property>
+      <factor>0.004</factor>
+      <offset>0.0</offset>
+    </volume>
+  </windows>
+
+  <wipers>
+    <name>left windshield wiper</name>
+    <path>Aircraft/tu154b/Sound/misc/wiper.wav</path>
+    <condition>
+      <property>sim/current-view/internal</property>
+      <property>tu154/wipers/pos-left</property>
+    </condition>
+    <mode>in-transit</mode>
+    <position>
+      <x>-2</x>
+      <y>-1</y>
+      <z>1.5</z>
+    </position>
+  </wipers>
+  <wipers>
+    <name>right windshield wiper</name>
+    <path>Aircraft/tu154b/Sound/misc/wiper.wav</path>
+    <condition>
+      <property>sim/current-view/internal</property>
+      <property>tu154/wipers/pos-right</property>
+    </condition>
+    <mode>in-transit</mode>
+    <position>
+      <x>-2</x>
+      <y>1</y>
+      <z>1.5</z>
+    </position>
+  </wipers>
 
 </fx> 
 
