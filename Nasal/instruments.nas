@@ -314,10 +314,10 @@ setlistener("instrumentation/dme[2]/indicated-distance-nm",
 
 
 # Added by Yurik dec 2013
-setprop("instrumentation/dme[0]/frequencies/selected-mhz", 
+setprop("instrumentation/dme[0]/frequencies/selected-mhz",
   getprop("instrumentation/nav[0]/frequencies/selected-mhz") );
 
-setprop("instrumentation/dme[1]/frequencies/selected-mhz", 
+setprop("instrumentation/dme[1]/frequencies/selected-mhz",
   getprop("instrumentation/nav[1]/frequencies/selected-mhz") );
 
 ######################################################################
@@ -1097,6 +1097,39 @@ var nvu_wind_adjust = func(which, sign) {
 
 
 ######################################################################
+#
+# Windshield wipers.
+#
+
+var wiper_timer = {};
+var wiper_func = func(side) {
+    var switch = getprop("tu154/wipers/switch-"~side);
+    var pos = "tu154/wipers/pos-"~side;
+    var bus = (side == "left" ? "DC27-bus-L" : "DC27-bus-R");
+    var power = getprop("tu154/systems/electrical/buses/"~bus~"/volts");
+    if (power > 12) {
+       interpolate(pos, 1, 0);  # Stop any interpolation in progress.
+       setprop(pos, 1);  # The line above doesn't set the value.
+       interpolate(pos, 0, 1.74);
+    }
+}
+var wiper = func(side) {
+    var switch = getprop("tu154/wipers/switch-"~side);
+    if (switch) {
+        if (!wiper_timer[side].isRunning)
+            wiper_func(side);
+        wiper_timer[side].restart(switch > 0 ? 1.74 : 4);
+    } else
+        wiper_timer[side].stop();
+}
+wiper_timer["left"] = maketimer(0, func { wiper_func("left"); });
+wiper_timer["right"] = maketimer(0, func { wiper_func("right"); });
+
+setlistener("tu154/wipers/switch-left", func { wiper("left"); }, 0, 0);
+setlistener("tu154/wipers/switch-right", func { wiper("right"); }, 0, 0);
+
+
+######################################################################
 
 svs_power = func{
 if( getprop( "tu154/switches/SVS-power" ) == 1.0 )
@@ -1200,13 +1233,13 @@ if( delta < abs( mgv_1_pitch - mgv_c_pitch ) )
 if( delta < abs( mgv_1_roll - mgv_c_roll ) )
 	setprop("tu154/instrumentation/bkk/mgv-1-failure", 1);
 
-# check MGV-2	
+# check MGV-2
 if( delta < abs( mgv_2_pitch - mgv_c_pitch ) )
 	setprop("tu154/instrumentation/bkk/mgv-2-failure", 1);
 if( delta < abs( mgv_2_roll - mgv_c_roll ) )
 	setprop("tu154/instrumentation/bkk/mgv-2-failure", 1);
 
-# check MGV-contr		
+# check MGV-contr
 if( getprop("tu154/instrumentation/bkk/mgv-1-failure" ) == 1 ){
 	if( getprop("tu154/instrumentation/bkk/mgv-2-failure" ) == 1 )
 		{
@@ -1214,7 +1247,7 @@ if( getprop("tu154/instrumentation/bkk/mgv-1-failure" ) == 1 ){
 		setprop("tu154/systems/electrical/indicators/contr-gyro", 1);
 		setprop("tu154/systems/electrical/indicators/mgvk-failure", 1);
 }}
-		
+
 # Check roll limit
 
 var ias = getprop( "instrumentation/airspeed-indicator/indicated-speed-kt" );
@@ -1225,11 +1258,11 @@ if( alt == nil ) alt = 0.0;
 alt = alt * 0.3048; # to m
 var limit = 15.0;
 if( getprop( "tu154/switches/pn-5-posadk" ) == 1 ){
-	if( alt >= 250.0 ) limit = 33.0;	
+	if( alt >= 250.0 ) limit = 33.0;
 	if( alt < 250.0 ) limit = 15.0;
 	}
 else {
-	if( ias > 340.0 ) limit = 33.0;	
+	if( ias > 340.0 ) limit = 33.0;
 	if( alt < 280.0 ) limit = 15.0;
 
 	}
@@ -1268,53 +1301,53 @@ bkk_adjust = func{
 	var param = getprop("tu154/systems/mgv/one");
 	if( param == nil ) return;
 	param = param + 0.1;
-	if( param >= 6.0 ) param = 6.0; 
+	if( param >= 6.0 ) param = 6.0;
 	setprop("tu154/systems/mgv/one", param);
-	
+
 	param = getprop("tu154/systems/mgv/two");
 	if( param == nil ) return;
 	param = param + 0.1;
-	if( param >= 6.0 ) param = 6.0; 
+	if( param >= 6.0 ) param = 6.0;
 	setprop("tu154/systems/mgv/two", param);
-	
+
 	param = getprop("tu154/systems/mgv/contr");
 	if( param == nil ) return;
 	param = param + 0.1;
-	if( param >= 6.0 ) param = 6.0; 
+	if( param >= 6.0 ) param = 6.0;
 	setprop("tu154/systems/mgv/contr", param);
-		
+
 }
 
 bkk_shutdown = func{
-if ( arg[0] == 0 ) 
+if ( arg[0] == 0 )
 	{
 #	setprop( "instrumentation/attitude-indicator[0]/serviceable", 0 );
 	setprop("tu154/systems/mgv/one", 0.0);
 #setprop( "instrumentation/attitude-indicator[0]/internal-pitch-deg",-rand()*30.0 );
 #setprop( "instrumentation/attitude-indicator[0]/internal-roll-deg", -rand()*15.0 );
 	}
-if ( arg[0] == 1 ) 
+if ( arg[0] == 1 )
 	{
 #	setprop( "instrumentation/attitude-indicator[1]/serviceable", 0 );
 	setprop("tu154/systems/mgv/two", 0.0);
 #setprop( "instrumentation/attitude-indicator[1]/internal-pitch-deg",-rand()*30.0 );
 #setprop( "instrumentation/attitude-indicator[1]/internal-roll-deg", -rand()*15.0 );
 	}
-if ( arg[0] == 2 ) 
+if ( arg[0] == 2 )
 	{
 	setprop( "instrumentation/attitude-indicator[2]/serviceable", 0 );
 	setprop("tu154/systems/mgv/contr", 0.0);
 #setprop( "instrumentation/attitude-indicator[2]/internal-pitch-deg",-rand()*30.0 );
 #setprop( "instrumentation/attitude-indicator[2]/internal-roll-deg", -rand()*15.0 );
 	}
-if ( arg[0] == 3 ) 
+if ( arg[0] == 3 )
 	{
 	setprop( "instrumentation/attitude-indicator[3]/serviceable", 0 );
 #setprop( "instrumentation/attitude-indicator[3]/internal-pitch-deg",-rand()*30.0 );
 #setprop( "instrumentation/attitude-indicator[3]/internal-roll-deg", -rand()*15.0 );
 	}
 
-	
+
 
 }
 
@@ -1391,7 +1424,7 @@ if( getprop("tu154/switches/pu-11-gpk") == 1 ) { # GA-3 correction
 	if( abs( delta ) < 0.5 ) return; 		# not adjust small values
 	if( delta > 360.0 ) delta = delta - 360.0;	# bias control
 	if( delta < 0.0 ) delta = delta + 360.0;
-	if( delta > 180 ) delta = 0.5; else delta = -0.5;# find short way	
+	if( delta > 180 ) delta = 0.5; else delta = -0.5;# find short way
 	var offset = getprop("instrumentation/heading-indicator[1]/offset-deg");
 	if( offset == nil ) return;
 	setprop("instrumentation/heading-indicator[1]/offset-deg", offset+delta );
@@ -1403,7 +1436,7 @@ else	{ # osn
 	if( abs( delta ) < 1.0 ) return; 		# not adjust small values
 	if( delta > 360.0 ) delta = delta - 360.0;	# bias control
 	if( delta < 0.0 ) delta = delta + 360.0;
-	if( delta > 180 ) delta = 0.5; else delta = -0.5;# find short way	
+	if( delta > 180 ) delta = 0.5; else delta = -0.5;# find short way
 	var offset = getprop("instrumentation/heading-indicator[0]/offset-deg");
 	if( offset == nil ) return;
 	setprop("instrumentation/heading-indicator[0]/offset-deg", offset+delta );
@@ -1418,7 +1451,7 @@ else	{ # osn
 	}
 else	{ # BGMK-1
         setprop("fdm/jsbsim/instrumentation/bgmk-corrector-1",1);
-	} 
+	}
    } # end BGMK correction
 }
 
@@ -1468,25 +1501,25 @@ else	{	# osn
 tks_power_1 = func{
 if( getprop( "tu154/switches/TKC-power-1" ) == 1.0 )
 	electrical.AC3x200_bus_1L.add_output( "GA3-1", 10.0);
-else electrical.AC3x200_bus_1L.rm_output( "GA3-1" );		
+else electrical.AC3x200_bus_1L.rm_output( "GA3-1" );
 }
 
 tks_bgmk_1 = func{
 if( getprop( "tu154/switches/TKC-BGMK-1" ) == 1.0 )
 	electrical.AC3x200_bus_1L.add_output( "BGMK-1", 10.0);
-else electrical.AC3x200_bus_1L.rm_output( "BGMK-1" );		
+else electrical.AC3x200_bus_1L.rm_output( "BGMK-1" );
 }
 
 tks_power_2 = func{
 if( getprop( "tu154/switches/TKC-power-2" ) == 1.0 )
 	electrical.AC3x200_bus_3R.add_output( "GA3-2", 10.0);
-else electrical.AC3x200_bus_3R.rm_output( "GA3-2" );		
+else electrical.AC3x200_bus_3R.rm_output( "GA3-2" );
 }
 
 tks_bgmk_2 = func{
 if( getprop( "tu154/switches/TKC-BGMK-2" ) == 1.0 )
 	electrical.AC3x200_bus_3R.add_output( "BGMK-2", 10.0);
-else electrical.AC3x200_bus_3R.rm_output( "BGMK-2" );		
+else electrical.AC3x200_bus_3R.rm_output( "BGMK-2" );
 }
 
 
@@ -1548,7 +1581,7 @@ if( arg[0] == 0 )	# proceed captain panel
 	var hdg_hund = getprop("tu154/instrumentation/kurs-mp-1/digit-h-hund");
 	if( hdg_hund == nil ) return;
 	heading = hdg_hund * 100 + hdg_dec * 10 + hdg_ones;
-	if( heading > 359.0 ) { 
+	if( heading > 359.0 ) {
 		heading = 0.0;
                 setprop("tu154/instrumentation/kurs-mp-1/digit-h-hund", 0.0 );
                 setprop("tu154/instrumentation/kurs-mp-1/digit-h-dec", 0.0 );
@@ -1573,7 +1606,7 @@ if( arg[0] == 1 ) # co-pilot
 	var hdg_hund = getprop("tu154/instrumentation/kurs-mp-2/digit-h-hund");
 	if( hdg_hund == nil ) return;
 	heading = hdg_hund * 100 + hdg_dec * 10 + hdg_ones;
-		if( heading > 359.0 ) { 
+		if( heading > 359.0 ) {
 		heading = 0.0;
                 setprop("tu154/instrumentation/kurs-mp-2/digit-h-hund", 0.0 );
                 setprop("tu154/instrumentation/kurs-mp-2/digit-h-dec", 0.0 );
@@ -1627,13 +1660,13 @@ setlistener( "instrumentation/nav[1]/in-range", kursmp_watchdog_2, 0,0 );
 var kursmp_power_1 = func{
 if( getprop( "tu154/switches/KURS-MP-1" ) == 1.0 )
 	electrical.AC3x200_bus_1L.add_output( "KURS-MP-1", 20.0);
-else electrical.AC3x200_bus_1L.rm_output( "KURS-MP-1" );		
+else electrical.AC3x200_bus_1L.rm_output( "KURS-MP-1" );
 }
 
 var kursmp_power_2 = func{
 if( getprop( "tu154/switches/KURS-MP-2" ) == 1.0 )
 	electrical.AC3x200_bus_3R.add_output( "KURS-MP-2", 20.0);
-else electrical.AC3x200_bus_3R.rm_output( "KURS-MP-2" );		
+else electrical.AC3x200_bus_3R.rm_output( "KURS-MP-2" );
 }
 
 setlistener( "tu154/switches/KURS-MP-1", kursmp_power_1 ,0,0);
@@ -1670,7 +1703,7 @@ else {
   setprop("tu154/instrumentation/rsbn/frequency", 108.0 + handle*2.5 + khz );
   setprop("instrumentation/nav[2]/frequencies/selected-mhz", 108.0 + handle*2.5 + khz );
   help.rsbn();
- } 
+ }
 }
 
 var rsbn_set_f_2 = func{
@@ -1696,7 +1729,7 @@ else {
   setprop("tu154/instrumentation/rsbn/frequency", int(freq) + handle/10.0 );
   setprop("instrumentation/nav[2]/frequencies/selected-mhz", int(freq) + handle/10.0 );
   help.rsbn();
-  } 
+  }
 }
 
 var rsbn_set_mode = func{
@@ -1705,17 +1738,17 @@ if( arg[0] == 0 )
 	setprop("tu154/instrumentation/rsbn/mode", 0 );
 	var handle = getprop("tu154/instrumentation/rsbn/handle-1");
 	if( handle  == nil ) handle = 0.0;
-	handle = int( handle ); 
+	handle = int( handle );
 	setprop("tu154/instrumentation/rsbn/handle-1", handle );
 	handle = getprop("tu154/instrumentation/rsbn/handle-2");
 	if( handle  == nil ) handle = 0.0;
-	handle = int( handle ); 
+	handle = int( handle );
 	setprop("tu154/instrumentation/rsbn/handle-2", handle );
 	}
 else {
 	setprop("tu154/instrumentation/rsbn/mode", 1 );
 	}
-	
+
 rsbn_set_f_1(0);
 rsbn_set_f_2(0);
 
@@ -1750,9 +1783,9 @@ if( arg[0] == 1 )
 	setprop("tu154/instrumentation/rsbn/serviceable", 1 );
 	  }
 	}
-else { 
+else {
 	electrical.AC3x200_bus_1L.rm_output( "RSBN" );
-#	setprop("instrumentation/nav[2]/serviceable", 0 ); 
+#	setprop("instrumentation/nav[2]/serviceable", 0 );
 	setprop("instrumentation/dme[2]/serviceable", 0 );
 	setprop("instrumentation/nav[2]/power-btn", 0 );
 	setprop("tu154/instrumentation/rsbn/serviceable", 0 );
@@ -1766,21 +1799,21 @@ if( getprop("instrumentation/nav[2]/powered" ) != 1 ) # power off
 #	setprop("instrumentation/nav[2]/serviceable", 0 );
 	setprop("instrumentation/dme[2]/serviceable", 0 );
 	setprop("instrumentation/nav[2]/power-btn", 0 );
-#	setprop("tu154/systems/electrical/indicators/range-avton", 0 );  
+#	setprop("tu154/systems/electrical/indicators/range-avton", 0 );
 #	setprop("tu154/systems/electrical/indicators/azimuth-avton", 0 );
 	setprop("tu154/instrumentation/rsbn/serviceable", 0 );
 	return;
 	}
-else 	{ 
-	if( getprop( "tu154/switches/RSBN-power" ) == 1.0 ) 
+else 	{
+	if( getprop( "tu154/switches/RSBN-power" ) == 1.0 )
 	    {
 	    setprop("instrumentation/nav[2]/power-btn", 1 );
             setprop("instrumentation/dme[2]/serviceable", 1 );
-	    setprop("tu154/instrumentation/rsbn/serviceable", 1 ); 
+	    setprop("tu154/instrumentation/rsbn/serviceable", 1 );
 	    }
 	}
 
-if( getprop( "tu154/switches/RSBN-power" ) != 1.0 ) 
+if( getprop( "tu154/switches/RSBN-power" ) != 1.0 )
         {
         setprop("tu154/instrumentation/rsbn/serviceable", 0 );
 	setprop("instrumentation/nav[2]/power-btn", 0 );
@@ -1856,7 +1889,7 @@ ark_1_power = func{
 	     electrical.AC3x200_bus_1L.rm_output( "ARK-15-1" );
 	     setprop("instrumentation/adf[0]/serviceable", 0 );
 	     }
-	} 
+	}
    else {
 	electrical.AC3x200_bus_1L.rm_output( "ARK-15-1" );
 	setprop("instrumentation/adf[0]/serviceable", 0 );
@@ -1875,7 +1908,7 @@ ark_2_power = func{
 	     electrical.AC3x200_bus_3R.rm_output( "ARK-15-2" );
 	     setprop("instrumentation/adf[1]/serviceable", 0 );
 		}
-	} 
+	}
    else {
 	electrical.AC3x200_bus_3R.rm_output( "ARK-15-2" );
 	setprop("instrumentation/adf[1]/serviceable", 0 );
@@ -1888,38 +1921,38 @@ ark_2_power = func{
 ark_init = func{
 var freq = getprop("instrumentation/adf[0]/frequencies/selected-khz");
 if( freq == nil ) freq = 0.0;
-setprop("tu154/instrumentation/ark-15[0]/digit-1-3", 
+setprop("tu154/instrumentation/ark-15[0]/digit-1-3",
 int( (freq/100.0) - int( freq/1000.0 )*10.0 ) );
-setprop("tu154/instrumentation/ark-15[0]/digit-1-2", 
+setprop("tu154/instrumentation/ark-15[0]/digit-1-2",
 int( (freq/10.0) - int( freq/100.0 )*10.0 ) );
-setprop("tu154/instrumentation/ark-15[0]/digit-1-1", 
+setprop("tu154/instrumentation/ark-15[0]/digit-1-1",
 int( freq - int( freq/10.0 )*10.0 ) );
 
 freq = getprop("instrumentation/adf[0]/frequencies/standby-khz");
 if( freq == nil ) freq = 0.0;
-setprop("tu154/instrumentation/ark-15[0]/digit-2-3", 
+setprop("tu154/instrumentation/ark-15[0]/digit-2-3",
 int( (freq/100.0) - int( freq/1000.0 )*10.0 ) );
-setprop("tu154/instrumentation/ark-15[0]/digit-2-2", 
+setprop("tu154/instrumentation/ark-15[0]/digit-2-2",
 int( (freq/10.0) - int( freq/100.0 )*10.0 ) );
-setprop("tu154/instrumentation/ark-15[0]/digit-2-1", 
+setprop("tu154/instrumentation/ark-15[0]/digit-2-1",
 int( freq - int( freq/10.0 )*10.0 ) );
 
 freq = getprop("instrumentation/adf[1]/frequencies/selected-khz");
 if( freq == nil ) freq = 0.0;
-setprop("tu154/instrumentation/ark-15[1]/digit-1-3", 
+setprop("tu154/instrumentation/ark-15[1]/digit-1-3",
 int( (freq/100.0) - int( freq/1000.0 )*10.0 ) );
-setprop("tu154/instrumentation/ark-15[1]/digit-1-2", 
+setprop("tu154/instrumentation/ark-15[1]/digit-1-2",
 int( (freq/10.0) - int( freq/100.0 )*10.0 ) );
-setprop("tu154/instrumentation/ark-15[1]/digit-1-1", 
+setprop("tu154/instrumentation/ark-15[1]/digit-1-1",
 int( freq - int( freq/10.0 )*10.0 ) );
 
 freq = getprop("instrumentation/adf[1]/frequencies/standby-khz");
 if( freq == nil ) freq = 0.0;
-setprop("tu154/instrumentation/ark-15[1]/digit-2-3", 
+setprop("tu154/instrumentation/ark-15[1]/digit-2-3",
 int( (freq/100.0) - int( freq/1000.0 )*10.0 ) );
-setprop("tu154/instrumentation/ark-15[1]/digit-2-2", 
+setprop("tu154/instrumentation/ark-15[1]/digit-2-2",
 int( (freq/10.0) - int( freq/100.0 )*10.0 ) );
-setprop("tu154/instrumentation/ark-15[1]/digit-2-1", 
+setprop("tu154/instrumentation/ark-15[1]/digit-2-1",
 int( freq - int( freq/10.0 )*10.0 ) );
 
 }
@@ -2007,12 +2040,12 @@ var dc12 = getprop( "tu154/systems/electrical/buses/DC27-bus-L/volts" );
 if( dc12 == nil ) return;
 if( dc12 > 12.0 ){
   if( getprop( "tu154/switches/comm-power-1" ) == 1.0 )
-	  setprop("instrumentation/comm[0]/serviceable", 1 );  
-  else setprop("instrumentation/comm[0]/serviceable", 0 );  
+	  setprop("instrumentation/comm[0]/serviceable", 1 );
+  else setprop("instrumentation/comm[0]/serviceable", 0 );
 
   if( getprop( "tu154/switches/comm-power-2" ) == 1.0 )
-	  setprop("instrumentation/comm[1]/serviceable", 1 );  
-  else setprop("instrumentation/comm[1]/serviceable", 0 );  
+	  setprop("instrumentation/comm[1]/serviceable", 1 );
+  else setprop("instrumentation/comm[1]/serviceable", 0 );
   }
 else {
   setprop("instrumentation/comm[0]/serviceable", 0 );
@@ -2023,10 +2056,10 @@ var ac200 = getprop( "tu154/systems/electrical/buses/AC3x200-bus-1L/volts" );
 if( ac200 == nil ) return; # system not ready yet
 if( ac200 > 150.0 )
 	{ # 200 V 400 Hz Line 1 Power OK
-	setprop("tu154/instrumentation/ark-15[0]/powered", 1 ); 
+	setprop("tu154/instrumentation/ark-15[0]/powered", 1 );
         setprop("instrumentation/dme[0]/serviceable",
                 (getprop("tu154/switches/dme-1-power") == 1));
-	setprop("instrumentation/nav[2]/powered", 1 ); 
+	setprop("instrumentation/nav[2]/powered", 1 );
 	setprop("instrumentation/dme[2]/serviceable", 1 );
         setprop("tu154/systems/nvu/powered",
                 (getprop("tu154/switches/v-51-power") ? 1 : 0));
@@ -2036,7 +2069,7 @@ if( ac200 > 150.0 )
 		setprop("instrumentation/nav[0]/power-btn", 1 );
 		setprop("instrumentation/nav[0]/serviceable", 1 );
 		setprop("instrumentation/marker-beacon[0]/power-btn", 1 );
-		setprop("instrumentation/marker-beacon[0]/serviceable", 1 );		
+		setprop("instrumentation/marker-beacon[0]/serviceable", 1 );
 		}
 	else	{
 		setprop("instrumentation/nav[0]/power-btn", 0 );
@@ -2048,27 +2081,27 @@ if( ac200 > 150.0 )
 	if( getprop( "tu154/switches/TKC-power-1" ) == 1.0 )
 		setprop("instrumentation/heading-indicator[0]/serviceable", 1 );
 	else	setprop("instrumentation/heading-indicator[0]/serviceable", 0 );
-		
+
 	# BGMK-1
 	if( getprop( "tu154/switches/TKC-BGMK-1" ) == 1.0 )
 		setprop("fdm/jsbsim/instrumentation/bgmk-failure-1", 0 );
 	else	setprop("fdm/jsbsim/instrumentation/bgmk-failure-1", 1 );
-	# BKK	
+	# BKK
 	if( getprop( "tu154/switches/BKK-power" ) == 1.0 )
 		setprop("tu154/instrumentation/bkk/serviceable", 1 );
 	else	setprop("tu154/instrumentation/bkk/serviceable", 0 );
 
-	# DISS	
+	# DISS
 	if( getprop( "tu154/switches/DISS-power" ) == 1.0 )
 		setprop("tu154/instrumentation/diss/powered", 1 );
 	else	setprop("tu154/instrumentation/diss/powered", 0 );
 
-	# SVS	
+	# SVS
 	if( getprop( "tu154/switches/SVS-power" ) == 1.0 )
 		setprop("tu154/systems/svs/powered", 1 );
 	else	setprop("tu154/systems/svs/powered", 0 );
 
-	# UVID-15	
+	# UVID-15
 	if( getprop( "tu154/switches/UVID" ) == 1.0 )
 		setprop("tu154/instrumentation/altimeter[1]/powered", 1 );
 	else	setprop("tu154/instrumentation/altimeter[1]/powered", 0 );
@@ -2097,16 +2130,16 @@ if( ac200 > 150.0 )
 	     setprop("instrumentation/turn-indicator/serviceable", 1 );
 	else setprop("instrumentation/turn-indicator/serviceable", 0 );
 
-	
-	
+
+
 	}
 
 
 # turn off all consumers if bus has gone
 else	{
-	setprop("tu154/instrumentation/ark-15[0]/powered", 0 ); 
+	setprop("tu154/instrumentation/ark-15[0]/powered", 0 );
 	setprop("instrumentation/dme[0]/serviceable", 0 );
-	setprop("instrumentation/nav[2]/powered", 0 ); 
+	setprop("instrumentation/nav[2]/powered", 0 );
 	setprop("instrumentation/dme[2]/serviceable", 0 );
 	setprop("tu154/systems/nvu/powered", 0.0 );
 	setprop("instrumentation/nav[0]/power-btn", 0 );
@@ -2121,12 +2154,12 @@ else	{
 	setprop("tu154/instrumentation/uap-12/powered", 0 );
 	setprop("instrumentation/turn-indicator/serviceable", 0 );
 	setprop("instrumentation/marker-beacon[0]/power-btn", 0 );
-	setprop("instrumentation/marker-beacon[0]/serviceable", 0 );		
-	
+	setprop("instrumentation/marker-beacon[0]/serviceable", 0 );
+
 	bkk_shutdown(0);
 	bkk_shutdown(1);
 	}
-	
+
 ac200 = getprop( "tu154/systems/electrical/buses/AC3x200-bus-3L/volts" );
 if( ac200 == nil ) return; # system not ready yet
 if( ac200 > 150.0 )
@@ -2148,7 +2181,7 @@ if( ac200 > 150.0 )
 	if( getprop( "tu154/switches/TKC-power-2" ) == 1.0 )
 		setprop("instrumentation/heading-indicator[1]/serviceable", 1 );
 	else	setprop("instrumentation/heading-indicator[1]/serviceable", 0 );
-		
+
 	# BGMK-2
 	if( getprop( "tu154/switches/TKC-BGMK-2" ) == 1.0 )
 		setprop("fdm/jsbsim/instrumentation/bgmk-failure-2", 0 );
@@ -2172,12 +2205,12 @@ if( ac200 > 150.0 )
 	if( getprop( "tu154/switches/MGV-contr" ) == 1.0 )
 		setprop("instrumentation/attitude-indicator[2]/serviceable", 1 );
 	else { bkk_shutdown(2); }
-	
-	
+
+
 	}
 
 else	{
-	setprop("tu154/instrumentation/ark-15[1]/powered", 0 ); 
+	setprop("tu154/instrumentation/ark-15[1]/powered", 0 );
         setprop("instrumentation/dme[1]/serviceable", 0 );
 	setprop("instrumentation/nav[1]/power-btn", 0 );
 	setprop("instrumentation/nav[1]/serviceable", 0 );
@@ -2185,11 +2218,11 @@ else	{
 	setprop("fdm/jsbsim/instrumentation/bgmk-failure-2", 1 );
         setprop("tu154/systems/absu/serviceable", 0 );
         setprop("tu154/instrumentation/pn-6/serviceable", 0 );
-	
+
        	bkk_shutdown(2);
 	bkk_shutdown(3);
 	}
-	
+
 
 }
 
@@ -2243,6 +2276,6 @@ setprop("instrumentation/attitude-indicator[2]/internal-roll-deg",
 #save sound volume and deny sound for startup
 
 var vol = getprop("/sim/sound/volume");
-	  setprop("tu154/volume", vol);  
+	  setprop("tu154/volume", vol);
 	  setprop("/sim/sound/volume", 0.0);
 print("PNK started");

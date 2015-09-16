@@ -37,12 +37,12 @@ settimer( fuel_handler, FUEL_UPDATE_PERIOD );
 #First, check DC
 var pwr = getprop("tu154/systems/electrical/buses/DC27-bus-L/volts");
 if( pwr == nil ) return;
-# check 27V and exit if power off 
-if(  pwr < 13.0 ){  
-	blank_fuel_lamps(); 
-	return; 
+# check 27V and exit if power off
+if(  pwr < 13.0 ){
+	blank_fuel_lamps();
+	return;
 	}
-	
+
 # check AC
 var ac200_1 = getprop("tu154/systems/electrical/buses/AC3x200-bus-1L/volts");
 if( ac200_1 == nil ) ac200_1 = 0.0;
@@ -53,7 +53,7 @@ if( ac200_3 == nil ) ac200_3 = 0.0;
 
 pwr = ac200_1 + ac200_2 + ac200_3;
 if( pwr < 130.0 ) pwr = 0.0;
-	
+
 var altitude = getprop("position/altitude-ft");
 if( altitude == nil ) altitude = 0.0;
 
@@ -185,19 +185,19 @@ var k3_r = 0.0;
 var k4 = 0.0;
 
 if( autocon_ok == 1 ) {
-      if( auto_cons_state == 1 ) { 	k2_l = TANK_2_CONST; 
+      if( auto_cons_state == 1 ) { 	k2_l = TANK_2_CONST;
 					k2_r = TANK_2_CONST; }
-					
-      if( auto_cons_state == 2 ) { 	k2_l = TANK_2_CONST; 
-					k2_r = TANK_2_CONST; 
+
+      if( auto_cons_state == 2 ) { 	k2_l = TANK_2_CONST;
+					k2_r = TANK_2_CONST;
 					k3_l = TANK_3_CONST;
  					k3_r = TANK_3_CONST; }
- 					
-      if( auto_cons_state == 3 ) { 	k3_l = TANK_3_CONST; 
+
+      if( auto_cons_state == 3 ) { 	k3_l = TANK_3_CONST;
 					k3_r = TANK_3_CONST; }
-					
+
       if( auto_cons_state == 4 ) { 	k4 = TANK_4_CONST; }
-      
+
 # autolevel support
 if( autolevel == 1 )
 	{
@@ -215,7 +215,7 @@ if( autolevel == 1 )
  	if( abs( tank_3_l - tank_3_r ) > AUTO_LEVEL_2 ) autolevel_failure = 1;
 	}
 }
-      
+
 if( autolevel_failure == 0 )
 	{
 	# stop pump for auto level
@@ -230,7 +230,7 @@ else	{ # clear flags cause autolevel failure at all
 	autolevel_3 = 0;
 	autolevel_4 = 0;
 	}
-# if auto mode deselected, let's set pumps manually      
+# if auto mode deselected, let's set pumps manually
 if( autocon_selected == 0 ) {
 	k2_l = p_2_l * TANK_2_CONST;	# 3 pumps per tanks 2, 2 per tanks 3, 2 per tank 4
 	k2_r = p_2_r * TANK_2_CONST;
@@ -238,8 +238,8 @@ if( autocon_selected == 0 ) {
 	k3_r = p_3_r * TANK_3_CONST;
 	k4 = p_4 * TANK_4_CONST;
 	}
-            
-      
+
+
 # check empty tanks
 if( tank_2_l == 0.0 ) k2_l = 0.0;
 if( tank_2_r == 0.0 ) k2_r = 0.0;
@@ -317,33 +317,33 @@ else	{
 	}
 
 if( autocon_ok == 1 )	setprop( "tu154/lamps/auto-consumption-failure", 0.0 );
-else	setprop( "tu154/lamps/auto-consumption-failure", 1.0 );	
+else	setprop( "tu154/lamps/auto-consumption-failure", 1.0 );
 
-if( auto_cons_state == 1 )	
+if( auto_cons_state == 1 )
 	{
 	setprop( "tu154/lamps/consumption-tank-2", 1.0 );
 	setprop( "tu154/lamps/consumption-tank-3", 0.0 );
-	setprop( "tu154/lamps/consumption-tank-4", 0.0 );	
+	setprop( "tu154/lamps/consumption-tank-4", 0.0 );
 	}
-if( auto_cons_state == 2 )	
+if( auto_cons_state == 2 )
 	{
 	setprop( "tu154/lamps/consumption-tank-2", 1.0 );
 	setprop( "tu154/lamps/consumption-tank-3", 1.0 );
 	setprop( "tu154/lamps/consumption-tank-4", 0.0 );
 	}
-if( auto_cons_state == 3 )	
+if( auto_cons_state == 3 )
 	{
 	setprop( "tu154/lamps/consumption-tank-2", 0.0 );
 	setprop( "tu154/lamps/consumption-tank-3", 1.0 );
 	setprop( "tu154/lamps/consumption-tank-4", 0.0 );
 	}
-if( auto_cons_state == 4 )	
+if( auto_cons_state == 4 )
 	{
 	setprop( "tu154/lamps/consumption-tank-2", 0.0 );
 	setprop( "tu154/lamps/consumption-tank-3", 0.0 );
 	setprop( "tu154/lamps/consumption-tank-4", 1.0 );
 	}
-if( auto_cons_state == 5 )	
+if( auto_cons_state == 5 )
 	{
 	setprop( "tu154/lamps/consumption-tank-2", 0.0 );
 	setprop( "tu154/lamps/consumption-tank-3", 0.0 );
@@ -359,7 +359,7 @@ else setprop( "tu154/lamps/tank-3-l-level", 0.0 );
 if( autolevel_4 == 1 ) setprop( "tu154/lamps/tank-3-r-level", 1.0 );
 else setprop( "tu154/lamps/tank-3-r-level", 0.0 );
 
-if( autolevel == 1 ) 
+if( autolevel == 1 )
 	{
 	if( autocon_ok == 1 ) { setprop( "tu154/lamps/fuel-level-auto", 1.0 ); }
 	else 	{
@@ -378,7 +378,7 @@ else 	{
 	setprop( "tu154/lamps/tank-3-r-level", 0.0 );
 	}
 
-if( autolevel_failure == 1 ) 
+if( autolevel_failure == 1 )
 	{
 	setprop( "tu154/lamps/tank-2-l-level", 1.0 );
 	setprop( "tu154/lamps/tank-2-r-level", 1.0 );
@@ -405,7 +405,7 @@ else	{
 	setprop( "tu154/lamps/valve-l-2", 0.0 );
 	setprop( "tu154/lamps/valve-r-2", 0.0 );
 	}
-	
+
 if( p_1_1 > 0 ) setprop( "tu154/lamps/pump-1", 1.0 );
 else setprop( "tu154/lamps/pump-1", 0.0 );
 if( p_1_2 > 0 ) setprop( "tu154/lamps/pump-2", 1.0 );
@@ -422,7 +422,7 @@ else setprop( "tu154/lamps/fuel-cutoff-2", 0.0 );
 if( cv3 > 0 ) setprop( "tu154/lamps/fuel-cutoff-3", 1.0 );
 else setprop( "tu154/lamps/fuel-cutoff-3", 0.0 );
 
-# end lamps support	
+# end lamps support
 
 
 # portioner procedure
@@ -439,13 +439,13 @@ if( consumed_norm < 0.9545 )    # -150 kg in tank 1
 	{
 	# total consume value - only for consume gauge
 	setprop("tu154/systems/fuel/total-consumed-gal_us", total_consumed + consumed );
-	
+
 	# start portioner procedure
 	consumed = consumed/pumps_pressure;
 	portioner_flag = 1.0;
 	setprop( "tu154/systems/fuel/portioner", portioner_flag );
 	interpolate( "tu154/systems/fuel/portioner", 0.0, PORTIONER_TIME );
-     
+
 	# refueling tank 1
 	setprop( "consumables/fuel/tank[0]/last-gal_us", total);
 # Modified by Yurik apr 2015
@@ -471,22 +471,22 @@ if( consumed_norm < 0.9545 )    # -150 kg in tank 1
 	tank_4 = tank_4 - consumed * k4;
 	if( tank_4 < 1.0 ) tank_4 = 0.0;
 	interpolate( "consumables/fuel/tank[5]/level-gal_us", tank_4, PORTIONER_TIME );
-	  } 
-	 } 
+	  }
+	 }
 	} # end portioner procedure
-	
+
 # fuel transfer procedure
-if( portioner_flag == 0.0 ) # don't transfer if portioner in operate 
+if( portioner_flag == 0.0 ) # don't transfer if portioner in operate
 	{
 # From 3 to 2 fuel transfer
 	if( trans_valve_1 == 1.0 )
 		{
 		#get
-		  
+
 # Modified by Yurik apr 2015
 # Bug 1717 The Tu-154 has too much range
 # Reported by Ludovic Brenta
-		
+
 #		consumed = ( k3_l + k3_r ) * TRANSFER_CONST;
 		consumed = 0.0;
 		tank_3_l = tank_3_l - k3_l * TRANSFER_CONST;
@@ -512,9 +512,9 @@ if( portioner_flag == 0.0 ) # don't transfer if portioner in operate
 # Modified by Yurik apr 2015
 # Bug 1717 The Tu-154 has too much range
 # Reported by Ludovic Brenta
-		
+
 #		consumed = k4 * TRANSFER_CONST;
-		consumed = 0.0;  
+		consumed = 0.0;
 		tank_4 = tank_4 - k4 * TRANSFER_CONST;
 		if( tank_4 < 1.0 ) tank_4 = 0.0;
 		else consumed = k4 * TRANSFER_CONST;
@@ -532,7 +532,7 @@ if( portioner_flag == 0.0 ) # don't transfer if portioner in operate
 	tank_2_r = tank_2_r + overfull/2;
 	setprop( "consumables/fuel/tank[1]/level-gal_us", tank_2_l );
 	setprop( "consumables/fuel/tank[3]/level-gal_us", tank_2_r );
-	} 
+	}
 # end fuel transfer procedure
 
 # fuel level meters support
@@ -541,7 +541,7 @@ setprop("tu154/systems/fuel/fuel-consumption-serviceable", cons_meter );
 # reload fuel level of cons tank
 level = getprop("consumables/fuel/tank[0]/level-gal_us");
 if( level == nil ) level = 0.0;
-	
+
 	if( fuel_meter == 1.0 ) {
 interpolate("tu154/systems/fuel/tank-1-kg", level * density, FUEL_UPDATE_PERIOD );
 interpolate("tu154/systems/fuel/tank-2-l-kg", tank_2_l * density, FUEL_UPDATE_PERIOD );
@@ -550,7 +550,7 @@ interpolate("tu154/systems/fuel/tank-3-l-kg", tank_3_l * density, FUEL_UPDATE_PE
 interpolate("tu154/systems/fuel/tank-3-r-kg", tank_3_r * density, FUEL_UPDATE_PERIOD );
 interpolate("tu154/systems/fuel/tank-4-kg", tank_4 * density, FUEL_UPDATE_PERIOD );
 # total
-interpolate( "tu154/systems/fuel/total-kg", 
+interpolate( "tu154/systems/fuel/total-kg",
  ( level + tank_2_l + tank_2_r + tank_3_l + tank_3_r + tank_4 ) * density,
  FUEL_UPDATE_PERIOD );
 	}
@@ -565,7 +565,7 @@ interpolate( "tu154/systems/fuel/total-kg", 0.0, FUEL_UPDATE_PERIOD );
 	}
 
 # Fuel consume meter procedure
-	
+
 if( cons_meter == 1.0 ) {
 	total_consumed = getprop("tu154/systems/fuel/total-consumed-gal_us" );
 	if( total_consumed == nil ) total_consumed = 0.0;
@@ -576,15 +576,15 @@ if( cons_meter == 1.0 ) {
 else	{
 	interpolate("tu154/systems/fuel/rest-kg", 0.0, FUEL_UPDATE_PERIOD );
 	}
-	
+
 # cutoff procedure
 if( cv1 < 1.0 ) setprop( "controls/engines/engine[0]/cutoff", 1 );
 if( cv2 < 1.0 ) setprop( "controls/engines/engine[1]/cutoff", 1 );
-if( cv3 < 1.0 ) setprop( "controls/engines/engine[2]/cutoff", 1 );	
+if( cv3 < 1.0 ) setprop( "controls/engines/engine[2]/cutoff", 1 );
 # stop levers
 if( cl1 < 1.0 ) setprop( "controls/engines/engine[0]/cutoff", 1 );
 if( cl2 < 1.0 ) setprop( "controls/engines/engine[1]/cutoff", 1 );
-if( cl3 < 1.0 ) setprop( "controls/engines/engine[2]/cutoff", 1 );	
+if( cl3 < 1.0 ) setprop( "controls/engines/engine[2]/cutoff", 1 );
 
 
 var tank_1_pumps = p_1_1 + p_1_2 + p_1_3 + p_1_4 + ext_fuel_pump;
@@ -603,7 +603,7 @@ if( level == nil ) level = 0.0;
 
 
 if( level > 0.0 ){
-	if( apu_fuel_pump > 0 ) 
+	if( apu_fuel_pump > 0 )
 		setprop( "tu154/systems/electrical/indicators/apu-fuel-pressure", 1.0 );
 	else	setprop( "tu154/systems/electrical/indicators/apu-fuel-pressure", 0.0 );
 	if( tank_1_pumps > 0.0 ){
@@ -615,15 +615,15 @@ if( level > 0.0 ){
  else { setprop( "tu154/systems/electrical/indicators/engine-3/p-fuel", 1 ); }
 	}
 	else {
-      setprop( "tu154/systems/electrical/indicators/engine-1/p-fuel", 1 ); 
-      setprop( "tu154/systems/electrical/indicators/engine-2/p-fuel", 1 ); 
+      setprop( "tu154/systems/electrical/indicators/engine-1/p-fuel", 1 );
+      setprop( "tu154/systems/electrical/indicators/engine-2/p-fuel", 1 );
       setprop( "tu154/systems/electrical/indicators/engine-3/p-fuel", 1 );
 	}
      }
-else { 
- setprop( "tu154/systems/electrical/indicators/engine-1/p-fuel", 1 ); 
- setprop( "tu154/systems/electrical/indicators/engine-2/p-fuel", 1 ); 
- setprop( "tu154/systems/electrical/indicators/engine-3/p-fuel", 1 ); 
+else {
+ setprop( "tu154/systems/electrical/indicators/engine-1/p-fuel", 1 );
+ setprop( "tu154/systems/electrical/indicators/engine-2/p-fuel", 1 );
+ setprop( "tu154/systems/electrical/indicators/engine-3/p-fuel", 1 );
  setprop( "tu154/systems/electrical/indicators/apu-fuel-pressure", 0.0 );
      }
 
@@ -647,7 +647,7 @@ var blank_fuel_lamps = func{
 	setprop( "tu154/lamps/auto-consumption-failure", 0.0 );
 	setprop( "tu154/lamps/consumption-tank-2", 0.0 );
 	setprop( "tu154/lamps/consumption-tank-3", 0.0 );
-	setprop( "tu154/lamps/consumption-tank-4", 0.0 );	
+	setprop( "tu154/lamps/consumption-tank-4", 0.0 );
         setprop( "tu154/lamps/tank-2-l-level", 0.0 );
         setprop( "tu154/lamps/tank-2-r-level", 0.0 );
         setprop( "tu154/lamps/tank-3-l-level", 0.0 );
@@ -669,7 +669,7 @@ var blank_fuel_lamps = func{
 	setprop( "tu154/lamps/fuel-cutoff-2", 0.0 );
 	setprop( "tu154/lamps/fuel-cutoff-3", 0.0 );
 	setprop( "tu154/systems/electrical/indicators/apu-fuel-pressure", 0.0 );
-	
+
         interpolate("tu154/systems/fuel/tank-1-kg", 0.0, FUEL_UPDATE_PERIOD );
         interpolate("tu154/systems/fuel/tank-2-l-kg", 0.0, FUEL_UPDATE_PERIOD );
         interpolate("tu154/systems/fuel/tank-2-r-kg", 0.0, FUEL_UPDATE_PERIOD );

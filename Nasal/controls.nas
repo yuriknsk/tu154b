@@ -10,7 +10,7 @@
 #
 
 # turn off autopilot & autothrottle
-var trigger = func(x) { # x - unused var 
+var trigger = func(x) { # x - unused var
 absu.absu_stab_off();
 absu.absu_at_stop();
 }
@@ -19,7 +19,7 @@ absu.absu_at_stop();
 var TRIM_RATE = 0.08;
 
 var elevatorTrim = func {
-    #controls.slewProp("/controls/flight/elevator-trim", arg[0] * TRIM_RATE); 
+    #controls.slewProp("/controls/flight/elevator-trim", arg[0] * TRIM_RATE);
     setprop("fdm/jsbsim/fcs/met-cmd", arg[0]);
     setprop("tu154/systems/warning/elevator-trim-pressed", 1.0 );
     settimer( elev_trim_stop, 0.2 );
@@ -88,7 +88,7 @@ var autostart = func{
 	setprop("tu154/switches/generator-3", 1.0 );
 	setprop("tu154/switches/bano", 1.0 );
 	setprop("tu154/switches/omi", 1.0 );
-	
+
 	setprop("tu154/switches/ut7-1-serviceable", 1.0 );
 	setprop("tu154/switches/ut7-2-serviceable", 1.0 );
 	setprop("tu154/switches/ut7-3-serviceable", 1.0 );
@@ -128,7 +128,7 @@ var autostart_helper_1 = func{
 	if( 	( getprop( "/fdm/jsbsim/propulsion/engine[0]/n2") > 20.0 ) and
 		( getprop( "/fdm/jsbsim/propulsion/engine[1]/n2") > 20.0 ) and
 		( getprop( "/fdm/jsbsim/propulsion/engine[2]/n2") > 20.0 ) )
-	{ 
+	{
 	# fire up engines
 		if( getprop( "controls/engines/engine[0]/cutoff") )
 			setprop( "controls/engines/engine[0]/cutoff", 0 );
@@ -137,7 +137,7 @@ var autostart_helper_1 = func{
 		if( getprop( "controls/engines/engine[2]/cutoff") )
 			setprop( "controls/engines/engine[2]/cutoff", 0 );
 	}
-	else 
+	else
 	{
 	settimer(autostart_helper_1, 0.5);
 	return;
@@ -244,9 +244,9 @@ var autostart_helper_2 = func{
 	setprop("tu154/switches/SAU-STU", 1.0 );
 	setprop("tu154/systems/absu/serviceable", 1.0 );
 	# TKS compass system adjust to magnetic heading
-	setprop("instrumentation/heading-indicator[0]/offset-deg", 
+	setprop("instrumentation/heading-indicator[0]/offset-deg",
 		-getprop("environment/magnetic-variation-deg") );
-	setprop("instrumentation/heading-indicator[1]/offset-deg", 
+	setprop("instrumentation/heading-indicator[1]/offset-deg",
 		-getprop("environment/magnetic-variation-deg") );
 	# Altimeters
         var inhgX100 = int(getprop("environment/pressure-inhg") * 100 + 0.5);
@@ -257,6 +257,10 @@ var autostart_helper_2 = func{
 	setprop("tu154/switches/steering", 1.0 );
 	setprop("controls/gear/nose-wheel-steering", 1.0 );
 	setprop("controls/gear/steering", 10.0 );
+
+        # Close cockpit windows.
+        interpolate("tu154/door/window-left", 0, 2);
+        interpolate("tu154/door/window-right", 0, 2);
 
 	help.messenger("Autostart done");
 }

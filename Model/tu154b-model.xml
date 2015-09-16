@@ -52,6 +52,8 @@
  <effect>
     <inherits-from>Effects/model-transparent</inherits-from>
     <object-name>MESH178</object-name>
+    <object-name>LeftWindowGlassExt</object-name>
+    <object-name>RightWindowGlassExt</object-name>
  </effect>
 
 <!-- Glass Shader-->
@@ -60,6 +62,8 @@
    <shader>chrome</shader>
    <texture>glass_shader.png</texture>
    <object-name>MESH178</object-name>
+   <object-name>LeftWindowGlassExt</object-name>
+   <object-name>RightWindowGlassExt</object-name>
  </animation>
 
 <!-- 
@@ -3177,6 +3181,36 @@
     <heading-deg>-90.0</heading-deg>
   </offsets>
 </model>
+<model>
+  <name>sw-wiper-left</name>
+  <path>Aircraft/tu154b/Instruments-3d/switches/wiper-azs4.xml</path>
+  <overlay>
+    <params>
+      <switch>tu154/wipers/switch-left</switch>
+    </params>
+  </overlay>
+  <offsets>
+    <x-m>-22.194</x-m>
+    <y-m>-1.015</y-m>
+    <z-m>1.659</z-m>
+    <heading-deg>72</heading-deg>
+  </offsets>
+</model>
+<model>
+  <name>sw-wiper-right</name>
+  <path>Aircraft/tu154b/Instruments-3d/switches/wiper-azs4.xml</path>
+  <overlay>
+    <params>
+      <switch>tu154/wipers/switch-right</switch>
+    </params>
+  </overlay>
+  <offsets>
+    <x-m>-22.22</x-m>
+    <y-m>1.02</y-m>
+    <z-m>1.665</z-m>
+    <heading-deg>-72</heading-deg>
+  </offsets>
+</model>
 
 <!--Hydrosystem control panel on FE-->
 <!--Pitch-->
@@ -3482,7 +3516,7 @@
       <mapping>nasal</mapping>
       <script>
         var page = arg[0];
-        var pages = size(mapcase.root.getChildren());
+        var pages = getprop("tu154/instrumentation/mapcase/total_pages");
         return sprintf("%d/%d", page, pages);
       </script>
     </binding>
@@ -5991,6 +6025,12 @@
 <animation>
   <type>material</type>
   <object-name>MESH17</object-name>
+  <object-name>LeftWindow</object-name>
+  <object-name>LeftWindowHandle</object-name>
+  <object-name>RightWindow</object-name>
+  <object-name>RightWindowHandle</object-name>
+  <object-name>WiperLeft</object-name>
+  <object-name>WiperRight</object-name>
   <object-name>MESH23</object-name>
   <object-name>MESH25</object-name>
   <object-name>MESH27</object-name>
@@ -6413,9 +6453,13 @@
     <object-name>c_gear_M10</object-name>
     <object-name>MESH17external</object-name>
     <object-name>MESH178</object-name>
+    <object-name>LeftWindowGlassExt</object-name>
+    <object-name>RightWindowGlassExt</object-name>
     <object-name>lever_sti3</object-name>
     <object-name>lever_sti4</object-name>
     <object-name>MESH23external</object-name>
+    <object-name>WiperLeftExt</object-name>
+    <object-name>WiperRightExt</object-name>
     <object-name>Door_Cargo</object-name>
     <object-name>Door_Passe</object-name>
     <object-name>MESH134</object-name>
@@ -6435,6 +6479,8 @@
     <object-name>lever_cow0</object-name>
     <object-name>lever_cowl</object-name>
     <object-name>MESH18</object-name>
+    <object-name>LeftWindowExt</object-name>
+    <object-name>RightWindowExt</object-name>
     <object-name>MESH24</object-name>
     <object-name>rudder</object-name>
     <object-name>Door_Carg0</object-name>
@@ -6597,6 +6643,284 @@
     <property-base>tu154/livery/wingr</property-base>
     <texture-prop>texture</texture-prop>
     <texture>wingr_t.png</texture>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>LeftWindow</object-name>
+  <object-name>LeftWindowExt</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        var pos = getprop("tu154/door/window-left");
+        if (pos) {
+            interpolate("tu154/door/window-left", 0, pos * 2);
+        } else {
+            interpolate("tu154/door/window-left", 1, 2);
+        }
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>LeftWindowHandle</object-name>
+  <property>tu154/door/window-left</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.25</ind>
+      <dep>-45</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>0</dep>
+    </entry>
+  </interpolation>
+  <axis>
+    <x1-m>1.03910</x1-m>
+    <y1-m>-0.88881</y1-m>
+    <z1-m>1.13192</z1-m>
+    <x2-m>1.01643</x2-m>
+    <y2-m>-0.87914</y2-m>
+    <z2-m>1.13592</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>LeftWindow</object-name>
+  <property>tu154/door/window-left</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.1</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.25</ind>
+      <dep>-5</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>-3</dep>
+    </entry>
+  </interpolation>
+  <axis>
+    <x1-m>0.7706</x1-m>
+    <y1-m>-0.70364</y1-m>
+    <z1-m>1.276</z1-m>
+    <x2-m>0.4761</x2-m>
+    <y2-m>-0.82664</y2-m>
+    <z2-m>0.94192</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>LeftWindowExt</object-name>
+  <property>tu154/door/window-left</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.1</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.25</ind>
+      <dep>-5</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>-3</dep>
+    </entry>
+  </interpolation>
+  <axis>
+    <x1-m>-22.35140</x1-m>
+    <y1-m>-0.68121</y1-m>
+    <z1-m>2.30679</z1-m>
+    <x2-m>-22.72380</x2-m>
+    <y2-m>-0.83034</y2-m>
+    <z2-m>1.89199</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>translate</type>
+  <object-name>LeftWindow</object-name>
+  <object-name>LeftWindowExt</object-name>
+  <property>tu154/door/window-left</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.25</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>0.4</dep>
+    </entry>
+  </interpolation>
+  <axis>
+    <x1-m>0.94910</x1-m>
+    <y1-m>-0.99614</y1-m>
+    <z1-m>0.85592</z1-m>
+    <x2-m>1.44310</x2-m>
+    <y2-m>-1.15914</y2-m>
+    <z2-m>0.81692</z2-m>
+  </axis>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>RightWindow</object-name>
+  <object-name>RightWindowExt</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        var pos = getprop("tu154/door/window-right");
+        if (pos) {
+            interpolate("tu154/door/window-right", 0, pos * 2);
+        } else {
+            interpolate("tu154/door/window-right", 1, 2);
+        }
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>RightWindowHandle</object-name>
+  <property>tu154/door/window-right</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.25</ind>
+      <dep>45</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>0</dep>
+    </entry>
+  </interpolation>
+  <axis>
+    <x1-m>1.03910</x1-m>
+    <y1-m>0.90053</y1-m>
+    <z1-m>1.13192</z1-m>
+    <x2-m>1.01676</x2-m>
+    <y2-m>0.89053</y2-m>
+    <z2-m>1.13426</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>RightWindow</object-name>
+  <property>tu154/door/window-right</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.1</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.25</ind>
+      <dep>5</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>3</dep>
+    </entry>
+  </interpolation>
+  <axis>
+    <x1-m>0.7701</x1-m>
+    <y1-m>0.72564</y1-m>
+    <z1-m>1.281</z1-m>
+    <x2-m>0.4700</x2-m>
+    <y2-m>0.84086</y2-m>
+    <z2-m>0.96000</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>RightWindowExt</object-name>
+  <property>tu154/door/window-right</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.1</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.25</ind>
+      <dep>5</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>3</dep>
+    </entry>
+  </interpolation>
+  <axis>
+    <x1-m>-22.35140</x1-m>
+    <y1-m>0.68139</y1-m>
+    <z1-m>2.30679</z1-m>
+    <x2-m>-22.72380</x2-m>
+    <y2-m>0.83052</y2-m>
+    <z2-m>1.89198</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>translate</type>
+  <object-name>RightWindow</object-name>
+  <object-name>RightWindowExt</object-name>
+  <property>tu154/door/window-right</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.25</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>0.4</dep>
+    </entry>
+  </interpolation>
+  <axis>
+    <x1-m>0.94910</x1-m>
+    <y1-m>1.00786</y1-m>
+    <z1-m>0.85592</z1-m>
+    <x2-m>1.44310</x2-m>
+    <y2-m>1.17086</y2-m>
+    <z2-m>0.81692</z2-m>
+  </axis>
 </animation>
 
 <animation>
@@ -6785,6 +7109,322 @@
     <x2-m>14.3899</x2-m>
     <y2-m>0.43492</y2-m>
     <z2-m>3.5374</z2-m>
+  </axis>
+</animation>
+
+<!-- Left engine additional air intake flaps. -->
+<animation>
+  <type>rotate</type>
+  <object-name>lever_prop</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.90387</x1-m>
+    <y1-m>-3.04216</y1-m>
+    <z1-m>2.68102</z1-m>
+    <x2-m>5.87026</x2-m>
+    <y2-m>-2.77490</y2-m>
+    <z2-m>2.52685</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pro0</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.94318</x1-m>
+    <y1-m>-3.44121</y1-m>
+    <z1-m>2.70357</z1-m>
+    <x2-m>5.91375</x2-m>
+    <y2-m>-3.13226</y2-m>
+    <z2-m>2.70511</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pro1</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.96779</x1-m>
+    <y1-m>-3.79855</y1-m>
+    <z1-m>2.52174</z1-m>
+    <x2-m>5.95048</x2-m>
+    <y2-m>-3.53131</y2-m>
+    <z2-m>2.67858</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pro2</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.97104</x1-m>
+    <y1-m>-4.01707</y1-m>
+    <z1-m>2.18533</z1-m>
+    <x2-m>5.97050</x2-m>
+    <y2-m>-3.86352</y2-m>
+    <z2-m>2.45504</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pro3</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.9516</x1-m>
+    <y1-m>-4.03842</y1-m>
+    <z1-m>1.78620</z1-m>
+    <x2-m>5.96852</x2-m>
+    <y2-m>-4.03967</y2-m>
+    <z2-m>2.09612</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pro4</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.91641</x1-m>
+    <y1-m>-3.85852</y1-m>
+    <z1-m>1.43196</z1-m>
+    <x2-m>5.94525</x2-m>
+    <y2-m>-4.01392</y2-m>
+    <z2-m>1.69906</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pro5</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.87343</x1-m>
+    <y1-m>-3.52692</y1-m>
+    <z1-m>1.21647</z1-m>
+    <x2-m>5.90705</x2-m>
+    <y2-m>-3.79479</y2-m>
+    <z2-m>1.36955</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pro6</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.83464</x1-m>
+    <y1-m>-3.13226</y1-m>
+    <z1-m>1.19572</z1-m>
+    <x2-m>5.86408</x2-m>
+    <y2-m>-3.44121</y2-m>
+    <z2-m>1.19418</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pro7</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.81024</x1-m>
+    <y1-m>-2.77868</y1-m>
+    <z1-m>1.37463</z1-m>
+    <x2-m>5.82766</x2-m>
+    <y2-m>-3.04655</y2-m>
+    <z2-m>1.21886</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pro8</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.80668</x1-m>
+    <y1-m>-2.55955</y1-m>
+    <z1-m>1.70632</z1-m>
+    <x2-m>5.80745</x2-m>
+    <y2-m>-2.71495</y2-m>
+    <z2-m>1.43767</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pro9</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.82505</x1-m>
+    <y1-m>-2.53380</y1-m>
+    <z1-m>2.10364</z1-m>
+    <x2-m>5.80892</x2-m>
+    <y2-m>-2.53503</y2-m>
+    <z2-m>1.79371</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr10</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.86059</x1-m>
+    <y1-m>-2.70993</y1-m>
+    <z1-m>2.46080</z1-m>
+    <x2-m>5.8318</x2-m>
+    <y2-m>-2.556407</y2-m>
+    <z2-m>2.19262</z2-m>
+  </axis>
+</animation>
+
+<!-- Right engine additional air intake flaps. -->
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr11</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.91374</x1-m>
+    <y1-m>3.13244</y1-m>
+    <z1-m>2.70511</z1-m>
+    <x2-m>5.94318</x2-m>
+    <y2-m>3.44139</y2-m>
+    <z2-m>2.70357</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr12</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.87026</x1-m>
+    <y1-m>2.77508</y1-m>
+    <z1-m>2.52685</z1-m>
+    <x2-m>5.90387</x2-m>
+    <y2-m>3.04234</y2-m>
+    <z2-m>2.68102</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr13</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.96852</x1-m>
+    <y1-m>4.03983</y1-m>
+    <z1-m>2.09612</z1-m>
+    <x2-m>5.95216</x2-m>
+    <y2-m>4.03859</y2-m>
+    <z2-m>1.78620</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr14</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.95048</x1-m>
+    <y1-m>3.53148</y1-m>
+    <z1-m>2.67858</z1-m>
+    <x2-m>5.96779</x2-m>
+    <y2-m>3.79872</y2-m>
+    <z2-m>2.52174</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr15</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.97050</x1-m>
+    <y1-m>3.86369</y1-m>
+    <z1-m>2.45504</z1-m>
+    <x2-m>5.97104</x2-m>
+    <y2-m>4.01724</y2-m>
+    <z2-m>2.18533</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr16</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.80745</x1-m>
+    <y1-m>2.71513</y1-m>
+    <z1-m>1.43767</z1-m>
+    <x2-m>5.80668</x2-m>
+    <y2-m>2.55972</y2-m>
+    <z2-m>1.70632</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr17</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.82767</x1-m>
+    <y1-m>3.04673</y1-m>
+    <z1-m>1.21886</z1-m>
+    <x2-m>5.81024</x2-m>
+    <y2-m>2.77886</y2-m>
+    <z2-m>1.37463</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr18</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.86408</x1-m>
+    <y1-m>3.44139</y1-m>
+    <z1-m>1.19418</z1-m>
+    <x2-m>5.83464</x2-m>
+    <y2-m>3.13244</y2-m>
+    <z2-m>1.19572</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr19</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.90705</x1-m>
+    <y1-m>3.79496</y1-m>
+    <z1-m>1.36955</z1-m>
+    <x2-m>5.87343</x2-m>
+    <y2-m>3.52709</y2-m>
+    <z2-m>1.21647</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr20</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.94525</x1-m>
+    <y1-m>4.01409</y1-m>
+    <z1-m>1.69905</z1-m>
+    <x2-m>5.91641</x2-m>
+    <y2-m>3.85869</y2-m>
+    <z2-m>1.43196</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr21</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.83187</x1-m>
+    <y1-m>2.55657</y1-m>
+    <z1-m>2.19262</z1-m>
+    <x2-m>5.86059</x2-m>
+    <y2-m>2.71011</y2-m>
+    <z2-m>2.46080</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr22</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.80892</x1-m>
+    <y1-m>2.53520</y1-m>
+    <z1-m>1.79371</z1-m>
+    <x2-m>5.82505</x2-m>
+    <y2-m>2.53397</y2-m>
+    <z2-m>2.10364</z2-m>
   </axis>
 </animation>
 
@@ -7192,6 +7832,124 @@
     </greater-than>
     <property>sim/current-view/internal</property>
   </condition>
+</animation>
+
+<!-- Windshield wipers -->
+<animation>
+  <type>rotate</type>
+  <object-name>WiperLeftExt</object-name>
+  <property>tu154/wipers/pos-left</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>-5</dep>
+    </entry>
+    <entry>
+      <ind>0.5</ind>
+      <dep>47</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>-5</dep>
+    </entry>
+  </interpolation>
+  <center>
+    <x-m>-23.05545</x-m>
+    <y-m>-0.55032</y-m>
+    <z-m>1.94338</z-m>
+  </center>
+  <axis>
+    <x>-0.326150037</x>
+    <y>-0.222758536</y>
+    <z>0.37999137</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>WiperLeft</object-name>
+  <property>tu154/wipers/pos-left</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>-5</dep>
+    </entry>
+    <entry>
+      <ind>0.5</ind>
+      <dep>47</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>-5</dep>
+    </entry>
+  </interpolation>
+  <center>
+    <x-m>0.20545</x-m>
+    <y-m>-0.55032</y-m>
+    <z-m>0.87338</z-m>
+  </center>
+  <axis>
+    <x>-0.326150037</x>
+    <y>-0.222758536</y>
+    <z>0.37999137</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>WiperRightExt</object-name>
+  <property>tu154/wipers/pos-right</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>5</dep>
+    </entry>
+    <entry>
+      <ind>0.5</ind>
+      <dep>-47</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>5</dep>
+    </entry>
+  </interpolation>
+  <center>
+    <x-m>-23.05545</x-m>
+    <y-m>0.55050</y-m>
+    <z-m>1.94338</z-m>
+  </center>
+  <axis>
+    <x>-0.325921264</x>
+    <y>0.222656236</y>
+    <z>0.379683264</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>WiperRight</object-name>
+  <property>tu154/wipers/pos-right</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>5</dep>
+    </entry>
+    <entry>
+      <ind>0.5</ind>
+      <dep>-47</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>5</dep>
+    </entry>
+  </interpolation>
+  <center>
+    <x-m>0.20545</x-m>
+    <y-m>0.55050</y-m>
+    <z-m>0.87338</z-m>
+  </center>
+  <axis>
+    <x>-0.325921264</x>
+    <y>0.222656236</y>
+    <z>0.379683264</z>
+  </axis>
 </animation>
 
 </PropertyList>

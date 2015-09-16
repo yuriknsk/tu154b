@@ -18,7 +18,7 @@ var tks = func {
    if( bgmk_1 == nil ) bgmk_1 = 0.0;
    if( bgmk_2 == nil ) bgmk_2 = 0.0;
 
-help_win.write(sprintf("GA-3-1: %.2f GA-3-2: %.2f BGMK-2-1: %.2f BGMK-2-2: %.2f", 
+help_win.write(sprintf("GA-3-1: %.2f GA-3-2: %.2f BGMK-2-1: %.2f BGMK-2-2: %.2f",
 gpk_1, gpk_2, bgmk_1,  bgmk_2 ) );
 
 }
@@ -36,7 +36,7 @@ var km = func {
    if(  km_deg_2 == nil ) km_deg_2 = 0.0;
    var magvar = getprop("environment/magnetic-variation-deg");
    if(  magvar == nil ) magvar = 0.0;
-   
+
 help_win.write(sprintf("Offset KM-5-1: %.2f deg,  KM-5-2: %.2f deg, magnetic variation %.2f deg", km_deg_1, km_deg_2, magvar ) );
 }
 
@@ -55,9 +55,9 @@ var advise = func {
    if( vr == nil ) vr = 0.0;
    if( mass == nil ) mass = 0.0;
    if( cg == nil ) cg = 0.0;
-   
+
    cg = (cg * 0.0254 - 24.04) * (100/5.285);
-   
+
 help_win.write(sprintf("mass: %.0f kg CG: %.1f%% MAC Vrotate: %.0f kmh Vref: %.0f kmh", mass, cg, v2, vr) );
 
 }
@@ -96,4 +96,3 @@ setlistener( "instrumentation/adf[1]/volume", adf_1_vol, 0, 0 );
 
 
 print("Help subsystem started");
-

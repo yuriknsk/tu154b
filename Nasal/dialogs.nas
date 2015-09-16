@@ -1,4 +1,4 @@
-var load_dlg=gui.Dialog.new("tu154/dialogs/Loads/dialog","Aircraft/tu154b/Dialogs/Loads.xml"); 
+var load_dlg=gui.Dialog.new("tu154/dialogs/Loads/dialog","Aircraft/tu154b/Dialogs/Loads.xml");
 var fl= props.globals.getNode( "/fdm/jsbsim/tu154/systems/flight/fl" , 1 );
 var dist= props.globals.getNode( "/fdm/jsbsim/tu154/systems/flight/dist" , 1 );
 var altdist= props.globals.getNode( "/fdm/jsbsim/tu154/systems/flight/altdist" , 1 );
@@ -31,7 +31,7 @@ var calc_fly_by_tanks = func{
 	t2r = t2r + dft;
 	t3l = t3l + dft;
 	t3r = t3r + dft;
-	
+
 	setprop("/consumables/fuel/tank[0]/level-lb",tl*kg2lb );
 	setprop("/consumables/fuel/tank[1]/level-lb",t2l*kg2lb );
 	setprop("/consumables/fuel/tank[3]/level-lb",t2r*kg2lb );
@@ -39,7 +39,7 @@ var calc_fly_by_tanks = func{
 	setprop("/consumables/fuel/tank[4]/level-lb",t3r*kg2lb );
 	setprop("/consumables/fuel/tank[5]/level-lb",t4*kg2lb );
 
-	
+
     }
     if( fly_f > 15 ){
 	var dft = (fly_f-15)*1000/4;
@@ -54,7 +54,7 @@ var calc_fly_by_tanks = func{
 	t2r = t2r + dft;
 	t3l = t3l + dft;
 	t3r = t3r + dft;
-	
+
 	setprop("/consumables/fuel/tank[0]/level-lb",tl*kg2lb );
 	setprop("/consumables/fuel/tank[1]/level-lb",t2l*kg2lb );
 	setprop("/consumables/fuel/tank[3]/level-lb",t2r*kg2lb );
@@ -62,7 +62,7 @@ var calc_fly_by_tanks = func{
 	setprop("/consumables/fuel/tank[4]/level-lb",t3r*kg2lb );
 	setprop("/consumables/fuel/tank[5]/level-lb",t4*kg2lb );
 
-	
+
     }
     return 0;
 }
