@@ -1440,5 +1440,11 @@
     <switch-left type="double">0</switch-left>
     <switch-right type="double">0</switch-right>
   </wipers>
+
+  <refuel>
+    <sel-4 type="int">0</sel-4>
+    <sel-123 type="int">0</sel-123>
+    <btn-check type="int">0</btn-check>
+  </refuel>
 </tu154>
 </PropertyList>

@@ -7535,6 +7535,25 @@
   </axis>
 </animation>
 
+<model>
+  <name>RefuelPanel</name>
+  <path>Aircraft/tu154b/Instruments-3d/refuel/refuel.xml</path>
+  <offsets>
+    <x-m>-4.31</x-m>
+    <y-m>3.37</y-m>
+    <z-m>0.02</z-m>
+    <roll-deg>-3</roll-deg>
+    <pitch-deg>45</pitch-deg>
+    <heading-deg>147</heading-deg>
+  </offsets>
+</model>
+<animation>
+  <type>select</type>
+  <object-name>RefuelPanel</object-name>
+  <condition>
+    <property>tu154/door/refuel</property>
+  </condition>
+</animation>
 <animation>
   <type>pick</type>
   <object-name>RefuelCover</object-name>
