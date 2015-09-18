@@ -23,6 +23,34 @@
   </condition>
 </animation>
 
+<!-- Hide gears when they are retracted. -->
+<animation>
+  <type>select</type>
+  <object-name>c_gear_M11</object-name>
+  <object-name>c_gear_Ob0</object-name>
+  <condition>
+    <property>gear/gear[0]/position-norm</property>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>l_gear_M12</object-name>
+  <object-name>l_gear_M13</object-name>
+  <object-name>l_gear_Obj</object-name>
+  <condition>
+    <property>gear/gear[1]/position-norm</property>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>r_gear_M12</object-name>
+  <object-name>r_gear_M13</object-name>
+  <object-name>r_gear_Ob1</object-name>
+  <condition>
+    <property>gear/gear[2]/position-norm</property>
+  </condition>
+</animation>
+
 <!--End external-->
 
 <!--Virtual cockpit staff-->
