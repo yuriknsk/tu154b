@@ -3791,12 +3791,12 @@
     <entry><ind>	1.0</ind>	<dep>	0.0</dep></entry>
   </interpolation>
   <axis>
-    <x1-m>0.8257</x1-m>
-    <y1-m>-5.28</y1-m>
-    <z1-m>-0.4618</z1-m>
-    <x2-m>1.7</x2-m>
-    <y2-m>-5.3</y2-m>
-    <z2-m>-0.4256</z2-m>
+    <x1-m>1.69387</x1-m>
+    <y1-m>-5.22040</y1-m>
+    <z1-m>-0.39352</z1-m>
+    <x2-m>2.99849</x2-m>
+    <y2-m>-5.23849</y2-m>
+    <z2-m>-0.29268</z2-m>
   </axis>
 </animation>
 <animation>
@@ -4393,12 +4393,12 @@
     <entry><ind>	1.0</ind>	<dep>	0.0</dep></entry>
   </interpolation>
   <axis>
-    <x1-m>0.8257</x1-m>
-    <y1-m>5.28</y1-m>
-    <z1-m>-0.4618</z1-m>
-    <x2-m>1.7</x2-m>
-    <y2-m>5.3</y2-m>
-    <z2-m>-0.4256</z2-m>
+    <x1-m>1.69387</x1-m>
+    <y1-m>5.22057</y1-m>
+    <z1-m>-0.39352</z1-m>
+    <x2-m>2.99841</x2-m>
+    <y2-m>5.23867</y2-m>
+    <z2-m>-0.29269</z2-m>
   </axis>
 </animation>
 <animation>
