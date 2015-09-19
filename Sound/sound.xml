@@ -238,6 +238,22 @@
     <z>1.5</z>
   </position>
 </voice>
+<voice>
+  <name>gear_neutr</name>
+  <path>Aircraft/tu154b/Sound/voice/2P_Neutr_l.wav</path>
+  <condition>
+    <equals>
+      <property>tu154/gear/sw-emerg2</property>
+      <value>0</value>
+    </equals>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>-1</x>
+    <y>-1</y>
+    <z>1.5</z>
+  </position>
+</voice>
 <!--Flaps control-->
 <voice>
   <name>s_flaps_retract</name>

@@ -692,6 +692,13 @@
 
     </hs>
 
+    <tu154>
+      <gear>
+        <sw-main alias="/tu154/gear/sw-main"/>
+        <sw-emerg1 alias="/tu154/gear/sw-emerg1"/>
+        <sw-emerg2 alias="/tu154/gear/sw-emerg2"/>
+      </gear>
+    </tu154>
   </jsbsim>
 </fdm>
 
@@ -812,10 +819,13 @@
         <property>controls/gear/gear-down</property>
         <value>0</value>
         <condition>
-          <equals>
-	    <property>gear/gear/wow</property>
-	    <value>false</value>
-          </equals>
+          <not>
+            <or>
+              <property>gear/gear/wow</property>
+              <property>tu154/gear/sw-emerg1</property>
+              <property>tu154/gear/sw-emerg2</property>
+            </or>
+          </not>
         </condition>
       </binding>
       <binding>
@@ -1076,6 +1086,9 @@
   <gear>
     <offset type="double" >0.15</offset>
     <gain type="double" >0.3048</gain>
+    <sw-main type="double">0</sw-main>
+    <sw-emerg1 type="double">0</sw-emerg1>
+    <sw-emerg2 type="double">0</sw-emerg2>
   </gear>
   <light>
     <instruments>

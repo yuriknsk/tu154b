@@ -3605,13 +3605,26 @@
 <animation>
   <type>rotate</type>
   <object-name>c_gear_ME7</object-name>
-  <property>gear/gear[0]/position-norm</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.1</ind>	<dep>	-90.0</dep></entry>
-    <entry><ind>	0.9</ind>	<dep>	-90.0</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	0.0</dep></entry>
-  </interpolation>
+  <expression>
+    <prod>
+      <min>
+        <dif>
+          <value>0.5</value>
+          <abs>
+            <dif>
+              <min>
+                <property>gear/gear[0]/position-norm</property>
+                <property>fdm/jsbsim/tu154/gear/door-limit</property>
+              </min>
+              <value>0.5</value>
+            </dif>
+          </abs>
+        </dif>
+        <value>0.1</value>
+      </min>
+      <value>-900</value>
+    </prod>
+  </expression>
   <axis>
     <x1-m>-16.85</x1-m>
     <y1-m>-0.428</y1-m>
@@ -3624,13 +3637,26 @@
 <animation>
   <type>rotate</type>
   <object-name>c_gear_ME9</object-name>
-  <property>gear/gear[0]/position-norm</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.1</ind>	<dep>	90.0</dep></entry>
-    <entry><ind>	0.9</ind>	<dep>	90.0</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	0.0</dep></entry>
-  </interpolation>
+  <expression>
+    <prod>
+      <min>
+        <dif>
+          <value>0.5</value>
+          <abs>
+            <dif>
+              <min>
+                <property>gear/gear[0]/position-norm</property>
+                <property>fdm/jsbsim/tu154/gear/door-limit</property>
+              </min>
+              <value>0.5</value>
+            </dif>
+          </abs>
+        </dif>
+        <value>0.1</value>
+      </min>
+      <value>900</value>
+    </prod>
+  </expression>
   <axis>
     <x1-m>-16.85</x1-m>
     <y1-m>0.428</y1-m>
@@ -3783,13 +3809,26 @@
 <animation>
   <type>rotate</type>
   <object-name>l_gear_M15</object-name>
-  <property>gear/gear[1]/position-norm</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.1</ind>	<dep>	90.0</dep></entry>
-    <entry><ind>	0.9</ind>	<dep>	90.0</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	0.0</dep></entry>
-  </interpolation>
+  <expression>
+    <prod>
+      <min>
+        <dif>
+          <value>0.5</value>
+          <abs>
+            <dif>
+              <min>
+                <property>gear/gear[1]/position-norm</property>
+                <property>fdm/jsbsim/tu154/gear/door-limit</property>
+              </min>
+              <value>0.5</value>
+            </dif>
+          </abs>
+        </dif>
+        <value>0.1</value>
+      </min>
+      <value>900</value>
+    </prod>
+  </expression>
   <axis>
     <x1-m>1.69387</x1-m>
     <y1-m>-5.22040</y1-m>
@@ -3802,13 +3841,26 @@
 <animation>
   <type>rotate</type>
   <object-name>l_gear_M17</object-name>
-  <property>gear/gear[1]/position-norm</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.1</ind>	<dep>	-90.0</dep></entry>
-    <entry><ind>	0.9</ind>	<dep>	-90.0</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	0.0</dep></entry>
-  </interpolation>
+  <expression>
+    <prod>
+      <min>
+        <dif>
+          <value>0.5</value>
+          <abs>
+            <dif>
+              <min>
+                <property>gear/gear[1]/position-norm</property>
+                <property>fdm/jsbsim/tu154/gear/door-limit</property>
+              </min>
+              <value>0.5</value>
+            </dif>
+          </abs>
+        </dif>
+        <value>0.1</value>
+      </min>
+      <value>-900</value>
+    </prod>
+  </expression>
   <axis>
     <x1-m>0.8257</x1-m>
     <y1-m>-6.28</y1-m>
@@ -4385,13 +4437,26 @@
 <animation>
   <type>rotate</type>
   <object-name>r_gear_M14</object-name>
-  <property>gear/gear[2]/position-norm</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.1</ind>	<dep>	-90.0</dep></entry>
-    <entry><ind>	0.9</ind>	<dep>	-90.0</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	0.0</dep></entry>
-  </interpolation>
+  <expression>
+    <prod>
+      <min>
+        <dif>
+          <value>0.5</value>
+          <abs>
+            <dif>
+              <min>
+                <property>gear/gear[2]/position-norm</property>
+                <property>fdm/jsbsim/tu154/gear/door-limit</property>
+              </min>
+              <value>0.5</value>
+            </dif>
+          </abs>
+        </dif>
+        <value>0.1</value>
+      </min>
+      <value>-900</value>
+    </prod>
+  </expression>
   <axis>
     <x1-m>1.69387</x1-m>
     <y1-m>5.22057</y1-m>
@@ -4404,13 +4469,26 @@
 <animation>
   <type>rotate</type>
   <object-name>r_gear_M15</object-name>
-  <property>gear/gear[2]/position-norm</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.1</ind>	<dep>	90.0</dep></entry>
-    <entry><ind>	0.9</ind>	<dep>	90.0</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	0.0</dep></entry>
-  </interpolation>
+  <expression>
+    <prod>
+      <min>
+        <dif>
+          <value>0.5</value>
+          <abs>
+            <dif>
+              <min>
+                <property>gear/gear[2]/position-norm</property>
+                <property>fdm/jsbsim/tu154/gear/door-limit</property>
+              </min>
+              <value>0.5</value>
+            </dif>
+          </abs>
+        </dif>
+        <value>0.1</value>
+      </min>
+      <value>900</value>
+    </prod>
+  </expression>
   <axis>
     <x1-m>0.8257</x1-m>
     <y1-m>6.28</y1-m>
@@ -7772,9 +7850,18 @@
   </offsets>
  </model>
  
- 
- 
- 
+ <model>
+   <name>gear-sw-emerg2</name>
+   <path>Aircraft/tu154b/Instruments-3d/switches/azs3-20.xml</path>
+   <offsets>
+     <x-m>-22.6129</x-m>
+     <y-m>0.5163</y-m>
+     <z-m>1.5354</z-m>
+     <roll-deg>180</roll-deg>
+   </offsets>
+ </model>
+
+
 <animation>
   <type>select</type>
   <object-name>headlight_l</object-name>

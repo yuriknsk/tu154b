@@ -913,8 +913,9 @@ else
 
 if (getprop("fdm/jsbsim/gear/gear-pos-norm") == 0.0 or
     getprop("fdm/jsbsim/gear/gear-pos-norm") == 1.0) {
-    if (getprop("tu154/systems/warning/voice/gear-hs-state") == 0.0 and
-        getprop("fdm/jsbsim/hs/hs1-pressure") >= 205.0) {
+    if (getprop("tu154/systems/warning/voice/gear-hs-state") == 0.0
+        and getprop("fdm/jsbsim/hs/hs1-pressure") >= 205.0
+        and !getprop("tu154/gear/sw-emerg1")) {
         interpolate("tu154/systems/warning/voice/gear-hs-state", 1, 20);
     }
 } else {
