@@ -53,6 +53,10 @@
 	    <name>m</name>
 	    <desc>Map case zoom-in</desc>
 	   </key>
+	   <key>
+	    <name>ctrl+g</name>
+	    <desc>Gear handle neutral</desc>
+	   </key>
 	 </help>
 
 <menubar>
@@ -797,6 +801,53 @@
 	  absu.absu_stab_off();
 	  absu.absu_at_stop();
 	</script>
+      </binding>
+    </key>
+
+    <key n="103">
+      <name>g</name>
+      <desc>Gear handle up</desc>
+      <binding>
+        <command>property-assign</command>
+        <property>controls/gear/gear-down</property>
+        <value>0</value>
+        <condition>
+          <equals>
+	    <property>gear/gear/wow</property>
+	    <value>false</value>
+          </equals>
+        </condition>
+      </binding>
+      <binding>
+        <command>property-interpolate</command>
+        <property>tu154/gear/sw-main</property>
+        <value>-1</value>
+        <time>0.2</time>
+      </binding>
+    </key>
+    <key n="71">
+      <name>G</name>
+      <desc>Gear handle down</desc>
+      <binding>
+        <command>property-assign</command>
+        <property>controls/gear/gear-down</property>
+        <value>1</value>
+      </binding>
+      <binding>
+        <command>property-interpolate</command>
+        <property>tu154/gear/sw-main</property>
+        <value>1</value>
+        <time>0.2</time>
+      </binding>
+    </key>
+    <key n="7">
+      <name>ctrl+g</name>
+      <desc>Gear handle neutral</desc>
+      <binding>
+        <command>property-interpolate</command>
+        <property>tu154/gear/sw-main</property>
+        <value>0</value>
+        <time>0.2</time>
       </binding>
     </key>
 

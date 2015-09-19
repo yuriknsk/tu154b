@@ -517,16 +517,9 @@
 <animation>
   <type>rotate</type>
   <object-name>gear_handle</object-name>
-  <property>controls/gear/gear-down</property>
-  <factor>45.0</factor>
-	
-  <condition>
-  <equals>
-   <property>gear/gear/wow</property>
-   <value>false</value>
-  </equals>
- </condition>
-  
+  <property>tu154/gear/sw-main</property>
+  <factor>30</factor>
+  <offset-deg>30</offset-deg>
   <center>
     <x-m>0.7007</x-m>
     <y-m>0.0</y-m>
@@ -546,14 +539,20 @@
     <button>0</button>
     <repeatable>false</repeatable>
     <binding>
-      <command>property-toggle</command>
-  <condition>
-    <equals>
-	<property>gear/gear/wow</property>
-	    <value>false</value>
-     </equals>
- </condition>    
-      <property>controls/gear/gear-down</property>
+      <command>nasal</command>
+      <script>
+          var pos = getprop("tu154/gear/sw-main");
+          if (pos) {
+              interpolate("tu154/gear/sw-main", 0, 0.2);
+          } else if (getprop("controls/gear/gear-down")) {
+              interpolate("tu154/gear/sw-main", -1, 0.2);
+              if (!getprop("gear/gear/wow"))
+                  setprop("controls/gear/gear-down", 0);
+          } else {
+              interpolate("tu154/gear/sw-main", 1, 0.2);
+              setprop("controls/gear/gear-down", 1);
+          }
+      </script>
     </binding>
   </action>
 </animation>
