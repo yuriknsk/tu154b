@@ -18,8 +18,8 @@
     <type>rotate</type>
     <object-name>handle</object-name>
     <property>tu154/gear/sw-emerg2</property>
-    <factor>120</factor>
-    <offset-deg>-60</offset-deg>
+    <factor>130</factor>
+    <offset-deg>-75</offset-deg>
     <axis>
       <x>0</x>
       <y>-1</y>

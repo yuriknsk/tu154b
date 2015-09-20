@@ -7909,8 +7909,8 @@
    <path>Aircraft/tu154b/Instruments-3d/switches/azs3-20.xml</path>
    <offsets>
      <x-m>-22.6129</x-m>
-     <y-m>0.5163</y-m>
-     <z-m>1.5354</z-m>
+     <y-m>0.515</y-m>
+     <z-m>1.539</z-m>
      <roll-deg>180</roll-deg>
    </offsets>
  </model>
