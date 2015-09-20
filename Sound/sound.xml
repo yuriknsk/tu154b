@@ -239,7 +239,7 @@
   </position>
 </voice>
 <voice>
-  <name>gear_neutr</name>
+  <name>gear_neutr_emerg2</name>
   <path>Aircraft/tu154b/Sound/voice/2P_Neutr_l.wav</path>
   <condition>
     <equals>
