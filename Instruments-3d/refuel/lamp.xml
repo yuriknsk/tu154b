@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <params>
+    <lamp/>
+    <model>lamp_green.ac</model>
+  </params>
+  <path alias="../params/model"/>
+
+  <animation>
+    <type>select</type>
+    <object-name>_d_2</object-name>
+    <condition>
+      <property alias="../../../params/lamp"/>
+    </condition>
+  </animation>
+</PropertyList>

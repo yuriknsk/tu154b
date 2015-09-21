@@ -719,15 +719,69 @@
           </pure_gain>
 
           <!--Gear driven by hydrosystem 1-->
+          <switch name="hs/consumers/gear-e-hs1">
+            <default value="0"/>
+            <test value="hs/consumers/gear-e">
+              tu154/gear/sw-main ne 0
+            </test>
+          </switch>
           <pure_gain name="hs/hs1-g-g">
-            <input>hs/consumers/gear-e</input>
+            <input>hs/consumers/gear-e-hs1</input>
             <gain>hs/hs1-p-rev</gain>
           </pure_gain>
-
           <pure_gain name="hs/hs1-gear-g">
             <input>hs/hs1-g-g</input>
             <gain>20000.0</gain><!--Power consumption coeft-->
           </pure_gain>
+
+          <!--Gear driven by hydrosystem 2-->
+          <switch name="hs/consumers/gear-e-hs2">
+            <default value="0"/>
+            <test value="hs/consumers/gear-e">
+              tu154/gear/sw-emerg1 ne 0
+            </test>
+          </switch>
+          <pure_gain name="hs/hs2-g-g">
+            <input>hs/consumers/gear-e-hs2</input>
+            <gain>hs/hs2-p-rev</gain>
+          </pure_gain>
+          <pure_gain name="hs/hs2-gear-g">
+            <input>hs/hs2-g-g</input>
+            <gain>20000.0</gain><!--Power consumption coeft-->
+          </pure_gain>
+
+          <!--Gear driven by hydrosystem 3-->
+          <switch name="hs/consumers/gear-e-hs3">
+            <default value="0"/>
+            <test value="hs/consumers/gear-e">
+              tu154/gear/sw-emerg2 ne 0
+            </test>
+          </switch>
+          <pure_gain name="hs/hs3-g-g">
+            <input>hs/consumers/gear-e-hs3</input>
+            <gain>hs/hs3-p-rev</gain>
+          </pure_gain>
+          <pure_gain name="hs/hs3-gear-g">
+            <input>hs/hs3-g-g</input>
+            <gain>20000.0</gain><!--Power consumption coeft-->
+          </pure_gain>
+
+          <!-- Gear animation: do not close doors on emergency extension. -->
+          <switch name="tu154/gear/door-limit1">
+            <default value="0"/>
+            <test value="tu154/gear/door-limit1">
+              gear/gear-pos-norm ge 0.9
+            </test>
+            <test logic="OR" value="0.1">
+              tu154/gear/sw-emerg1 ne 0
+              tu154/gear/sw-emerg2 ne 0
+            </test>
+          </switch>
+          <summer name="tu154/gear/door-limit">
+            <input>-tu154/gear/door-limit1</input>
+            <bias>1</bias>
+          </summer>
+
           <!--Brake driven by hydrosystem 1-->
           <pure_gain name="hs/hs1-lb-g">
             <input>hs/consumers/left-brake-e</input>
@@ -898,6 +952,7 @@
             <input>hs/hs2-ra56-roll-g-switched</input>
             <input>hs/hs2-ra56-yaw-g-switched</input>
             <input>hs/hs2-flap-g</input>
+            <input>hs/hs2-gear-g</input>
           </summer>
 
           <pure_gain name="hs/hs2-outp-flow">
@@ -913,6 +968,7 @@
             <input>hs/hs3-ra56-pitch-g-switched</input>
             <input>hs/hs3-ra56-roll-g-switched</input>
             <input>hs/hs3-ra56-yaw-g-switched</input>
+            <input>hs/hs3-gear-g</input>
           </summer>
 
           <pure_gain name="hs/hs3-outp-flow">

@@ -517,16 +517,9 @@
 <animation>
   <type>rotate</type>
   <object-name>gear_handle</object-name>
-  <property>controls/gear/gear-down</property>
-  <factor>45.0</factor>
-	
-  <condition>
-  <equals>
-   <property>gear/gear/wow</property>
-   <value>false</value>
-  </equals>
- </condition>
-  
+  <property>tu154/gear/sw-main</property>
+  <factor>30</factor>
+  <offset-deg>30</offset-deg>
   <center>
     <x-m>0.7007</x-m>
     <y-m>0.0</y-m>
@@ -546,17 +539,71 @@
     <button>0</button>
     <repeatable>false</repeatable>
     <binding>
-      <command>property-toggle</command>
-  <condition>
-    <equals>
-	<property>gear/gear/wow</property>
-	    <value>false</value>
-     </equals>
- </condition>    
-      <property>controls/gear/gear-down</property>
+      <command>nasal</command>
+      <script>
+          var pos = getprop("tu154/gear/sw-main");
+          if (pos) {
+              interpolate("tu154/gear/sw-main", 0, 0.2);
+          } else if (getprop("controls/gear/gear-down")) {
+              interpolate("tu154/gear/sw-main", -1, 0.2);
+              if (!(getprop("gear/gear/wow")
+                    or getprop("tu154/gear/sw-emerg1")
+                    or getprop("tu154/gear/sw-emerg2")))
+                  setprop("controls/gear/gear-down", 0);
+          } else {
+              interpolate("tu154/gear/sw-main", 1, 0.2);
+              setprop("controls/gear/gear-down", 1);
+          }
+      </script>
     </binding>
   </action>
 </animation>
+<!--Emergency gear system 1-->
+<animation>
+  <type>translate</type>
+  <object-name>EmergGearExtHandle</object-name>
+  <property>tu154/gear/sw-emerg1</property>
+  <factor>0.1</factor>
+  <axis>
+    <x1-m>1.12453</x1-m>
+    <y1-m>0.98919</y1-m>
+    <z1-m>0.41541</z1-m>
+    <x2-m>1.12675</x2-m>
+    <y2-m>0.96830</y2-m>
+    <z2-m>0.52967</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>EmergGearExtHandle</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-assign</command>
+      <property>controls/gear/gear-down</property>
+      <value>1</value>
+    </binding>
+    <binding>
+      <command>property-interpolate</command>
+      <property>tu154/gear/sw-emerg1</property>
+      <value>1</value>
+      <time>0.4</time>
+    </binding>
+  </action>
+  <action>
+    <button>1</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-interpolate</command>
+      <property>tu154/gear/sw-emerg1</property>
+      <value>0</value>
+      <time>0.4</time>
+    </binding>
+  </action>
+</animation>
+<!--Emergency gear system 2-->
 
 <!--Flap handle-->
 <animation>

@@ -23,6 +23,34 @@
   </condition>
 </animation>
 
+<!-- Hide gears when they are retracted. -->
+<animation>
+  <type>select</type>
+  <object-name>c_gear_M11</object-name>
+  <object-name>c_gear_Ob0</object-name>
+  <condition>
+    <property>gear/gear[0]/position-norm</property>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>l_gear_M12</object-name>
+  <object-name>l_gear_M13</object-name>
+  <object-name>l_gear_Obj</object-name>
+  <condition>
+    <property>gear/gear[1]/position-norm</property>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>r_gear_M12</object-name>
+  <object-name>r_gear_M13</object-name>
+  <object-name>r_gear_Ob1</object-name>
+  <condition>
+    <property>gear/gear[2]/position-norm</property>
+  </condition>
+</animation>
+
 <!--End external-->
 
 <!--Virtual cockpit staff-->
@@ -3577,13 +3605,26 @@
 <animation>
   <type>rotate</type>
   <object-name>c_gear_ME7</object-name>
-  <property>gear/gear[0]/position-norm</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.1</ind>	<dep>	-90.0</dep></entry>
-    <entry><ind>	0.9</ind>	<dep>	-90.0</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	0.0</dep></entry>
-  </interpolation>
+  <expression>
+    <prod>
+      <min>
+        <dif>
+          <value>0.5</value>
+          <abs>
+            <dif>
+              <min>
+                <property>gear/gear[0]/position-norm</property>
+                <property>fdm/jsbsim/tu154/gear/door-limit</property>
+              </min>
+              <value>0.5</value>
+            </dif>
+          </abs>
+        </dif>
+        <value>0.1</value>
+      </min>
+      <value>-900</value>
+    </prod>
+  </expression>
   <axis>
     <x1-m>-16.85</x1-m>
     <y1-m>-0.428</y1-m>
@@ -3596,13 +3637,26 @@
 <animation>
   <type>rotate</type>
   <object-name>c_gear_ME9</object-name>
-  <property>gear/gear[0]/position-norm</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.1</ind>	<dep>	90.0</dep></entry>
-    <entry><ind>	0.9</ind>	<dep>	90.0</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	0.0</dep></entry>
-  </interpolation>
+  <expression>
+    <prod>
+      <min>
+        <dif>
+          <value>0.5</value>
+          <abs>
+            <dif>
+              <min>
+                <property>gear/gear[0]/position-norm</property>
+                <property>fdm/jsbsim/tu154/gear/door-limit</property>
+              </min>
+              <value>0.5</value>
+            </dif>
+          </abs>
+        </dif>
+        <value>0.1</value>
+      </min>
+      <value>900</value>
+    </prod>
+  </expression>
   <axis>
     <x1-m>-16.85</x1-m>
     <y1-m>0.428</y1-m>
@@ -3755,32 +3809,58 @@
 <animation>
   <type>rotate</type>
   <object-name>l_gear_M15</object-name>
-  <property>gear/gear[1]/position-norm</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.1</ind>	<dep>	90.0</dep></entry>
-    <entry><ind>	0.9</ind>	<dep>	90.0</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	0.0</dep></entry>
-  </interpolation>
+  <expression>
+    <prod>
+      <min>
+        <dif>
+          <value>0.5</value>
+          <abs>
+            <dif>
+              <min>
+                <property>gear/gear[1]/position-norm</property>
+                <property>fdm/jsbsim/tu154/gear/door-limit</property>
+              </min>
+              <value>0.5</value>
+            </dif>
+          </abs>
+        </dif>
+        <value>0.1</value>
+      </min>
+      <value>900</value>
+    </prod>
+  </expression>
   <axis>
-    <x1-m>0.8257</x1-m>
-    <y1-m>-5.28</y1-m>
-    <z1-m>-0.4618</z1-m>
-    <x2-m>1.7</x2-m>
-    <y2-m>-5.3</y2-m>
-    <z2-m>-0.4256</z2-m>
+    <x1-m>1.69387</x1-m>
+    <y1-m>-5.22040</y1-m>
+    <z1-m>-0.39352</z1-m>
+    <x2-m>2.99849</x2-m>
+    <y2-m>-5.23849</y2-m>
+    <z2-m>-0.29268</z2-m>
   </axis>
 </animation>
 <animation>
   <type>rotate</type>
   <object-name>l_gear_M17</object-name>
-  <property>gear/gear[1]/position-norm</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.1</ind>	<dep>	-90.0</dep></entry>
-    <entry><ind>	0.9</ind>	<dep>	-90.0</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	0.0</dep></entry>
-  </interpolation>
+  <expression>
+    <prod>
+      <min>
+        <dif>
+          <value>0.5</value>
+          <abs>
+            <dif>
+              <min>
+                <property>gear/gear[1]/position-norm</property>
+                <property>fdm/jsbsim/tu154/gear/door-limit</property>
+              </min>
+              <value>0.5</value>
+            </dif>
+          </abs>
+        </dif>
+        <value>0.1</value>
+      </min>
+      <value>-900</value>
+    </prod>
+  </expression>
   <axis>
     <x1-m>0.8257</x1-m>
     <y1-m>-6.28</y1-m>
@@ -4357,32 +4437,58 @@
 <animation>
   <type>rotate</type>
   <object-name>r_gear_M14</object-name>
-  <property>gear/gear[2]/position-norm</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.1</ind>	<dep>	-90.0</dep></entry>
-    <entry><ind>	0.9</ind>	<dep>	-90.0</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	0.0</dep></entry>
-  </interpolation>
+  <expression>
+    <prod>
+      <min>
+        <dif>
+          <value>0.5</value>
+          <abs>
+            <dif>
+              <min>
+                <property>gear/gear[2]/position-norm</property>
+                <property>fdm/jsbsim/tu154/gear/door-limit</property>
+              </min>
+              <value>0.5</value>
+            </dif>
+          </abs>
+        </dif>
+        <value>0.1</value>
+      </min>
+      <value>-900</value>
+    </prod>
+  </expression>
   <axis>
-    <x1-m>0.8257</x1-m>
-    <y1-m>5.28</y1-m>
-    <z1-m>-0.4618</z1-m>
-    <x2-m>1.7</x2-m>
-    <y2-m>5.3</y2-m>
-    <z2-m>-0.4256</z2-m>
+    <x1-m>1.69387</x1-m>
+    <y1-m>5.22057</y1-m>
+    <z1-m>-0.39352</z1-m>
+    <x2-m>2.99841</x2-m>
+    <y2-m>5.23867</y2-m>
+    <z2-m>-0.29269</z2-m>
   </axis>
 </animation>
 <animation>
   <type>rotate</type>
   <object-name>r_gear_M15</object-name>
-  <property>gear/gear[2]/position-norm</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.1</ind>	<dep>	90.0</dep></entry>
-    <entry><ind>	0.9</ind>	<dep>	90.0</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	0.0</dep></entry>
-  </interpolation>
+  <expression>
+    <prod>
+      <min>
+        <dif>
+          <value>0.5</value>
+          <abs>
+            <dif>
+              <min>
+                <property>gear/gear[2]/position-norm</property>
+                <property>fdm/jsbsim/tu154/gear/door-limit</property>
+              </min>
+              <value>0.5</value>
+            </dif>
+          </abs>
+        </dif>
+        <value>0.1</value>
+      </min>
+      <value>900</value>
+    </prod>
+  </expression>
   <axis>
     <x1-m>0.8257</x1-m>
     <y1-m>6.28</y1-m>
@@ -6617,6 +6723,7 @@
 <animation>
     <type>material</type>
     <object-name>MESH91</object-name>
+    <object-name>RefuelCover</object-name>
     <object-name>r_gear_ME1</object-name>
     <object-name>r_pct_tra1</object-name>
     <object-name>r_pct_tra2</object-name>
@@ -7428,6 +7535,59 @@
   </axis>
 </animation>
 
+<model>
+  <name>RefuelPanel</name>
+  <path>Aircraft/tu154b/Instruments-3d/refuel/refuel.xml</path>
+  <offsets>
+    <x-m>-4.31</x-m>
+    <y-m>3.37</y-m>
+    <z-m>0.02</z-m>
+    <roll-deg>-3</roll-deg>
+    <pitch-deg>45</pitch-deg>
+    <heading-deg>147</heading-deg>
+  </offsets>
+</model>
+<animation>
+  <type>select</type>
+  <object-name>RefuelPanel</object-name>
+  <condition>
+    <property>tu154/door/refuel</property>
+  </condition>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>RefuelCover</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        if (getprop("tu154/door/refuel")) {
+            interpolate("tu154/door/refuel", 0, 0.5);
+        } else {
+            interpolate("tu154/door/refuel", 1, 0.5);
+        }
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>RefuelCover</object-name>
+  <property>tu154/door/refuel</property>
+  <factor>85</factor>
+  <axis>
+    <x1-m>-4.48886</x1-m>
+    <y1-m>3.44460</y1-m>
+    <z1-m>-0.03075</z1-m>
+    <x2-m>-4.43994</x2-m>
+    <y2-m>3.51918</y2-m>
+    <z2-m>-0.02736</z2-m>
+  </axis>
+</animation>
+
 
 <!-- CONTRAIL -->
  
@@ -7744,9 +7904,18 @@
   </offsets>
  </model>
  
- 
- 
- 
+ <model>
+   <name>gear-sw-emerg2</name>
+   <path>Aircraft/tu154b/Instruments-3d/switches/azs3-20.xml</path>
+   <offsets>
+     <x-m>-22.6129</x-m>
+     <y-m>0.515</y-m>
+     <z-m>1.539</z-m>
+     <roll-deg>180</roll-deg>
+   </offsets>
+ </model>
+
+
 <animation>
   <type>select</type>
   <object-name>headlight_l</object-name>
