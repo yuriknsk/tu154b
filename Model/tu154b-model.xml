@@ -2464,6 +2464,11 @@
 <model>
   <name>l-21</name>
   <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-1-1</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.468</x-m>
     <y-m>0.926</y-m>
@@ -2473,7 +2478,12 @@
 </model>
 <model>
   <name>l-22</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_22.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-1-2</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.447</x-m>
     <y-m>0.926</y-m>
@@ -2483,7 +2493,12 @@
 </model>
 <model>
   <name>l-23</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_23.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-1-3</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.427</x-m>
     <y-m>0.926</y-m>
@@ -2493,7 +2508,12 @@
 </model>
 <model>
   <name>l-24</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_24.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-1-4</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.407</x-m>
     <y-m>0.926</y-m>
@@ -2503,7 +2523,12 @@
 </model>
 <model>
   <name>l-25</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_25.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-4</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.436</x-m>
     <y-m>0.926</y-m>
@@ -2513,7 +2538,12 @@
 </model>
 <model>
   <name>l-26</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_26.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-4</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.414</x-m>
     <y-m>0.926</y-m>
@@ -2523,7 +2553,12 @@
 </model>
 <model>
   <name>l-27</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_27.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-3L</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.468</x-m>
     <y-m>0.926</y-m>
@@ -2533,7 +2568,12 @@
 </model>
 <model>
   <name>l-28</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_28.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-3R</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.407</x-m>
     <y-m>0.926</y-m>
@@ -2583,7 +2623,12 @@
 </model>
 <model>
   <name>l-33</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_33.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-3L</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.468</x-m>
     <y-m>0.926</y-m>
@@ -2593,7 +2638,12 @@
 </model>
 <model>
   <name>l-34</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_34.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-3R</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.408</x-m>
     <y-m>0.926</y-m>
@@ -2603,7 +2653,12 @@
 </model>
 <model>
   <name>l-35</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_35.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-2L</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.448</x-m>
     <y-m>0.926</y-m>
@@ -2613,7 +2668,12 @@
 </model>
 <model>
   <name>l-36</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_36.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-2R</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.427</x-m>
     <y-m>0.926</y-m>
@@ -2623,7 +2683,12 @@
 </model>
 <model>
   <name>l-37</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_37.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-3L</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.468</x-m>
     <y-m>0.926</y-m>
@@ -2633,7 +2698,12 @@
 </model>
 <model>
   <name>l-38</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_38.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-3R</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.408</x-m>
     <y-m>0.926</y-m>
@@ -2643,7 +2713,12 @@
 </model>
 <model>
   <name>l-39</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_39.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-2L</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.448</x-m>
     <y-m>0.926</y-m>
@@ -2653,7 +2728,12 @@
 </model>
 <model>
   <name>l-40</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_40.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-2R</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.427</x-m>
     <y-m>0.926</y-m>
@@ -2663,7 +2743,13 @@
 </model>
 <model>
   <name>l-41</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_41.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <model>yellow_lamp.ac</model>
+      <trigger>fdm/jsbsim/fuel/valve-3L-2L</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.323</x-m>
     <y-m>0.926</y-m>
@@ -2673,7 +2759,13 @@
 </model>
 <model>
   <name>l-42</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_42.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <model>yellow_lamp.ac</model>
+      <trigger>fdm/jsbsim/fuel/valve-3R-2R</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.323</x-m>
     <y-m>0.926</y-m>
@@ -2683,7 +2775,13 @@
 </model>
 <model>
   <name>l-43</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_43.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <model>yellow_lamp.ac</model>
+      <trigger>fdm/jsbsim/fuel/valve-4-2L</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.323</x-m>
     <y-m>0.926</y-m>
@@ -2693,7 +2791,13 @@
 </model>
 <model>
   <name>l-44</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_44.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <model>yellow_lamp.ac</model>
+      <trigger>fdm/jsbsim/fuel/valve-4-2R</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.324</x-m>
     <y-m>0.926</y-m>
@@ -2704,6 +2808,11 @@
 <model>
   <name>l-45</name>
   <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_45.xml</path>
+  <overlay>
+    <params>
+      <tanks>1</tanks>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.296</x-m>
     <y-m>0.926</y-m>
@@ -2713,7 +2822,12 @@
 </model>
 <model>
   <name>l-46</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_46.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_45.xml</path>
+  <overlay>
+    <params>
+      <tanks>2</tanks>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.295</x-m>
     <y-m>0.926</y-m>
@@ -2723,7 +2837,12 @@
 </model>
 <model>
   <name>l-47</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_47.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_45.xml</path>
+  <overlay>
+    <params>
+      <tanks>3</tanks>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.295</x-m>
     <y-m>0.926</y-m>
@@ -2916,7 +3035,12 @@
 </model>
 <model>
   <name>sw-13</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-11.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-15.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-pump-1-1</switch>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.464</x-m>
     <y-m>0.924</y-m>
@@ -2926,7 +3050,12 @@
 </model>
 <model>
   <name>sw-14</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-12.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-15.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-pump-1-2</switch>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.447</x-m>
     <y-m>0.924</y-m>
@@ -2936,7 +3065,12 @@
 </model>
 <model>
   <name>sw-15</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-13.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-15.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-pump-1-3</switch>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.43</x-m>
     <y-m>0.924</y-m>
@@ -2946,7 +3080,12 @@
 </model>
 <model>
   <name>sw-16</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-14.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-15.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-pump-1-4</switch>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.413</x-m>
     <y-m>0.924</y-m>
@@ -2957,6 +3096,11 @@
 <model>
   <name>sw-17</name>
   <path>Aircraft/tu154b/Instruments-3d/switches/azs1-15.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-pump-4</switch>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.459</x-m>
     <y-m>0.924</y-m>
@@ -2966,7 +3110,12 @@
 </model>
 <model>
   <name>sw-18</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-16.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-15.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-pump-3L</switch>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.459</x-m>
     <y-m>0.924</y-m>
@@ -2976,7 +3125,12 @@
 </model>
 <model>
   <name>sw-19</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-17.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-15.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-pump-3R</switch>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.419</x-m>
     <y-m>0.924</y-m>
@@ -2986,7 +3140,12 @@
 </model>
 <model>
   <name>sw-20</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-18.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-15.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-pump-2L</switch>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.458</x-m>
     <y-m>0.924</y-m>
@@ -2996,7 +3155,12 @@
 </model>
 <model>
   <name>sw-21</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-19.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-15.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-pump-2R</switch>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.421</x-m>
     <y-m>0.924</y-m>
@@ -3006,7 +3170,12 @@
 </model>
 <model>
   <name>sw-22</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-20.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-15.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-fuel</switch>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.373</x-m>
     <y-m>0.916</y-m>
@@ -3017,7 +3186,12 @@
 </model>
 <model>
   <name>sw-23</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-21.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-15.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-balance</switch>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.332</x-m>
     <y-m>0.916</y-m>
@@ -3028,7 +3202,12 @@
 </model>
 <model>
   <name>sw-24</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-22.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-15.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-program</switch>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.248</x-m>
     <y-m>0.916</y-m>
@@ -3039,7 +3218,12 @@
 </model>
 <model>
   <name>sw-25</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-23.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-15.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-consumption</switch>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.211</x-m>
     <y-m>0.916</y-m>
@@ -3073,6 +3257,13 @@
 <model>
   <name>sw-28</name>
   <path>Aircraft/tu154b/Instruments-3d/switches/azs3-1.xml</path>
+  <overlay>
+    <params>
+      <model>azs_2.ac</model>
+      <switch>fdm/jsbsim/fuel/sw-valve-3-2</switch>
+      <cover>tu154/switches/cover-sw-valve-3-2</cover>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.367</x-m>
     <y-m>0.924</y-m>
@@ -3082,7 +3273,14 @@
 </model>
 <model>
   <name>sw-29</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs3-2.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs3-1.xml</path>
+  <overlay>
+    <params>
+      <model>azs_2.ac</model>
+      <switch>fdm/jsbsim/fuel/sw-valve-4-2</switch>
+      <cover>tu154/switches/cover-sw-valve-4-2</cover>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.367</x-m>
     <y-m>0.924</y-m>
@@ -3102,7 +3300,13 @@
 </model>
 <model>
   <name>sw-31</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs3-4.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs3-1.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-valve-apu</switch>
+      <cover>tu154/switches/cover-sw-valve-apu</cover>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-21.097</x-m>
     <y-m>0.889</y-m>
@@ -3124,7 +3328,14 @@
 </model>
 <model>
   <name>sw-33</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs3-6.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs3-1.xml</path>
+  <overlay>
+    <params>
+      <model>azs_2.ac</model>
+      <switch>fdm/jsbsim/fuel/sw-automat</switch>
+      <cover>tu154/switches/cover-sw-automat-3-2</cover>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.281</x-m>
     <y-m>0.916</y-m>
@@ -3135,7 +3346,13 @@
 </model>
 <model>
   <name>sw-34</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs3-7.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs3-1.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-valve-e1</switch>
+      <cover>tu154/switches/cover-sw-valve-e1</cover>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.466</x-m>
     <y-m>0.915</y-m>
@@ -3146,7 +3363,13 @@
 </model>
 <model>
   <name>sw-35</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs3-8.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs3-1.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-valve-e2</switch>
+      <cover>tu154/switches/cover-sw-valve-e2</cover>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.44</x-m>
     <y-m>0.915</y-m>
@@ -3157,7 +3380,13 @@
 </model>
 <model>
   <name>sw-36</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs3-9.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs3-1.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-valve-e3</switch>
+      <cover>tu154/switches/cover-sw-valve-e3</cover>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.415</x-m>
     <y-m>0.915</y-m>
@@ -3179,7 +3408,12 @@
 </model>
 <model>
   <name>sw-38</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-27.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-15.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-pump-apu</switch>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-21.056</x-m>
     <y-m>0.912</y-m>

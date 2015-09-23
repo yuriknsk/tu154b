@@ -51,33 +51,24 @@
 </animation>
 
 <!--Control-->
-<animation>
-  <type>pick</type>
-  <object-name>hs1</object-name>
-  <visible>false</visible>
-  <action>
-    <button>0</button>
-    <repeatable>true</repeatable>
+  <animation>
+    <type>select</type>
+    <object-name>hs1</object-name>
+    <visible>false</visible>
+  </animation>
+  <animation>
+    <type>knob</type>
+    <object-name>hs2</object-name>
+    <visible>false</visible>
+    <action>
       <binding>
         <command>nasal</command>
-        <script>fuel.cons_meter_adjust(-1);</script>  
-      </binding>      
-  </action>
-</animation>
-
-<animation>
-  <type>pick</type>
-  <object-name>hs2</object-name>
-  <visible>false</visible>
-  <action>
-    <button>0</button>
-    <repeatable>true</repeatable>
-    <binding>
-      <command>nasal</command>
-      <script>fuel.cons_meter_adjust(1);</script>  
-    </binding>      
-  </action>
-</animation>
-
+        <script>
+            var offset = cmdarg().getNode('offset').getValue();
+            instruments.fuel_consumption_adjust(offset * 100);
+        </script>
+      </binding>
+    </action>
+  </animation>
 
 </PropertyList>

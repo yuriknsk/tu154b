@@ -40,7 +40,14 @@
   <object-name>_d_2</object-name>
   <condition>
     <or>
-     <property>tu154/lamps/tank-2-l-level</property>
+      <equals>
+        <property>fdm/jsbsim/fuel/balance-state</property>
+        <value>-1</value>
+      </equals>
+      <greater-than>
+        <property>fdm/jsbsim/fuel/disbalance-2</property>
+        <value>0</value>
+      </greater-than>
      <property>tu154/systems/electrical/checking-lamps/engine-panel</property>
     </or>
   </condition>

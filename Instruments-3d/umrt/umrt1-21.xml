@@ -47,7 +47,7 @@
         <prod>
           <max>
             <property alias="../../../../../../params/pph"/>
-            <value>320</value>
+            <value>881</value>
           </max>
           <value>0.020411657</value>
         </prod>

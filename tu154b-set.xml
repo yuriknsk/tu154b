@@ -506,8 +506,8 @@
  <fuel>
   <tank n="0"><name>Feed tank (1)</name></tank>
   <tank n="1"><name>Left wing inner tank (2 LEFT)</name></tank>
-  <tank n="2"><name>Left wing outer tank (3 LEFT)</name></tank>
-  <tank n="3"><name>Right wing inner tank (2 RIGHT)</name></tank>
+  <tank n="2"><name>Right wing inner tank (2 RIGHT)</name></tank>
+  <tank n="3"><name>Left wing outer tank (3 LEFT)</name></tank>
   <tank n="4"><name>Right wing outer tank (3 RIGHT)</name></tank>
   <tank n="5"><name>Ballast tank (4)</name></tank>
  </fuel>
@@ -724,6 +724,25 @@
         <sw-emerg2 alias="/tu154/gear/sw-emerg2"/>
       </gear>
     </tu154>
+
+    <fuel>
+      <power-dc27-L
+          alias="/tu154/systems/electrical/buses/DC27-bus-L/volts"/>
+      <power-ac200-1L
+          alias="/tu154/systems/electrical/buses/AC3x200-bus-1L/volts"/>
+      <power-ac200-2
+          alias="/tu154/systems/electrical/buses/AC3x200-bus-2/volts"/>
+      <power-ac200-3L
+          alias="/tu154/systems/electrical/buses/AC3x200-bus-3L/volts"/>
+      <level-1-kg alias="/consumables/fuel/tank[0]/level-kg"/>
+      <level-2L-kg alias="/consumables/fuel/tank[1]/level-kg"/>
+      <level-2R-kg alias="/consumables/fuel/tank[2]/level-kg"/>
+      <level-3L-kg alias="/consumables/fuel/tank[3]/level-kg"/>
+      <level-3R-kg alias="/consumables/fuel/tank[4]/level-kg"/>
+      <level-4-kg alias="/consumables/fuel/tank[5]/level-kg"/>
+      <sw-apu alias="/tu154/switches/APU-starter-switch"/>
+    </fuel>
+
   </jsbsim>
 </fdm>
 
