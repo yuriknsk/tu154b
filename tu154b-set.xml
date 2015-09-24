@@ -338,6 +338,7 @@
   </view>
   <view n="107">
     <name>Refuel Panel View</name>
+    <enabled type="bool">false</enabled>
     <type>lookfrom</type>
     <internal type="bool">false</internal>
     <config>
