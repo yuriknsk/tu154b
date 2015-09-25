@@ -20,22 +20,24 @@ var start_engine = func{
 	var engine_prop = -1;
 	# Is start subsystem  serviceable?
 	if( getprop("tu154/switches/startpanel-start" ) != 1.0 ) return;
-	if( getprop("tu154/lamps/pump-1") != 1.0 ) return;
-	if( getprop("tu154/lamps/pump-2") != 1.0 ) return;
-	if( getprop("tu154/lamps/pump-3") != 1.0 ) return;
-	if( getprop("tu154/lamps/pump-4") != 1.0 ) return;
-	if( getprop("tu154/lamps/auto-consumption-failure") == 1.0 ) return;
+	if (!getprop("fdm/jsbsim/fuel/program-tanks")) return;
 	if( getprop( "tu154/systems/APU/APU-ready" ) == 0 ) return;
 	if( getprop( "tu154/systems/APU/APU-bleed" ) != 5.0 ) return;	# need bleed
 
-	# which engine we want start?
-	if( getprop("tu154/switches/startpanel-selector-1" ) == 1.0 )
-		engine_prop = "controls/engines/engine[0]/starter";
-	if( getprop("tu154/switches/startpanel-selector-2" ) == 1.0 )
-		engine_prop = "controls/engines/engine[1]/starter";
-	if( getprop("tu154/switches/startpanel-selector-3" ) == 1.0 )
-		engine_prop = "controls/engines/engine[2]/starter";
-	if( engine_prop == -1 ) return;	# engine not selected
+    # which engine we want start?
+    if( getprop("tu154/switches/startpanel-selector-1" ) == 1.0 ) {
+        if (!getprop("fdm/jsbsim/fuel/has-pressure-e1")) return;
+	engine_prop = "controls/engines/engine[0]/starter";
+    }
+    if( getprop("tu154/switches/startpanel-selector-2" ) == 1.0 ) {
+        if (!getprop("fdm/jsbsim/fuel/has-pressure-e2")) return;
+	engine_prop = "controls/engines/engine[1]/starter";
+    }
+    if( getprop("tu154/switches/startpanel-selector-3" ) == 1.0 ) {
+        if (!getprop("fdm/jsbsim/fuel/has-pressure-e3")) return;
+	engine_prop = "controls/engines/engine[2]/starter";
+    }
+    if( engine_prop == -1 ) return;	# engine not selected
 
 #let's start selected engine
 	setprop(engine_prop, 1);
@@ -70,7 +72,7 @@ var break_start = func{
 var start_apu = func{
 # Is start subsystem  serviceable?
 
-if( getprop( "tu154/switches/APU-starter-selector" ) != 1.0 ) return;
+if (!getprop("fdm/jsbsim/fuel/sw-pump-apu")) return;
 if( getprop("tu154/systems/electrical/indicators/apu-ready-to-start") != 1.0 ) return;
 #let's start selected engine
 	setprop("controls/engines/engine[3]/starter", 1);
@@ -207,7 +209,6 @@ if(  (pwr < 13.0) or (getprop( "tu154/switches/APU-starter-switch" ) != 1 ) )
 	{
 	setprop("tu154/systems/electrical/indicators/apu-ready", 0.0 );
 	setprop("tu154/systems/electrical/indicators/apu-oil-pressure", 0.0 );
-	setprop("tu154/systems/electrical/indicators/apu-fuel-pressure", 0.0 );
 	setprop("tu154/systems/electrical/indicators/apu-start", 0.0 );
 	setprop("tu154/systems/electrical/indicators/apu-levers-open", 0.0 );
 	setprop("tu154/systems/electrical/indicators/apu-ready-to-start", 0.0 );
@@ -217,7 +218,7 @@ if(  (pwr < 13.0) or (getprop( "tu154/switches/APU-starter-switch" ) != 1 ) )
 
 if( getprop( "controls/engines/engine[3]/cutoff" ) == 1 )
  if( getprop( "engines/engine[3]/n2" ) > 20.0 )
-      if( getprop( "tu154/switches/APU-starter-selector" ) == 1 )
+      if(getprop("fdm/jsbsim/fuel/sw-pump-apu"))
  	 if( getprop( "engines/engine[3]/starter" ) == 1 )
  		setprop( "controls/engines/engine[3]/cutoff",0 );
 # indicator support
@@ -232,7 +233,7 @@ if( getprop( "controls/engines/engine[3]/cutoff" ) == 1 )
   else setprop("tu154/systems/electrical/indicators/apu-levers-open", 0.0 );
   if( getprop( "tu154/systems/electrical/indicators/apu-levers-open" ) == 1.0 )
   	param = param + 1;
-   if( getprop( "tu154/systems/electrical/indicators/apu-fuel-pressure" ) == 1.0 )
+   if (getprop("fdm/jsbsim/fuel/sw-valve-apu"))
   	param = param + 1;
     if( getprop( "tu154/systems/APU/APU-bleed" ) < 4.8 )
   	param = param + 1;
@@ -251,7 +252,7 @@ if( getprop( "controls/engines/engine[3]/cutoff" ) == 1 )
 	setprop("tu154/systems/electrical/indicators/apu-ready", 0.0 );
 	}
 
-if( getprop( "engines/engine[3]/n2" ) > 90.0 and getprop( "tu154/systems/electrical/indicators/apu-fuel-pressure") < 0.2 ) stop_apu();
+if( getprop( "engines/engine[3]/n2" ) > 90.0 and !getprop("fdm/jsbsim/fuel/has-fuel-apu")) stop_apu();
 
 }
 
@@ -269,7 +270,6 @@ var check_lamps_eng = func{
         setprop("tu154/systems/electrical/indicators/engine-1/low-oil", param );
         setprop("tu154/systems/electrical/indicators/engine-1/metal-in-oil", param );
         setprop("tu154/systems/electrical/indicators/engine-1/overflow-oil", param );
-        setprop("tu154/systems/electrical/indicators/engine-1/p-fuel", param );
         setprop("tu154/systems/electrical/indicators/engine-1/p-oil", param );
         setprop("tu154/systems/electrical/indicators/engine-1/revers-dampers", param );
         setprop("tu154/systems/electrical/indicators/engine-1/revers-lock", param );
@@ -281,7 +281,6 @@ var check_lamps_eng = func{
         setprop("tu154/systems/electrical/indicators/engine-2/low-oil", param );
         setprop("tu154/systems/electrical/indicators/engine-2/metal-in-oil", param );
         setprop("tu154/systems/electrical/indicators/engine-2/overflow-oil", param );
-        setprop("tu154/systems/electrical/indicators/engine-2/p-fuel", param );
         setprop("tu154/systems/electrical/indicators/engine-2/p-oil", param );
         setprop("tu154/systems/electrical/indicators/engine-2/t-bearing-danger", param );
         setprop("tu154/systems/electrical/indicators/engine-2/vibration", param );
@@ -291,7 +290,6 @@ var check_lamps_eng = func{
         setprop("tu154/systems/electrical/indicators/engine-3/low-oil", param );
         setprop("tu154/systems/electrical/indicators/engine-3/metal-in-oil", param );
         setprop("tu154/systems/electrical/indicators/engine-3/overflow-oil", param );
-        setprop("tu154/systems/electrical/indicators/engine-3/p-fuel", param );
         setprop("tu154/systems/electrical/indicators/engine-3/p-oil", param );
         setprop("tu154/systems/electrical/indicators/engine-3/revers-dampers", param );
         setprop("tu154/systems/electrical/indicators/engine-3/revers-lock", param );

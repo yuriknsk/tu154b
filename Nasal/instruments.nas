@@ -1130,6 +1130,79 @@ setlistener("tu154/wipers/switch-right", func { wiper("right"); }, 0, 0);
 
 
 ######################################################################
+#
+# Fuel subsystem.
+#
+
+var fuel_gauge_handler = func {
+    var enabled = (getprop("tu154/systems/electrical/buses/DC27-bus-L/volts")
+                   and getprop("fdm/jsbsim/fuel/sw-fuel"));
+    var name = [ "1", "2-l", "2-r", "3-l", "3-r", "4" ];
+    for (var i = 0; i < 6; i += 1) {
+        realias("tu154/systems/fuel/tank-"~name[i]~"-kg",
+                (enabled ? "consumables/fuel/tank["~i~"]/level-kg" : 0), 0.5);
+    }
+    realias("tu154/systems/fuel/total-kg",
+            (enabled ? "consumables/fuel/total-fuel-kg" : 0), 0.5);
+}
+fuel_gauge_handler();
+
+setlistener("tu154/systems/electrical/buses/DC27-bus-L/volts",
+            fuel_gauge_handler, 0, 1);
+setlistener("fdm/jsbsim/fuel/sw-fuel", fuel_gauge_handler, 0, 1);
+
+
+var fuel_consumption_adjust = func(offset) {
+    var enabled = (getprop("tu154/systems/electrical/buses/DC27-bus-L/volts")
+                   and getprop("fdm/jsbsim/fuel/sw-consumption"));
+    if (enabled) {
+        var used = getprop("fdm/jsbsim/fuel/used-kg");
+        var base = getprop("fdm/jsbsim/fuel/remains-base");
+        base += offset;
+        if (base < used)
+            base = used;
+        else if (base > 50000 + used)
+            base = 50000 + used;
+        setprop("fdm/jsbsim/fuel/remains-base", base);
+    }
+}
+
+var fuel_consumption_gauge_enabled = 0;
+var fuel_consumption_gauge_handler = func {
+    var enabled = (getprop("tu154/systems/electrical/buses/DC27-bus-L/volts")
+                   and getprop("fdm/jsbsim/fuel/sw-consumption"));
+    if (enabled and !fuel_consumption_gauge_enabled) {
+        var used = getprop("fdm/jsbsim/fuel/used-kg");
+        setprop("fdm/jsbsim/fuel/remains-base", used);
+    }
+    realias("tu154/systems/fuel/rest-kg",
+            (enabled ? "fdm/jsbsim/fuel/remains-kg" : 0), 0.5);
+    fuel_consumption_gauge_enabled = enabled;
+}
+fuel_consumption_gauge_handler();
+
+setlistener("tu154/systems/electrical/buses/DC27-bus-L/volts",
+            fuel_consumption_gauge_handler, 0, 1);
+setlistener("fdm/jsbsim/fuel/sw-consumption",
+            fuel_consumption_gauge_handler, 0, 1);
+
+
+var engine_cutoff = func {
+    var name = [ "e1", "e2", "e3" ];
+    for (var i = 0; i < 3; i += 1) {
+        var cutoff = (!getprop("tu154/switches/cutoff-lever-"~(i + 1))
+                      or !getprop("fdm/jsbsim/fuel/has-fuel-"~name[i]));
+        if (cutoff)
+            setprop("controls/engines/engine["~i~"]/cutoff", cutoff);
+    }
+    if (!getprop("fdm/jsbsim/fuel/has-fuel-apu"))
+        setprop("controls/engines/engine[3]/cutoff", 1);
+}
+var engine_cutoff_timer = maketimer(1, engine_cutoff);
+engine_cutoff_timer.start();
+
+
+######################################################################
 
 svs_power = func{
 if( getprop( "tu154/switches/SVS-power" ) == 1.0 )

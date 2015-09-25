@@ -23,10 +23,16 @@
     <object-name>SwValve3L</object-name>
     <object-name>SwEnable</object-name>
     <emission>
-      <red-prop>tu154/refuel/light</red-prop>
-      <green-prop>tu154/refuel/light</green-prop>
-      <blue-prop>tu154/refuel/light</blue-prop>
+      <red>0.5</red>
+      <green>0.5</green>
+      <blue>0.5</blue>
     </emission>
+    <condition>
+      <and>
+        <property>tu154/systems/electrical/buses/DC27-bus-L/volts</property>
+        <property>tu154/refuel/sw-light</property>
+      </and>
+    </condition>
   </animation>
 
   <model>
@@ -44,7 +50,7 @@
     <path>Aircraft/tu154b/Instruments-3d/refuel/switch.xml</path>
     <overlay>
       <params>
-        <switch>tu154/refuel/sw-valve-4</switch>
+        <switch>fdm/jsbsim/fuel/sw-refuel-4</switch>
       </params>
     </overlay>
     <offsets>
@@ -58,7 +64,7 @@
     <path>Aircraft/tu154b/Instruments-3d/refuel/lamp.xml</path>
     <overlay>
       <params>
-        <lamp>tu154/refuel/lamp-valve-4</lamp>
+        <lamp>fdm/jsbsim/fuel/valve-refuel-4</lamp>
       </params>
     </overlay>
     <offsets>
@@ -72,7 +78,7 @@
     <path>Aircraft/tu154b/Instruments-3d/refuel/lamp.xml</path>
     <overlay>
       <params>
-        <lamp>tu154/refuel/lamp-enabled</lamp>
+        <lamp>fdm/jsbsim/fuel/sw-refuel</lamp>
         <model>lamp_yellow.ac</model>
       </params>
     </overlay>
@@ -102,7 +108,7 @@
     <path>Aircraft/tu154b/Instruments-3d/refuel/lamp.xml</path>
     <overlay>
       <params>
-        <lamp>tu154/refuel/lamp-valve-3R</lamp>
+        <lamp>fdm/jsbsim/fuel/valve-refuel-3R</lamp>
       </params>
     </overlay>
     <offsets>
@@ -116,7 +122,7 @@
     <path>Aircraft/tu154b/Instruments-3d/refuel/lamp.xml</path>
     <overlay>
       <params>
-        <lamp>tu154/refuel/lamp-valve-2R</lamp>
+        <lamp>fdm/jsbsim/fuel/valve-refuel-2R</lamp>
       </params>
     </overlay>
     <offsets>
@@ -130,7 +136,7 @@
     <path>Aircraft/tu154b/Instruments-3d/refuel/lamp.xml</path>
     <overlay>
       <params>
-        <lamp>tu154/refuel/lamp-valve-1</lamp>
+        <lamp>fdm/jsbsim/fuel/valve-refuel-1</lamp>
       </params>
     </overlay>
     <offsets>
@@ -144,7 +150,7 @@
     <path>Aircraft/tu154b/Instruments-3d/refuel/lamp.xml</path>
     <overlay>
       <params>
-        <lamp>tu154/refuel/lamp-valve-2L</lamp>
+        <lamp>fdm/jsbsim/fuel/valve-refuel-2L</lamp>
       </params>
     </overlay>
     <offsets>
@@ -158,7 +164,7 @@
     <path>Aircraft/tu154b/Instruments-3d/refuel/lamp.xml</path>
     <overlay>
       <params>
-        <lamp>tu154/refuel/lamp-valve-3L</lamp>
+        <lamp>fdm/jsbsim/fuel/valve-refuel-3L</lamp>
       </params>
     </overlay>
     <offsets>
@@ -193,7 +199,7 @@
     <path>Aircraft/tu154b/Instruments-3d/refuel/switch.xml</path>
     <overlay>
       <params>
-        <switch>tu154/refuel/sw-valve-3R</switch>
+        <switch>fdm/jsbsim/fuel/sw-refuel-3R</switch>
       </params>
     </overlay>
     <offsets>
@@ -207,7 +213,7 @@
     <path>Aircraft/tu154b/Instruments-3d/refuel/switch.xml</path>
     <overlay>
       <params>
-        <switch>tu154/refuel/sw-valve-2R</switch>
+        <switch>fdm/jsbsim/fuel/sw-refuel-2R</switch>
       </params>
     </overlay>
     <offsets>
@@ -221,7 +227,7 @@
     <path>Aircraft/tu154b/Instruments-3d/refuel/switch.xml</path>
     <overlay>
       <params>
-        <switch>tu154/refuel/sw-valve-1</switch>
+        <switch>fdm/jsbsim/fuel/sw-refuel-1</switch>
       </params>
     </overlay>
     <offsets>
@@ -235,7 +241,7 @@
     <path>Aircraft/tu154b/Instruments-3d/refuel/switch.xml</path>
     <overlay>
       <params>
-        <switch>tu154/refuel/sw-valve-2L</switch>
+        <switch>fdm/jsbsim/fuel/sw-refuel-2L</switch>
       </params>
     </overlay>
     <offsets>
@@ -249,7 +255,7 @@
     <path>Aircraft/tu154b/Instruments-3d/refuel/switch.xml</path>
     <overlay>
       <params>
-        <switch>tu154/refuel/sw-valve-3L</switch>
+        <switch>fdm/jsbsim/fuel/sw-refuel-3L</switch>
       </params>
     </overlay>
     <offsets>
@@ -263,7 +269,7 @@
     <path>Aircraft/tu154b/Instruments-3d/refuel/switch.xml</path>
     <overlay>
       <params>
-        <switch>tu154/refuel/sw-enable</switch>
+        <switch>fdm/jsbsim/fuel/sw-refuel</switch>
       </params>
     </overlay>
     <offsets>

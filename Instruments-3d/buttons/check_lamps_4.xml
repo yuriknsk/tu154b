@@ -56,8 +56,10 @@
     <binding>
       <command>nasal</command>
       <script>
-	setprop("tu154/systems/electrical/checking-lamps/engine-panel", 1.0 );
-        engines.check_lamps_eng();
+        if (getprop("tu154/systems/electrical/buses/DC27-bus-L/volts")) {
+          setprop("tu154/systems/electrical/checking-lamps/engine-panel", 1.0 );
+          engines.check_lamps_eng();
+        }
       </script>
     </binding>
     <mod-up>

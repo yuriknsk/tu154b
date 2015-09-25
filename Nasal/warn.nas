@@ -714,9 +714,7 @@ if( getprop( "tu154/systems/warning/fire/fire" ) == 1 )
 else setprop("tu154/systems/electrical/indicators/fire", 0 );
 
 # Low fuel
-param = getprop( "consumables/fuel/tank[0]/level-gal_us" );
-if ( param == nil ) param = 0.0;
-if(  param < 826 ) { # 2500 kg 0.8 kg/l 3.78 l/gal
+if (getprop("consumables/fuel/tank[0]/level-kg") <= 2500 ) {
      if (!getprop("tu154/systems/electrical/indicators/fuel-2500/enabled")) {
          fuel_2500.switch(1);
          setprop("tu154/systems/electrical/indicators/fuel-2500/alarm", 1);

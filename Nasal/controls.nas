@@ -92,24 +92,24 @@ var autostart = func{
 	setprop("tu154/switches/ut7-1-serviceable", 1.0 );
 	setprop("tu154/switches/ut7-2-serviceable", 1.0 );
 	setprop("tu154/switches/ut7-3-serviceable", 1.0 );
-	# fuei
-	setprop("tu154/switches/tank-2-left-serviceable", 1.0 );
-	setprop("tu154/switches/tank-2-right-serviceable", 1.0 );
-	setprop("tu154/switches/tank-3-left-serviceable", 1.0 );
-	setprop("tu154/switches/tank-3-right-serviceable", 1.0 );
-	setprop("tu154/switches/tank-4-serviceable", 1.0 );
-	setprop("tu154/switches/pump-1-serviceable", 1.0 );
-	setprop("tu154/switches/pump-2-serviceable", 1.0 );
-	setprop("tu154/switches/pump-3-serviceable", 1.0 );
-	setprop("tu154/switches/pump-4-serviceable", 1.0 );
-	setprop("tu154/switches/fuel-cutoff-valve-1", 1.0 );
-	setprop("tu154/switches/fuel-cutoff-valve-2", 1.0 );
-	setprop("tu154/switches/fuel-cutoff-valve-3", 1.0 );
-	setprop("tu154/switches/fuel-meter-serviceable", 1.0 );
-	setprop("tu154/switches/fuel-autolevel-serviceable", 1.0 );
-	setprop("tu154/switches/fuel-autoconsumption-mode", 1.0 );
-	setprop("tu154/switches/fuel-autoconsumption-serviceable", 1.0 );
-	setprop("tu154/switches/fuel-consumption-meter", 1.0 );
+	# fuel
+        setprop("fdm/jsbsim/fuel/sw-pump-2L", 1);
+        setprop("fdm/jsbsim/fuel/sw-pump-2R", 1);
+        setprop("fdm/jsbsim/fuel/sw-pump-3L", 1);
+        setprop("fdm/jsbsim/fuel/sw-pump-3R", 1);
+        setprop("fdm/jsbsim/fuel/sw-pump-4", 1);
+        setprop("fdm/jsbsim/fuel/sw-pump-1-1", 1);
+        setprop("fdm/jsbsim/fuel/sw-pump-1-2", 1);
+        setprop("fdm/jsbsim/fuel/sw-pump-1-3", 1);
+        setprop("fdm/jsbsim/fuel/sw-pump-1-4", 1);
+        setprop("fdm/jsbsim/fuel/sw-valve-e1", 1);
+        setprop("fdm/jsbsim/fuel/sw-valve-e2", 1);
+        setprop("fdm/jsbsim/fuel/sw-valve-e3", 1);
+        setprop("fdm/jsbsim/fuel/sw-fuel", 1);
+        setprop("fdm/jsbsim/fuel/sw-balance", 1);
+        setprop("fdm/jsbsim/fuel/sw-automat", 1);
+        setprop("fdm/jsbsim/fuel/sw-program", 1);
+        setprop("fdm/jsbsim/fuel/sw-consumption", 1);
 	# Begin engine start procedure
 	setprop( "controls/engines/engine[0]/cutoff", 1 );
 	setprop( "controls/engines/engine[1]/cutoff", 1 );

@@ -41,10 +41,6 @@
         <!--Electrical support-->
         <property>systems/electrical-ok</property>
 
-	<!--Refuel systems-->
-      <property>tu154/systems/flight/fl</property>
-      <property>tu154/systems/flight/dist</property>
-
 
       <!--******************************************** For script controlled flight ************************************-->
 <!--
