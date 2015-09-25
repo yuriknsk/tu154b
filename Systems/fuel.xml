@@ -28,6 +28,11 @@
   -->
   <property value="16404">fuel/pressure-alt-ft</property>
 
+  <!--
+    Refuel flow is 100kg/s.
+  -->
+  <property value="220">fuel/refuel-pps</property>
+
   <property>fuel/sw-pump-2L</property>
   <property>fuel/sw-pump-2R</property>
   <property>fuel/sw-pump-3L</property>
@@ -52,6 +57,16 @@
 
   <property>fuel/sw-pump-apu</property>
   <property>fuel/sw-valve-apu</property>
+
+  <property>fuel/sw-refuel</property>
+  <property>fuel/sw-refuel-3R</property>
+  <property>fuel/sw-refuel-2R</property>
+  <property>fuel/sw-refuel-1</property>
+  <property>fuel/sw-refuel-2L</property>
+  <property>fuel/sw-refuel-3L</property>
+  <property>fuel/sel-refuel-123</property>
+  <property>fuel/sw-refuel-4</property>
+  <property>fuel/sel-refuel-4</property>
 
   <channel name="Fuel flows">
 
@@ -361,8 +376,8 @@
     </switch>
 
     <!--
-      Fuel flows from tanks 3 and 4 are equally divided between their
-      consumers.
+      Fuel flows from tanks 3 and 4 and refuel flow are equally
+      divided between their consumers.
     -->
     <fcs_function name="fuel/pump-3L-eq">
       <function>
@@ -407,6 +422,24 @@
         </quotient>
       </function>
     </fcs_function>
+    <fcs_function name="fuel/refuel-pps-eq">
+      <function>
+        <quotient>
+          <property>fuel/refuel-pps</property>
+          <max>
+            <sum>
+              <property>fuel/valve-refuel-3R</property>
+              <property>fuel/valve-refuel-2R</property>
+              <property>fuel/valve-refuel-1</property>
+              <property>fuel/valve-refuel-2L</property>
+              <property>fuel/valve-refuel-3L</property>
+              <property>fuel/valve-refuel-4</property>
+            </sum>
+            <value>1</value>
+          </max>
+        </quotient>
+      </function>
+    </fcs_function>
 
     <!--
       Portion valve of tank 1 opens when fuel level drops to 3150kg
@@ -419,6 +452,113 @@
       </test>
       <test value="fuel/valve-portion">
         fuel/level-1-kg le 3300
+      </test>
+    </switch>
+
+    <!--
+      Refuel targets.
+    -->
+    <switch name="fuel/refuel-target-1">
+      <default value="3300"/>
+      <test value="0">
+        fuel/sw-refuel eq 0
+      </test>
+      <test value="1000000"><!-- never reached, fuel overflows to the ground -->
+        fuel/program-tanks eq 0
+      </test>
+    </switch>
+    <switch name="fuel/refuel-target-2">
+      <default value="9500"/>
+      <test value="0">
+        fuel/sw-refuel eq 0
+      </test>
+      <test value="1000000"><!-- never reached, fuel overflows to the ground -->
+        fuel/program-tanks eq 0
+      </test>
+      <test value="2062.5">
+        fuel/sel-refuel-123 eq 0
+      </test>
+      <test value="3312.5">
+        fuel/sel-refuel-123 eq 1
+      </test>
+      <test value="5425">
+        fuel/sel-refuel-123 eq 2
+      </test>
+    </switch>
+    <switch name="fuel/refuel-target-3">
+      <default value="5425"/>
+      <test value="0">
+        fuel/sw-refuel eq 0
+      </test>
+      <test value="1000000"><!-- never reached, fuel overflows to the ground -->
+        fuel/program-tanks eq 0
+      </test>
+      <test value="3787.5">
+        fuel/sel-refuel-123 eq 0
+      </test>
+      <test value="5037.5">
+        fuel/sel-refuel-123 eq 1
+      </test>
+    </switch>
+    <switch name="fuel/refuel-target-4">
+      <default value="6600"/>
+      <test value="0">
+        fuel/sw-refuel eq 0
+      </test>
+      <test value="1000000"><!-- never reached, fuel overflows to the ground -->
+        fuel/program-tanks eq 0
+      </test>
+      <test value="2000">
+        fuel/sel-refuel-4 eq 0
+      </test>
+      <test value="4000">
+        fuel/sel-refuel-4 eq 1
+      </test>
+    </switch>
+
+    <!--
+      Refuel valves.
+    -->
+    <switch name="fuel/valve-refuel-2L">
+      <default value="0"/>
+      <test logic="AND" value="1">
+        fuel/sw-refuel-2L eq 1
+        fuel/level-2L-kg lt fuel/refuel-target-2
+      </test>
+    </switch>
+    <switch name="fuel/valve-refuel-2R">
+      <default value="0"/>
+      <test logic="AND" value="1">
+        fuel/sw-refuel-2R eq 1
+        fuel/level-2R-kg lt fuel/refuel-target-2
+      </test>
+    </switch>
+    <switch name="fuel/valve-refuel-3L">
+      <default value="0"/>
+      <test logic="AND" value="1">
+        fuel/sw-refuel-3L eq 1
+        fuel/level-3L-kg lt fuel/refuel-target-3
+      </test>
+    </switch>
+    <switch name="fuel/valve-refuel-3R">
+      <default value="0"/>
+      <test logic="AND" value="1">
+        fuel/sw-refuel-3R eq 1
+        fuel/level-3R-kg lt fuel/refuel-target-3
+      </test>
+    </switch>
+    <switch name="fuel/valve-refuel-1">
+      <default value="0"/>
+      <test logic="AND" value="1">
+        fuel/sw-refuel-1 eq 1
+        fuel/level-1-kg lt fuel/refuel-target-1
+      </test>
+    </switch>
+    <switch name="fuel/valve-refuel-4">
+      <default value="0"/>
+      <test logic="AND" value="1">
+        fuel/sw-refuel-4 eq 1
+        fuel/level-4-kg lt fuel/refuel-target-4
       </test>
     </switch>
 
@@ -479,12 +619,51 @@
         fuel/valve-4-2R eq 1
       </test>
     </switch>
+    <!-- Refuel -->
+    <switch name="fuel/pps-refuel-3R">
+      <default value="0"/>
+      <test value="fuel/refuel-pps-eq">
+        fuel/valve-refuel-3R eq 1
+      </test>
+    </switch>
+    <switch name="fuel/pps-refuel-2R">
+      <default value="0"/>
+      <test value="fuel/refuel-pps-eq">
+        fuel/valve-refuel-2R eq 1
+      </test>
+    </switch>
+    <switch name="fuel/pps-refuel-1">
+      <default value="0"/>
+      <test value="fuel/refuel-pps-eq">
+        fuel/valve-refuel-1 eq 1
+      </test>
+    </switch>
+    <switch name="fuel/pps-refuel-2L">
+      <default value="0"/>
+      <test value="fuel/refuel-pps-eq">
+        fuel/valve-refuel-2L eq 1
+      </test>
+    </switch>
+    <switch name="fuel/pps-refuel-3L">
+      <default value="0"/>
+      <test value="fuel/refuel-pps-eq">
+        fuel/valve-refuel-3L eq 1
+      </test>
+    </switch>
+    <switch name="fuel/pps-refuel-4">
+      <default value="0"/>
+      <test value="fuel/refuel-pps-eq">
+        fuel/valve-refuel-4 eq 1
+      </test>
+    </switch>
+
 
     <!--
       Compute total fuel flows per tank.  Note that fuel consumption
       flows from tank 1 are automatic and are not defined here.
     -->
     <summer name="fuel/flow-1">
+      <input>fuel/pps-refuel-1</input>
       <input>fuel/pps-2L-1</input>
       <input>fuel/pps-2R-1</input>
       <input>fuel/pps-3L-1</input>
@@ -493,28 +672,33 @@
       <output>propulsion/tank[0]/external-flow-rate-pps</output>
     </summer>
     <summer name="fuel/flow-2L">
+      <input>fuel/pps-refuel-2L</input>
       <input>-fuel/pps-2L-1</input>
       <input>fuel/pps-3L-2L</input>
       <input>fuel/pps-4-2L</input>
       <output>propulsion/tank[1]/external-flow-rate-pps</output>
     </summer>
     <summer name="fuel/flow-2R">
+      <input>fuel/pps-refuel-2R</input>
       <input>-fuel/pps-2R-1</input>
       <input>fuel/pps-3R-2R</input>
       <input>fuel/pps-4-2R</input>
       <output>propulsion/tank[2]/external-flow-rate-pps</output>
     </summer>
     <summer name="fuel/flow-3L">
+      <input>fuel/pps-refuel-3L</input>
       <input>-fuel/pps-3L-1</input>
       <input>-fuel/pps-3L-2L</input>
       <output>propulsion/tank[3]/external-flow-rate-pps</output>
     </summer>
     <summer name="fuel/flow-3R">
+      <input>fuel/pps-refuel-3R</input>
       <input>-fuel/pps-3R-1</input>
       <input>-fuel/pps-3R-2R</input>
       <output>propulsion/tank[4]/external-flow-rate-pps</output>
     </summer>
     <summer name="fuel/flow-4">
+      <input>fuel/pps-refuel-4</input>
       <input>-fuel/pps-4-1</input>
       <input>-fuel/pps-4-2L</input>
       <input>-fuel/pps-4-2R</input>

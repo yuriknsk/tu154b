@@ -5,12 +5,12 @@
   <animation>
     <type>knob</type>
     <object-name>handle</object-name>
-    <property>tu154/refuel/sel-123</property>
+    <property>fdm/jsbsim/fuel/sel-refuel-123</property>
     <visible>true</visible>
     <action>
       <binding>
         <command>property-adjust</command>
-        <property>tu154/refuel/sel-123</property>
+        <property>fdm/jsbsim/fuel/sel-refuel-123</property>
         <min>0</min>
         <max>3</max>
         <wrap>false</wrap>
