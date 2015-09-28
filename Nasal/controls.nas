@@ -76,6 +76,10 @@ var autostart = func{
 	setprop("tu154/switches/APU-RAP-selector", 1.0 );
 	setprop("tu154/switches/main-battery", 0.0 );
 	help.messenger("Begin autostart procedure...");
+        # Doors
+        interpolate("tu154/door/passe", 0, 1.5);
+        interpolate("tu154/door/cargo0", 0, 1);
+        interpolate("tu154/door/cargo1", 0, 1);
 	# fuel cutoff levers
 	setprop("tu154/switches/cutoff-lever-1", 1.0 );
 	setprop("tu154/switches/cutoff-lever-2", 1.0 );

@@ -401,6 +401,12 @@
 <model>
   <name>check_lamps_1</name>
   <path>Aircraft/tu154b/Instruments-3d/buttons/check_lamps_1.xml</path>
+  <overlay>
+    <params>
+      <button>tu154/switches/checking-lamps-main-panel</button>
+      <signal>tu154/systems/electrical/checking-lamps/main-panel</signal>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-22.613</x-m>
     <y-m>-0.6</y-m>
@@ -673,6 +679,12 @@
 <model>
   <name>check_lamps_2</name>
   <path>Aircraft/tu154b/Instruments-3d/buttons/check_lamps_1.xml</path>
+  <overlay>
+    <params>
+      <button>tu154/switches/checking-lamps-main-panel</button>
+      <signal>tu154/systems/electrical/checking-lamps/main-panel</signal>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-22.613</x-m>
     <y-m>0.598</y-m>
@@ -3610,7 +3622,13 @@
 <!--APU-->
 <model>
   <name>check_lamps_3</name>
-  <path>Aircraft/tu154b/Instruments-3d/buttons/check_lamps_3.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/buttons/check_lamps_1.xml</path>
+  <overlay>
+    <params>
+      <button>tu154/switches/checking-lamps-apu-panel</button>
+      <signal>tu154/systems/electrical/checking-lamps/apu-panel</signal>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.867</x-m>
     <y-m>0.883</y-m>
@@ -3628,6 +3646,24 @@
     <y-m>0.883</y-m>
     <z-m>1.69</z-m>
     <pitch-deg>-12.5</pitch-deg>
+    <heading-deg>-90.0</heading-deg>
+  </offsets>
+</model>
+<!--Doors-->
+<model>
+  <name>check_lamps_5</name>
+  <path>Aircraft/tu154b/Instruments-3d/buttons/check_lamps_1.xml</path>
+  <overlay>
+    <params>
+      <model>button_small.ac</model>
+      <button>tu154/switches/checking-lamps-doors-panel</button>
+      <signal>tu154/systems/electrical/checking-lamps/doors-panel</signal>
+    </params>
+  </overlay>
+  <offsets>
+    <x-m>-20.8158</x-m>
+    <y-m>0.7269</y-m>
+    <z-m>2.5707</z-m>
     <heading-deg>-90.0</heading-deg>
   </offsets>
 </model>
@@ -6469,6 +6505,257 @@
 </animation>
 <!--End pax cabin windows-->
 
+<!-- Engineer doors panel -->
+<animation>
+  <type>material</type>
+  <object-name>DoorsPanel_Unused</object-name>
+  <emission>
+    <red>0</red>
+    <green>0</green>
+    <blue>0</blue>
+  </emission>
+  <texture>doors_panel_off.png</texture>
+  <condition>
+    <not>
+      <and>
+        <property>tu154/systems/electrical/buses/DC27-bus-L/volts</property>
+        <property>tu154/systems/electrical/checking-lamps/doors-panel</property>
+      </and>
+    </not>
+  </condition>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>DoorsPanel_CargoFront</object-name>
+  <emission>
+    <red>0</red>
+    <green>0</green>
+    <blue>0</blue>
+  </emission>
+  <texture>doors_panel_off.png</texture>
+  <condition>
+    <not>
+      <and>
+        <property>tu154/systems/electrical/buses/DC27-bus-L/volts</property>
+        <or>
+          <property>tu154/systems/electrical/checking-lamps/doors-panel</property>
+          <property>tu154/door/cargo0</property>
+        </or>
+      </and>
+    </not>
+  </condition>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>DoorsPanel_CargoFront</object-name>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>view.forceView(9)</script>
+    </binding>
+  </action>
+  <action>
+    <button>1</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-interpolate</command>
+      <property>tu154/door/cargo0</property>
+      <value>0</value>
+      <time>1</time>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>DoorsPanel_CargoMiddle</object-name>
+  <emission>
+    <red>0</red>
+    <green>0</green>
+    <blue>0</blue>
+  </emission>
+  <texture>doors_panel_off.png</texture>
+  <condition>
+    <not>
+      <and>
+        <property>tu154/systems/electrical/buses/DC27-bus-L/volts</property>
+        <or>
+          <property>tu154/systems/electrical/checking-lamps/doors-panel</property>
+          <property>tu154/door/cargo1</property>
+        </or>
+      </and>
+    </not>
+  </condition>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>DoorsPanel_CargoMiddle</object-name>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>view.forceView(10)</script>
+    </binding>
+  </action>
+  <action>
+    <button>1</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-interpolate</command>
+      <property>tu154/door/cargo1</property>
+      <value>0</value>
+      <time>1</time>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>DoorsPanel_TechHatch2</object-name>
+  <emission>
+    <red>0</red>
+    <green>0</green>
+    <blue>0</blue>
+  </emission>
+  <texture>doors_panel_off.png</texture>
+  <condition>
+    <not>
+      <and>
+        <property>tu154/systems/electrical/buses/DC27-bus-L/volts</property>
+        <or>
+          <property>tu154/systems/electrical/checking-lamps/doors-panel</property>
+          <property>tu154/door/refuel</property>
+        </or>
+      </and>
+    </not>
+  </condition>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>DoorsPanel_TechHatch2</object-name>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>view.forceView(7)</script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>DoorsPanel_PassRearLock</object-name>
+  <emission>
+    <red>0</red>
+    <green>0</green>
+    <blue>0</blue>
+  </emission>
+  <texture>doors_panel_off.png</texture>
+  <condition>
+    <not>
+      <and>
+        <property>tu154/systems/electrical/buses/DC27-bus-L/volts</property>
+        <or>
+          <property>tu154/systems/electrical/checking-lamps/doors-panel</property>
+          <greater-than>
+            <property>tu154/door/passe</property>
+            <value>0.33</value>
+          </greater-than>
+        </or>
+      </and>
+    </not>
+  </condition>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>DoorsPanel_PassRearLatch</object-name>
+  <emission>
+    <red>0</red>
+    <green>0</green>
+    <blue>0</blue>
+  </emission>
+  <texture>doors_panel_off.png</texture>
+  <condition>
+    <not>
+      <and>
+        <property>tu154/systems/electrical/buses/DC27-bus-L/volts</property>
+        <or>
+          <property>tu154/systems/electrical/checking-lamps/doors-panel</property>
+          <property>tu154/door/passe</property>
+        </or>
+      </and>
+    </not>
+  </condition>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>DoorsPanel_PassRearLock</object-name>
+  <object-name>DoorsPanel_PassRearLatch</object-name>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>view.forceView(8)</script>
+    </binding>
+  </action>
+  <action>
+    <button>1</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-interpolate</command>
+      <property>tu154/door/passe</property>
+      <value>0</value>
+      <time>1.5</time>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>DoorsPanel_SteerDisabled</object-name>
+  <emission>
+    <red>0</red>
+    <green>0</green>
+    <blue>0</blue>
+  </emission>
+  <texture>doors_panel_off.png</texture>
+  <condition>
+    <not>
+      <and>
+        <property>tu154/systems/electrical/buses/DC27-bus-L/volts</property>
+        <or>
+          <property>tu154/systems/electrical/checking-lamps/doors-panel</property>
+          <not><property>fdm/jsbsim/gear/nose-wheel-steering</property></not>
+          <not><property>fdm/jsbsim/hs/hs2-busters-ok</property></not>
+        </or>
+      </and>
+    </not>
+  </condition>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>DoorsPanel_Steer63</object-name>
+  <emission>
+    <red>0</red>
+    <green>0</green>
+    <blue>0</blue>
+  </emission>
+  <texture>doors_panel_off.png</texture>
+  <condition>
+    <not>
+      <and>
+        <property>tu154/systems/electrical/buses/DC27-bus-L/volts</property>
+        <or>
+          <property>tu154/systems/electrical/checking-lamps/doors-panel</property>
+          <not><property>tu154/switches/steering-limit</property></not>
+        </or>
+      </and>
+    </not>
+  </condition>
+</animation>
+
+
 <!--Nav light-->
 <animation>
   <type>material</type>
@@ -7317,7 +7604,10 @@
   <type>translate</type>
   <object-name>Door_Passe</object-name>
   <property>tu154/door/passe</property>
-  <factor>0.95</factor>
+  <interpolation>
+    <entry> <ind>0.38</ind> <dep>0</dep> </entry>
+    <entry> <ind>1</ind> <dep>0.95</dep> </entry>
+  </interpolation>
   <axis>
     <x>-1</x>
     <y>0</y>
@@ -7328,13 +7618,10 @@
   <type>translate</type>
   <object-name>Door_Passe</object-name>
   <property>tu154/door/passe</property>
-  <condition>
-    <less-than>
-      <property>tu154/door/passe</property>
-      <value>0.1</value>
-    </less-than>
-  </condition>
-  <factor>1.6</factor>
+  <interpolation>
+    <entry> <ind>0.33</ind> <dep>0</dep> </entry>
+    <entry> <ind>0.43</ind> <dep>0.16</dep> </entry>
+  </interpolation>
   <axis>
     <x>0</x>
     <y>-1</y>
@@ -7352,10 +7639,10 @@
       <command>nasal</command>
       <script>
         if (getprop("tu154/door/passe")) {
-            interpolate("tu154/door/passe", 0, 1);
+            interpolate("tu154/door/passe", 0, 1.5);
         } else {
             setprop("tu154/door/passe", 0);
-            interpolate("tu154/door/passe", 1, 1);
+            interpolate("tu154/door/passe", 1, 1.5);
         }
       </script>
     </binding>
@@ -7366,7 +7653,10 @@
   <type>translate</type>
   <object-name>Door_Cargo</object-name>
   <property>tu154/door/cargo0</property>
-  <factor>1.3</factor>
+  <interpolation>
+    <entry> <ind>0</ind> <dep>0</dep> </entry>
+    <entry> <ind>1</ind> <dep>1.3</dep> </entry>
+  </interpolation>
   <axis>
     <x>-1</x>
     <y>0</y>
@@ -7377,12 +7667,10 @@
   <type>translate</type>
   <object-name>Door_Cargo</object-name>
   <property>tu154/door/cargo0</property>
-  <condition>
-    <less-than>
-      <property>tu154/door/cargo0</property>
-      <value>0.1</value>
-    </less-than>
-  </condition>
+  <interpolation>
+    <entry> <ind>0</ind> <dep>0</dep> </entry>
+    <entry> <ind>0.1</ind> <dep>0.1</dep> </entry>
+  </interpolation>
   <axis>
     <x>0</x>
     <y>-1</y>
@@ -7414,7 +7702,10 @@
   <type>rotate</type>
   <object-name>Door_Carg0</object-name>
   <property>tu154/door/cargo1</property>
-  <factor>100</factor>
+  <interpolation>
+    <entry> <ind>0</ind> <dep>0</dep> </entry>
+    <entry> <ind>1</ind> <dep>100</dep> </entry>
+  </interpolation>
   <center>
     <x-m>3.16</x-m>
     <y-m>1.81</y-m>
@@ -7427,7 +7718,10 @@
   <type>translate</type>
   <object-name>Door_Carg1</object-name>
   <property>tu154/door/cargo1</property>
-  <factor>1.3</factor>
+  <interpolation>
+    <entry> <ind>0</ind> <dep>0</dep> </entry>
+    <entry> <ind>1</ind> <dep>1.3</dep> </entry>
+  </interpolation>
   <axis>
     <x>-1</x>
     <y>0</y>
@@ -7438,12 +7732,10 @@
   <type>translate</type>
   <object-name>Door_Carg1</object-name>
   <property>tu154/door/cargo1</property>
-  <condition>
-    <less-than>
-      <property>tu154/door/cargo1</property>
-      <value>0.1</value>
-    </less-than>
-  </condition>
+  <interpolation>
+    <entry> <ind>0</ind> <dep>0</dep> </entry>
+    <entry> <ind>0.1</ind> <dep>0.1</dep> </entry>
+  </interpolation>
   <axis>
     <x>0</x>
     <y>-1</y>

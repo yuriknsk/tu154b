@@ -364,6 +364,90 @@
       <dynamic-view type="bool">true</dynamic-view>
     </config>
   </view>
+  <view n="108">
+    <name>Passenger Door View</name>
+    <enabled type="bool">false</enabled>
+    <type>lookfrom</type>
+    <internal type="bool">false</internal>
+    <config>
+      <from-model type="bool">true</from-model>
+      <x-offset-m type="double" >-10</x-offset-m>
+      <y-offset-m type="double" >2.3</y-offset-m>
+      <z-offset-m type="double" >-11</z-offset-m>
+      <heading-offset-deg type="double">-110</heading-offset-deg>
+      <pitch-offset-deg type="double">0</pitch-offset-deg>
+      <from-model-idx type="int">0</from-model-idx>
+      <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
+      <default-field-of-view-deg type="double">49</default-field-of-view-deg>
+      <default-pitch-deg type="double">0</default-pitch-deg>
+      <default-heading-deg type="double">0</default-heading-deg>
+      <front-direction-deg type="double">0</front-direction-deg>
+      <front-left-direction-deg type="double">45</front-left-direction-deg>
+      <left-direction-deg type="double">90</left-direction-deg>
+      <back-left-direction-deg type="double">135</back-left-direction-deg>
+      <back-direction-deg type="double">180</back-direction-deg>
+      <back-right-direction-deg type="double">225</back-right-direction-deg>
+      <right-direction-deg type="double">270</right-direction-deg>
+      <front-right-direction-deg type="double">315</front-right-direction-deg>
+      <dynamic-view type="bool">true</dynamic-view>
+    </config>
+  </view>
+  <view n="109">
+    <name>Front Cargo Door View</name>
+    <enabled type="bool">false</enabled>
+    <type>lookfrom</type>
+    <internal type="bool">false</internal>
+    <config>
+      <from-model type="bool">true</from-model>
+      <x-offset-m type="double" >7</x-offset-m>
+      <y-offset-m type="double" >-0.5</y-offset-m>
+      <z-offset-m type="double" >-9</z-offset-m>
+      <heading-offset-deg type="double">60</heading-offset-deg>
+      <pitch-offset-deg type="double">10</pitch-offset-deg>
+      <from-model-idx type="int">0</from-model-idx>
+      <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
+      <default-field-of-view-deg type="double">49</default-field-of-view-deg>
+      <default-pitch-deg type="double">0</default-pitch-deg>
+      <default-heading-deg type="double">0</default-heading-deg>
+      <front-direction-deg type="double">0</front-direction-deg>
+      <front-left-direction-deg type="double">45</front-left-direction-deg>
+      <left-direction-deg type="double">90</left-direction-deg>
+      <back-left-direction-deg type="double">135</back-left-direction-deg>
+      <back-direction-deg type="double">180</back-direction-deg>
+      <back-right-direction-deg type="double">225</back-right-direction-deg>
+      <right-direction-deg type="double">270</right-direction-deg>
+      <front-right-direction-deg type="double">315</front-right-direction-deg>
+      <dynamic-view type="bool">true</dynamic-view>
+    </config>
+  </view>
+  <view n="111">
+    <name>Rear Cargo Door View</name>
+    <enabled type="bool">false</enabled>
+    <type>lookfrom</type>
+    <internal type="bool">false</internal>
+    <config>
+      <from-model type="bool">true</from-model>
+      <x-offset-m type="double" >7</x-offset-m>
+      <y-offset-m type="double" >-0.5</y-offset-m>
+      <z-offset-m type="double" >8.5</z-offset-m>
+      <heading-offset-deg type="double">50</heading-offset-deg>
+      <pitch-offset-deg type="double">10</pitch-offset-deg>
+      <from-model-idx type="int">0</from-model-idx>
+      <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
+      <default-field-of-view-deg type="double">49</default-field-of-view-deg>
+      <default-pitch-deg type="double">0</default-pitch-deg>
+      <default-heading-deg type="double">0</default-heading-deg>
+      <front-direction-deg type="double">0</front-direction-deg>
+      <front-left-direction-deg type="double">45</front-left-direction-deg>
+      <left-direction-deg type="double">90</left-direction-deg>
+      <back-left-direction-deg type="double">135</back-left-direction-deg>
+      <back-direction-deg type="double">180</back-direction-deg>
+      <back-right-direction-deg type="double">225</back-right-direction-deg>
+      <right-direction-deg type="double">270</right-direction-deg>
+      <front-right-direction-deg type="double">315</front-right-direction-deg>
+      <dynamic-view type="bool">true</dynamic-view>
+    </config>
+  </view>
 
   <instrumentation>
     <path>Aircraft/tu154b/Systems/instrumentation-config.xml</path>
@@ -1446,6 +1530,9 @@
   </mod-views>
 
   <door>
+    <passe type="double">1</passe>
+    <cargo0 type="double">1</cargo0>
+    <cargo1 type="double">1</cargo1>
     <window-left type="double">1</window-left>
     <window-right type="double">1</window-right>
     <refuel type="double">0</refuel>

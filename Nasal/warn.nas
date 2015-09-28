@@ -533,6 +533,10 @@ if (stu_enabled) {
 
 # not ready to takeoff
 param = 0.0;
+if (getprop("tu154/door/passe")) param = 1;
+if (getprop("tu154/door/cargo0")) param = 1;
+if (getprop("tu154/door/cargo1")) param = 1;
+if (getprop("tu154/door/refuel")) param = 1;
 if( getprop( "tu154/switches/busters-cover" ) != 0.0 ) param = param + 1.0;
 if( getprop( "tu154/switches/steering" ) == 0.0 ) param = param + 1.0;
 if( getprop( "tu154/switches/steering-limit" ) == 0.0 ) param = param + 1.0;
