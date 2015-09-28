@@ -6360,6 +6360,55 @@
   <texture-prop>tu154/textures/fe-panel</texture-prop>
 </animation>
 
+<animation>
+  <type>material</type>
+  <object-name>CompPassengerRear</object-name>
+  <condition>
+    <and>
+      <property>tu154/systems/electrical/buses/DC27-bus-L/volts</property>
+      <property>tu154/door/passe</property>
+    </and>
+  </condition>
+  <texture-prop>tu154/textures/capt-panel</texture-prop>
+  <emission>
+    <red-prop>tu154/door/compartment-light</red-prop>
+    <green-prop>tu154/door/compartment-light</green-prop>
+    <blue-prop>tu154/door/compartment-light</blue-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>CompCargoFront</object-name>
+  <condition>
+    <and>
+      <property>tu154/systems/electrical/buses/DC27-bus-L/volts</property>
+      <property>tu154/door/cargo0</property>
+    </and>
+  </condition>
+  <texture-prop>tu154/textures/capt-panel</texture-prop>
+  <emission>
+    <red-prop>tu154/door/compartment-light</red-prop>
+    <green-prop>tu154/door/compartment-light</green-prop>
+    <blue-prop>tu154/door/compartment-light</blue-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>CompCargoMiddle</object-name>
+  <condition>
+    <and>
+      <property>tu154/systems/electrical/buses/DC27-bus-L/volts</property>
+      <property>tu154/door/cargo1</property>
+    </and>
+  </condition>
+  <texture-prop>tu154/textures/capt-panel</texture-prop>
+  <emission>
+    <red-prop>tu154/door/compartment-light</red-prop>
+    <green-prop>tu154/door/compartment-light</green-prop>
+    <blue-prop>tu154/door/compartment-light</blue-prop>
+  </emission>
+</animation>
+
 <!--Ambient light-->
 
 <animation>
