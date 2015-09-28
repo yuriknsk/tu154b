@@ -76,6 +76,10 @@ var autostart = func{
 	setprop("tu154/switches/APU-RAP-selector", 1.0 );
 	setprop("tu154/switches/main-battery", 0.0 );
 	help.messenger("Begin autostart procedure...");
+        # Doors
+        interpolate("tu154/door/passe", 0, 1.5);
+        interpolate("tu154/door/cargo0", 0, 1);
+        interpolate("tu154/door/cargo1", 0, 1);
 	# fuel cutoff levers
 	setprop("tu154/switches/cutoff-lever-1", 1.0 );
 	setprop("tu154/switches/cutoff-lever-2", 1.0 );
@@ -171,6 +175,8 @@ var autostart_helper_1 = func{
 	setprop("tu154/switches/KURS-MP-1", 1.0 );
 	setprop("tu154/switches/KURS-MP-2", 1.0 );
 
+	setprop("tu154/switches/RSBN-power", 1.0 );
+
         setprop("tu154/switches/dme-1-power", 1);
         setprop("tu154/switches/dme-2-power", 1);
 
@@ -179,6 +185,7 @@ var autostart_helper_1 = func{
 	setprop("tu154/switches/KURS-PNP-right", 1.0 );
 	setprop("/fdm/jsbsim/instrumentation/pnp-right-selector", 1.0 );
 	setprop("tu154/switches/RV-5-1", 1.0 );
+	setprop("tu154/switches/RV-5-2", 1.0 );
 	setprop("tu154/switches/comm-power-1", 1.0 );
 	setprop("tu154/switches/comm-power-2", 1.0 );
 	setprop("tu154/switches/adf-power-1", 1.0 );
@@ -248,6 +255,15 @@ var autostart_helper_2 = func{
 		-getprop("environment/magnetic-variation-deg") );
 	setprop("instrumentation/heading-indicator[1]/offset-deg",
 		-getprop("environment/magnetic-variation-deg") );
+
+        # Stabilizer
+        interpolate("tu154/switches/stab-auto-handle", 2, 0.2 );
+        setprop("fdm/jsbsim/fcs/stab-auto-cmd", 2);
+
+        # Flaps 28
+        controls.flapsDown(1);
+        controls.flapsDown(1);
+
 	# Altimeters
         var inhgX100 = int(getprop("environment/pressure-inhg") * 100 + 0.5);
 	setprop("tu154/instrumentation/altimeter[0]/inhgX100", inhgX100);
@@ -257,6 +273,9 @@ var autostart_helper_2 = func{
 	setprop("tu154/switches/steering", 1.0 );
 	setprop("controls/gear/nose-wheel-steering", 1.0 );
 	setprop("controls/gear/steering", 10.0 );
+
+        # NVU
+	setprop("tu154/switches/v-51-power", 1.0 );
 
         # Close cockpit windows.
         interpolate("tu154/door/window-left", 0, 2);
