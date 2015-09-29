@@ -477,7 +477,7 @@
   </multiplay>
 
   <systems>
-    <property-rule>
+    <property-rule n="100">
       <path>Aircraft/tu154b/Systems/property-rules.xml</path>
     </property-rule>
   </systems>
