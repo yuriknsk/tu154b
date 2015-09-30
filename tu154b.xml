@@ -46,7 +46,7 @@
         <ixz unit="KG*M2">0</ixz>
         <iyz unit="KG*M2">0</iyz>
         <ixy unit="KG*M2">0</ixy>
-        <emptywt unit="KG">53000</emptywt>
+        <emptywt unit="KG">50000</emptywt>
         <location name="CG" unit="M">
             <x>26.68</x>
             <y>0</y>
