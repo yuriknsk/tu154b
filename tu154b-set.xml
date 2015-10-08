@@ -126,8 +126,8 @@
  </livery>
 
  <pushback>
-  <kp type="double">100</kp>
-  <ki type="double">25</ki>
+  <kp type="double">1000</kp>
+  <ki type="double">10</ki>
   <kd type="double">0</kd>
   <position-norm type="double">0</position-norm>
  </pushback>
