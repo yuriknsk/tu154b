@@ -23,6 +23,34 @@
   </condition>
 </animation>
 
+<!-- Hide gears when they are retracted. -->
+<animation>
+  <type>select</type>
+  <object-name>c_gear_M11</object-name>
+  <object-name>c_gear_Ob0</object-name>
+  <condition>
+    <property>gear/gear[0]/position-norm</property>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>l_gear_M12</object-name>
+  <object-name>l_gear_M13</object-name>
+  <object-name>l_gear_Obj</object-name>
+  <condition>
+    <property>gear/gear[1]/position-norm</property>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>r_gear_M12</object-name>
+  <object-name>r_gear_M13</object-name>
+  <object-name>r_gear_Ob1</object-name>
+  <condition>
+    <property>gear/gear[2]/position-norm</property>
+  </condition>
+</animation>
+
 <!--End external-->
 
 <!--Virtual cockpit staff-->
@@ -52,6 +80,8 @@
  <effect>
     <inherits-from>Effects/model-transparent</inherits-from>
     <object-name>MESH178</object-name>
+    <object-name>LeftWindowGlassExt</object-name>
+    <object-name>RightWindowGlassExt</object-name>
  </effect>
 
 <!-- Glass Shader-->
@@ -60,6 +90,8 @@
    <shader>chrome</shader>
    <texture>glass_shader.png</texture>
    <object-name>MESH178</object-name>
+   <object-name>LeftWindowGlassExt</object-name>
+   <object-name>RightWindowGlassExt</object-name>
  </animation>
 
 <!-- 
@@ -369,6 +401,12 @@
 <model>
   <name>check_lamps_1</name>
   <path>Aircraft/tu154b/Instruments-3d/buttons/check_lamps_1.xml</path>
+  <overlay>
+    <params>
+      <button>tu154/switches/checking-lamps-main-panel</button>
+      <signal>tu154/systems/electrical/checking-lamps/main-panel</signal>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-22.613</x-m>
     <y-m>-0.6</y-m>
@@ -641,6 +679,12 @@
 <model>
   <name>check_lamps_2</name>
   <path>Aircraft/tu154b/Instruments-3d/buttons/check_lamps_1.xml</path>
+  <overlay>
+    <params>
+      <button>tu154/switches/checking-lamps-main-panel</button>
+      <signal>tu154/systems/electrical/checking-lamps/main-panel</signal>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-22.613</x-m>
     <y-m>0.598</y-m>
@@ -2432,6 +2476,11 @@
 <model>
   <name>l-21</name>
   <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-1-1</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.468</x-m>
     <y-m>0.926</y-m>
@@ -2441,7 +2490,12 @@
 </model>
 <model>
   <name>l-22</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_22.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-1-2</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.447</x-m>
     <y-m>0.926</y-m>
@@ -2451,7 +2505,12 @@
 </model>
 <model>
   <name>l-23</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_23.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-1-3</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.427</x-m>
     <y-m>0.926</y-m>
@@ -2461,7 +2520,12 @@
 </model>
 <model>
   <name>l-24</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_24.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-1-4</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.407</x-m>
     <y-m>0.926</y-m>
@@ -2471,7 +2535,12 @@
 </model>
 <model>
   <name>l-25</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_25.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-4</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.436</x-m>
     <y-m>0.926</y-m>
@@ -2481,7 +2550,12 @@
 </model>
 <model>
   <name>l-26</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_26.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-4</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.414</x-m>
     <y-m>0.926</y-m>
@@ -2491,7 +2565,12 @@
 </model>
 <model>
   <name>l-27</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_27.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-3L</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.468</x-m>
     <y-m>0.926</y-m>
@@ -2501,7 +2580,12 @@
 </model>
 <model>
   <name>l-28</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_28.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-3R</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.407</x-m>
     <y-m>0.926</y-m>
@@ -2551,7 +2635,12 @@
 </model>
 <model>
   <name>l-33</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_33.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-3L</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.468</x-m>
     <y-m>0.926</y-m>
@@ -2561,7 +2650,12 @@
 </model>
 <model>
   <name>l-34</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_34.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-3R</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.408</x-m>
     <y-m>0.926</y-m>
@@ -2571,7 +2665,12 @@
 </model>
 <model>
   <name>l-35</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_35.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-2L</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.448</x-m>
     <y-m>0.926</y-m>
@@ -2581,7 +2680,12 @@
 </model>
 <model>
   <name>l-36</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_36.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-2R</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.427</x-m>
     <y-m>0.926</y-m>
@@ -2591,7 +2695,12 @@
 </model>
 <model>
   <name>l-37</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_37.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-3L</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.468</x-m>
     <y-m>0.926</y-m>
@@ -2601,7 +2710,12 @@
 </model>
 <model>
   <name>l-38</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_38.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-3R</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.408</x-m>
     <y-m>0.926</y-m>
@@ -2611,7 +2725,12 @@
 </model>
 <model>
   <name>l-39</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_39.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-2L</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.448</x-m>
     <y-m>0.926</y-m>
@@ -2621,7 +2740,12 @@
 </model>
 <model>
   <name>l-40</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_40.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <trigger>fdm/jsbsim/fuel/pump-2R</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.427</x-m>
     <y-m>0.926</y-m>
@@ -2631,7 +2755,13 @@
 </model>
 <model>
   <name>l-41</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_41.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <model>yellow_lamp.ac</model>
+      <trigger>fdm/jsbsim/fuel/valve-3L-2L</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.323</x-m>
     <y-m>0.926</y-m>
@@ -2641,7 +2771,13 @@
 </model>
 <model>
   <name>l-42</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_42.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <model>yellow_lamp.ac</model>
+      <trigger>fdm/jsbsim/fuel/valve-3R-2R</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.323</x-m>
     <y-m>0.926</y-m>
@@ -2651,7 +2787,13 @@
 </model>
 <model>
   <name>l-43</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_43.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <model>yellow_lamp.ac</model>
+      <trigger>fdm/jsbsim/fuel/valve-4-2L</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.323</x-m>
     <y-m>0.926</y-m>
@@ -2661,7 +2803,13 @@
 </model>
 <model>
   <name>l-44</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_44.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_21.xml</path>
+  <overlay>
+    <params>
+      <model>yellow_lamp.ac</model>
+      <trigger>fdm/jsbsim/fuel/valve-4-2R</trigger>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.324</x-m>
     <y-m>0.926</y-m>
@@ -2672,6 +2820,11 @@
 <model>
   <name>l-45</name>
   <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_45.xml</path>
+  <overlay>
+    <params>
+      <tanks>1</tanks>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.296</x-m>
     <y-m>0.926</y-m>
@@ -2681,7 +2834,12 @@
 </model>
 <model>
   <name>l-46</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_46.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_45.xml</path>
+  <overlay>
+    <params>
+      <tanks>2</tanks>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.295</x-m>
     <y-m>0.926</y-m>
@@ -2691,7 +2849,12 @@
 </model>
 <model>
   <name>l-47</name>
-  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_47.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/lamps/lamp_45.xml</path>
+  <overlay>
+    <params>
+      <tanks>3</tanks>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.295</x-m>
     <y-m>0.926</y-m>
@@ -2884,7 +3047,12 @@
 </model>
 <model>
   <name>sw-13</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-11.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-15.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-pump-1-1</switch>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.464</x-m>
     <y-m>0.924</y-m>
@@ -2894,7 +3062,12 @@
 </model>
 <model>
   <name>sw-14</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-12.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-15.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-pump-1-2</switch>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.447</x-m>
     <y-m>0.924</y-m>
@@ -2904,7 +3077,12 @@
 </model>
 <model>
   <name>sw-15</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-13.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-15.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-pump-1-3</switch>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.43</x-m>
     <y-m>0.924</y-m>
@@ -2914,7 +3092,12 @@
 </model>
 <model>
   <name>sw-16</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-14.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-15.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-pump-1-4</switch>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.413</x-m>
     <y-m>0.924</y-m>
@@ -2925,6 +3108,11 @@
 <model>
   <name>sw-17</name>
   <path>Aircraft/tu154b/Instruments-3d/switches/azs1-15.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-pump-4</switch>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.459</x-m>
     <y-m>0.924</y-m>
@@ -2934,7 +3122,12 @@
 </model>
 <model>
   <name>sw-18</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-16.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-15.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-pump-3L</switch>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.459</x-m>
     <y-m>0.924</y-m>
@@ -2944,7 +3137,12 @@
 </model>
 <model>
   <name>sw-19</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-17.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-15.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-pump-3R</switch>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.419</x-m>
     <y-m>0.924</y-m>
@@ -2954,7 +3152,12 @@
 </model>
 <model>
   <name>sw-20</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-18.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-15.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-pump-2L</switch>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.458</x-m>
     <y-m>0.924</y-m>
@@ -2964,7 +3167,12 @@
 </model>
 <model>
   <name>sw-21</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-19.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-15.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-pump-2R</switch>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.421</x-m>
     <y-m>0.924</y-m>
@@ -2974,7 +3182,12 @@
 </model>
 <model>
   <name>sw-22</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-20.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-15.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-fuel</switch>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.373</x-m>
     <y-m>0.916</y-m>
@@ -2985,7 +3198,12 @@
 </model>
 <model>
   <name>sw-23</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-21.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-15.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-balance</switch>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.332</x-m>
     <y-m>0.916</y-m>
@@ -2996,7 +3214,12 @@
 </model>
 <model>
   <name>sw-24</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-22.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-15.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-program</switch>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.248</x-m>
     <y-m>0.916</y-m>
@@ -3007,7 +3230,12 @@
 </model>
 <model>
   <name>sw-25</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-23.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-15.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-consumption</switch>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.211</x-m>
     <y-m>0.916</y-m>
@@ -3041,6 +3269,13 @@
 <model>
   <name>sw-28</name>
   <path>Aircraft/tu154b/Instruments-3d/switches/azs3-1.xml</path>
+  <overlay>
+    <params>
+      <model>azs_2.ac</model>
+      <switch>fdm/jsbsim/fuel/sw-valve-3-2</switch>
+      <cover>tu154/switches/cover-sw-valve-3-2</cover>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.367</x-m>
     <y-m>0.924</y-m>
@@ -3050,7 +3285,14 @@
 </model>
 <model>
   <name>sw-29</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs3-2.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs3-1.xml</path>
+  <overlay>
+    <params>
+      <model>azs_2.ac</model>
+      <switch>fdm/jsbsim/fuel/sw-valve-4-2</switch>
+      <cover>tu154/switches/cover-sw-valve-4-2</cover>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.367</x-m>
     <y-m>0.924</y-m>
@@ -3070,7 +3312,13 @@
 </model>
 <model>
   <name>sw-31</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs3-4.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs3-1.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-valve-apu</switch>
+      <cover>tu154/switches/cover-sw-valve-apu</cover>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-21.097</x-m>
     <y-m>0.889</y-m>
@@ -3092,7 +3340,14 @@
 </model>
 <model>
   <name>sw-33</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs3-6.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs3-1.xml</path>
+  <overlay>
+    <params>
+      <model>azs_2.ac</model>
+      <switch>fdm/jsbsim/fuel/sw-automat</switch>
+      <cover>tu154/switches/cover-sw-automat-3-2</cover>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.281</x-m>
     <y-m>0.916</y-m>
@@ -3103,7 +3358,13 @@
 </model>
 <model>
   <name>sw-34</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs3-7.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs3-1.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-valve-e1</switch>
+      <cover>tu154/switches/cover-sw-valve-e1</cover>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.466</x-m>
     <y-m>0.915</y-m>
@@ -3114,7 +3375,13 @@
 </model>
 <model>
   <name>sw-35</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs3-8.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs3-1.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-valve-e2</switch>
+      <cover>tu154/switches/cover-sw-valve-e2</cover>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.44</x-m>
     <y-m>0.915</y-m>
@@ -3125,7 +3392,13 @@
 </model>
 <model>
   <name>sw-36</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs3-9.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs3-1.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-valve-e3</switch>
+      <cover>tu154/switches/cover-sw-valve-e3</cover>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.415</x-m>
     <y-m>0.915</y-m>
@@ -3147,7 +3420,12 @@
 </model>
 <model>
   <name>sw-38</name>
-  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-27.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/switches/azs1-15.xml</path>
+  <overlay>
+    <params>
+      <switch>fdm/jsbsim/fuel/sw-pump-apu</switch>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-21.056</x-m>
     <y-m>0.912</y-m>
@@ -3175,6 +3453,36 @@
     <y-m>0.924</y-m>
     <z-m>2.256</z-m>
     <heading-deg>-90.0</heading-deg>
+  </offsets>
+</model>
+<model>
+  <name>sw-wiper-left</name>
+  <path>Aircraft/tu154b/Instruments-3d/switches/wiper-azs4.xml</path>
+  <overlay>
+    <params>
+      <switch>tu154/wipers/switch-left</switch>
+    </params>
+  </overlay>
+  <offsets>
+    <x-m>-22.194</x-m>
+    <y-m>-1.015</y-m>
+    <z-m>1.659</z-m>
+    <heading-deg>72</heading-deg>
+  </offsets>
+</model>
+<model>
+  <name>sw-wiper-right</name>
+  <path>Aircraft/tu154b/Instruments-3d/switches/wiper-azs4.xml</path>
+  <overlay>
+    <params>
+      <switch>tu154/wipers/switch-right</switch>
+    </params>
+  </overlay>
+  <offsets>
+    <x-m>-22.22</x-m>
+    <y-m>1.02</y-m>
+    <z-m>1.665</z-m>
+    <heading-deg>-72</heading-deg>
   </offsets>
 </model>
 
@@ -3314,7 +3622,13 @@
 <!--APU-->
 <model>
   <name>check_lamps_3</name>
-  <path>Aircraft/tu154b/Instruments-3d/buttons/check_lamps_3.xml</path>
+  <path>Aircraft/tu154b/Instruments-3d/buttons/check_lamps_1.xml</path>
+  <overlay>
+    <params>
+      <button>tu154/switches/checking-lamps-apu-panel</button>
+      <signal>tu154/systems/electrical/checking-lamps/apu-panel</signal>
+    </params>
+  </overlay>
   <offsets>
     <x-m>-20.867</x-m>
     <y-m>0.883</y-m>
@@ -3332,6 +3646,24 @@
     <y-m>0.883</y-m>
     <z-m>1.69</z-m>
     <pitch-deg>-12.5</pitch-deg>
+    <heading-deg>-90.0</heading-deg>
+  </offsets>
+</model>
+<!--Doors-->
+<model>
+  <name>check_lamps_5</name>
+  <path>Aircraft/tu154b/Instruments-3d/buttons/check_lamps_1.xml</path>
+  <overlay>
+    <params>
+      <model>button_small.ac</model>
+      <button>tu154/switches/checking-lamps-doors-panel</button>
+      <signal>tu154/systems/electrical/checking-lamps/doors-panel</signal>
+    </params>
+  </overlay>
+  <offsets>
+    <x-m>-20.8158</x-m>
+    <y-m>0.7269</y-m>
+    <z-m>2.5707</z-m>
     <heading-deg>-90.0</heading-deg>
   </offsets>
 </model>
@@ -3482,7 +3814,7 @@
       <mapping>nasal</mapping>
       <script>
         var page = arg[0];
-        var pages = size(mapcase.root.getChildren());
+        var pages = getprop("tu154/instrumentation/mapcase/total_pages");
         return sprintf("%d/%d", page, pages);
       </script>
     </binding>
@@ -3543,13 +3875,26 @@
 <animation>
   <type>rotate</type>
   <object-name>c_gear_ME7</object-name>
-  <property>gear/gear[0]/position-norm</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.1</ind>	<dep>	-90.0</dep></entry>
-    <entry><ind>	0.9</ind>	<dep>	-90.0</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	0.0</dep></entry>
-  </interpolation>
+  <expression>
+    <prod>
+      <min>
+        <dif>
+          <value>0.5</value>
+          <abs>
+            <dif>
+              <min>
+                <property>gear/gear[0]/position-norm</property>
+                <property>fdm/jsbsim/tu154/gear/door-limit</property>
+              </min>
+              <value>0.5</value>
+            </dif>
+          </abs>
+        </dif>
+        <value>0.1</value>
+      </min>
+      <value>-900</value>
+    </prod>
+  </expression>
   <axis>
     <x1-m>-16.85</x1-m>
     <y1-m>-0.428</y1-m>
@@ -3562,13 +3907,26 @@
 <animation>
   <type>rotate</type>
   <object-name>c_gear_ME9</object-name>
-  <property>gear/gear[0]/position-norm</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.1</ind>	<dep>	90.0</dep></entry>
-    <entry><ind>	0.9</ind>	<dep>	90.0</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	0.0</dep></entry>
-  </interpolation>
+  <expression>
+    <prod>
+      <min>
+        <dif>
+          <value>0.5</value>
+          <abs>
+            <dif>
+              <min>
+                <property>gear/gear[0]/position-norm</property>
+                <property>fdm/jsbsim/tu154/gear/door-limit</property>
+              </min>
+              <value>0.5</value>
+            </dif>
+          </abs>
+        </dif>
+        <value>0.1</value>
+      </min>
+      <value>900</value>
+    </prod>
+  </expression>
   <axis>
     <x1-m>-16.85</x1-m>
     <y1-m>0.428</y1-m>
@@ -3721,32 +4079,58 @@
 <animation>
   <type>rotate</type>
   <object-name>l_gear_M15</object-name>
-  <property>gear/gear[1]/position-norm</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.1</ind>	<dep>	90.0</dep></entry>
-    <entry><ind>	0.9</ind>	<dep>	90.0</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	0.0</dep></entry>
-  </interpolation>
+  <expression>
+    <prod>
+      <min>
+        <dif>
+          <value>0.5</value>
+          <abs>
+            <dif>
+              <min>
+                <property>gear/gear[1]/position-norm</property>
+                <property>fdm/jsbsim/tu154/gear/door-limit</property>
+              </min>
+              <value>0.5</value>
+            </dif>
+          </abs>
+        </dif>
+        <value>0.1</value>
+      </min>
+      <value>900</value>
+    </prod>
+  </expression>
   <axis>
-    <x1-m>0.8257</x1-m>
-    <y1-m>-5.28</y1-m>
-    <z1-m>-0.4618</z1-m>
-    <x2-m>1.7</x2-m>
-    <y2-m>-5.3</y2-m>
-    <z2-m>-0.4256</z2-m>
+    <x1-m>1.69387</x1-m>
+    <y1-m>-5.22040</y1-m>
+    <z1-m>-0.39352</z1-m>
+    <x2-m>2.99849</x2-m>
+    <y2-m>-5.23849</y2-m>
+    <z2-m>-0.29268</z2-m>
   </axis>
 </animation>
 <animation>
   <type>rotate</type>
   <object-name>l_gear_M17</object-name>
-  <property>gear/gear[1]/position-norm</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.1</ind>	<dep>	-90.0</dep></entry>
-    <entry><ind>	0.9</ind>	<dep>	-90.0</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	0.0</dep></entry>
-  </interpolation>
+  <expression>
+    <prod>
+      <min>
+        <dif>
+          <value>0.5</value>
+          <abs>
+            <dif>
+              <min>
+                <property>gear/gear[1]/position-norm</property>
+                <property>fdm/jsbsim/tu154/gear/door-limit</property>
+              </min>
+              <value>0.5</value>
+            </dif>
+          </abs>
+        </dif>
+        <value>0.1</value>
+      </min>
+      <value>-900</value>
+    </prod>
+  </expression>
   <axis>
     <x1-m>0.8257</x1-m>
     <y1-m>-6.28</y1-m>
@@ -4323,32 +4707,58 @@
 <animation>
   <type>rotate</type>
   <object-name>r_gear_M14</object-name>
-  <property>gear/gear[2]/position-norm</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.1</ind>	<dep>	-90.0</dep></entry>
-    <entry><ind>	0.9</ind>	<dep>	-90.0</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	0.0</dep></entry>
-  </interpolation>
+  <expression>
+    <prod>
+      <min>
+        <dif>
+          <value>0.5</value>
+          <abs>
+            <dif>
+              <min>
+                <property>gear/gear[2]/position-norm</property>
+                <property>fdm/jsbsim/tu154/gear/door-limit</property>
+              </min>
+              <value>0.5</value>
+            </dif>
+          </abs>
+        </dif>
+        <value>0.1</value>
+      </min>
+      <value>-900</value>
+    </prod>
+  </expression>
   <axis>
-    <x1-m>0.8257</x1-m>
-    <y1-m>5.28</y1-m>
-    <z1-m>-0.4618</z1-m>
-    <x2-m>1.7</x2-m>
-    <y2-m>5.3</y2-m>
-    <z2-m>-0.4256</z2-m>
+    <x1-m>1.69387</x1-m>
+    <y1-m>5.22057</y1-m>
+    <z1-m>-0.39352</z1-m>
+    <x2-m>2.99841</x2-m>
+    <y2-m>5.23867</y2-m>
+    <z2-m>-0.29269</z2-m>
   </axis>
 </animation>
 <animation>
   <type>rotate</type>
   <object-name>r_gear_M15</object-name>
-  <property>gear/gear[2]/position-norm</property>
-  <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.1</ind>	<dep>	90.0</dep></entry>
-    <entry><ind>	0.9</ind>	<dep>	90.0</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	0.0</dep></entry>
-  </interpolation>
+  <expression>
+    <prod>
+      <min>
+        <dif>
+          <value>0.5</value>
+          <abs>
+            <dif>
+              <min>
+                <property>gear/gear[2]/position-norm</property>
+                <property>fdm/jsbsim/tu154/gear/door-limit</property>
+              </min>
+              <value>0.5</value>
+            </dif>
+          </abs>
+        </dif>
+        <value>0.1</value>
+      </min>
+      <value>900</value>
+    </prod>
+  </expression>
   <axis>
     <x1-m>0.8257</x1-m>
     <y1-m>6.28</y1-m>
@@ -5986,11 +6396,66 @@
   <texture-prop>tu154/textures/fe-panel</texture-prop>
 </animation>
 
+<animation>
+  <type>material</type>
+  <object-name>CompPassengerRear</object-name>
+  <condition>
+    <and>
+      <property>tu154/systems/electrical/buses/DC27-bus-L/volts</property>
+      <property>tu154/door/passe</property>
+    </and>
+  </condition>
+  <texture-prop>tu154/textures/capt-panel</texture-prop>
+  <emission>
+    <red-prop>tu154/door/compartment-light</red-prop>
+    <green-prop>tu154/door/compartment-light</green-prop>
+    <blue-prop>tu154/door/compartment-light</blue-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>CompCargoFront</object-name>
+  <condition>
+    <and>
+      <property>tu154/systems/electrical/buses/DC27-bus-L/volts</property>
+      <property>tu154/door/cargo0</property>
+    </and>
+  </condition>
+  <texture-prop>tu154/textures/capt-panel</texture-prop>
+  <emission>
+    <red-prop>tu154/door/compartment-light</red-prop>
+    <green-prop>tu154/door/compartment-light</green-prop>
+    <blue-prop>tu154/door/compartment-light</blue-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>CompCargoMiddle</object-name>
+  <condition>
+    <and>
+      <property>tu154/systems/electrical/buses/DC27-bus-L/volts</property>
+      <property>tu154/door/cargo1</property>
+    </and>
+  </condition>
+  <texture-prop>tu154/textures/capt-panel</texture-prop>
+  <emission>
+    <red-prop>tu154/door/compartment-light</red-prop>
+    <green-prop>tu154/door/compartment-light</green-prop>
+    <blue-prop>tu154/door/compartment-light</blue-prop>
+  </emission>
+</animation>
+
 <!--Ambient light-->
 
 <animation>
   <type>material</type>
   <object-name>MESH17</object-name>
+  <object-name>LeftWindow</object-name>
+  <object-name>LeftWindowHandle</object-name>
+  <object-name>RightWindow</object-name>
+  <object-name>RightWindowHandle</object-name>
+  <object-name>WiperLeft</object-name>
+  <object-name>WiperRight</object-name>
   <object-name>MESH23</object-name>
   <object-name>MESH25</object-name>
   <object-name>MESH27</object-name>
@@ -6039,6 +6504,257 @@
   </condition>
 </animation>
 <!--End pax cabin windows-->
+
+<!-- Engineer doors panel -->
+<animation>
+  <type>material</type>
+  <object-name>DoorsPanel_Unused</object-name>
+  <emission>
+    <red>0</red>
+    <green>0</green>
+    <blue>0</blue>
+  </emission>
+  <texture>doors_panel_off.png</texture>
+  <condition>
+    <not>
+      <and>
+        <property>tu154/systems/electrical/buses/DC27-bus-L/volts</property>
+        <property>tu154/systems/electrical/checking-lamps/doors-panel</property>
+      </and>
+    </not>
+  </condition>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>DoorsPanel_CargoFront</object-name>
+  <emission>
+    <red>0</red>
+    <green>0</green>
+    <blue>0</blue>
+  </emission>
+  <texture>doors_panel_off.png</texture>
+  <condition>
+    <not>
+      <and>
+        <property>tu154/systems/electrical/buses/DC27-bus-L/volts</property>
+        <or>
+          <property>tu154/systems/electrical/checking-lamps/doors-panel</property>
+          <property>tu154/door/cargo0</property>
+        </or>
+      </and>
+    </not>
+  </condition>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>DoorsPanel_CargoFront</object-name>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>view.forceView(9)</script>
+    </binding>
+  </action>
+  <action>
+    <button>1</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-interpolate</command>
+      <property>tu154/door/cargo0</property>
+      <value>0</value>
+      <time>1</time>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>DoorsPanel_CargoMiddle</object-name>
+  <emission>
+    <red>0</red>
+    <green>0</green>
+    <blue>0</blue>
+  </emission>
+  <texture>doors_panel_off.png</texture>
+  <condition>
+    <not>
+      <and>
+        <property>tu154/systems/electrical/buses/DC27-bus-L/volts</property>
+        <or>
+          <property>tu154/systems/electrical/checking-lamps/doors-panel</property>
+          <property>tu154/door/cargo1</property>
+        </or>
+      </and>
+    </not>
+  </condition>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>DoorsPanel_CargoMiddle</object-name>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>view.forceView(10)</script>
+    </binding>
+  </action>
+  <action>
+    <button>1</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-interpolate</command>
+      <property>tu154/door/cargo1</property>
+      <value>0</value>
+      <time>1</time>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>DoorsPanel_TechHatch2</object-name>
+  <emission>
+    <red>0</red>
+    <green>0</green>
+    <blue>0</blue>
+  </emission>
+  <texture>doors_panel_off.png</texture>
+  <condition>
+    <not>
+      <and>
+        <property>tu154/systems/electrical/buses/DC27-bus-L/volts</property>
+        <or>
+          <property>tu154/systems/electrical/checking-lamps/doors-panel</property>
+          <property>tu154/door/refuel</property>
+        </or>
+      </and>
+    </not>
+  </condition>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>DoorsPanel_TechHatch2</object-name>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>view.forceView(7)</script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>DoorsPanel_PassRearLock</object-name>
+  <emission>
+    <red>0</red>
+    <green>0</green>
+    <blue>0</blue>
+  </emission>
+  <texture>doors_panel_off.png</texture>
+  <condition>
+    <not>
+      <and>
+        <property>tu154/systems/electrical/buses/DC27-bus-L/volts</property>
+        <or>
+          <property>tu154/systems/electrical/checking-lamps/doors-panel</property>
+          <greater-than>
+            <property>tu154/door/passe</property>
+            <value>0.33</value>
+          </greater-than>
+        </or>
+      </and>
+    </not>
+  </condition>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>DoorsPanel_PassRearLatch</object-name>
+  <emission>
+    <red>0</red>
+    <green>0</green>
+    <blue>0</blue>
+  </emission>
+  <texture>doors_panel_off.png</texture>
+  <condition>
+    <not>
+      <and>
+        <property>tu154/systems/electrical/buses/DC27-bus-L/volts</property>
+        <or>
+          <property>tu154/systems/electrical/checking-lamps/doors-panel</property>
+          <property>tu154/door/passe</property>
+        </or>
+      </and>
+    </not>
+  </condition>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>DoorsPanel_PassRearLock</object-name>
+  <object-name>DoorsPanel_PassRearLatch</object-name>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>view.forceView(8)</script>
+    </binding>
+  </action>
+  <action>
+    <button>1</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-interpolate</command>
+      <property>tu154/door/passe</property>
+      <value>0</value>
+      <time>1.5</time>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>DoorsPanel_SteerDisabled</object-name>
+  <emission>
+    <red>0</red>
+    <green>0</green>
+    <blue>0</blue>
+  </emission>
+  <texture>doors_panel_off.png</texture>
+  <condition>
+    <not>
+      <and>
+        <property>tu154/systems/electrical/buses/DC27-bus-L/volts</property>
+        <or>
+          <property>tu154/systems/electrical/checking-lamps/doors-panel</property>
+          <not><property>fdm/jsbsim/gear/nose-wheel-steering</property></not>
+          <not><property>fdm/jsbsim/hs/hs2-busters-ok</property></not>
+        </or>
+      </and>
+    </not>
+  </condition>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>DoorsPanel_Steer63</object-name>
+  <emission>
+    <red>0</red>
+    <green>0</green>
+    <blue>0</blue>
+  </emission>
+  <texture>doors_panel_off.png</texture>
+  <condition>
+    <not>
+      <and>
+        <property>tu154/systems/electrical/buses/DC27-bus-L/volts</property>
+        <or>
+          <property>tu154/systems/electrical/checking-lamps/doors-panel</property>
+          <not><property>tu154/switches/steering-limit</property></not>
+        </or>
+      </and>
+    </not>
+  </condition>
+</animation>
+
 
 <!--Nav light-->
 <animation>
@@ -6413,9 +7129,13 @@
     <object-name>c_gear_M10</object-name>
     <object-name>MESH17external</object-name>
     <object-name>MESH178</object-name>
+    <object-name>LeftWindowGlassExt</object-name>
+    <object-name>RightWindowGlassExt</object-name>
     <object-name>lever_sti3</object-name>
     <object-name>lever_sti4</object-name>
     <object-name>MESH23external</object-name>
+    <object-name>WiperLeftExt</object-name>
+    <object-name>WiperRightExt</object-name>
     <object-name>Door_Cargo</object-name>
     <object-name>Door_Passe</object-name>
     <object-name>MESH134</object-name>
@@ -6435,6 +7155,8 @@
     <object-name>lever_cow0</object-name>
     <object-name>lever_cowl</object-name>
     <object-name>MESH18</object-name>
+    <object-name>LeftWindowExt</object-name>
+    <object-name>RightWindowExt</object-name>
     <object-name>MESH24</object-name>
     <object-name>rudder</object-name>
     <object-name>Door_Carg0</object-name>
@@ -6571,6 +7293,7 @@
 <animation>
     <type>material</type>
     <object-name>MESH91</object-name>
+    <object-name>RefuelCover</object-name>
     <object-name>r_gear_ME1</object-name>
     <object-name>r_pct_tra1</object-name>
     <object-name>r_pct_tra2</object-name>
@@ -6600,10 +7323,291 @@
 </animation>
 
 <animation>
+  <type>pick</type>
+  <object-name>LeftWindow</object-name>
+  <object-name>LeftWindowExt</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        var pos = getprop("tu154/door/window-left");
+        if (pos) {
+            interpolate("tu154/door/window-left", 0, pos * 2);
+        } else {
+            interpolate("tu154/door/window-left", 1, 2);
+        }
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>LeftWindowHandle</object-name>
+  <property>tu154/door/window-left</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.25</ind>
+      <dep>-45</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>0</dep>
+    </entry>
+  </interpolation>
+  <axis>
+    <x1-m>1.03910</x1-m>
+    <y1-m>-0.88881</y1-m>
+    <z1-m>1.13192</z1-m>
+    <x2-m>1.01643</x2-m>
+    <y2-m>-0.87914</y2-m>
+    <z2-m>1.13592</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>LeftWindow</object-name>
+  <property>tu154/door/window-left</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.1</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.25</ind>
+      <dep>-5</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>-3</dep>
+    </entry>
+  </interpolation>
+  <axis>
+    <x1-m>0.7706</x1-m>
+    <y1-m>-0.70364</y1-m>
+    <z1-m>1.276</z1-m>
+    <x2-m>0.4761</x2-m>
+    <y2-m>-0.82664</y2-m>
+    <z2-m>0.94192</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>LeftWindowExt</object-name>
+  <property>tu154/door/window-left</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.1</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.25</ind>
+      <dep>-5</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>-3</dep>
+    </entry>
+  </interpolation>
+  <axis>
+    <x1-m>-22.35140</x1-m>
+    <y1-m>-0.68121</y1-m>
+    <z1-m>2.30679</z1-m>
+    <x2-m>-22.72380</x2-m>
+    <y2-m>-0.83034</y2-m>
+    <z2-m>1.89199</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>translate</type>
+  <object-name>LeftWindow</object-name>
+  <object-name>LeftWindowExt</object-name>
+  <property>tu154/door/window-left</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.25</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>0.4</dep>
+    </entry>
+  </interpolation>
+  <axis>
+    <x1-m>0.94910</x1-m>
+    <y1-m>-0.99614</y1-m>
+    <z1-m>0.85592</z1-m>
+    <x2-m>1.44310</x2-m>
+    <y2-m>-1.15914</y2-m>
+    <z2-m>0.81692</z2-m>
+  </axis>
+</animation>
+
+<animation>
+  <type>pick</type>
+  <object-name>RightWindow</object-name>
+  <object-name>RightWindowExt</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        var pos = getprop("tu154/door/window-right");
+        if (pos) {
+            interpolate("tu154/door/window-right", 0, pos * 2);
+        } else {
+            interpolate("tu154/door/window-right", 1, 2);
+        }
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>RightWindowHandle</object-name>
+  <property>tu154/door/window-right</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.25</ind>
+      <dep>45</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>0</dep>
+    </entry>
+  </interpolation>
+  <axis>
+    <x1-m>1.03910</x1-m>
+    <y1-m>0.90053</y1-m>
+    <z1-m>1.13192</z1-m>
+    <x2-m>1.01676</x2-m>
+    <y2-m>0.89053</y2-m>
+    <z2-m>1.13426</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>RightWindow</object-name>
+  <property>tu154/door/window-right</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.1</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.25</ind>
+      <dep>5</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>3</dep>
+    </entry>
+  </interpolation>
+  <axis>
+    <x1-m>0.7701</x1-m>
+    <y1-m>0.72564</y1-m>
+    <z1-m>1.281</z1-m>
+    <x2-m>0.4700</x2-m>
+    <y2-m>0.84086</y2-m>
+    <z2-m>0.96000</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>RightWindowExt</object-name>
+  <property>tu154/door/window-right</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.1</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.25</ind>
+      <dep>5</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>3</dep>
+    </entry>
+  </interpolation>
+  <axis>
+    <x1-m>-22.35140</x1-m>
+    <y1-m>0.68139</y1-m>
+    <z1-m>2.30679</z1-m>
+    <x2-m>-22.72380</x2-m>
+    <y2-m>0.83052</y2-m>
+    <z2-m>1.89198</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>translate</type>
+  <object-name>RightWindow</object-name>
+  <object-name>RightWindowExt</object-name>
+  <property>tu154/door/window-right</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>0.25</ind>
+      <dep>0</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>0.4</dep>
+    </entry>
+  </interpolation>
+  <axis>
+    <x1-m>0.94910</x1-m>
+    <y1-m>1.00786</y1-m>
+    <z1-m>0.85592</z1-m>
+    <x2-m>1.44310</x2-m>
+    <y2-m>1.17086</y2-m>
+    <z2-m>0.81692</z2-m>
+  </axis>
+</animation>
+
+<animation>
   <type>translate</type>
   <object-name>Door_Passe</object-name>
   <property>tu154/door/passe</property>
-  <factor>0.95</factor>
+  <interpolation>
+    <entry> <ind>0.38</ind> <dep>0</dep> </entry>
+    <entry> <ind>1</ind> <dep>0.95</dep> </entry>
+  </interpolation>
   <axis>
     <x>-1</x>
     <y>0</y>
@@ -6614,13 +7618,10 @@
   <type>translate</type>
   <object-name>Door_Passe</object-name>
   <property>tu154/door/passe</property>
-  <condition>
-    <less-than>
-      <property>tu154/door/passe</property>
-      <value>0.1</value>
-    </less-than>
-  </condition>
-  <factor>1.6</factor>
+  <interpolation>
+    <entry> <ind>0.33</ind> <dep>0</dep> </entry>
+    <entry> <ind>0.43</ind> <dep>0.16</dep> </entry>
+  </interpolation>
   <axis>
     <x>0</x>
     <y>-1</y>
@@ -6638,10 +7639,10 @@
       <command>nasal</command>
       <script>
         if (getprop("tu154/door/passe")) {
-            interpolate("tu154/door/passe", 0, 1);
+            interpolate("tu154/door/passe", 0, 1.5);
         } else {
             setprop("tu154/door/passe", 0);
-            interpolate("tu154/door/passe", 1, 1);
+            interpolate("tu154/door/passe", 1, 1.5);
         }
       </script>
     </binding>
@@ -6652,7 +7653,10 @@
   <type>translate</type>
   <object-name>Door_Cargo</object-name>
   <property>tu154/door/cargo0</property>
-  <factor>1.3</factor>
+  <interpolation>
+    <entry> <ind>0</ind> <dep>0</dep> </entry>
+    <entry> <ind>1</ind> <dep>1.3</dep> </entry>
+  </interpolation>
   <axis>
     <x>-1</x>
     <y>0</y>
@@ -6663,12 +7667,10 @@
   <type>translate</type>
   <object-name>Door_Cargo</object-name>
   <property>tu154/door/cargo0</property>
-  <condition>
-    <less-than>
-      <property>tu154/door/cargo0</property>
-      <value>0.1</value>
-    </less-than>
-  </condition>
+  <interpolation>
+    <entry> <ind>0</ind> <dep>0</dep> </entry>
+    <entry> <ind>0.1</ind> <dep>0.1</dep> </entry>
+  </interpolation>
   <axis>
     <x>0</x>
     <y>-1</y>
@@ -6700,7 +7702,10 @@
   <type>rotate</type>
   <object-name>Door_Carg0</object-name>
   <property>tu154/door/cargo1</property>
-  <factor>100</factor>
+  <interpolation>
+    <entry> <ind>0</ind> <dep>0</dep> </entry>
+    <entry> <ind>1</ind> <dep>100</dep> </entry>
+  </interpolation>
   <center>
     <x-m>3.16</x-m>
     <y-m>1.81</y-m>
@@ -6713,7 +7718,10 @@
   <type>translate</type>
   <object-name>Door_Carg1</object-name>
   <property>tu154/door/cargo1</property>
-  <factor>1.3</factor>
+  <interpolation>
+    <entry> <ind>0</ind> <dep>0</dep> </entry>
+    <entry> <ind>1</ind> <dep>1.3</dep> </entry>
+  </interpolation>
   <axis>
     <x>-1</x>
     <y>0</y>
@@ -6724,12 +7732,10 @@
   <type>translate</type>
   <object-name>Door_Carg1</object-name>
   <property>tu154/door/cargo1</property>
-  <condition>
-    <less-than>
-      <property>tu154/door/cargo1</property>
-      <value>0.1</value>
-    </less-than>
-  </condition>
+  <interpolation>
+    <entry> <ind>0</ind> <dep>0</dep> </entry>
+    <entry> <ind>0.1</ind> <dep>0.1</dep> </entry>
+  </interpolation>
   <axis>
     <x>0</x>
     <y>-1</y>
@@ -6785,6 +7791,375 @@
     <x2-m>14.3899</x2-m>
     <y2-m>0.43492</y2-m>
     <z2-m>3.5374</z2-m>
+  </axis>
+</animation>
+
+<!-- Left engine additional air intake flaps. -->
+<animation>
+  <type>rotate</type>
+  <object-name>lever_prop</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.90387</x1-m>
+    <y1-m>-3.04216</y1-m>
+    <z1-m>2.68102</z1-m>
+    <x2-m>5.87026</x2-m>
+    <y2-m>-2.77490</y2-m>
+    <z2-m>2.52685</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pro0</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.94318</x1-m>
+    <y1-m>-3.44121</y1-m>
+    <z1-m>2.70357</z1-m>
+    <x2-m>5.91375</x2-m>
+    <y2-m>-3.13226</y2-m>
+    <z2-m>2.70511</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pro1</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.96779</x1-m>
+    <y1-m>-3.79855</y1-m>
+    <z1-m>2.52174</z1-m>
+    <x2-m>5.95048</x2-m>
+    <y2-m>-3.53131</y2-m>
+    <z2-m>2.67858</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pro2</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.97104</x1-m>
+    <y1-m>-4.01707</y1-m>
+    <z1-m>2.18533</z1-m>
+    <x2-m>5.97050</x2-m>
+    <y2-m>-3.86352</y2-m>
+    <z2-m>2.45504</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pro3</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.9516</x1-m>
+    <y1-m>-4.03842</y1-m>
+    <z1-m>1.78620</z1-m>
+    <x2-m>5.96852</x2-m>
+    <y2-m>-4.03967</y2-m>
+    <z2-m>2.09612</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pro4</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.91641</x1-m>
+    <y1-m>-3.85852</y1-m>
+    <z1-m>1.43196</z1-m>
+    <x2-m>5.94525</x2-m>
+    <y2-m>-4.01392</y2-m>
+    <z2-m>1.69906</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pro5</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.87343</x1-m>
+    <y1-m>-3.52692</y1-m>
+    <z1-m>1.21647</z1-m>
+    <x2-m>5.90705</x2-m>
+    <y2-m>-3.79479</y2-m>
+    <z2-m>1.36955</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pro6</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.83464</x1-m>
+    <y1-m>-3.13226</y1-m>
+    <z1-m>1.19572</z1-m>
+    <x2-m>5.86408</x2-m>
+    <y2-m>-3.44121</y2-m>
+    <z2-m>1.19418</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pro7</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.81024</x1-m>
+    <y1-m>-2.77868</y1-m>
+    <z1-m>1.37463</z1-m>
+    <x2-m>5.82766</x2-m>
+    <y2-m>-3.04655</y2-m>
+    <z2-m>1.21886</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pro8</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.80668</x1-m>
+    <y1-m>-2.55955</y1-m>
+    <z1-m>1.70632</z1-m>
+    <x2-m>5.80745</x2-m>
+    <y2-m>-2.71495</y2-m>
+    <z2-m>1.43767</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pro9</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.82505</x1-m>
+    <y1-m>-2.53380</y1-m>
+    <z1-m>2.10364</z1-m>
+    <x2-m>5.80892</x2-m>
+    <y2-m>-2.53503</y2-m>
+    <z2-m>1.79371</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr10</object-name>
+  <property>engines/engine[0]/intake-flaps</property>
+  <axis>
+    <x1-m>5.86059</x1-m>
+    <y1-m>-2.70993</y1-m>
+    <z1-m>2.46080</z1-m>
+    <x2-m>5.8318</x2-m>
+    <y2-m>-2.556407</y2-m>
+    <z2-m>2.19262</z2-m>
+  </axis>
+</animation>
+
+<!-- Right engine additional air intake flaps. -->
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr11</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.91374</x1-m>
+    <y1-m>3.13244</y1-m>
+    <z1-m>2.70511</z1-m>
+    <x2-m>5.94318</x2-m>
+    <y2-m>3.44139</y2-m>
+    <z2-m>2.70357</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr12</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.87026</x1-m>
+    <y1-m>2.77508</y1-m>
+    <z1-m>2.52685</z1-m>
+    <x2-m>5.90387</x2-m>
+    <y2-m>3.04234</y2-m>
+    <z2-m>2.68102</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr13</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.96852</x1-m>
+    <y1-m>4.03983</y1-m>
+    <z1-m>2.09612</z1-m>
+    <x2-m>5.95216</x2-m>
+    <y2-m>4.03859</y2-m>
+    <z2-m>1.78620</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr14</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.95048</x1-m>
+    <y1-m>3.53148</y1-m>
+    <z1-m>2.67858</z1-m>
+    <x2-m>5.96779</x2-m>
+    <y2-m>3.79872</y2-m>
+    <z2-m>2.52174</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr15</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.97050</x1-m>
+    <y1-m>3.86369</y1-m>
+    <z1-m>2.45504</z1-m>
+    <x2-m>5.97104</x2-m>
+    <y2-m>4.01724</y2-m>
+    <z2-m>2.18533</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr16</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.80745</x1-m>
+    <y1-m>2.71513</y1-m>
+    <z1-m>1.43767</z1-m>
+    <x2-m>5.80668</x2-m>
+    <y2-m>2.55972</y2-m>
+    <z2-m>1.70632</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr17</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.82767</x1-m>
+    <y1-m>3.04673</y1-m>
+    <z1-m>1.21886</z1-m>
+    <x2-m>5.81024</x2-m>
+    <y2-m>2.77886</y2-m>
+    <z2-m>1.37463</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr18</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.86408</x1-m>
+    <y1-m>3.44139</y1-m>
+    <z1-m>1.19418</z1-m>
+    <x2-m>5.83464</x2-m>
+    <y2-m>3.13244</y2-m>
+    <z2-m>1.19572</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr19</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.90705</x1-m>
+    <y1-m>3.79496</y1-m>
+    <z1-m>1.36955</z1-m>
+    <x2-m>5.87343</x2-m>
+    <y2-m>3.52709</y2-m>
+    <z2-m>1.21647</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr20</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.94525</x1-m>
+    <y1-m>4.01409</y1-m>
+    <z1-m>1.69905</z1-m>
+    <x2-m>5.91641</x2-m>
+    <y2-m>3.85869</y2-m>
+    <z2-m>1.43196</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr21</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.83187</x1-m>
+    <y1-m>2.55657</y1-m>
+    <z1-m>2.19262</z1-m>
+    <x2-m>5.86059</x2-m>
+    <y2-m>2.71011</y2-m>
+    <z2-m>2.46080</z2-m>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>lever_pr22</object-name>
+  <property>engines/engine[2]/intake-flaps</property>
+  <axis>
+    <x1-m>5.80892</x1-m>
+    <y1-m>2.53520</y1-m>
+    <z1-m>1.79371</z1-m>
+    <x2-m>5.82505</x2-m>
+    <y2-m>2.53397</y2-m>
+    <z2-m>2.10364</z2-m>
+  </axis>
+</animation>
+
+<model>
+  <name>RefuelPanel</name>
+  <path>Aircraft/tu154b/Instruments-3d/refuel/refuel.xml</path>
+  <offsets>
+    <x-m>-4.31</x-m>
+    <y-m>3.37</y-m>
+    <z-m>0.02</z-m>
+    <roll-deg>-3</roll-deg>
+    <pitch-deg>45</pitch-deg>
+    <heading-deg>147</heading-deg>
+  </offsets>
+</model>
+<animation>
+  <type>select</type>
+  <object-name>RefuelPanel</object-name>
+  <condition>
+    <property>tu154/door/refuel</property>
+  </condition>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>RefuelCover</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        if (getprop("tu154/door/refuel")) {
+            interpolate("tu154/door/refuel", 0, 0.5);
+        } else {
+            interpolate("tu154/door/refuel", 1, 0.5);
+        }
+      </script>
+    </binding>
+  </action>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>RefuelCover</object-name>
+  <property>tu154/door/refuel</property>
+  <factor>85</factor>
+  <axis>
+    <x1-m>-4.48886</x1-m>
+    <y1-m>3.44460</y1-m>
+    <z1-m>-0.03075</z1-m>
+    <x2-m>-4.43994</x2-m>
+    <y2-m>3.51918</y2-m>
+    <z2-m>-0.02736</z2-m>
   </axis>
 </animation>
 
@@ -7104,9 +8479,18 @@
   </offsets>
  </model>
  
- 
- 
- 
+ <model>
+   <name>gear-sw-emerg2</name>
+   <path>Aircraft/tu154b/Instruments-3d/switches/azs3-20.xml</path>
+   <offsets>
+     <x-m>-22.6129</x-m>
+     <y-m>0.515</y-m>
+     <z-m>1.539</z-m>
+     <roll-deg>180</roll-deg>
+   </offsets>
+ </model>
+
+
 <animation>
   <type>select</type>
   <object-name>headlight_l</object-name>
@@ -7192,6 +8576,124 @@
     </greater-than>
     <property>sim/current-view/internal</property>
   </condition>
+</animation>
+
+<!-- Windshield wipers -->
+<animation>
+  <type>rotate</type>
+  <object-name>WiperLeftExt</object-name>
+  <property>tu154/wipers/pos-left</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>-5</dep>
+    </entry>
+    <entry>
+      <ind>0.5</ind>
+      <dep>47</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>-5</dep>
+    </entry>
+  </interpolation>
+  <center>
+    <x-m>-23.05545</x-m>
+    <y-m>-0.55032</y-m>
+    <z-m>1.94338</z-m>
+  </center>
+  <axis>
+    <x>-0.326150037</x>
+    <y>-0.222758536</y>
+    <z>0.37999137</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>WiperLeft</object-name>
+  <property>tu154/wipers/pos-left</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>-5</dep>
+    </entry>
+    <entry>
+      <ind>0.5</ind>
+      <dep>47</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>-5</dep>
+    </entry>
+  </interpolation>
+  <center>
+    <x-m>0.20545</x-m>
+    <y-m>-0.55032</y-m>
+    <z-m>0.87338</z-m>
+  </center>
+  <axis>
+    <x>-0.326150037</x>
+    <y>-0.222758536</y>
+    <z>0.37999137</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>WiperRightExt</object-name>
+  <property>tu154/wipers/pos-right</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>5</dep>
+    </entry>
+    <entry>
+      <ind>0.5</ind>
+      <dep>-47</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>5</dep>
+    </entry>
+  </interpolation>
+  <center>
+    <x-m>-23.05545</x-m>
+    <y-m>0.55050</y-m>
+    <z-m>1.94338</z-m>
+  </center>
+  <axis>
+    <x>-0.325921264</x>
+    <y>0.222656236</y>
+    <z>0.379683264</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>WiperRight</object-name>
+  <property>tu154/wipers/pos-right</property>
+  <interpolation>
+    <entry>
+      <ind>0</ind>
+      <dep>5</dep>
+    </entry>
+    <entry>
+      <ind>0.5</ind>
+      <dep>-47</dep>
+    </entry>
+    <entry>
+      <ind>1</ind>
+      <dep>5</dep>
+    </entry>
+  </interpolation>
+  <center>
+    <x-m>0.20545</x-m>
+    <y-m>0.55050</y-m>
+    <z-m>0.87338</z-m>
+  </center>
+  <axis>
+    <x>-0.325921264</x>
+    <y>0.222656236</y>
+    <z>0.379683264</z>
+  </axis>
 </animation>
 
 </PropertyList>

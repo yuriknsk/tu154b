@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <params>
+    <lamp/>
+    <model>lamp_green.ac</model>
+  </params>
+
+  <path alias="../params/model"/>
+
+  <animation>
+    <type>material</type>
+    <object-name>_c_1</object-name>
+    <object-name>_c_2</object-name>
+    <emission>
+      <red>0.5</red>
+      <green>0.5</green>
+      <blue>0.5</blue>
+    </emission>
+    <condition>
+      <and>
+        <property>tu154/systems/electrical/buses/DC27-bus-L/volts</property>
+        <property>tu154/refuel/sw-light</property>
+      </and>
+    </condition>
+  </animation>
+  <!--Brightness-->
+  <animation>
+    <type>material</type>
+    <object-name>_d_2</object-name>
+    <emission>
+      <red>1.0</red>
+      <green>1.0</green>
+      <blue>1.0</blue>
+      <factor-prop>tu154/systems/electrical/checking-lamps/lamps-power</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>_d_2</object-name>
+    <condition>
+      <and>
+        <property>tu154/systems/electrical/buses/DC27-bus-L/volts</property>
+        <or>
+          <property>tu154/refuel/btn-check</property>
+          <property alias="../../../../../params/lamp"/>
+        </or>
+      </and>
+    </condition>
+  </animation>
+</PropertyList>

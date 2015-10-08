@@ -378,7 +378,7 @@
                 <y> 0 </y>
                 <z> 0 </z>
             </location>
-            <capacity unit="KG">3300</capacity>
+            <capacity unit="KG">3350</capacity><!-- 3300 + 50 margin -->
             <contents unit="KG">3300</contents>
         </tank>
         <tank type="FUEL">
@@ -387,8 +387,17 @@
                 <y> -4 </y>
                 <z> 0 </z>
             </location>
-            <capacity unit="KG">9500</capacity>
-            <contents unit="KG">2200</contents>
+            <capacity unit="KG">9550</capacity><!-- 9500 + 50 margin -->
+            <contents unit="KG">1500</contents>
+        </tank>
+        <tank type="FUEL">
+            <location unit="M">
+                <x> 24 </x>
+                <y> 4 </y>
+                <z> 0 </z>
+            </location>
+            <capacity unit="KG">9550</capacity><!-- 9500 + 50 margin -->
+            <contents unit="KG">1500</contents>
         </tank>
         <tank type="FUEL">
             <location unit="M">
@@ -397,16 +406,7 @@
                 <z> 0 </z>
             </location>
             <capacity unit="KG">5425</capacity>
-            <contents unit="KG">1000</contents>
-        </tank>
-        <tank type="FUEL">
-            <location unit="M">
-                <x> 24 </x>
-                <y> 4 </y>
-                <z> 0 </z>
-            </location>
-            <capacity unit="KG">9500</capacity>
-            <contents unit="KG">2200</contents>
+            <contents unit="KG">3225</contents>
         </tank>
         <tank type="FUEL">
             <location unit="M">
@@ -415,7 +415,7 @@
                 <z> 0 </z>
             </location>
             <capacity unit="KG">5425</capacity>
-            <contents unit="KG">1000</contents>
+            <contents unit="KG">3225</contents>
         </tank>
         <tank type="FUEL">
             <location unit="M">
@@ -424,11 +424,10 @@
                 <z> 0 </z>
             </location>
             <capacity unit="KG">6600</capacity>
-<!--            <contents unit="KG">3000</contents>-->
-            <contents unit="KG">5000</contents>
+            <contents unit="KG">4000</contents>
         </tank>
     </propulsion>
-    
+
     <flight_control name="tu154b">
 <!--      
 	<property>fcs/stab-auto-cmd</property>
@@ -956,6 +955,7 @@
     </flight_control>
     
     <system file="fdm_globals"/>
+    <system file="fuel"/>
     <system file="engines"/>
     <system file="hydrosystems"/>
     <system file="instrumentation"/>

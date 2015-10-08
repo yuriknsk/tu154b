@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <path>button.ac</path>
+
+  <animation>
+    <type>translate</type>
+    <object-name>button</object-name>
+    <property>tu154/refuel/btn-check</property>
+    <factor>0.002</factor>
+    <axis>
+      <x>-1.0</x>
+      <y>0.0</y>
+      <z>0.0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>button</object-name>
+    <visible>true</visible>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-assign</command>
+        <property>tu154/refuel/btn-check</property>
+        <value>1</value>
+      </binding>
+      <mod-up>
+        <binding>
+          <command>property-assign</command>
+          <property>tu154/refuel/btn-check</property>
+          <value>0</value>
+        </binding>
+      </mod-up>
+    </action>
+  </animation>
+</PropertyList>

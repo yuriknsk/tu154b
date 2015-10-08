@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <path>handle.ac</path>
+
+  <animation>
+    <type>knob</type>
+    <object-name>handle</object-name>
+    <property>fdm/jsbsim/fuel/sel-refuel-4</property>
+    <visible>true</visible>
+    <action>
+      <binding>
+        <command>property-adjust</command>
+        <property>fdm/jsbsim/fuel/sel-refuel-4</property>
+        <min>0</min>
+        <max>2</max>
+        <wrap>false</wrap>
+      </binding>
+    </action>
+    <interpolation>
+      <entry><ind>0</ind><dep>-30</dep></entry>
+      <entry><ind>2</ind><dep>30</dep></entry>
+    </interpolation>
+    <axis>
+      <x>-1.0</x>
+      <y>0.0</y>
+      <z>0.0</z>
+    </axis>
+  </animation>
+</PropertyList>

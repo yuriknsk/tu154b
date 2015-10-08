@@ -40,8 +40,11 @@
   <object-name>_d_2</object-name>
   <condition>
     <or>
-     <property>tu154/lamps/fuel-cutoff-2</property>
-     <property>tu154/systems/electrical/checking-lamps/engine-panel</property>
+      <and>
+        <property>tu154/systems/electrical/buses/DC27-bus-L/volts</property>
+        <property>fdm/jsbsim/fuel/sw-valve-e2</property>
+      </and>
+      <property>tu154/systems/electrical/checking-lamps/engine-panel</property>
     </or>
   </condition>
 </animation>

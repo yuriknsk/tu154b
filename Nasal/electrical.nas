@@ -67,7 +67,7 @@ update_buses_thandler = func{
     AC3x200_bus_3R.update_voltage();
     AC1x115_bus_L.update_voltage();
     AC1x115_bus_R.update_voltage();
-    
+
     TSZZOSS4B_1.update();
     TSZZOSS4B_2.update();
 
@@ -99,7 +99,7 @@ update_buses_thandler = func{
     AC3x200_bus_3R.update_load();
     AC1x115_bus_L.update_load();
     AC1x115_bus_R.update_load();
-    
+
 
     AC3x36_bus_L.update_load();
     AC3x36_bus_R.update_load();
@@ -153,7 +153,7 @@ generator_1_shandler = func{
 	AC3x200_bus_1L.rm_input( "RAP" );
 #	setprop("tu154/lamps/generator-1",0.0);
 	print(" GT40-1 On");
-    } 
+    }
     if( getprop("tu154/switches/generator-1")==0 ){
 	AC3x200_bus_1L.rm_input( "GT40-1" );
 	GT40_1.disconnect_from_bus();
@@ -170,7 +170,7 @@ generator_2_shandler = func{
 	AC3x200_bus_2.rm_input( "RAP" );
 #	setprop("tu154/lamps/generator-2",0.0);
 	print(" GT40-2 On");
-    } 
+    }
     if( getprop("tu154/switches/generator-2")==0 ){
 	AC3x200_bus_2.rm_input( "GT40-2" );
 	GT40_2.disconnect_from_bus();
@@ -187,7 +187,7 @@ generator_3_shandler = func{
 	AC3x200_bus_3R.rm_input( "RAP" );
 #	setprop("tu154/lamps/generator-3",0.0);
 	print(" GT40-3 On");
-    } 
+    }
     if( getprop("tu154/switches/generator-3")==0 ){
 	AC3x200_bus_3R.rm_input( "GT40-3" );
 	GT40_3.disconnect_from_bus();
@@ -209,7 +209,7 @@ main_battery_handler = func{
 	battery4.connect_to_bus( DC27_bus_Rv );
 #	setprop("tu154/lamps/battery",1.0);
 	print("On");
-    } 
+    }
     if( getprop("tu154/switches/main-battery")==0 ){
 	DC27_bus_Lv.rm_input( battery1.name );
 	DC27_bus_Lv.rm_input( battery3.name );
@@ -229,7 +229,7 @@ VU6B_1_shandler = func{
 	AC3x200_bus_1L.add_output( "VU6B-1", 0.0);
 	DC27_bus_L.add_input( VU6B_1 );
 	print(" VU6B-1 On");
-    } 
+    }
     if( getprop("tu154/switches/vypr-1")==0 ){
 	DC27_bus_L.rm_input( "VU6B-1" );
 	AC3x200_bus_1L.rm_output( "VU6B-1" );
@@ -242,7 +242,7 @@ VU6B_2_shandler = func{
 	AC3x200_bus_3R.add_output( "VU6B-2", 0.0);
 	DC27_bus_R.add_input( VU6B_2 );
 	print(" VU6B-2 On");
-    } 
+    }
     if( getprop("tu154/switches/vypr-2")==0 ){
 	DC27_bus_R.rm_input( "VU6B-2" );
 	AC3x200_bus_3R.rm_output( "VU6B-2" );
@@ -259,7 +259,7 @@ APU_RAP_shandler = func{
 	AC3x200_bus_2.rm_input( "RAP");
 	AC3x200_bus_3R.rm_input( "RAP");
 	print(" APU On");
-    } 
+    }
     if( getprop("tu154/switches/APU-RAP-selector")==1 ){
 	AC3x200_bus_1L.rm_input( "GT40-APU" );
 	AC3x200_bus_2.rm_input( "GT40-APU" );
@@ -290,7 +290,7 @@ AGR_shandler = func{
 	DC27_bus_Lv.add_output( "PTS-250-1" ,0.0);
 	AC3x36_bus_PTS1.add_input( "PTS-250-1" );
 	print(" AGR On");
-    } 
+    }
     if( getprop("tu154/switches/vypr-2")==0 ){
 	AC3x36_bus_PTS1.rm_input( "PTS-250-1" );
 	DC27_bus_Lv.rm_output( "PTS-250-1" );
@@ -332,7 +332,7 @@ init_electrical = func {
     VU6B_2 = ACDCconverterClass.new( "VU6B-2", 0.135 );
     VU6B_3 = ACDCconverterClass.new( "VU6B-3", 0.135 );
 
-    
+
 
     DC27_bus_L   = DCBusClass.new( "DC27-bus-L" );
     DC27_bus_Lv  = DCBusClass.new( "DC27-bus-Lv" );
@@ -355,7 +355,7 @@ init_electrical = func {
     AC3x36_bus_PTS2 = ACBusClass.new( "AC3x36-bus-PTS2" );
     AC3x36_bus_R    = ACBusClass.new( "AC3x36-bus-R" );
 
-    
+
 #--------- connect bases ------------------
     DC27_bus_L.add_input( DC27_bus_Lv );
     DC27_bus_R.add_input( DC27_bus_Rv );
@@ -399,122 +399,113 @@ init_electrical = func {
     setprop("tu154/switches/main-battery", 0);
     setlistener("tu154/switches/main-battery", main_battery_handler,0,0 );
 
-  setprop("tu154/switches/ut7-3-serviceable", 0);  
-  setprop("tu154/switches/pump-1-serviceable", 0);  
-  setprop("tu154/switches/pump-2-serviceable", 0);  
-  setprop("tu154/switches/pump-3-serviceable", 0);  
-  setprop("tu154/switches/pump-4-serviceable", 0);  
-  setprop("tu154/switches/tank-4-serviceable", 0);  
-  setprop("tu154/switches/tank-3-left-serviceable", 0);  
-  setprop("tu154/switches/tank-3-right-serviceable", 0);  
-  setprop("tu154/switches/tank-2-left-serviceable", 0);  
-  setprop("tu154/switches/tank-2-right-serviceable", 0);  
-  setprop("tu154/switches/zk-selector", 0);  
-  setprop("tu154/switches/fuel-meter-serviceable", 0);  
-  setprop("tu154/switches/fuel-autolevel-serviceable", 0);  
-  setprop("tu154/switches/fuel-autoconsumption-mode", 0);  
-  setprop("tu154/switches/fuel-consumption-meter", 0);  
-  setprop("tu154/switches/ext-hydro-pump-2", 0);  
-  setprop("tu154/switches/ext-hydro-pump-3", 0);  
-  setprop("tu154/switches/APU-starter-switch", 0);  
-  setprop("tu154/switches/APU-starter-selector", 0);  
-  setprop("tu154/switches/AUASP", 0);  
-  setprop("tu154/switches/AUASP-check", 0);  
-  setprop("tu154/switches/main-battery", 0);  
-  setprop("tu154/switches/UVID", 0);  
-  setprop("tu154/switches/EUP", 0);  
-    setprop("tu154/switches/AGR", 0);  
+  setprop("tu154/switches/ut7-3-serviceable", 0);
+  setprop("tu154/switches/zk-selector", 0);
+  setprop("fdm/jsbsim/fuel/sw-pump-2L", 0);
+  setprop("fdm/jsbsim/fuel/sw-pump-2R", 0);
+  setprop("fdm/jsbsim/fuel/sw-pump-3L", 0);
+  setprop("fdm/jsbsim/fuel/sw-pump-3R", 0);
+  setprop("fdm/jsbsim/fuel/sw-pump-4", 0);
+  setprop("fdm/jsbsim/fuel/sw-pump-1-1", 0);
+  setprop("fdm/jsbsim/fuel/sw-pump-1-2", 0);
+  setprop("fdm/jsbsim/fuel/sw-pump-1-3", 0);
+  setprop("fdm/jsbsim/fuel/sw-pump-1-4", 0);
+  setprop("fdm/jsbsim/fuel/sw-valve-e1", 0);
+  setprop("fdm/jsbsim/fuel/sw-valve-e2", 0);
+  setprop("fdm/jsbsim/fuel/sw-valve-e3", 0);
+  setprop("fdm/jsbsim/fuel/sw-fuel", 0);
+  setprop("fdm/jsbsim/fuel/sw-balance", 0);
+  setprop("fdm/jsbsim/fuel/sw-automat", 0);
+  setprop("fdm/jsbsim/fuel/sw-program", 0);
+  setprop("fdm/jsbsim/fuel/sw-consumption", 0);
+  setprop("fdm/jsbsim/fuel/sw-pump-apu", 0);
+  setprop("fdm/jsbsim/fuel/sw-valve-apu", 0);
+  setprop("tu154/switches/ext-hydro-pump-2", 0);
+  setprop("tu154/switches/ext-hydro-pump-3", 0);
+  setprop("tu154/switches/APU-starter-switch", 0);
+  setprop("tu154/switches/AUASP", 0);
+  setprop("tu154/switches/AUASP-check", 0);
+  setprop("tu154/switches/main-battery", 0);
+  setprop("tu154/switches/UVID", 0);
+  setprop("tu154/switches/EUP", 0);
+    setprop("tu154/switches/AGR", 0);
 #   setlistener("tu154/switches/AGR", AGR_shandler,0,0 );
-  setprop("tu154/switches/TKC-power-1", 0);  
-  setprop("tu154/switches/TKC-power-2", 0);  
-  setprop("tu154/switches/TKC-heat", 0);  
-  setprop("tu154/switches/TKC-BGMK-1", 0);  
-  setprop("tu154/switches/TKC-BGMK-2", 0);  
-  setprop("tu154/switches/KURS-PNP-left", 0);  
-  setprop("tu154/switches/KURS-PNP-right", 0);  
-    setprop("tu154/switches/vypr-1", 0);  
+  setprop("tu154/switches/TKC-power-1", 0);
+  setprop("tu154/switches/TKC-power-2", 0);
+  setprop("tu154/switches/TKC-heat", 0);
+  setprop("tu154/switches/TKC-BGMK-1", 0);
+  setprop("tu154/switches/TKC-BGMK-2", 0);
+  setprop("tu154/switches/KURS-PNP-left", 0);
+  setprop("tu154/switches/KURS-PNP-right", 0);
+    setprop("tu154/switches/vypr-1", 0);
     setlistener("tu154/switches/vypr-1", VU6B_1_shandler,0,0 );
-  setprop("tu154/switches/SVS-power", 0);  
-  setprop("tu154/switches/SVS-heat", 0);  
-  setprop("tu154/switches/fasten-seat-belts", 0);  
-  setprop("tu154/switches/no-smoking", 0);  
-  setprop("tu154/switches/exit", 0);  
-  setprop("tu154/switches/pito-heat", 0);  
-  setprop("tu154/switches/DISS-power", 0);  
-  setprop("tu154/switches/DISS-surface", 0);  
-  setprop("tu154/switches/DISS-check", 0);  
-  setprop("tu154/switches/KURS-MP-1", 0);  
-    setprop("tu154/switches/vypr-2", 0);  
+  setprop("tu154/switches/SVS-power", 0);
+  setprop("tu154/switches/SVS-heat", 0);
+  setprop("tu154/switches/fasten-seat-belts", 0);
+  setprop("tu154/switches/no-smoking", 0);
+  setprop("tu154/switches/exit", 0);
+  setprop("tu154/switches/pito-heat", 0);
+  setprop("tu154/switches/DISS-power", 0);
+  setprop("tu154/switches/DISS-surface", 0);
+  setprop("tu154/switches/DISS-check", 0);
+  setprop("tu154/switches/KURS-MP-1", 0);
+    setprop("tu154/switches/vypr-2", 0);
     setlistener("tu154/switches/vypr-2", VU6B_2_shandler,0,0 );
-  setprop("tu154/switches/KURS-MP-2", 0);  
-  setprop("tu154/switches/RSBN-power", 0);  
-  setprop("tu154/switches/RSBN-opozn", 0);  
-  setprop("tu154/switches/RV-5-1", 0);  
-  setprop("tu154/switches/RV-5-2", 0);  
-  setprop("tu154/switches/comm-power-1", 0);  
-  setprop("tu154/switches/comm-power-2", 0);  
-  setprop("tu154/switches/adf-power-1", 0);  
-  setprop("tu154/switches/adf-power-2", 0);  
-  setprop("tu154/switches/stab-hyro-1", 0);  
-    setprop("tu154/switches/generator-1", 0);  
+  setprop("tu154/switches/KURS-MP-2", 0);
+  setprop("tu154/switches/RSBN-power", 0);
+  setprop("tu154/switches/RSBN-opozn", 0);
+  setprop("tu154/switches/RV-5-1", 0);
+  setprop("tu154/switches/RV-5-2", 0);
+  setprop("tu154/switches/comm-power-1", 0);
+  setprop("tu154/switches/comm-power-2", 0);
+  setprop("tu154/switches/adf-power-1", 0);
+  setprop("tu154/switches/adf-power-2", 0);
+  setprop("tu154/switches/stab-hyro-1", 0);
+    setprop("tu154/switches/generator-1", 0);
     setlistener("tu154/switches/generator-1", generator_1_shandler,0,0 );
-  setprop("tu154/switches/stab-hyro-2", 0);  
-  setprop("tu154/switches/landing-light-retract", 0);  
-    setprop("tu154/switches/generator-2", 0);  
+  setprop("tu154/switches/stab-hyro-2", 0);
+  setprop("tu154/switches/landing-light-retract", 0);
+    setprop("tu154/switches/generator-2", 0);
     setlistener("tu154/switches/generator-2", generator_2_shandler,0,0 );
-    setprop("tu154/switches/generator-3", 0);  
+    setprop("tu154/switches/generator-3", 0);
     setlistener("tu154/switches/generator-3", generator_3_shandler,0,0 );
-  setprop("tu154/switches/ut7-1-serviceable", 0);  
-  setprop("tu154/switches/ut7-2-serviceable", 0);  
-#  setprop("tu154/switches/azs1-1", 0);  
-#  setprop("tu154/switches/azs1-1", 0);  
-  setprop("tu154/switches/BKK-test", 0);  
-  setprop("tu154/switches/BKK-test-cover", 0);  
-  setprop("tu154/switches/BKK-power", 0);  
-  setprop("tu154/switches/BKK-power-cover", 0);  
-  setprop("tu154/switches/SAU-STU", 0);  
-  setprop("tu154/switches/SAU-STU-cover", 0);  
-  setprop("tu154/switches/PKP-left", 0);  
-  setprop("tu154/switches/PKP-left-cover", 0);  
-  setprop("tu154/switches/PKP-right", 0);  
-  setprop("tu154/switches/PKP-right-cover", 0);  
-  setprop("tu154/switches/MGV-contr", 0);  
-  setprop("tu154/switches/MGV-contr-cover", 0);  
-  setprop("tu154/switches/steering", 0);  
-  setprop("tu154/switches/steering-cover", 0);  
-  setprop("tu154/switches/steering-limit", 0);  
-  setprop("tu154/switches/steering-limit-cover", 0);  
-  setprop("tu154/switches/transfer-valve-1", 0);  
-  setprop("tu154/switches/transfer-valve-1-cover", 0);  
-  setprop("tu154/switches/transfer-valve-2", 0);  
-  setprop("tu154/switches/transfer-valve-2-cover", 0);  
-  setprop("tu154/switches/emergency-alternator", 0);  
-  setprop("tu154/switches/emergency-alternator-cover", 0);  
-  setprop("tu154/switches/APU-cutoff-valve", 0);  
-  setprop("tu154/switches/APU-cutoff-valve-cover", 0);  
-  setprop("tu154/switches/hydrosystem-1-to-2", 0);  
-  setprop("tu154/switches/hydrosystem-1-to-2-cover", 0);  
-  setprop("tu154/switches/fuel-autoconsumption-serviceable", 0);  
-  setprop("tu154/switches/fuel-autoconsumption-serviceable-cover", 0);  
-  setprop("tu154/switches/fuel-cutoff-valve-1", 0);  
-  setprop("tu154/switches/fuel-cutoff-valve-1-cover", 0);  
-  setprop("tu154/switches/fuel-cutoff-valve-2", 0);  
-  setprop("tu154/switches/fuel-cutoff-valve-2-cover", 0);  
-  setprop("tu154/switches/fuel-cutoff-valve-3", 0);  
-  setprop("tu154/switches/fuel-cutoff-valve-3-cover", 0);  
-#  setprop("tu154/switches/azs3-1", 0);  
-  setprop("tu154/switches/capt-idr-selector", 0);  
-  setprop("tu154/switches/copilot-idr-selector", 0);  
-  setprop("tu154/switches/APU-bleed", 1);  
-    setprop("tu154/switches/APU-RAP-selector", 1);  
+  setprop("tu154/switches/ut7-1-serviceable", 0);
+  setprop("tu154/switches/ut7-2-serviceable", 0);
+#  setprop("tu154/switches/azs1-1", 0);
+#  setprop("tu154/switches/azs1-1", 0);
+  setprop("tu154/switches/BKK-test", 0);
+  setprop("tu154/switches/BKK-test-cover", 0);
+  setprop("tu154/switches/BKK-power", 0);
+  setprop("tu154/switches/BKK-power-cover", 0);
+  setprop("tu154/switches/SAU-STU", 0);
+  setprop("tu154/switches/SAU-STU-cover", 0);
+  setprop("tu154/switches/PKP-left", 0);
+  setprop("tu154/switches/PKP-left-cover", 0);
+  setprop("tu154/switches/PKP-right", 0);
+  setprop("tu154/switches/PKP-right-cover", 0);
+  setprop("tu154/switches/MGV-contr", 0);
+  setprop("tu154/switches/MGV-contr-cover", 0);
+  setprop("tu154/switches/steering", 0);
+  setprop("tu154/switches/steering-cover", 0);
+  setprop("tu154/switches/steering-limit", 0);
+  setprop("tu154/switches/steering-limit-cover", 0);
+  setprop("tu154/switches/emergency-alternator", 0);
+  setprop("tu154/switches/emergency-alternator-cover", 0);
+  setprop("tu154/switches/hydrosystem-1-to-2", 0);
+  setprop("tu154/switches/hydrosystem-1-to-2-cover", 0);
+#  setprop("tu154/switches/azs3-1", 0);
+  setprop("tu154/switches/capt-idr-selector", 0);
+  setprop("tu154/switches/copilot-idr-selector", 0);
+  setprop("tu154/switches/APU-bleed", 1);
+    setprop("tu154/switches/APU-RAP-selector", 1);
     setlistener("tu154/switches/APU-RAP-selector", APU_RAP_shandler,0,0 );
-  setprop("tu154/switches/headlight-mode", 1);  
-  setprop("tu154/switches/voltage-src-selector", 0);  
-  setprop("tu154/switches/voltage-phase-selector", 0);  
-  setprop("tu154/switches/current-src-selector", 0);  
-  setprop("tu154/switches/current-phase-selector", 0);  
-  setprop("tu154/switches/dc-src-selector", 0);  
-  setprop("tu154/switches/POS", 0);  
+  setprop("tu154/switches/headlight-mode", 1);
+  setprop("tu154/switches/voltage-src-selector", 0);
+  setprop("tu154/switches/voltage-phase-selector", 0);
+  setprop("tu154/switches/current-src-selector", 0);
+  setprop("tu154/switches/current-phase-selector", 0);
+  setprop("tu154/switches/dc-src-selector", 0);
+  setprop("tu154/switches/POS", 0);
 
 # Added by Yurik jul 2013
 #   Set external light parameters if Rembrandt deselected
@@ -553,10 +544,10 @@ setlistener("/sim/signals/fdm-initialized", init_electrical);
 update_electrical = func {
     settimer(update_electrical, UPDATE_PERIOD);
 instruments.update_electrical();
-# Added by Yurik 
+# Added by Yurik
 # Electrical panel gauges and lamps support
 
-# AC 
+# AC
 var src = getprop( "tu154/switches/voltage-src-selector" );
 if( src == nil ) src = 0;
 var voltage = 0.0;
@@ -589,27 +580,33 @@ if( src == 6 ) {
 	voltage = getprop( "tu154/systems/electrical/buses/AC3x200-bus-3L/volts" );
 	freq = getprop( "tu154/systems/electrical/suppliers/AC3x200-bus-3L/frequency" );
 	}
-	
+
 	if( voltage == nil ) voltage = 0.0;
 	if( freq == nil ) freq = 0.0;
 # v=v/sqrt(3);
 	interpolate("tu154/instrumentation/electrical/v200", voltage/1.73, UPDATE_PERIOD );
 	interpolate("tu154/instrumentation/electrical/hz200", freq, UPDATE_PERIOD );
-	
+
 src = getprop( "tu154/switches/current-src-selector" );
 if( src == nil ) src = 0;
 var current = 0.0;
-if( src == 0 ) 
-	current = getprop( "tu154/systems/electrical/buses/AC3x200-bus-1L/load" );
-if( src == 1 ) 
-	current = getprop( "tu154/systems/electrical/buses/AC3x200-bus-2/load" );
-if( src == 2 ) 
-	current = getprop( "tu154/systems/electrical/buses/AC3x200-bus-3L/load" );
-if( src == 4 ) # It's evil hack... 
-	current = getprop( "tu154/systems/electrical/buses/AC3x200-bus-1L/load" );
-	
+var powersrc = getprop("tu154/switches/APU-RAP-selector");
+
+if( powersrc == 1 ) {
+  if( src == 0 )
+  	current = getprop( "tu154/systems/electrical/buses/AC3x200-bus-1L/load" );
+  if( src == 1 )
+  	current = getprop( "tu154/systems/electrical/buses/AC3x200-bus-2/load" );
+  if( src == 2 )
+  	current = getprop( "tu154/systems/electrical/buses/AC3x200-bus-3L/load" );
+}
+if( src == 3 ) {
+  if( powersrc == 0 )
+    current = getprop( "tu154/systems/electrical/buses/AC3x200-bus-1L/load" ) + getprop( "tu154/systems/electrical/buses/AC3x200-bus-2/load" ) + getprop( "tu154/systems/electrical/buses/AC3x200-bus-3L/load" );
+}
+
 	if( current == nil ) current = 0.0;
-	
+
 	interpolate("tu154/instrumentation/electrical/a200", current, UPDATE_PERIOD );
 # DC
 src = getprop( "tu154/switches/dc-src-selector" );
@@ -642,12 +639,12 @@ if( voltage > 15.0 )
 		( getprop( "tu154/switches/generator-1") == 1 ) )
 			setprop("tu154/lamps/gen-1-failure", 0.0);
 	else	setprop("tu154/lamps/gen-1-failure", 1.0);
-	
+
 	if( (getprop( "tu154/systems/electrical/suppliers/GT40-2/volts" ) > 150) and
 		( getprop( "tu154/switches/generator-2") == 1 ) )
 			setprop("tu154/lamps/gen-2-failure", 0.0);
 	else	setprop("tu154/lamps/gen-2-failure", 1.0);
-	
+
 	if( (getprop( "tu154/systems/electrical/suppliers/GT40-3/volts" ) > 150) and
 		( getprop( "tu154/switches/generator-3") == 1 ) )
 			setprop("tu154/lamps/gen-3-failure", 0.0);
@@ -655,12 +652,12 @@ if( voltage > 15.0 )
 
 
 	# Main battery lamp
-	if( 
+	if(
 	      ( (getprop( "tu154/systems/electrical/suppliers/VU6B-1/volts" ) > 18.0 ) and
 	      ( getprop( "tu154/switches/vypr-1") == 1 ) ) or
 	      ( (getprop( "tu154/systems/electrical/suppliers/VU6B-2/volts" ) > 18.0 ) and
 	      ( getprop( "tu154/switches/vypr-2") == 1 ) )
-	  )	
+	  )
 		{
 		setprop("tu154/lamps/battery", 0.0);
 		setprop( "tu154/systems/electrical/suppliers/battery_charge", 1.0 );
@@ -669,7 +666,7 @@ if( voltage > 15.0 )
 		setprop("tu154/lamps/battery", 1.0);
 		setprop( "tu154/systems/electrical/suppliers/battery_charge", 0.0 );
 		}
-	
+
 	}
 else	{
 	setprop("tu154/lamps/npk-left", 0.0);
@@ -692,7 +689,7 @@ if(  hd_input > 0.0 )
 	{
 	setprop("tu154/light/headlight", 1.0 );
 	}
-	else { 
+	else {
 	setprop("tu154/light/headlight", 0.0 );
 	}
 
@@ -1057,7 +1054,3 @@ ExternalClass.connect_to_bus = func( _bus ){
 ExternalClass.disconnect_from_bus = func{
     me.bus = nil;
 }
-
-
-
-

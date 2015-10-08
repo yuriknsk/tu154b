@@ -10,7 +10,7 @@
 #
 
 # turn off autopilot & autothrottle
-var trigger = func(x) { # x - unused var 
+var trigger = func(x) { # x - unused var
 absu.absu_stab_off();
 absu.absu_at_stop();
 }
@@ -19,7 +19,7 @@ absu.absu_at_stop();
 var TRIM_RATE = 0.08;
 
 var elevatorTrim = func {
-    #controls.slewProp("/controls/flight/elevator-trim", arg[0] * TRIM_RATE); 
+    #controls.slewProp("/controls/flight/elevator-trim", arg[0] * TRIM_RATE);
     setprop("fdm/jsbsim/fcs/met-cmd", arg[0]);
     setprop("tu154/systems/warning/elevator-trim-pressed", 1.0 );
     settimer( elev_trim_stop, 0.2 );
@@ -76,6 +76,10 @@ var autostart = func{
 	setprop("tu154/switches/APU-RAP-selector", 1.0 );
 	setprop("tu154/switches/main-battery", 0.0 );
 	help.messenger("Begin autostart procedure...");
+        # Doors
+        interpolate("tu154/door/passe", 0, 1.5);
+        interpolate("tu154/door/cargo0", 0, 1);
+        interpolate("tu154/door/cargo1", 0, 1);
 	# fuel cutoff levers
 	setprop("tu154/switches/cutoff-lever-1", 1.0 );
 	setprop("tu154/switches/cutoff-lever-2", 1.0 );
@@ -88,28 +92,28 @@ var autostart = func{
 	setprop("tu154/switches/generator-3", 1.0 );
 	setprop("tu154/switches/bano", 1.0 );
 	setprop("tu154/switches/omi", 1.0 );
-	
+
 	setprop("tu154/switches/ut7-1-serviceable", 1.0 );
 	setprop("tu154/switches/ut7-2-serviceable", 1.0 );
 	setprop("tu154/switches/ut7-3-serviceable", 1.0 );
-	# fuei
-	setprop("tu154/switches/tank-2-left-serviceable", 1.0 );
-	setprop("tu154/switches/tank-2-right-serviceable", 1.0 );
-	setprop("tu154/switches/tank-3-left-serviceable", 1.0 );
-	setprop("tu154/switches/tank-3-right-serviceable", 1.0 );
-	setprop("tu154/switches/tank-4-serviceable", 1.0 );
-	setprop("tu154/switches/pump-1-serviceable", 1.0 );
-	setprop("tu154/switches/pump-2-serviceable", 1.0 );
-	setprop("tu154/switches/pump-3-serviceable", 1.0 );
-	setprop("tu154/switches/pump-4-serviceable", 1.0 );
-	setprop("tu154/switches/fuel-cutoff-valve-1", 1.0 );
-	setprop("tu154/switches/fuel-cutoff-valve-2", 1.0 );
-	setprop("tu154/switches/fuel-cutoff-valve-3", 1.0 );
-	setprop("tu154/switches/fuel-meter-serviceable", 1.0 );
-	setprop("tu154/switches/fuel-autolevel-serviceable", 1.0 );
-	setprop("tu154/switches/fuel-autoconsumption-mode", 1.0 );
-	setprop("tu154/switches/fuel-autoconsumption-serviceable", 1.0 );
-	setprop("tu154/switches/fuel-consumption-meter", 1.0 );
+	# fuel
+        setprop("fdm/jsbsim/fuel/sw-pump-2L", 1);
+        setprop("fdm/jsbsim/fuel/sw-pump-2R", 1);
+        setprop("fdm/jsbsim/fuel/sw-pump-3L", 1);
+        setprop("fdm/jsbsim/fuel/sw-pump-3R", 1);
+        setprop("fdm/jsbsim/fuel/sw-pump-4", 1);
+        setprop("fdm/jsbsim/fuel/sw-pump-1-1", 1);
+        setprop("fdm/jsbsim/fuel/sw-pump-1-2", 1);
+        setprop("fdm/jsbsim/fuel/sw-pump-1-3", 1);
+        setprop("fdm/jsbsim/fuel/sw-pump-1-4", 1);
+        setprop("fdm/jsbsim/fuel/sw-valve-e1", 1);
+        setprop("fdm/jsbsim/fuel/sw-valve-e2", 1);
+        setprop("fdm/jsbsim/fuel/sw-valve-e3", 1);
+        setprop("fdm/jsbsim/fuel/sw-fuel", 1);
+        setprop("fdm/jsbsim/fuel/sw-balance", 1);
+        setprop("fdm/jsbsim/fuel/sw-automat", 1);
+        setprop("fdm/jsbsim/fuel/sw-program", 1);
+        setprop("fdm/jsbsim/fuel/sw-consumption", 1);
 	# Begin engine start procedure
 	setprop( "controls/engines/engine[0]/cutoff", 1 );
 	setprop( "controls/engines/engine[1]/cutoff", 1 );
@@ -128,7 +132,7 @@ var autostart_helper_1 = func{
 	if( 	( getprop( "/fdm/jsbsim/propulsion/engine[0]/n2") > 20.0 ) and
 		( getprop( "/fdm/jsbsim/propulsion/engine[1]/n2") > 20.0 ) and
 		( getprop( "/fdm/jsbsim/propulsion/engine[2]/n2") > 20.0 ) )
-	{ 
+	{
 	# fire up engines
 		if( getprop( "controls/engines/engine[0]/cutoff") )
 			setprop( "controls/engines/engine[0]/cutoff", 0 );
@@ -137,7 +141,7 @@ var autostart_helper_1 = func{
 		if( getprop( "controls/engines/engine[2]/cutoff") )
 			setprop( "controls/engines/engine[2]/cutoff", 0 );
 	}
-	else 
+	else
 	{
 	settimer(autostart_helper_1, 0.5);
 	return;
@@ -171,6 +175,8 @@ var autostart_helper_1 = func{
 	setprop("tu154/switches/KURS-MP-1", 1.0 );
 	setprop("tu154/switches/KURS-MP-2", 1.0 );
 
+	setprop("tu154/switches/RSBN-power", 1.0 );
+
         setprop("tu154/switches/dme-1-power", 1);
         setprop("tu154/switches/dme-2-power", 1);
 
@@ -179,6 +185,7 @@ var autostart_helper_1 = func{
 	setprop("tu154/switches/KURS-PNP-right", 1.0 );
 	setprop("/fdm/jsbsim/instrumentation/pnp-right-selector", 1.0 );
 	setprop("tu154/switches/RV-5-1", 1.0 );
+	setprop("tu154/switches/RV-5-2", 1.0 );
 	setprop("tu154/switches/comm-power-1", 1.0 );
 	setprop("tu154/switches/comm-power-2", 1.0 );
 	setprop("tu154/switches/adf-power-1", 1.0 );
@@ -244,10 +251,19 @@ var autostart_helper_2 = func{
 	setprop("tu154/switches/SAU-STU", 1.0 );
 	setprop("tu154/systems/absu/serviceable", 1.0 );
 	# TKS compass system adjust to magnetic heading
-	setprop("instrumentation/heading-indicator[0]/offset-deg", 
+	setprop("instrumentation/heading-indicator[0]/offset-deg",
 		-getprop("environment/magnetic-variation-deg") );
-	setprop("instrumentation/heading-indicator[1]/offset-deg", 
+	setprop("instrumentation/heading-indicator[1]/offset-deg",
 		-getprop("environment/magnetic-variation-deg") );
+
+        # Stabilizer
+        interpolate("tu154/switches/stab-auto-handle", 2, 0.2 );
+        setprop("fdm/jsbsim/fcs/stab-auto-cmd", 2);
+
+        # Flaps 28
+        controls.flapsDown(1);
+        controls.flapsDown(1);
+
 	# Altimeters
         var inhgX100 = int(getprop("environment/pressure-inhg") * 100 + 0.5);
 	setprop("tu154/instrumentation/altimeter[0]/inhgX100", inhgX100);
@@ -257,6 +273,13 @@ var autostart_helper_2 = func{
 	setprop("tu154/switches/steering", 1.0 );
 	setprop("controls/gear/nose-wheel-steering", 1.0 );
 	setprop("controls/gear/steering", 10.0 );
+
+        # NVU
+	setprop("tu154/switches/v-51-power", 1.0 );
+
+        # Close cockpit windows.
+        interpolate("tu154/door/window-left", 0, 2);
+        interpolate("tu154/door/window-right", 0, 2);
 
 	help.messenger("Autostart done");
 }

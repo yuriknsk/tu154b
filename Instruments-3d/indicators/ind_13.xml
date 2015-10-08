@@ -74,7 +74,12 @@
     <red>1.0</red>
     <green>1.0</green>
     <blue>1.0</blue>
-    <factor-prop>tu154/systems/electrical/indicators/apu-fuel-pressure</factor-prop>
+    <!--
+      This lamp signals that the pump is working (fuel/pump-apu), not that
+      the APU has fuel pressure (fuel/has-pressure-apu), which it may
+      not if cutoff valve (fuel/sw-valve-apu) is closed.
+    -->
+    <factor-prop>fdm/jsbsim/fuel/pump-apu</factor-prop>
   </emission>
 </animation>
 <animation>

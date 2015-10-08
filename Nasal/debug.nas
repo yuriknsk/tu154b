@@ -45,7 +45,7 @@ alpha = alpha * 57.3;
 #thrust = ( thrust_1 + thrust_2 + thrust_3 ) * 0.454 * 9.8 / 1000;
 thrust = thrust_1 * 0.454 * 9.8 / 1000;
 
-util_win.write(sprintf("mass: %d kg, CG: %.2f %% CAX, airspeed: %d km/h, AOA: %.2f',Cy: %.2f total thrust: %.2f kN, elevator: %.2f", 
+util_win.write(sprintf("mass: %d kg, CG: %.2f %% CAX, airspeed: %d km/h, AOA: %.2f',Cy: %.2f total thrust: %.2f kN, elevator: %.2f",
 int(mass), cg, int(ias), alpha, cy, thrust, elev ));
 
 }
