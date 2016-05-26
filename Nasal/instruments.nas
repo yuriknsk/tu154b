@@ -1794,7 +1794,7 @@ if( getprop("tu154/instrumentation/rsbn/mode") == 0)
   }
 else {
   handle = handle + step/20.0;
-  if( handle > 9.0 ) handle = 9.0;
+  if( handle > 9.95 ) handle = 9.95;
   if( handle < 0.0 ) handle = 0.0;
   var freq = getprop("tu154/instrumentation/rsbn/frequency" );
   if( freq == nil ) freq = 108.0;

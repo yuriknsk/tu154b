@@ -61,7 +61,7 @@
   <property>tu154/instrumentation/rsbn/handle-2</property>
   <interpolation>
     <entry><ind>	0.0</ind>	<dep>	-60.0</dep></entry>
-    <entry><ind>	9.0</ind>	<dep>	210.0</dep></entry>
+    <entry><ind>	9.95</ind>	<dep>	235.65</dep></entry>
   </interpolation>
   <center>
     <x-m>0.0</x-m>
